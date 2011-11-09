@@ -11,4 +11,6 @@ tmp/
 *.lock
 bin/
 config/database.yml
+.autotest
+.rspec
 
