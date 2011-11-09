@@ -19,7 +19,7 @@ describe Outlet do
   
   before(:each) do
     @attr = { 
-      :service_url => "http://twitter.com/example", 
+      :service_url  => "http://twitter.com/example", 
       :organization => "Example Project",
       :info_url     => "http://example.gov",
       :account      => "example",
@@ -32,13 +32,42 @@ describe Outlet do
     Outlet.create!(@attr)
   end
   
-  it "should require a service URL" do
-    no_url_outlet = Outlet.new(@attr.merge(:service_url => ""))
-    no_url_outlet.should_not be_valid
-  end
+  it "should record the correct updated_by email"
+  
+  describe "new-object validation" do
+    it "should require a service URL" do
+      no_url_outlet = Outlet.new(@attr.merge(:service_url => ""))
+      no_url_outlet.should_not be_valid
+    end
 
-  it "should require valid URLs" do
-    no_url_outlet = Outlet.new(@attr.merge(:service_url => "blern.foo.com"))
-    no_url_outlet.should_not be_valid
+    invalid_url = "blern.foo.com"
+  
+    it "should require a valid service URL" do
+      bad_url_outlet = Outlet.new(@attr.merge(:service_url => invalid_url))
+      bad_url_outlet.should_not be_valid
+    end
+
+    it "should require a valid info URL" do
+      bad_url_outlet = Outlet.new(@attr.merge(:info_url => invalid_url))
+      bad_url_outlet.should_not be_valid
+    end
+  end
+  
+  describe "resolve" do
+    before(:each) do
+      @outlet = Outlet.create!(@attr)
+    end
+    
+    it "should produce an empty instance if not present" do
+      new_outlet_url = "http://emergency.gov"
+      new_outlet = Outlet.resolve(new_outlet_url)
+      new_outlet.service_url.should == new_outlet_url
+    end
+    
+    pending "should return an existing instance if present" do
+      resolved_outlet = Outlet.resolve(@attr[:service_url])
+      resolved_outlet.should == @outlet
+    end
+    
   end
 end

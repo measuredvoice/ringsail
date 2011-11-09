@@ -21,6 +21,8 @@ class Outlet < ActiveRecord::Base
     :presence   => true, 
     :format     => { :with => URI::regexp(%w(http https)) }, 
     :uniqueness => { :case_sensitive => false }
+  validates :info_url,
+    :format     => { :with => URI::regexp(%w(http https)) }
 
   def self.resolve(url)
     # TODO: 
