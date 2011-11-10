@@ -1,0 +1,27 @@
+<% if @outlet %>
+<h1><%= @outlet.service_url %></h1>
+<% if @outlet.verified? %>
+<p>VERIFIED</p>
+
+<p>Agencies:
+<ul>
+<% @outlet.agencies.each do |agency| %>
+  <li><%= agency.name %></li>
+<% end %>
+</ul>
+
+<p>Organization: <%= @outlet.organization %></p>
+<p>Information URL: <%= @outlet.info_url %></p>
+<p>Language: <%= @outlet.language %></p>
+<p>Service: <%= @outlet.service.name %></p>
+<p>Account: <%= @outlet.account %></p>
+
+
+<% else %>
+<p>NOT VERIFIED</p>
+
+<% end %>
+<% else %>
+<h1>Verify an outlet</h1>
+<p>This is a form. Really. Squint and you'll see it.</p>
+<% end %>

@@ -1,5 +1,11 @@
 Ringsail::Application.routes.draw do
-  get "outlets/add"
+
+  # API call /outlets/add, both GET and POST
+  match "outlets/add" => "outlets#add", :via => :get, :as => :add
+  match "outlets/add" => "outlets#update", :via => :post, :as => :update
+
+  # API call /outlets/verify
+  match "outlets/verify" => "outlets#verify", :via => :get, :as => :verify
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
