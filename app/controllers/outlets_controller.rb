@@ -1,4 +1,6 @@
 class OutletsController < ApplicationController
+  respond_to :html, :xml, :json
+  
   def add
     @outlet = Outlet.resolve(params[:service_url]) || Outlet.new
   end
@@ -28,6 +30,9 @@ class OutletsController < ApplicationController
   def verify
     @outlet = Outlet.resolve(params[:service_url])
     
+    # Package anything other than HTML as a Boxer hash
+    # FIXME: This workaround for XML is horrible.
+    respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet))) unless request.format == :html
   end
 
 end
