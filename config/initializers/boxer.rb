@@ -4,10 +4,8 @@ Boxer.configure do |config|
 end
 
 # Load all box definitions from lib/boxer/*.rb
-unless Rails.env.test?
-  Dir[File.join(Rails.root, 'lib', 'boxer', '**', '*.rb')].each do |f|
-    require_dependency f
-  end
+Dir[File.join(Rails.root, 'lib', 'boxer', '**', '*.rb')].each do |f|
+  require_dependency f
 end
 
 class XBoxer < Hash

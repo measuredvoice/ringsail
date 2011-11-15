@@ -4,6 +4,10 @@ describe OutletsController do
   render_views
 
   describe "GET 'add'" do
+    before(:each) do
+      Service.create!(:name => "Twitter", :shortname => "twitter")
+    end
+  
     it "should be successful" do
       get :add
       response.should be_success
@@ -17,7 +21,6 @@ describe OutletsController do
     
     describe "with a service_url" do
       it "should display the full form with service_url filled in" do
-        Service.create!(:name => "Twitter", :shortname => "twitter")
         service_url = 'http://twitter.com/somethingorother'
         get :add, :service_url => service_url
         response.should have_selector("p", :content => "Update registry information")

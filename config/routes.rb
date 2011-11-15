@@ -10,6 +10,6 @@ Ringsail::Application.routes.draw do
 
   # API call /outlets/verify
   match "outlets/verify" => "outlets#verify", :via => :get, :as => :verify
-  match "outlets/:service/:account" => "outlets#show", :via => :get
+  match "outlets/:service/:account" => "outlets#show", :via => :get, :as => :show
 
 end

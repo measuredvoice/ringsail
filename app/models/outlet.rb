@@ -45,6 +45,7 @@ class Outlet < ActiveRecord::Base
     service = Service.find_by_shortname(service_shortname)
     
     return nil unless service
+    return nil unless account
     
     existing = self.find_by_account_and_service_id(account, service.id)
     if existing
