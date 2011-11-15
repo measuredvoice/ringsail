@@ -4,13 +4,12 @@
   <title>Ringsail</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
 </head>
 <body>
 
 <%= yield %>
 
-<%= debug(params) if Rails.env.development? %>
+<!-- <%= debug(params) if Rails.env.development? %> -->
 
 </body>
 </html>

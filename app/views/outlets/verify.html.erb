@@ -1,27 +1,53 @@
 <% if @outlet %>
-<h1><%= @outlet.service_url %></h1>
+<h1><a href="<%= @outlet.service_url %>"><%= @outlet.account %> on <%= @outlet.service.name %></a></h1>
 <% if @outlet.verified? %>
-<p>VERIFIED</p>
+<p>is registered in the USA.gov Social Media Registry.</p>
 
-<p>Agencies:
+<p><a href="verify">look up another account</a></p>
+
+<h2>Information about this account:</h2>
+
+<p>Organization or Program: <%= @outlet.organization %></p>
+
+<p>Information URL: <%= link_to @outlet.info_url, @outlet.info_url %></p>
+
+<p>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:
 <ul>
 <% @outlet.agencies.each do |agency| %>
   <li><%= agency.name %></li>
 <% end %>
 </ul>
 
-<p>Organization: <%= @outlet.organization %></p>
-<p>Information URL: <%= @outlet.info_url %></p>
+<p>Tags: <em>not yet implemented</em></p>
+
 <p>Language: <%= @outlet.language %></p>
-<p>Service: <%= @outlet.service.name %></p>
-<p>Account: <%= @outlet.account %></p>
+
+<p>Location: <em>not yet implemented</em></p>
+
+<p>Last updated by: <em>not yet implemented</em><br>
+Last updated on: <%= @outlet.updated_at.to_s(:human) %>
+</p>
+
 
 
 <% else %>
-<p>NOT VERIFIED</p>
+<p>is not registered in the USA.gov Social Media Registry.</p>
+
+<p><a href="verify">look up another account</a></p>
 
 <% end %>
+
+<p>To make changes to this listing, provide your .gov or .mil email address below. You will receive a link that will allow editing for 60 minutes from the time the email is sent.</p>
+
+<p><em>Not yet implemented.</em> You may preview <%= link_to "editing this outlet", :action => "add", :service_url => @outlet.service_url %>.</p>
+
 <% else %>
 <h1>Verify an outlet</h1>
-<p>This is a form. Really. Squint and you'll see it.</p>
+
+<p>Paste or type the full URL of a social media account here:</p>
+<form action="verify" method="GET">
+<input type="text" name="service_url" style="width: 50em"><br>
+<input type="submit" value="Look Up">
+</form>
+
 <% end %>

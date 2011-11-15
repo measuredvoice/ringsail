@@ -9,10 +9,20 @@ describe OutletsController do
       response.should be_success
     end
     
-    it "should ask for a service_url if one was not given"
+    it "should ask for a service_url if one was not given" do
+      get :add
+      response.should have_selector("p", :content => "type the full URL")
+      response.should have_selector("input", :type => "submit", :value => "Look Up")
+    end
     
     describe "with a service_url" do
-      it "should display the full form with service_url filled in"
+      it "should display the full form with service_url filled in" do
+        Service.create!(:name => "Twitter", :shortname => "twitter")
+        service_url = 'http://twitter.com/somethingorother'
+        get :add, :service_url => service_url
+        response.should have_selector("p", :content => "Update registry information")
+        response.should have_selector("a", :href => service_url)
+      end
     end
   end
 
@@ -81,8 +91,8 @@ describe OutletsController do
       it "should return an unverified indication" do
         unverified_url = "http://twitter.com/unverified"
         get :verify, :service_url => unverified_url
-        response.should have_selector("p", :content => "NOT VERIFIED")
-        response.should have_selector("h1", :content => unverified_url)
+        response.should have_selector("p", :content => "is not registered")
+        response.should have_selector("a", :href => unverified_url)
       end
       
       it "should return no outlet attributes" do
@@ -93,11 +103,93 @@ describe OutletsController do
     end
     
     describe "for a verified outlet" do
-      it "should be successful"
+      before(:each) do
+        # FIXME: Get thee to a factory
+        Service.create!(:name => "Twitter", :shortname => "Twitter")
+        @verified_url = "http://twitter.com/deptofexample"
+        @outlet = Outlet.resolve(@verified_url)
+        @outlet.language = 'English';
+        @outlet.organization = 'Example Campaign'
+        @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
+        @outlet.agencies.push @agency
+        @outlet.save!
+      end
       
-      it "should return a verified indication"
+      it "should be successful" do
+        get :verify, :service_url => @verified_url
+        response.should be_success
+      end
       
-      it "should return the attributes of the outlet"
+      it "should return a verified indication" do
+        get :verify, :service_url => @verified_url
+        response.should have_selector("p", :content => "is registered")
+      end
+      
+      it "should return the attributes of the outlet" do
+        get :verify, :service_url => @verified_url
+        response.should have_selector("p", :content => "is registered")
+        response.should have_selector("p", :content => @outlet.organization)
+        response.should have_selector("p", :content => @outlet.language)
+      end
     end
   end
+
+  describe "DELETE 'destroy'" do
+  
+    before(:each) do
+      # FIXME: Get thee to a factory
+      Service.create!(:name => "Twitter", :shortname => "Twitter")
+      @verified_url = "http://twitter.com/deptofexample"
+      @outlet = Outlet.resolve(@verified_url)
+      @outlet.language = 'English';
+      @outlet.organization = 'Example Campaign'
+      @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
+      @outlet.agencies.push @agency
+      @outlet.save!
+    end
+    
+    describe "as an authorized user" do
+
+       it "should destroy the outlet" do
+        lambda do
+         delete :destroy, :service => @outlet.service.shortname, :account => @outlet.account
+        end.should change(Outlet, :count).by(-1)
+      end
+
+      it "should redirect to the add page" do
+        delete :destroy, :service => @outlet.service.shortname, :account => @outlet.account
+        response.should redirect_to(add_path)
+      end
+    end
+  end
+
+  describe "POST 'remove'" do
+  
+    before(:each) do
+      # FIXME: Get thee to a factory
+      Service.create!(:name => "Twitter", :shortname => "Twitter")
+      @verified_url = "http://twitter.com/deptofexample"
+      @outlet = Outlet.resolve(@verified_url)
+      @outlet.language = 'English';
+      @outlet.organization = 'Example Campaign'
+      @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
+      @outlet.agencies.push @agency
+      @outlet.save!
+    end
+    
+    describe "as an authorized user" do
+
+       it "should destroy the outlet" do
+        lambda do
+          post :remove, :service_url => @outlet.service_url
+        end.should change(Outlet, :count).by(-1)
+      end
+
+      it "should redirect to the add page" do
+        post :remove, :service_url => @outlet.service_url
+        response.should redirect_to(add_path)
+      end
+    end
+  end
+
 end

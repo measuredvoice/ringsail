@@ -1,2 +1,51 @@
-<h1>Outlets#add</h1>
-<p>Find me in app/views/outlets/add.html.erb</p>
+<% if @outlet %>
+
+<p>Update registry information for:<p>
+<h1><a href="<%= @outlet.service_url %>"><%= @outlet.account %> on <%= @outlet.service.name %></a></h1>
+
+<% if @outlet.verified? %>
+<p>[<%= link_to "Remove this account from the registry", "/outlets/#{@outlet.service.shortname}/#{@outlet.account}", :method => :delete,
+    :confirm => "Do you really want to remove (#{@outlet.account} on #{@outlet.service.name}) from the registry?" %>]</p>
+<% end %>
+
+<h2>Information about this account:</h2>
+
+<%= form_tag({:action => "update"}) do %>
+<form action="update" method="POST">
+
+<%= render 'shared/error_messages', :object => @outlet %>
+
+<p><label>Organization or Program: 
+<%= text_field_tag('organization', @outlet.organization) %>
+</label></p>
+
+<p><label>Information URL: 
+<%= url_field_tag('info_url', @outlet.info_url) %></p>
+
+<p><label>Sponsoring Agency:
+<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true %>
+
+<p>Tags: <em>not yet implemented</em></p>
+
+<p><label>Language: 
+<%= text_field_tag('language', @outlet.language) %>
+</label></p>
+
+<p>Location: <em>not yet implemented</em></p>
+
+<%= hidden_field_tag('service_url', @outlet.service_url) %>
+
+
+<input type="submit" value="Submit">
+
+<% end %>
+
+<% else %>
+
+<p>Paste or type the full URL of your official social media account here:</p>
+<form action="verify" method="GET">
+<input type="text" name="service_url" style="width: 50em"><br>
+<input type="submit" value="Look Up">
+</form>
+
+<% end %>
