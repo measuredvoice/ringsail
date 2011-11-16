@@ -24,11 +24,13 @@ describe Outlet do
       :organization => "Example Project",
       :info_url     => "http://example.gov",
       :language     => "English",
+      :service      => :twitter,
+      :account      => "something",
     }
   end
   
   it "should create a new instance given minimal attributes" do 
-    Outlet.create!(:service_url => @attr[:service_url])
+    Outlet.create!(:service_url => @attr[:service_url], :service => @attr[:service], :account => @attr[:account])
   end
   
   it "should create a new instance given valid attributes" do 
@@ -62,10 +64,7 @@ describe Outlet do
   end
   
   describe "resolve" do
-    before(:each) do
-      Service.create(:name => "Twitter", :shortname => "twitter")
-    end
-    
+
     it "should produce a new instance if not present" do
       new_outlet_url = "http://twitter.com/example2"
       new_outlet = Outlet.resolve(new_outlet_url)
@@ -101,11 +100,19 @@ describe Outlet do
   describe "service" do
     before(:each) do
       @outlet = Outlet.create!(@attr)
-      @service = Service.create!(:shortname => "pownce", :name => "So Sad")
     end
     
     it "should have a service method" do
       @outlet.should respond_to(:service)
+    end
+    
+    it "should return the service type" do
+      @outlet.service.should_not be_nil
+    end
+    
+    it "should provide service-specific information" do
+      @outlet.should respond_to(:service_info)
+      @outlet.service_info.account.should_not be_nil
     end
   end
   

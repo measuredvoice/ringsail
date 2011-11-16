@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110004905) do
+ActiveRecord::Schema.define(:version => 20111116005754) do
 
   create_table "agencies", :force => true do |t|
     t.string   "name"
@@ -31,21 +31,12 @@ ActiveRecord::Schema.define(:version => 20111110004905) do
     t.string   "updated_by"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "service_id"
+    t.string   "service"
   end
 
   add_index "outlets", ["account"], :name => "index_outlets_on_account"
-  add_index "outlets", ["service_id", "account"], :name => "index_outlets_on_service_id_and_account", :unique => true
-  add_index "outlets", ["service_id"], :name => "index_outlets_on_service_id"
-
-  create_table "services", :force => true do |t|
-    t.string   "shortname"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "services", ["shortname"], :name => "index_services_on_shortname", :unique => true
+  add_index "outlets", ["account"], :name => "index_outlets_on_service_id_and_account", :unique => true
+  add_index "outlets", ["service", "account"], :name => "index_outlets_on_service_and_account"
 
   create_table "sponsorships", :force => true do |t|
     t.integer  "outlet_id"

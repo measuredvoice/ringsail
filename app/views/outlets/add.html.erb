@@ -1,11 +1,15 @@
 <% if @outlet %>
 
 <p>Update registry information for:<p>
-<h1><a href="<%= @outlet.service_url %>"><%= @outlet.account %> on <%= @outlet.service.name %></a></h1>
+<h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.pretty_name %></a></h1>
+
+<% if @outlet.service_info.profile_image %>
+<p><img src="<%= @outlet.service_info.profile_image %>" alt="profile image for <%= @outlet.service_info.pretty_name %>" title="profile image for <%= @outlet.service_info.pretty_name %>"></p>
+<% end %>
 
 <% if @outlet.verified? %>
-<p>[<%= link_to "Remove this account from the registry", "/outlets/#{@outlet.service.shortname}/#{@outlet.account}", :method => :delete,
-    :confirm => "Do you really want to remove (#{@outlet.account} on #{@outlet.service.name}) from the registry?" %>]</p>
+<p>[<%= link_to "Remove this account from the registry", "/outlets/#{@outlet.service}/#{@outlet.account}", :method => :delete,
+    :confirm => "Do you really want to remove (#{@outlet.account} on #{@outlet.service}) from the registry?" %>]</p>
 <% end %>
 
 <h2>Information about this account:</h2>
@@ -16,11 +20,11 @@
 <%= render 'shared/error_messages', :object => @outlet %>
 
 <p><label>Organization or Program: 
-<%= text_field_tag('organization', @outlet.organization) %>
+<%= text_field_tag('organization', @outlet.organization || @outlet.service_info.profile_name) %>
 </label></p>
 
 <p><label>Information URL: 
-<%= url_field_tag('info_url', @outlet.info_url) %></p>
+<%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url) %></p>
 
 <p><label>Sponsoring Agency:
 <%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true %>

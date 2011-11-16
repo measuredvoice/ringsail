@@ -1,13 +1,15 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.1.1'
-
 gem 'mysql2'
 
 # Templates for generating JSON and other data output
 # see https://github.com/gowalla/boxer
 gem 'boxer'
 gem 'json'
+
+# Support for social media service plugins
+gem 'twitter'
 
 # Gems used only for assets and not required
 # in production environments by default.

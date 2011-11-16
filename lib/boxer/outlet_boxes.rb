@@ -3,7 +3,7 @@ Boxer.box(:outlet) do |box, outlet|
     {
       :service_url  => outlet.service_url,
       :verified     => outlet.verified? ? 'true' : 'false',
-      :service      => outlet.service ? outlet.service.shortname : nil,
+      :service      => outlet.service,
       :account      => outlet.account,
     }
   end

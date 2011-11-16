@@ -4,10 +4,6 @@ describe OutletsController do
   render_views
 
   describe "GET 'add'" do
-    before(:each) do
-      Service.create!(:name => "Twitter", :shortname => "twitter")
-    end
-  
     it "should be successful" do
       get :add
       response.should be_success
@@ -51,7 +47,6 @@ describe OutletsController do
     
     describe "success" do
       before(:each) do
-        Service.create!(:name => "Twitter", :shortname => "Twitter")
         @attr = {
           :service_url => "http://twitter.com/example",
           :organization => "Example Project",
@@ -81,11 +76,7 @@ describe OutletsController do
   describe "GET 'verify'" do
   
     describe "for an unverified outlet" do
-    
-      before(:each) do
-        Service.create!(:name => "Twitter", :shortname => "twitter")
-      end
-    
+        
       it "should be successful" do
         get :verify
         response.should be_success
@@ -108,7 +99,6 @@ describe OutletsController do
     describe "for a verified outlet" do
       before(:each) do
         # FIXME: Get thee to a factory
-        Service.create!(:name => "Twitter", :shortname => "Twitter")
         @verified_url = "http://twitter.com/deptofexample"
         @outlet = Outlet.resolve(@verified_url)
         @outlet.language = 'English';
@@ -141,7 +131,6 @@ describe OutletsController do
   
     before(:each) do
       # FIXME: Get thee to a factory
-      Service.create!(:name => "Twitter", :shortname => "Twitter")
       @verified_url = "http://twitter.com/deptofexample"
       @outlet = Outlet.resolve(@verified_url)
       @outlet.language = 'English';
@@ -155,12 +144,12 @@ describe OutletsController do
 
        it "should destroy the outlet" do
         lambda do
-         delete :destroy, :service => @outlet.service.shortname, :account => @outlet.account
+         delete :destroy, :service => @outlet.service, :account => @outlet.account
         end.should change(Outlet, :count).by(-1)
       end
 
       it "should redirect to the add page" do
-        delete :destroy, :service => @outlet.service.shortname, :account => @outlet.account
+        delete :destroy, :service => @outlet.service, :account => @outlet.account
         response.should redirect_to(add_path)
       end
     end
@@ -170,7 +159,6 @@ describe OutletsController do
   
     before(:each) do
       # FIXME: Get thee to a factory
-      Service.create!(:name => "Twitter", :shortname => "Twitter")
       @verified_url = "http://twitter.com/deptofexample"
       @outlet = Outlet.resolve(@verified_url)
       @outlet.language = 'English';

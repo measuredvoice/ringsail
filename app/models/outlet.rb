@@ -19,7 +19,6 @@ class Outlet < ActiveRecord::Base
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
-  belongs_to :service
 
   validates :service_url, 
     :presence   => true, 
@@ -28,6 +27,10 @@ class Outlet < ActiveRecord::Base
   validates :info_url,
     :format     => { :with => URI::regexp(%w(http https)), 
                      :allow_blank => true}
+  validates :service, 
+    :presence   => true 
+  validates :account, 
+    :presence   => true 
   
   def verified?
     # TODO:
@@ -35,23 +38,21 @@ class Outlet < ActiveRecord::Base
     agencies.size > 0
   end
   
+  def service_info
+    @service_info ||= Service.find_by_url(service_url)
+  end
+  
   def self.resolve(url)
-    # TODO: 
-    #   Resolve the URL down to a service and account ID
-    #   Look up existing settings for this outlet, or
-    #   set up sensible defaults for the object.
-    /twitter\.com\/(?<account>\w+)/ =~ url
-    service_shortname = "twitter"
-    service = Service.find_by_shortname(service_shortname)
+    return nil if url.nil?
+    s = Service.find_by_url(url)
     
-    return nil unless service
-    return nil unless account
+    return nil unless s
     
-    existing = self.find_by_account_and_service_id(account, service.id)
+    existing = self.find_by_account_and_service(s.account, s.shortname)
     if existing
       return existing
     else
-      self.new(:service_url => url, :service => service, :account => account)
+      self.new(:service_url => url, :service => s.shortname, :account => s.account)
     end
   end    
 end

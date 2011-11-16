@@ -1,47 +1,46 @@
-# == Schema Information
-#
-# Table name: services
-#
-#  id         :integer(4)      not null, primary key
-#  shortname  :string(255)
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 require 'spec_helper'
 
 describe Service do
 
-  before(:each) do
-    @attr = { 
-      :shortname  => "example", 
-      :name       => "Example Service",
-    }
+  it "should return nil for unknown services" do
+    unknown = Service.find_by_url("http://example.com")
+    unknown.should be_nil
   end
   
-  it "should create a new instance given valid attributes" do 
-    Service.create!(@attr)
+  describe "Twitter plugin" do
+    
+    it "should be chosen for Twitter URLs" do
+      service = Service.find_by_url("http://twitter.com/usagov")
+      service.shortname.should == :twitter
+    end
+    
+    it "should provide account details" do
+      service = Service.find_by_url("http://twitter.com/usagov")
+      service.account.should == "usagov"
+      service.profile_name.should_not be_nil
+      service.profile_image.should_not be_nil
+    end
+    
+    it "should gracefully handle invalid accounts" do
+      invalid = Service.find_by_url("http://twitter.com/notappearinginthisfilm")
+      invalid.account.should == "notappearinginthisfilm"
+      invalid.profile_name.should be_nil
+      invalid.profile_image.should be_nil
+    end
   end
   
-  describe "new-object validation" do
-    it "should require a shortname" do
-      no_name = Service.new(@attr.merge(:shortname => ""))
-      no_name.should_not be_valid
-    end
-
-    it "should require a name" do
-      no_name = Service.new(@attr.merge(:name => ""))
-      no_name.should_not be_valid
-    end
+  describe "Facebook plugin" do
+    
+    it "should be chosen for Facebook URLs"
   end
   
-  describe "find by shortname" do
-    it "should find the right service" do
-      Service.create!(@attr)
-      found = Service.find_by_shortname(@attr[:shortname])
-      found.should_not be_nil
-      found.name.should == @attr[:name]
-    end
+  describe "Youtube plugin" do
+    
+    it "should be chosen for Youtube URLs"
+  end
+  
+  describe "Flickr plugin" do
+    
+    it "should be chosen for Flickr URLs"
   end
 end

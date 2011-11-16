@@ -54,7 +54,7 @@ class OutletsController < ApplicationController
     if @outlet.save
       if request.format == :html
         flash[:success] = "Outlet updated."
-        redirect_to "/outlets/#{@outlet.service.shortname}/#{@outlet.account}"
+        redirect_to "/outlets/#{@outlet.service}/#{@outlet.account}"
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
       end
@@ -87,8 +87,7 @@ class OutletsController < ApplicationController
   end
 
   def show
-    service = Service.find_by_shortname(params[:service])
-    @outlet = Outlet.find_by_service_id_and_account(service.id, params[:account])
+    @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
     
     if request.format == :html
       render 'verify'
@@ -98,8 +97,7 @@ class OutletsController < ApplicationController
   end
 
   def destroy
-    service = Service.find_by_shortname(params[:service])
-    Outlet.find_by_service_id_and_account(service.id, params[:account]).destroy
+    Outlet.find_by_service_and_account(params[:service], params[:account]).destroy
     
     if request.format == :html
       redirect_to add_path
