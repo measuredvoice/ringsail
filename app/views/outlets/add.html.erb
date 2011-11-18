@@ -1,4 +1,5 @@
 <% if @outlet %>
+<div class="span14">
 
 <p>Update registry information for:<p>
 <h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.pretty_name %></a></h1>
@@ -19,37 +20,67 @@
 
 <%= render 'shared/error_messages', :object => @outlet %>
 
-<p><label>Organization or Program: 
-<%= text_field_tag('organization', @outlet.organization || @outlet.service_info.profile_name) %>
-</label></p>
+<div class="clearfix">
+<label for="organization">Organization or Program:</label>
+<div class="input">
+<%= text_field_tag('organization', @outlet.organization || @outlet.service_info.profile_name, :class => "span8") %>
+</div>
+</div>
 
-<p><label>Information URL: 
-<%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url) %></p>
+<div class="clearfix">
+<label for="info_url">Information URL:</label>
+<div class="input">
+<%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url) %>
+</div>
+</div>
 
-<p><label>Sponsoring Agency:
+<div class="clearfix">
+<label for="agency_id">Sponsoring Agency:</label>
+<div class="input">
 <%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true %>
+</div>
+</div>
 
-<p>Tags: <em>not yet implemented</em></p>
+<div class="clearfix">
+<label for="tags">Tags:</label>
+<div class="input">
+<input type="text" disabled id="tags" value="not yet implemented">
+</div>
+</div>
 
-<p><label>Language: 
+<div class="clearfix">
+<label for="language">Language:</label>
+<div class="input">
 <%= text_field_tag('language', @outlet.language) %>
-</label></p>
+</div>
+</div>
 
-<p>Location: <em>not yet implemented</em></p>
+<div class="clearfix">
+<label for="location">Location:</label>
+<div class="input">
+<input type="text" disabled id="location" value="not yet implemented">
+</div>
+</div>
 
 <%= hidden_field_tag('service_url', @outlet.service_url) %>
 
-
-<input type="submit" value="Submit">
+<div class="actions">
+  <input type="submit" class="btn primary" value="Save changes">&nbsp;<button type="reset" class="btn">Cancel</button>
+</div>
 
 <% end %>
+</div>
 
 <% else %>
 
+<div class="span14">
+
 <p>Paste or type the full URL of your official social media account here:</p>
 <form action="verify" method="GET">
-<input type="text" name="service_url" style="width: 50em"><br>
-<input type="submit" value="Look Up">
+<input type="text" name="service_url" class="span7">
+<button class="btn" type="submit">Look Up</button>
 </form>
+
+</div>
 
 <% end %>

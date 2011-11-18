@@ -1,3 +1,5 @@
+<div class="span14">
+
 <% if @outlet %>
 <h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.pretty_name %></a></h1>
 <% if @outlet.verified? %>
@@ -46,12 +48,13 @@ Last updated on: <%= @outlet.updated_at.to_s(:human) %>
 <p><em>Not yet implemented.</em> You may preview <%= link_to "editing this outlet", :action => "add", :service_url => @outlet.service_url %>.</p>
 
 <% else %>
-<h1>Verify an outlet</h1>
 
 <p>Paste or type the full URL of a social media account here:</p>
 <form action="verify" method="GET">
-<input type="text" name="service_url" style="width: 50em"><br>
-<input type="submit" value="Look Up">
+<input type="text" name="service_url" class="span7">
+<button class="btn" type="submit">Look Up</button>
 </form>
 
 <% end %>
+
+</div>

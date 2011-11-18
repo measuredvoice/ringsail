@@ -5,12 +5,14 @@ class OutletsController < ApplicationController
     @outlet = Outlet.resolve(params[:service_url])
     
     if @outlet
+      @page_title = "Add Information for " + @outlet.service_info.pretty_name
       @agencies = Agency.all
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
       respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, 
         :view => @outlet.verified? ? :verified : :base )))
     else
+      @page_title = "Add an outlet"
       respond_with(XBoxer.new(:result, {
         :status => "incomplete",
         :needs  => "service_url",
@@ -73,12 +75,14 @@ class OutletsController < ApplicationController
     @outlet = Outlet.resolve(params[:service_url])
     
     if @outlet
+      @page_title = "Verify " + @outlet.service_info.pretty_name
       @agencies = Agency.all
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
       respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, 
         :view => @outlet.verified? ? :verified : :base )))
     else
+      @page_title = "Verify an outlet"
       respond_with(XBoxer.new(:result, {
         :status => "incomplete",
         :needs  => "service_url",
@@ -88,6 +92,12 @@ class OutletsController < ApplicationController
 
   def show
     @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
+    
+    if @outlet
+      @page_title = @outlet.service_info.pretty_name
+    else
+      @page_title = "Verify an outlet"
+    end
     
     if request.format == :html
       render 'verify'
