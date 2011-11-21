@@ -1,18 +1,18 @@
-class TumblrService < Service
+class YoutubeService < Service
   def self.handles?(uri)
-    uri.host =~ /tumblr.com$/
+    uri.host =~ /youtube.com$/
   end
   
   def shortname
-    :tumblr
+    :youtube
   end
   
   def display_name
-    "#{account} on Tumblr"
+    "#{account}'s Channel on YouTube"
   end
   
   def account
-    /^(?<account>\w+)\.tumblr.com/ =~ @uri.host
+    /\/(?<account>\w+)$/ =~ @uri.path
     account
   end
   
@@ -25,4 +25,4 @@ class TumblrService < Service
   end
 end
 
-Service.register(:tumblr, TumblrService)
+Service.register(:youtube, YoutubeService)

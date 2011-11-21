@@ -1,12 +1,12 @@
 <div class="span14">
 
 <% if @outlet %>
-<h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.pretty_name %></a></h1>
+<h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></h1>
 <% if @outlet.verified? %>
 <p>is registered in the USA.gov Social Media Registry.</p>
 
 <% if @outlet.service_info.profile_image %>
-<p><img src="<%= @outlet.service_info.profile_image %>" alt="profile image for <%= @outlet.service_info.pretty_name %>" title="profile image for <%= @outlet.service_info.pretty_name %>"></p>
+<p><img src="<%= @outlet.service_info.profile_image %>" alt="profile image for <%= @outlet.service_info.display_name %>" title="profile image for <%= @outlet.service_info.display_name %>"></p>
 <% end %>
 
 <p><a href="verify">look up another account</a></p>

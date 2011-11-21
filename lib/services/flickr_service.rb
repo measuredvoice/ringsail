@@ -1,18 +1,18 @@
-class TumblrService < Service
+class FlickrService < Service
   def self.handles?(uri)
-    uri.host =~ /tumblr.com$/
+    uri.host =~ /flickr.com$/
   end
   
   def shortname
-    :tumblr
+    :flickr
   end
   
   def display_name
-    "#{account} on Tumblr"
+    "#{account} photos on Flickr"
   end
   
   def account
-    /^(?<account>\w+)\.tumblr.com/ =~ @uri.host
+    /photos\/(?<account>\w+)\/?$/ =~ @uri.path
     account
   end
   
@@ -25,4 +25,4 @@ class TumblrService < Service
   end
 end
 
-Service.register(:tumblr, TumblrService)
+Service.register(:flickr, FlickrService)

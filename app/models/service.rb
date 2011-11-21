@@ -37,7 +37,7 @@ class Service
     fail "shortname is not defined for this service"
   end
   
-  def pretty_name
+  def display_name
     "#{account} on #{shortname}"
   end
   

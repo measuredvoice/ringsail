@@ -2,10 +2,10 @@
 <div class="span14">
 
 <p>Update registry information for:<p>
-<h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.pretty_name %></a></h1>
+<h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></h1>
 
 <% if @outlet.service_info.profile_image %>
-<p><img src="<%= @outlet.service_info.profile_image %>" alt="profile image for <%= @outlet.service_info.pretty_name %>" title="profile image for <%= @outlet.service_info.pretty_name %>"></p>
+<p><img src="<%= @outlet.service_info.profile_image %>" alt="profile image for <%= @outlet.service_info.display_name %>" title="profile image for <%= @outlet.service_info.display_name %>"></p>
 <% end %>
 
 <% if @outlet.verified? %>

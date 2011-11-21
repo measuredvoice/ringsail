@@ -11,7 +11,7 @@
 #  updated_by   :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
-#  service_id   :integer(4)
+#  service      :string(255)
 #
 
 require 'spec_helper'

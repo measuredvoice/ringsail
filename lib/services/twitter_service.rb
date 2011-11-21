@@ -7,7 +7,7 @@ class TwitterService < Service
     :twitter
   end
   
-  def pretty_name
+  def display_name
     "@#{account} on Twitter"
   end
   

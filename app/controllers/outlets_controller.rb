@@ -5,7 +5,7 @@ class OutletsController < ApplicationController
     @outlet = Outlet.resolve(params[:service_url])
     
     if @outlet
-      @page_title = "Add Information for " + @outlet.service_info.pretty_name
+      @page_title = "Add Information for " + @outlet.service_info.display_name
       @agencies = Agency.all
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
@@ -75,7 +75,7 @@ class OutletsController < ApplicationController
     @outlet = Outlet.resolve(params[:service_url])
     
     if @outlet
-      @page_title = "Verify " + @outlet.service_info.pretty_name
+      @page_title = "Verify " + @outlet.service_info.display_name
       @agencies = Agency.all
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
@@ -94,7 +94,7 @@ class OutletsController < ApplicationController
     @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
     
     if @outlet
-      @page_title = @outlet.service_info.pretty_name
+      @page_title = @outlet.service_info.display_name
     else
       @page_title = "Verify an outlet"
     end

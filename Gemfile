@@ -10,6 +10,7 @@ gem 'json'
 
 # Support for social media service plugins
 gem 'twitter'
+gem 'hyper-graph'
 
 # Gems used only for assets and not required
 # in production environments by default.

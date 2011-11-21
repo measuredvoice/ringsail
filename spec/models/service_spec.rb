@@ -31,16 +31,25 @@ describe Service do
   
   describe "Facebook plugin" do
     
-    it "should be chosen for Facebook URLs"
+    it "should be chosen for Facebook URLs" do
+      service = Service.find_by_url("http://facebook.com/USAgov")
+      service.shortname.should == :facebook
+    end
   end
   
   describe "Youtube plugin" do
     
-    it "should be chosen for Youtube URLs"
+    it "should be chosen for Youtube URLs" do
+      service = Service.find_by_url("http://www.youtube.com/USGovernment")
+      service.shortname.should == :youtube
+    end
   end
   
   describe "Flickr plugin" do
     
-    it "should be chosen for Flickr URLs"
+    it "should be chosen for Flickr URLs" do
+      service = Service.find_by_url("http://www.flickr.com/groups/usagov/")
+      service.shortname.should == :flickr
+    end
   end
 end
