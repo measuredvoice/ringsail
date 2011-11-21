@@ -12,7 +12,6 @@ describe OutletsController do
     it "should ask for a service_url if one was not given" do
       get :add
       response.should have_selector("p", :content => "type the full URL")
-      response.should have_selector("input", :type => "submit", :value => "Look Up")
     end
     
     describe "with a service_url" do
