@@ -8,14 +8,13 @@ class TumblrService < Service
   end
   
   def account
-    @details ||= fetch_details
-    @details[:account]
+    /^(?<account>\w+)\.tumblr.com/ =~ @uri.host
+    account
   end
   
   private
   
   def fetch_details
-    /^(?<account>\w+)\.tumblr.com/ =~ @uri.host
     {
       :account => account,
     }
