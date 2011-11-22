@@ -3,21 +3,28 @@ require 'spec_helper'
 describe OutletsController do
   render_views
 
+  before(:each) do
+    @good_token = AuthToken.create!(
+      :email => "valid@example.gov", 
+      :phone => "555-1212",
+    )
+  end
+  
   describe "GET 'add'" do
     it "should be successful" do
-      get :add
+      get :add, :auth_token => @good_token.token
       response.should be_success
     end
     
     it "should ask for a service_url if one was not given" do
-      get :add
+      get :add, :auth_token => @good_token.token
       response.should have_selector("p", :content => "type the full URL")
     end
     
     describe "with a service_url" do
       it "should display the full form with service_url filled in" do
         service_url = 'http://twitter.com/somethingorother'
-        get :add, :service_url => service_url
+        get :add, :service_url => service_url, :auth_token => @good_token.token
         response.should have_selector("p", :content => "Update registry information")
         response.should have_selector("a", :href => service_url)
       end
@@ -26,10 +33,36 @@ describe OutletsController do
 
   describe "POST 'update'" do
     
+    describe "authorization checking" do
+
+      before(:each) do
+        @attr = {
+          :auth_token => @good_token.token,
+          :service_url => "http://twitter.com/example",
+          :organization => "Example Project",
+          :info_url => "http://example.gov",
+          :language => "English"
+        }
+      end
+      
+      it "should reject a missing auth token" do
+        post :update, @attr.merge(:auth_token => "")
+        response.should redirect_to(new_path)
+      end
+      
+      it "should reject a bogus auth token" do
+        post :update, @attr.merge(:auth_token => "ABCDEFG")
+        response.should redirect_to(new_path)
+      end
+      
+      it "should reject an old auth token"
+    end
+    
     describe "failure" do
 
       before(:each) do
         @attr = {
+          :auth_token => @good_token.token,
           :service_url => "",
           :organization => "",
           :info_url => "",
@@ -47,6 +80,7 @@ describe OutletsController do
     describe "success" do
       before(:each) do
         @attr = {
+          :auth_token => @good_token.token,
           :service_url => "http://twitter.com/example",
           :organization => "Example Project",
           :info_url => "http://example.gov",
@@ -104,6 +138,11 @@ describe OutletsController do
         @outlet.organization = 'Example Campaign'
         @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
         @outlet.agencies.push @agency
+        @good_token = AuthToken.create!(
+          :email => "valid@example.gov", 
+          :phone => "555-1212",
+        )
+        @outlet.auth_token = @good_token.token
         @outlet.save!
       end
       
@@ -136,21 +175,20 @@ describe OutletsController do
       @outlet.organization = 'Example Campaign'
       @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
       @outlet.agencies.push @agency
+      @outlet.auth_token = @good_token.token
       @outlet.save!
     end
     
-    describe "as an authorized user" do
+    it "should destroy the outlet" do
+      lambda do
+       delete :destroy, :service => @outlet.service, :account => @outlet.account, :auth_token => @good_token.token
 
-       it "should destroy the outlet" do
-        lambda do
-         delete :destroy, :service => @outlet.service, :account => @outlet.account
-        end.should change(Outlet, :count).by(-1)
-      end
+      end.should change(Outlet, :count).by(-1)
+    end
 
-      it "should redirect to the add page" do
-        delete :destroy, :service => @outlet.service, :account => @outlet.account
-        response.should redirect_to(add_path)
-      end
+    it "should redirect to the add page" do
+      delete :destroy, :service => @outlet.service, :account => @outlet.account, :auth_token => @good_token.token
+      response.should redirect_to(add_path)
     end
   end
 
@@ -164,22 +202,22 @@ describe OutletsController do
       @outlet.organization = 'Example Campaign'
       @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
       @outlet.agencies.push @agency
+      @outlet.auth_token = @good_token.token
       @outlet.save!
     end
     
-    describe "as an authorized user" do
+    describe "as an admin user" do
 
-       it "should destroy the outlet" do
+      it "should destroy the outlet" do
         lambda do
-          post :remove, :service_url => @outlet.service_url
+          post :remove, :service_url => @outlet.service_url, :auth_token => @good_token.token
         end.should change(Outlet, :count).by(-1)
       end
 
       it "should redirect to the add page" do
-        post :remove, :service_url => @outlet.service_url
-        response.should redirect_to(add_path)
+        post :remove, :service_url => @outlet.service_url, :auth_token => @good_token.token
+        response.should redirect_to(verify_path(:service_url => @outlet.service_url))
       end
     end
   end
-
 end

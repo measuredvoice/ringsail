@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116005754) do
+ActiveRecord::Schema.define(:version => 20111121230612) do
 
   create_table "agencies", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,19 @@ ActiveRecord::Schema.define(:version => 20111116005754) do
   end
 
   add_index "agencies", ["shortname"], :name => "index_agencies_on_shortname", :unique => true
+
+  create_table "auth_tokens", :force => true do |t|
+    t.string   "token"
+    t.string   "email"
+    t.string   "phone"
+    t.boolean  "admin"
+    t.integer  "access_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "auth_tokens", ["email"], :name => "index_auth_tokens_on_email"
+  add_index "auth_tokens", ["token"], :name => "index_auth_tokens_on_token", :unique => true
 
   create_table "outlets", :force => true do |t|
     t.string   "service_url"

@@ -9,14 +9,17 @@
 <% end %>
 
 <% if @outlet.verified? %>
-<p>[<%= link_to "Remove this account from the registry", "/outlets/#{@outlet.service}/#{@outlet.account}", :method => :delete,
-    :confirm => "Do you really want to remove (#{@outlet.account} on #{@outlet.service}) from the registry?" %>]</p>
+<%= form_tag({:action => "remove"}) do %>
+<%= hidden_field_tag('service_url', @outlet.service_url) %>
+<%= hidden_field_tag('auth_token', @current_token.token) %>
+
+<button type="submit" class="btn" data-confirm="Do you really want to remove (<%= @outlet.service_info.display_name %>) from the registry?">Remove this account</button>
+<% end %>
 <% end %>
 
 <h2>Information about this account:</h2>
 
 <%= form_tag({:action => "update"}) do %>
-<form action="update" method="POST">
 
 <%= render 'shared/error_messages', :object => @outlet %>
 
@@ -63,6 +66,7 @@
 </div>
 
 <%= hidden_field_tag('service_url', @outlet.service_url) %>
+<%= hidden_field_tag('auth_token', @current_token.token) %>
 
 <div class="actions">
   <input type="submit" class="btn primary" value="Save changes">&nbsp;<button type="reset" class="btn">Cancel</button>
@@ -76,7 +80,7 @@
 <div class="span14">
 
 <p>Paste or type the full URL of your official social media account here:</p>
-<form action="verify" method="GET">
+<form action="/outlets/verify" method="GET">
 <input type="text" name="service_url" class="span7">
 <button class="btn" type="submit">Look Up</button>
 </form>

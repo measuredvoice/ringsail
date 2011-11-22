@@ -45,7 +45,27 @@ Last updated on: <%= @outlet.updated_at.to_s(:human) %>
 
 <p>To make changes to this listing, provide your .gov or .mil email address below. You will receive a link that will allow editing for 60 minutes from the time the email is sent.</p>
 
-<p><em>Not yet implemented.</em> You may preview <%= link_to "editing this outlet", :action => "add", :service_url => @outlet.service_url %>.</p>
+<%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
+
+<div class="clearfix">
+<label for="email">Email:</label>
+<div class="input">
+<%= text_field_tag('email', '', :class => "span8") %>
+</div>
+</div>
+
+<div class="clearfix">
+<label for="phone">Phone:</label>
+<div class="input">
+<%= text_field_tag('phone', '', :class => "span8") %>
+</div>
+</div>
+
+<div class="actions">
+  <input type="submit" class="btn primary" value="Submit">
+</div>
+
+<% end %>
 
 <% else %>
 

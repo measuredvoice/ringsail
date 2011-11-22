@@ -15,7 +15,8 @@
 #
 
 class Outlet < ActiveRecord::Base
-  attr_accessible :service_url, :organization, :info_url, :language, :account, :service
+  attr_accessor :auth_token
+  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
@@ -31,6 +32,10 @@ class Outlet < ActiveRecord::Base
     :presence   => true 
   validates :account, 
     :presence   => true 
+  validates :auth_token,
+    :presence   => true 
+  
+  before_save :set_updated_by
   
   def verified?
     # TODO:
@@ -55,4 +60,16 @@ class Outlet < ActiveRecord::Base
       self.new(:service_url => url, :service => s.shortname, :account => s.account)
     end
   end    
+  
+  private
+  
+  def set_updated_by
+    # Always clear the old updated_by user to prevent anonymous updates
+    self.updated_by = ''
+    
+    current_token = AuthToken.find_by_token(auth_token)
+    unless current_token.nil?
+      self.updated_by = current_token.email
+    end
+  end
 end

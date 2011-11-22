@@ -1,5 +1,6 @@
 class OutletsController < ApplicationController
   respond_to :html, :xml, :json
+  before_filter :check_auth, :except => [:verify, :show]
   
   def add
     @outlet = Outlet.resolve(params[:service_url])
@@ -47,6 +48,7 @@ class OutletsController < ApplicationController
     @outlet.organization = params[:organization] unless params[:organization].nil? or params[:organization].empty?
     @outlet.info_url = params[:info_url] unless params[:info_url].nil? or params[:info_url].empty?
     @outlet.language = params[:language] unless params[:language].nil? or params[:language].empty?
+    @outlet.auth_token = @current_token.token
     
     # If any agencies are specified, update the list of agencies to match
     if params[:agency_id]
@@ -120,7 +122,7 @@ class OutletsController < ApplicationController
     Outlet.resolve(params[:service_url]).destroy
     
     if request.format == :html
-      redirect_to add_path
+      redirect_to verify_path(:service_url => params[:service_url])
     else
       respond_with(XBoxer.new(:result, {:status => "success"}))
     end

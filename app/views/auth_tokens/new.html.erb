@@ -1,0 +1,30 @@
+<div class="span14">
+
+<p>To make changes to a listing, provide your .gov or .mil email address below.</p>
+<p>You will receive a link that will allow editing access for <strong>24 hours</strong> from the time the email is sent.</p>
+
+<%= form_tag({:action => "create"}) do %>
+
+<%= render 'shared/error_messages', :object => @auth_token %>
+
+<div class="clearfix">
+<label for="email">Email:</label>
+<div class="input">
+<%= text_field_tag('email', @auth_token.email, :class => "span8") %>
+</div>
+</div>
+
+<div class="clearfix">
+<label for="phone">Phone:</label>
+<div class="input">
+<%= text_field_tag('phone', @auth_token.phone, :class => "span8") %>
+</div>
+</div>
+
+<div class="actions">
+  <input type="submit" class="btn primary" value="Submit">
+</div>
+
+<% end %>
+
+</div>
