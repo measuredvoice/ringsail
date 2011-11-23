@@ -53,6 +53,11 @@ class OutletsController < ApplicationController
     # If any agencies are specified, update the list of agencies to match
     if params[:agency_id]
       @outlet.agencies = params[:agency_id].map {|s| Agency.find_by_shortname(s)}
+    elsif @outlet.agencies.empty?
+      @outlet.errors.add(:agencies, "must include an agency to be verified")
+      @agencies = Agency.all
+      @selected_agencies = [];
+      render 'add' and return
     end
     
     if @outlet.save

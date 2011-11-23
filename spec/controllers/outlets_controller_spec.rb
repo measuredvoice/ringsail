@@ -8,6 +8,7 @@ describe OutletsController do
       :email => "valid@example.gov", 
       :phone => "555-1212",
     )
+    @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
   end
   
   describe "GET 'add'" do
@@ -84,7 +85,8 @@ describe OutletsController do
           :service_url => "http://twitter.com/example",
           :organization => "Example Project",
           :info_url => "http://example.gov",
-          :language => "English"
+          :language => "English",
+          :agency_id => [@agency.shortname],
         }
       end
       
@@ -136,7 +138,6 @@ describe OutletsController do
         @outlet = Outlet.resolve(@verified_url)
         @outlet.language = 'English';
         @outlet.organization = 'Example Campaign'
-        @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
         @outlet.agencies.push @agency
         @good_token = AuthToken.create!(
           :email => "valid@example.gov", 
@@ -173,7 +174,6 @@ describe OutletsController do
       @outlet = Outlet.resolve(@verified_url)
       @outlet.language = 'English';
       @outlet.organization = 'Example Campaign'
-      @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
       @outlet.agencies.push @agency
       @outlet.auth_token = @good_token.token
       @outlet.save!
@@ -200,7 +200,6 @@ describe OutletsController do
       @outlet = Outlet.resolve(@verified_url)
       @outlet.language = 'English';
       @outlet.organization = 'Example Campaign'
-      @agency = Agency.create!(:name => "Department of Examples", :shortname => "example")
       @outlet.agencies.push @agency
       @outlet.auth_token = @good_token.token
       @outlet.save!
