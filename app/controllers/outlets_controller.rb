@@ -10,8 +10,7 @@ class OutletsController < ApplicationController
       @agencies = Agency.all
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
-      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, 
-        :view => @outlet.verified? ? :verified : :base )))
+      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, :view => :full )))
     else
       @page_title = "Add an outlet"
       respond_with(XBoxer.new(:result, {
@@ -86,8 +85,7 @@ class OutletsController < ApplicationController
       @agencies = Agency.all
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
-      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, 
-        :view => @outlet.verified? ? :verified : :base )))
+      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, :view => :full )))
     else
       @page_title = "Verify an outlet"
       respond_with(XBoxer.new(:result, {
@@ -109,7 +107,7 @@ class OutletsController < ApplicationController
     if request.format == :html
       render 'verify'
     else
-      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet)))
+      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, :view => :full)))
     end
   end
 

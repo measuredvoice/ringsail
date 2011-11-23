@@ -30,7 +30,7 @@
 
 <p>Location: <em>not yet implemented</em></p>
 
-<p>Last updated by: <em>not yet implemented</em><br>
+<p>Last updated by: <%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %><br>
 Last updated on: <%= @outlet.updated_at.to_s(:human) %>
 </p>
 
@@ -60,6 +60,8 @@ Last updated on: <%= @outlet.updated_at.to_s(:human) %>
 <%= text_field_tag('phone', '', :class => "span8") %>
 </div>
 </div>
+
+<%= hidden_field_tag('service_url', @outlet.service_url) %>
 
 <div class="actions">
   <input type="submit" class="btn primary" value="Submit">

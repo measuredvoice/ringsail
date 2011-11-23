@@ -67,7 +67,7 @@ class Outlet < ActiveRecord::Base
     # Always clear the old updated_by user to prevent anonymous updates
     self.updated_by = ''
     
-    current_token = AuthToken.find_by_token(auth_token)
+    current_token = AuthToken.find_valid_token(auth_token)
     unless current_token.nil?
       self.updated_by = current_token.email
     end

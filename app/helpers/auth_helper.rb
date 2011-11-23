@@ -8,13 +8,9 @@ module AuthHelper
     @current_token
   end
   
-  def token_is_ok?
-    self.current_token = AuthToken.find_by_token(params[:auth_token])
-    !self.current_token.nil?
-  end
-  
   def check_auth
-    deny_access unless token_is_ok?
+    self.current_token = AuthToken.find_valid_token(params[:auth_token])
+    deny_access if self.current_token.nil?
   end
 
   def deny_access

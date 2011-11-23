@@ -80,8 +80,16 @@
 <div class="span14">
 
 <p>Paste or type the full URL of your official social media account here:</p>
+
+<% if @current_token.token %>
+<form action="/outlets/add" method="GET">
+<%= hidden_field_tag('auth_token', @current_token.token) %>
+<% else %>
 <form action="/outlets/verify" method="GET">
+<% end %>
 <input type="text" name="service_url" class="span7">
+
+
 <button class="btn" type="submit">Look Up</button>
 </form>
 

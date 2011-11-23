@@ -12,6 +12,8 @@ class AuthTokensController < ApplicationController
     if @auth_token.save
       @page_title = "Authorization requested"
       
+      AuthTokenMailer.token_link_email(@auth_token, params[:service_url]).deliver
+      
       respond_with(XBoxer.new(:result, {
         :status => "success",
       }))

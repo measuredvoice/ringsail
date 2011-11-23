@@ -23,6 +23,19 @@ class AuthToken < ActiveRecord::Base
 
   before_save :make_token
   
+  def still_valid?
+    created_at > 12.hours.ago && updated_at > 4.hours.ago
+  end
+  
+  def self.find_valid_token(token)
+    suspect = self.find_by_token(token)
+    if (!suspect.nil? && suspect.still_valid?)
+      suspect
+    else
+      nil
+    end
+  end
+
   private
   
   def make_token
