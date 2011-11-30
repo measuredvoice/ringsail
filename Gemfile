@@ -12,6 +12,10 @@ gem 'json'
 gem 'twitter'
 gem 'hyper-graph'
 
+# Automatic admin interface
+gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
+gem "devise"
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -38,3 +42,4 @@ group :test do
   gem 'autotest-fsevent', '0.2.4'
   gem 'autotest-growl', '0.2.9'
 end
+

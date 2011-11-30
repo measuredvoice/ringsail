@@ -1,5 +1,11 @@
 Ringsail::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  devise_for :users
+  
+  root :to => "outlets#verify"
+
   # API call /outlets/add, both GET and POST
   match "outlets/add" => "outlets#add", :via => :get, :as => :add
   match "outlets/add" => "outlets#update", :via => :post, :as => :update

@@ -56,6 +56,7 @@ class OutletsController < ApplicationController
       @outlet.errors.add(:agencies, "must include an agency to be verified")
       @agencies = Agency.all
       @selected_agencies = [];
+      @page_title = "Add Information for " + @outlet.service_info.display_name
       render 'add' and return
     end
     
@@ -70,6 +71,7 @@ class OutletsController < ApplicationController
       if request.format == :html
         @agencies = Agency.all
         @selected_agencies = [];
+        @page_title = "Add Information for " + @outlet.service_info.display_name
         render 'add'
       else
         respond_with(XBoxer.new(:result, {:status => "error"}))

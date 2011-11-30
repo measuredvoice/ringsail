@@ -13,5 +13,5 @@ class Agency < ActiveRecord::Base
   attr_accessible :name, :shortname
   
   has_many :sponsorships
-  has_many :agencies, :through => :sponsorships
+  has_many :outlets, :through => :sponsorships
 end

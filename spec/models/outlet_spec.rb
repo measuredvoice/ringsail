@@ -23,6 +23,7 @@ describe Outlet do
       :email => "valid@example.gov", 
       :phone => "555-1212",
     )
+    @agency = Agency.create!(:name => "Department of Examples")
     @attr = { 
       :service_url  => "http://twitter.com/example", 
       :organization => "Example Project",
@@ -31,6 +32,7 @@ describe Outlet do
       :service      => :twitter,
       :account      => "something",
       :auth_token   => @good_token.token,
+      :agency_ids   => [@agency.id],
     }
   end
   
@@ -49,11 +51,8 @@ describe Outlet do
       no_url_outlet.should_not be_valid
     end
 
-    it "should not allow bulk updates of updated_by" do
-      forced_outlet = Outlet.new(@attr.merge(:updated_by => "user@example.gov", :auth_token => nil))
-      forced_outlet.should_not be_valid
-    end
-
+    it "should not allow bulk updates of updated_by"
+    
     invalid_url = "blern.foo.com"
   
     it "should require a valid service URL" do
@@ -85,6 +84,7 @@ describe Outlet do
     it "should return an existing instance if present" do
       outlet = Outlet.resolve(@attr[:service_url])
       outlet.auth_token = @attr[:auth_token]
+      outlet.agencies.push @agency
       outlet.save
       resolved_outlet = Outlet.resolve(@attr[:service_url])
       resolved_outlet.should == outlet

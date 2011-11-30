@@ -16,7 +16,7 @@
 
 class Outlet < ActiveRecord::Base
   attr_accessor :auth_token
-  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token
+  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
@@ -28,14 +28,10 @@ class Outlet < ActiveRecord::Base
   validates :info_url,
     :format     => { :with => URI::regexp(%w(http https)), 
                      :allow_blank => true}
-  validates :service, 
-    :presence   => true 
-  validates :account, 
-    :presence   => true 
-  validates :auth_token,
-    :presence   => true 
+  validates :agencies, :presence => true
   
   before_save :set_updated_by
+  before_save :fix_service_info
   
   def verified?
     # TODO:
@@ -64,12 +60,16 @@ class Outlet < ActiveRecord::Base
   private
   
   def set_updated_by
-    # Always clear the old updated_by user to prevent anonymous updates
-    self.updated_by = ''
-    
     current_token = AuthToken.find_valid_token(auth_token)
-    unless current_token.nil?
+    if !current_token.nil?
       self.updated_by = current_token.email
+    else
+      self.updated_by ||= 'admin'
     end
+  end
+  
+  def fix_service_info
+    self.service = service_info.shortname
+    self.account = service_info.account
   end
 end
