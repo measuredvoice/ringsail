@@ -23,7 +23,7 @@ describe Outlet do
       :email => "valid@example.gov", 
       :phone => "555-1212",
     )
-    @agency = Agency.create!(:name => "Department of Examples")
+    @agency = Agency.create!(:name => "Department of Examples", :shortname => 'examples')
     @attr = { 
       :service_url  => "http://twitter.com/example", 
       :organization => "Example Project",
@@ -95,7 +95,6 @@ describe Outlet do
   describe "sponsorships" do
     before(:each) do
       @outlet = Outlet.create!(@attr)
-      @agency = Agency.create!(:name => "Department of Departments")
     end
     
     it "should have a sponsorships method" do

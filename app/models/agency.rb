@@ -7,11 +7,15 @@
 #  created_at :datetime
 #  updated_at :datetime
 #  shortname  :string(255)
+#  info_url   :string(255)
 #
 
 class Agency < ActiveRecord::Base
-  attr_accessible :name, :shortname
+  attr_accessible :name, :shortname, :info_url
   
   has_many :sponsorships
   has_many :outlets, :through => :sponsorships
+  
+  validates :name, :presence => true
+  validates :shortname, :presence => true
 end

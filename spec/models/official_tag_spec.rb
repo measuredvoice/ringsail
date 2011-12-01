@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: official_tags
+#
+#  id         :integer(4)      not null, primary key
+#  shortname  :string(255)
+#  tag_text   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 require 'spec_helper'
 
 describe OfficialTag do

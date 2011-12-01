@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: official_tags
+#
+#  id         :integer(4)      not null, primary key
+#  shortname  :string(255)
+#  tag_text   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class OfficialTag < ActiveRecord::Base
   attr_accessible :shortname, :tag_text
   
