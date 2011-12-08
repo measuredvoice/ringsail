@@ -23,4 +23,9 @@ Ringsail::Application.routes.draw do
   match "auth_tokens/request" => "auth_tokens#new", :via => :get, :as => :new
   match "auth_tokens/request" => "auth_tokens#create", :via => :post, :as => :create
 
+  # API call /agencies, GET
+  match "agencies" => "agencies#list", :via => :get
+
+  # API call /tags, GET
+  match "tags" => "official_tags#list", :via => :get
 end
