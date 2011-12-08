@@ -16,6 +16,9 @@ gem 'hyper-graph'
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem "devise"
 
+# Tagging support
+gem 'acts-as-taggable-on', '~>2.1.0'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

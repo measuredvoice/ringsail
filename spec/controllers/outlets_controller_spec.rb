@@ -87,6 +87,7 @@ describe OutletsController do
           :info_url => "http://example.gov",
           :language => "English",
           :agency_id => [@agency.shortname],
+          :tags      => "foo, bar baz, example",
         }
       end
       
@@ -102,6 +103,7 @@ describe OutletsController do
         new_outlet.service_url.should  == @attr[:service_url]
         new_outlet.organization.should  == @attr[:organization]
         new_outlet.service.should_not be_nil
+        new_outlet.tag_list.should_not be_empty
       end
       
     end

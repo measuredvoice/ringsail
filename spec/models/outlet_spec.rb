@@ -33,6 +33,7 @@ describe Outlet do
       :account      => "something",
       :auth_token   => @good_token.token,
       :agency_ids   => [@agency.id],
+      :tag_list     => "foo thing, bar, baz",
     }
   end
   
@@ -126,12 +127,25 @@ describe Outlet do
   end
   
   describe "verification" do
+  
     before(:each) do
       @outlet = Outlet.create!(@attr)
     end
     
     it "should have a verified? method" do
       @outlet.should respond_to(:verified?)
+    end
+  end
+  
+  describe "tagging" do
+  
+    before(:each) do
+      @outlet = Outlet.create!(@attr)
+    end
+      
+    it "should return tags" do
+      @outlet.tag_list.should_not be_empty
+      @outlet.tags.first.to_s.should == 'foo thing'
     end
   end
 end

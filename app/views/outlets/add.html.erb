@@ -47,7 +47,7 @@
 <div class="clearfix">
 <label for="tags">Tags:</label>
 <div class="input">
-<input type="text" disabled id="tags" value="not yet implemented">
+<%= text_field_tag('tags', @outlet.tag_list.join(", ")) %>
 </div>
 </div>
 

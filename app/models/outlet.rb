@@ -16,11 +16,13 @@
 
 class Outlet < ActiveRecord::Base
   attr_accessor :auth_token
-  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids
+  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
 
+  acts_as_taggable
+  
   validates :service_url, 
     :presence   => true, 
     :format     => { :with => URI::regexp(%w(http https)) }, 

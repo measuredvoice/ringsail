@@ -15,6 +15,7 @@ Boxer.box(:outlet) do |box, outlet|
         :agencies     => outlet.agencies.map { |agency| Boxer.ship(:agency, agency) },
         :language     => outlet.language,
         :display_name => outlet.service_info.display_name,
+        :tags         => outlet.tags.map { |tag| tag.name },
         :updated_at   => outlet.updated_at.to_s(:iso),
         :updated_by   => (outlet.updated_by || '').gsub(/(\w)\w+@/, '\1*****@'),
       }
