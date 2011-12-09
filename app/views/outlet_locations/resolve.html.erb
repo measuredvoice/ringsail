@@ -1,0 +1,27 @@
+<div class="span14">
+
+<form action="/locations/resolve" method="GET">
+<input type="text" name="location" value="<%= @last_input %>" class="span7">
+<button class="btn" type="submit">Resolve</button>
+</form>
+
+<table class="condensed-table zebra-striped">
+<thead>
+<tr>
+<th>ID</th>
+<th>Location</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<% @locations.each do |location| %>
+<tr>
+  <td><%= location.woe_id %></td>
+  <td><%= location.display_name %></td>
+  <td><%= location.location_type %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+</div>

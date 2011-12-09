@@ -19,6 +19,9 @@ gem "devise"
 # Tagging support
 gem 'acts-as-taggable-on', '~>2.1.0'
 
+# Location support
+gem 'yahoo-geoplanet', :git => 'git://github.com/measuredvoice/yahoo-geoplanet.git'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -33,6 +36,7 @@ group :development do
   gem 'rspec-rails', '2.6.1'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'faker', '0.3.1'
+  gem 'ruby-debug19'
 end
 
 group :test do

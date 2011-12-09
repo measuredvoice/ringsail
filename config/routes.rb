@@ -28,4 +28,7 @@ Ringsail::Application.routes.draw do
 
   # API call /tags, GET
   match "tags" => "official_tags#list", :via => :get
+  
+  # API call /locations/resolve, GET
+  match "locations/resolve" => "outlet_locations#resolve", :via => :get
 end

@@ -48,6 +48,7 @@ class OutletsController < ApplicationController
     @outlet.info_url = params[:info_url] unless params[:info_url].nil? or params[:info_url].empty?
     @outlet.language = params[:language] unless params[:language].nil? or params[:language].empty?
     @outlet.tag_list = params[:tags] unless params[:tags].nil? or params[:tags].empty?
+    @outlet.location_id = params[:location_id] unless params[:location_id].nil? or params[:location_id].empty?
     @outlet.auth_token = @current_token.token
     
     # If any agencies are specified, update the list of agencies to match

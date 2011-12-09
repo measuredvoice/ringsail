@@ -2,21 +2,23 @@
 #
 # Table name: outlets
 #
-#  id           :integer(4)      not null, primary key
-#  service_url  :string(255)
-#  organization :string(255)
-#  info_url     :string(255)
-#  account      :string(255)
-#  language     :string(255)
-#  updated_by   :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  service      :string(255)
+#  id            :integer(4)      not null, primary key
+#  service_url   :string(255)
+#  organization  :string(255)
+#  info_url      :string(255)
+#  account       :string(255)
+#  language      :string(255)
+#  updated_by    :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  service       :string(255)
+#  location_id   :integer(4)
+#  location_name :string(255)
 #
 
 class Outlet < ActiveRecord::Base
   attr_accessor :auth_token
-  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list
+  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
@@ -34,6 +36,7 @@ class Outlet < ActiveRecord::Base
   
   before_save :set_updated_by
   before_save :fix_service_info
+  before_save :set_location_name
   
   def verified?
     # TODO:
@@ -76,5 +79,16 @@ class Outlet < ActiveRecord::Base
   def fix_service_info
     self.service = service_info.shortname
     self.account = service_info.account
+  end
+  
+  def set_location_name
+    if (self.location_id_changed?)
+      location = OutletLocation.find_by_id(location_id)
+      if location
+        self.location_name = location.display_name
+      else
+        self.location_name = nil
+      end
+    end
   end
 end

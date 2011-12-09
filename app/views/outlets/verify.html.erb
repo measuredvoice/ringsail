@@ -28,7 +28,7 @@
 
 <p>Language: <%= @outlet.language %></p>
 
-<p>Location: <em>not yet implemented</em></p>
+<p>Location: <%= @outlet.location_name %></p>
 
 <p>Last updated by: <%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %><br>
 Last updated on: <%= @outlet.updated_at.to_s(:human) %>
