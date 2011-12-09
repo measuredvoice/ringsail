@@ -112,13 +112,20 @@ describe OutletsController do
 
   describe "GET 'verify'" do
   
+    it "should be successful" do
+      get :verify
+      response.should be_success
+    end
+    
+    it "should prepend http:// if missing" do
+      unverified_url = "twitter.com/unverified"
+      get :verify, :service_url => unverified_url
+      response.should have_selector("p", :content => "is not registered")
+      response.should have_selector("a", :href => 'http://' + unverified_url)
+    end
+    
     describe "for an unverified outlet" do
         
-      it "should be successful" do
-        get :verify
-        response.should be_success
-      end
-      
       it "should return an unverified indication" do
         unverified_url = "http://twitter.com/unverified"
         get :verify, :service_url => unverified_url
