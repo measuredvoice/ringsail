@@ -17,6 +17,14 @@ class OfficialTag < ActiveRecord::Base
   
   before_validation :fix_shortname
   
+  def self.autocomplete(input)
+    if (input.nil? or input.length < 2)
+      self.all
+    else
+      self.where(["LOWER(official_tags.tag_text) LIKE ?", "#{input.downcase}%"])    
+    end
+  end
+  
   private
   
   def fix_shortname
