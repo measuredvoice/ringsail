@@ -6,6 +6,6 @@ class OfficialTagsController < ApplicationController
     @last_input = params[:q] || params[:keywords]
     @tags = OfficialTag.autocomplete(@last_input)
     
-    respond_with(XBoxer.new(:result, Boxer.ship(:official_tags, @tags) ))
+    respond_with(@tags.map { |tag| Boxer.ship(:official_tag, tag) })
   end
 end
