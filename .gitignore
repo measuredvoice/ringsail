@@ -8,7 +8,6 @@ tmp/
 *~
 .project
 .DS_Store
-*.lock
 bin/
 config/database.yml
 .autotest
