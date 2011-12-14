@@ -1,8 +1,6 @@
 <% if @outlet %>
 <div class="span14">
 
-<% end %>
-
 <%= form_tag({:action => "update"}) do %>
 
 <%= render 'shared/error_messages', :object => @outlet %>
@@ -65,6 +63,7 @@
 		<%= hidden_field_tag('auth_token', @current_token.token) %>
 
 		<button type="submit" class="btn danger small" data-confirm="Do you really want to remove (<%= @outlet.service_info.display_name %>) from the registry?">Remove this account</button>
+  <% end %>
 	</div>
 <% end %>
 
