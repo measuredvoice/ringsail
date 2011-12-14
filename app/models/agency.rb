@@ -18,4 +18,8 @@ class Agency < ActiveRecord::Base
   
   validates :name, :presence => true
   validates :shortname, :presence => true
+  
+  def to_s
+    self.name
+  end
 end
