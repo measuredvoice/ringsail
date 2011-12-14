@@ -1,23 +1,28 @@
 <div class="span14">
 
-<p>To make changes to a listing, provide your .gov or .mil email address below.</p>
-<p>You will receive a link that will allow editing access for <strong>24 hours</strong> from the time the email is sent.</p>
+<h3>Edit or update entries in this registry</h3>
+<div class="span8">
+<p>If you have a .gov or .mil email address, you can edit or update entries in this registry.</p>
+<p>Enter your .gov or .mil email address and phone number below, and we will send you a link that will allow editing access for <strong>24 hours</strong> from the time the email is sent.</p>
+</div>
 
 <%= form_tag({:action => "create"}) do %>
 
+<div class="span8">
 <%= render 'shared/error_messages', :object => @auth_token %>
+</div>
 
 <div class="clearfix">
 <label for="email">Email:</label>
 <div class="input">
-<%= text_field_tag('email', @auth_token.email, :class => "span8") %>
+	<%= text_field_tag('email', @auth_token.email, :class => "span5") %>
 </div>
 </div>
 
 <div class="clearfix">
 <label for="phone">Phone:</label>
 <div class="input">
-<%= text_field_tag('phone', @auth_token.phone, :class => "span8") %>
+	<%= text_field_tag('phone', @auth_token.phone, :class => "span5") %>
 </div>
 </div>
 

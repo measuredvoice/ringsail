@@ -1,8 +1,13 @@
-<p>{Text about what the Registry is and who requested this token.} <%= @auth_token.email %></p>
+<p>Hello, someone (probably you) has submitted <%= @service_url %> to be included as an official social media account in the USA.gov Social Media Registry.</p>
 
-<p>To continue, follow this link: <%= @link_url %></p>
+<p>This submission will not be complete until you click on the link included below. Please understand that the USA.gov Social Media Registry should only include accounts that represent official U.S. government agencies, organizations, or programs. <strong>Do not submit any accounts that represent non-government organizations or individual people, even if they are government employees.</strong></p>
 
-<p>If you have any questions, {instructions for support}</p>
+<p>To confirm your submission and verify your understanding of the above, please follow this link: <%= @link_url %>.</p>
 
-<p>Yours,<br>
-The Social Media Registry</p>
+<p>If you have any questions about this service, please email Leilani Martinez at leilani.martinez@gsa.gov or call 202-222-2222</p>
+
+<p>Thank you,</p>
+
+<p>The USA.gov Social Media Registry team.</p>
+
+<p>Sent to <%= @auth_token.email %></p>

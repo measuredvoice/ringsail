@@ -1,82 +1,150 @@
 <div class="span14">
+    <% if @outlet %>
+    
+    <ul class="breadcrumb">
+      <li><a href="verify">Verify an account</a> <span class="divider">/</span></li>
+      <li class="active"><%= @outlet.service_info.display_name %></li>
+    </ul>
 
-<% if @outlet %>
-<h1><a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></h1>
-<% if @outlet.verified? %>
-<p>is registered in the USA.gov Social Media Registry.</p>
+    <% if @outlet.verified? %>
+    <div class="row">
+        <p class="span7 alert-message block-message success">
+            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a> is an official U.S. government account.
+        </p>
+    </div>
+    
+    <table class="span8 condensed-table">
+        <thead>
+            <tr><th colspan="2">Information about this account</th></tr>
+        </thead>
+        <tbody>
+            <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
+            <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
+            <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><% @outlet.agencies.each do |agency| %><%= agency.name %>, <% end %></td></tr>
+            <tr><td>Location:</td><td class="muted"><em>not yet implemented</em></td></tr>
+            <tr><td>Tags:</td><td class="muted"><em>not yet implemented</em></td></tr>
+            <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
+            <tr><td>Last updated by:</td><td><%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %></td></tr>
+            <tr><td>Last updated on:</td><td><%= @outlet.updated_at.to_s(:human) %></td></tr>    
+        </tbody>
+    </table>
 
-<% if @outlet.service_info.profile_image %>
-<p><img src="<%= @outlet.service_info.profile_image %>" alt="profile image for <%= @outlet.service_info.display_name %>" title="profile image for <%= @outlet.service_info.display_name %>"></p>
+    <hr>
+    
+    <div class="span8">
+        
+        <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
+
+        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
+
+        <div class="clearfix">
+            <label for="email">Email:</label>
+            <div class="input">
+                <%= text_field_tag('email', '', :class => "span5") %>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <label for="phone">Phone:</label>
+            <div class="input">
+                <%= text_field_tag('phone', '', :class => "span5") %>
+            </div>
+        </div>
+
+        <%= hidden_field_tag('service_url', @outlet.service_url) %>
+
+        <div class="actions">
+            <input type="submit" class="btn" value="Submit">
+        </div>
+        <% end %>
+    </div>
+
+    <% else %>
+
+    <div class="row">
+        <p class="span7 alert-message warning">
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a> is <strong>not</strong> registered as an official U.S. government account.
+        </p>
+    </div>
+
+    <hr>
+    
+    <div class="span8">
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can add it to this registry. Enter your email address and phone number below and we will send you a link to add it.</p>
+        
+        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
+
+        <div class="clearfix">
+            <label for="email">Email:</label>
+            <div class="input">
+                <%= text_field_tag('email', '', :class => "span5") %>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <label for="phone">Phone:</label>
+            <div class="input">
+                <%= text_field_tag('phone', '', :class => "span5") %>
+            </div>
+        </div>
+
+        <%= hidden_field_tag('service_url', @outlet.service_url) %>
+
+        <div class="actions">
+                <p><span class="label important">Important!</span> The USA.gov Social Media Registry should only include accounts that represent official U.S. government agencies, organizations, or programs.</p>
+                <p><strong>Do not register any accounts that represent non-government organizations or individual people, even if they are government employees.</strong></p>
+
+            <input type="submit" class="btn" value="Submit">
+        </div>
+        <% end %>
+
+    </div>
 <% end %>
-
-<p><a href="verify">look up another account</a></p>
-
-<h2>Information about this account:</h2>
-
-<p>Organization or Program: <%= @outlet.organization %></p>
-
-<p>Information URL: <%= link_to @outlet.info_url, @outlet.info_url %></p>
-
-<p>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:
-<ul>
-<% @outlet.agencies.each do |agency| %>
-  <li><%= agency.name %></li>
-<% end %>
-</ul>
-
-<p>Tags: <em>not yet implemented</em></p>
-
-<p>Language: <%= @outlet.language %></p>
-
-<p>Location: <em>not yet implemented</em></p>
-
-<p>Last updated by: <%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %><br>
-Last updated on: <%= @outlet.updated_at.to_s(:human) %>
-</p>
-
-
 
 <% else %>
-<p>is not registered in the USA.gov Social Media Registry.</p>
-
-<p><a href="verify">look up another account</a></p>
-
-<% end %>
-
-<p>To make changes to this listing, provide your .gov or .mil email address below. You will receive a link that will allow editing for 60 minutes from the time the email is sent.</p>
-
-<%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
-
-<div class="clearfix">
-<label for="email">Email:</label>
-<div class="input">
-<%= text_field_tag('email', '', :class => "span8") %>
-</div>
+<h3>Verify official U.S. government social media accounts</h3>
+<div class="span8">
+<p>Social media tools like Twitter, Facebook, and YouTube are now standard tools used by the government to connect with people and communicate official  information. Because of this, it is important to know if a social media account is really managed by the government or not.</p>
+<p>This service is designed to make it easy for anyone to verify if a social media account is officially managed by the U.S. government.</p>
 </div>
 
-<div class="clearfix">
-<label for="phone">Phone:</label>
-<div class="input">
-<%= text_field_tag('phone', '', :class => "span8") %>
+
+<hr>
+<div class="row">
+    <div class="span7">
+        <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b></p>
+        <p>Example: http://twitter.com/whitehouse</p>
+        <form action="/outlets/verify" method="GET">
+            <input type="text" name="service_url" class="span5">
+            <button class="btn primary" type="submit">Verify</button>
+        </form>
+    </div>
+    <div class="span4 offset1">
+        <p><b>Types of accounts we can verify:</b></p>
+            <ul>
+                <li>Blip.tv</li>
+                <li>Disqus</li>
+                <li>Facebook</li>
+                <li>Flickr</li>
+                <li>Github</li>
+                <li>Google+</li>
+                <li>Ideascale</li>
+                <li>Linkedin</li>
+                <li>Meetup</li>
+                <li>Myspace</li>
+                <li>Posterous</li>
+                <li>Scribd</li>
+                <li>Slideshare</li>
+                <li>Socrata</li>
+                <li>Tumblr</li>
+                <li>Twitter</li>
+                <li>Uservoice</li>
+                <li>Ustream</li>
+                <li>Vimeo</li>
+                <li>Youtube</li>
+            </ul>
+    </div>
 </div>
-</div>
-
-<%= hidden_field_tag('service_url', @outlet.service_url) %>
-
-<div class="actions">
-  <input type="submit" class="btn primary" value="Submit">
-</div>
-
-<% end %>
-
-<% else %>
-
-<p>Paste or type the full URL of a social media account here:</p>
-<form action="/outlets/verify" method="GET">
-<input type="text" name="service_url" class="span7">
-<button class="btn" type="submit">Look Up</button>
-</form>
-
 <% end %>
 
 </div>
