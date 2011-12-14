@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111209215643) do
+ActiveRecord::Schema.define(:version => 20111214185351) do
 
   create_table "agencies", :force => true do |t|
     t.string   "name"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(:version => 20111209215643) do
   end
 
   add_index "outlets", ["account"], :name => "index_outlets_on_account"
-  add_index "outlets", ["account"], :name => "index_outlets_on_service_id_and_account", :unique => true
   add_index "outlets", ["service", "account"], :name => "index_outlets_on_service_and_account"
 
   create_table "rails_admin_histories", :force => true do |t|
