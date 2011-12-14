@@ -8,6 +8,7 @@ class OutletLocation
   # Class methods
   
   def self.find_by_text(query_text)
+    return [] if query_text.nil?
     Place.search(query_text).flat_map do |place|
       # Ignore place types we don't know how to handle
       case place.type
