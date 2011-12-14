@@ -12,5 +12,4 @@ bin/
 config/database.yml
 .autotest
 .rspec
-config/initializers/secret*.rb
 

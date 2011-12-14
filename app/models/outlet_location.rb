@@ -1,5 +1,5 @@
 include Yahoo::GeoPlanet
-Yahoo::GeoPlanet.app_id = Ringsail::Application.config.yahoo_app_id
+Yahoo::GeoPlanet.app_id = ENV['YAHOO_APP_ID']
 
 class OutletLocation
   attr_accessor :woe_id
