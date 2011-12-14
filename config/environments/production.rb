@@ -58,12 +58,14 @@ Ringsail::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
+  config.action_mailer.default_url_options = { :host => ENV['RINGSAIL_HOST'] }
+
   # Set up SendGrid for email
   config.action_mailer.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address => "smtp.sendgrid.net",   
     :port => 25,   
-    :authentication => :plain 
+    :authentication => :plain, 
     :user_name => ENV['SENDGRID_USER'],   
     :domain    => ENV['SENDGRID_DOMAIN'],
     :password  => ENV['SENDGRID_PASSWORD'],   

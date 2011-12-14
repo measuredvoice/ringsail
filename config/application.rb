@@ -1,5 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
+secrets_file = File.expand_path('../too_many_secrets', __FILE__)
+require secrets_file if File.exists?(secrets_file + '.rb')
+
 require 'rails/all'
 
 if defined?(Bundler)
