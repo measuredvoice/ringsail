@@ -5,6 +5,14 @@
       <li><a href="verify">Verify an account</a> <span class="divider">/</span></li>
       <li class="active"><%= @outlet.service_url %></li>
     </ul>
+    
+    <% if flash[:notice] %>
+    <div class="row">
+        <p class="span7 alert-message block-message success">
+            <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+        </p>
+    </div>
+    <% end %>
 
     <% if @outlet.verified? %>
     <div class="row">

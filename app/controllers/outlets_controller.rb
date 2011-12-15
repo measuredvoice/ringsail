@@ -66,7 +66,8 @@ class OutletsController < ApplicationController
     
     if @outlet.save
       if request.format == :html
-        flash[:success] = "Outlet updated."
+        flash[:shortnotice] = "Thank you!"
+        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been updated."
         redirect_to "/outlets/#{@outlet.service}/#{@outlet.account}"
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
