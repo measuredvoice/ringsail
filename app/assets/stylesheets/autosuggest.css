@@ -144,6 +144,10 @@ ul.as-selections li.as-selection-item.selected {
 	background: #d4d4d4;
 }
 
+ul.as-selections li.as-selection-item a.as-close {
+	color: #EEE;
+}
+
 ul.as-selections li.as-selection-item a:hover.as-close {
 	color: #1b3c65;
 }
