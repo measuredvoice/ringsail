@@ -3,13 +3,13 @@
     
     <ul class="breadcrumb">
       <li><a href="verify">Verify an account</a> <span class="divider">/</span></li>
-      <li class="active"><%= @outlet.service_info.display_name %></li>
+      <li class="active"><%= @outlet.service_url %></li>
     </ul>
 
     <% if @outlet.verified? %>
     <div class="row">
         <p class="span7 alert-message block-message success">
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a> is an official U.S. government account.
+            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an official U.S. government account.
         </p>
     </div>
     
