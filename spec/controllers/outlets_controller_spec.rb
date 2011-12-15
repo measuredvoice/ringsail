@@ -16,18 +16,12 @@ describe OutletsController do
       get :add, :auth_token => @good_token.token
       response.should be_success
     end
-    
-    it "should ask for a service_url if one was not given" do
-      get :add, :auth_token => @good_token.token
-      response.should have_selector("p", :content => "type the full URL")
-    end
-    
+        
     describe "with a service_url" do
-      it "should display the full form with service_url filled in" do
+      it "should display the full form" do
         service_url = 'http://twitter.com/somethingorother'
         get :add, :service_url => service_url, :auth_token => @good_token.token
-        response.should have_selector("p", :content => "Update registry information")
-        response.should have_selector("a", :href => service_url)
+        response.should have_selector("label", :content => "Sponsoring Agency:")
       end
     end
   end
@@ -163,14 +157,13 @@ describe OutletsController do
       
       it "should return a verified indication" do
         get :verify, :service_url => @verified_url
-        response.should have_selector("p", :content => "is registered")
+        response.should have_selector("p", :content => "official")
       end
       
       it "should return the attributes of the outlet" do
         get :verify, :service_url => @verified_url
-        response.should have_selector("p", :content => "is registered")
-        response.should have_selector("p", :content => @outlet.organization)
-        response.should have_selector("p", :content => @outlet.language)
+        response.should have_selector("td", :content => @outlet.organization)
+        response.should have_selector("td", :content => @outlet.language)
       end
     end
   end

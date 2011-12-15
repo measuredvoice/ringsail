@@ -11,7 +11,7 @@ describe AuthTokensController do
     
     it "should ask for email and phone" do
       get :new
-      response.should have_selector("p", :content => "email address below")
+      response.should have_selector("p", :content => "email address and phone number")
     end
   end
   
