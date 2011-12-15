@@ -1,85 +1,106 @@
-Administrative Conference of the United States,www.acus.gov,acus
-Advisory Council on Historic Preservation,www.achp.gov,achp
-African Development Foundation,www.adf.gov,adf
-United States Agency for International Development,www.usaid.gov,usaid
-Department of Agriculture,www.usda.gov,usda
+Administrative Conference of the United States (ACUS),www.acus.gov,acus
+Advisory Council on Historic Preservation (ACHP),www.achp.gov,achp
+African Development Foundation (ADF),www.adf.gov,adf
+United States Agency for International Development (USAID),www.usaid.gov,usaid
+Department of Agriculture (USDA),www.usda.gov,usda
 AMTRAK (National Railroad Passenger Corporation),www.amtrak.com,amtrak
-"Broadcasting Board of Governors, International Broadcasting Bureau",www.bbg.gov,bbg
-Central Intelligence Agency,www.cia.gov,cia
+"Broadcasting Board of Governors, International Broadcasting Bureau (BBG)",www.bbg.gov,bbg
+Central Intelligence Agency (CIA),www.cia.gov,cia
 Department of Commerce,www.commerce.gov,commerce
-Commission on Civil Rights,www.usccr.gov,usccr
-Commodity Futures Trading Commission,www.cftc.gov,cftc
-Consumer Product Safety Commission,"www.cpsc.gov, www.serve.gov",cpsc
-Corporation for National and Community Service,www.nationalservice.gov,nationalservice
-Court Services and Offender Supervision Agency for the District of Columbia,www.csosa.gov,csosa
-Defense Nuclear Facilities Safety Board,www.dnfsb.gov,dnfsb
-Department of Defense,www.defense.gov,defense
-Director of National Intelligence,www.dni.gov,dni
-Department of Education,www.ed.gov,ed
-Election Assistance Commission,www.eac.gov,eac
-Department of Energy,www.energy.gov,energy
-Environmental Protection Agency,www.epa.gov,epa
-Equal Employment Opportunity Commission,www.eeoc.gov,eeoc
-Export-Import Bank of the United States,www.exim.gov,exim
-Farm Credit Administration,www.fca.gov,fca
-Federal Communications Commission,www.fcc.gov,fcc
-Federal Deposit Insurance Corporation,www.fdic.gov,fdic
-Federal Election Commission,www.fec.gov,fec
-Federal Energy Regulatory Commission,www.ferc.gov,ferc
-Federal Housing Finance Board,www.fhfa.gov,fhfa
-Federal Labor Relations Authority,www.flra.gov,flra
-Federal Maritime Commission,www.fmc.gov,fmc
-Federal Mediation and Conciliation Service,www.fmcs.gov,fmcs
-Federal Mine Safety and Health Review Commission,www.fmshrc.gov,fmshrc
+Commission on Civil Rights (USCCR),www.usccr.gov,usccr
+Commodity Futures Trading Commission (CFTC),www.cftc.gov,cftc
+Consumer Product Safety Commission (CPSC),"www.cpsc.gov, www.serve.gov",cpsc
+Corporation for National and Community Service (CNCS),www.nationalservice.gov,nationalservice
+Court Services and Offender Supervision Agency for the District of Columbia (CSOSA),www.csosa.gov,csosa
+Defense Nuclear Facilities Safety Board (DNFSB),www.dnfsb.gov,dnfsb
+Department of Defense (DOD),www.defense.gov,defense
+Director of National Intelligence (DNI),www.dni.gov,dni
+Department of Education (ED),www.ed.gov,ed
+Election Assistance Commission (EAC),www.eac.gov,eac
+Department of Energy (DOE),www.energy.gov,energy
+Environmental Protection Agency (EPA),www.epa.gov,epa
+Equal Employment Opportunity Commission (EEOC),www.eeoc.gov,eeoc
+Export-Import Bank of the United States (EXIM),www.exim.gov,exim
+Farm Credit Administration (FCA),www.fca.gov,fca
+Federal Communications Commission (FCC),www.fcc.gov,fcc
+Federal Deposit Insurance Corporation (FDIC),www.fdic.gov,fdic
+Federal Election Commission (FEC),www.fec.gov,fec
+Federal Energy Regulatory Commission (FERC),www.ferc.gov,ferc
+Federal Housing Finance Board (FHFA),www.fhfa.gov,fhfa
+Federal Labor Relations Authority (FLRA),www.flra.gov,flra
+Federal Maritime Commission (FMC),www.fmc.gov,fmc
+Federal Mediation and Conciliation Service (FMCS),www.fmcs.gov,fmcs
+Federal Mine Safety and Health Review Commission (FMSHRC),www.fmshrc.gov,fmshrc
 Federal Reserve System,www.federalreserve.gov,federalreserve
-Federal Retirement Thrift Investment Board,www.frtib.gov,frtib
-Federal Trade Commission,www.ftc.gov,ftc
-General Services Administration,www.gsa.gov,gsa
-Department of Health and Human Services,www.hhs.gov,hhs
-Department of Homeland Security,www.dhs.gov,dhs
-Department of Housing and Urban Development,www.hud.gov,hud
-Institute of Museum and Library Services,www.imls.gov,imls
-Inter-American Foundation,www.iaf.gov,iaf
-Department of the Interior,www.doi.gov,doi
-United States International Trade Commission,www.usitc.gov,usitc
-Department of Justice,www.justice.gov,justice
-Department of Labor,www.labor.gov,labor
-Merit Systems Protection Board,www.mspb.gov,mspb
-Millennium Challenge Corporation,www.mcc.gov,mcc
-National Aeronautics and Space Administration,www.nasa.gov,nasa
-National Archives and Records Administration,www.archives.gov,archives
-National Capital Planning Commission,www.ncpc.gov,ncpc
-National Council on Disability,www.ncd.gov,ncd
-National Credit Union Administration,www.ncua.gov,ncua
-National Endowment for the Arts,www.nea.gov,nea
-National Endowment for the Humanities,www.neh.gov,neh
-National Labor Relations Board,www.nlrb.gov,nlrb
-National Mediation Board,www.nmb.gov,nmb
-National Science Foundation,www.nsf.gov,nsf
-National Transportation Safety Board,www.ntsb.gov,ntsb
-Nuclear Regulatory Commission,www.nrc.gov,nrc
-Occupational Safety and Health Review Commission,www.oshrc.gov,oshrc
+Federal Retirement Thrift Investment Board (FRTIB),www.frtib.gov,frtib
+Federal Trade Commission (FTC),www.ftc.gov,ftc
+General Services Administration (GSA),www.gsa.gov,gsa
+Department of Health and Human Services (HHS),www.hhs.gov,hhs
+Department of Homeland Security (DHS),www.dhs.gov,dhs
+Department of Housing and Urban Development (HUD),www.hud.gov,hud
+Institute of Museum and Library Services (IMLS),www.imls.gov,imls
+Inter-American Foundation (IAF),www.iaf.gov,iaf
+Department of the Interior (DOI),www.doi.gov,doi
+United States International Trade Commission (USITC),www.usitc.gov,usitc
+Department of Justice (DOJ),www.justice.gov,justice
+Department of Labor (DOL),www.labor.gov,labor
+Merit Systems Protection Board (MSPB),www.mspb.gov,mspb
+Millennium Challenge Corporation (MCC),www.mcc.gov,mcc
+National Aeronautics and Space Administration (NASA),www.nasa.gov,nasa
+National Archives and Records Administration (NARA),www.archives.gov,archives
+National Capital Planning Commission (NCPC),www.ncpc.gov,ncpc
+National Council on Disability (NCD),www.ncd.gov,ncd
+National Credit Union Administration (NCUA),www.ncua.gov,ncua
+National Endowment for the Arts (NEA),www.nea.gov,nea
+National Endowment for the Humanities (NEH),www.neh.gov,neh
+National Labor Relations Board (NLRB),www.nlrb.gov,nlrb
+National Mediation Board (NMB),www.nmb.gov,nmb
+National Science Foundation (NSF),www.nsf.gov,nsf
+National Transportation Safety Board (NTSB),www.ntsb.gov,ntsb
+Nuclear Regulatory Commission (NRC),www.nrc.gov,nrc
+Occupational Safety and Health Review Commission (OSHRC),www.oshrc.gov,oshrc
 Office of Compliance,www.compliance.gov,compliance
-Office of Government Ethics,www.usoge.gov,usoge
-Office of Personnel Management,www.opm.gov,opm
-Office of Special Counsel,www.osc.gov,osc
-Office of the Director of National Intelligence,www.dni.gov,dni
-Office of the National Counterintelligence Executive,www.ncix.gov,ncix
-Overseas Private Investment Corporation,www.opic.gov,opic
+Office of Government Ethics (USOGE),www.usoge.gov,usoge
+Office of Personnel Management (OPM),www.opm.gov,opm
+Office of Special Counsel (OSC),www.osc.gov,osc
+Office of the Director of National Intelligence (DNI),www.dni.gov,dni
+Office of the National Counterintelligence Executive (NCIX),www.ncix.gov,ncix
+Overseas Private Investment Corporation (OPIC),www.opic.gov,opic
 Peace Corps,www.peacecorps.gov,peacecorps
-Pension Benefit Guaranty Corporation,www.pbgc.gov,pbgc
-Postal Regulatory Commission,www.prc.gov,prc
-United States Postal Service,www.usps.com,usps
-Railroad Retirement Board,www.rrb.gov,rrb
-Securities and Exchange Commission,www.sec.gov,sec
-Selective Service System,www.sss.gov,sss
-Small Business Administration,www.sba.gov,sba
-Social Security Administration,www.ssa.gov,ssa
+Pension Benefit Guaranty Corporation (PBGC),www.pbgc.gov,pbgc
+Postal Regulatory Commission (PRC),www.prc.gov,prc
+United States Postal Service (USPS),www.usps.com,usps
+Railroad Retirement Board (RRB),www.rrb.gov,rrb
+Securities and Exchange Commission (SEC),www.sec.gov,sec
+Selective Service System (SSS),www.sss.gov,sss
+Small Business Administration (SBA),www.sba.gov,sba
+Social Security Administration (SSA),www.ssa.gov,ssa
 Department of State,www.state.gov,state
-Tennessee Valley Authority,www.tva.gov,tva
-U.S. Trade and Development Agency,www.ustda.gov,ustda
-Department of Transportation,www.dot.gov,dot
+Tennessee Valley Authority (TVA),www.tva.gov,tva
+U.S. Trade and Development Agency (USTDA),www.ustda.gov,ustda
+Department of Transportation (DOT),www.dot.gov,dot
 Department of the Treasury,www.treasury.gov,treasury
-Department of Veterans Affairs,www.va.gov,va
-Office of Management and Budget,www.omb.gov,omb
+Department of Veterans Affairs (VA),www.va.gov,va
+Office of Management and Budget (OMB),www.omb.gov,omb
 White House,www.whitehouse.gov,whitehouse
+Supreme Court (SCOTUS),www.supremecourt.gov,supremecourt
+House of Representatives,www.house.gov,house
+U.S. Senate,www.senate.gov,senate
+Library of Congress (LOC),www.libraryofcongress.gov,loc
+U.S. Court of Appeals (CAFC),www.cafc.uscourts.gov,courtofappeals
+U.S. District Courts,www.uscourts.gov/FederalCourts/UnderstandingtheFederalCourts/DistrictCourts.aspx,districtcourts
+U.S. Bankruptcy Courts,www.uscourts.gov/FederalCourts/UnderstandingtheFederalCourts/BankruptcyCourts.aspx,backruptcycourts
+U.S. Court of Appeals for the Armed Forces,www.armfor.uscourts.gov,courtofappealsforarmedforces
+U.S. Court of Federal Claims (USCFC),www.uscfc.uscourts.gov,courtoffederalclaims
+U.S. Court of International Trade,www.cit.uscourts.gov,courtofinternationaltrade
+U.S. Tax Court,www.ustaxcourt.gov,ustaxcourt
+U.S. Court of Appeals for Veterans Claims (CAVC),www.uscourts.cavc.gov,courtofappealsforveterans
+Judicial Panel on Multidistrict Litigation (JPML),www.jpml.uscourts.gov,jpml
+Administrative Office of the U.S. Courts,www.uscourts.gov,uscourts
+Federal Judicial Center (FJC),www.fjc.gov,fjc
+U.S. Sentencing Commission (USSC),www.ussc.gov,ussc
+Architect of the Capitol (AOC),www.aoc.gov,capitol
+United States Botanic Garden ,www.usbg.gov,botanicgarden
+Government Accountability Office (GAO),www.gao.gov,gao
+Government Printing Office (GPO),www.gpo.gov,gpo
+Congressional Budget Office (CBO),www.cbo.gov,cbo
