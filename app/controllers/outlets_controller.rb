@@ -46,8 +46,10 @@ class OutletsController < ApplicationController
     # FIXME: Doing this the stupid, straightforward way to start
     @outlet.organization = params[:organization] unless params[:organization].nil? or params[:organization].empty?
     @outlet.info_url = params[:info_url] unless params[:info_url].nil? or params[:info_url].empty?
-    @outlet.language = params[:language] unless params[:language].nil? or params[:language].empty?
-    @outlet.tag_list = params[:tags] unless params[:tags].nil? or params[:tags].empty?
+    if !params[:language].nil?
+      @outlet.language = params[:language].gsub(/,/, '')
+    end
+    @outlet.tag_list = params[:tags]
     @outlet.location_id = params[:location_id] unless params[:location_id].nil? or params[:location_id].empty?
     @outlet.auth_token = @current_token.token
     
