@@ -16,19 +16,6 @@
 		// active "Chosen" plugin - Agencies dropdown
 		$(".chzn-select").chosen();
 		
-		// activate the AutoSuggest for languages
-		var languagePlaceholder = $("#language").attr("placeholder");
-		var langPrefillString = $("#language").val();
-		if (langPrefillString){
-			var langPrefills = langPrefillString.split(",");
-			var langPrefillArray = [];
-			for(i=0;i<=langPrefills.length-1;i++){
-				var preObj = {}
-				preObj = {"value": langPrefills[i], "name":langPrefills[i]};
-				langPrefillArray[i] = preObj;
-			}
-		}
-		$("#language").autoSuggest(defaultLanguages.languages, {preFill: langPrefillArray, asHtmlID: "language", minChars: 1, startText:languagePlaceholder, selectionLimit: 1, resultsHighlight: false, neverSubmit:true, selectedItemProp: "name", searchObjProps: "value"});
 		
 		// activate the AutoSuggest for tags
 		//DEV ONLY: 
@@ -50,7 +37,7 @@
 		
 		// when the form is submitted, grab the values from the AutoSuggest fields and pop them into a more friendly-named input 
 		$("form.validate").submit(function(){
-			var destinationFields = Array("tags","language");
+			var destinationFields = Array("tags");
 			// loop through desired endpoints
 			for (i=0;i<=destinationFields.length-1;i++){
 				var fieldName = destinationFields[i];
