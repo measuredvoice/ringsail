@@ -7,7 +7,7 @@ class OutletsController < ApplicationController
     
     if @outlet
       @page_title = "Add Information for " + @outlet.service_info.display_name
-      @agencies = Agency.all
+      @agencies = agencies_for_form
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
       respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, :view => :full )))
@@ -58,7 +58,7 @@ class OutletsController < ApplicationController
       @outlet.agencies = params[:agency_id].map {|s| Agency.find_by_shortname(s)}
     elsif @outlet.agencies.empty?
       @outlet.errors.add(:agencies, "must include an agency to be verified")
-      @agencies = Agency.all
+      @agencies = agencies_for_form
       @selected_agencies = [];
       @page_title = "Add Information for " + @outlet.service_info.display_name
       render 'add' and return
@@ -73,7 +73,7 @@ class OutletsController < ApplicationController
       end
     else
       if request.format == :html
-        @agencies = Agency.all
+        @agencies = agencies_for_form
         @selected_agencies = [];
         @page_title = "Add Information for " + @outlet.service_info.display_name
         render 'add'
@@ -88,7 +88,7 @@ class OutletsController < ApplicationController
     
     if @outlet
       @page_title = "Verify " + @outlet.service_info.display_name
-      @agencies = Agency.all
+      @agencies = agencies_for_form
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
       respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, :view => :full )))
@@ -135,5 +135,11 @@ class OutletsController < ApplicationController
     else
       respond_with(XBoxer.new(:result, {:status => "success"}))
     end
+  end
+  
+  private
+  
+  def agencies_for_form
+    Agency.all(:order => "name")
   end
 end
