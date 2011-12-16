@@ -22,7 +22,7 @@
 <div class="clearfix">
 <label for="agency_id">Sponsoring Agency:</label>
 <div class="input">
-<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select" %>
+<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select", 'data-placeholder' => "Choose an agency by typing the name" %>
 </div>
 </div>
 
@@ -36,7 +36,7 @@
 <div class="clearfix">
 <label for="language">Language:</label>
 <div class="input">
-<%= text_field_tag('language', @outlet.language, :placeholder => "Specify your language", :class => "span8") %>
+<%= text_field_tag('language', @outlet.language, :class => "span8") %>
 </div>
 </div>
 
