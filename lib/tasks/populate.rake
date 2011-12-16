@@ -4,18 +4,29 @@ namespace :db do
     make_agencies
     make_official_tags
   end
+  task :forcerefresh => :environment do
+    make_agencies(:force => true)
+    make_official_tags(:force => true)
+  end
 end
 
-def make_agencies
+def make_agencies(options = {})
   agencies_file = Rails.root + "db/raw_data/agencies.csv"
   
   CSV.foreach(agencies_file) do |row|
     attrs = {:name => row[0], :info_url => row[1], :shortname => row[2]}
-    Agency.find_or_create_by_shortname(attrs)
+
+    agency = Agency.find_or_create_by_shortname(attrs)
+    
+    if (options[:force])
+      agency.assign_attributes(attrs)
+      puts "Forcing refresh for '#{agency.shortname}'" if agency.changed?
+      agency.save
+    end
   end
 end
 
-def make_official_tags
+def make_official_tags(options = {})
   tags_file = Rails.root + "db/raw_data/official-tags.csv"
   
   CSV.foreach(tags_file) do |row|
