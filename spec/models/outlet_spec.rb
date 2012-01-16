@@ -93,6 +93,10 @@ describe Outlet do
       resolved_outlet.should == outlet
     end
     
+    it "should allow HTTPS URLs" do
+      outlet = Outlet.resolve("https://twitter.com/example3")
+      outlet.should_not be_nil
+    end
   end
   
   describe "sponsorships" do

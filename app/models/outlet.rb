@@ -51,7 +51,7 @@ class Outlet < ActiveRecord::Base
   def self.resolve(url)
     return nil if url.nil?
 
-    url = 'http://' + url unless url =~ %r{\Ahttp://}
+    url = 'http://' + url unless url =~ %r{\Ahttps?://}
     
     s = Service.find_by_url(url)
     
