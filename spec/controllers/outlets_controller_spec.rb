@@ -118,6 +118,22 @@ describe OutletsController do
       response.should have_selector("a", :href => 'http://' + unverified_url)
     end
     
+    describe "for an unrecognized service" do
+      it "should display an error" do
+        unrecognized_url = "http://florndip.com/invalid"
+        get :verify, :service_url => unrecognized_url
+        response.should have_selector("p", :content => "doesn't recognize")
+      end
+    end
+    
+    describe "for an unparseable account URL" do
+      it "should display an error" do
+        problem_url = "http://twitter.com/"
+        get :verify, :service_url => problem_url
+        response.should have_selector("p", :content => "doesn't match")
+      end
+    end
+    
     describe "for an unverified outlet" do
         
       it "should return an unverified indication" do

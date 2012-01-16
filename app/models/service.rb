@@ -71,6 +71,11 @@ class Service
   def uri=(uri)
     @service_uri = uri
   end
+  
+  def service_url_example
+    nil
+  end
+  
 end
 
 # Load all service definitions from lib/services/*.rb

@@ -115,14 +115,26 @@
 <p>Social media tools like Twitter, Facebook, and YouTube are now standard tools used by the government to connect with people and communicate official  information. Because of this, it is important to know if a social media account is really managed by the government or not.</p>
 <p>This service is designed to make it easy for anyone to verify if a social media account is officially managed by the U.S. government.</p>
 </div>
+</div>
+</div>
 
 <hr>
+
+<% if flash[:alert] %>
+<div class="row">
+  <p class="span10 alert-message warning">
+    <%= flash[:alert] %>
+  </p>
+</div>
+<% end %>
+
+
 <div class="row">
     <div class="span7">
         <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b></p>
         <p>Example: http://twitter.com/whitehouse</p>
         <form action="/outlets/verify" method="GET">
-            <input type="text" name="service_url" class="span5">
+            <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
             <button class="btn primary" type="submit">Verify</button>
         </form>
     </div>
