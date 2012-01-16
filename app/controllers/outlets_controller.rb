@@ -18,7 +18,7 @@ class OutletsController < ApplicationController
       if @outlet and @outlet.service_info
         proper_url = @outlet.service_info.service_url_example
         help_msg = proper_url ? " Accounts on that service usually look like #{proper_url} instead." : ""
-        flash.now[:alert] = params[:service_url] + "doesn't seem to be a social media account." + help_msg
+        flash.now[:alert] = params[:service_url] + " doesn't seem to be a social media account." + help_msg
         @outlet = nil
       elsif params[:service_url]
         flash.now[:alert] = "The registry doesn't recognize that URL as a supported social media service."
@@ -109,10 +109,10 @@ class OutletsController < ApplicationController
       if @outlet and @outlet.service_info
         proper_url = @outlet.service_info.service_url_example
         help_msg = proper_url ? " Perhaps try something like #{proper_url} instead." : ""
-        flash.now[:alert] = "The URL you provided doesn't match what the registry knows about this service." + help_msg
+        flash.now[:alert] = params[:service_url] + " doesn't seem to be a social media account." + help_msg
         @outlet = nil
       elsif params[:service_url]
-        flash.now[:alert] = "The registry doesn't recognize a supported social media service at the URL you provided."
+        flash.now[:alert] = "The registry doesn't recognize that URL as a supported social media service."
       end
 
       @page_title = "Verify an outlet"

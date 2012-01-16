@@ -130,7 +130,7 @@ describe OutletsController do
       it "should display an error" do
         problem_url = "http://twitter.com/"
         get :verify, :service_url => problem_url
-        response.should have_selector("p", :content => "doesn't match")
+        response.should have_selector("p", :content => "doesn't seem")
       end
     end
     
