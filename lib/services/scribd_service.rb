@@ -1,27 +1,27 @@
-class TumblrService < Service
+class ScribdService < Service
   def self.handles?(uri)
-    uri.host =~ /tumblr.com$/
+    uri.host =~ /scribd.com$/
   end
   
   def shortname
-    :tumblr
+    :scribd
   end
   
   def display_name
-    "#{account} on Tumblr"
-  end
-  
-  def account
-    /^(?<account>[\w-]+)\.tumblr.com/ =~ @uri.host
-    account
+    "#{account} on Scribd"
   end
 
+  def account
+      /\/(?<account>[\w-]+)$/ =~ @uri.path
+    account
+  end
+  
   def service_url_example
-    "http://peacecorps.tumblr.com/"
+    "http://www.scribd.com/USAgov"
   end
   
   def service_url_canonical
-    "http://#{account}.tumblr.com/"
+    "http://scribd.com/#{account}"
   end
 
   private
@@ -33,4 +33,4 @@ class TumblrService < Service
   end
 end
 
-Service.register(:tumblr, TumblrService)
+Service.register(:scribd, ScribdService)

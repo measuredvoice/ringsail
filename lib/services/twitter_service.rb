@@ -13,10 +13,18 @@ class TwitterService < Service
   
   def account
     # Twitter's hashbang syntax might put the account name in the fragment
-    /\/(?<account>\w+)$/ =~ (@uri.fragment || @uri.path)
+    /\/(?<account>[\w-]+)$/ =~ (@uri.fragment || @uri.path)
     account
   end
+
+  def service_url_example
+    "http://twitter.com/ftc"
+  end
   
+  def service_url_canonical
+    "http://twitter.com/#{account}"
+  end
+
   private
   
   def fetch_details

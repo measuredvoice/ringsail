@@ -1,27 +1,27 @@
-class TumblrService < Service
+class UstreamService < Service
   def self.handles?(uri)
-    uri.host =~ /tumblr.com$/
+    uri.host =~ /ustream.tv$/
   end
   
   def shortname
-    :tumblr
+    :ustream
   end
   
   def display_name
-    "#{account} on Tumblr"
-  end
-  
-  def account
-    /^(?<account>[\w-]+)\.tumblr.com/ =~ @uri.host
-    account
+    "#{account} on Ustream"
   end
 
+  def account
+      /\/(?<account>[\w-]+)$/ =~ @uri.path
+    account
+  end
+  
   def service_url_example
-    "http://peacecorps.tumblr.com/"
+    "http://www.ustream.tv/NASAJPL"
   end
   
   def service_url_canonical
-    "http://#{account}.tumblr.com/"
+    "http://ustream.tv/#{account}"
   end
 
   private
@@ -33,4 +33,4 @@ class TumblrService < Service
   end
 end
 
-Service.register(:tumblr, TumblrService)
+Service.register(:ustream, UstreamService)

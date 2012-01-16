@@ -1,27 +1,27 @@
-class TumblrService < Service
+class DisqusService < Service
   def self.handles?(uri)
-    uri.host =~ /tumblr.com$/
+    uri.host =~ /disqus.com$/
   end
   
   def shortname
-    :tumblr
+    :disqus
   end
   
   def display_name
-    "#{account} on Tumblr"
-  end
-  
-  def account
-    /^(?<account>[\w-]+)\.tumblr.com/ =~ @uri.host
-    account
+    "#{account} on Disqus"
   end
 
+  def account
+      /\/(?<account>[\w-]+)$/ =~ @uri.path
+    account
+  end
+  
   def service_url_example
-    "http://peacecorps.tumblr.com/"
+    "http://www.disqus.com/USAgov"
   end
   
   def service_url_canonical
-    "http://#{account}.tumblr.com/"
+    "http://disqus.com/#{account}"
   end
 
   private
@@ -33,4 +33,4 @@ class TumblrService < Service
   end
 end
 
-Service.register(:tumblr, TumblrService)
+Service.register(:disqus, DisqusService)

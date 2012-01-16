@@ -13,7 +13,7 @@ class FacebookService < Service
     if account =~ /[^\d]/
       "#{account} on Facebook"
     else
-      "Facebook account ID:#{account}"
+      "Facebook account ID: #{account}"
     end
   end
   
@@ -21,11 +21,19 @@ class FacebookService < Service
     if /pages/ =~ @uri.path
       /\/(?<account>\d+)$/ =~ @uri.path
     else
-      /\/(?<account>\w+)$/ =~ @uri.path
+      /\/(?<account>[\w-]+)$/ =~ @uri.path
     end
     account
   end
+
+  def service_url_example
+    "https://www.facebook.com/USarmy"
+  end
   
+  def service_url_canonical
+    "http://facebook.com/#{account}"
+  end
+
   private
   
   def fetch_details
