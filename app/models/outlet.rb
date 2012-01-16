@@ -61,7 +61,7 @@ class Outlet < ActiveRecord::Base
     if existing
       return existing
     else
-      self.new(:service_url => url, :service => s.shortname, :account => s.account)
+      self.new(:service_url => s.service_url_canonical, :service => s.shortname, :account => s.account)
     end
   end    
   

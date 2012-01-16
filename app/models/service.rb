@@ -76,6 +76,11 @@ class Service
     nil
   end
   
+  def service_url_canonical
+    # By default, return whatever the user specified.
+    @service_url
+  end
+  
 end
 
 # Load all service definitions from lib/services/*.rb
