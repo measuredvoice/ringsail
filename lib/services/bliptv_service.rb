@@ -1,27 +1,27 @@
-class TumblrService < Service
+class BlipService < Service
   def self.handles?(uri)
-    uri.host =~ /tumblr.com$/
+    uri.host =~ /blip.tv$/
   end
   
   def shortname
-    :tumblr
+    :blip
   end
   
   def display_name
-    "#{account} on Tumblr"
-  end
-  
-  def account
-    /^(?<account>[\w-]+)\.tumblr.com/ =~ @uri.host
-    account
+    "#{account} on Blip"
   end
 
+  def account
+      /\/(?<account>[\w-]+)$/ =~ @uri.path
+    account
+  end
+  
   def service_url_example
-    "http://peacecorps.tumblr.com/"
+    "http://www.blip.tv/USAgov"
   end
   
   def service_url_canonical
-    "http://#{account}.tumblr.com/"
+    "http://blip.tv/#{account}"
   end
 
   private
@@ -33,4 +33,4 @@ class TumblrService < Service
   end
 end
 
-Service.register(:tumblr, TumblrService)
+Service.register(:blip, BlipService)

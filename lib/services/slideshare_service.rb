@@ -1,31 +1,27 @@
-class YoutubeService < Service
+class SlideshareService < Service
   def self.handles?(uri)
-    uri.host =~ /youtube.com$/
+    uri.host =~ /slideshare.net$/
   end
   
   def shortname
-    :youtube
+    :slideshare
   end
   
   def display_name
-    "#{account} on YouTube"
+    "#{account} on SlideShare"
   end
 
   def account
-    if /user/ =~ @uri.path
       /\/(?<account>[\w-]+)$/ =~ @uri.path
-    else
-      /\/(?<account>[\w-]+)$/ =~ @uri.path
-    end
     account
   end
   
   def service_url_example
-    "http://www.youtube.com/USEPAgov"
+    "http://www.slideshare.net/whitehouse"
   end
   
   def service_url_canonical
-    "http://youtube.com/#{account}"
+    "http://slideshare.net/#{account}"
   end
 
   private
@@ -37,4 +33,4 @@ class YoutubeService < Service
   end
 end
 
-Service.register(:youtube, YoutubeService)
+Service.register(:slideshare, SlideshareService)

@@ -8,12 +8,20 @@ class FlickrService < Service
   end
   
   def display_name
-    "#{account} photos on Flickr"
+    "#{account} on Flickr"
   end
   
   def account
-    /photos\/(?<account>\w+)\/?$/ =~ @uri.path
+      /(photos|people)\/(?<account>[\w-]+)$/ =~ @uri.path
     account
+  end
+  
+  def service_url_example
+    "http://flickr.com/photos/USAgov"
+  end
+  
+  def service_url_canonical
+    "http://flickr.com/photos/#{account}"
   end
   
   private
@@ -23,6 +31,7 @@ class FlickrService < Service
       :account => account,
     }
   end
+  
 end
 
 Service.register(:flickr, FlickrService)

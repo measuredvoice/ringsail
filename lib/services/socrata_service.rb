@@ -1,27 +1,27 @@
-class TumblrService < Service
+class SocrataService < Service
   def self.handles?(uri)
-    uri.host =~ /tumblr.com$/
+    uri.host =~ /socrata.com$/
   end
   
   def shortname
-    :tumblr
+    :socrata
   end
   
   def display_name
-    "#{account} on Tumblr"
+    "#{account} on Socrata"
   end
   
   def account
-    /^(?<account>[\w-]+)\.tumblr.com/ =~ @uri.host
+    /^(?<account>[\w-]+)\.socrata.com/ =~ @uri.host
     account
   end
 
   def service_url_example
-    "http://peacecorps.tumblr.com/"
+    "http://census.socrata.com/"
   end
   
   def service_url_canonical
-    "http://#{account}.tumblr.com/"
+    "http://#{account}.socrata.com/"
   end
 
   private
@@ -33,4 +33,4 @@ class TumblrService < Service
   end
 end
 
-Service.register(:tumblr, TumblrService)
+Service.register(:socrata, SocrataService)
