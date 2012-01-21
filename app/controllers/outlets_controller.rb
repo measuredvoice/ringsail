@@ -99,7 +99,7 @@ class OutletsController < ApplicationController
     @outlet = Outlet.resolve(params[:service_url])
     
     if @outlet and @outlet.account
-      @page_title = "Verify " + @outlet.service_info.display_name
+      @page_title ||= "Verify " + @outlet.service_info.display_name
       @agencies = agencies_for_form
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
@@ -114,8 +114,10 @@ class OutletsController < ApplicationController
       elsif params[:service_url]
         flash.now[:alert] = "The registry doesn't recognize that URL as a supported social media service."
       end
+      
+      @services = Service.all;
 
-      @page_title = "Verify an outlet"
+      @page_title ||= "Verify an outlet"
       respond_with(XBoxer.new(:result, {
         :status => "incomplete",
         :needs  => "service_url",

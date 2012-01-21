@@ -31,4 +31,11 @@ Ringsail::Application.routes.draw do
   
   # API call /locations/resolve, GET
   match "locations/resolve" => "outlet_locations#resolve", :via => :get
+  
+  # HowTo.gov native style
+  match "howto/register" => "howto#verify", :via => :get
+  
+  # HowTo.gov embedded style
+  match "embed/register" => "embed#verify", :via => :get
+  
 end

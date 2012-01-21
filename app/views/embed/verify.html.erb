@@ -1,11 +1,6 @@
 <div class="span14">
     <% if @outlet %>
     
-    <ul class="breadcrumb">
-      <li><a href="verify">Verify an account</a> <span class="divider">/</span></li>
-      <li class="active"><%= @outlet.service_url %></li>
-    </ul>
-    
     <% if flash[:notice] %>
     <div class="row">
         <p class="span7 alert-message block-message info">
@@ -110,15 +105,6 @@
 <% end %>
 
 <% else %>
-<h3>Verify official U.S. government social media accounts</h3>
-<div class="span8">
-<p>Social media tools like Twitter, Facebook, and YouTube are now standard tools used by the government to connect with people and communicate official  information. Because of this, it is important to know if a social media account is really managed by the government or not.</p>
-<p>This service is designed to make it easy for anyone to verify if a social media account is officially managed by the U.S. government.</p>
-</div>
-</div>
-</div>
-
-<hr>
 
 <% if flash[:alert] %>
 <div class="row">
@@ -131,15 +117,17 @@
 
 <div class="row">
     <div class="span7">
-        <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b></p>
+        <p><b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b></p>
         <p>Example: http://twitter.com/whitehouse</p>
-        <form action="/outlets/verify" method="GET">
+        <form action="/embed/register" method="GET">
             <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
-            <button class="btn primary" type="submit">Verify</button>
+            <button class="btn primary" type="submit">Check</button>
         </form>
     </div>
-    <div class="span4 offset1">
-        <p><b>Types of accounts we can verify:</b></p>
+</div>
+<div class="row">
+    <div class="span7">
+        <p><b>Types of accounts we can register:</b></p>
         <%= render "shared/services_list" %>
     </div>
 </div>
