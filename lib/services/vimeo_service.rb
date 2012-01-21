@@ -3,7 +3,7 @@ class VimeoService < Service
     uri.host =~ /vimeo.com$/
   end
   
-  def shortname
+  def self.shortname
     :vimeo
   end
   

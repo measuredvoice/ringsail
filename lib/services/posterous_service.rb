@@ -3,7 +3,7 @@ class PosterousService < Service
     uri.host =~ /posterous.com$/
   end
   
-  def shortname
+  def self.shortname
     :posterous
   end
   

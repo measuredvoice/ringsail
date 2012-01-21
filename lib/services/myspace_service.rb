@@ -3,7 +3,7 @@ class MyspaceService < Service
     uri.host =~ /myspace.com$/
   end
   
-  def shortname
+  def self.shortname
     :myspace
   end
   

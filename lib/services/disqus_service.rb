@@ -3,7 +3,7 @@ class DisqusService < Service
     uri.host =~ /disqus.com$/
   end
   
-  def shortname
+  def self.shortname
     :disqus
   end
   

@@ -3,7 +3,7 @@ class MeetupService < Service
     uri.host =~ /meetup.com$/
   end
   
-  def shortname
+  def self.shortname
     :meetup
   end
   

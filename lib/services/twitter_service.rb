@@ -3,7 +3,7 @@ class TwitterService < Service
     uri.host =~ /twitter.com$/
   end
   
-  def shortname
+  def self.shortname
     :twitter
   end
   

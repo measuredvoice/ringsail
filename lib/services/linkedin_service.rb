@@ -3,8 +3,12 @@ class LinkedinService < Service
     uri.host =~ /linkedin.com$/
   end
   
-  def shortname
+  def self.shortname
     :linkedin
+  end
+  
+  def self.longname
+    "LinkedIn"
   end
   
   def display_name

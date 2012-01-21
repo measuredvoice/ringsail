@@ -22,11 +22,25 @@ class Service
     return nil
   end
   
+  def self.all
+    @services.map do |shortname, service|
+      service
+    end
+  end
+  
   def self.handles?(url)
     # Each service subclass needs to identify which URLs it can handle
     false
   end
 
+  def self.shortname
+    fail "self.shortname is not defined for this service (#{self.name})"
+  end
+  
+  def self.longname
+    self.shortname.to_s.humanize
+  end
+  
   ## instance methods
   
   def fetch_details
@@ -34,11 +48,15 @@ class Service
   end
   
   def shortname
-    fail "shortname is not defined for this service"
+    self.class.shortname
+  end
+  
+  def longname
+    self.class.longname
   end
   
   def display_name
-    "#{account} on #{shortname}"
+    "#{account} on #{longname}"
   end
   
   # If possible, override #account to return an account ID

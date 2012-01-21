@@ -3,7 +3,7 @@ class TumblrService < Service
     uri.host =~ /tumblr.com$/
   end
   
-  def shortname
+  def self.shortname
     :tumblr
   end
   

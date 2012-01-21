@@ -3,7 +3,7 @@ class SocrataService < Service
     uri.host =~ /socrata.com$/
   end
   
-  def shortname
+  def self.shortname
     :socrata
   end
   

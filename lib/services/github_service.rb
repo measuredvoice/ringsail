@@ -3,7 +3,7 @@ class GithubService < Service
     uri.host =~ /github.com$/
   end
   
-  def shortname
+  def self.shortname
     :github
   end
   

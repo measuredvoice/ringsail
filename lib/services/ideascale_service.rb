@@ -3,12 +3,12 @@ class IdeascaleService < Service
     uri.host =~ /ideascale.com$/
   end
   
-  def shortname
+  def self.shortname
     :ideascale
   end
   
-  def display_name
-    "#{account} on IdeaScale"
+  def self.longname
+    "IdeaScale"
   end
   
   def account

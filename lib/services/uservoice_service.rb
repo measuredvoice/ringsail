@@ -3,7 +3,7 @@ class UservoiceService < Service
     uri.host =~ /uservoice.com$/
   end
   
-  def shortname
+  def self.shortname
     :uservoice
   end
   

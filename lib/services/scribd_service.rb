@@ -3,7 +3,7 @@ class ScribdService < Service
     uri.host =~ /scribd.com$/
   end
   
-  def shortname
+  def self.shortname
     :scribd
   end
   

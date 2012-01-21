@@ -3,7 +3,7 @@ class SlideshareService < Service
     uri.host =~ /slideshare.net$/
   end
   
-  def shortname
+  def self.shortname
     :slideshare
   end
   

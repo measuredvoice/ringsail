@@ -3,8 +3,12 @@ class GooglePlusService < Service
     uri.host =~ /plus.google.com$/
   end
   
-  def shortname
+  def self.shortname
     :google_plus
+  end
+  
+  def self.longname
+    "Google+"
   end
   
   def display_name

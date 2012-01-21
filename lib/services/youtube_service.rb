@@ -3,7 +3,7 @@ class YoutubeService < Service
     uri.host =~ /youtube.com$/
   end
   
-  def shortname
+  def self.shortname
     :youtube
   end
   

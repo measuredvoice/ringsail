@@ -3,8 +3,12 @@ class BlipService < Service
     uri.host =~ /blip.tv$/
   end
   
-  def shortname
+  def self.shortname
     :blip
+  end
+  
+  def self.longname
+    "Blip"
   end
   
   def display_name

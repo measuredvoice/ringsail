@@ -5,7 +5,7 @@ class FacebookService < Service
     uri.host =~ /facebook.com$/
   end
   
-  def shortname
+  def self.shortname
     :facebook
   end
   

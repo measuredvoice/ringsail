@@ -3,7 +3,7 @@ class FlickrService < Service
     uri.host =~ /flickr.com$/
   end
   
-  def shortname
+  def self.shortname
     :flickr
   end
   

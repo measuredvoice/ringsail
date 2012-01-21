@@ -3,7 +3,7 @@ class UstreamService < Service
     uri.host =~ /ustream.tv$/
   end
   
-  def shortname
+  def self.shortname
     :ustream
   end
   
