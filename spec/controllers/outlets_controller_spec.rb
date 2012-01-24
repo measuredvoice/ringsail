@@ -42,12 +42,12 @@ describe OutletsController do
       
       it "should reject a missing auth token" do
         post :update, @attr.merge(:auth_token => "")
-        response.should redirect_to(add_outlet_path)
+        response.should redirect_to(howto_request_token_path)
       end
       
       it "should reject a bogus auth token" do
         post :update, @attr.merge(:auth_token => "ABCDEFG")
-        response.should redirect_to(add_outlet_path)
+        response.should redirect_to(howto_request_token_path)
       end
       
       it "should reject an old auth token"
