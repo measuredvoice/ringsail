@@ -42,12 +42,12 @@ describe OutletsController do
       
       it "should reject a missing auth token" do
         post :update, @attr.merge(:auth_token => "")
-        response.should redirect_to(new_path)
+        response.should redirect_to(add_outlet_path)
       end
       
       it "should reject a bogus auth token" do
         post :update, @attr.merge(:auth_token => "ABCDEFG")
-        response.should redirect_to(new_path)
+        response.should redirect_to(add_outlet_path)
       end
       
       it "should reject an old auth token"
@@ -184,7 +184,7 @@ describe OutletsController do
     end
   end
 
-  describe "DELETE 'destroy'" do
+  describe "DELETE 'remove'" do
   
     before(:each) do
       # FIXME: Get thee to a factory
@@ -199,14 +199,14 @@ describe OutletsController do
     
     it "should destroy the outlet" do
       lambda do
-       delete :destroy, :service => @outlet.service, :account => @outlet.account, :auth_token => @good_token.token
+       delete :remove, :service => @outlet.service, :account => @outlet.account, :auth_token => @good_token.token
 
       end.should change(Outlet, :count).by(-1)
     end
 
     it "should redirect to the add page" do
-      delete :destroy, :service => @outlet.service, :account => @outlet.account, :auth_token => @good_token.token
-      response.should redirect_to(add_path)
+      delete :remove, :service => @outlet.service, :account => @outlet.account, :auth_token => @good_token.token
+        response.should redirect_to(verify_outlet_path(:service_url => @outlet.service_url, :auth_token => @good_token.token))
     end
   end
 
@@ -233,7 +233,7 @@ describe OutletsController do
 
       it "should redirect to the add page" do
         post :remove, :service_url => @outlet.service_url, :auth_token => @good_token.token
-        response.should redirect_to(verify_path(:service_url => @outlet.service_url))
+        response.should redirect_to(verify_outlet_path(:service_url => @outlet.service_url, :auth_token => @good_token.token))
       end
     end
   end

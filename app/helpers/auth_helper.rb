@@ -14,6 +14,7 @@ module AuthHelper
   end
 
   def deny_access
-    redirect_to new_path, :notice => "Please request authorization before proceeding."
+    flash[:notice] = "Please request authorization before proceeding."
+    redirect_to :action => "add"
   end
 end

@@ -10,9 +10,9 @@ class OutletsController < ApplicationController
       @agencies = agencies_for_form
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
-      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, :view => :full )))
+      respond_with(XBoxer.new(:account, Boxer.ship(:outlet, @outlet, :view => :full )))
     else
-      @page_title = "Add an outlet"
+      @page_title = "Register an account"
       
       # Add a message about proper URLs for this service if 
       if @outlet and @outlet.service_info
@@ -79,7 +79,7 @@ class OutletsController < ApplicationController
       if request.format == :html
         flash[:shortnotice] = "Thank you!"
         flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been updated."
-        redirect_to "/outlets/#{@outlet.service}/#{@outlet.account}"
+        redirect_to :action => "verify", :service_url => @outlet.service_url, :auth_token => @current_token.token
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
       end
@@ -96,7 +96,11 @@ class OutletsController < ApplicationController
   end
   
   def verify
-    @outlet = Outlet.resolve(params[:service_url])
+    if params[:service] and params[:account]
+      @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
+    else
+      @outlet = Outlet.resolve(params[:service_url])
+    end
     
     if @outlet and @outlet.account
       @page_title ||= "Verify " + @outlet.service_info.display_name
@@ -117,7 +121,7 @@ class OutletsController < ApplicationController
       
       @services = Service.all;
 
-      @page_title ||= "Verify an outlet"
+      @page_title ||= "Verify an account"
       respond_with(XBoxer.new(:result, {
         :status => "incomplete",
         :needs  => "service_url",
@@ -125,37 +129,21 @@ class OutletsController < ApplicationController
     end
   end
 
-  def show
-    @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
-    
-    if @outlet
-      @page_title = @outlet.service_info.display_name
-    else
-      @page_title = "Verify an outlet"
-    end
-    
-    if request.format == :html
-      render 'verify'
-    else
-      respond_with(XBoxer.new(:outlet, Boxer.ship(:outlet, @outlet, :view => :full)))
-    end
-  end
-
-  def destroy
-    Outlet.find_by_service_and_account(params[:service], params[:account]).destroy
-    
-    if request.format == :html
-      redirect_to add_path
-    else
-      respond_with(XBoxer.new(:result, {:status => "success"}))
-    end
-  end
-
   def remove
-    Outlet.resolve(params[:service_url]).destroy
+    if params[:service] and params[:account]
+      @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
+    else
+      @outlet = Outlet.resolve(params[:service_url])
+    end
+
+    outlet_name = @outlet.service_info.display_name
+    service_url = @outlet.service_url
+    @outlet.destroy
     
     if request.format == :html
-      redirect_to verify_path(:service_url => params[:service_url])
+      flash[:shortnotice] = "Thank you!"
+      flash[:notice] = "The entry for #{outlet_name} has been removed from the registry."
+      redirect_to :action => "verify", :service_url => service_url, :auth_token => @current_token.token
     else
       respond_with(XBoxer.new(:result, {:status => "success"}))
     end

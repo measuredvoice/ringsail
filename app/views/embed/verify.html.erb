@@ -75,7 +75,7 @@
     <div class="span8">
         <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can add it to this registry. Enter your email address and phone number below and we will send you a link to add it.</p>
         
-        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
+        <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
             <label for="email">Email:</label>
@@ -119,10 +119,10 @@
     <div class="span7">
         <p><b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b></p>
         <p>Example: http://twitter.com/whitehouse</p>
-        <form action="/embed/register" method="GET">
+        <%= form_tag({:action => "verify"}, :method => :get) do %>
             <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
             <button class="btn primary" type="submit">Check</button>
-        </form>
+        <% end %>
     </div>
 </div>
 <div class="row">
