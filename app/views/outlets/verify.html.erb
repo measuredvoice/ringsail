@@ -78,33 +78,7 @@
     <hr>
     
     <div class="span8">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can add it to this registry. Enter your email address and phone number below and we will send you a link to add it.</p>
-        
-        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
-
-        <div class="clearfix">
-            <label for="email">Email:</label>
-            <div class="input">
-                <%= text_field_tag('email', '', :class => "span5") %>
-            </div>
-        </div>
-
-        <div class="clearfix">
-            <label for="phone">Phone:</label>
-            <div class="input">
-                <%= text_field_tag('phone', '', :class => "span5") %>
-            </div>
-        </div>
-
-        <%= hidden_field_tag('service_url', @outlet.service_url) %>
-
-        <div class="actions">
-                <p><span class="label important">Important!</span> The USA.gov Social Media Registry should only include accounts that represent official U.S. government agencies, organizations, or programs.</p>
-                <p><strong>Do not register any accounts that represent non-government organizations or individual people, even if they are government employees.</strong></p>
-
-            <input type="submit" class="btn" value="Submit">
-        </div>
-        <% end %>
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">add it to this registry</a> on HowTo.gov.</p>
 
     </div>
 <% end %>
