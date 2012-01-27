@@ -21,7 +21,7 @@ class FacebookService < Service
     if /pages/ =~ @uri.path
       /\/(?<account>\d+)$/ =~ @uri.path
     else
-      /\/(?<account>[\w-]+)$/ =~ @uri.path
+      /\/(?<account>[\w\.-]+)$/ =~ @uri.path
     end
     account
   end

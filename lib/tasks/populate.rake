@@ -47,6 +47,7 @@ def make_accounts(options = {})
       Agency.find_by_shortname(s) || []
     end
     service_url = row[3]
+    puts service_url
 
     account = Outlet.resolve(service_url)
     account.assign_attributes(attrs)
