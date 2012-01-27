@@ -37,3 +37,18 @@ def make_official_tags(options = {})
   end
 end
 
+def make_accounts(options = {})
+  accounts_file = Rails.root + "db/raw_data/accounts.csv"
+  
+  CSV.foreach(accounts_file) do |row|
+    attrs = {:info_url => row[0], :organization => row[1], :agency_ids => row[2], :service_url => row[3]}
+
+    account = Outlet.resolve(attrs[:service_url])
+    
+    if (options[:force])
+      account.assign_attributes(attrs)
+      puts "Forcing refresh for '#{account.shortname}'" if account.changed?
+      account.save
+    end
+  end
+end
