@@ -1,6 +1,6 @@
 class OutletsController < ApplicationController
   respond_to :html, :xml, :json
-  before_filter :check_auth, :except => [:verify, :show]
+  before_filter :check_auth, :except => [:verify, :show, :list]
   
   def add
     @outlet = Outlet.resolve(params[:service_url])
@@ -149,6 +149,29 @@ class OutletsController < ApplicationController
     end
   end
   
+  def list
+    @page_title = "Accounts"
+    @keywords = params[:q] || params[:keywords]
+    args = {}
+    relationships = []
+    if params[:service_id] and !params[:service_id].empty?
+      args[:service] = params[:service_id]
+    end
+    if params[:agency_id] and !params[:agency_id].empty?
+      relationships << :agencies
+      args[:agencies] = {:shortname => params[:agency_id]}
+    end
+    
+    # FIXME: There's a nicer way to specify the tags filter
+    if params[:tag] and !params[:tag].empty?
+      @outlets = Outlet.joins(relationships).tagged_with(params[:tag]).includes(:agencies).where(args)
+    else
+      @outlets = Outlet.joins(relationships).includes(:agencies).where(args)      
+    end
+    
+    respond_with(XBoxer.new(:result, Boxer.ship(:outlets, @outlets) ))
+  end
+
   private
   
   def agencies_for_form

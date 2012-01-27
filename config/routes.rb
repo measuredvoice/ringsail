@@ -11,6 +11,11 @@ Ringsail::Application.routes.draw do
   
   root :to => "outlets#verify"
 
+  # API call /accounts, GET
+  # and synonym /accounts/{service}, GET
+  match "accounts" => "outlets#list", :via => :get, :as => :list_outlets
+  match "accounts/:service_id" => "outlets#list", :via => :get, :as => :list_service_outlets
+
   # API call /outlets/register, both GET and POST
   match "accounts/register" => "outlets#add", :via => :get, :as => :add_outlet
   match "accounts/register" => "outlets#update", :via => :post, :as => :update_outlet

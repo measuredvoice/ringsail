@@ -24,3 +24,11 @@ Boxer.box(:outlet) do |box, outlet|
     end
   end
 end
+
+Boxer.box(:outlets) do |box, outlets|
+  {
+    :page_count => 1,
+    :total_items => outlets.count,
+    :outlets => outlets.map { |outlet| Boxer.ship(:outlet, outlet) },
+  }
+end

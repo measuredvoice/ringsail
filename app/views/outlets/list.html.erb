@@ -1,0 +1,37 @@
+<div class="span14">
+
+<form action="/accounts" method="GET">
+
+<div class="clearfix">
+<label for="service_id">Service:</label>
+<div class="input">
+<input type="text" id="service_id" name="service_id" value="<%= params[:service_id] %>" class="span7">
+</div>
+</div>
+
+<div class="clearfix">
+<label for="agency_id">Agency:</label>
+<div class="input">
+<input type="text" id="agency_id" name="agency_id" value="<%= params[:agency_id] %>" class="span7">
+</div>
+</div>
+
+<div class="clearfix">
+<label for="agency_id">Tag:</label>
+<div class="input">
+<input type="text" id="tag" name="tag" value="<%= params[:tag] %>" class="span7">
+</div>
+</div>
+
+<div class="actions">
+<button class="btn" type="submit">Find</button>
+</div>
+</form>
+
+<ul>
+<% @outlets.each do |outlet| %>
+  <li><a href="/accounts/verify?service_url=<%= outlet.service_url %>"><%= outlet.service_url %></a></li>
+<% end %>
+</ul>
+
+</div>
