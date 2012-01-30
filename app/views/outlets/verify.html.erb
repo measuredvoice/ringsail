@@ -29,11 +29,6 @@
             <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
             <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
             <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
-            <!-- <tr><td>Location:</td><td><%= @outlet.location_name %></td></tr> -->
-            <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
-            <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
-            <tr><td>Last updated by:</td><td><%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %></td></tr>
-            <tr><td>Last updated on:</td><td><%= @outlet.updated_at.to_s(:human) %></td></tr>    
         </tbody>
     </table>
 
@@ -41,30 +36,7 @@
     
     <div class="span8">
         
-        <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
-
-        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
-
-        <div class="clearfix">
-            <label for="email">Email:</label>
-            <div class="input">
-                <%= text_field_tag('email', '', :class => "span5") %>
-            </div>
-        </div>
-
-        <div class="clearfix">
-            <label for="phone">Phone:</label>
-            <div class="input">
-                <%= text_field_tag('phone', '', :class => "span5") %>
-            </div>
-        </div>
-
-        <%= hidden_field_tag('service_url', @outlet.service_url) %>
-
-        <div class="actions">
-            <input type="submit" class="btn" value="Submit">
-        </div>
-        <% end %>
+        <p>If you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">make changes to this listing</a> on HowTo.gov.
     </div>
 
     <% else %>

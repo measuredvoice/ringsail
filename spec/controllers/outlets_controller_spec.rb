@@ -179,7 +179,6 @@ describe OutletsController do
       it "should return the attributes of the outlet" do
         get :verify, :service_url => @verified_url
         response.should have_selector("td", :content => @outlet.organization)
-        response.should have_selector("td", :content => @outlet.language)
       end
     end
   end
