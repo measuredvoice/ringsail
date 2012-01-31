@@ -27,8 +27,10 @@ end
 
 Boxer.box(:outlets) do |box, outlets|
   {
-    :page_count => 1,
-    :total_items => outlets.count,
+    :page_count => outlets.total_pages,
+    :total_items => outlets.total_entries,
+    :page_number => outlets.current_page,
+    :page_size => outlets.per_page,
     :outlets => outlets.map { |outlet| Boxer.ship(:outlet, outlet) },
   }
 end

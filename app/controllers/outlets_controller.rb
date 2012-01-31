@@ -151,23 +151,21 @@ class OutletsController < ApplicationController
   
   def list
     @page_title = "Accounts"
-    @keywords = params[:q] || params[:keywords]
-    args = {}
-    relationships = []
+    # @keywords = params[:q] || params[:keywords]
+    
+    @outlets = Outlet.includes(:agencies).order('account, service')
+
     if params[:service_id] and !params[:service_id].empty?
-      args[:service] = params[:service_id]
+      @outlets = @outlets.where(:service => params[:service_id])
     end
     if params[:agency_id] and !params[:agency_id].empty?
-      relationships << :agencies
-      args[:agencies] = {:shortname => params[:agency_id]}
+      @outlets = @outlets.joins(:agencies).where(:agencies => {:shortname => params[:agency_id]})
+    end
+    if params[:tag] and !params[:tag].empty?
+      @outlets = @outlets.tagged_with(params[:tag])
     end
     
-    # FIXME: There's a nicer way to specify the tags filter
-    if params[:tag] and !params[:tag].empty?
-      @outlets = Outlet.joins(relationships).tagged_with(params[:tag]).includes(:agencies).where(args)
-    else
-      @outlets = Outlet.joins(relationships).includes(:agencies).where(args)      
-    end
+    @outlets = @outlets.page(params[:page_number])
     
     respond_with(XBoxer.new(:result, Boxer.ship(:outlets, @outlets) ))
   end

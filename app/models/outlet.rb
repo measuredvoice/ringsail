@@ -38,6 +38,8 @@ class Outlet < ActiveRecord::Base
   before_save :fix_service_info
   before_save :set_location_name
   
+  self.per_page = 100
+  
   def verified?
     # TODO:
     #  Add a more formal definition of a verified outlet

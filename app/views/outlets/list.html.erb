@@ -28,10 +28,13 @@
 </div>
 </form>
 
+<%= will_paginate @outlets, :param_name => :page_number %>
+
 <ul>
 <% @outlets.each do |outlet| %>
   <li><a href="/accounts/verify?service_url=<%= outlet.service_url %>"><%= outlet.service_url %></a></li>
 <% end %>
 </ul>
+
 
 </div>
