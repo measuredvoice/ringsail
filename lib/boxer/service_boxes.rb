@@ -1,7 +1,7 @@
 Boxer.box(:service) do |box, service|
   {
-    :name       => service.name,
-    :shortname  => service.shortname,
+    :service_id   => service.shortname,
+    :service_name => service.longname,
   }
 end
 

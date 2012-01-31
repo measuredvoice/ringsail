@@ -3,7 +3,7 @@ Boxer.box(:outlet) do |box, outlet|
     {
       :service_url  => outlet.service_url,
       :verified     => outlet.verified?,
-      :service      => outlet.service,
+      :service_id   => outlet.service,
       :account      => outlet.account,
     }
   end
@@ -21,10 +21,9 @@ Boxer.box(:outlet) do |box, outlet|
   box.view(:full, :extends => :brief) do
     if outlet.verified?
       {
-        :info_url     => outlet.info_url,
-        :agencies     => outlet.agencies.map { |agency| Boxer.ship(:agency, agency) },
-        :language     => outlet.language,
         :display_name => outlet.service_info.display_name,
+        :info_url     => outlet.info_url,
+        :language     => outlet.language,
         :tags         => outlet.tags.map { |tag| tag.name },
         :updated_at   => outlet.updated_at.to_s(:iso),
         :updated_by   => outlet.masked_updated_by,
