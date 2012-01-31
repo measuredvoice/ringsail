@@ -38,6 +38,7 @@ class Outlet < ActiveRecord::Base
   before_save :fix_service_info
   before_save :set_location_name
   
+  # For use by will_paginate
   self.per_page = 100
   
   def verified?
@@ -66,6 +67,14 @@ class Outlet < ActiveRecord::Base
       self.new(:service_url => s.service_url_canonical, :service => s.shortname, :account => s.account)
     end
   end    
+  
+  def masked_updated_by
+    (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
+  end
+  
+  def details_url
+    "/accounts/#{service}/#{account}"
+  end
   
   private
   

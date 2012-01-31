@@ -31,6 +31,9 @@ Ringsail::Application.routes.draw do
   # API call /agencies, GET
   match "agencies" => "agencies#list", :via => :get, :as => :list_agencies
 
+  # API call /services, GET
+  match "services" => "services#list", :via => :get, :as => :list_services
+
   # API call /tags, GET
   match "tags" => "official_tags#list", :via => :get, :as => :list_tags
   

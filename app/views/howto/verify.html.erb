@@ -32,7 +32,7 @@
             <!-- <tr><td>Location:</td><td><%= @outlet.location_name %></td></tr> -->
             <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
             <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
-            <tr><td>Last updated by:</td><td><%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %></td></tr>
+            <tr><td>Last updated by:</td><td><%= @outlet.masked_updated_by %></td></tr>
             <tr><td>Last updated on:</td><td><%= @outlet.updated_at.to_s(:human) %></td></tr>    
         </tbody>
     </table>

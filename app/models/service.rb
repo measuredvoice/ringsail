@@ -23,7 +23,8 @@ class Service
   end
   
   def self.all
-    @services.map do |shortname, service|
+    sorted = @services.sort_by { |shortname, service| shortname }
+    sorted.map do |shortname, service|
       service
     end
   end
