@@ -43,6 +43,7 @@ class TwitterService < Service
       :location      => user.location,
       :verified      => user.verified,
       :followers     => user.followers_count,
+      :twitter_id    => user.id,
     }
   end
 end
