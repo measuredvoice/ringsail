@@ -5,7 +5,7 @@ class AuthTokenMailer < ActionMailer::Base
     @auth_token = auth_token
     @service_url = service_url
     @link_url = url_for(
-      :controller  => 'outlets', 
+      :controller  => 'howto', 
       :action      => 'add',
       :only_path   => false, 
       :service_url => service_url,
