@@ -17,6 +17,11 @@ class TwitterService < Service
     account
   end
 
+  def account_id
+    @details ||= fetch_details
+    @details[:account_id]
+  end
+
   def service_url_example
     "http://twitter.com/ftc"
   end
@@ -43,7 +48,7 @@ class TwitterService < Service
       :location      => user.location,
       :verified      => user.verified,
       :followers     => user.followers_count,
-      :twitter_id    => user.id,
+      :account_id    => user.id,
     }
   end
 end
