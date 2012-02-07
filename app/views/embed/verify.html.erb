@@ -1,4 +1,4 @@
-<div class="span14">
+<div class="span7">
     <% if @outlet %>
     
     <% if flash[:notice] %>
@@ -38,7 +38,7 @@
         
         <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
 
-        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
+        <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
             <label for="email">Email:</label>
