@@ -28,7 +28,7 @@
 </div>
 </form>
 
-<%= will_paginate @outlets, :param_name => :page_number %>
+<%= paginate @outlets, :param_name => :page_number %>
 
 <ul>
 <% @outlets.each do |outlet| %>

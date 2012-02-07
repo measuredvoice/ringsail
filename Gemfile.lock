@@ -215,7 +215,6 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
-    will_paginate (3.0.2)
 
 PLATFORMS
   ruby
@@ -234,6 +233,7 @@ DEPENDENCIES
   hyper-graph
   jquery-rails
   json
+  kaminari (~> 0.12)
   mysql2
   rails (= 3.1.1)
   rails_admin!
@@ -244,5 +244,4 @@ DEPENDENCIES
   twitter
   uglifier (>= 1.0.3)
   webrat (= 0.7.1)
-  will_paginate (~> 3.0)
   yahoo-geoplanet!

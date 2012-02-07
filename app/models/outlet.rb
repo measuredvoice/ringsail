@@ -38,8 +38,7 @@ class Outlet < ActiveRecord::Base
   before_save :fix_service_info
   before_save :set_location_name
   
-  # For use by will_paginate
-  self.per_page = 100
+  paginates_per 100
   
   def verified?
     # TODO:

@@ -20,7 +20,7 @@ gem "devise"
 gem 'acts-as-taggable-on', '~>2.1.0'
 
 # API pagination
-gem 'will_paginate', '~> 3.0'
+gem 'kaminari', '~> 0.12'
 
 # Location support
 gem 'yahoo-geoplanet', :git => 'git://github.com/measuredvoice/yahoo-geoplanet.git'
