@@ -19,8 +19,7 @@ class Agency < ActiveRecord::Base
   validates :name, :presence => true
   validates :shortname, :presence => true
   
-  # For use by will_paginate
-  self.per_page = 200
+  paginates_per 200
 
   def to_s
     self.name

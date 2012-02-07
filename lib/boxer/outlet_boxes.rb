@@ -36,10 +36,9 @@ end
 
 Boxer.box(:outlets) do |box, outlets|
   {
-    :page_count => outlets.total_pages,
-    :total_items => outlets.total_entries,
+    :page_count => outlets.num_pages,
+    :total_items => outlets.total_count,
     :page_number => outlets.current_page,
-    :page_size => outlets.per_page,
     :accounts => outlets.map { |outlet| Boxer.ship(:outlet, outlet, :view => :brief) },
   }
 end
