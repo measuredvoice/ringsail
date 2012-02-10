@@ -1,7 +1,6 @@
 class OutletsController < ApplicationController
   respond_to :html, :xml, :json
   before_filter :check_auth, :except => [:verify, :show, :list]
-  layout "embed"
   
   def add
     @outlet = Outlet.resolve(params[:service_url])
