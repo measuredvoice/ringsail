@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Verify a social media account | USA.gov</title>
+  <link href="/assets/application.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+<link href="/assets/autosuggest.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+<link href="/assets/chosen.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+<link href="/assets/outlets.css?body=1" media="screen" rel="stylesheet" type="text/css" />
+  <script src="/assets/jquery.js?body=1" type="text/javascript"></script>
+<script src="/assets/jquery_ujs.js?body=1" type="text/javascript"></script>
+<script src="/assets/autosuggest.jquery.min.js?body=1" type="text/javascript"></script>
+<script src="/assets/chosen.jquery.min.js?body=1" type="text/javascript"></script>
+<script src="/assets/outlets.js?body=1" type="text/javascript"></script>
+<script src="/assets/application.js?body=1" type="text/javascript"></script>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
+  <style type="text/css">
+    /* Override some bootstrap defaults */
+    html, body {
+      background-color: #eee;
+    }
+    body {
+      padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+    }
+    .container > footer p {
+      text-align: center; /* center align it with the container */
+    }
+    .container {
+      width: 460px; 
+    }
+
+    /* The white background content wrapper */
+    .content {
+      background-color: #fff;
+      padding: 20px;
+      margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+      -webkit-border-radius: 0 0 6px 6px;
+         -moz-border-radius: 0 0 6px 6px;
+              border-radius: 0 0 6px 6px;
+      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+              box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    }
+
+    /* Page header tweaks */
+    .page-header {
+      background-color: #f5f5f5;
+      padding: 20px 20px 10px;
+      margin: -20px -20px 20px;
+    }
+
+    /* Give a quick and non-cross-browser friendly divider */
+    .content .span4 {
+      margin-left: 0;
+      padding-left: 19px;
+      border-left: 1px solid #eee;
+    }
+
+    .topbar .btn {
+      border: 0;
+    }
+
+    /* Form default text tweaks */
+    input::-webkit-input-placeholder {
+      color:    gray;
+    }
+    input:-moz-placeholder {
+      color:    gray;
+    }
+    
+    iframe {
+      border: 0px;
+    }
+    
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="fill">
+    <div class="container">
+      <a class="brand" href="/usagov/embed-example.html">USA.gov (embedded)</a>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="content">
+    <div class="row">
+
+<div class="span14">
+
+
+
+<div class="row">
+    <div class="span7">
+        <p>This is example text on the containing page on USA.gov.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span7">
+
+<iframe src="/accounts/verify" height="600" width="465"></iframe>
+
+    </div>
+</div>
+
+</div>
+
+    </div>
+  </div>
+
+</div> <!-- /container -->
+
+
+<!-- <pre class='debug_dump'>---
+controller: embed
+action: verify
+</pre> -->
+
+</body>
+</html>
