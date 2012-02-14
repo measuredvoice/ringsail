@@ -33,6 +33,7 @@ class Outlet < ActiveRecord::Base
     :format     => { :with => URI::regexp(%w(http https)), 
                      :allow_blank => true}
   validates :agencies, :presence => true
+  validates :account, :presence => true
   
   before_save :set_updated_by
   before_save :fix_service_info

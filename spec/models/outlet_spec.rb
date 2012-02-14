@@ -72,6 +72,11 @@ describe Outlet do
       bad_url_outlet = Outlet.new(@attr.merge(:info_url => invalid_url))
       bad_url_outlet.should_not be_valid
     end
+    
+    it "should require a valid account name" do
+      bad_account_outlet = Outlet.new(@attr.merge(:account => '', :service_url => 'http://twitter.com/'))
+      bad_account_outlet.should_not be_valid
+    end    
   end
   
   describe "resolve" do
