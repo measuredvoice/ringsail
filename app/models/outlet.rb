@@ -71,11 +71,7 @@ class Outlet < ActiveRecord::Base
   def masked_updated_by
     (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
   end
-  
-  def details_url
-    "/accounts/#{service}/#{account}"
-  end
-  
+    
   private
   
   def set_updated_by

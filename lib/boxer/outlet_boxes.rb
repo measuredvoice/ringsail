@@ -10,7 +10,7 @@ Boxer.box(:outlet) do |box, outlet|
   box.view(:brief, :extends => :base) do
     if outlet.verified?
       {
-        :details_url  => outlet.details_url,
+        :details_url  => show_outlet_path(:service => outlet.service, :account => outlet.account),
         :agencies     => outlet.agencies.map { |agency| Boxer.ship(:agency, agency) },
         :organization => outlet.organization,
       }
