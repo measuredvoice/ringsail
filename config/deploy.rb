@@ -5,7 +5,7 @@ role :db, "ec2-184-72-64-170.compute-1.amazonaws.com", :primary => true
 
 set :post_update_path, "/home/mv/ringsail/cap/current/config/postupdate/post_update_demo.sh"
 
-set(:repository, Capistrano::CLI.ui.ask("GIT Repository: "))
+set(:repo, Capistrano::CLI.ui.ask("GIT Repo suffix (after github.com/): "))
 set(:gituser, Capistrano::CLI.ui.ask("GIT Username: "))
 set (:scm_password) { Capistrano::CLI.password_prompt("GIT Password: ") }
 
@@ -17,12 +17,16 @@ set :vhost, "ringsail"
 
 require "bundler/capistrano"
 
+#set :repository,  "https://#{gituser}:#{scm_password}@github.com/sdadh01/ringsail.git"
+set :repository,  "http://#{gituser}:#{scm_password}@github.com/#{repo}"
+
 set :application, "ringsail"
 set :deploy_to, "/home/mv/ringsail/cap"
 set :user, "mv"
 set :runner, "mv"
 set :deploy_via, :remote_cache
 set :copy_strategy, :export
+
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", "mv_deploy_key")]
 
