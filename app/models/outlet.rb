@@ -18,7 +18,7 @@
 
 class Outlet < ActiveRecord::Base
   attr_accessor :auth_token
-  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id
+  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
@@ -37,7 +37,7 @@ class Outlet < ActiveRecord::Base
   
   before_save :set_updated_by
   before_save :fix_service_info
-  before_save :set_location_name
+  # before_save :set_location_name
   
   paginates_per 100
   
