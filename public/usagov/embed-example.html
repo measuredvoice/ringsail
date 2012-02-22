@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 
 			<html lang="en" xml:lang="en">
 	
 <head>
+<base href="http://www.usa.gov/About/developer-resources/">
     	    <title>Developer Resources | USA.gov</title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -12,41 +12,52 @@
 				 	
 			<meta name="keywords" content="software developers, researchers, data, APIs, XML" />
 	
-	<link rel="canonical" href="/developer-resources/developers.shtml" />
-	<link rel="stylesheet" href="usgov.css" type="text/css" media="screen" />
+	<link rel="canonical" href="http://www.usa.gov//About/developer-resources/developers.shtml" />
+	<link rel="stylesheet" href="/resources/css/styles/en/usgov.css" type="text/css" media="screen" />
 	
-			<link rel="shortcut icon" href="/usa_favicon.ico" />		
-		<link href="jquery-ui-1.8.5.custom.css" media="screen" rel="stylesheet" type="text/css" />
-		<link href="search.css" media="screen" rel="stylesheet" type="text/css" />
+			<link rel="shortcut icon" href="/resources/images/usa_favicon.ico" />		
+		<link href="/resources/css/styles/jquery-ui-1.8.5.custom.css" media="screen" rel="stylesheet" type="text/css" />
+		<link href="/resources/css/styles/search.css" media="screen" rel="stylesheet" type="text/css" />
 		<link href="http://www.usa.gov/rss/updates.xml" rel="alternate" title="USA.gov Updates: News and Features" type="application/rss+xml" />
 		<link href="http://www.usa.gov/rss/FAQs.xml" rel="alternate" title="Popular Government Questions from USA.gov" type="application/rss+xml" />
 		<link rel="accessibility" href="/About/Important_Notices.shtml#a11y" />
 		
-		<script src="jquery.min.js" type="text/javascript"></script>
-		<script src="jquery.hoverIntent.minified.js" type="text/javascript"></script>
-		<script src="jquery.cycle.min.js" type="text/javascript"></script>
-		<script src="dropdown.js" type="text/javascript"></script>
-		<script src="rotator.js" type="text/javascript"></script>
-		<script src="equalcolumns.js" type="text/javascript"></script>		
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+		<script src="/resources/js/jquery.hoverIntent.minified.js" type="text/javascript"></script>
+		<script src="/resources/js/jquery.cycle.min.js" type="text/javascript"></script>
+						<script src="/resources/js/dropdown.js" type="text/javascript"></script>
+		<script src="/resources/js/rotator.js" type="text/javascript"></script>
+		<script src="/resources/js/equalcolumns.js" type="text/javascript"></script>		
 		
-		<script src="jquery-ui-1.8.12.custom.min.js" type="text/javascript"></script>
-		<script src="sayt-ui.js" type="text/javascript"></script>
-		<script src="main.js" type="text/javascript"></script>
-
-		<script type="text/javascript" src="jquery.form.js"></script>
-        <script type="text/javascript" src="jquery.labelify.js"></script>
-        <script type="text/javascript" src="jquery.cookie.js"></script>
-        <script type="text/javascript" src="perc_poll_ballot.js"></script>
+				<script src="/resources/js/jquery-ui-1.8.12.custom.min.js" type="text/javascript"></script>
+		<script src="/resources/js/sayt-ui.js" type="text/javascript"></script>
+		
 				
-        <script type="text/javascript" src="json2.js"></script>
+		<script src="/resources/js/main.js" type="text/javascript"></script>
+	
+	                      <script type="text/javascript" src="/resources/Polls/jquery/jquery.form.js"></script>
+        <script type="text/javascript" src="/resources/Polls/jquery/jquery.labelify.js"></script>
+        <script type="text/javascript" src="/resources/Polls/jquery/jquery.cookie.js"></script>
+        			<script type="text/javascript" src="/resources/Polls/perc_poll_ballot.js"></script>
+				
+        <script type="text/javascript" src="/resources/Polls/json2.js"></script>
                 		
-		<style type="text/css" media="screen">
-		iframe#verify-embed {
-			width:100%;
-			height:900px;
-			border: none;
-		}
-		</style>
+<style type="text/css" media="screen">
+iframe#verify-embed {
+  width:100%;
+  height:900px;
+  border: none;
+}
+</style>
+<script>
+$(function() {
+  // set the iframe location correctly
+  var myHost = document.location.origin;
+  var myPage = $('#verify-embed').attr('src');
+  $('#verify-embed').attr('src', myHost + myPage);
+});
+</script>
+		
 		            	
 		    	    		    			<!--String to be replaced is = src="/ -->
 <!--String which replaces is = $string_2-->
@@ -150,7 +161,7 @@
 
 	            																												<!--String to be replaced is = src="/ -->
 <!--String which replaces is = $string_2-->
-<div id="home_logo" role="banner"><h1> <a href="/index.shtml"><img height="78" width="253" alt="USA.gov: Government Made Easy" src="usagov_logo.gif" /></a></h1> </div> <div role="search" id="home_search"> <form action="http://search.usa.gov/search" method="get" name="fg_search_form"> <input id="affiliate" name="affiliate" type="hidden" value="usagov" /><label for="query" class="hidden">Search</label> <input type="text" maxlength="50" name="query" size="38" id="query" class="search_bg usagov-search-autocomplete" autocomplete="off" /> <div class="d_srchbtn"> <input type="image" name="USA.gov Search" src="images/search_button.gif" alt="Search" class="search_btn" /> </div> </form> </div> <div id="home_fedinfo"> <a href="/About/FEDINFO.shtml">1-800-FED-INFO (333-4636)</a> </div> <!-- spacer css div bj 2/21/11 --> <div class="header_spacing"> </div> <!-- end spacer css div -->
+<div id="home_logo" role="banner"><h1> <a href="/index.shtml"><img height="78" width="253" alt="USA.gov: Government Made Easy" src="/resources/images/usagov_logo.gif" /></a></h1> </div> <div role="search" id="home_search"> <form action="http://search.usa.gov/search" method="get" name="fg_search_form"> <input id="affiliate" name="affiliate" type="hidden" value="usagov" /><label for="query" class="hidden">Search</label> <input type="text" maxlength="50" name="query" size="38" id="query" class="search_bg usagov-search-autocomplete" autocomplete="off" /> <div class="d_srchbtn"> <input type="image" name="USA.gov Search" src="/resources/images/search_button.gif" alt="Search" class="search_btn" /> </div> </form> </div> <div id="home_fedinfo"> <a href="/About/FEDINFO.shtml">1-800-FED-INFO (333-4636)</a> </div> <!-- spacer css div bj 2/21/11 --> <div class="header_spacing"> </div> <!-- end spacer css div -->
 
 
 
@@ -290,7 +301,7 @@
       
       
     </ul>
-    <script src="blogmenu.js" type="text/javascript"></script> 
+    <script src="/resources/js/blogmenu.js" type="text/javascript"></script> 
   </div>
 
                 
@@ -653,23 +664,7 @@
 		<!-- begin tagline -->
 						<!-- end tagline -->
 
-				
-    
-        			    			    				    					    					
-
-
-
-<!-- <h2 class="section_title">1.USA.gov Data<a id="1usagov" name="1usagov">&#160;</a></h2>
-
-<div class="one_column_container"> <h3>About</h3> </div>
-
-<p>1.USA.gov URLs are created whenever anyone shortens a .gov or .mil URL using <a href="http://bitly.com">bitly</a>. 
-
-Learn <a href="http://blog.usa.gov/post/3768174086/look-for-usa-gov-short-urls">more about 1.USA.gov URLs on the USA.gov 
-
-Blog</a>.</p> -->
-
-<iframe scrolling="auto" height="1500px" id="verify-embed" src="http://localhost:3000/usagov/verify"></iframe> 
+<iframe scrolling="auto" height="1500px" id="verify-embed" src="/usagov/verify"></iframe> 
 		
     </div>	
             			
