@@ -1,4 +1,4 @@
 class UsagovController < OutletsController
-  layout "embed"
+  layout "usagov"
 
 end

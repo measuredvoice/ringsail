@@ -116,7 +116,7 @@ class OutletsController < ApplicationController
         flash.now[:alert] = params[:service_url] + " doesn't seem to be a social media account." + help_msg
         @outlet = nil
       elsif params[:service_url]
-        flash.now[:alert] = "The registry doesn't recognize that URL as a supported social media service."
+        flash.now[:alert] = "Sorry, we cannot look up the URL you entered because it is not from the social media services that we can verify."
       end
       
       @services = Service.all;

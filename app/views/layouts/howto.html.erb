@@ -5,102 +5,203 @@
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
-  <style type="text/css">
-    /* Override some bootstrap defaults */
-    html, body {
-      background-color: #eee;
-    }
-    body {
-      padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
-    }
-    .container > footer p {
-      text-align: center; /* center align it with the container */
-    }
-    .container {
-      width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-    }
+<style type="text/css" media="screen">
+  html, body {
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  }
 
-    /* The white background content wrapper */
-    .content {
-      background-color: #fff;
-      padding: 20px;
-      margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-      -webkit-border-radius: 0 0 6px 6px;
-         -moz-border-radius: 0 0 6px 6px;
-              border-radius: 0 0 6px 6px;
-      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-              box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    }
+body {
+font-family: Verdana,sans-serif;
+font-size: 0.75em;
+line-height: 1.5em;
+background: #FDFDFD url('http://howto.gov/sites/default/themes/howto/images/fade_bk.jpg') repeat-x left top;
+color: #232D32;
+}
 
-    /* Page header tweaks */
-    .page-header {
-      background-color: #f5f5f5;
-      padding: 20px 20px 10px;
-      margin: -20px -20px 20px;
-    }
+a {
+color: #2C5D80;
+text-decoration: underline;
+}
+		
+#container {
+	margin: 0px auto;
+	width: 960px;
+	background: white;
+	border: 1px solid #DADADA;
+	border-top: 0px;
+}
+		
+header {
+background: #1D5D89 url('http://howto.gov/sites/default/themes/howto/images/header_bk.png') repeat-y left top;
+height: 146px;
+position: relative;
+}
+		
+footer {
+	background: #1D5D8A;
+	color: white;
+	margin:0 0 0 0;
+	padding:0 0 0 0;
+	height:100%;
+	clear:both;
+}
+		
+footer a {
+	color: white;
+}
+		
+footer ul {
+	list-style: none;
+}
+		
+footer ul li {
+	display:inline;
+	padding: 0 4px 0 4px;
+}
+		
+a#skip-to-content-link-home {
+position: absolute;
+z-index: 5000;
+background: white;
+font-size: 1.11em;
+display: block;
+padding: 6px 10px;
+top: -4000px;
+left: 50%;
+width: 180px;
+margin-left: -457px;
+}
+		
+#site-name a {
+display: block;
+width: 604px;
+height: 74px;
+text-indent: -9999px;
+overflow: hidden;
+background: url(http://howto.gov/sites/default/themes/howto/images/spacer.gif) 0 0 no-repeat;
+}
+		
+#header-nav {
+font-size: 1.2em;
+float:right;
+}
+		
+#header-nav a {
+	color:#FFF;
+	text-decoration: none;
+}
 
-    /* Give a quick and non-cross-browser friendly divider */
-    .content .span4 {
-      margin-left: 0;
-      padding-left: 19px;
-      border-left: 1px solid #eee;
-    }
+#header-nav ul {
+	list-style: none;
+}
 
-    .topbar .btn {
-      border: 0;
-    }
+#header-nav ul li {
+	display:inline;
+	padding:0 4px 0 4px;
+	border-right: 1px solid #68A7D3;
+}
 
-    /* Form default text tweaks */
-    input::-webkit-input-placeholder {
-      color:    gray;
-    }
-    input:-moz-placeholder {
-      color:    gray;
-    }
-  </style>
+#header-nav ul li.last {
+	display:inline;
+	padding:0 4px 0 4px;
+	border-right: none;
+}
+
+#header-nav li.facebook a {
+background: url('http://howto.gov/sites/default/themes/howto/images/facebook.png') no-repeat left top;
+text-indent: -8765px;
+height: 17px;
+width: 17px;
+display: block;
+float: left;
+overflow: hidden;
+padding:0 4px 0 4px;
+}
+
+#header-nav li.twitter a {
+background: url('http://howto.gov/sites/default/themes/howto/images/twitter.png') no-repeat left top;
+text-indent: -8765px;
+display: block;
+height: 17px;
+width: 17px;
+float: left;
+overflow: hidden;
+padding:0 4px 0 4px;
+}
+		
+#form {
+	background-color: #FFF;
+	width:900px;
+	margin: 20px auto 0 auto;
+}
+			
+#footer-menu-top {
+	text-align: center;
+}		
+</style>
+
 </head>
-<body>
+	<body>
+		<div id="container">
+			<header>
+				<div id="header-inner" class="clearfix">
+					<a href="#skip-to-content-destination" id="skip-to-content-link-home" tabindex="1" name="skip-to-content-link-home">Skip to main content</a>
+					<div id="logo-title" role="banner">
+						<div id="site-name">
+							<a href="http://howto.gov/" title="Home" rel="home">HowTo.gov</a>
+						</div>
+					</div><!-- close logo-title -->
+					<!-- <div id="header-nav">
+						<ul class="menu level-1" role="navigation">
+							<li class="facebook">
+								<a href="http://www.facebook.com/pages/Washington-DC/Web-Content-Managers-Forum/102988744944" title="Facebook" class=" menu-mlid-657 level-depth-1">Facebook</a>
+							</li>
+							<li class="twitter">
+								<a href="http://twitter.com/govnewmedia" title="Twitter" class=" menu-mlid-658 level-depth-1">Twitter</a>
+							</li>
+							<li>
+								<a href="http://howto.gov/a-z-index">A - Z Index</a>
+							</li>
+							<li>
+								<a href="http://howto.gov/contact-us">Contact Us</a>
+							</li>
+							<li>
+								<a href="http://howto.gov/about-us">About Us</a>
+							</li>
+							<li class="last">
+								<a href="http://howto.gov/site-policies" title="Site Policies">Site Policies</a>
+							</li>
+						</ul>
+					</div>
+				</div> -->				
+			</header>
+			<section id="form">
+				<div class="page-header">
+					<h2><%= @page_title %></h2>
+				</div>
 
-<div class="topbar">
-  <div class="fill">
-    <div class="container">
-      <a class="brand" href="/howto/register">HowTo.gov Social Media Registry</a>
-      <ul class="nav">
-        <li><a href="/howto/find">Register accounts</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="content">
-    <div class="page-header">
-      <h1><%= @page_title %></h1>
-    </div>
-    <div class="row">
-
-<%= yield %>
-
-    </div>
-  </div>
-
-</div> <!-- /container -->
-
-<footer class="container">
-  <div class="row">
-  <div class="span14">
-  <div class="alert-message block-message info">
-	<p><strong>For internal use only.</strong></p>
-	<p>This is a prototype of a social media registry designed to keep track of all social media accounts managed by U.S. federal government agencies and programs. This prototype has not been designed with accessibility in mind, but the final registry will.</p>
-	</div>
-	</div>
-	</div>
-</footer>
-
-
-<!-- <%= debug(params) if Rails.env.development? %> -->
-
-</body>
+				<%= yield %>
+				
+			</section>
+			<footer>
+				<div id="footer-menu-top">
+					<ul class="menu level-1" role="navigation">
+						<li class="leaf menu-mlid-656 menu-mlid-656">
+							<a href="http://howto.gov/a-z-index" class="menu-mlid-656 level-depth-1">A - Z Index</a>
+						</li>
+						<li class="leaf menu-mlid-655 menu-mlid-655">
+							<a href="http://howto.gov/contact-us" class="menu-mlid-655 level-depth-1">Contact Us</a>
+						</li>
+						<li class="leaf menu-mlid-654 active active-trail menu-mlid-654 active-trail-menu-mlid-654">
+							<a href="http://howto.gov/about-us" class="active-trail menu-mlid-654 level-depth-1 active">About Us</a>
+						</li>
+						<li class="leaf last menu-mlid-1198 menu-mlid-1198">
+							<a href="http://howto.gov/site-policies" title="Site Policies" class=" menu-mlid-1198 level-depth-1">Site Policies</a>
+						</li>
+					</ul>
+				</div>
+			</footer>
+		</div>
+	</body>
 </html>

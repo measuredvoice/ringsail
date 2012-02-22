@@ -39,7 +39,7 @@
 
     <hr>
     
-    <div class="span8">
+    <div>
         
         <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
 
@@ -66,6 +66,17 @@
         </div>
         <% end %>
     </div>
+
+	<div role="search" id="verify-another">
+		<p><label for="service-url">To look up another social media account, please paste its complete URL here:
+		<p class="quiet">Example: http://twitter.com/whitehouse</p>
+		</label></p>
+	</div>
+		
+    <%= form_tag({:action => "verify"}, :method => :get) do %>
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+        <button class="verify-button" type="submit">Look Up</button>
+    <% end %>
 
     <% else %>
 
@@ -104,6 +115,18 @@
 
             <input type="submit" class="btn" value="Submit">
         </div>
+
+	<div role="search" id="verify-another">
+		<p><label for="service-url">To look up another social media account, please paste its complete URL here:
+		<p class="quiet">Example: http://twitter.com/whitehouse</p>
+		</label></p>
+	</div>
+		
+    <%= form_tag({:action => "verify"}, :method => :get) do %>
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+        <button class="verify-button" type="submit">Look Up</button>
+    <% end %>
+
         <% end %>
 
     </div>

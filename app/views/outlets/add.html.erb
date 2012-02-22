@@ -1,5 +1,5 @@
 <% if @outlet %>
-<div class="span14">
+<div>
 
 <%= form_tag({:action => "update"}, :class => "validate") do %>
 
@@ -65,8 +65,8 @@
 		<button type="submit" class="btn danger small" data-confirm="Do you really want to remove (<%= @outlet.service_info.display_name %>) from the registry?">Remove this account</button>
   <% end %>
 	</div>
-<% end %>
 
+<% end %>
 </div>
 
 <% else %>

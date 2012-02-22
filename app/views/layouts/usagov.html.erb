@@ -37,7 +37,7 @@
   
   input.verify-url-field {
 	  font-size: 120%;
-	  width: 22em;
+	  width: 25em;
   }
   
   button.verify-button {
@@ -77,45 +77,11 @@
   #howto-cta {
 	  margin: 4em 0 0 0;
   }
-
-  table {
-	  width: 100%;
-	  margin-bottom: 18px;
-	  padding: 0;
-	  font-size: 13px;
-	  border-collapse: collapse;
-  }
-  
-  table th, table td {
-  text-align: left;
-  padding: 5px 4px 5px 4px;
-  vertical-align: top;
-  }
-  
-  table td.first-column {
-	  width:15em;
-  }
-  
-  thead {
-  display: table-header-group;
-  }
   </style>
-
 </head>
 <body>
 
-<div class="container">
-
-  <div class="content">
-    <div class="row">
-
 <%= yield %>
-
-    </div>
-  </div>
-
-</div> <!-- /container -->
-
 
 <!-- <%= debug(params) if Rails.env.development? %> -->
 
