@@ -1,5 +1,5 @@
 <% if @outlet %>
-<div class="span14">
+<div>
 
 <%= form_tag({:action => "update"}, :class => "validate") do %>
 
@@ -40,12 +40,12 @@
 </div>
 </div>
 
-<div class="clearfix">
-<label for="location_name">Location:</label>
+<!-- <div class="clearfix">
+<label for="location_id">Location ID:</label>
 <div class="input">
-<%= text_field_tag('location_name', @outlet.location_name) %>
+<%= text_field_tag('location_id', @outlet.location_id) %>
 </div>
-</div>
+</div> -->
 
 <%= hidden_field_tag('service_url', @outlet.service_url) %>
 <%= hidden_field_tag('auth_token', @current_token.token) %>
@@ -65,8 +65,8 @@
 		<button type="submit" class="btn danger small" data-confirm="Do you really want to remove (<%= @outlet.service_info.display_name %>) from the registry?">Remove this account</button>
   <% end %>
 	</div>
-<% end %>
 
+<% end %>
 </div>
 
 <% else %>
@@ -86,13 +86,17 @@
     <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b></p>
     <p>Example: http://twitter.com/whitehouse</p>
 
-<%= form_tag({:action => "add"}, :method => :get) do %>
+<% if @current_token.token %>
+<form action="/outlets/add" method="GET">
 <%= hidden_field_tag('auth_token', @current_token.token) %>
+<% else %>
+<form action="/outlets/verify" method="GET">
+<% end %>
 <input type="text" name="service_url" class="span7" value="<%= params[:service_url] %>">
 
 
 <button class="btn" type="submit">Look Up</button>
-<% end %>
+</form>
 
 </div>
 

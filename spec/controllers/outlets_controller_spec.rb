@@ -122,7 +122,7 @@ describe OutletsController do
       it "should display an error" do
         unrecognized_url = "http://florndip.com/invalid"
         get :verify, :service_url => unrecognized_url
-        response.should have_selector("p", :content => "doesn't recognize")
+        response.should have_selector("p", :content => "cannot look up")
       end
     end
     

@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
 
 <head>
+<base href="http://www.howto.gov/social-media/">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="msvalidate.01" content="EECEE553580B119A72BEAFDC71EB4D28" />
     <title>Using Social Media in Government | HowTo.gov</title>
@@ -40,6 +41,14 @@ jQuery.extend(Drupal.settings, { "basePath": "/", "fivestar": { "titleUser": "Yo
 			border: none;
 		}
 		</style>
+<script>
+$(function() {
+  // set the iframe location correctly
+  var myHost = document.location.origin;
+  var myPage = $('#verify-embed').attr('src');
+  $('#verify-embed').attr('src', myHost + myPage);
+});
+</script>
 
 
 </head>
@@ -215,7 +224,7 @@ jQuery.extend(Drupal.settings, { "basePath": "/", "fivestar": { "titleUser": "Yo
     </div>
 
   <div class="content">
-	<iframe scrolling="auto" height="1500px" id="verify-embed" src="http://localhost:3000/embed/find"></iframe> 
+	<iframe scrolling="auto" height="1500px" id="verify-embed" src="/embed/find"></iframe> 
     
   </div>
 
