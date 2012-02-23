@@ -93,8 +93,23 @@ describe Outlet do
       resolved_outlet.should == outlet
     end
     
+    it "should add HTTP by default to URLs" do
+      outlet = Outlet.resolve("twitter.com/example3")
+      outlet.should_not be_nil
+    end
+    
     it "should allow HTTPS URLs" do
       outlet = Outlet.resolve("https://twitter.com/example3")
+      outlet.should_not be_nil
+    end
+    
+    it "should ignore case in the protocol" do
+      outlet = Outlet.resolve("Http://twitter.com/example3")
+      outlet.should_not be_nil
+    end
+    
+    it "should ignore case in the hostname" do
+      outlet = Outlet.resolve("http://TWitter.com/example3")
       outlet.should_not be_nil
     end
   end
