@@ -52,9 +52,9 @@ iframe#verify-embed {
 <script>
 $(function() {
   // set the iframe location correctly
-  var myHost = document.location.origin;
+  var myHost = window.location.host;
   var myPage = $('#verify-embed').attr('src');
-  $('#verify-embed').attr('src', myHost + myPage);
+  $('#verify-embed').attr('src', "http://" + myHost + myPage);
 });
 </script>
 		
