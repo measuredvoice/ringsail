@@ -37,7 +37,6 @@ class Outlet < ActiveRecord::Base
   
   before_save :set_updated_by
   before_save :fix_service_info
-  # before_save :set_location_name
   
   paginates_per 100
   

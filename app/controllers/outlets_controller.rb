@@ -54,7 +54,6 @@ class OutletsController < ApplicationController
       @outlet.language = params[:language].gsub(/,/, '')
     end
     @outlet.tag_list = params[:tags]
-    @outlet.location_name = params[:location_name] if params[:location_name]
     @outlet.auth_token = @current_token.token
     
     # If any agencies are specified, update the list of agencies to match
