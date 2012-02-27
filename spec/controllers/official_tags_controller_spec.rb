@@ -24,10 +24,17 @@ describe OfficialTagsController do
       response.should be_success
     end
     
-    it "should respond with all tags by default" 
+    it "should respond with all tags by default"  do
+      get :list
+      response.should have_selector("li", :content => "Ten Again")
+    end
     
     describe "with a keyword" do
-      it "should list the tags that match the provided text"
+      it "should list the tags that match the provided text" do
+        get :list, :q => 'ten'
+        response.should have_selector("li", :content => "Ten Again")
+        response.should_not have_selector("li", :content => "Seven")
+      end
     end
   end
 end
