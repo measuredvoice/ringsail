@@ -16,10 +16,10 @@ describe AgenciesController do
       response.should be_success
     end
     
-    it "should respond with all agencies by default" 
-    
-    describe "with a keyword" do
-      it "should list the agencies that match the provided text"
+    it "should respond with all agencies" do
+      get :list
+      response.should have_selector("li", :content => Agency.first.name)
+      response.should have_selector("li", :content => Agency.last.name)
     end
   end
 end

@@ -18,7 +18,7 @@
 
 class Outlet < ActiveRecord::Base
   attr_accessor :auth_token
-  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id
+  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
@@ -33,10 +33,10 @@ class Outlet < ActiveRecord::Base
     :format     => { :with => URI::regexp(%w(http https)), 
                      :allow_blank => true}
   validates :agencies, :presence => true
+  validates :account, :presence => true
   
   before_save :set_updated_by
   before_save :fix_service_info
-  before_save :set_location_name
   
   paginates_per 100
   
@@ -70,11 +70,7 @@ class Outlet < ActiveRecord::Base
   def masked_updated_by
     (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
   end
-  
-  def details_url
-    "/accounts/#{service}/#{account}"
-  end
-  
+    
   private
   
   def set_updated_by

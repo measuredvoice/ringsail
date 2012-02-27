@@ -47,21 +47,13 @@ class OutletsController < ApplicationController
       return
     end
     
-    # Update the object with any non-empty values provided
-    # new_params = params.reject do |key, value| 
-    #   value.nil? || 
-    #   value.empty? || 
-    #   key == :service_url
-    # end
-    
     # FIXME: Doing this the stupid, straightforward way to start
-    @outlet.organization = params[:organization] unless params[:organization].nil? or params[:organization].empty?
-    @outlet.info_url = params[:info_url] unless params[:info_url].nil? or params[:info_url].empty?
-    if !params[:language].nil?
+    @outlet.organization = params[:organization] if params[:organization]
+    @outlet.info_url = params[:info_url] if params[:info_url]
+    if params[:language]
       @outlet.language = params[:language].gsub(/,/, '')
     end
     @outlet.tag_list = params[:tags]
-    @outlet.location_id = params[:location_id] unless params[:location_id].nil? or params[:location_id].empty?
     @outlet.auth_token = @current_token.token
     
     # If any agencies are specified, update the list of agencies to match

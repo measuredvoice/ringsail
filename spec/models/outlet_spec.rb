@@ -54,7 +54,11 @@ describe Outlet do
       no_url_outlet.should_not be_valid
     end
 
-    it "should not allow bulk updates of updated_by"
+    it "should not allow bulk updates of updated_by" do
+      bad_actor = 'someone@something.com'
+      bulked_outlet = Outlet.create!(@attr.merge(:updated_by => bad_actor))
+      bulked_outlet.updated_by.should_not == bad_actor
+    end
     
     invalid_url = "blern.foo.com"
   
@@ -72,6 +76,11 @@ describe Outlet do
       bad_url_outlet = Outlet.new(@attr.merge(:info_url => invalid_url))
       bad_url_outlet.should_not be_valid
     end
+    
+    it "should require a valid account name" do
+      bad_account_outlet = Outlet.new(@attr.merge(:account => '', :service_url => 'http://twitter.com/'))
+      bad_account_outlet.should_not be_valid
+    end    
   end
   
   describe "resolve" do
