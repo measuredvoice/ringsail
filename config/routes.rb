@@ -54,6 +54,9 @@ Ringsail::Application.routes.draw do
   match "embed/request" => "embed_tokens#create", :via => :post, :as => :embed_create_token
   
   # USA.gov embedded style
-  match "usagov/verify" => "usagov#verify", :via => :get, :as => :embed_verify_outlet
+  match "usagov/verify" => "usagov#verify", :via => :get, :as => :usagov_verify_outlet
+  
+  # GobiernoUSA.gov embedded style
+  match "gobierno/verificar" => "gobierno#verify", :via => :get, :as => :gobierno_verify_outlet
   
 end
