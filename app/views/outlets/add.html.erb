@@ -1,7 +1,7 @@
 <% if @outlet %>
 <div class="span14">
 
-<%= form_tag({:action => "update"}, :class => "validate") do %>
+<%= form_tag({:action => "update"}, :class => "validate form-stacked") do %>
 
 <%= render 'shared/error_messages', :object => @outlet %>
 
@@ -9,6 +9,7 @@
 <label for="organization">Organization or program name:</label>
 <div class="input">
 <%= text_field_tag('organization', @outlet.organization || @outlet.service_info.profile_name, :class => "span8") %>
+<p class="help-block">TODO: needs help text</p>
 </div>
 </div>
 
@@ -16,27 +17,31 @@
 <label for="info_url">Information URL:</label>
 <div class="input">
 <%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url) %>
+<p class="help-block">TODO: needs help text</p>
 </div>
 </div>
 
 <div class="clearfix">
 <label for="agency_id">Sponsoring Agency:</label>
 <div class="input">
-<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select", 'data-placeholder' => "Choose sponsoring agency by typing its name" %>
+<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select" %>
+<p class="help-block">Choose sponsoring agency by typing its name</p>
 </div>
 </div>
 
 <div class="clearfix">
 <label for="tags">Tags:</label>
 <div class="input">
-<%= text_field_tag('tags', @outlet.tag_list.join(", "), :placeholder => "Separate tags with commas", :class => "span8") %>
+<%= text_field_tag('tags', @outlet.tag_list.join(", "), :class => "span8") %>
+<p class="help-block">Separate tags with commas</p>
 </div>
 </div>
 
 <div class="clearfix">
 <label for="language">Language:</label>
 <div class="input">
-<%= text_field_tag('language', @outlet.language, :placeholder => "Specify the primary language", :class => "span8") %>
+<%= text_field_tag('language', @outlet.language, :class => "span8") %>
+<p class="help-block">Specify the primary language</p>
 </div>
 </div>
 

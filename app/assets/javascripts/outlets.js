@@ -22,7 +22,7 @@
 		//var jsonTagEndpoint = "add-form_files/tags.php";
 		// LIVE (script automagically adds ?q= for typed query
 		var jsonTagEndpoint = "/tags.json";
-		var tagPlaceholder = $("#tags").attr("placeholder");
+		var tagPlaceholder = "";
 		var prefillString = $("#tags").val();
 		if (prefillString){
 			var prefills = prefillString.split(",");
@@ -33,7 +33,26 @@
 				prefillArray[i] = preObj;
 			}
 		}
-		$("#tags").autoSuggest(jsonTagEndpoint, {preFill: prefillArray, asHtmlID:"tags",minChars: 2, selectionLimit: false, startText:tagPlaceholder, resultsHighlight: false, neverSubmit:true, selectedItemProp: "tag_text", selectedValuesProp:"tag_id",searchObjProps: "tag_id"});
+		$("#tags").autoSuggest(jsonTagEndpoint, {preFill: prefillArray, asHtmlID:"tags",minChars: 2, matchCase:false, emptyText:"", selectionLimit: false, startText:tagPlaceholder, resultsHighlight: false, neverSubmit:true, selectedItemProp: "tag_text", selectedValuesProp:"tag_id",searchObjProps: "tag_text"});
+		
+		
+		// activate the AutoSuggest for languages 
+		var languagePlaceholder = "";//$("#language").attr("placeholder");
+		$("#language").autoSuggest(
+				defaultLanguages.languages, 
+				{
+					asHtmlID: "language", 
+					emptyText:"", 
+					selectionLimit: 1, 
+					minChars: 1, 
+					startText:languagePlaceholder, 
+					resultsHighlight: false, 
+					neverSubmit:true, 
+					selectedItemProp: "name", 
+					searchObjProps: "value"
+				}
+			);
+		
 		
 		// when the form is submitted, grab the values from the AutoSuggest fields and pop them into a more friendly-named input 
 		$("form.validate").submit(function(){
