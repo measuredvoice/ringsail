@@ -49,12 +49,31 @@ ul.as-selections li.as-original {
 	margin-left: 5px;	
 }
 
-/* language selector un-classed */
-#as-selections-language li a {
-	display: none;
+#languageSearchResults {
+	position: relative;
+	width: 460px;	
 }
-#as-selections-language li.as-selection-item {
-	background-color: transparent;
-	background-image: none;
-	border: none;	
+#languageSearchResults ul {
+	list-style-type: none;	
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #FFF;
+	border: 1px solid #AAA;
+	
+	-webkit-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, .15);
+	-moz-box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, .15);
+	box-shadow: 0px 4px 5px 2px rgba(0, 0, 0, .15);
+}
+#languageSearchResults li a {
+	padding: 4px 5px;	
+	text-decoration: none;
+	display: block;
+}
+#languageSearchResults li a.hover {
+	background-color: #2C5D80;
+	color: #FFF;	
 }
