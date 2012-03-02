@@ -38,6 +38,21 @@
 
     <hr>
     
+<% if @current_token %>
+
+	<div role="search" id="verify-another">
+    <%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
+		<p><label for="service-url">To register another social media account, please paste its complete URL here:
+		<p class="quiet">Example: http://twitter.com/whitehouse</p>
+		</label></p>
+		
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+        <%= hidden_field_tag('auth_token', @current_token.token) %>
+        <button class="verify-button" type="submit">Look Up</button>
+    <% end %>
+	</div>
+
+<% else %>
     <div>
         
         <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
@@ -65,17 +80,9 @@
         </div>
         <% end %>
     </div>
+    
+<% end %>
 
-	<div role="search" id="verify-another">
-		<p><label for="service-url">To look up another social media account, please paste its complete URL here:
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
-		</label></p>
-	</div>
-		
-    <%= form_tag({:action => "verify"}, :method => :get) do %>
-		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
-        <button class="verify-button" type="submit">Look Up</button>
-    <% end %>
 
     <% else %>
 
@@ -87,6 +94,21 @@
 
     <hr>
     
+<% if @current_token %>
+
+	<div role="search" id="verify-another">
+    <%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
+		<p><label for="service-url">To register a social media account, please paste its complete URL here:
+		<p class="quiet">Example: http://twitter.com/whitehouse</p>
+		</label></p>
+		
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+        <%= hidden_field_tag('auth_token', @current_token.token) %>
+        <button class="verify-button" type="submit">Look Up</button>
+    <% end %>
+	</div>
+
+<% else %>
     <div class="span8">
         <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can add it to this registry. Enter your email address and phone number below and we will send you a link to add it.</p>
         
@@ -115,20 +137,10 @@
             <input type="submit" class="btn" value="Submit">
         </div>
 
-	<div role="search" id="verify-another">
-		<p><label for="service-url">To look up another social media account, please paste its complete URL here:
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
-		</label></p>
-	</div>
-		
-    <%= form_tag({:action => "verify"}, :method => :get) do %>
-		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
-        <button class="verify-button" type="submit">Look Up</button>
-    <% end %>
 
         <% end %>
-
     </div>
+<% end %>
 <% end %>
 
 <% else %>

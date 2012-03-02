@@ -47,6 +47,9 @@ class OutletsController < ApplicationController
       return
     end
     
+    # If the account was already verified, it will be updated
+    action_performed = @outlet.verified? ? 'updated' : 'registered';
+    
     # FIXME: Doing this the stupid, straightforward way to start
     @outlet.organization = params[:organization] if params[:organization]
     @outlet.info_url = params[:info_url] if params[:info_url]
@@ -70,7 +73,7 @@ class OutletsController < ApplicationController
     if @outlet.save
       if request.format == :html
         flash[:shortnotice] = "Thank you!"
-        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been updated."
+        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been #{action_performed}."
         redirect_to :action => "verify", :service_url => @outlet.service_url, :auth_token => @current_token.token
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
@@ -88,6 +91,8 @@ class OutletsController < ApplicationController
   end
   
   def verify
+    @current_token = AuthToken.find_valid_token(params[:auth_token])
+    
     if params[:service] and params[:account]
       @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
     else

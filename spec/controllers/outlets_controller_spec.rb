@@ -180,7 +180,9 @@ describe OutletsController do
         get :verify, :service_url => @verified_url
         response.should have_selector("td", :content => @outlet.organization)
       end
+      
     end
+    
   end
 
   describe "DELETE 'remove'" do
