@@ -1,6 +1,21 @@
 <% if @outlet %>
 <div class="span14">
 
+<% if @outlet.verified? %>
+<div class="row">
+    <p class="span7 alert-message block-message success">
+        <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is registered as an official U.S. government account.
+    </p>
+</div>
+<% else %>
+
+<div class="row">
+    <p class="span7 alert-message block-message warning">
+        <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
+    </p>
+</div>
+<% end %>
+
 <%= form_tag({:action => "update"}, :class => "validate form-stacked") do %>
 
 <%= render 'shared/error_messages', :object => @outlet %>
@@ -49,7 +64,11 @@
 <%= hidden_field_tag('auth_token', @current_token.token) %>
 
 <div class="actions">
+<% if @outlet.verified? %>
   <input type="submit" class="btn primary" value="Save changes">
+<% else %>
+  <input type="submit" class="btn primary" value="Add to registry">
+<% end %>
 </div>
 
 <% end %>
