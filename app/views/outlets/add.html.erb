@@ -3,16 +3,20 @@
 
 <% if @outlet.verified? %>
 <div class="row">
-    <p class="span7 alert-message block-message success">
-        <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is registered as an official U.S. government account.
-    </p>
+    <div class="span14 alert-message block-message success">
+        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is registered as an official U.S. government account.</p>
+		<p>You can make changes to this listing using the form below.</p>
+    </div>
 </div>
 <% else %>
 
 <div class="row">
-    <p class="span7 alert-message block-message warning">
-        <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
-    </p>
+    <div class="span14 alert-message block-message warning">
+        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.</p>
+		<p>You can add it to the social media registry using the form below.</p>
+    </div>
+
+        
 </div>
 <% end %>
 
@@ -24,23 +28,20 @@
 <label for="organization">Organization or program name:</label>
 <div class="input">
 <%= text_field_tag('organization', @outlet.organization || @outlet.service_info.profile_name, :class => "span8", :tabindex => "1") %>
-<p class="help-block">TODO: needs help text</p>
 </div>
 </div>
 
 <div class="clearfix">
-<label for="info_url">Information URL:</label>
+<label for="info_url">Website URL:</label>
 <div class="input">
-<%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url, :tabindex => "2") %>
-<p class="help-block">TODO: needs help text</p>
+	<%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url, :class => "span8", :tabindex => "2") %>
 </div>
 </div>
 
 <div class="clearfix">
-<label for="agency_id">Sponsoring Agency:</label>
+<label for="agency_id">Sponsoring Top-Level Agency:</label>
 <div class="input">
 <%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select", :tabindex => "3" %>
-<p class="help-block">Choose sponsoring agency by typing its name</p>
 </div>
 </div>
 
@@ -53,10 +54,9 @@
 </div>
 
 <div class="clearfix">
-<label for="language">Language:</label>
+<label for="language">Primary language of account (optional):</label>
 <div class="input">
 <%= text_field_tag('language', @outlet.language, :class => "span8", :tabindex => "5") %>
-<p class="help-block">Specify the primary language</p>
 </div>
 </div>
 

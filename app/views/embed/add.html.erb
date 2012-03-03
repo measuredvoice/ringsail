@@ -73,9 +73,11 @@
 
 
 <% if flash[:alert] %>
-  <p class="span10 alert-message warning">
-    <%= flash[:alert] %>
-  </p>
+    <div class="alert-error">
+        <p>
+            <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+        </p>
+    </div>
 </div>
 <div class="row">
 <% end %>

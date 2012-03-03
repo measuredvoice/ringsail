@@ -1,14 +1,9 @@
 <div class="span14">
     <% if @outlet %>
-    
-    <ul class="breadcrumb">
-      <li><a href="verify">Register an account</a> <span class="divider">/</span></li>
-      <li class="active"><%= @outlet.service_url %></li>
-    </ul>
-    
+        
     <% if flash[:notice] %>
-    <div class="row">
-        <p class="span7 alert-message block-message info">
+    <div class="span14 alert-message block-message success">
+        <p>
             <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
         </p>
     </div>
@@ -16,41 +11,33 @@
 
     <% if @outlet.verified? %>
     <div class="row">
-        <p class="span7 alert-message block-message success">
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an official U.S. government account.
-        </p>
-    </div>
-    
-    <table class="span8 condensed-table">
+    <table class="span12 table">
         <thead>
-            <tr><th colspan="2">Information about this account</th></tr>
+            <tr><th colspan="4">Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></th></tr>
         </thead>
         <tbody>
-            <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
-            <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
-            <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
-            <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
-            <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
-            <tr><td>Last updated by:</td><td><%= @outlet.masked_updated_by %></td></tr>
-            <tr><td>Last updated on:</td><td><%= @outlet.updated_at.to_s(:human) %></td></tr>    
+            <tr><td class="span6">Organization or Program:</td><td><strong><%= @outlet.organization %></strong></td></tr>
+            <tr><td>Website URL:</td><td><strong><%= link_to @outlet.info_url, @outlet.info_url %></strong></td></tr>
+            <tr><td>Sponsoring top-level <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><strong><%= @outlet.agencies.join(", ") %></strong></td></tr>
+            <tr><td>Tags:</td><td><strong><%= @outlet.tag_list.join(", ") %></strong></td></tr>
+            <tr><td>Language:</td><td><strong><%= @outlet.language %></strong></td></tr>
+            <tr><td>Last updated by:</td><td><strong><%= @outlet.masked_updated_by %></strong></td></tr>
+            <tr><td>Last updated on:</td><td><strong><%= @outlet.updated_at.to_s(:human) %></strong></td></tr>    
         </tbody>
     </table>
-
+	</div>
     <hr>
     
 <% if @current_token %>
-
-	<div role="search" id="verify-another">
-    <%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
-		<p><label for="service-url">To register another social media account, please paste its complete URL here:
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
-		</label></p>
-		
-		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
-        <%= hidden_field_tag('auth_token', @current_token.token) %>
-        <button class="verify-button" type="submit">Look Up</button>
-    <% end %>
-	</div>
+		<div role="search" id="verify-another">
+			<%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
+			<p><label for="service-url">To register another social media account, please paste its complete URL here:</label></p>
+			<input id="service-url" name="service_url" class="verify-url-field span8" type="text" value="<%= params[:service_url] %>">
+			<%= hidden_field_tag('auth_token', @current_token.token) %>
+			<button class="verify-button btn primary" type="submit">Look Up</button>
+			<p class="help-block">Example: http://twitter.com/whitehouse</p>
+			<% end %>
+		</div>
 
 <% else %>
     <div>
@@ -83,11 +70,10 @@
     
 <% end %>
 
-
     <% else %>
 
     <div class="row">
-        <p class="span7 alert-message warning">
+        <p class="span14 alert-message warning">
             <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
         </p>
     </div>
@@ -99,12 +85,12 @@
 	<div role="search" id="verify-another">
     <%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
 		<p><label for="service-url">To register a social media account, please paste its complete URL here:
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
 		</label></p>
 		
-		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+		<input id="service-url" name="service_url" class="verify-url-field span8" type="text" value="<%= params[:service_url] %>">
         <%= hidden_field_tag('auth_token', @current_token.token) %>
-        <button class="verify-button" type="submit">Look Up</button>
+        <button class="verify-button btn primary" type="submit">Look Up</button>
+		<p class="help-block">Example: http://twitter.com/whitehouse</p>
     <% end %>
 	</div>
 
@@ -137,7 +123,6 @@
             <input type="submit" class="btn" value="Submit">
         </div>
 
-
         <% end %>
     </div>
 <% end %>
@@ -155,22 +140,22 @@
 <hr>
 
 <% if flash[:alert] %>
-<div class="row">
+
   <p class="span10 alert-message warning">
     <%= flash[:alert] %>
   </p>
-</div>
+
 <% end %>
 
 
 <div class="row">
-    <div class="span7">
+    <div class="span14">
         <p><b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b></p>
-        <p>Example: http://twitter.com/whitehouse</p>
         <%= form_tag({:action => "verify"}, :method => :get) do %>
             <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
             <button class="btn primary" type="submit">Check</button>
         <% end %>
+        <p>Example: http://twitter.com/whitehouse</p>
     </div>
     <div class="span4 offset1">
         <p><b>Types of accounts we can register:</b></p>

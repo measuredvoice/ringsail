@@ -48,7 +48,7 @@ class OutletsController < ApplicationController
     end
     
     # If the account was already verified, it will be updated
-    action_performed = @outlet.verified? ? 'updated' : 'registered';
+    action_performed = @outlet.verified? ? 'updated' : 'added to the social media registry';
     
     # FIXME: Doing this the stupid, straightforward way to start
     @outlet.organization = params[:organization] if params[:organization]
@@ -100,7 +100,12 @@ class OutletsController < ApplicationController
     end
     
     if @outlet and @outlet.account
-      @page_title ||= "Verify " + @outlet.service_info.display_name
+      if @outlet.verified?
+        @page_title ||= @outlet.service_info.display_name + " is verified"
+      else
+        @page_title ||= @outlet.service_info.display_name + " is not verified"
+      end
+        
       @agencies = agencies_for_form
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       

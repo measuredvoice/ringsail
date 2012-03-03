@@ -11,23 +11,23 @@
     <% if @outlet.verified? %>
     <div id="verified-account">
         <p>
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an official U.S. government account.
+            <strong>&iexcl;S&iacute;!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> es una cuenta oficial del Gobierno de los Estados Unidos.
         </p>
     </div>
 
 	<div role="search" id="verify-another">
-		<p><label for="service-url">To see if another social media account is an official U.S. government account, please paste its complete URL here:
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
+		<p><label for="service-url">Para verificar si otra cuenta de redes sociales es una cuenta oficial del Gobierno de Estados Unidos por favor empaste el URL completo aqu&iacute;:
 		</label></p>
 	</div>
 		
     <%= form_tag({:action => "verify"}, :method => :get) do %>
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
-        <button class="verify-button" type="submit">Verify</button>
+        <button class="verify-button" type="submit">Verificar</button>
     <% end %>
-
+	<p class="quiet">Ejemplo: http://twitter.com/whitehouse</p>
+	
     <div class="quiet" id="howto-cta">
-        <p>If you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">make changes to this listing on HowTo.gov</a>.</p>
+        <p>Si tiene un e-mail con direcci&oacute;n .gov o .mil, usted puede hacer cambios al registro de redes sociales en <a href="/embed/find?service_url=<%= @outlet.service_url %>">HowTo.gov</a> (en ingl&eacute;s).</p>
     </div>
     
 
@@ -36,24 +36,23 @@
 
     <div id="not-verified-account">
         <p>
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> <strong>no</strong> es una cuenta oficial registrada por el Gobierno de los Estados Unidos.
         </p>
     </div>
 
 	<div role="search" id="verify-another">
-		<p><label for="service-url"><strong>To see if another social media account is an official U.S. government account, please paste its complete URL here:</strong>
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
+		<p><label for="service-url"><strong>Para verificar si otra cuenta de redes sociales es una cuenta oficial del Gobierno de Estados Unidos por favor empaste el URL completo aqu&iacute;:</strong>
 		</label></p>
 	</div>
 		
     <%= form_tag({:action => "verify"}, :method => :get) do %>
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
-        <button class="verify-button" type="submit">Verify</button>
+        <button class="verify-button" type="submit">Verificar</button>
     <% end %>
-
+	<p class="quiet">Ejemplo: http://twitter.com/whitehouse</p>
     
     <div class="quiet" id="howto-cta">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">add it to the USA.gov social media registry on HowTo.gov</a>.</p>
+        <p>Si sabe que <em><%= @outlet.service_url %></em> es una cuenta oficial de redes sociales del Gobierno de Estados Unidos y tiene un e-mail con direcci&oacute;n .gov o .mil, puede <a href="/embed/find?service_url=<%= @outlet.service_url %>">agregarlo al registro de redes sociales de USA.gov en el sitio web HowTo.gov</a> (en ingl&eacute;s).</p>
 
     </div>
 <% end %>
@@ -67,20 +66,20 @@
   </p>
 </div>
 <% end %>
-		<p><strong>TODO: Translate</strong> Social media tools like Twitter, Facebook, and YouTube are now standard tools used by the government to connect with people and communicate official  information. Because of this, it is important to know if a social media account is really managed by the government or not.</p>
-		<p>This service is designed to make it easy for anyone to verify if a social media account is officially managed by the U.S. government.</p>
+		<p>Herramientas de redes sociales como Twitter, Facebook y YouTube se han convertido en plataformas comunes que utiliza el Gobierno para conectar con el p&uacute;blico y dar a conocer informaci&oacute;n oficial. Debido a esto es importante saber si una cuenta de redes sociales es verdaderamente administrada por el Gobierno.</p>
+		<p>Este servicio tiene como objetivo facilitar la verificaci&oacute;n de una cuenta de redes sociales para saber si es administrada oficialmente por el Gobierno de los Estados Unidos.</p>
 		
 		<div role="search">
-			<p><label for="service-url"><strong>To see if a social media account is an official U.S. government account, please paste its complete URL here:</strong>
-			<p class="quiet">Example: http://twitter.com/whitehouse</p>
+			<p><label for="service-url"><strong>Para verificar si una cuenta de redes sociales es una cuenta oficial del Gobierno de los Estados Unidos, por favor empaste el URL completo aqu&iacute;:</strong>
 			</label></p>
 		</div>
 		
         <%= form_tag({:action => "verify"}, :method => :get) do %>
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
-            <button class="verify-button" type="submit">Verify</button>
+            <button class="verify-button" type="submit">Verificar</button>
         <% end %>
-        <h4>Types of accounts we can verify:</h4>
+		<p class="quiet">Ejemplo: http://twitter.com/whitehouse</p>
+        <h4>Tipos de cuentas que verificamos:</h4>
         <%= render "shared/services_list" %>
 
 <% end %>

@@ -23,7 +23,7 @@
     
     <table class="span8 condensed-table">
         <thead>
-            <tr><th colspan="2">Information about this account</th></tr>
+            <tr><th colspan="2">Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></th></tr>
         </thead>
         <tbody>
             <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>

@@ -2,28 +2,23 @@
     <% if @outlet %>
     
     <% if flash[:notice] %>
-    <div class="row">
-        <p class="span7 alert-message block-message info">
+    <div id="verified-account">
+        <p>
             <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
         </p>
-    </div>
+    </div><%=
     <% end %>
 
     <% if @outlet.verified? %>
-    <div id="verified-account">
-        <p>
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an official U.S. government account.
-        </p>
-    </div>
     
     <table>
         <thead>
-            <tr><th colspan="2">Information about this account</th></tr>
+            <tr><th colspan="2">Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></th></tr>
         </thead>
         <tbody>
             <tr><td class="first-column">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
             <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
-            <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
+            <tr><td>Sponsoring top-level <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
             <!-- <tr><td>Location:</td><td><%= @outlet.location_name %></td></tr> -->
             <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
             <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
@@ -115,7 +110,6 @@
     </div>
 	<div role="search" id="verify-another">
 		<p><label for="service-url">To look up another social media account, please paste its complete URL here:
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
 		</label></p>
 	</div>
 		
@@ -123,17 +117,18 @@
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
         <button class="verify-button" type="submit">Look Up</button>
     <% end %>
+		<p class="quiet">Example: http://twitter.com/whitehouse</p>
 
 <% end %>
 
 <% else %>
 
 <% if flash[:alert] %>
-<div class="row">
-  <p class="span10 alert-message warning">
+
+  <p class="alert-error">
     <%= flash[:alert] %>
   </p>
-</div>
+
 <% end %>
 
 
@@ -143,7 +138,6 @@
 		
 		<div role="search">
 			<p><label for="service-url"><strong>To register an account, first check to see if it's already listed. Please paste the URL of the account you'd like to register here:</strong>
-			<p class="quiet">Example: http://twitter.com/whitehouse</p>
 			</label></p>
 		</div>
 		
@@ -151,6 +145,7 @@
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
             <button class="verify-button" type="submit">Verify</button>
         <% end %>
+			<p class="quiet">Example: http://twitter.com/whitehouse</p>
         <h4>Types of accounts we can verify:</h4>
         <%= render "shared/services_list" %>
     </div>
