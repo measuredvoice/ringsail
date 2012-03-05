@@ -20,6 +20,7 @@
 </div>
 <% end %>
 
+<div class="row span8">
 <%= form_tag({:action => "update"}, :class => "validate form-stacked") do %>
 
 <%= render 'shared/error_messages', :object => @outlet %>
@@ -65,12 +66,13 @@
 
 <div class="actions">
 <% if @outlet.verified? %>
-  <input type="submit" class="btn primary" value="Save changes">
+  <input type="submit" class="btn primary" tabindex="6" value="Save changes">
 <% else %>
-  <input type="submit" class="btn primary" value="Add to registry">
+  <input type="submit" class="btn primary" tabindex="6" value="Add to registry">
 <% end %>
 </div>
 
+</div>
 <% end %>
 
 <% if @outlet.verified? %>
