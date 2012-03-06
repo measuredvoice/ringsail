@@ -91,6 +91,7 @@ class OutletsController < ApplicationController
   end
   
   def verify
+    @errors ||= {};
     @current_token = AuthToken.find_valid_token(params[:auth_token])
     
     if params[:service] and params[:account]
@@ -114,11 +115,12 @@ class OutletsController < ApplicationController
       # Add a message about proper URLs for this service if 
       if @outlet and @outlet.service_info
         proper_url = @outlet.service_info.service_url_example
-        help_msg = proper_url ? " Perhaps try something like #{proper_url} instead." : ""
-        flash.now[:alert] = params[:service_url] + " doesn't seem to be a social media account." + help_msg
+        help_msg = proper_url ? @errors[:help_msg] || " Perhaps try something like #{proper_url} instead." : ""
+        bad_account = @errors[:bad_account] || " doesn't seem to be a social media account."
+        flash.now[:alert] = params[:service_url] + bad_account + help_msg
         @outlet = nil
       elsif params[:service_url]
-        flash.now[:alert] = "Sorry, we cannot look up the URL you entered because it is not from the social media services that we can verify."
+        flash.now[:alert] = @errors[:bad_service_url] || "Sorry, we cannot look up the URL you entered because it is not from the social media services that we can verify."
       end
       
       @services = Service.all;

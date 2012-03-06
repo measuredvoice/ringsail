@@ -9,8 +9,27 @@ describe GobiernoController do
       response.should be_success
     end
         
-    it "should be translated"
+    it "should be translated" do
+      get :verify
+      response.should have_selector("p", :content => "Herramientas")      
+    end
         
+    describe "for an unrecognized service" do
+      it "should display a translated error" do
+        unrecognized_url = "http://florndip.com/invalid"
+        get :verify, :service_url => unrecognized_url
+        response.should have_selector("p", :content => "sentimos")
+      end
+    end
+    
+    describe "for an unparseable account URL" do
+      it "should display a translated error" do
+        problem_url = "http://twitter.com/"
+        get :verify, :service_url => problem_url
+        response.should have_selector("p", :content => "TODO")
+      end
+    end
+    
     describe "for a verified outlet" do
       before(:each) do
         # FIXME: Get thee to a factory
@@ -33,7 +52,10 @@ describe GobiernoController do
         response.should be_success
       end
       
-      it "should be translated"
+      it "should be translated" do
+        get :verify, :service_url => @verified_url
+        response.should have_selector("p", :content => "oficial")      
+      end
     end
   end
 end
