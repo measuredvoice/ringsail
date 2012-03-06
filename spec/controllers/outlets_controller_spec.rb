@@ -21,7 +21,7 @@ describe OutletsController do
       it "should display the full form" do
         service_url = 'http://twitter.com/somethingorother'
         get :add, :service_url => service_url, :auth_token => @good_token.token
-        response.should have_selector("label", :content => "Sponsoring Agency:")
+        response.should have_selector("label", :content => "Sponsoring Top-Level Agency:")
       end
     end
   end
