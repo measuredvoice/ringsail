@@ -70,6 +70,7 @@
 <% else %>
   <input type="submit" class="btn primary" tabindex="6" value="Add to registry">
 <% end %>
+<a href="<%= url_for :action => 'verify', :auth_token => @current_token.token, :service_url => @outlet.service_url %>" class="btn">Cancel</a>
 </div>
 
 </div>

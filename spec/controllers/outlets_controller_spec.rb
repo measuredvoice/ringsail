@@ -23,6 +23,12 @@ describe OutletsController do
         get :add, :service_url => service_url, :auth_token => @good_token.token
         response.should have_selector("label", :content => "Sponsoring Top-Level Agency:")
       end
+      
+      it "should offer a cancel button" do
+        service_url = 'http://twitter.com/somethingorother'
+        get :add, :service_url => service_url, :auth_token => @good_token.token
+        response.should have_selector("a", :content => "Cancel")
+      end
     end
   end
 
