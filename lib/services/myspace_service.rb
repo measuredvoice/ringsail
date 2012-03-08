@@ -17,7 +17,7 @@ class MyspaceService < Service
   end
   
   def service_url_example
-    "http://www.myspace.com/whitehouse"
+    "http://www.myspace.com/username"
   end
   
   def service_url_canonical

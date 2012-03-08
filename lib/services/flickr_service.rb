@@ -17,7 +17,7 @@ class FlickrService < Service
   end
   
   def service_url_example
-    "http://flickr.com/photos/USAgov"
+    "http://flickr.com/photos/username"
   end
   
   def service_url_canonical

@@ -17,7 +17,7 @@ class UstreamService < Service
   end
   
   def service_url_example
-    "http://www.ustream.tv/NASAJPL"
+    "http://www.ustream.tv/username"
   end
   
   def service_url_canonical

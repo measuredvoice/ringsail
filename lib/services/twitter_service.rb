@@ -23,7 +23,7 @@ class TwitterService < Service
   end
 
   def service_url_example
-    "http://twitter.com/ftc"
+    "http://twitter.com/username"
   end
   
   def service_url_canonical

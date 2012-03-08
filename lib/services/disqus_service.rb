@@ -17,7 +17,7 @@ class DisqusService < Service
   end
   
   def service_url_example
-    "http://www.disqus.com/USAgov"
+    "http://www.disqus.com/username"
   end
   
   def service_url_canonical

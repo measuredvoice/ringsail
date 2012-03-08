@@ -27,7 +27,7 @@ class FacebookService < Service
   end
 
   def service_url_example
-    "https://www.facebook.com/USarmy"
+    "https://www.facebook.com/username"
   end
   
   def service_url_canonical

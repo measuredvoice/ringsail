@@ -17,8 +17,8 @@ class OutletsController < ApplicationController
       # Add a message about proper URLs for this service if 
       if @outlet and @outlet.service_info
         proper_url = @outlet.service_info.service_url_example
-        help_msg = proper_url ? " Accounts on that service usually look like #{proper_url} instead." : ""
-        flash.now[:alert] = params[:service_url] + " doesn't seem to be a social media account." + help_msg
+        help_msg = proper_url ? " Accounts URLs on that service usually look like #{proper_url}." : ""
+        flash.now[:alert] = params[:service_url] + " appears to be an incomplete URL." + help_msg
         @outlet = nil
       elsif params[:service_url]
         flash.now[:alert] = "The registry doesn't recognize that URL as a supported social media service."
@@ -115,8 +115,8 @@ class OutletsController < ApplicationController
       # Add a message about proper URLs for this service if 
       if @outlet and @outlet.service_info
         proper_url = @outlet.service_info.service_url_example
-        help_msg = proper_url ? @errors[:help_msg] || " Perhaps try something like #{proper_url} instead." : ""
-        bad_account = @errors[:bad_account] || " doesn't seem to be a social media account."
+        help_msg = proper_url ? @errors[:help_msg] || " Accounts URLs on that service usually look like #{proper_url}." : ""
+        bad_account = @errors[:bad_account] || " appears to be an incomplete URL."
         flash.now[:alert] = params[:service_url] + bad_account + help_msg
         @outlet = nil
       elsif params[:service_url]
