@@ -16,7 +16,7 @@
     </div>
 
 	<div role="search" id="verify-another">
-		<p><label for="service-url">Para verificar si otra cuenta de redes sociales es una cuenta oficial del Gobierno de Estados Unidos por favor empaste el URL completo aqu&iacute;:
+		<p><label for="service-url">Para verificar si otra cuenta de redes sociales es una cuenta oficial del Gobierno de los Estados Unidos, por favor ingrese el URL completo aqu&iacute;:
 		</label></p>
 	</div>
 		
@@ -24,10 +24,10 @@
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
         <button class="verify-button" type="submit">Verificar</button>
     <% end %>
-	<p class="quiet">Ejemplo: http://twitter.com/whitehouse</p>
+	<p class="quiet">Ejemplo: http://twitter.com/GobiernoUSA</p>
 	
     <div class="quiet" id="howto-cta">
-        <p>Si tiene un e-mail con direcci&oacute;n .gov o .mil, usted puede hacer cambios al registro de redes sociales en <a href="/embed/find?service_url=<%= @outlet.service_url %>">HowTo.gov</a> (en ingl&eacute;s).</p>
+        <p>Si tiene un e-mail que termine en .gov o .mil, usted puede <a href="/embed/find?service_url=<%= @outlet.service_url %>">hacer cambios al registro de redes sociales en HowTo.gov</a> (en ingl&eacute;s).</p>
     </div>
     
 
@@ -36,12 +36,12 @@
 
     <div id="not-verified-account">
         <p>
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> <strong>no</strong> es una cuenta oficial registrada por el Gobierno de los Estados Unidos.
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> <strong>no</strong> ha sido registrada como una cuenta oficial del Gobierno de los Estados Unidos.
         </p>
     </div>
 
 	<div role="search" id="verify-another">
-		<p><label for="service-url"><strong>Para verificar si otra cuenta de redes sociales es una cuenta oficial del Gobierno de Estados Unidos por favor empaste el URL completo aqu&iacute;:</strong>
+		<p><label for="service-url"><strong>Para verificar si otra cuenta de redes sociales es una cuenta oficial del Gobierno de los Estados Unidos, por favor ingrese el URL completo aqu&iacute;:</strong>
 		</label></p>
 	</div>
 		
@@ -49,10 +49,10 @@
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
         <button class="verify-button" type="submit">Verificar</button>
     <% end %>
-	<p class="quiet">Ejemplo: http://twitter.com/whitehouse</p>
+	<p class="quiet">Ejemplo: http://twitter.com/GobiernoUSA</p>
     
     <div class="quiet" id="howto-cta">
-        <p>Si sabe que <em><%= @outlet.service_url %></em> es una cuenta oficial de redes sociales del Gobierno de Estados Unidos y tiene un e-mail con direcci&oacute;n .gov o .mil, puede <a href="/embed/find?service_url=<%= @outlet.service_url %>">agregarlo al registro de redes sociales de USA.gov en el sitio web HowTo.gov</a> (en ingl&eacute;s).</p>
+        <p>Si sabe que <em><%= @outlet.service_url %></em> es una cuenta oficial de redes sociales del Gobierno de Estados Unidos y tiene un e-mail que termina en .gov o .mil, puede <a href="/embed/find?service_url=<%= @outlet.service_url %>">agregarlo al registro de redes sociales en HowTo.gov</a> <strong>(en ingl&eacute;s)</strong>.</p>
 
     </div>
 <% end %>
@@ -80,7 +80,7 @@
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
             <button class="verify-button" type="submit">Verificar</button>
         <% end %>
-		<p class="quiet">Ejemplo: http://twitter.com/whitehouse</p>
+		<p class="quiet">Ejemplo: http://twitter.com/GobiernoUSA</p>
         <h4>Tipos de cuentas que verificamos:</h4>
         <%= render "shared/services_list" %>
 
