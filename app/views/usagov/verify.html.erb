@@ -17,7 +17,6 @@
 
 	<div role="search" id="verify-another">
 		<p><label for="service-url">To see if another social media account is an official U.S. government account, please paste its complete URL here:
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
 		</label></p>
 	</div>
 		
@@ -25,7 +24,7 @@
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
         <button class="verify-button" type="submit">Verify</button>
     <% end %>
-
+		<p class="quiet">Example: http://twitter.com/whitehouse</p>
     <div class="quiet" id="howto-cta">
         <p>If you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">make changes to this listing on HowTo.gov</a>.</p>
     </div>
@@ -42,7 +41,6 @@
 
 	<div role="search" id="verify-another">
 		<p><label for="service-url"><strong>To see if another social media account is an official U.S. government account, please paste its complete URL here:</strong>
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
 		</label></p>
 	</div>
 		
@@ -50,7 +48,7 @@
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
         <button class="verify-button" type="submit">Verify</button>
     <% end %>
-
+		<p class="quiet">Example: http://twitter.com/whitehouse</p>
     
     <div class="quiet" id="howto-cta">
         <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">add it to the USA.gov social media registry on HowTo.gov</a>.</p>
@@ -72,7 +70,6 @@
 		
 		<div role="search">
 			<p><label for="service-url"><strong>To see if a social media account is an official U.S. government account, please paste its complete URL here:</strong>
-			<p class="quiet">Example: http://twitter.com/whitehouse</p>
 			</label></p>
 		</div>
 		
@@ -80,6 +77,7 @@
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
             <button class="verify-button" type="submit">Verify</button>
         <% end %>
+			<p class="quiet">Example: http://twitter.com/whitehouse</p>
         <h4>Types of accounts we can verify:</h4>
         <%= render "shared/services_list" %>
 

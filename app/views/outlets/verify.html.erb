@@ -78,11 +78,11 @@
 <div class="row">
     <div class="span7">
         <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b></p>
-        <p>Example: http://twitter.com/whitehouse</p>
         <%= form_tag({:action => "verify"}, :method => :get) do %>
             <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
             <button class="btn primary" type="submit">Verify</button>
         <% end %>
+        <p>Example: http://twitter.com/whitehouse</p>
     </div>
     <div class="span4 offset1">
         <p><b>Types of accounts we can verify:</b></p>
