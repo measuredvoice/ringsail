@@ -64,7 +64,7 @@
 			}
 		} else if (dir == "up"){
 			nextResult = current -1;
-			console.log("UP!" + nextResult);
+			// console.log("UP!" + nextResult);
 			if (nextResult > -1){
 				$("#languageSearchResults ul li").removeClass("active").find("a").removeClass("hover");
 				$("#languageSearchResults ul li:eq("+nextResult+")").addClass("active").find("a").addClass("hover");
@@ -129,7 +129,7 @@
 			if (searchTimeout){
 				clearTimeout(searchTimeout);
 			}		
-			console.log(event.which);
+			// console.log(event.which);
 			if (event.which != 40 && event.which != 38 && event.which != 13){
 				searchTimeout = setTimeout(function(){ checkLanguageField(); },200);	
 			}
@@ -153,7 +153,7 @@
 		// setup functionality for selector
 		$("#languageSearchResults ul li a").live('click',function(){
 			$("#language").val($(this).html());
-			console.log($(this).html());
+			// console.log($(this).html());
 			removeLanguageDrop();
 			return false;
 		});

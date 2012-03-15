@@ -42,7 +42,7 @@
 <div class="clearfix">
 <label for="agency_id">Sponsoring Top-Level Agency:</label>
 <div class="input">
-<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select", :tabindex => "3" %>
+<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select", :tabindex => "3", 'data-placeholder' => " " %>
 </div>
 </div>
 
