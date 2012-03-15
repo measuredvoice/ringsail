@@ -51,7 +51,7 @@ class Outlet < ActiveRecord::Base
   end
   
   def self.resolve(url)
-    return nil if url.nil?
+    return nil if url.nil? or url.empty?
 
     url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
     

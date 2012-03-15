@@ -119,7 +119,7 @@ class OutletsController < ApplicationController
         bad_account = @errors[:bad_account] || " appears to be an incomplete URL."
         flash.now[:alert] = params[:service_url] + bad_account + help_msg
         @outlet = nil
-      elsif params[:service_url]
+      elsif params[:service_url] and !params[:service_url].empty?
         flash.now[:alert] = @errors[:bad_service_url] || "Sorry, we cannot look up the URL you entered because it is not from the social media services that we can verify."
       end
       

@@ -124,6 +124,13 @@ describe OutletsController do
       response.should have_selector("a", :href => 'http://' + unverified_url)
     end
     
+    describe "for an empty service_url" do
+      it "should not display an error" do
+        get :verify, :service_url => ''
+        response.should_not have_selector("p", :content => "cannot look up")
+      end
+    end
+    
     describe "for an unrecognized service" do
       it "should display an error" do
         unrecognized_url = "http://florndip.com/invalid"
