@@ -26,7 +26,7 @@ describe GobiernoController do
       it "should display a translated error" do
         problem_url = "http://twitter.com/"
         get :verify, :service_url => problem_url
-        response.should have_selector("p", :content => "TODO")
+        response.should have_selector("p", :content => "incompleto")
       end
     end
     
