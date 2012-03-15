@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="span14 alert-message block-message warning">
-        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.</p>
+        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.</p>
 		<p>You can add it to the social media registry using the form below.</p>
     </div>
 
@@ -104,7 +104,6 @@
 <div class="span14">
 
     <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b></p>
-    <p>Example: http://twitter.com/whitehouse</p>
 
 <%= form_tag({:action => "add"}, :method => :get) do %>
 <%= hidden_field_tag('auth_token', @current_token.token) %>
@@ -113,6 +112,7 @@
 
 <button class="btn" type="submit">Look Up</button>
 <% end %>
+    <p>Example: http://twitter.com/whitehouse</p>
 
 </div>
 

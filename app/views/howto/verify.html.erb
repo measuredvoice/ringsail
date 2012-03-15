@@ -74,7 +74,7 @@
 
     <div class="row">
         <p class="span14 alert-message warning">
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
         </p>
     </div>
 
@@ -153,7 +153,7 @@
         <p><b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b></p>
         <%= form_tag({:action => "verify"}, :method => :get) do %>
             <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
-            <button class="btn primary" type="submit">Check</button>
+            <button class="btn primary" type="submit">Look up</button>
         <% end %>
         <p>Example: http://twitter.com/whitehouse</p>
     </div>

@@ -73,7 +73,7 @@
 
     <div id="not-verified-account">
         <p>
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
         </p>
     </div>
 
@@ -100,8 +100,8 @@
         <%= hidden_field_tag('service_url', @outlet.service_url) %>
 
         <div class="actions">
-                <p><span class="label important">Important!</span> The USA.gov Social Media Registry should only include accounts that represent official U.S. government agencies, organizations, or programs.</p>
-                <p><strong>Do not register any accounts that represent non-government organizations or individual people, even if they are government employees.</strong></p>
+                <p><span class="label important">Important!</span> The USA.gov Social Media Registry should only include accounts managed by federal agencies, elected officials or members of the President’s Cabinet.</p>
+                <p><strong>Do not enter personal, employee, or other types of accounts.</strong></p>
 
             <input type="submit" class="btn" value="Submit">
         </div>
@@ -133,17 +133,28 @@
 
 
     <div>
-		<p>Social media tools like Twitter, Facebook, and YouTube are now standard tools used by the government to connect with people and communicate official  information. Because of this, it is important to know if a social media account is really managed by the government or not.</p>
-		<p>This service is designed to make it easy for you to register social media accounts that are officially managed by the U.S. federal government.</p>
+		<p>
+			Many people now look to social media tools like Twitter, Facebook and YouTube to connect with government and receive official government information information. Because of this, it’s important to know if a social media account is really managed by the government.
+		</p>
+		<p>
+			If you have a .gov or .mil email address, this tool lets you register social media accounts to verify that they are officially managed by the U.S. federal government.
+		</p>
+		<p>
+			You can register accounts managed by federal agencies, elected officials or members of the President’s Cabinet.
+		</p>
+		<p>
+			To register a social media account, first look it up by entering its URL in the field below. We will tell you if the account has been registered and give you instructions to add it to the registry or update its information.
+		</p>
+		
 		
 		<div role="search">
-			<p><label for="service-url"><strong>To register an account, first check to see if it's already listed. Please paste the URL of the account you'd like to register here:</strong>
+			<p><label for="service-url"><strong>Please paste the URL of the account you'd like to register here:</strong>
 			</label></p>
 		</div>
 		
         <%= form_tag({:action => "verify"}, :method => :get) do %>
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
-            <button class="verify-button" type="submit">Verify</button>
+            <button class="verify-button" type="submit">Look Up</button>
         <% end %>
 			<p class="quiet">Example: http://twitter.com/whitehouse</p>
         <h4>Types of accounts we can verify:</h4>
