@@ -41,12 +41,12 @@ Ringsail::Application.routes.draw do
   match "locations/resolve" => "outlet_locations#resolve", :via => :get, :as => :resolve_locations
   
   # HowTo.gov proxied style
-  match "howto/register" => "howto#add", :via => :get, :as => :howto_add_outlet
-  match "howto/register" => "howto#update", :via => :post, :as => :howto_update_outlet
-  match "howto/remove"   => "howto#remove", :via => :post, :as => :howto_remove_outlet
-  match "howto/find"     => "howto#verify", :via => :get, :as => :howto_find_outlet
-  match "howto/request"  => "howto_tokens#new", :via => :get, :as => :howto_request_token
-  match "howto/request"  => "howto_tokens#create", :via => :post, :as => :howto_create_token
+  match "social-media/accounts/register" => "howto#add", :via => :get, :as => :howto_add_outlet
+  match "social-media/accounts/register" => "howto#update", :via => :post, :as => :howto_update_outlet
+  match "social-media/accounts/remove"   => "howto#remove", :via => :post, :as => :howto_remove_outlet
+  match "social-media/accounts/find"     => "howto#verify", :via => :get, :as => :howto_find_outlet
+  match "social-media/accounts/request"  => "howto_tokens#new", :via => :get, :as => :howto_request_token
+  match "social-media/accounts/request"  => "howto_tokens#create", :via => :post, :as => :howto_create_token
   
   # HowTo.gov embedded style
   match "embed/find" => "embed#verify", :via => :get, :as => :embed_find_outlet
