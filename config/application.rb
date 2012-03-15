@@ -4,6 +4,7 @@ secrets_file = File.expand_path('../too_many_secrets', __FILE__)
 require secrets_file if File.exists?(secrets_file + '.rb')
 
 require 'rails/all'
+require 'rack/jsonp'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -47,5 +48,8 @@ module Ringsail
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    
+    # Allow API clients to use JSONP callbacks
+    config.middleware.use Rack::JSONP
   end
 end

@@ -7,6 +7,7 @@ gem 'mysql2'
 # see https://github.com/gowalla/boxer
 gem 'boxer'
 gem 'json'
+gem 'rack-jsonp'
 
 # Support for social media service plugins
 gem 'twitter'
