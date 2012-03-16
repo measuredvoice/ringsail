@@ -11,7 +11,7 @@ describe GobiernoController do
         
     it "should be translated" do
       get :verify
-      response.should have_selector("p", :content => "Herramientas")      
+      response.should have_selector("p", :content => "Gobierno")      
     end
         
     describe "for an unrecognized service" do

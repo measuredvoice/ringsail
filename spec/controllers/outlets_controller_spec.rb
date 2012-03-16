@@ -120,7 +120,6 @@ describe OutletsController do
     it "should prepend http:// if missing" do
       unverified_url = "twitter.com/unverified"
       get :verify, :service_url => unverified_url
-      response.should have_selector("p", :content => "is not registered")
       response.should have_selector("a", :href => 'http://' + unverified_url)
     end
     
@@ -152,7 +151,7 @@ describe OutletsController do
       it "should return an unverified indication" do
         unverified_url = "http://twitter.com/unverified"
         get :verify, :service_url => unverified_url
-        response.should have_selector("p", :content => "is not registered")
+        response.should have_selector("strong", :content => "not")
         response.should have_selector("a", :href => unverified_url)
       end
       
