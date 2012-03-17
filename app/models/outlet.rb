@@ -34,6 +34,7 @@ class Outlet < ActiveRecord::Base
                      :allow_blank => true}
   validates :agencies, :presence => true
   validates :account, :presence => true
+  validates :language, :presence => true
   
   before_save :set_updated_by
   before_save :fix_service_info

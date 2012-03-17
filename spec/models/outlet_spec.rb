@@ -81,6 +81,11 @@ describe Outlet do
       bad_account_outlet = Outlet.new(@attr.merge(:account => '', :service_url => 'http://twitter.com/'))
       bad_account_outlet.should_not be_valid
     end    
+
+    it "should require the language field" do
+      no_language_outlet = Outlet.new(@attr.merge(:language => ''))
+      no_language_outlet.should_not be_valid
+    end    
   end
   
   describe "resolve" do
@@ -97,6 +102,7 @@ describe Outlet do
       outlet = Outlet.resolve(@attr[:service_url])
       outlet.auth_token = @attr[:auth_token]
       outlet.agencies.push @agency
+      outlet.language = 'English'
       outlet.save
       resolved_outlet = Outlet.resolve(@attr[:service_url])
       resolved_outlet.should == outlet
