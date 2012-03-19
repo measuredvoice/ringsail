@@ -103,7 +103,9 @@
 
 <div class="span14">
 
-    <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b></p>
+    <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b><br><br>
+	    <span class="quiet">Example: http://twitter.com/whitehouse</span>
+	</p>
 
 <%= form_tag({:action => "add"}, :method => :get) do %>
 <%= hidden_field_tag('auth_token', @current_token.token) %>
@@ -112,7 +114,7 @@
 
 <button class="btn" type="submit">Look Up</button>
 <% end %>
-    <p>Example: http://twitter.com/whitehouse</p>
+
 
 </div>
 

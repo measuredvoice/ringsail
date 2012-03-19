@@ -10,16 +10,16 @@
     <% end %>
 
     <% if @outlet.verified? %>
+
+	<h3>
+		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
+	</h3>
     
     <table>
-        <thead>
-            <tr><th colspan="2">Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></th></tr>
-        </thead>
         <tbody>
             <tr><td class="first-column">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
             <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
             <tr><td>Sponsoring top-level <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
-            <!-- <tr><td>Location:</td><td><%= @outlet.location_name %></td></tr> -->
             <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
             <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
             <tr><td>Last updated by:</td><td><%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %></td></tr>
@@ -57,7 +57,8 @@
         <% end %>
 		
 		<div role="search" id="verify-another">
-			<p><label for="service-url">To look up another social media account, please paste its complete URL here:
+			<p><label for="service-url">To look up another social media account, please paste its complete URL here:<br><br>
+				<span class="quiet">Example: http://twitter.com/whitehouse</span>
 			</label></p>
 		</div>
 		
@@ -65,7 +66,7 @@
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
 	        <button class="verify-button" type="submit">Look Up</button>
 	    <% end %>
-			<p class="quiet">Example: http://twitter.com/whitehouse</p>
+
 		
     </div>
 
@@ -109,7 +110,8 @@
 
     </div>
 	<div role="search" id="verify-another">
-		<p><label for="service-url">To look up another social media account, please paste its complete URL here:
+		<p><label for="service-url">To look up another social media account, please paste its complete URL here:<br><br>
+			<span class="quiet">Example: http://twitter.com/whitehouse</span>
 		</label></p>
 	</div>
 		
@@ -117,7 +119,6 @@
 		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
         <button class="verify-button" type="submit">Look Up</button>
     <% end %>
-		<p class="quiet">Example: http://twitter.com/whitehouse</p>
 
 <% end %>
 
@@ -140,9 +141,6 @@
 			If you work for the U.S. federal government and have a .gov or .mil email address, use this tool to register your agency&rsquo;s social media accounts (including elected officials or Cabinet members), so the public knows they are official.
 		</p>
 		<p>
-			You can register accounts managed by federal agencies, elected officials or members of the President&rsquo;s Cabinet.
-		</p>
-		<p>
 To register an account, enter the account URL in the field below and click &ldquo;Look Up&rdquo;
 			<ul>
 				<li>If it&rsquo;s not yet registered, you can add it</li>
@@ -152,7 +150,8 @@ To register an account, enter the account URL in the field below and click &ldqu
 		
 		
 		<div role="search">
-			<p><label for="service-url"><strong>Please paste the URL of the account you'd like to register here:</strong>
+			<p><label for="service-url"><strong>Please paste the URL of the account you'd like to register here:</strong><br><br>
+			<span class="quiet">Example: http://twitter.com/whitehouse</span>	
 			</label></p>
 		</div>
 		
@@ -160,8 +159,7 @@ To register an account, enter the account URL in the field below and click &ldqu
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
             <button class="verify-button" type="submit">Look Up</button>
         <% end %>
-			<p class="quiet">Example: http://twitter.com/whitehouse</p>
-        <h4>Types of accounts we can verify:</h4>
+        <h3>Types of accounts we can verify:</h3>
         <%= render "shared/services_list" %>
     </div>
 <% end %>

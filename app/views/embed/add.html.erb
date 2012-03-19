@@ -85,7 +85,10 @@
 
 <div class="span14">
 
-    <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b></p>
+    <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b>
+	<br><br>
+    <span class="quiet">Example: http://twitter.com/whitehouse</span></p>
+</p>
 
 <% if @current_token.token %>
 <form action="/outlets/add" method="GET">
@@ -98,7 +101,6 @@
 
 <button class="btn" type="submit">Look Up</button>
 </form>
-    <p>Example: http://twitter.com/whitehouse</p>
 
 </div>
 

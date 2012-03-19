@@ -21,10 +21,11 @@
         </p>
     </div>
     
+	<h3>
+		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
+	</h3>
+
     <table class="span8 condensed-table">
-        <thead>
-            <tr><th colspan="2">Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a></th></tr>
-        </thead>
         <tbody>
             <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
             <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
@@ -80,15 +81,16 @@
 
 <div class="row">
     <div class="span7">
-        <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b></p>
+        <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b><br><br>
+        <span class="quiet">Example: http://twitter.com/whitehouse</span>
+		</p>
         <%= form_tag({:action => "verify"}, :method => :get) do %>
             <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
             <button class="btn primary" type="submit">Verify</button>
         <% end %>
-        <p>Example: http://twitter.com/whitehouse</p>
     </div>
     <div class="span4 offset1">
-        <p><b>Types of accounts we can verify:</b></p>
+        <h3>Types of accounts we can verify:</h3>
         <%= render "shared/services_list" %>
     </div>
 </div>
