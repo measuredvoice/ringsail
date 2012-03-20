@@ -56,7 +56,18 @@ describe OutletsController do
         response.should redirect_to(howto_request_token_path)
       end
       
-      it "should reject an old auth token"
+      it "should reject an old auth token" do
+        @old_token = AuthToken.create!(
+          :email => "oldster@example.gov", 
+          :phone => "555-1212",
+        )
+        @old_token.created_at = 2.years.ago
+        @old_token.updated_at = 1.year.ago
+        @old_token.save!
+
+        post :update, @attr.merge(:auth_token => @old_token.token)
+        response.should redirect_to(howto_request_token_path)
+      end
     end
     
     describe "failure" do

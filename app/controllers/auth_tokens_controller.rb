@@ -9,10 +9,12 @@ class AuthTokensController < ApplicationController
   def create
     @auth_token = AuthToken.new(params)
     
-    if @auth_token.save
+    if AuthToken.find_recent_by_email(params[:email]) || @auth_token.save
       @page_title = "Authorization requested"
       
-      AuthTokenMailer.token_link_email(@auth_token, params[:service_url]).deliver
+      if @auth_token.token
+        AuthTokenMailer.token_link_email(@auth_token, params[:service_url]).deliver
+      end
       
       respond_with(XBoxer.new(:result, {
         :status => "success",
