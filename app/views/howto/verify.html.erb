@@ -11,9 +11,11 @@
 
     <% if @outlet.verified? %>
     <div class="row">
-    <h3>
-    	Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
-    </h3>
+    <div class="span12">
+		<h3>
+    		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
+		</h3>
+	</div>
     <table class="span12 table">
         <tbody>
             <tr><td class="span6">Organization or Program:</td><td><strong><%= @outlet.organization %></strong></td></tr>
@@ -31,8 +33,8 @@
 <% if @current_token %>
 		<div role="search" id="verify-another">
 			<%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
-			<p><label for="service-url">To register another social media account, please paste its complete URL here:<br>
-			<span class="help-block">Example: http://twitter.com/whitehouse</span><br><br>
+			<p><label for="service-url">To register another social media account, please paste its complete URL here:<br><br>
+			<span class="help-block">Example: http://twitter.com/whitehouse</span>
 			</label></p>
 			<input id="service-url" name="service_url" class="verify-url-field span8" type="text" value="<%= params[:service_url] %>">
 			<%= hidden_field_tag('auth_token', @current_token.token) %>
