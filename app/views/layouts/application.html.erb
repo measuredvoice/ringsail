@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @page_title %> | Ringsail</title>
+  <title><%= @page_title %> | U.S. Government Social Media Registry</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
@@ -76,12 +76,7 @@
 <div class="topbar">
   <div class="fill">
     <div class="container">
-      <a class="brand" href="/">Ringsail prototype</a>
-      <ul class="nav">
-        <li><a href="/usagov/embed-example.html">USA.gov: Verify accounts</a></li>
-        <li><a href="/gobierno/embed-example.html">GobiernoUSA.gov: Verifique cuentas</a></li>
-        <li><a href="/howto/embed-example.html">HowTo.gov: Register accounts</a></li>
-      </ul>
+      <a class="brand" href="http://usa.gov/developers/docs/registry">U.S. Government Social Media Registry API</a>
     </div>
   </div>
 </div>
@@ -90,7 +85,7 @@
 
   <div class="content">
     <div class="page-header">
-      <h1><%= @page_title %></h1>
+      <h1>API Preview<%= @page_title ? ": #{@page_title}" : '' %></h1>
     </div>
     <div class="row">
 
@@ -105,8 +100,8 @@
   <div class="row">
   <div class="span14">
   <div class="alert-message block-message info">
-	<p><strong>For internal use only.</strong></p>
-	<p>This is a prototype of a social media registry designed to keep track of all social media accounts managed by U.S. federal government agencies and programs. This prototype has not been designed with accessibility in mind, but the final registry will.</p>
+	<p>This is an HTML preview of the API output from a social media registry designed to keep track of all social media accounts managed by U.S. federal government agencies and programs.</p>
+	<p>See the <a href="http://usa.gov/developers/docs/registry">API documentation</a> for more information on using this API.</p>
 	</div>
 	</div>
 	</div>
