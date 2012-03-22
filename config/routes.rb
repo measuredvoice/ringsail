@@ -9,7 +9,7 @@ Ringsail::Application.routes.draw do
   match "accounts/verify" => "outlets#verify", :via => :get, :as => :verify_outlet
   match "accounts/:service/:account" => "outlets#verify", :via => :get, :as => :show_outlet, :constraints => {:account => /[\w.-]+?/, :format => /html|json|xml/}
   
-  root :to => "outlets#verify"
+  # root :to => "outlets#verify"
 
   # API call /accounts, GET
   # and synonym /accounts/{service}, GET
