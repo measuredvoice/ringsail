@@ -1,5 +1,3 @@
-require 'hyper_graph'
-
 class FacebookService < Service
   def self.handles?(uri)
     uri.host =~ /facebook.com$/
@@ -27,7 +25,7 @@ class FacebookService < Service
   end
 
   def service_url_example
-    "https://www.facebook.com/USarmy"
+    "https://www.facebook.com/username"
   end
   
   def service_url_canonical
@@ -37,34 +35,9 @@ class FacebookService < Service
   private
   
   def fetch_details
-    begin
-      user = HyperGraph.get(account)
-    rescue
-      return {:account => account}
-    end
-        
     {
-      :account       => account,
-      :profile_name  => user[:name],
-      :profile_image => user[:picture],
-      :info_url      => user[:website] ? user[:website].split[0] : nil,
-      :location      => pretty_location(user[:location]),
-      :followers     => user[:likes],
+      :account => account,
     }
-  end
-  
-  def pretty_location(parts={})
-    return nil if parts.nil?
-    
-    if parts[:city]
-      "#{parts[:city]}, #{parts[:state]}, #{parts[:country]}"
-    elsif parts[:state]
-      "#{parts[:state]}, #{parts[:country]}"
-    elsif parts[:country]
-      parts[:country]
-    else
-      nil
-    end
   end
 end
 

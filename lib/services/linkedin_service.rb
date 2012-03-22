@@ -21,7 +21,7 @@ class LinkedinService < Service
   end
   
   def service_url_example
-    "http://www.linkedin.com/company/us-epa"
+    "http://www.linkedin.com/company/example"
   end
   
   def service_url_canonical

@@ -2,29 +2,24 @@
     <% if @outlet %>
     
     <% if flash[:notice] %>
-    <div class="row">
-        <p class="span7 alert-message block-message info">
+    <div id="verified-account">
+        <p>
             <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
         </p>
     </div>
     <% end %>
 
     <% if @outlet.verified? %>
-    <div class="row">
-        <p class="span7 alert-message block-message success">
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an official U.S. government account.
-        </p>
-    </div>
+
+	<h3>
+		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
+	</h3>
     
-    <table class="span8 condensed-table">
-        <thead>
-            <tr><th colspan="2">Information about this account</th></tr>
-        </thead>
+    <table>
         <tbody>
-            <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
+            <tr><td class="first-column">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
             <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
-            <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
-            <!-- <tr><td>Location:</td><td><%= @outlet.location_name %></td></tr> -->
+            <tr><td>Sponsoring top-level <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
             <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
             <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
             <tr><td>Last updated by:</td><td><%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %></td></tr>
@@ -34,14 +29,14 @@
 
     <hr>
     
-    <div class="span8">
+    <div>
         
         <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
 
         <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
-            <label for="email">Email:</label>
+            <label for="email">Official Government Email Address:</label>
             <div class="input">
                 <%= text_field_tag('email', '', :class => "span5") %>
             </div>
@@ -60,25 +55,37 @@
             <input type="submit" class="btn" value="Submit">
         </div>
         <% end %>
+		
+		<div role="search" id="verify-another">
+			<p><label for="service-url">To look up another social media account, please paste its complete URL here:<br><br>
+				<span class="quiet">Example: http://twitter.com/whitehouse</span>
+			</label></p>
+		</div>
+		
+	    <%= form_tag({:action => "verify"}, :method => :get) do %>
+			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+	        <button class="verify-button" type="submit">Look Up</button>
+	    <% end %>
+
+		
     </div>
 
     <% else %>
 
-    <div class="row">
-        <p class="span7 alert-message warning">
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
+    <div id="not-verified-account">
+        <p>
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
         </p>
     </div>
 
-    <hr>
     
-    <div class="span8">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can add it to this registry. Enter your email address and phone number below and we will send you a link to add it.</p>
+    <div>
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. federal government social media account, you can add it to this registry. Enter your official government (.gov or .mil) email address and phone number below and we'll send you a link so you can add it to the registry.</p>
         
         <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
-            <label for="email">Email:</label>
+            <label for="email">Official Government Email Address:</label>
             <div class="input">
                 <%= text_field_tag('email', '', :class => "span5") %>
             </div>
@@ -94,43 +101,67 @@
         <%= hidden_field_tag('service_url', @outlet.service_url) %>
 
         <div class="actions">
-                <p><span class="label important">Important!</span> The USA.gov Social Media Registry should only include accounts that represent official U.S. government agencies, organizations, or programs.</p>
-                <p><strong>Do not register any accounts that represent non-government organizations or individual people, even if they are government employees.</strong></p>
+                <p><span class="label important">Important!</span> You should only add accounts managed by federal agencies (including elected officials and Cabinet members) into the USA.gov Social Media Registry.</p>
+                <p><strong>Do not enter personal, employee, or other types of accounts.</strong></p>
 
             <input type="submit" class="btn" value="Submit">
         </div>
         <% end %>
 
     </div>
+	<div role="search" id="verify-another">
+		<p><label for="service-url">To look up another social media account, please paste its complete URL here:<br><br>
+			<span class="quiet">Example: http://twitter.com/whitehouse</span>
+		</label></p>
+	</div>
+		
+    <%= form_tag({:action => "verify"}, :method => :get) do %>
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+        <button class="verify-button" type="submit">Look Up</button>
+    <% end %>
+
 <% end %>
 
 <% else %>
 
 <% if flash[:alert] %>
-<div class="row">
-  <p class="span10 alert-message warning">
+
+  <p class="alert-error">
     <%= flash[:alert] %>
   </p>
-</div>
+
 <% end %>
 
 
-<div class="row">
-    <div class="span7">
-        <p><b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b></p>
-        <p>Example: http://twitter.com/whitehouse</p>
+    <div>
+		<p>
+			Many people now use tools like Twitter, Facebook and YouTube to receive news and information, so it&rsquo;s important to help the public verify which social media accounts are managed by government agencies.
+		</p>
+		<p>
+			If you work for the U.S. federal government and have a .gov or .mil email address, use this tool to register your agency&rsquo;s social media accounts (including elected officials or Cabinet members), so the public knows they are official.
+		</p>
+		<p>
+To register an account, enter the account URL in the field below and click &ldquo;Look Up&rdquo;
+			<ul>
+				<li>If it&rsquo;s not yet registered, you can add it</li>
+				<li>If it&rsquo;s already in the system, you can update it</li>
+			</ul>
+		</p>
+		
+		
+		<div role="search">
+			<p><label for="service-url"><strong>Please paste the URL of the account you'd like to register here:</strong><br><br>
+			<span class="quiet">Example: http://twitter.com/whitehouse</span>	
+			</label></p>
+		</div>
+		
         <%= form_tag({:action => "verify"}, :method => :get) do %>
-            <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
-            <button class="btn primary" type="submit">Check</button>
+			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+            <button class="verify-button" type="submit">Look Up</button>
         <% end %>
-    </div>
-</div>
-<div class="row">
-    <div class="span7">
-        <p><b>Types of accounts we can register:</b></p>
+        <h3>Types of accounts we can verify:</h3>
         <%= render "shared/services_list" %>
     </div>
-</div>
 <% end %>
 
 </div>

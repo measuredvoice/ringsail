@@ -17,7 +17,7 @@ class MeetupService < Service
   end
   
   def service_url_example
-    "http://www.meetup.com/USAgov"
+    "http://www.meetup.com/example"
   end
   
   def service_url_canonical

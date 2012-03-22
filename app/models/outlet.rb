@@ -34,6 +34,7 @@ class Outlet < ActiveRecord::Base
                      :allow_blank => true}
   validates :agencies, :presence => true
   validates :account, :presence => true
+  validates :language, :presence => true
   
   before_save :set_updated_by
   before_save :fix_service_info
@@ -51,9 +52,9 @@ class Outlet < ActiveRecord::Base
   end
   
   def self.resolve(url)
-    return nil if url.nil?
+    return nil if url.nil? or url.empty?
 
-    url = 'http://' + url unless url =~ %r{\Ahttps?://}
+    url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
     
     s = Service.find_by_url(url)
     

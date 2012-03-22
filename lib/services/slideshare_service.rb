@@ -17,7 +17,7 @@ class SlideshareService < Service
   end
   
   def service_url_example
-    "http://www.slideshare.net/whitehouse"
+    "http://www.slideshare.net/username"
   end
   
   def service_url_canonical

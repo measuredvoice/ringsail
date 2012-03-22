@@ -1,14 +1,9 @@
 <div class="span14">
     <% if @outlet %>
-    
-    <ul class="breadcrumb">
-      <li><a href="verify">Register an account</a> <span class="divider">/</span></li>
-      <li class="active"><%= @outlet.service_url %></li>
-    </ul>
-    
+        
     <% if flash[:notice] %>
-    <div class="row">
-        <p class="span7 alert-message block-message info">
+    <div class="span14 alert-message block-message success">
+        <p>
             <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
         </p>
     </div>
@@ -16,29 +11,39 @@
 
     <% if @outlet.verified? %>
     <div class="row">
-        <p class="span7 alert-message block-message success">
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an official U.S. government account.
-        </p>
-    </div>
-    
-    <table class="span8 condensed-table">
-        <thead>
-            <tr><th colspan="2">Information about this account</th></tr>
-        </thead>
+    <div class="span12">
+		<h3>
+    		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
+		</h3>
+	</div>
+    <table class="span12 table">
         <tbody>
-            <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
-            <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
-            <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
-            <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
-            <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
-            <tr><td>Last updated by:</td><td><%= @outlet.masked_updated_by %></td></tr>
-            <tr><td>Last updated on:</td><td><%= @outlet.updated_at.to_s(:human) %></td></tr>    
+            <tr><td class="span6">Organization or Program:</td><td><strong><%= @outlet.organization %></strong></td></tr>
+            <tr><td>Website URL:</td><td><strong><%= link_to @outlet.info_url, @outlet.info_url %></strong></td></tr>
+            <tr><td>Sponsoring top-level <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><strong><%= @outlet.agencies.join(", ") %></strong></td></tr>
+            <tr><td>Tags:</td><td><strong><%= @outlet.tag_list.join(", ") %></strong></td></tr>
+            <tr><td>Language:</td><td><strong><%= @outlet.language %></strong></td></tr>
+            <tr><td>Last updated by:</td><td><strong><%= @outlet.masked_updated_by %></strong></td></tr>
+            <tr><td>Last updated on:</td><td><strong><%= @outlet.updated_at.to_s(:human) %></strong></td></tr>    
         </tbody>
     </table>
-
+	</div>
     <hr>
     
-    <div class="span8">
+<% if @current_token %>
+		<div role="search" id="verify-another">
+			<%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
+			<p><label for="service-url">To register another social media account, please paste its complete URL here:<br><br>
+			<span class="help-block">Example: http://twitter.com/whitehouse</span>
+			</label></p>
+			<input id="service-url" name="service_url" class="verify-url-field span8" type="text" value="<%= params[:service_url] %>">
+			<%= hidden_field_tag('auth_token', @current_token.token) %>
+			<button class="verify-button btn primary" type="submit">Look Up</button>
+			<% end %>
+		</div>
+
+<% else %>
+    <div>
         
         <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
 
@@ -65,24 +70,43 @@
         </div>
         <% end %>
     </div>
+    
+<% end %>
 
     <% else %>
 
     <div class="row">
-        <p class="span7 alert-message warning">
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
+        <p class="span14 alert-message warning">
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
         </p>
     </div>
 
     <hr>
     
+<% if @current_token %>
+
+	<div role="search" id="verify-another">
+    <%= form_tag({:action => "add"}, :method => :get, :class => 'form-stacked') do %>
+		<p>
+			<label for="service-url">To register a social media account, please paste its complete URL here:<br><br>
+				<span class="help-block">Example: http://twitter.com/whitehouse</span>
+			</label>
+		</p>
+		
+		<input id="service-url" name="service_url" class="verify-url-field span8" type="text" value="<%= params[:service_url] %>">
+        <%= hidden_field_tag('auth_token', @current_token.token) %>
+        <button class="verify-button btn primary" type="submit">Look Up</button>
+    <% end %>
+	</div>
+
+<% else %>
     <div class="span8">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can add it to this registry. Enter your email address and phone number below and we will send you a link to add it.</p>
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. federal government social media account, you can add it to this registry. Enter your official government (.gov or .mil) email address and phone number below and we'll send you a link so you can add it to the registry.</p>
         
         <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
-            <label for="email">Email:</label>
+            <label for="email">Official Government Email Address:</label>
             <div class="input">
                 <%= text_field_tag('email', '', :class => "span5") %>
             </div>
@@ -98,14 +122,15 @@
         <%= hidden_field_tag('service_url', @outlet.service_url) %>
 
         <div class="actions">
-                <p><span class="label important">Important!</span> The USA.gov Social Media Registry should only include accounts that represent official U.S. government agencies, organizations, or programs.</p>
+                <p><span class="label important">Important!</span> Important! You should only add accounts managed by federal agencies (including elected officials and Cabinet members) into the USA.gov Social Media Registry.</p>
                 <p><strong>Do not register any accounts that represent non-government organizations or individual people, even if they are government employees.</strong></p>
 
             <input type="submit" class="btn" value="Submit">
         </div>
-        <% end %>
 
+        <% end %>
     </div>
+<% end %>
 <% end %>
 
 <% else %>
@@ -120,25 +145,29 @@
 <hr>
 
 <% if flash[:alert] %>
-<div class="row">
+
   <p class="span10 alert-message warning">
     <%= flash[:alert] %>
   </p>
-</div>
+
 <% end %>
 
 
 <div class="row">
-    <div class="span7">
-        <p><b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b></p>
-        <p>Example: http://twitter.com/whitehouse</p>
+    <div class="span14">
+        <p>
+			<label for="service-url">
+				<b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b><br><br>
+				<span class="help-block">Example: http://twitter.com/whitehouse</span>
+			</label>
+		</p>
         <%= form_tag({:action => "verify"}, :method => :get) do %>
-            <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
-            <button class="btn primary" type="submit">Check</button>
+            <input type="text" id="service-url" name="service_url" class="span5" value="<%= params[:service_url] %>">
+            <button class="btn primary" type="submit">Look up</button>
         <% end %>
     </div>
     <div class="span4 offset1">
-        <p><b>Types of accounts we can register:</b></p>
+        <h3>Types of accounts we can register:</h3>
         <%= render "shared/services_list" %>
     </div>
 </div>

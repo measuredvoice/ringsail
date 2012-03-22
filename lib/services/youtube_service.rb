@@ -21,7 +21,7 @@ class YoutubeService < Service
   end
   
   def service_url_example
-    "http://www.youtube.com/USEPAgov"
+    "http://www.youtube.com/username"
   end
   
   def service_url_canonical

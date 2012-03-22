@@ -6,9 +6,9 @@
 <p>Enter your .gov or .mil email address and phone number below, and we will send you a link that will allow editing access for <strong>24 hours</strong> from the time the email is sent.</p>
 </div>
 
-<%= form_tag({:action => "create"}) do %>
+<%= form_tag({:action => "create"}, :class => "form-stacked") do %>
 
-<div class="span8">
+<div class="alert-error">
 <%= render 'shared/error_messages', :object => @auth_token %>
 </div>
 
@@ -27,7 +27,7 @@
 </div>
 
 <div class="actions">
-  <input type="submit" class="btn primary" value="Submit">
+  <input type="submit" class="btn" value="Submit">
 </div>
 
 <% end %>
