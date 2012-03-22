@@ -17,7 +17,7 @@ class GithubService < Service
   end
   
   def service_url_example
-    "http://www.github.com/USAgov"
+    "http://www.github.com/username"
   end
   
   def service_url_canonical

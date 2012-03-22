@@ -17,7 +17,7 @@ class ScribdService < Service
   end
   
   def service_url_example
-    "http://www.scribd.com/USAgov"
+    "http://www.scribd.com/username"
   end
   
   def service_url_canonical

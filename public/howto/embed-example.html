@@ -1,119 +1,454 @@
-<!DOCTYPE html>
-<html>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
 <head>
-  <title>Register an account | HowTo.gov</title>
-  <link href="/assets/application.css?body=1" media="screen" rel="stylesheet" type="text/css" />
-<link href="/assets/autosuggest.css?body=1" media="screen" rel="stylesheet" type="text/css" />
-<link href="/assets/chosen.css?body=1" media="screen" rel="stylesheet" type="text/css" />
-<link href="/assets/outlets.css?body=1" media="screen" rel="stylesheet" type="text/css" />
-  <script src="/assets/jquery.js?body=1" type="text/javascript"></script>
-<script src="/assets/jquery_ujs.js?body=1" type="text/javascript"></script>
-<script src="/assets/autosuggest.jquery.min.js?body=1" type="text/javascript"></script>
-<script src="/assets/chosen.jquery.min.js?body=1" type="text/javascript"></script>
-<script src="/assets/outlets.js?body=1" type="text/javascript"></script>
-<script src="/assets/application.js?body=1" type="text/javascript"></script>
-  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
-  <style type="text/css">
-    /* Override some bootstrap defaults */
-    html, body {
-      background-color: #eee;
-    }
-    body {
-      padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
-    }
-    .container > footer p {
-      text-align: center; /* center align it with the container */
-    }
-    .container {
-      width: 460px; 
-    }
+<base href="http://www.howto.gov/social-media/">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="msvalidate.01" content="EECEE553580B119A72BEAFDC71EB4D28" />
+    <title>Using Social Media in Government | HowTo.gov</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="social media in government, examples, policies, guidance, social media, government, tools, collaborative government" />
+<meta name="description" content="Policies and best practice for using social media in government." />
+  <link type="text/css" rel="stylesheet" media="all" href="http://howto.gov/sites/default/files/css/css_1a989f3490ac64ff8bbee31fb4470243.css" />
+<link type="text/css" rel="stylesheet" media="print" href="http://howto.gov/sites/default/files/css/css_4ad803e403b8ee28b04e969bb736b411.css" />
+  <script type="text/javascript" src="/sites/default/files/js/js_ef4ca4f5a54894e2a2a50ff1e3524568.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/", "fivestar": { "titleUser": "Your rating: ", "titleAverage": "Rate this page: ", "feedbackSavingVote": "Saving your vote...", "feedbackVoteSaved": "Your vote has been saved.", "feedbackDeletingVote": "Deleting your vote...", "feedbackVoteDeleted": "Your vote has been deleted." } });
+//--><!]]>
+</script>
 
-    /* The white background content wrapper */
-    .content {
-      background-color: #fff;
-      padding: 20px;
-      margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-      -webkit-border-radius: 0 0 6px 6px;
-         -moz-border-radius: 0 0 6px 6px;
-              border-radius: 0 0 6px 6px;
-      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-              box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    }
+<script type="text/javascript" src="/sites/default/themes/howto/foresee/foresee-trigger.js"></script>
 
-    /* Page header tweaks */
-    .page-header {
-      background-color: #f5f5f5;
-      padding: 20px 20px 10px;
-      margin: -20px -20px 20px;
-    }
+<!--[if lte IE 8]>
+<script type="text/javascript" src="/sites/default/themes/howto/js/jquery.corner.js"></script>
+<script type="text/javascript" src="/sites/default/themes/howto/js/application_ie.js"></script>
+<![endif]-->
+<!--[if IE 7]>
+<link href="http://howto.gov/sites/default/themes/howto/css/ie7.css" media="all" rel="stylesheet" type="text/css">
+<![endif]-->
+<!--[if IE 6]>
+<link href="http://howto.gov/sites/default/themes/howto/css/ie6.css" media="all" rel="stylesheet" type="text/css">
+<![endif]-->
+<script type="text/javascript" src="/sites/default/themes/howto/js/application.js"></script>
 
-    /* Give a quick and non-cross-browser friendly divider */
-    .content .span4 {
-      margin-left: 0;
-      padding-left: 19px;
-      border-left: 1px solid #eee;
-    }
 
-    .topbar .btn {
-      border: 0;
-    }
+<script>
+$(function() {
+  // set the iframe location correctly
+  var myHost = window.location.host;
+  var myPage = $('#verify-embed').attr('src');
+  $('#verify-embed').attr('src', "http://" + myHost + myPage);
+});
+</script>
 
-    /* Form default text tweaks */
-    input::-webkit-input-placeholder {
-      color:    gray;
-    }
-    input:-moz-placeholder {
-      color:    gray;
-    }
-    
-  </style>
+
 </head>
-<body>
 
-<div class="topbar">
-  <div class="fill">
-    <div class="container">
-      <a class="brand" href="/howto/embed-example.html">HowTo.gov (embedded)</a>
-    </div>
-  </div>
+
+<body class="not-front not-logged-in page-node node-type-page one-sidebar sidebar-left">
+<a name="pagetop"></a>
+  <div id="page">
+  <div id="page-inner">
+
+    <div id="header">
+    <div id="header-inner" class="clearfix">
+	<a href="#skip-to-content-destination" id="skip-to-content-link-home" tabindex="1">Skip to main content</a>
+              <div id="logo-title" role="banner">
+
+                                    <div id="site-name">
+                <a href="http://howto.gov/" title="Home" rel="home">
+                HowTo.gov                </a>
+              </div>
+                      
+        </div> <!-- close logo-title -->
+            
+              <div id="header-blocks" class="region region-header">  <div id="block-menu_block-3" class="block block-menu_block">
+
+
+  <div class="content"><div class="menu-block-3 menu-name-secondary-links parent-mlid-0 menu-level-1">
+  <ul class="menu level-1" role="navigation"><li class="leaf first menu-mlid-657 menu-mlid-657"><a href="http://www.facebook.com/pages/Washington-DC/Web-Content-Managers-Forum/102988744944" title="Facebook" class=" menu-mlid-657 level-depth-1">Facebook</a></li>
+<li class="leaf menu-mlid-658 menu-mlid-658"><a href="http://twitter.com/govnewmedia" title="Twitter" class=" menu-mlid-658 level-depth-1">Twitter</a></li>
+<li class="leaf menu-mlid-656 menu-mlid-656"><a href="http://howto.gov/a-z-index" title="A - Z Index" class=" menu-mlid-656 level-depth-1">A - Z Index</a></li>
+<li class="leaf menu-mlid-655 menu-mlid-655"><a href="http://howto.gov/contact-us" title="Contact Us" class=" menu-mlid-655 level-depth-1">Contact Us</a></li>
+<li class="leaf menu-mlid-654 menu-mlid-654"><a href="http://howto.gov/about-us" title="About Us" class=" menu-mlid-654 level-depth-1">About Us</a></li>
+<li class="leaf menu-mlid-1198 menu-mlid-1198"><a href="http://howto.gov/site-policies" title="Site Policies" class=" menu-mlid-1198 level-depth-1">Site Policies</a></li>
+<li class="leaf last menu-mlid-2141 menu-mlid-2141"><a href="http://howto.gov/suggest" title="Suggest Content" class=" menu-mlid-2141 level-depth-1">Suggest Content</a></li>
+</ul></div>
 </div>
+</div></div> <!-- close header-blocks -->
+                  
+      <!-- Search Form provided by usa.gov -->
+      
+      <div id="search-box">
+      <script src="http://search.usa.gov/javascripts/jquery/jquery.bgiframe.min.js" type="text/javascript"></script>
+      <script src="http://search.usa.gov/javascripts/jquery/jquery.autocomplete.min.js" type="text/javascript"></script>
+      <script type="text/javascript">
+        //<![CDATA[
+          var usagov_sayt_url = "http://search.usa.gov/sayt?aid= 464&amp;";;
+        //]]>
+      </script>
+      <script src="http://search.usa.gov/javascripts/sayt.js" type="text/javascript"></script>
+      <link href="http://search.usa.gov/stylesheets/compiled/sayt.css" type="text/css" rel="stylesheet">
 
-<div class="container">
+      <form method="get" action="http://search.usa.gov/search" id="search-block-form">
+      <div class="container-inline">
+        <input type="hidden" name="affiliate" value="HowTo.gov">
+        <label for="edit-search-block-form-1">What information do you want to search for?</label>
+        <input class="usagov-search-autocomplete form-text" maxlength="128" id="edit-search-block-form-1" size="15" value="" role="search" type="text" name="query" autocomplete="off"/>
+        <input type="submit" name="op" id="edit-submit" value="Search"  class="form-submit" />
+      </div>
+      </form>
+      
+      </div>
+      </div>
+      
+      <!-- End Search Form -->
+           
+           <div id="header-middle">
+                      </div><!-- /header-middle -->
+      
+          <div id="header-last">
+                          <div id="block-menu-primary-links" class="block block-menu">
+
+
+  <div class="content"><ul class="menu level-1" role="navigation"><li class="leaf first menu-mlid-652"><a href="http://howto.gov/" title="Home" class=" menu-mlid-652 level-depth-1">Home</a></li>
+<li class="expanded menu-mlid-647"><a href="http://howto.gov/web-content" title="Web Content" class=" menu-mlid-647 level-depth-1">Web Content</a><ul class="menu level-2"><li class="collapsed first menu-mlid-3271"><a href="http://howto.gov/web-content/requirements-and-best-practices" title="Requirements and Best Practices" class=" menu-mlid-3271 level-depth-2">Requirements and Best Practices</a></li>
+<li class="collapsed menu-mlid-2411"><a href="http://howto.gov/web-content/manage" title="Managing Content" class=" menu-mlid-2411 level-depth-2">Managing Content</a></li>
+<li class="collapsed menu-mlid-1901"><a href="http://howto.gov/web-content/usability" title="Usability &amp; Design" class=" menu-mlid-1901 level-depth-2">Usability &amp; Design</a></li>
+<li class="collapsed menu-mlid-3531"><a href="http://howto.gov/web-content/governance" title="Management and Governance" class=" menu-mlid-3531 level-depth-2">Management and Governance</a></li>
+<li class="collapsed menu-mlid-3421"><a href="http://howto.gov/web-content/analytics" title="Web Analytics" class=" menu-mlid-3421 level-depth-2">Web Analytics</a></li>
+<li class="collapsed menu-mlid-1741"><a href="http://howto.gov/web-content/accessibility" title="Accessibility" class=" menu-mlid-1741 level-depth-2">Accessibility</a></li>
+<li class="collapsed menu-mlid-2741"><a href="http://howto.gov/web-content/multilingual" title="Multilingual Websites" class=" menu-mlid-2741 level-depth-2">Multilingual Websites</a></li>
+<li class="leaf last menu-mlid-3651"><a href="http://howto.gov/web-content/resources" title="Resources and Tools" class=" menu-mlid-3651 level-depth-2">Resources and Tools</a></li>
+</ul></li>
+<li class="expanded active-trail menu-mlid-648 active-trail-menu-mlid-648"><a href="http://howto.gov/social-media" title="Social Media" class=" menu-mlid-648 level-depth-1">Social Media</a><ul class="menu level-2"><li class="collapsed first menu-mlid-1244"><a href="http://howto.gov/social-media/social-media-types" title="Types of Social Media" class=" menu-mlid-1244 level-depth-2">Types of Social Media</a></li>
+<li class="expanded active-trail menu-mlid-1242 active-trail-menu-mlid-1242"><a href="http://howto.gov/social-media/using-social-media" title="Using Social Media in Government" class=" menu-mlid-1242 level-depth-2 active">Using Social Media in Government</a><ul class="menu level-3"><li class="leaf first menu-mlid-1284"><a href="http://howto.gov/social-media/short-urls" title="USA.gov Short URLs" class=" menu-mlid-1284 level-depth-3">USA.gov URL Shorteners</a></li>
+<li class="collapsed menu-mlid-965"><a href="http://howto.gov/web-content/resources/tools/terms-of-service-agreements" title="Terms of Service Agreements" class=" menu-mlid-965 level-depth-3">Terms of Service Agreements</a></li>
+<li class="leaf last menu-mlid-966"><a href="http://citizen.apps.gov/" title="APPS.gov NOW" class=" menu-mlid-966 level-depth-3">APPS.gov NOW</a></li>
+</ul></li>
+<li class="collapsed last menu-mlid-2851"><a href="http://howto.gov/social-media/challenges" title="Innovation Challenges &amp; Contests" class=" menu-mlid-2851 level-depth-2">Innovation Challenges &amp; Contests</a></li>
+</ul></li>
+<li class="expanded menu-mlid-649"><a href="http://howto.gov/contact-centers" title="Contact Centers" class=" menu-mlid-649 level-depth-1">Contact Centers</a><ul class="menu level-2"><li class="leaf first menu-mlid-1481"><a href="http://howto.gov/contact-centers/requirements-and-best-practices" title="Requirements and Best Practices" class=" menu-mlid-1481 level-depth-2">Requirements and Best Practices</a></li>
+<li class="expanded menu-mlid-1491"><a href="http://howto.gov/contact-centers/getting-started" title="Getting Started" class=" menu-mlid-1491 level-depth-2">Getting Started</a><ul class="menu level-3"><li class="leaf first menu-mlid-1501"><a href="http://howto.gov/contact-centers/getting-started/what-is-a-contact-center" title="What is a Contact Center" class=" menu-mlid-1501 level-depth-3">What is a Contact Center?</a></li>
+<li class="leaf menu-mlid-1511"><a href="http://howto.gov/contact-centers/getting-started/attributes-of-high-performing-contact-centers" title="Attributes of High Performance" class=" menu-mlid-1511 level-depth-3">Attributes of High-Performing Contact Centers</a></li>
+<li class="leaf menu-mlid-1521"><a href="http://howto.gov/contact-centers/getting-started/planning-a-contact-center" title="Planning a Contact Center" class=" menu-mlid-1521 level-depth-3">Planning a Contact Center</a></li>
+<li class="leaf menu-mlid-1531"><a href="http://howto.gov/contact-centers/getting-started/customer-contact-channels-and-strategies" title="Channels and Strategies" class=" menu-mlid-1531 level-depth-3">Customer Contact Channels and Strategies</a></li>
+<li class="leaf last menu-mlid-1541"><a href="http://howto.gov/contact-centers/getting-started/contact-center-site-selection-criteria" title="Site Selection" class=" menu-mlid-1541 level-depth-3">Contact Center Site Selection Criteria</a></li>
+</ul></li>
+<li class="expanded menu-mlid-1551"><a href="http://howto.gov/contact-centers/technologies" title="Technologies" class=" menu-mlid-1551 level-depth-2">Technologies</a><ul class="menu level-3"><li class="leaf first menu-mlid-1561"><a href="http://howto.gov/contact-centers/technologies/automatic-call-distributor-systems" title="Automatic Call Distributor" class=" menu-mlid-1561 level-depth-3">Automatic Call Distributor Systems</a></li>
+<li class="leaf menu-mlid-5431"><a href="http://howto.gov/contact-centers/technologies/email-response-management-systems" title="Email Response Management System" class=" menu-mlid-5431 level-depth-3">Email Response Management Systems</a></li>
+<li class="leaf menu-mlid-1571"><a href="http://howto.gov/contact-centers/technologies/intelligent-call-routing" title="Intelligent Call Routing" class=" menu-mlid-1571 level-depth-3">Intelligent Call Routing</a></li>
+<li class="leaf menu-mlid-1581"><a href="http://howto.gov/contact-centers/technologies/interactive-voice-response-systems" title="Interactive Voice Response" class=" menu-mlid-1581 level-depth-3">Interactive Voice Response Systems</a></li>
+<li class="leaf menu-mlid-1591"><a href="http://howto.gov/contact-centers/technologies/knowledge-management-systems" title="Knowledge Management System" class=" menu-mlid-1591 level-depth-3">Knowledge Management Systems</a></li>
+<li class="leaf menu-mlid-1601"><a href="http://howto.gov/contact-centers/technologies/tty-tdd-communications" title="TTY/TDD" class=" menu-mlid-1601 level-depth-3">TTY/TDD Communications</a></li>
+<li class="leaf menu-mlid-1611"><a href="http://howto.gov/contact-centers/technologies/toll-free-telephone-services" title="Toll-Free Telephone Service" class=" menu-mlid-1611 level-depth-3">Toll-Free Telephone Services</a></li>
+<li class="leaf menu-mlid-1621"><a href="http://howto.gov/contact-centers/technologies/trunk-circuit-networks" title="Trunk Circuit" class=" menu-mlid-1621 level-depth-3">Trunk Circuit Networks</a></li>
+<li class="leaf menu-mlid-1461"><a href="http://howto.gov/contact-centers/technologies/web-chat" title="Web Chat" class=" menu-mlid-1461 level-depth-3">Web Chat</a></li>
+<li class="leaf last menu-mlid-1631"><a href="http://howto.gov/contact-centers/technologies/workforce-management-systems" title="Workforce Management System" class=" menu-mlid-1631 level-depth-3">Workforce Management Systems</a></li>
+</ul></li>
+<li class="expanded last menu-mlid-1641"><a href="http://howto.gov/contact-centers/management" title="Operation and Management" class=" menu-mlid-1641 level-depth-2">Operation and Management</a><ul class="menu level-3"><li class="leaf first menu-mlid-1651"><a href="http://howto.gov/contact-centers/management/control-contact-center-costs" title="Cost Control" class=" menu-mlid-1651 level-depth-3">Control Contact Center Costs</a></li>
+<li class="leaf menu-mlid-1661"><a href="http://howto.gov/contact-centers/management/monitor-quality" title="Monitor Quality" class=" menu-mlid-1661 level-depth-3">Monitor Quality</a></li>
+<li class="leaf menu-mlid-1671"><a href="http://howto.gov/contact-centers/management/avoid-fraudulent-pay-phone-calls" title="Fraud Prevention" class=" menu-mlid-1671 level-depth-3">Avoid Fraudulent Pay Phone Calls</a></li>
+<li class="leaf menu-mlid-1681"><a href="http://howto.gov/contact-centers/management/call-calibration" title="Call Calibration" class=" menu-mlid-1681 level-depth-3">Call Calibration</a></li>
+<li class="leaf menu-mlid-1691"><a href="http://howto.gov/contact-centers/management/ivr-call-flow-basics" title="IVR Call Flow Basics" class=" menu-mlid-1691 level-depth-3">IVR Call Flow Basics</a></li>
+<li class="leaf last menu-mlid-1471"><a href="http://howto.gov/contact-centers/management/disaster-planning-and-recovery" title="Disaster Recovery and Business Continuity Planning" class=" menu-mlid-1471 level-depth-3">Disaster Planning and Recovery</a></li>
+</ul></li>
+</ul></li>
+<li class="expanded menu-mlid-650"><a href="http://howto.gov/tech-solutions" title="Tech Solutions" class=" menu-mlid-650 level-depth-1">Tech Solutions</a><ul class="menu level-2"><li class="collapsed first menu-mlid-734"><a href="http://howto.gov/tech-solutions/cloud-computing" title="Cloud Computing" class=" menu-mlid-734 level-depth-2">Cloud Computing</a></li>
+<li class="collapsed menu-mlid-737"><a href="http://howto.gov/tech-solutions/data" title="Sharing Government Data" class=" menu-mlid-737 level-depth-2">Sharing Government Data</a></li>
+<li class="collapsed menu-mlid-6081"><a href="http://howto.gov/tech-solutions/site-search" title="Site Search" class=" menu-mlid-6081 level-depth-2">Site Search</a></li>
+<li class="collapsed menu-mlid-735"><a href="http://howto.gov/tech-solutions/web-development" title="Web Development &amp; Support" class=" menu-mlid-735 level-depth-2">Web Development &amp; Support</a></li>
+<li class="collapsed last menu-mlid-1201"><a href="http://howto.gov/tech-solutions/mobile" title="Mobile" class=" menu-mlid-1201 level-depth-2">Mobile</a></li>
+</ul></li>
+<li class="expanded menu-mlid-651"><a href="http://howto.gov/communities" title="Communities" class=" menu-mlid-651 level-depth-1">Communities</a><ul class="menu level-2"><li class="leaf first menu-mlid-5581"><a href="http://howto.gov/communities/web-content" title="Web Content Groups" class=" menu-mlid-5581 level-depth-2">Web Content Groups</a></li>
+<li class="leaf menu-mlid-5591"><a href="http://howto.gov/communities/social-media" title="Social Media Groups" class=" menu-mlid-5591 level-depth-2">Social Media Groups</a></li>
+<li class="leaf menu-mlid-5621"><a href="http://howto.gov/communities/contact-center" title="Contact Center Groups" class=" menu-mlid-5621 level-depth-2">Contact Centers Groups</a></li>
+<li class="leaf menu-mlid-5601"><a href="http://howto.gov/communities/information-technology" title="Information Technology Groups" class=" menu-mlid-5601 level-depth-2">Information Technology Groups</a></li>
+<li class="leaf menu-mlid-5731"><a href="http://howto.gov/communities/research" title="Research Groups" class=" menu-mlid-5731 level-depth-2">Research Groups</a></li>
+<li class="leaf last menu-mlid-5081"><a href="http://howto.gov/training" title="Training" class=" menu-mlid-5081 level-depth-2">Training</a></li>
+</ul></li>
+<li class="expanded last menu-mlid-852"><a href="http://howto.gov/customer-service" title="Customer Service" class=" menu-mlid-852 level-depth-1">Customer Service</a><ul class="menu level-2"><li class="leaf first menu-mlid-5411"><a href="http://howto.gov/customer-service/customer-service-government" title="Overview - Customer Service in Government" class=" menu-mlid-5411 level-depth-2">Overview</a></li>
+<li class="leaf menu-mlid-1291"><a href="http://howto.gov/customer-service/how-to-collect-customer-feedback" title="Collecting Customer Feedback" class=" menu-mlid-1291 level-depth-2">Collecting Customer Feedback</a></li>
+<li class="leaf menu-mlid-5421"><a href="http://howto.gov/customer-service/strategic-planning" title="Strategic Planning" class=" menu-mlid-5421 level-depth-2">Strategic Planning</a></li>
+<li class="leaf menu-mlid-756"><a href="http://howto.gov/strategic-planning/customer-service-principles" title="Principles" class=" menu-mlid-756 level-depth-2">Principles</a></li>
+<li class="leaf last menu-mlid-1199"><a href="http://howto.gov/customer-service/models" title="Models" class=" menu-mlid-1199 level-depth-2">Models</a></li>
+</ul></li>
+</ul></div>
+</div>                      </div><!-- /header-last -->
+    	
+    
+
+    </div><!-- close header-inner -->
+    </div><!-- close header -->
+
+    <a name="skip-to-content-destination"></a>
+
+	
+    
+    <div id="main" class="node-148">
+    <div id="main-inner" class="clearfix">
+		<div class="breadcrumb"><a href="http://howto.gov/">Home</a> &raquo; <a href="http://howto.gov/social-media" title="Social Media">Social Media</a> &raquo; Using Social Media in Government</div>    
+    <div id="main-left-wrapper" class="clearfix">
+
+
+
+      <div id="content">
+      <div id="content-inner" class="clearfix">
+		
+		
+		
+
+        
+
+                  <div id="content-header">
+          
+                        				<h1 class="title">Register Official Social Media Accounts</h1>									                        
+          </div> <!-- close content-header -->
+        
+
+        <div id="content-area">
+           
+           <div id="node-148" class="node">
+
+
+  <div class="meta">
+    </div>
 
   <div class="content">
-    <div class="row">
-
-<div class="span14">
-
-
-
-<div class="row">
-    <div class="span7">
-        <p>This is example text on the containing page.</p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="span7">
-
-<iframe src="/embed/find" height="450" width="465"></iframe>
-
-    </div>
-</div>
-
-</div>
-
-    </div>
+	<iframe scrolling="auto" style="width:100%; height:950px; border: none;" height="1500px" id="verify-embed" src="/embed/find" aria-live="polite" title="Register Official Social Media Accounts" marginheight="0" marginwidth="0" frameborder="0"><a href="/embed/find">Register Official Social Media Accounts</a></iframe> 
   </div>
 
-</div> <!-- /container -->
+
+    </div>
+                              <div class="node"><div class="content">
+          <p>
+                       <strong><a href="http://howto.gov/suggest">Content Lead</a>: </strong>
+                             <a href="mailto:jonathan.rubin@gsa.gov">Jonathan Rubin</a>
+                                       <br>
+                                 <strong>Page Reviewed/Updated: </strong>February 3, 2012                    </p>
+          </div></div>
+          
+        </div>
+
+        
+
+                
+        
+        
+        
+
+      </div><!-- close content-inner -->
+      </div><!-- close content -->
+
+      
+
+              <div id="sidebar-left">
+        <div id="sidebar-left-inner" class="region region-left">
+        
+        
+                    
+          
+		    <div id="block-menu_block-1" class="block block-menu_block">
+
+  <h2><a href="http://howto.gov/social-media" title="Social Media" class="active-trail menu-mlid-648 level-depth-1">Social Media</a></h2>
+
+  <div class="content"><div class="menu-block-1 menu-name-primary-links parent-mlid-0 menu-level-2">
+  <ul class="menu level-2"><li class="leaf first menu-mlid-1244 has-children menu-mlid-1244"><a href="http://howto.gov/social-media/social-media-types" title="Types of Social Media" class=" menu-mlid-1244 level-depth-2">Types of Social Media</a></li>
+<li class="leaf menu-mlid-1242 has-children active active-trail menu-mlid-1242 active-trail-menu-mlid-1242"><a href="http://howto.gov/social-media/using-social-media" title="Using Social Media in Government" class="active-trail menu-mlid-1242 level-depth-2 active">Using Social Media in Government</a></li>
+<li class="leaf last menu-mlid-2851 has-children menu-mlid-2851"><a href="http://howto.gov/social-media/challenges" title="Innovation Challenges &amp; Contests" class=" menu-mlid-2851 level-depth-2">Innovation Challenges &amp; Contests</a></li>
+</ul></div>
+</div>
+</div>          
+          
+        </div><!-- close sidebar-left-inner -->
+        </div><!-- close sidebar-left -->
+              
+ </div><!-- close main-left-wrapper -->
 
 
-<!-- <pre class='debug_dump'>---
-controller: embed
-action: verify
-</pre> -->
 
+
+	
+        <div id="sidebar-right" role="complimentary">
+        <div id="sidebar-right-inner" class="region region-right">
+        
+        		
+				        		
+  								
+				<div id="block-block-23" class="mp blocky block block-block">
+  				<h3>Toolbox</h3>
+  				<div class="content clearfix">
+  				
+								<div class="imgIcons">
+				<img src="/sites/default/files/images/Tool_Share_On.png" alt="Share">&nbsp;<a href="http://www.addthis.com/bookmark.php">Share</a>
+				&nbsp;&nbsp;&nbsp;<img src="/sites/default/files/images/Tool_Print_On.png" alt="Print">&nbsp;<a href="javascript:window.print()">Print</a>
+				<p style="height:1px">&nbsp;</p>
+				<img src="/sites/default/files/images/Tool_Download_On.png" alt="Download Plug-ins">&nbsp;<a href="http://howto.gov/site-policies/download-plug-ins">Download Plug-ins</a>
+<form action="/social-media/using-social-media"  accept-charset="UTF-8" method="post" id="fivestar-form-node-148" class="fivestar-widget">
+<div><div class="fivestar-form-vote-148 clear-block"><input type="hidden" name="content_type" id="edit-content-type" value="node"  />
+<input type="hidden" name="content_id" id="edit-content-id" value="148"  />
+<div class="fivestar-form-item  fivestar-average-text fivestar-smart-stars fivestar-average-stars"><div class="form-item" id="edit-vote-wrapper">
+ <label for="edit-vote">Rate this page: </label>
+ <input type="hidden" name="vote_count" id="edit-vote-count" value="18"  />
+<input type="hidden" name="vote_average" id="edit-vote-average" value="70"  />
+<input type="hidden" name="auto_submit_path" id="edit-auto-submit-path" value="/fivestar/vote/node/148/vote"  class="fivestar-path" />
+<select name="vote" class="form-select" id="edit-vote-1" ><option value="-">Select rating</option><option value="20">Give it 1/5</option><option value="40">Give it 2/5</option><option value="60">Give it 3/5</option><option value="80" selected="selected">Give it 4/5</option><option value="100">Give it 5/5</option></select><input type="hidden" name="auto_submit_token" id="edit-auto-submit-token" value="bf14017c093c3b8ad9769531d21ab224"  class="fivestar-token" />
+
+ <div class="description"><div class="fivestar-summary fivestar-summary-average-count fivestar-feedback-enabled"><span class="average-rating">Average: <span>3.5</span></span> <span class="total-votes">(<span>18</span> votes)</span></div></div>
+</div>
+</div><input type="hidden" name="destination" id="edit-destination" value="node/148"  />
+<input type="submit" name="op" id="edit-fivestar-submit" value="Rate"  class="form-submit fivestar-submit" />
+<input type="hidden" name="form_build_id" id="form-67215f25516c9ec934967dfdb4d9a52f" value="form-67215f25516c9ec934967dfdb4d9a52f"  />
+<input type="hidden" name="form_id" id="edit-fivestar-form-node-148" value="fivestar_form_node_148"  />
+</div>
+</div></form>
+				</div>
+				
+				</div>
+				</div>
+				
+							
+						
+		
+		
+		
+		        
+        
+        </div><!-- close sidebar-right-inner -->
+        </div><!-- close sidebar-right -->
+
+	
+
+
+    </div><!-- close main-inner -->
+    </div><!-- close main -->
+
+
+    
+     
+    
+    
+	      <div id="footer">
+      <div id="footer-inner" class="region region-footer clearfix">
+
+        <a href="#pagetop" class="offscreen">Go to the top of this page</a>
+		<div id="footer-menu">  <div id="block-menu_block-2" class="block block-menu_block">
+
+
+  <div class="content"><div class="menu-block-2 menu-name-primary-links parent-mlid-0 menu-level-1">
+  <ul class="menu level-1" role="navigation"><li class="leaf first menu-mlid-652 menu-mlid-652"><a href="http://howto.gov/" title="Home" class=" menu-mlid-652 level-depth-1">Home</a></li>
+<li class="expanded menu-mlid-647 menu-mlid-647"><a href="http://howto.gov/web-content" title="Web Content" class=" menu-mlid-647 level-depth-1">Web Content</a><ul class="menu level-2"><li class="leaf first menu-mlid-3271 has-children menu-mlid-3271"><a href="http://howto.gov/web-content/requirements-and-best-practices" title="Requirements and Best Practices" class=" menu-mlid-3271 level-depth-2">Requirements and Best Practices</a></li>
+<li class="leaf menu-mlid-2411 has-children menu-mlid-2411"><a href="http://howto.gov/web-content/manage" title="Managing Content" class=" menu-mlid-2411 level-depth-2">Managing Content</a></li>
+<li class="leaf menu-mlid-1901 has-children menu-mlid-1901"><a href="http://howto.gov/web-content/usability" title="Usability &amp; Design" class=" menu-mlid-1901 level-depth-2">Usability &amp; Design</a></li>
+<li class="leaf menu-mlid-3531 has-children menu-mlid-3531"><a href="http://howto.gov/web-content/governance" title="Management and Governance" class=" menu-mlid-3531 level-depth-2">Management and Governance</a></li>
+<li class="leaf menu-mlid-3421 has-children menu-mlid-3421"><a href="http://howto.gov/web-content/analytics" title="Web Analytics" class=" menu-mlid-3421 level-depth-2">Web Analytics</a></li>
+<li class="leaf menu-mlid-1741 has-children menu-mlid-1741"><a href="http://howto.gov/web-content/accessibility" title="Accessibility" class=" menu-mlid-1741 level-depth-2">Accessibility</a></li>
+<li class="leaf menu-mlid-2741 has-children menu-mlid-2741"><a href="http://howto.gov/web-content/multilingual" title="Multilingual Websites" class=" menu-mlid-2741 level-depth-2">Multilingual Websites</a></li>
+<li class="leaf last menu-mlid-3651 menu-mlid-3651"><a href="http://howto.gov/web-content/resources" title="Resources and Tools" class=" menu-mlid-3651 level-depth-2">Resources and Tools</a></li>
+</ul></li>
+<li class="expanded menu-mlid-648 active-trail menu-mlid-648 active-trail-menu-mlid-648"><a href="http://howto.gov/social-media" title="Social Media" class="active-trail menu-mlid-648 level-depth-1">Social Media</a><ul class="menu level-2"><li class="leaf first menu-mlid-1244 has-children menu-mlid-1244"><a href="http://howto.gov/social-media/social-media-types" title="Types of Social Media" class=" menu-mlid-1244 level-depth-2">Types of Social Media</a></li>
+<li class="leaf menu-mlid-1242 has-children active active-trail menu-mlid-1242 active-trail-menu-mlid-1242"><a href="http://howto.gov/social-media/using-social-media" title="Using Social Media in Government" class="active-trail menu-mlid-1242 level-depth-2 active">Using Social Media in Government</a></li>
+<li class="leaf last menu-mlid-2851 has-children menu-mlid-2851"><a href="http://howto.gov/social-media/challenges" title="Innovation Challenges &amp; Contests" class=" menu-mlid-2851 level-depth-2">Innovation Challenges &amp; Contests</a></li>
+</ul></li>
+<li class="expanded menu-mlid-649 menu-mlid-649"><a href="http://howto.gov/contact-centers" title="Contact Centers" class=" menu-mlid-649 level-depth-1">Contact Centers</a><ul class="menu level-2"><li class="leaf first menu-mlid-1481 menu-mlid-1481"><a href="http://howto.gov/contact-centers/requirements-and-best-practices" title="Requirements and Best Practices" class=" menu-mlid-1481 level-depth-2">Requirements and Best Practices</a></li>
+<li class="leaf menu-mlid-1491 has-children menu-mlid-1491"><a href="http://howto.gov/contact-centers/getting-started" title="Getting Started" class=" menu-mlid-1491 level-depth-2">Getting Started</a></li>
+<li class="leaf menu-mlid-1551 has-children menu-mlid-1551"><a href="http://howto.gov/contact-centers/technologies" title="Technologies" class=" menu-mlid-1551 level-depth-2">Technologies</a></li>
+<li class="leaf last menu-mlid-1641 has-children menu-mlid-1641"><a href="http://howto.gov/contact-centers/management" title="Operation and Management" class=" menu-mlid-1641 level-depth-2">Operation and Management</a></li>
+</ul></li>
+<li class="expanded menu-mlid-650 menu-mlid-650"><a href="http://howto.gov/tech-solutions" title="Tech Solutions" class=" menu-mlid-650 level-depth-1">Tech Solutions</a><ul class="menu level-2"><li class="leaf first menu-mlid-734 has-children menu-mlid-734"><a href="http://howto.gov/tech-solutions/cloud-computing" title="Cloud Computing" class=" menu-mlid-734 level-depth-2">Cloud Computing</a></li>
+<li class="leaf menu-mlid-737 has-children menu-mlid-737"><a href="http://howto.gov/tech-solutions/data" title="Sharing Government Data" class=" menu-mlid-737 level-depth-2">Sharing Government Data</a></li>
+<li class="leaf menu-mlid-6081 has-children menu-mlid-6081"><a href="http://howto.gov/tech-solutions/site-search" title="Site Search" class=" menu-mlid-6081 level-depth-2">Site Search</a></li>
+<li class="leaf menu-mlid-735 has-children menu-mlid-735"><a href="http://howto.gov/tech-solutions/web-development" title="Web Development &amp; Support" class=" menu-mlid-735 level-depth-2">Web Development &amp; Support</a></li>
+<li class="leaf last menu-mlid-1201 has-children menu-mlid-1201"><a href="http://howto.gov/tech-solutions/mobile" title="Mobile" class=" menu-mlid-1201 level-depth-2">Mobile</a></li>
+</ul></li>
+<li class="expanded menu-mlid-651 menu-mlid-651"><a href="http://howto.gov/communities" title="Communities" class=" menu-mlid-651 level-depth-1">Communities</a><ul class="menu level-2"><li class="leaf first menu-mlid-5581 menu-mlid-5581"><a href="http://howto.gov/communities/web-content" title="Web Content Groups" class=" menu-mlid-5581 level-depth-2">Web Content Groups</a></li>
+<li class="leaf menu-mlid-5591 menu-mlid-5591"><a href="http://howto.gov/communities/social-media" title="Social Media Groups" class=" menu-mlid-5591 level-depth-2">Social Media Groups</a></li>
+<li class="leaf menu-mlid-5621 menu-mlid-5621"><a href="http://howto.gov/communities/contact-center" title="Contact Center Groups" class=" menu-mlid-5621 level-depth-2">Contact Centers Groups</a></li>
+<li class="leaf menu-mlid-5601 menu-mlid-5601"><a href="http://howto.gov/communities/information-technology" title="Information Technology Groups" class=" menu-mlid-5601 level-depth-2">Information Technology Groups</a></li>
+<li class="leaf menu-mlid-5731 menu-mlid-5731"><a href="http://howto.gov/communities/research" title="Research Groups" class=" menu-mlid-5731 level-depth-2">Research Groups</a></li>
+<li class="leaf last menu-mlid-5081 menu-mlid-5081"><a href="http://howto.gov/training" title="Training" class=" menu-mlid-5081 level-depth-2">Training</a></li>
+</ul></li>
+<li class="expanded last menu-mlid-852 menu-mlid-852"><a href="http://howto.gov/customer-service" title="Customer Service" class=" menu-mlid-852 level-depth-1">Customer Service</a><ul class="menu level-2"><li class="leaf first menu-mlid-5411 menu-mlid-5411"><a href="http://howto.gov/customer-service/customer-service-government" title="Overview - Customer Service in Government" class=" menu-mlid-5411 level-depth-2">Overview</a></li>
+<li class="leaf menu-mlid-1291 menu-mlid-1291"><a href="http://howto.gov/customer-service/how-to-collect-customer-feedback" title="Collecting Customer Feedback" class=" menu-mlid-1291 level-depth-2">Collecting Customer Feedback</a></li>
+<li class="leaf menu-mlid-5421 menu-mlid-5421"><a href="http://howto.gov/customer-service/strategic-planning" title="Strategic Planning" class=" menu-mlid-5421 level-depth-2">Strategic Planning</a></li>
+<li class="leaf menu-mlid-756 menu-mlid-756"><a href="http://howto.gov/strategic-planning/customer-service-principles" title="Principles" class=" menu-mlid-756 level-depth-2">Principles</a></li>
+<li class="leaf last menu-mlid-1199 menu-mlid-1199"><a href="http://howto.gov/customer-service/models" title="Models" class=" menu-mlid-1199 level-depth-2">Models</a></li>
+</ul></li>
+</ul></div>
+</div>
+</div></div>		<div id="footer-menu-top">  <div id="block-menu_block-5" class="block block-menu_block">
+
+
+  <div class="content"><div class="menu-block-5 menu-name-secondary-links parent-mlid-0 menu-level-1">
+  <ul class="menu level-1" role="navigation"><li class="leaf first menu-mlid-657 menu-mlid-657"><a href="http://www.facebook.com/pages/Washington-DC/Web-Content-Managers-Forum/102988744944" title="Facebook" class=" menu-mlid-657 level-depth-1">Facebook</a></li>
+<li class="leaf menu-mlid-658 menu-mlid-658"><a href="http://twitter.com/govnewmedia" title="Twitter" class=" menu-mlid-658 level-depth-1">Twitter</a></li>
+<li class="leaf menu-mlid-656 menu-mlid-656"><a href="http://howto.gov/a-z-index" title="A - Z Index" class=" menu-mlid-656 level-depth-1">A - Z Index</a></li>
+<li class="leaf menu-mlid-655 menu-mlid-655"><a href="http://howto.gov/contact-us" title="Contact Us" class=" menu-mlid-655 level-depth-1">Contact Us</a></li>
+<li class="leaf menu-mlid-654 menu-mlid-654"><a href="http://howto.gov/about-us" title="About Us" class=" menu-mlid-654 level-depth-1">About Us</a></li>
+<li class="leaf menu-mlid-1198 menu-mlid-1198"><a href="http://howto.gov/site-policies" title="Site Policies" class=" menu-mlid-1198 level-depth-1">Site Policies</a></li>
+<li class="leaf last menu-mlid-2141 menu-mlid-2141"><a href="http://howto.gov/suggest" title="Suggest Content" class=" menu-mlid-2141 level-depth-1">Suggest Content</a></li>
+</ul></div>
+</div>
+</div></div>		<div id="footer-copyright" role="contentinfo">  <div id="block-block-6" class="block block-block">
+
+
+  <div class="content"><p><a class="footerUSAGOV" href="http://www.usa.gov"><img alt="USA.gov logo" border="0" class="footerLogo" height="32" src="/sites/default/themes/howto/images/logo_footer_usaGov.png" width="98" /></a></p>
+<p>An Official Website of the US Government<br />
+	Sponsored by <a href="http://www.gsa.gov/portal/category/25729">GSA&#39;s Office of Citizen Services &amp; Innovative Technologies</a><br />
+	Managed by the <a href="http://howto.gov/communities/federal-web-managers-council">Federal Web Managers Council</a></p>
+</div>
+</div></div>        		
+      </div><!-- close footer-inner -->
+      </div><!-- close footer -->
+    
+
+
+  </div><!-- close page-inner -->
+  </div> <!-- close page -->
+
+	<div id="dialog-confirm" title="Notification">
+		<div id="modalContent">
+			<p>You are now leaving the HowTo.gov website.</p><br />
+			<p><a href="" id="cancelExitURL" class="cancelExitURL">Cancel</a><a href="" id="exitURL">View Link</a></p>
+		</div><!-- close modalContent -->
+	</div><!-- close dialog-confirm -->
+
+
+  
+
+
+  
+<!-- START OF SmartSource Data Collector TAG -->
+<!-- Copyright (c) 1996-2010 WebTrends Inc.  All rights reserved. -->
+<!-- Version: 9.3.0 -->
+<!-- Tag Builder Version: 3.1  -->
+<!-- Created: 12/8/2010 8:51:05 PM -->
+<script src="/sites/default/themes/howto/js/webtrends.js" type="text/javascript"></script>
+<!-- ----------------------------------------------------------------------------------- -->
+<!-- Warning: The two script blocks below must remain inline. Moving them to an external -->
+<!-- JavaScript include file can cause serious problems with cross-domain tracking.      -->
+<!-- ----------------------------------------------------------------------------------- -->
+<script type="text/javascript">
+//<![CDATA[
+var _tag=new WebTrends();
+_tag.dcsGetId();
+//]]>
+</script>
+<script type="text/javascript">
+//<![CDATA[
+_tag.dcsCustom=function(){
+// Add custom parameters here.
+//_tag.DCSext.param_name=param_value;
+}
+_tag.dcsCollect();
+//]]>
+</script>
+<noscript>
+<div><img alt="DCSIMG" id="DCSIMG" width="1" height="1" src="http://statse.webtrendslive.com/dcsvttmj310000ou3678qyrr6_8p2t/njs.gif?dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=9.3.0&amp;WT.dcssip=www.howto.gov"/></div>
+</noscript>
+<!-- END OF SmartSource Data Collector TAG -->
 </body>
 </html>

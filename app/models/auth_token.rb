@@ -27,9 +27,22 @@ class AuthToken < ActiveRecord::Base
     created_at > 12.hours.ago && updated_at > 4.hours.ago
   end
   
+  def is_recent?
+    created_at > 1.hour.ago
+  end
+  
   def self.find_valid_token(token)
     suspect = self.find_by_token(token)
     if (!suspect.nil? && suspect.still_valid?)
+      suspect
+    else
+      nil
+    end
+  end
+
+  def self.find_recent_by_email(email)
+    suspect = self.where(["email = ?", 'chris@measuredvoice.com']).last
+    if (suspect && suspect.is_recent?)
       suspect
     else
       nil

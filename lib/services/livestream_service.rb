@@ -17,7 +17,7 @@ class LivestreamService < Service
   end
   
   def service_url_example
-    "http://www.livestream.com/NASAJPL"
+    "http://www.livestream.com/username"
   end
   
   def service_url_canonical

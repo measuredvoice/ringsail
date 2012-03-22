@@ -21,7 +21,7 @@ class BlipService < Service
   end
   
   def service_url_example
-    "http://www.blip.tv/USAgov"
+    "http://www.blip.tv/username"
   end
   
   def service_url_canonical

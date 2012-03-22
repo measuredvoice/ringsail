@@ -7,9 +7,9 @@ Ringsail::Application.routes.draw do
   # API call /accounts/verify, GET
   # and synonym /accounts/{service}/{account}, GET
   match "accounts/verify" => "outlets#verify", :via => :get, :as => :verify_outlet
-  match "accounts/:service/:account" => "outlets#verify", :via => :get, :as => :show_outlet, :constraints => {:account => /[\w.]+?/, :format => /html|json|xml/}
+  match "accounts/:service/:account" => "outlets#verify", :via => :get, :as => :show_outlet, :constraints => {:account => /[\w.-]+?/, :format => /html|json|xml/}
   
-  root :to => "outlets#verify"
+  # root :to => "outlets#verify"
 
   # API call /accounts, GET
   # and synonym /accounts/{service}, GET
@@ -41,16 +41,22 @@ Ringsail::Application.routes.draw do
   match "locations/resolve" => "outlet_locations#resolve", :via => :get, :as => :resolve_locations
   
   # HowTo.gov proxied style
-  match "howto/register" => "howto#add", :via => :get, :as => :howto_add_outlet
-  match "howto/register" => "howto#update", :via => :post, :as => :howto_update_outlet
-  match "howto/remove"   => "howto#remove", :via => :post, :as => :howto_remove_outlet
-  match "howto/find"     => "howto#verify", :via => :get, :as => :howto_find_outlet
-  match "howto/request"  => "howto_tokens#new", :via => :get, :as => :howto_request_token
-  match "howto/request"  => "howto_tokens#create", :via => :post, :as => :howto_create_token
+  match "social-media/social-media-registry/accounts/register" => "howto#add", :via => :get, :as => :howto_add_outlet
+  match "social-media/social-media-registry/accounts/register" => "howto#update", :via => :post, :as => :howto_update_outlet
+  match "social-media/social-media-registry/accounts/remove"   => "howto#remove", :via => :post, :as => :howto_remove_outlet
+  match "social-media/social-media-registry/accounts/find"     => "howto#verify", :via => :get, :as => :howto_find_outlet
+  match "social-media/social-media-registry/accounts/request"  => "howto_tokens#new", :via => :get, :as => :howto_request_token
+  match "social-media/social-media-registry/accounts/request"  => "howto_tokens#create", :via => :post, :as => :howto_create_token
   
   # HowTo.gov embedded style
   match "embed/find" => "embed#verify", :via => :get, :as => :embed_find_outlet
   match "embed/request" => "embed_tokens#new", :via => :get, :as => :embed_request_token
   match "embed/request" => "embed_tokens#create", :via => :post, :as => :embed_create_token
+  
+  # USA.gov embedded style
+  match "usagov/verify" => "usagov#verify", :via => :get, :as => :usagov_verify_outlet
+  
+  # GobiernoUSA.gov embedded style
+  match "gobierno/verificar" => "gobierno#verify", :via => :get, :as => :gobierno_verify_outlet
   
 end

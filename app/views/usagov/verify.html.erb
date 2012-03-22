@@ -1,0 +1,89 @@
+    <% if @outlet %>
+    
+    <% if flash[:notice] %>
+    <div class="alert-error">
+        <p>
+            <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+        </p>
+    </div>
+    <% end %>
+
+    <% if @outlet.verified? %>
+    <div id="verified-account">
+        <p>
+            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an official U.S. government account.
+        </p>
+    </div>
+
+	<div role="search" id="verify-another">
+		<p><label for="service-url">To see if another social media account is an official U.S. government account, please paste its complete URL here:<br><br>
+		<span class="quiet">Example: http://twitter.com/whitehouse</span>
+		</label></p>
+	</div>
+		
+    <%= form_tag({:action => "verify"}, :method => :get) do %>
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+        <button class="verify-button" type="submit">Verify</button>
+    <% end %>
+    <div class="quiet" id="howto-cta">
+        <p>If you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">make changes to this listing on HowTo.gov</a>.</p>
+    </div>
+    
+
+
+    <% else %>
+
+    <div id="not-verified-account">
+        <p>
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
+        </p>
+    </div>
+
+	<div role="search" id="verify-another">
+		<p><label for="service-url"><strong>To see if another social media account is an official U.S. government account, please paste its complete URL here:</strong><br><br>
+			<span class="quiet">Example: http://twitter.com/whitehouse</span>
+		</label></p>
+	</div>
+		
+    <%= form_tag({:action => "verify"}, :method => :get) do %>
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+        <button class="verify-button" type="submit">Verify</button>
+    <% end %>
+    
+    <div class="quiet" id="howto-cta">
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. government social media account and you have a .gov or .mil email address, you can <a href="/embed/find?service_url=<%= @outlet.service_url %>">add it to the USA.gov social media registry on HowTo.gov</a>.</p>
+
+    </div>
+<% end %>
+
+<% else %>
+
+<% if flash[:alert] %>
+<div class="alert-error">
+  <p>
+    <%= flash[:alert] %>
+  </p>
+</div>
+<% end %>
+
+		<p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the government.</p>
+
+		<p>This tool lets you verify if a social media account is officially managed by the U.S. government.</p>
+
+		<p>You can look up accounts managed by federal agencies, elected officials or members of the President’s Cabinet.</p>
+		
+		<div role="search">
+			<p><label for="service-url"><strong>To see if a social media account is an official U.S. government account, please paste its complete URL here:</strong><br><br>
+				<span class="quiet">Example: http://twitter.com/whitehouse</span>
+			</label></p>
+		</div>
+		
+        <%= form_tag({:action => "verify"}, :method => :get) do %>
+			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+            <button class="verify-button" type="submit">Verify</button>
+        <% end %>
+
+        <h3>Types of accounts we can verify:</h3>
+        <%= render "shared/services_list" %>
+
+<% end %>

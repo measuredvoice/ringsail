@@ -1,0 +1,108 @@
+  html {
+	  margin: 0 0 0 0;
+	  padding: 0 0 0 0;
+  }
+
+  body {
+	  font-family: verdana, geneva, sans-serif;
+	  font-size: 80%;
+	  margin: 0 0 0 0;
+	  padding: 0 0 50px 0;
+  }
+  
+  p {
+	  margin: 1em 0 1em 0;
+  }
+  
+  .quiet {
+	  font-size: 90%;
+	  color: #595959;
+  }
+  
+  .alert-error {
+	  color: #884400;
+	  background-color: #ffffee;
+	  border: 1px solid #884400;
+	  font-size: 120%;
+	  padding: .6em .8em .8em .8em;
+	  margin: 1em 0 1em 0;
+  }
+  
+  input.verify-url-field {
+	  font-size: 120%;
+	  width: 22em;
+  }
+  
+  button.verify-button {
+	  font-size: 120%;
+  }
+  
+  .btn {
+	  font-family: 'Lucida Grande';
+	  background-color: #EEE;
+	  border: 1px solid #999;
+	  font-size: 110%;
+	  height: 1.3;
+	  padding-bottom: 3px;
+	  padding-left: 6px;
+	  padding-right: 6px;
+	  padding-top: 2px;
+	  text-align: center;
+	  cursor:pointer;
+  }
+  
+  #verified-account, #not-verified-account {
+	  font-size: 120%;
+	  padding: .1em .8em .1em .8em;
+	  margin: 1em 0 1em 0;
+  }
+
+  #verified-account {
+	  color: #004400;
+	  background-color: #eeffee;
+	  border: 1px solid #004400;
+  }
+
+  #not-verified-account {
+	  color: #884400;
+	  background-color: #ffffee;
+	  border: 1px solid #884400;
+  }
+
+  #not-verified-account a{
+	  color: #884400;
+  }
+
+  #verified-account a {
+	  color: #004400;
+  }
+  
+  #verify-another {
+	  margin: 4em 0 0 0;
+  }
+  
+  #howto-cta {
+	  margin: 4em 0 0 0;
+  }
+
+  table {
+	  width: 100%;
+	  margin-bottom: 18px;
+	  padding: 0;
+	  font-size: 13px;
+	  border-collapse: collapse;
+  }
+  
+  table th, table td {
+  text-align: left;
+  padding: 5px 4px 5px 4px;
+  vertical-align: top;
+  }
+  
+  table td.first-column {
+	  width:15em;
+  }
+  
+  thead {
+  display: table-header-group;
+  }

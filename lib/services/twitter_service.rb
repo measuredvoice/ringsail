@@ -23,7 +23,7 @@ class TwitterService < Service
   end
 
   def service_url_example
-    "http://twitter.com/ftc"
+    "http://twitter.com/username"
   end
   
   def service_url_canonical
@@ -33,22 +33,8 @@ class TwitterService < Service
   private
   
   def fetch_details
-    
-    begin
-      user = Twitter.user(account)
-    rescue
-      return {:account => account}
-    end
-    
     {
-      :account       => account,
-      :profile_name  => user.name,
-      :profile_image => user.profile_image_url,
-      :info_url      => user.url,
-      :location      => user.location,
-      :verified      => user.verified,
-      :followers     => user.followers_count,
-      :account_id    => user.id,
+      :account => account,
     }
   end
 end

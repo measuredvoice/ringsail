@@ -17,7 +17,7 @@ class IdeascaleService < Service
   end
 
   def service_url_example
-    "http://opengov.ideascale.com/"
+    "http://example.ideascale.com/"
   end
   
   def service_url_canonical

@@ -17,7 +17,7 @@ class SocrataService < Service
   end
 
   def service_url_example
-    "http://census.socrata.com/"
+    "http://username.socrata.com/"
   end
   
   def service_url_canonical

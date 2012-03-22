@@ -1,5 +1,5 @@
 class AuthTokenMailer < ActionMailer::Base
-  default from: "info@measuredvoice.com"
+  default from: "registry@gsa.gov"
 
   def token_link_email(auth_token, service_url=nil)
     @auth_token = auth_token

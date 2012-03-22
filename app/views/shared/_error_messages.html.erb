@@ -1,8 +1,8 @@
 <% if object.errors.any? %>
     <div id="error_explanation">
         <p class="alert-message error">
-            <strong>That didn't work.</strong> <% object.errors.full_messages.each do |msg| %>
-                <%= msg %>
+            <strong>Please try again.</strong> <% object.errors.full_messages.each do |msg| %>
+                <%= msg %>. 
             <% end %>
         </p>
     </div>

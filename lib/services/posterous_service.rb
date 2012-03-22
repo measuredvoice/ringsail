@@ -17,7 +17,7 @@ class PosterousService < Service
   end
 
   def service_url_example
-    "http://USAgov.posterous.com/"
+    "http://username.posterous.com/"
   end
   
   def service_url_canonical

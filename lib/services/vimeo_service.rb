@@ -24,7 +24,7 @@ class VimeoService < Service
   end
   
   def service_url_example
-    "http://vimeo.com/USAgov"
+    "http://vimeo.com/username"
   end
   
   def service_url_canonical
