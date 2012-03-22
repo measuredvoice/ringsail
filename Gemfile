@@ -7,10 +7,11 @@ gem 'mysql2'
 # see https://github.com/gowalla/boxer
 gem 'boxer'
 gem 'json'
+gem 'rack-jsonp'
 
 # Support for social media service plugins
-gem 'twitter'
-gem 'hyper-graph'
+# gem 'twitter'
+# gem 'hyper-graph'
 
 # Automatic admin interface
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'

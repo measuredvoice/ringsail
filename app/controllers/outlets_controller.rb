@@ -17,8 +17,8 @@ class OutletsController < ApplicationController
       # Add a message about proper URLs for this service if 
       if @outlet and @outlet.service_info
         proper_url = @outlet.service_info.service_url_example
-        help_msg = proper_url ? " Accounts on that service usually look like #{proper_url} instead." : ""
-        flash.now[:alert] = params[:service_url] + " doesn't seem to be a social media account." + help_msg
+        help_msg = proper_url ? " Accounts URLs on that service usually look like #{proper_url}." : ""
+        flash.now[:alert] = params[:service_url] + " appears to be an incomplete URL." + help_msg
         @outlet = nil
       elsif params[:service_url]
         flash.now[:alert] = "The registry doesn't recognize that URL as a supported social media service."
@@ -47,6 +47,9 @@ class OutletsController < ApplicationController
       return
     end
     
+    # If the account was already verified, it will be updated
+    action_performed = @outlet.verified? ? 'updated' : 'added to the social media registry';
+    
     # FIXME: Doing this the stupid, straightforward way to start
     @outlet.organization = params[:organization] if params[:organization]
     @outlet.info_url = params[:info_url] if params[:info_url]
@@ -70,7 +73,7 @@ class OutletsController < ApplicationController
     if @outlet.save
       if request.format == :html
         flash[:shortnotice] = "Thank you!"
-        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been updated."
+        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been #{action_performed}."
         redirect_to :action => "verify", :service_url => @outlet.service_url, :auth_token => @current_token.token
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
@@ -88,6 +91,9 @@ class OutletsController < ApplicationController
   end
   
   def verify
+    @errors ||= {};
+    @current_token = AuthToken.find_valid_token(params[:auth_token])
+    
     if params[:service] and params[:account]
       @outlet = Outlet.find_by_service_and_account(params[:service], params[:account])
     else
@@ -95,7 +101,12 @@ class OutletsController < ApplicationController
     end
     
     if @outlet and @outlet.account
-      @page_title ||= "Verify " + @outlet.service_info.display_name
+      if @outlet.verified?
+        @page_title ||= @outlet.service_info.display_name + " is verified"
+      else
+        @page_title ||= @outlet.service_info.display_name + " is not verified"
+      end
+        
       @agencies = agencies_for_form
       @selected_agencies = @outlet.agencies.map {|agency| agency.shortname}
       
@@ -104,11 +115,12 @@ class OutletsController < ApplicationController
       # Add a message about proper URLs for this service if 
       if @outlet and @outlet.service_info
         proper_url = @outlet.service_info.service_url_example
-        help_msg = proper_url ? " Perhaps try something like #{proper_url} instead." : ""
-        flash.now[:alert] = params[:service_url] + " doesn't seem to be a social media account." + help_msg
+        help_msg = proper_url ? @errors[:help_msg] || " Accounts URLs on that service usually look like #{proper_url}." : ""
+        bad_account = @errors[:bad_account] || " appears to be an incomplete URL."
+        flash.now[:alert] = params[:service_url] + bad_account + help_msg
         @outlet = nil
-      elsif params[:service_url]
-        flash.now[:alert] = "The registry doesn't recognize that URL as a supported social media service."
+      elsif params[:service_url] and !params[:service_url].empty?
+        flash.now[:alert] = @errors[:bad_service_url] || "Sorry, we cannot look up the URL you entered because it is not from the social media services that we can verify."
       end
       
       @services = Service.all;

@@ -21,10 +21,11 @@
         </p>
     </div>
     
+	<h3>
+		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
+	</h3>
+
     <table class="span8 condensed-table">
-        <thead>
-            <tr><th colspan="2">Information about this account</th></tr>
-        </thead>
         <tbody>
             <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
             <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
@@ -43,7 +44,7 @@
 
     <div class="row">
         <p class="span7 alert-message warning">
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is <strong>not</strong> registered as an official U.S. government account.
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
         </p>
     </div>
 
@@ -58,8 +59,11 @@
 <% else %>
 <h3>Verify official U.S. government social media accounts</h3>
 <div class="span8">
-<p>Social media tools like Twitter, Facebook, and YouTube are now standard tools used by the government to connect with people and communicate official  information. Because of this, it is important to know if a social media account is really managed by the government or not.</p>
-<p>This service is designed to make it easy for anyone to verify if a social media account is officially managed by the U.S. government.</p>
+<p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the government.</p>
+
+<p>This tool lets you verify if a social media account is officially managed by the U.S. government.</p>
+
+<p>You can look up accounts managed by federal agencies, elected officials or members of the President’s Cabinet.</p>
 </div>
 </div>
 </div>
@@ -77,15 +81,16 @@
 
 <div class="row">
     <div class="span7">
-        <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b></p>
-        <p>Example: http://twitter.com/whitehouse</p>
+        <p><b>To see if a social media account is an official U.S. government account, please paste its complete URL here:</b><br><br>
+        <span class="quiet">Example: http://twitter.com/whitehouse</span>
+		</p>
         <%= form_tag({:action => "verify"}, :method => :get) do %>
             <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
             <button class="btn primary" type="submit">Verify</button>
         <% end %>
     </div>
     <div class="span4 offset1">
-        <p><b>Types of accounts we can verify:</b></p>
+        <h3>Types of accounts we can verify:</h3>
         <%= render "shared/services_list" %>
     </div>
 </div>

@@ -11,7 +11,7 @@ class Service
   end
   
   def self.find_by_url(url)
-    uri = URI.parse(url)
+    uri = URI.parse(url.downcase)
     
     @services.each do |shortname, service|
       if service.handles?(uri)

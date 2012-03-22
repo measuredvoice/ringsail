@@ -1,42 +1,63 @@
 <% if @outlet %>
 <div class="span14">
 
-<%= form_tag({:action => "update"}, :class => "validate") do %>
+<% if @outlet.verified? %>
+<div class="row">
+    <div class="span14 alert-message block-message success">
+        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is registered as an official U.S. government account.</p>
+		<p>You can make changes to this listing using the form below.</p>
+    </div>
+</div>
+<% else %>
+
+<div class="row">
+    <div class="span14 alert-message block-message warning">
+        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.</p>
+		<p>You can add it to the social media registry using the form below.</p>
+    </div>
+
+        
+</div>
+<% end %>
+
+<div class="row span8">
+<%= form_tag({:action => "update"}, :class => "validate form-stacked") do %>
 
 <%= render 'shared/error_messages', :object => @outlet %>
 
 <div class="clearfix">
 <label for="organization">Organization or program name:</label>
 <div class="input">
-<%= text_field_tag('organization', @outlet.organization || @outlet.service_info.profile_name, :class => "span8") %>
+<%= text_field_tag('organization', @outlet.organization || @outlet.service_info.profile_name, :class => "span8", :tabindex => "1") %>
 </div>
 </div>
 
 <div class="clearfix">
-<label for="info_url">Information URL:</label>
+<label for="info_url">Website URL:</label>
 <div class="input">
-<%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url) %>
+	<%= url_field_tag('info_url', @outlet.info_url || @outlet.service_info.info_url, :class => "span8", :tabindex => "2") %>
 </div>
 </div>
 
 <div class="clearfix">
-<label for="agency_id">Sponsoring Agency:</label>
+<label for="agency_id">Sponsoring Top-Level Agency:</label>
 <div class="input">
-<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select", 'data-placeholder' => "Choose sponsoring agency by typing its name" %>
+<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", @selected_agencies), :multiple => true, :class => "span8 chzn-select", :tabindex => "3", 'data-placeholder' => " " %>
 </div>
 </div>
 
 <div class="clearfix">
 <label for="tags">Tags:</label>
 <div class="input">
-<%= text_field_tag('tags', @outlet.tag_list.join(", "), :placeholder => "Separate tags with commas", :class => "span8") %>
+<%= text_field_tag('tags', @outlet.tag_list.join(", "), :class => "span8", :tabindex => "4") %>
+<p class="help-block">Separate tags with commas</p>
 </div>
 </div>
 
 <div class="clearfix">
-<label for="language">Language:</label>
+<label for="language">Primary language of account:</label>
 <div class="input">
-<%= text_field_tag('language', @outlet.language, :placeholder => "Specify the primary language", :class => "span8") %>
+<%= text_field_tag('language', @outlet.language, :class => "span8", :tabindex => "5") %>
 </div>
 </div>
 
@@ -44,9 +65,15 @@
 <%= hidden_field_tag('auth_token', @current_token.token) %>
 
 <div class="actions">
-  <input type="submit" class="btn primary" value="Save changes">
+<% if @outlet.verified? %>
+  <input type="submit" class="btn primary" tabindex="6" value="Save changes">
+<% else %>
+  <input type="submit" class="btn primary" tabindex="6" value="Add to registry">
+<% end %>
+<a href="<%= url_for :action => 'verify', :auth_token => @current_token.token, :service_url => @outlet.service_url %>" class="btn">Cancel</a>
 </div>
 
+</div>
 <% end %>
 
 <% if @outlet.verified? %>
@@ -76,8 +103,9 @@
 
 <div class="span14">
 
-    <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b></p>
-    <p>Example: http://twitter.com/whitehouse</p>
+    <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b><br><br>
+	    <span class="quiet">Example: http://twitter.com/whitehouse</span>
+	</p>
 
 <%= form_tag({:action => "add"}, :method => :get) do %>
 <%= hidden_field_tag('auth_token', @current_token.token) %>
@@ -86,6 +114,7 @@
 
 <button class="btn" type="submit">Look Up</button>
 <% end %>
+
 
 </div>
 

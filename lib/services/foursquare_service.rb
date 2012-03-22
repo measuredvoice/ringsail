@@ -17,7 +17,7 @@ class FoursquareService < Service
   end
   
   def service_url_example
-    "http://www.foursquare.com/NASAJPL"
+    "http://www.foursquare.com/username"
   end
   
   def service_url_canonical

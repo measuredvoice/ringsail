@@ -17,15 +17,11 @@ describe Service do
     it "should provide account details" do
       service = Service.find_by_url("http://twitter.com/usagov")
       service.account.should == "usagov"
-      service.profile_name.should_not be_nil
-      service.profile_image.should_not be_nil
     end
     
     it "should gracefully handle invalid accounts" do
       invalid = Service.find_by_url("http://twitter.com/notappearinginthisfilm")
       invalid.account.should == "notappearinginthisfilm"
-      invalid.profile_name.should be_nil
-      invalid.profile_image.should be_nil
     end
   end
   

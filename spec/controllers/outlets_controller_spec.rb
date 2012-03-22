@@ -21,7 +21,13 @@ describe OutletsController do
       it "should display the full form" do
         service_url = 'http://twitter.com/somethingorother'
         get :add, :service_url => service_url, :auth_token => @good_token.token
-        response.should have_selector("label", :content => "Sponsoring Agency:")
+        response.should have_selector("label", :content => "Sponsoring Top-Level Agency:")
+      end
+      
+      it "should offer a cancel button" do
+        service_url = 'http://twitter.com/somethingorother'
+        get :add, :service_url => service_url, :auth_token => @good_token.token
+        response.should have_selector("a", :content => "Cancel")
       end
     end
   end
@@ -50,7 +56,18 @@ describe OutletsController do
         response.should redirect_to(howto_request_token_path)
       end
       
-      it "should reject an old auth token"
+      it "should reject an old auth token" do
+        @old_token = AuthToken.create!(
+          :email => "oldster@example.gov", 
+          :phone => "555-1212",
+        )
+        @old_token.created_at = 2.years.ago
+        @old_token.updated_at = 1.year.ago
+        @old_token.save!
+
+        post :update, @attr.merge(:auth_token => @old_token.token)
+        response.should redirect_to(howto_request_token_path)
+      end
     end
     
     describe "failure" do
@@ -114,15 +131,21 @@ describe OutletsController do
     it "should prepend http:// if missing" do
       unverified_url = "twitter.com/unverified"
       get :verify, :service_url => unverified_url
-      response.should have_selector("p", :content => "is not registered")
       response.should have_selector("a", :href => 'http://' + unverified_url)
+    end
+    
+    describe "for an empty service_url" do
+      it "should not display an error" do
+        get :verify, :service_url => ''
+        response.should_not have_selector("p", :content => "cannot look up")
+      end
     end
     
     describe "for an unrecognized service" do
       it "should display an error" do
         unrecognized_url = "http://florndip.com/invalid"
         get :verify, :service_url => unrecognized_url
-        response.should have_selector("p", :content => "doesn't recognize")
+        response.should have_selector("p", :content => "cannot look up")
       end
     end
     
@@ -130,7 +153,7 @@ describe OutletsController do
       it "should display an error" do
         problem_url = "http://twitter.com/"
         get :verify, :service_url => problem_url
-        response.should have_selector("p", :content => "doesn't seem")
+        response.should have_selector("p", :content => "incomplete URL")
       end
     end
     
@@ -139,7 +162,7 @@ describe OutletsController do
       it "should return an unverified indication" do
         unverified_url = "http://twitter.com/unverified"
         get :verify, :service_url => unverified_url
-        response.should have_selector("p", :content => "is not registered")
+        response.should have_selector("strong", :content => "not")
         response.should have_selector("a", :href => unverified_url)
       end
       
@@ -180,7 +203,9 @@ describe OutletsController do
         get :verify, :service_url => @verified_url
         response.should have_selector("td", :content => @outlet.organization)
       end
+      
     end
+    
   end
 
   describe "DELETE 'remove'" do
