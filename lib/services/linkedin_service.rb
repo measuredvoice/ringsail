@@ -16,7 +16,7 @@ class LinkedinService < Service
   end
 
   def account
-    /\/company\/(?<account>[\w-]+)$/ =~ @uri.path
+    /\/company\/(?<account>[\w.-]+)$/ =~ @uri.path
     account
   end
   

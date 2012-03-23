@@ -42,7 +42,7 @@ http://noaa.gov/,NOAA Director Jane Lubchenko,commerce,http://facebook.com/noaa.
 http://osti.gov/,Office of Scientific and Technical Information,energy,http://facebook.com/ostigov,English
 http://commissaries.com/,Defense Commissary Agency,defense,http://facebook.com/pages/Defense-Commissary-Agency/136880189673357,English
 http://eric.ed.gov/,Education Resources Information Center,ed,http://facebook.com/pages/ERIC/346769469411,English
-http://fanniemae.com,Fannie Mae,hud,http://facebook.com/pages/Fannie-Mae,English
+http://fanniemae.com,Fannie Mae,hud,https://www.facebook.com/pages/FannieMae/106467849390602,English
 http://fhwa.dot.gov/,Federal Highway Administration,dot,http://facebook.com/pages/Federal-Highway-Administration/175380479155058,English
 http://ise.gov/,Information Sharing Environment,ise,http://facebook.com/pages/Information-Sharing-Environment/111231325622334,English
 http://osce.usmission.gov/,United States Mission to the OSC in Europe,state,http://facebook.com/pages/United-States-Mission-to-the-OSCE/151372664878320,English
@@ -151,7 +151,7 @@ http://www.fws.gov/midwest/,USFWS Midwest Region,doi,http://facebook.com/USFWSMi
 http://www.fws.gov/migratorybirds/,USFWS Migratory Bird Program,doi,http://facebook.com/usfwsmigratorybirds,English
 http://www.fws.gov/mountain-prairie/,USFWS Mountain-Prairie Region,doi,http://facebook.com/USFWSMountainPrairie,English
 http://nctc.fws.gov/,USFWS National Conservation Training Center,doi,http://facebook.com/USFWSNCTC,English
-www.fws.gov/northeast/,USFWS Northeast Region,doi,http://facebook.com/usfwsnortheast,English
+http://www.fws.gov/northeast/,USFWS Northeast Region,doi,http://facebook.com/usfwsnortheast,English
 http://www.fws.gov/pacific/,USFWS Pacific Region,doi,http://facebook.com/USFWSPacific,English
 http://www.fws.gov/cno/,USFWS Pacific Southwest Region,doi,http://facebook.com/usfwspacificsouthwest,English
 http://www.fws.gov/refuges/,USFWS National Wildlife Refuge System,doi,http://facebook.com/USFWSRefuges,English
@@ -364,14 +364,14 @@ ndjamena.usembassy.gov/,U.S. Embassy - N'djamena,state,http://facebook.com/pages
 ouagadougou.usembassy.gov/,U.S. Embassy - Ouagadougou,state,http://facebook.com/pages/US-Embassy-Ouaga/147467418636156,English,"Ouagadougou - Burkina Faso, af, embassy"
 bulgaria.usembassy.gov/,U.S. Embassy - Sofia,state,http://facebook.com/pages/US-Embassy-Sofia/108194222569430,English,"Sofia - Bulgaria, eur, embassy"
 thehague.usembassy.gov/,U.S. Embassy The Hague,state,http://facebook.com/pages/US-Embassy-The-Hague/147599291963527,English,"The Hague - Netherlands, eur, embassy"
-libya.usembassy.gov/,U.S. Embassy - Libya,state,http://://www.facebook.com/usembassytripoli,English,"Tripoli - Libya, nea, embassy"
+libya.usembassy.gov/,U.S. Embassy - Libya,state,http://www.facebook.com/usembassytripoli,English,"Tripoli - Libya, nea, embassy"
 mongolia.usembassy.gov/,U.S. Embassy - Mongolia,state,http://facebook.com/pages/US-Embassy-Ulaanbaatar-Consular-Section/176655402990,English,"Ulaanbaatar - Mongolia, eap, embassy"
 kampala.usembassy.gov/,U.S. Mission - Uganda,state,http://facebook.com/pages/US-Mission-Uganda/121384077911109,English,"Kampala - Uganda, af, embassy"
 austria.usembassy.gov/,U.S. Embassy - Austria,state,http://facebook.com/pages/Vienna-Austria/US-Embassy-Vienna/61299260993,English,"Vienna - Austria, eur, embassy"
 vienna.usmission.gov/,U.S. Mission - Vienna,state,http://facebook.com/pages/Vienna-Austria/US-Mission-Vienna/56632622313,English,"Vienna - Austria, eur, mission"
 laos.usembassy.gov/,U.S. Embassy - Laos,state,http://facebook.com/pages/Vientiane-Laos/US-Embassy-Vientiane/82124194915,English,"Vientiane - Laos, eap, embassy"
 www.americancorners.am/en/,American Corner - Yerevan,state,http://facebook.com/pages/Yerevan/American-Corner-Yerevan/141271449648,English,"Yerevan - Armenia, eur, american-corner"
-,American Corner - Zenica,state,http://://www.facebook.com/pages/American-Corner-Zenica/65451391270,Croatian,"Zenica - Bosnia and Herzegovina, eur, american-corner"
+,American Corner - Zenica,state,http://www.facebook.com/pages/American-Corner-Zenica/65451391270,Croatian,"Zenica - Bosnia and Herzegovina, eur, american-corner"
 islamabad.usembassy.gov/,U.S. Embassy - Islamabad,state,http://facebook.com/pakistan.usembassy,English,"Islamabad - Pakistan, sca, embassy"
 spanish.panama.usembassy.gov/,Embajada de los Estados Unidos en Panama,state,http://facebook.com/panamaestamosunidos,Spanish,"Panama City - Panama, wha, embassy"
 perth.usconsulate.gov/,U.S. Consulate General - Perth,state,http://facebook.com/perth.usconsulate,English,"Perth - Australia, eap, consulate"
@@ -505,7 +505,7 @@ http://darpa.mil/index.html,Defense Advanced Research Projects Agency,defense,ht
 http://www.dia.mil/,Defense Intelligence Agency,defense,http://twitter.com/DefenseIntel,English
 http://defense.gov/,Defense,defense,http://twitter.com/DeptofDefense,English
 http://va.gov/,Veterans Affairs,va,http://twitter.com/DeptVetAffairs,English
-http://dhs.gov,Homeland Security,dhs,http://twitter.com/dhsgov/,English
+http://dhs.gov,Homeland Security,dhs,http://twitter.com/dhsgov,English
 http://www.dla.mil/,Defense Logistics Agency,defense,http://twitter.com/DLAMIL,English
 http://www.dodea.edu/,Department of Defense Education Activity,defense,http://twitter.com/dodea,English
 http://ed.gov,External Affairs and Outreach,ed,http://twitter.com/ED_Outreach,English
@@ -639,7 +639,7 @@ https://www1.nga.mil,National Geospatial-Intelligence Agency,defense,https://twi
 http://nhsc.hrsa.gov/,National Health Service Corps,hhs,https://twitter.com/#!/NHSCorps,English
 http://www.niaid.nih.gov/,National Institute of Allergy and Infectious Diseases (NIAID),hhs,https://twitter.com/#!/NIAIDNews,English
 http://www.drugabuse.gov/,National Institute on Drug Abuse,hhs,https://twitter.com/#!/NIDAnews,English
-http://www.nigms.nih.gov/,National Institute of General Medical Sciences,hhs,https://twitter.com/#!/nigms/,English
+http://www.nigms.nih.gov/,National Institute of General Medical Sciences,hhs,https://twitter.com/#!/nigms,English
 http://www.nhlbi.nih.gov/,"National Heart, Lung, and Blood Institute (NHLBI)",hhs,https://twitter.com/#!/nih_nhlbi,English
 http://www.niams.nih.gov/,National Institute of Arthritis and Musculoskeletal and Skin Diseases Labs,hhs,https://twitter.com/#!/NIH_NIAMS,English
 http://clinicalcenter.nih.gov/,The NIH Clinical Center,hhs,https://twitter.com/#!/NIHClinicalCntr,English
@@ -648,7 +648,7 @@ http://www.nih.gov,National Institutes of Health (NIH),hhs,https://twitter.com/#
 http://obssr.od.nih.gov/index.aspx,The Office of Behavioral and Social Sciences Research,hhs,https://twitter.com/#!/NIHOBSSR,English
 http://clinicalstudies.info.nih.gov/,NIH CC PRPL,hhs,https://twitter.com/#!/NIHPtRecruit,English
 http://www.nimh.nih.gov,National Institute of Mental Health,hhs,https://twitter.com/#!/nimhgov,English
-http://www.cdc.gov/niosh/,NIOSH National Institute for Occupational Safety and Health,hhs,https://twitter.com/#!/niosh/,English
+http://www.cdc.gov/niosh/,NIOSH National Institute for Occupational Safety and Health,hhs,https://twitter.com/#!/niosh,English
 http://www.nlm.nih.gov/,NLM 4 Caregivers,hhs,https://twitter.com/#!/nlm_4caregivers,English
 http://www.nlm.nih.gov/,National Library of Medicine (NLM),hhs,https://twitter.com/#!/nlm_newsroom,English
 http://www.nrc.gov/,Nuclear Regulatory Commission,nrc,https://twitter.com/#!/nrcgov,English
@@ -663,7 +663,7 @@ http://www.uscg.mil/,US Coast Guard,dhs,https://twitter.com/#!/uscg,English
 http://www.ars.usda.gov/main/main.htm,Agricultural Research Service,usda,https://twitter.com/#!/usda_ars,English
 http://www.ustda.gov/,US Trade and Development Agency,ustda,https://twitter.com/#!/USTDA,English
 http://whitehouse.gov/,Office of the Vice President,eop,https://twitter.com/#!/VP,English
-http://www.womenshealth.gov/,Office on Women's Health - U.S. Department of Health and Human Services,hhs,https://twitter.com/#!/WomensHealth/,English
+http://www.womenshealth.gov/,Office on Women's Health - U.S. Department of Health and Human Services,hhs,https://twitter.com/#!/WomensHealth,English
 http://www.acus.gov/,Administrative Conference of the United States,acus,https://twitter.com/ACUSgov,English
 http://www.amtrak.com/servlet/ContentServer?pagename=Amtrak/HomePage,AMTRAK (National Railroad Passenger Corporation),amtrak,https://twitter.com/amtrak,English
 http://www.nifc.gov/,National Interagency Fire Center,doi,https://twitter.com/blmnifc,English
@@ -690,7 +690,6 @@ http://www.samhsa.gov/,Substance Abuse and Mental Health Services Administration
 http://ise.gov/,Information Sharing Environment,ise,https://twitter.com/shareandprotect,English
 http://www.graduateschool.edu/,Graduate School,usda,https://twitter.com/thegradschool,English
 http://www.ncua.gov/Pages/default.aspx,National Credit Union Administration,ncua,https://twitter.com/TheNCUA,English
-http://www.pancanal.com/eng/index.html,Panama Canal Commission,pcc,https://twitter.com/thepanamacanal,English
 http://www.tva.gov/,Tennessee Valley Authority,tva,https://twitter.com/tva_newsroom,English
 http://www.imls.gov/,Institute of Museum and Library Services,imls,https://twitter.com/US_IMLS,English
 http://www.osc.gov/,Office of Special Councel,osc,https://twitter.com/US_OSC,English
@@ -860,18 +859,14 @@ http://archives.gov/,National Archives and Records Administration,archives,http:
 http://whitehouse.gov/,White House,eop,https://foursquare.com/whitehouse,English
 http://freddiemac.com/,Freddie Mac,hud,http://linkedin.com/company/freddie-mac,English
 http://gsa.gov/,General Services Administration,gsa,http://linkedin.com/company/GSA,English
-http://whitehouse.gov/,White House,eop,http://linkedin.com/groups/White-House-2199632,English
 http://www.acus.gov/,Administrative Conference of the United States,acus,http://www.linkedin.com/company/administrative-conference-of-the-united-states,English
 http://peacecorps.gov,Peace Corps,peacecorps,http://www.linkedin.com/company/peace-corps,English
 http://www.ustda.gov/,US Trade and Development Agency,ustda,http://www.linkedin.com/company/u.s.-trade-and-development-agency,English
-http://www.tva.gov/,Tennessee Valley Authority,tva,http://www.linkedin.com/groups?home=&gid=2827439&trk=anet_ug_hm,English
-http://www.state.gov/e/eb/index.htm,Bureau of Economic and Business Affairs,state,http://www.linkedin.com/pub/jose-w-fernandez/27/560/181,English
 http://nasa.gov/,NASA,nasa,https://plus.google.com/u/0/102371865054310418159/posts,English
 http://whitehouse.gov/,White House,eop,https://plus.google.com/105479712798762608629/posts,English
 http://energy.gov/,Department of Energy,energy,http://vimeo.com/doe,English
 http://ustr.gov/,U.S. Trade Representative,eop,http://vimeo.com/ustr,English
 http://whitehouse.gov/,White House,eop,http://vimeo.com/whitehouse,English
-http://www.ntsb.gov/,National Transportation Safety Board,ntsb,http://www.ntsb.gov/video.html,English
 http://www.amtrak.com/servlet/ContentServer?pagename=Amtrak/HomePage,AMTRAK (National Railroad Passenger Corporation),amtrak,http://www.youtube.com/amtrak,English
 http://www.nifc.gov/,National Interagency Fire Center,doi,http://www.youtube.com/BLMNIFC,English
 http://www.cftc.gov/index.htm,Commodity Futures Trading Commission,cftc,http://www.youtube.com/CFTC,English
@@ -899,7 +894,7 @@ http://www.cpsc.gov/,Consumer Product Safety Commission,cpsc,http://www.youtube.
 http://www.fns.usda.gov/fns/default.htm,Food and Nutrition Service,usda,http://www.youtube.com/USDAfoodandnutrition,English
 http://www.bpa.gov/corporate/,Bonneville Power Administration,energy,http://www.youtube.com/user/BonnevillePower,English
 http://cdc.gov/,Centers for Disease Control,hhs,http://www.youtube.com/user/CDCStreamingHealth,English
-https://www.cia.gov/,Central Intelligence Agency,cia,http://www.youtube.com/user/ciagov
+https://www.cia.gov/,Central Intelligence Agency,cia,http://www.youtube.com/user/ciagov,English
 http://www.epa.gov/espanol/,Environmental Protection Agency,epa,http://www.youtube.com/user/epaespanol,Spanish
 http://www.fdic.gov/,Federal Deposit Insurance Corporation,fdic,http://www.youtube.com/user/FDICchannel,English
 http://www.mda.mil/,Missile Defense Agency,defense,http://www.youtube.com/user/MDAbmds,English
@@ -914,12 +909,12 @@ http://www.samhsa.gov/,Substance Abuse and Mental Health Services Administration
 http://www.graduateschool.edu/,Graduate School,usda,http://www.youtube.com/user/TheGradSchool,English
 http://www.tva.gov/,Tennessee Valley Authority,tva,http://www.youtube.com/user/TVANewsVideo,English
 http://www.uscg.mil/,US Coast Guard,dhs,http://www.youtube.com/user/USCGImagery,English
-http://www.cpsc.gov/cpscpub/spanish/spanish.html,Consumer Product Safety Commission, cpsc,http://www.youtube.com/user/USCPSCEspanol,Spanish
+http://www.cpsc.gov/cpscpub/spanish/spanish.html,Consumer Product Safety Commission,cpsc,http://www.youtube.com/user/USCPSCEspanol,Spanish
 spanish.sansalvador.usembassy.gov/,Embajada de los Estados Unidos El Salvador,state,http://www.youtube.com/user/USEmbassyElSalvador,Spanish,"San Salvador - El Salvador, wha, embassy"
 http://www.dfas.mil/,Defense Finance and Accounting Service,defense,http://www.youtube.com/user/WePayDoD,English
 http://www.womenshealth.gov/,Office on Women's Health - U.S. Department of Health and Human Services,hhs,http://www.youtube.com/user/WomensHealthgov,English
 http://www.fws.gov/,National Fish and Wildlife Service,doi,http://www.youtube.com/usfws,English
-http://www.acf.hhs.gov/,Administration for Children and Families,hhs,http://www.youtube.com/usgovacf
+http://www.acf.hhs.gov/,Administration for Children and Families,hhs,http://www.youtube.com/usgovacf,English
 http://www.nmfs.noaa.gov/,National Marine Fisheries Service,commerce,http://www.youtube.com/usnoaafisheriesgov,English
 http://www.ustda.gov/,US Trade and Development Agency,ustda,http://www.youtube.com/USTDAvideo,English
 http://blm.gov,Bureau of Land Management,doi,http://youtube.com/blmnational,English
@@ -946,7 +941,7 @@ http://irs.gov/,Internal Revenue Service,treasury,http://youtube.com/IRSVideos,E
 http://nasa.gov/,NASA,nasa,http://youtube.com/NASATelevision,English
 http://nps.gov/,National Park Service,doi,http://youtube.com/nationalparkservice,English
 http://nnsa.energy.gov/,Nuclear Security,energy,http://youtube.com/NNSANews,English
-http://ne.doe.gov/,Nuclear Energy,energy,http://youtube.com/nuclearenergygov
+http://ne.doe.gov/,Nuclear Energy,energy,http://youtube.com/nuclearenergygov,English
 http://usbr.gov/,Bureau of Reclamation,doi,http://youtube.com/reclamation,English
 http://sba.gov/,Small Business Administration,sba,http://youtube.com/sba,English
 http://ssa.gov/,Social Security Administration,ssa,http://youtube.com/socialsecurityonline,English
@@ -962,7 +957,7 @@ http://energy.gov/,Department of Energy,energy,http://youtube.com/usdepartmentof
 http://dol.gov/,Labor,labor,http://youtube.com/usdepartmentoflabor,English
 http://ed.gov,Education,ed,http://youtube.com/usedgov,English
 http://aids.gov/,AIDS.gov,hhs,http://youtube.com/user/aidsgov,English
-http://atf.gov/,"Bureau of Alcohol, Tobacco,Firearms and Explosives",justice,http://youtube.com/user/ATFHQ
+http://atf.gov/,"Bureau of Alcohol, Tobacco,Firearms and Explosives",justice,http://youtube.com/user/ATFHQ,English
 http://bia.gov/,Bureau of Indian Affairs,doi,http://youtube.com/user/bia4432,English
 http://college.gov,College.gov,ed,http://youtube.com/user/collegedotgov,English
 http://va.gov/,Veterans Affairs,va,http://youtube.com/user/DeptVetAffairs,English
@@ -982,7 +977,7 @@ http://fta.dot.gov/,Federal Transit Administration,dot,http://youtube.com/user/U
 http://epa.gov/,Environmental Protection Agency,epa,http://youtube.com/user/USEPAgov,English
 http://fda.gov/,Food and Drug Administration,hhs,http://youtube.com/user/USFoodandDrugAdmin,English
 http://doi.gov/,Interior,doi,http://youtube.com/user/USInterior,English
-http://moneyfactory.gov/,Bureau of Engraving and Printing,treasury,http://youtube.com/user/usmoneyfactory
+http://moneyfactory.gov/,Bureau of Engraving and Printing,treasury,http://youtube.com/user/usmoneyfactory,English
 http://osce.usmission.gov/,United States Mission to the OSC in Europe,state,http://youtube.com/user/usosce,English
 http://va.gov/health/default.asp,Veterans Health Administration,va,http://youtube.com/user/VeteransHealthAdmin,English
 http://nsf.gov/,National Science Foundation,nsf,http://youtube.com/user/VideosatNSF,English
@@ -1026,7 +1021,7 @@ dublin.usembassy.gov/,U.S. Embassy - Dublin,state,youtube.com/user/paodublin,Eng
 jakarta.usembassy.gov/,U.S. Embassy - Jakarta,state,youtube.com/user/pasjakartaindonesia,Malay,"Jakarta - Indonesia, eap, embassy"
 ciudadjuarez.usconsulate.gov/,U.S. Consulate General - Ciudad Juarez,state,youtube.com/user/pasjuarez,Spanish,"Ciudad Juarez - Mexico, wha, consulate"
 kuwait.usembassy.gov/,U.S. Embassy - Kuwait,state,youtube.com/user/PASKUWAIT,English,"Bayan - Kuwait, nea, embassy"
-,U.S. Embassy - Moldova (Public Affairs),state,youtube.com/user/pasmoldova,,"Chisinau - Moldova, eur, embassy"
+,U.S. Embassy - Moldova (Public Affairs),state,youtube.com/user/pasmoldova,Moldovan,"Chisinau - Moldova, eur, embassy"
 chile.usembassy.gov/,U.S. Embassy - Chile,state,youtube.com/user/santiagopress,Spanish,"Las Condes - Chile, wha, embassy"
 bulgaria.usembassy.gov/,U.S. Embassy - Sofia,state,youtube.com/user/SofiaPAO,English,"Sofia - Bulgaria, eur, embassy"
 ,U.S. Mission to the European Union - USEU Brussels,state,youtube.com/user/theuseu,English,"Brussels - Belgium, eur, mission"
@@ -1037,7 +1032,7 @@ hongkong.usconsulate.gov/,U.S. Consulate General - Hong Kong,state,youtube.com/u
 istanbul.usconsulate.gov/,U.S. Consulate General - Istanbul,state,youtube.com/user/USConsulateIstanbul,Turkish,"Istanbul - Turkey, nea, embassy"
 muenchen.usconsulate.gov/,U.S. Consulate General - Munich,state,youtube.com/user/USConsulateMunich,German,"Muenchen - Germany, eur, consulate"
 stpetersburg.usconsulate.gov/,U.S. Consulate General - St. Petersburg,state,youtube.com/user/usconsulatespb,Russian,"St. Petersburg - Russia, eur, consulate"
-,U.S. Ambassador - Howard Gutman,state,youtube.com/user/USembassy1,,"Brussels - Belgium, eur, personal"
+,U.S. Ambassador - Howard Gutman,state,youtube.com/user/USembassy1,English,"Brussels - Belgium, eur, personal"
 algiers.usembassy.gov/,U.S. Embassy - Algiers,state,youtube.com/user/USEmbassyAlgiers,English,"Algiers - Algeria, , "
 armenia.usembassy.gov/,U.S. Embassy - Armenia,state,youtube.com/user/usembassyarmenia,English,"Yerevan - Armenia, eur, embassy"
 kazakhstan.usembassy.gov,U.S. Embassy - Kazakhstan,state,youtube.com/user/usembassyastana,English,"Astana - Kazakhstan, sca, embassy"
@@ -1118,20 +1113,19 @@ kampala.usembassy.gov/,U.S. Mission - Uganda,state,youtube.com/user/USMissionUga
 osce.usmission.gov/,U.S. Mission to the OSCE,state,youtube.com/user/usosce,English,"Vienna - Austria, eur, mission"
 vladivostok.usconsulate.gov/,U.S. Consulate General - Vladivostok,state,youtube.com/user/vladconsulate,Russian,"Vladivostok - Russia, eur, consulate"
 yekaterinburg.usconsulate.gov/,U.S. Consulate General - Yekaterinburg,state,youtube.com/user/yekatconsulate,Russian,"Yekaterinburg - Russia, eur, consulate"
-http://consumerfinance.gov/,Consumer Financial Protection Bureau,treasury,http://flickr.com/cfpbphotos,English,"credit,financial education,"
-http://consumerfinance.gov/,Consumer Financial Protection Bureau,treasury,http://flickr.com/cfpbphotos,English
-http://www.dia.mil/,Defense Intelligence Agency,defense,http://flickr.com/DefenseIntelligenceAgency,English
-http://cdc.gov/niosh/,Institute for Occupation Safety and Health,hhs,http://flickr.com/niosh,English
-http://nnsa.energy.gov/,Nuclear Security,energy,http://flickr.com/NNSANews,English
+http://consumerfinance.gov/,Consumer Financial Protection Bureau,treasury,http://www.flickr.com/photos/cfpbphotos,English,"credit,financial education,"
+http://www.dia.mil/,Defense Intelligence Agency,defense,http://www.flickr.com/photos/defenseintelligenceagency,English
+http://cdc.gov/niosh/,Institute for Occupation Safety and Health,hhs,http://flickr.com/photos/niosh,English
+http://nnsa.energy.gov/,Nuclear Security,energy,http://flickr.com/photos/NNSANews,English
 http://defense.gov/,Defense,defense,http://flickr.com/photos/39955793@N07,English
-http://www.em.doe.gov/,Office of Environmental Management,energy,http://flickr.com/photos/44220185@N08
+http://www.em.doe.gov/,Office of Environmental Management,energy,http://flickr.com/photos/44220185@N08,English
 http://va.gov/,Veterans Affairs,va,http://flickr.com/photos/44636446@N04,English
 http://cem.va.gov/,National Cemetery Administration,va,http://flickr.com/photos/44636446@N04,English
 http://state.gov/p/wha/,Bureau of Western Hemisphere Affairs,state,http://flickr.com/photos/46577594@N04,English
 http://aids.gov/,AIDS.gov,hhs,http://flickr.com/photos/aidsgov,English
 http://cbp.gov/,Customs and Border Protection,dhs,http://flickr.com/photos/cbpphotos,English
 http://energy.gov/,Department of Energy,energy,http://flickr.com/photos/departmentofenergy,English
-http://www.dtra.mil/,Defense Threat Reduction Agency,defense,http://flickr.com/photos/dod_dtra
+http://www.dtra.mil/,Defense Threat Reduction Agency,defense,http://flickr.com/photos/dod_dtra,English
 http://www.dodea.edu/,Department of Defense Education Activity,defense,http://flickr.com/photos/dodeacommunications,English
 http://fda.gov/,Food and Drug Administration,hhs,http://flickr.com/photos/fdaphotos,English
 http://hhs.gov,Health and Human Services,hhs,http://flickr.com/photos/hhsgov,English
@@ -1140,7 +1134,7 @@ http://nasa.gov/,NASA,nasa,http://flickr.com/photos/nasahqphoto,English
 http://nsf.gov/,National Science Foundation,nsf,http://flickr.com/photos/nsf_beta,English
 http://pfpa.mil/index2.html,Pentagon Force Protection Agency,defense,http://flickr.com/photos/pfpa,English
 http://state.gov/,State,state,http://flickr.com/photos/statephotos,English
-http://state.gov/g/prm/,"U.S. Department of State: Bureau of Population, Refugees, and Migration",state,http://flickr.com/photos/statephotos/,English
+http://state.gov/g/prm/,"U.S. Department of State: Bureau of Population, Refugees, and Migration",state,http://flickr.com/photos/statephotos,English
 http://census.gov/,Census,commerce,http://flickr.com/photos/uscensusbureau,English
 http://usda.gov/,Agriculture,usda,http://flickr.com/photos/usdagov,English
 http://fws.gov/,US Fish and Wildlife Service,doi,http://flickr.com/photos/usfwshq,English
@@ -1149,21 +1143,21 @@ http://gsa.gov/,General Services Administration,gsa,http://flickr.com/photos/usg
 http://doi.gov/,Interior,doi,http://flickr.com/photos/usinterior,English
 http://opm.gov/,Office of Personnel and Management,opm,http://flickr.com/photos/usopm,English
 http://osce.usmission.gov/,United States Mission to the OSC in Europe,state,http://flickr.com/photos/usosce,English
-http://usbr.gov/,Bureau of Reclamation,doi,http://flickr.com/usbr,English
-http://usgs.gov/,US Geological Survey,doi,http://flickr.com/usgeologicalsurvey,English
-http://archives.gov/,National Archives and Records Administration,archives,http://flickr.com/usnationalarchives,English
-http://noaa.gov/,National Oceanic and Atmospheric Agency,commerce,http://flickr.com/usoceangov,English
-http://oceanservice.noaa.gov/,National Ocean Service,commerce,http://flickr.com/usoceangov,English
-http://ustr.gov/,U.S. Trade Representative,eop,http://flickr.com/ustr,English
-http://ustreas.gov/,Treasury,treasury,http://flickr.com/ustreasury,English
-http://va.gov/health/default.asp,Veterans Health Administration,va,http://flickr.com/VeteransHealth,English
-http://whitehouse.gov/,White House,eop,http://flickr.com/whitehouse,English
+http://usbr.gov/,Bureau of Reclamation,doi,http://flickr.com/photos/usbr,English
+http://usgs.gov/,US Geological Survey,doi,http://flickr.com/photos/usgeologicalsurvey,English
+http://archives.gov/,National Archives and Records Administration,archives,http://flickr.com/photos/usnationalarchives,English
+http://noaa.gov/,National Oceanic and Atmospheric Agency,commerce,http://flickr.com/photos/usoceangov,English
+http://oceanservice.noaa.gov/,National Ocean Service,commerce,http://flickr.com/photos/usoceangov,English
+http://ustr.gov/,U.S. Trade Representative,eop,http://flickr.com/photos/ustr,English
+http://ustreas.gov/,Treasury,treasury,http://flickr.com/photos/ustreasury,English
+http://va.gov/health/default.asp,Veterans Health Administration,va,http://flickr.com/photos/VeteransHealth,English
+http://whitehouse.gov/,White House,eop,http://flickr.com/photos/whitehouse,English
 http://www.nrc.gov/,Nuclear Regulatory Commission,nrc,http://www.flickr.com/people/nrcgov,English
 http://www.fws.gov/midwest/,USFWS Midwest Region,doi,http://www.flickr.com/people/usfwsmidwest/,English
 http://www.fws.gov/mountain-prairie/,USFWS Mountain-Prairie Region,doi,http://www.flickr.com/photos/51986662@N05/,English
 http://www.acus.gov/,Administrative Conference of the United States,acus,http://www.flickr.com/photos/acusgov,English
 http://www.cftc.gov/index.htm,Commodity Futures Trading Commission,cftc,http://www.flickr.com/photos/cftc,English
-https://www.cia.gov/,Central Intelligence Agency,cia,http://www.flickr.com/photos/ciagov
+https://www.cia.gov/,Central Intelligence Agency,cia,http://www.flickr.com/photos/ciagov,English
 http://www.uscg.mil/,US Coast Guard,dhs,http://www.flickr.com/photos/coast_guard/,English
 http://www.fcc.gov/,Federal Communications Commission,fcc,http://www.flickr.com/photos/fccdotgov,English
 http://www.mda.mil/,Missile Defense Agency,defense,http://www.flickr.com/photos/mdabmds/,English
@@ -1174,7 +1168,6 @@ http://peacecorps.gov,Peace Corps,peacecorps,http://www.flickr.com/photos/peacec
 http://www.peacecorps.gov/index.cfm,Peace Corps,peacecorps,http://www.flickr.com/photos/peacecorps,English
 http://www.samhsa.gov/,The Substance Abuse and Mental Health Services Administration (SAMHSA),hhs,http://www.flickr.com/photos/samhsa,English
 http://www.samhsa.gov/,Substance Abuse and Mental Health Services Administration,hhs,http://www.flickr.com/photos/samhsa/,English
-http://www.state.gov/e/eb/index.htm,Bureau of Economic and Business Affairs,state,http://www.flickr.com/photos/statephotos/sets/72157626215863008/with/5269448696/,English
 http://www.tva.gov/,Tennessee Valley Authority,tva,http://www.flickr.com/photos/tennesseevalleyauthority/,English
 http://www.graduateschool.edu/,Graduate School,usda,http://www.flickr.com/photos/thegradschool,English
 http://www.cpsc.gov/,Consumer Product Safety Commission,cpsc,http://www.flickr.com/photos/uscpsc,English
@@ -1186,8 +1179,6 @@ http://www.fws.gov/,National Fish and Wildlife Service,doi,http://www.flickr.com
 www.fws.gov/northeast/,USFWS Northeast Region,doi,http://www.flickr.com/photos/usfwsnortheast/,English
 http://www.fws.gov/pacific/,USFWS Pacific Region,doi,http://www.flickr.com/photos/usfwspacific/,English
 http://www.fws.gov/southeast/,USFWS Southeast Region,doi,http://www.flickr.com/photos/usfwssoutheast/,English
-http://www.fws.gov/cno/fire/,USFWS Pacific Southwest Region Fire Management Division,doi,http://www.flickr.com/photos/usfwssoutheast/tags/fire/,English
-http://www.fws.gov/southeastfire/,USFWS Southeast Region Fire Management Division,doi,http://www.flickr.com/photos/usfwssoutheast/tags/fire/,English
 http://www.ustda.gov/,US Trade and Development Agency,ustda,http://www.flickr.com/photos/ustdaphotos,English
 http://doi.gov/,Department of the Interior,doi,http://americasgreatoutdoors.tumblr.com/,English
 http://archives.gov/presidential-libraries/,Office of Presidential Libraries,archives,http://ourpresidents.tumblr.com/,English
@@ -1260,13 +1251,13 @@ http://www.gsa.gov/portal/content/104706,GSA Heartland,gsa,facebook.com/pages/GS
 http://www.gsa.gov/r2,GSA Region 2,gsa,facebook.com/pages/US-General-Services-Administration-Region-2/193825877358363?ref=pb,English
 http://gsaautoauctons.gsa.gov,GSA Auto Auctions,gsa,facebook.com/pages/GSA-Auto-Auctions/157950697596870?ref=pb,English
 http://www.gsa.gov/goodneighbor,Urban Development,gsa,facebook.com/GSAUrbDev,English
-http://gsa.gov,U.S. General Services Administration,gsa,http://youtube.com/usgsa
-http://howto.gov,HowTo.gov,gsa,http://youtube.com/HowToGov
-http://www.gsa.gov/portal/content/104706,PBS R6,gsa,http://youtube.com/PBSR6
-http://gsa.gov/r9,GSA Region 9,gsa,http://youtube.com/GSARegion9
-http://usa.gov,USA.gov,gsa,http://youtube.com/USGovernment
-http://gsa.gov/r8,DFCGal,gsa,http://youtube.com/DFCGal
-http://gsa.gov/r8,GSA Region 8,gsa,http://youtube.com/GSARegion8
-http://howto.gov,Gov New Media,gsa,http://youtube.com/govnewmedia
-http://gsa.gov,U.S. General Services Administration,gsa,http://flickr.com/usgsa
-http://gobiernousa.gov,GobiernoUSA.gov,gsa,http://youtube.com/gobiernousa
+http://gsa.gov,U.S. General Services Administration,gsa,http://youtube.com/usgsa,English
+http://howto.gov,HowTo.gov,gsa,http://youtube.com/HowToGov,English
+http://www.gsa.gov/portal/content/104706,PBS R6,gsa,http://youtube.com/PBSR6,English
+http://gsa.gov/r9,GSA Region 9,gsa,http://youtube.com/GSARegion9,English
+http://usa.gov,USA.gov,gsa,http://youtube.com/USGovernment,English
+http://gsa.gov/r8,DFCGal,gsa,http://youtube.com/DFCGal,English
+http://gsa.gov/r8,GSA Region 8,gsa,http://youtube.com/GSARegion8,English
+http://howto.gov,Gov New Media,gsa,http://youtube.com/govnewmedia,English
+http://gobiernousa.gov,GobiernoUSA.gov,gsa,http://youtube.com/gobiernousa,English
+http://www.pancanal.com/eng/index.html,Panama Canal Commission,acp,https://twitter.com/thepanamacanal,English

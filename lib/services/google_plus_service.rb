@@ -16,7 +16,7 @@ class GooglePlusService < Service
   end
 
   def account
-    /^\/(?<account>\d+)/ =~ @uri.path
+    /^(\/u\/0)?\/(?<account>\d+)(\/posts)?/ =~ @uri.path
     account
   end
   

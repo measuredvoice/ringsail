@@ -12,7 +12,7 @@ class FlickrService < Service
   end
   
   def account
-      /(photos|people)\/(?<account>[\w-]+)$/ =~ @uri.path
+      /(photos|people)\/(?<account>[\w@-]+)(\/)?$/ =~ @uri.path
     account
   end
   
