@@ -42,16 +42,28 @@ def make_accounts(options = {})
   accounts_file = Rails.root + "db/raw_data/accounts.csv"
   
   CSV.foreach(accounts_file) do |row|
-    attrs = {:info_url => row[0], :organization => row[1]}
+    attrs = {
+      :info_url => row[0], 
+      :organization => row[1],
+      :language => row[4],
+    }
+    if attrs[:info_url] && attrs[:info_url] !~ %r{(?i)\Ahttps?://}
+      attrs[:info_url] = 'http://' + attrs[:info_url] 
+    end
     agencies = row[2].split(/\s*,\s*/).flat_map do |s|
       Agency.find_by_shortname(s) || []
     end
     service_url = row[3]
+    tag_list = row[5]
     puts service_url
 
-    account = Outlet.resolve(service_url)
-    account.assign_attributes(attrs)
-    account.agencies = agencies
-    account.save
+    if (account = Outlet.resolve(service_url))
+      account.assign_attributes(attrs)
+      account.agencies = agencies
+      account.tag_list = tag_list
+      account.save!
+    else
+      puts "--- Can't add account: (#{service_url})"
+    end
   end
 end
