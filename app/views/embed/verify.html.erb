@@ -12,7 +12,7 @@
     <% if @outlet.verified? %>
 
 	<h3>
-		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
+		Information about <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_info.display_name %></a>
 	</h3>
     
     <table>
@@ -74,7 +74,7 @@
 
     <div id="not-verified-account">
         <p>
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
+            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
         </p>
     </div>
 
