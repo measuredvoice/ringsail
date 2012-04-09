@@ -11,7 +11,7 @@
     <% if @outlet.verified? %>
     <div id="verified-account">
         <p>
-            <strong>&iexcl;S&iacute;!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> es una cuenta oficial del Gobierno de los Estados Unidos.
+            <strong>&iexcl;S&iacute;!</strong> <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> es una cuenta oficial del Gobierno de los Estados Unidos.
         </p>
     </div>
 
@@ -36,7 +36,7 @@
 
     <div id="not-verified-account">
         <p>
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> <strong>no</strong> ha sido registrada como una cuenta oficial del Gobierno de los Estados Unidos.
+            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> <strong>no</strong> ha sido registrada como una cuenta oficial del Gobierno de los Estados Unidos.
         </p>
     </div>
 
