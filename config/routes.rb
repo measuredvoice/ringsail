@@ -1,16 +1,18 @@
 Ringsail::Application.routes.draw do
 
+  get "homes/index"
+
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
   
+  root :to => "home#index"
+
   # API call /accounts/verify, GET
   # and synonym /accounts/{service}/{account}, GET
   match "accounts/verify" => "outlets#verify", :via => :get, :as => :verify_outlet
   match "accounts/:service/:account" => "outlets#verify", :via => :get, :as => :show_outlet, :constraints => {:account => /[\w.@-]+?/, :format => /html|json|xml/}
   
-  # root :to => "outlets#verify"
-
   # API call /accounts, GET
   # and synonym /accounts/{service}, GET
   match "accounts" => "outlets#list", :via => :get, :as => :list_outlets
