@@ -1,5 +1,5 @@
 class AuthTokenMailer < ActionMailer::Base
-  default from: "registry@gsa.gov"
+  default from: "socialmediaregistry@gsa.gov"
 
   def token_link_email(auth_token, service_url=nil)
     @auth_token = auth_token
