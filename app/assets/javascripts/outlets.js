@@ -85,7 +85,7 @@
 		//DEV ONLY: 
 		//var jsonTagEndpoint = "add-form_files/tags.php";
 		// LIVE (script automagically adds ?q= for typed query
-		var jsonTagEndpoint = "/tags.json";
+		var jsonTagEndpoint = "/social-media/social-media-registry/accounts/tags.json";
 		var tagPlaceholder = "";
 		var prefillString = $("#tags").val();
 		if (prefillString){
