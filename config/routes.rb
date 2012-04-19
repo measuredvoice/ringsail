@@ -49,6 +49,7 @@ Ringsail::Application.routes.draw do
   match "social-media/social-media-registry/accounts/find"     => "howto#verify", :via => :get, :as => :howto_find_outlet
   match "social-media/social-media-registry/accounts/request"  => "howto_tokens#new", :via => :get, :as => :howto_request_token
   match "social-media/social-media-registry/accounts/request"  => "howto_tokens#create", :via => :post, :as => :howto_create_token
+  match "social-media/social-media-registry/accounts/tags" => "official_tags#list", :via => :get, :as => :howto_list_tags
   
   # HowTo.gov embedded style
   match "embed/find" => "embed#verify", :via => :get, :as => :embed_find_outlet
