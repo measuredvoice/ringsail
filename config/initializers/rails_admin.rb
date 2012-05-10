@@ -10,7 +10,7 @@ RailsAdmin.config do |config|
   config.current_user_method { current_user } # auto-generated
 
   # Set the admin name here (optional second array element will appear in a beautiful RailsAdmin red ©)
-  config.main_app_name = ['Ringsail prototype', 'Admin']
+  config.main_app_name = ['Social Media Registry', 'Admin']
   # or for a dynamic name:
   # config.main_app_name = Proc.new { |controller| [Rails.application.engine_name.titleize, controller.params['action'].titleize] }
 
@@ -135,22 +135,30 @@ RailsAdmin.config do |config|
   #  - has_many/has_one associations in list section (hidden by default for performance reasons)
   # Fields may also be marked as read_only (and thus not editable) if they are not mass-assignable by current_user
 
-  # config.model Agency do
-  #   # Found associations:
-  #     field :sponsorships, :has_many_association 
-  #     field :agencies, :has_many_association   #   # Found columns:
-  #     field :id, :integer 
-  #     field :name, :string 
-  #     field :created_at, :datetime 
-  #     field :updated_at, :datetime 
-  #     field :shortname, :string   #   # Sections:
-  #   list do; end
-  #   export do; end
-  #   show do; end
-  #   edit do; end
-  #   create do; end
-  #   update do; end
-  # end
+  config.model Agency do
+    # Found associations:
+    list do
+      field :id 
+      field :name
+      field :shortname
+      field :agency_contacts
+    end
+    export do; end
+    show do
+      field :id 
+      field :name
+      field :shortname
+      field :info_url
+      field :agency_contacts
+    end
+    edit do
+      field :name
+      field :shortname
+      field :info_url
+    end
+    create do; end
+    update do; end
+  end
   # config.model AuthToken do
   #   # Found associations:
   #   # Found columns:
@@ -170,6 +178,7 @@ RailsAdmin.config do |config|
   #   update do; end
   # end
   config.model Outlet do
+    label "Account"
     list do
       field :service, :string 
       field :account, :string 

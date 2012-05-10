@@ -1,0 +1,11 @@
+<p>Hello, someone has submitted <%= @outlet.service_url %> to be included as an official social media account in the USA.gov Social Media Registry.</p>
+
+<p>If you wish to view, edit, or remove this account from the Registry, please follow this link: <%= @link_url %>.</p>
+
+<p>If you have any questions about this service, please email socialmediaregistry@gsa.gov.</p>
+
+<p>Thank you,</p>
+
+<p>The USA.gov Social Media Registry team.</p>
+
+<p>Sent to <%= @outlet.contact_emails.join(", ") %></p>

@@ -71,6 +71,17 @@ class Outlet < ActiveRecord::Base
   def masked_updated_by
     (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
   end
+  
+  def contact_emails
+    # TODO: exclude updated_by from the list
+    agencies.flat_map do |agency| 
+      if !agency.contact_emails.empty?
+        agency.contact_emails
+      else
+        []
+      end
+    end
+  end
     
   private
   
