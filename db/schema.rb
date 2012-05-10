@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111214185351) do
+ActiveRecord::Schema.define(:version => 20120510200447) do
 
   create_table "agencies", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(:version => 20111214185351) do
   end
 
   add_index "agencies", ["shortname"], :name => "index_agencies_on_shortname", :unique => true
+
+  create_table "agency_contacts", :force => true do |t|
+    t.string   "email"
+    t.string   "agency_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "agency_contacts", ["agency_id"], :name => "index_agency_contacts_on_agency_id"
 
   create_table "auth_tokens", :force => true do |t|
     t.string   "token"

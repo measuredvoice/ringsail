@@ -11,10 +11,11 @@
 #
 
 class Agency < ActiveRecord::Base
-  attr_accessible :name, :shortname, :info_url
+  attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   
   has_many :sponsorships
   has_many :outlets, :through => :sponsorships
+  has_many :agency_contacts
   
   validates :name, :presence => true
   validates :shortname, :presence => true
@@ -23,5 +24,9 @@ class Agency < ActiveRecord::Base
 
   def to_s
     self.name
+  end
+  
+  def contact_emails
+    agency_contacts.map {|contact| contact.email}
   end
 end

@@ -50,7 +50,6 @@ class OutletsController < ApplicationController
     # If the account was already verified, it will be updated
     action_performed = @outlet.verified? ? 'updated' : 'added to the social media registry';
     
-    # FIXME: Doing this the stupid, straightforward way to start
     @outlet.organization = params[:organization] if params[:organization]
     @outlet.info_url = params[:info_url] if params[:info_url]
     if params[:language]
@@ -71,9 +70,15 @@ class OutletsController < ApplicationController
     end
     
     if @outlet.save
+      somebody_was_notified = ''
+      if action_performed != 'updated' && !@outlet.contact_emails.empty?
+        somebody_was_notified = "We have notified JED PLEASE SET THIS TEXT: " + @outlet.contact_emails.join(", ")
+        AgencyNotificationMailer.new_outlet_email(@outlet).deliver
+      end
+      
       if request.format == :html
         flash[:shortnotice] = "Thank you!"
-        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been #{action_performed}."
+        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been #{action_performed}. #{somebody_was_notified}" 
         redirect_to :action => "verify", :service_url => @outlet.service_url, :auth_token => @current_token.token
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
