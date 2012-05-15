@@ -8,10 +8,13 @@
 
 <%= form_tag({:action => "create"}, :class => "form-stacked") do %>
 
+<% if flash[:alert] %>
 <div class="alert-error">
 <%= render 'shared/error_messages', :object => @auth_token %>
 </div>
+<% end %>
 
+<div class="row">
 <div class="clearfix">
 <label for="email">Email:</label>
 <div class="input">
@@ -29,7 +32,7 @@
 <div class="actions">
   <input type="submit" class="btn" value="Submit">
 </div>
-
+</div>
 <% end %>
 
 </div>

@@ -36,9 +36,9 @@
         <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
-            <label for="email">Official Government Email Address:</label>
+            <label for="email">Your Official Government Email Address:</label>
             <div class="input">
-                <%= text_field_tag('email', '', :class => "span5") %>
+                <%= text_field_tag('email', '', :class => "emailfield") %>
             </div>
         </div>
 
@@ -74,7 +74,7 @@
 
     <div id="not-verified-account">
         <p>
-            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.
+            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. government.
         </p>
     </div>
 
@@ -85,9 +85,9 @@
         <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
-            <label for="email">Official Government Email Address:</label>
+            <label for="email">Your Official Government Email Address:</label>
             <div class="input">
-                <%= text_field_tag('email', '', :class => "span5") %>
+                <%= text_field_tag('email', '', :class => "emailfield") %>
             </div>
         </div>
 
@@ -135,16 +135,16 @@
 
     <div>
 		<p>
-			Many people now use tools like Twitter, Facebook and YouTube to receive news and information, so it&rsquo;s important to help the public verify which social media accounts are managed by government agencies.
+			Many people now use tools like Twitter, Facebook and YouTube to receive news and information. This registry identifies social media accounts managed by the federal government, to help the public know which accounts they can trust to provide factual government information.
 		</p>
 		<p>
-			If you work for the U.S. federal government and have a .gov or .mil email address, use this tool to register your agency&rsquo;s social media accounts (including elected officials, heads of agencies, or Cabinet members), so the public knows they are official.
+			If you work for the U.S. federal government and have a .gov or .mil email address, use this tool to register social media accounts managed by federal agencies (including accounts for elected officials, heads of agencies or Cabinet members). Any registered accounts should have been created under federal-compatible <a href="http://www.howto.gov/web-content/resources/tools/terms-of-service-agreements">Terms of Service (TOS)</a>. If they weren&rsquo;t, contact your agency <a href="http://www.howto.gov/web-content/resources/tools/terms-of-service-agreements/agency-points-of-contact">Point of Contact</a>, who can help you to bring these accounts into compliance with federal law.
 		</p>
 		<p>
 To register an account, enter the account URL in the field below and click &ldquo;Look Up&rdquo;
 			<ul>
 				<li>If it&rsquo;s not yet registered, you can add it</li>
-				<li>If it&rsquo;s already in the system, you can update it</li>
+				<li>If it&rsquo;s already in the system, you can update it, if needed</li>
 			</ul>
 		</p>
 		

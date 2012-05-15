@@ -4,7 +4,7 @@
 <% if @outlet.verified? %>
 <div class="row">
     <div class="span14 alert-message block-message success">
-        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is registered as an official U.S. government account.</p>
+        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is registered as an account managed by the U.S. government.</p>
 		<p>You can make changes to this listing using the form below.</p>
     </div>
 </div>
@@ -12,7 +12,7 @@
 
 <div class="row">
     <div class="span14 alert-message block-message warning">
-        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an official U.S. government account.</p>
+        <p><a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. government.</p>
 		<p>You can add it to the social media registry using the form below.</p>
     </div>
 
@@ -102,7 +102,7 @@
 
 <div class="span14">
 
-    <p class="span7"><b>To see if a social media account is an official U.S. government account, please type or paste its complete URL here:</b><br><br>
+    <p class="span7"><b>To see if a social media account is managed by the U.S. government, please type or paste its complete URL here:</b><br><br>
 	    <span class="quiet">Example: http://twitter.com/whitehouse</span>
 	</p>
 

@@ -1,13 +1,16 @@
-Hello, someone (probably you) has submitted <%= @service_url %> to be included as an official social media account in the USA.gov Social Media Registry.
+Hello,
+Someone (probably you) has requested a change to the USA.gov Social Media Registry. 
+Account to be created or updated: <%= @service_url %>
 
-This submission will not be complete until you click on the link included below. Please understand that the Social Media Registry only includes accounts that represent official U.S. government agencies, organizations, or programs. You can register accounts managed by federal agencies, elected officials (not campaign accounts), heads of agencies, or members of the President’s Cabinet. Do not enter personal, employee, or other types of accounts.
+This account will not be added to the Registry or edited until you verify its authenticity by clicking on the link below. 
 
-To confirm your submission and verify your understanding of the above, please follow this link: <%= @link_url %>.
+Only verify accounts that are managed by U.S. federal government agencies, organizations, or programs. You can also register accounts managed by elected officials (not campaign accounts), heads of agencies, or members of the President’s Cabinet. Do not enter personal, employee, or other types of accounts.
+
+To confirm your submission and verify your understanding of the above, please follow this link: <%= @link_url %>
 
 If you have any questions about this service, please email socialmediaregistry@gsa.gov.
 
 Thank you,
-
 The USA.gov Social Media Registry team.
 
 Sent to <%= @auth_token.email %>
