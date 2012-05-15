@@ -106,3 +106,7 @@
   thead {
   display: table-header-group;
   }
+  
+  .emailfield {
+	  width:24em;
+	}
