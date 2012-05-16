@@ -11,12 +11,12 @@
     <% if @outlet.verified? %>
     <div id="verified-account">
         <p>
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> is managed by the U.S. government.
+            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> is managed by the U.S. federal government.
         </p>
     </div>
 
 	<div role="search" id="verify-another">
-		<p><label for="service-url">To see if another social media account is managed by the U.S. government, please paste its complete URL here:<br><br>
+		<p><label for="service-url">To see if another social media account is managed by the U.S. federal government, please paste its complete URL here:<br><br>
 		<span class="quiet">Example: http://twitter.com/whitehouse</span>
 		</label></p>
 	</div>
@@ -35,12 +35,12 @@
 
     <div id="not-verified-account">
         <p>
-            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. government.
+            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
         </p>
     </div>
 
 	<div role="search" id="verify-another">
-		<p><label for="service-url"><strong>To see if another social media account is managed by the U.S. government, please paste its complete URL here:</strong><br><br>
+		<p><label for="service-url"><strong>To see if another social media account is managed by the U.S. federal government, please paste its complete URL here:</strong><br><br>
 			<span class="quiet">Example: http://twitter.com/whitehouse</span>
 		</label></p>
 	</div>
@@ -51,7 +51,7 @@
     <% end %>
     
     <div class="quiet" id="howto-cta">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is managed by the U.S. government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to the USA.gov social media registry on HowTo.gov</a>.</p>
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is managed by the U.S. federal government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to the USA.gov social media registry on HowTo.gov</a>.</p>
 
     </div>
 <% end %>
@@ -66,14 +66,14 @@
 </div>
 <% end %>
 
-		<p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the government.</p>
+		<p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the federal government.</p>
 
-		<p>This tool lets you verify if a social media account is managed by the U.S. government.</p>
+		<p>This tool lets you verify if a social media account is managed by the U.S. federal government.</p>
 
 		<p>You can look up accounts managed by federal agencies, elected officials, heads of agencies or members of the President&rsquo;s Cabinet.</p>
 		
 		<div role="search">
-			<p><label for="service-url"><strong>To see if a social media account is managed by the U.S. government, please paste its complete URL here:</strong><br><br>
+			<p><label for="service-url"><strong>To see if a social media account is managed by the U.S. federal government, please paste its complete URL here:</strong><br><br>
 				<span class="quiet">Example: http://twitter.com/whitehouse</span>
 			</label></p>
 		</div>

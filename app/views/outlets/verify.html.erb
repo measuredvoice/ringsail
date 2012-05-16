@@ -17,7 +17,7 @@
     <% if @outlet.verified? %>
     <div class="row">
         <p class="span7 alert-message block-message success">
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is an account managed by the U.S. government.
+            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is managed by the U.S. federal government.
         </p>
     </div>
     
@@ -44,24 +44,24 @@
 
     <div class="row">
         <p class="span7 alert-message warning">
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. government.
+            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
         </p>
     </div>
 
     <hr>
     
     <div class="span8">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an account managed by the U.S. government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to this registry</a> on HowTo.gov.</p>
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an account managed by the U.S. federal government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to this registry</a> on HowTo.gov.</p>
 
     </div>
 <% end %>
 
 <% else %>
-<h3>Verify social media accounts managed by the U.S. government</h3>
+<h3>Verify social media accounts managed by the U.S. federal government</h3>
 <div class="span8">
 <p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the government.</p>
 
-<p>This tool lets you verify if a social media account is managed by the U.S. government.</p>
+<p>This tool lets you verify if a social media account is managed by the U.S. federal government.</p>
 
 <p>You can look up accounts managed by federal agencies, elected officials, heads of agencies or members of the President&rsquo;s Cabinet.</p>
 </div>
@@ -81,7 +81,7 @@
 
 <div class="row">
     <div class="span7">
-        <p><b>To see if a social media account is managed by the U.S. government, please paste its complete URL here:</b><br><br>
+        <p><b>To see if a social media account is managed by the U.S. federal government, please paste its complete URL here:</b><br><br>
         <span class="quiet">Example: http://twitter.com/whitehouse</span>
 		</p>
         <%= form_tag({:action => "verify"}, :method => :get) do %>
