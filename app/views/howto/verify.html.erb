@@ -135,10 +135,19 @@
 
 <% else %>
 <h3>Register social media accounts managed by the U.S. federal government</h3>
-<div class="span8">
-<p>Social media tools like Twitter, Facebook, and YouTube are now standard tools used by the government to connect with people and communicate official  information. Because of this, it is important to know if a social media account is really managed by the government or not.</p>
-<p>This service is designed to make it easy for you to register a social media account as officially managed by the U.S. federal government.</p>
-</div>
+
+<div class="span14">
+<p>Many people now use tools like Twitter, Facebook and YouTube to receive news and information. This registry identifies social media accounts managed by the federal government, to help the public know which accounts they can trust to provide factual government information.</p>
+
+<p>If you work for the U.S. federal government and have a .gov or .mil email address, use this tool to register social media accounts managed by federal agencies (including accounts for elected officials, heads of agencies or Cabinet members). Any registered accounts should have been created under federal-compatible Terms of Service (TOS). If they weren’t, contact your agency Point of Contact, who can help you to bring these accounts into compliance with federal law.</p>
+
+<p>To register an account, enter the account URL in the field below and click “Look Up”</p>
+
+<ul>
+<li>If it’s not yet registered, you can add it</li>
+<li>If it’s already in the system, you can update it, if needed</li>
+</ul>
+
 </div>
 </div>
 
@@ -153,24 +162,22 @@
 <% end %>
 
 
-<div class="row">
-    <div class="span14">
+  <div class="span14">
+        <%= form_tag({:action => "verify"}, :class => 'form-stacked', :method => :get) do %>
         <p>
 			<label for="service-url">
 				<b>To see if a social media account is listed in the official registry, please paste its complete URL here:</b><br><br>
 				<span class="help-block">Example: http://twitter.com/whitehouse</span>
 			</label>
 		</p>
-        <%= form_tag({:action => "verify"}, :method => :get) do %>
             <input type="text" id="service-url" name="service_url" class="span5" value="<%= params[:service_url] %>">
             <button class="btn primary" type="submit">Look up</button>
         <% end %>
     </div>
-    <div class="span4 offset1">
+    <div class="span14">
         <h3>Types of accounts we can register:</h3>
         <%= render "shared/services_list" %>
     </div>
-</div>
 <% end %>
 
 </div>
