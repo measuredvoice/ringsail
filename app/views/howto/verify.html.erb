@@ -47,7 +47,7 @@
         
         <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
 
-        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
+        <%= form_tag({:controller => "howto_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
             <label for="email">Email:</label>
@@ -103,7 +103,7 @@
     <div class="span8">
         <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. federal government social media account, you can add it to this registry. Enter your official government (.gov or .mil) email address and phone number below and we'll send you a link so you can add it to the registry.</p>
         
-        <%= form_tag({:controller => "auth_tokens", :action => "create"}) do %>
+        <%= form_tag({:controller => "howto_tokens", :action => "create"}) do %>
 
         <div class="clearfix">
             <label for="email">Your Official Government Email Address:</label>
