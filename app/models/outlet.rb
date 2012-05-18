@@ -73,13 +73,8 @@ class Outlet < ActiveRecord::Base
   end
   
   def contact_emails
-    # TODO: exclude updated_by from the list
-    agencies.flat_map do |agency| 
-      if !agency.contact_emails.empty?
-        agency.contact_emails
-      else
-        []
-      end
+    agencies.flat_map do |agency|
+      agency.contact_emails(:excluding => updated_by)
     end
   end
     

@@ -26,7 +26,9 @@ class Agency < ActiveRecord::Base
     self.name
   end
   
-  def contact_emails
-    agency_contacts.map {|contact| contact.email}
+  def contact_emails(options = {})
+    agency_contacts.where("email != ?", options[:excluding]).map do |contact|
+      contact.email
+    end
   end
 end
