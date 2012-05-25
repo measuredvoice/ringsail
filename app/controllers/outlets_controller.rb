@@ -72,7 +72,7 @@ class OutletsController < ApplicationController
     if @outlet.save
       somebody_was_notified = ''
       if action_performed != 'updated' && !@outlet.contact_emails.empty?
-        somebody_was_notified = "We have notified JED PLEASE SET THIS TEXT: " + @outlet.contact_emails.join(", ")
+        somebody_was_notified = "We have notified the following points of contact at the agencies affiliated with the account:" + @outlet.contact_emails.join(", ")
         AgencyNotificationMailer.new_outlet_email(@outlet).deliver
       end
       
