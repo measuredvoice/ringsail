@@ -175,7 +175,8 @@ class OutletsController < ApplicationController
     @outlets = Outlet.includes(:agencies)
     
     if request.format == :atom
-      @outlets = @outlets.order('updated_at')    
+      @outlets = @outlets.order('outlets.updated_at DESC')
+      @per_page = 20
     else
       @outlets = @outlets.order('account, service')
     end
@@ -190,7 +191,7 @@ class OutletsController < ApplicationController
       @outlets = @outlets.tagged_with(params[:tag])
     end
     
-    @outlets = @outlets.page(params[:page_number])
+    @outlets = @outlets.page(params[:page_number]).per(@per_page)
     
     respond_with(XBoxer.new(:result, Boxer.ship(:outlets, @outlets) ))
   end
