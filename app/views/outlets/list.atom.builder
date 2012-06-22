@@ -8,9 +8,9 @@ atom_feed(:root_url => list_outlets_url) do |feed|
     howto_review_url = howto_find_outlet_url(:service_url => outlet.service_url, :host => ENV['RINGSAIL_HOST'])
     feed.entry(outlet, :url => howto_review_url, :published => outlet.updated_at ) do |entry|
       if outlet.updated_at == outlet.created_at
-        entry.title "New #{outlet.service} account: #{outlet.account}"
+        entry.title "New #{outlet.service_info.longname} account: #{outlet.account}"
       else
-        entry.title "Updated #{outlet.service} account: #{outlet.account}"
+        entry.title "Updated #{outlet.service_info.longname} account: #{outlet.account}"
       end
             
       if outlet.updated_at == outlet.created_at
