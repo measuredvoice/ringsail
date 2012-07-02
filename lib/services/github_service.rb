@@ -12,7 +12,9 @@ class GithubService < Service
   end
 
   def account
-      /\/(?<account>[\w-]+)$/ =~ @uri.path
+    # The first part of the path is the user or organization
+    # e.g. github.com/GeneralServicesAdministration/ringsail
+    /^\/(?<account>[\w-]+)/ =~ @uri.path
     account
   end
   
