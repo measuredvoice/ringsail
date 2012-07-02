@@ -1,6 +1,11 @@
 class OutletsController < ApplicationController
   respond_to :html, :xml, :json
+  respond_to :atom, :only => :list
   before_filter :check_auth, :except => [:verify, :show, :list]
+  
+  def default_url_options
+    {:host => ENV['RINGSAIL_API_HOST']}
+  end
   
   def add
     @outlet = Outlet.resolve(params[:service_url])
@@ -84,7 +89,7 @@ class OutletsController < ApplicationController
       if request.format == :html
         flash[:shortnotice] = "Thank you!"
         flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been #{action_performed}. #{somebody_was_notified}" 
-        redirect_to :action => "verify", :service_url => @outlet.service_url, :auth_token => @current_token.token
+        redirect_to :action => "verify", :service_url => @outlet.service_url, :auth_token => @current_token.token, :only_path => true
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
       end
@@ -157,7 +162,7 @@ class OutletsController < ApplicationController
     if request.format == :html
       flash[:shortnotice] = "Thank you!"
       flash[:notice] = "The entry for #{outlet_name} has been removed from the registry."
-      redirect_to :action => "verify", :service_url => service_url, :auth_token => @current_token.token
+      redirect_to :action => "verify", :service_url => service_url, :auth_token => @current_token.token, :only_path => true
     else
       respond_with(XBoxer.new(:result, {:status => "success"}))
     end
@@ -167,7 +172,14 @@ class OutletsController < ApplicationController
     @page_title = "Accounts"
     # @keywords = params[:q] || params[:keywords]
     
-    @outlets = Outlet.includes(:agencies).order('account, service')
+    @outlets = Outlet.includes(:agencies)
+    
+    if request.format == :atom
+      @outlets = @outlets.order('outlets.updated_at DESC')
+      @per_page = 20
+    else
+      @outlets = @outlets.order('account, service')
+    end
 
     if params[:service_id] and !params[:service_id].empty?
       @outlets = @outlets.where(:service => params[:service_id])
@@ -179,7 +191,7 @@ class OutletsController < ApplicationController
       @outlets = @outlets.tagged_with(params[:tag])
     end
     
-    @outlets = @outlets.page(params[:page_number])
+    @outlets = @outlets.page(params[:page_number]).per(@per_page)
     
     respond_with(XBoxer.new(:result, Boxer.ship(:outlets, @outlets) ))
   end
