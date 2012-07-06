@@ -4,10 +4,15 @@ namespace :db do
     make_agencies
     make_official_tags
   end
+  desc "Reset data back to pre-populated files"
   task :forcerefresh => :environment do
     make_agencies(:force => true)
     make_official_tags(:force => true)
     make_accounts
+  end
+  desc "Reset agencies back to pre-populated file"
+  task :reset_agencies => :environment do
+    make_agencies(:force => true)
   end
 end
 
