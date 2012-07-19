@@ -2,6 +2,7 @@ Boxer.box(:agency) do |box, agency|
   {
     :agency_id    => agency.shortname,
     :agency_name  => agency.name,
+    :agency_url   => agency.info_url,
   }
 end
 
