@@ -12,11 +12,14 @@ class YoutubeService < Service
   end
 
   def account
-    if /user/ =~ @uri.path
-      /\/(?<account>[\w-]+)$/ =~ @uri.path
-    else
-      /\/(?<account>[\w-]+)$/ =~ @uri.path
+    /^(\/user)?\/(?<account>[\w-]+)/ =~ @uri.path
+    
+    @exclude = ['watch', 'movies', 'channel', 'music', 'shows', 
+      'live', 'sports', 'education', 'news']
+    if @exclude.any? {|stopword| account == stopword}
+      account = nil
     end
+    
     account
   end
   
