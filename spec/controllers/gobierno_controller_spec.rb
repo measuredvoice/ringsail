@@ -54,7 +54,7 @@ describe GobiernoController do
       
       it "should be translated" do
         get :verify, :service_url => @verified_url
-        response.should have_selector("p", :content => "oficial")      
+        response.should have_selector("p", :content => "administrada")      
       end
     end
   end
