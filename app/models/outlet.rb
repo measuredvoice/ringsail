@@ -51,6 +51,10 @@ class Outlet < ActiveRecord::Base
     @service_info ||= Service.find_by_url(service_url)
   end
   
+  def self.which_need_updating
+    where('updated_at < ?', 6.months.ago).order('updated_at')
+  end
+  
   def self.resolve(url)
     return nil if url.nil? or url.empty?
 

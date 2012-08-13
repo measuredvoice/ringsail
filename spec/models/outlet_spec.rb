@@ -184,4 +184,29 @@ describe Outlet do
       @outlet.tags.first.to_s.should == 'foo thing'
     end
   end
+  
+  describe "lists of items" do
+    before(:each) do
+      # Generate outlets that were created/updated over the past year
+      12.times do |n|
+        outlet = FactoryGirl.build(:outlet, created_at: n.months.ago, updated_at: n.months.ago)
+        outlet.agencies << FactoryGirl.create(:agency)
+        outlet.save!
+      end
+    end
+    
+    describe "that need updating" do
+      
+      it "should only list outlets older than 6 months" do
+        @outlets = Outlet.which_need_updating
+        @outlets.first.updated_at.should <= 6.months.ago
+      end
+      
+      it "should be in order by update time" do
+        @outlets = Outlet.which_need_updating
+        @outlets[0].updated_at.should <= @outlets[1].updated_at
+      end
+      
+    end
+  end
 end
