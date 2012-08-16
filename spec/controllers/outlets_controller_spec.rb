@@ -196,7 +196,7 @@ describe OutletsController do
       
       it "should return a verified indication" do
         get :verify, :service_url => @verified_url
-        response.should have_selector("p", :content => "official")
+        response.should have_selector("p", :content => "Yes!")
       end
       
       it "should return the attributes of the outlet" do
