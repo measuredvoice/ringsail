@@ -47,6 +47,8 @@ Ringsail::Application.routes.draw do
   match "social-media/social-media-registry/accounts/register" => "howto#update", :via => :post, :as => :howto_update_outlet
   match "social-media/social-media-registry/accounts/remove"   => "howto#remove", :via => :post, :as => :howto_remove_outlet
   match "social-media/social-media-registry/accounts/find"     => "howto#verify", :via => :get, :as => :howto_find_outlet
+  match "social-media/social-media-registry/accounts/review"     => "howto#review", :via => :get, :as => :howto_review_outlets
+  match "social-media/social-media-registry/accounts/confirm" => "howto#confirm", :via => :post, :as => :howto_confirm_outlet
   match "social-media/social-media-registry/accounts/request"  => "howto_tokens#new", :via => :get, :as => :howto_request_token
   match "social-media/social-media-registry/accounts/request"  => "howto_tokens#create", :via => :post, :as => :howto_create_token
   match "social-media/social-media-registry/accounts/tags" => "official_tags#list", :via => :get, :as => :howto_list_tags

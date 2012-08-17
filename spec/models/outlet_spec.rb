@@ -185,7 +185,7 @@ describe Outlet do
     end
   end
   
-  describe "lists of items" do
+  describe "lists" do
     before(:each) do
       # Generate outlets that were created/updated over the past year
       12.times do |n|
@@ -195,18 +195,29 @@ describe Outlet do
       end
     end
     
-    describe "that need updating" do
-      
+    describe "to review" do
       it "should only list outlets older than 6 months" do
-        @outlets = Outlet.which_need_updating
+        @outlets = Outlet.to_review
         @outlets.first.updated_at.should <= 6.months.ago
       end
       
       it "should be in order by update time" do
-        @outlets = Outlet.which_need_updating
+        @outlets = Outlet.to_review
         @outlets[0].updated_at.should <= @outlets[1].updated_at
       end
       
+      it "should be filterable by email address" do
+        # Make a special outlet updated by a specific email
+        @auth_token = FactoryGirl.create(:auth_token)
+        @outlet_a = FactoryGirl.build(:outlet, created_at: 9.months.ago, updated_at: 9.months.ago)
+        @outlet_a.auth_token = @auth_token.token
+        @outlet_a.agencies << FactoryGirl.create(:agency)
+        @outlet_a.save!
+        
+        @outlets = Outlet.to_review.updated_by(@auth_token.email)
+        @outlets[0].updated_by.should == @outlet_a.updated_by
+        
+      end
     end
   end
 end
