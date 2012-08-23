@@ -48,4 +48,28 @@ describe Service do
       service.shortname.should == :flickr
     end
   end
+  
+  describe "Google+ plugin" do
+    
+    it "should be chosen for Google+ URLs" do
+      service = Service.find_by_url("https://plus.google.com/111769560327165905725/posts")
+      service.shortname.should == :google_plus
+    end
+    
+    it "should find both numeric and +name accounts" do
+      service = Service.find_by_url("https://plus.google.com/111769560327165905725")
+      service.account.should == '111769560327165905725'
+
+      service = Service.find_by_url("https://plus.google.com/+NASA")
+      service.account.should == '+NASA'
+    end
+    
+    it "should accept but ignore /posts in URL" do
+      service = Service.find_by_url("https://plus.google.com/111769560327165905725/posts")
+      service.account.should == '111769560327165905725'
+
+      service = Service.find_by_url("https://plus.google.com/+NASA/posts")
+      service.account.should == '+NASA'
+    end
+  end
 end

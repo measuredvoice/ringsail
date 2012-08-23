@@ -11,7 +11,7 @@ Ringsail::Application.routes.draw do
   # API call /accounts/verify, GET
   # and synonym /accounts/{service}/{account}, GET
   match "accounts/verify" => "outlets#verify", :via => :get, :as => :verify_outlet
-  match "accounts/:service/:account" => "outlets#verify", :via => :get, :as => :show_outlet, :constraints => {:account => /[\w.@-]+?/, :format => /html|json|xml/}
+  match "accounts/:service/:account" => "outlets#verify", :via => :get, :as => :show_outlet, :constraints => {:account => /[\w.@\+-]+?/, :format => /html|json|xml/}
   
   # API call /accounts, GET
   # and synonym /accounts/{service}, GET
@@ -24,7 +24,7 @@ Ringsail::Application.routes.draw do
   
   # API call /outlets/remove, either DELETE or POST
   match "accounts/remove" => "outlets#remove", :via => :post, :as => :remove_outlet
-  match "accounts/:service/:account" => "outlets#remove", :via => :delete, :as => :delete_outlet, :constraints => {:account => /[\w.]+?/, :format => /html|json|xml/}
+  match "accounts/:service/:account" => "outlets#remove", :via => :delete, :as => :delete_outlet, :constraints => {:account => /[\w.@\+-]+?/, :format => /html|json|xml/}
 
   # API call /auth_tokens/request, GET and POST
   match "auth_tokens/request" => "auth_tokens#new", :via => :get, :as => :request_token

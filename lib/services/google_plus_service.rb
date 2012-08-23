@@ -17,6 +17,10 @@ class GooglePlusService < Service
 
   def account
     /^(\/u\/0)?\/(?<account>\d+)(\/posts)?/ =~ @uri.path
+    if !account
+      # Option 2: plus.google.com/+accountname
+      /^(\/u\/0)?\/(?<account>\+\w+)(\/posts)?/ =~ @uri.path      
+    end
     account
   end
   
