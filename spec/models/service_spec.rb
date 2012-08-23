@@ -39,6 +39,11 @@ describe Service do
       service = Service.find_by_url("http://www.youtube.com/USGovernment")
       service.shortname.should == :youtube
     end
+
+    it "should ignore system URLs" do
+      service = Service.find_by_url("http://www.youtube.com/watch")
+      service.account.should be_nil
+    end
   end
   
   describe "Flickr plugin" do
@@ -70,6 +75,22 @@ describe Service do
 
       service = Service.find_by_url("https://plus.google.com/+NASA/posts")
       service.account.should == '+NASA'
+    end
+  end
+
+  describe "Slideshare plugin" do
+    
+    it "should be chosen for Slideshare URLs" do
+      service = Service.find_by_url("http://www.slideshare.net/nasa")
+      service.shortname.should == :slideshare
+    end
+
+    it "should ignore system URLs" do
+      service = Service.find_by_url("http://www.slideshare.net/nasa")
+      service.account.should == 'nasa'
+
+      service = Service.find_by_url("http://www.slideshare.net/popular")
+      service.account.should be_nil
     end
   end
 end
