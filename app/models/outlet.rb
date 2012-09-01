@@ -52,7 +52,7 @@ class Outlet < ActiveRecord::Base
   end
   
   def self.to_review
-    where('updated_at < ?', 6.months.ago).order('updated_at')
+    where('outlets.updated_at < ?', 6.months.ago).order('outlets.updated_at')
   end
   
   def self.updated_by(email)

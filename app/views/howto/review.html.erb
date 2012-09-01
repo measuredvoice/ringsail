@@ -28,7 +28,7 @@
 <tbody>
 <% @outlets.each do |outlet| %>
 <tr>
-  <td><a href="/accounts/verify?service_url=<%= outlet.service_url %>"><%= outlet.service_url %></a></td>
+  <td><a href="<%= howto_find_outlet_path(:service_url => outlet.service_url, :auth_token => @current_token.token) %>"><%= outlet.service_url %></a></td>
   <td><%= outlet.organization %></td>
   <td><%= outlet.agencies.map {|a| a.name}.join(", ") %></td>
   <td>

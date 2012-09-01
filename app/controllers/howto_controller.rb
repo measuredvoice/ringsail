@@ -12,7 +12,7 @@ class HowtoController < OutletsController
     
     @outlets = Outlet.to_review.includes(:agencies)
 
-    if params[:agency_id] and !params[:agency_id].empty?
+    if !params[:agency_id].blank?
       @outlets = @outlets.joins(:agencies).where(:agencies => {:shortname => params[:agency_id]})
     end
     if params[:tag] and !params[:tag].empty?
