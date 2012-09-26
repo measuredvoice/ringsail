@@ -1,6 +1,11 @@
 <div class="span14">
 
+<% if @goto == 'review' %>
+<h3>Review entries in this registry</h3>
+<% else %>
 <h3>Edit or update entries in this registry</h3>
+<% end %>
+
 <div class="span8">
 <p>If you have a .gov or .mil email address, you can edit or update entries in this registry.</p>
 <p>Enter your .gov or .mil email address and phone number below, and we will send you a link that will allow editing access for <strong>24 hours</strong> from the time the email is sent.</p>
@@ -28,6 +33,11 @@
 	<%= text_field_tag('phone', @auth_token.phone, :class => "span5") %>
 </div>
 </div>
+
+<% if @goto %>
+<%= hidden_field_tag('goto', @goto) %>
+<% end %>
+
 
 <div class="actions">
   <input type="submit" class="btn" value="Submit">

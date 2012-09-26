@@ -4,16 +4,18 @@ class AuthTokensController < ApplicationController
   def new
     @page_title = "Request authorization"
     @auth_token = AuthToken.new
+    @goto = params[:goto] || 'add'
   end
 
   def create
-    @auth_token = AuthToken.new(params)
+    @auth_token = AuthToken.new(params.except(:goto))   
+    @goto = params[:goto] || 'add'
     
     if AuthToken.find_recent_by_email(params[:email]) || @auth_token.save
       @page_title = "Authorization requested"
       
       if @auth_token.token
-        AuthTokenMailer.token_link_email(@auth_token, params[:service_url]).deliver
+        AuthTokenMailer.token_link_email(@auth_token, params[:service_url], @goto).deliver
       end
       
       respond_with(XBoxer.new(:result, {

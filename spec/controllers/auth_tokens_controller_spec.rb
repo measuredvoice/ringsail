@@ -13,6 +13,17 @@ describe AuthTokensController do
       get :new
       response.should have_selector("p", :content => "email address and phone number")
     end
+    
+    it "should offer editing by default" do
+      get :new
+      response.should have_selector("h3", :content => "update entries")
+    end
+    
+    it "should offer reviewing when specified" do
+      get :new, :goto => 'review'
+      response.should have_selector("h3", :content => "Review entries")
+    end    
+
   end
   
   describe "POST 'request'" do
