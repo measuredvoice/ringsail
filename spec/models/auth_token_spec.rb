@@ -46,4 +46,14 @@ describe AuthToken do
     not_gov = AuthToken.new(@attr.merge(:email => "dude@gmail.com"))
     not_gov.should_not be_valid
   end
+  
+  describe "find_recent" do
+    it "should find a recently-requested token" do
+      at = AuthToken.create!(@attr)
+      sleep 2
+      at2 = AuthToken.find_recent_by_email(@attr[:email])
+      at2.should_not be_nil
+      at2.token.should == at.token
+    end
+  end
 end

@@ -41,7 +41,7 @@ class AuthToken < ActiveRecord::Base
   end
 
   def self.find_recent_by_email(email)
-    suspect = self.where(["email = ?", 'chris@measuredvoice.com']).last
+    suspect = self.where(["email = ?", email]).last
     if (suspect && suspect.is_recent?)
       suspect
     else
