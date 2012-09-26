@@ -10,6 +10,7 @@
 #  access_count :integer(4)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  duration     :string(255)     default("short")
 #
 
 require 'spec_helper'
@@ -47,6 +48,16 @@ describe AuthToken do
     not_gov.should_not be_valid
   end
   
+  it "should stay valid if refreshed" do
+    current = FactoryGirl.build(:auth_token, created_at: 8.hours.ago, updated_at: 2.hours.ago)
+    current.should be_still_valid
+  end
+  
+  it "should expire after a day" do
+    expired = FactoryGirl.build(:auth_token, created_at: 2.days.ago, updated_at: 2.days.ago)
+    expired.should_not be_still_valid
+  end
+  
   describe "find_recent" do
     it "should find a recently-requested token" do
       at = AuthToken.create!(@attr)
@@ -54,6 +65,36 @@ describe AuthToken do
       at2 = AuthToken.find_recent_by_email(@attr[:email])
       at2.should_not be_nil
       at2.token.should == at.token
+    end
+  end
+  
+  describe "long-duration tokens" do
+    before(:each) do
+      @long_attr = {
+        :email    => @attr[:email],
+      }
+    end
+    
+    it "should create a long-duration instance given valid attributes" do
+      at = AuthToken.new(@long_attr)
+      at.duration = 'long'
+      at.should be_valid
+    end
+    
+    it "should still be valid after two weeks" do
+      current = FactoryGirl.build(:auth_token_ld, created_at: 2.weeks.ago, updated_at: 2.weeks.ago)
+      current.should be_still_valid
+    end
+    
+    it "should not be valid after six weeks" do
+      expired = FactoryGirl.build(:auth_token_ld, created_at: 6.weeks.ago, updated_at: 6.weeks.ago)
+      expired.should_not be_still_valid
+    end
+    
+    it "should not be returned when checking recent tokens" do
+      at = FactoryGirl.create(:auth_token_ld)
+      at2 = AuthToken.find_recent_by_email(at.email)
+      at2.should be_nil
     end
   end
 end
