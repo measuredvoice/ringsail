@@ -31,7 +31,6 @@ class HowtoController < OutletsController
   
   def confirm
     @outlet = Outlet.resolve(params[:service_url])
-    @return_to = params[:return_to] || 'review'
     
     unless @outlet && @outlet.verified?
       respond_to do |format|
@@ -51,14 +50,22 @@ class HowtoController < OutletsController
     if @outlet.save
       if request.format == :html
         flash[:shortnotice] = "Thank you!"
-        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been confirmed." 
-        redirect_to :action => @return_to, :service_url => @outlet.service_url, :auth_token => @current_token.token, :only_path => true
+        flash[:notice] = "The entry for #{ @outlet.service_info.display_name} has been confirmed."
+        redirect_to(:action => 'review', 
+          :agency_id => params[:agency_id],
+          :auth_token => @current_token.token, 
+          :only_path => true
+        )
       else
         respond_with(XBoxer.new(:result, {:status => "success"}))
       end
     else
       if request.format == :html
-        redirect_to :action => @return_to, :service_url => @outlet.service_url, :auth_token => @current_token.token, :only_path => true
+        redirect_to(:action => 'review', 
+          :agency_id => params[:agency_id],
+          :auth_token => @current_token.token, 
+          :only_path => true
+        )
       else
         respond_with(XBoxer.new(:result, {:status => "error"}))
       end

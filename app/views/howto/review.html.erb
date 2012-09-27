@@ -12,6 +12,12 @@
     <%= flash[:alert] %>
   </p>
 
+<% elsif flash[:notice] %>
+
+  <p class="span10 alert-message notice">
+    <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+  </p>
+
 <% end %>
 
 <%= paginate @outlets, :param_name => :page_number %>
@@ -36,6 +42,7 @@
     <%= hidden_field_tag('service_url', outlet.service_url) %>
     <%= hidden_field_tag('auth_token', @current_token.token) %>
     <%= hidden_field_tag('return_to', 'review') %>
+    <%= hidden_field_tag('agency_id', params[:agency_id]) %>
   
     <button type="submit" class="btn primary">Confirm</button>
   <% end %>
@@ -43,6 +50,7 @@
   <%= form_tag({:action => "remove"}) do %>
     <%= hidden_field_tag('service_url', outlet.service_url) %>
     <%= hidden_field_tag('auth_token', @current_token.token) %>
+    <%= hidden_field_tag('agency_id', params[:agency_id]) %>
     <%= hidden_field_tag('return_to', 'review') %>
   
     <button type="submit" class="btn danger" data-confirm="Do you really want to remove (<%= outlet.service_info.display_name %>) from the registry?">Remove</button>

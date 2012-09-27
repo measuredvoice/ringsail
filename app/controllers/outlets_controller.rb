@@ -163,7 +163,13 @@ class OutletsController < ApplicationController
     if request.format == :html
       flash[:shortnotice] = "Thank you!"
       flash[:notice] = "The entry for #{outlet_name} has been removed from the registry."
-      redirect_to :action => @return_to, :service_url => service_url, :auth_token => @current_token.token, :only_path => true
+      redirect_to(
+        :action => @return_to, 
+        :agency_id => params[:agency_id], 
+        :service_url => service_url, 
+        :auth_token => @current_token.token, 
+        :only_path => true
+      )
     else
       respond_with(XBoxer.new(:result, {:status => "success"}))
     end
