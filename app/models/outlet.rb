@@ -41,22 +41,20 @@ class Outlet < ActiveRecord::Base
   
   paginates_per 100
   
-  def verified?
-    # TODO:
-    #  Add a more formal definition of a verified outlet
-    agencies.size > 0
-  end
-  
-  def service_info
-    @service_info ||= Service.find_by_url(service_url)
-  end
-  
   def self.to_review
     where('outlets.updated_at < ?', 6.months.ago).order('outlets.updated_at')
   end
   
+  def self.to_review_for(email)
+    to_review.updated_by(email)
+  end
+  
   def self.updated_by(email)
     where(:updated_by => email)
+  end
+  
+  def self.emails_for_review
+    to_review.group("updated_by").order("outlets.updated_by").map(&:updated_by)
   end
   
   def self.resolve(url)
@@ -75,6 +73,16 @@ class Outlet < ActiveRecord::Base
       self.new(:service_url => s.service_url_canonical, :service => s.shortname, :account => s.account)
     end
   end    
+  
+  def verified?
+    # TODO:
+    #  Add a more formal definition of a verified outlet
+    agencies.size > 0
+  end
+  
+  def service_info
+    @service_info ||= Service.find_by_url(service_url)
+  end
   
   def masked_updated_by
     (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')

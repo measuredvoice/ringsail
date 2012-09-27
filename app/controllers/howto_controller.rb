@@ -18,7 +18,7 @@ class HowtoController < OutletsController
       @outlets = @outlets.joins(:agencies).where(:agencies => {:shortname => params[:agency_id]})
     else
       # Only show the accounts this user has submitted
-      @outlets = @outlets.where(:updated_by => @current_token.email)
+      @outlets = @outlets.updated_by(@current_token.email)
     end
     if params[:tag] and !params[:tag].empty?
       @outlets = @outlets.tagged_with(params[:tag])
