@@ -34,7 +34,7 @@
 <tbody>
 <% @outlets.each do |outlet| %>
 <tr>
-  <td><a href="<%= howto_find_outlet_path(:service_url => outlet.service_url, :auth_token => @current_token.token) %>"><%= outlet.service_url %></a></td>
+  <td><a href="<%= howto_find_outlet_path(:service_url => outlet.service_url, :auth_token => @current_token.token) %>" target="_blank"><%= outlet.service_url %></a></td>
   <td><%= outlet.organization %></td>
   <td><%= outlet.agencies.map {|a| a.name}.join(", ") %></td>
   <td>
@@ -46,7 +46,7 @@
   
     <button type="submit" class="btn primary">Confirm</button>
   <% end %>
-  <a class="btn" href="<%= howto_add_outlet_path :service_url => outlet.service_url, :auth_token => @current_token.token %>" target="new">Edit</a> 
+  <a class="btn" href="<%= howto_add_outlet_path :service_url => outlet.service_url, :auth_token => @current_token.token %>" target="_blank">Edit</a> 
   <%= form_tag({:action => "remove"}) do %>
     <%= hidden_field_tag('service_url', outlet.service_url) %>
     <%= hidden_field_tag('auth_token', @current_token.token) %>
