@@ -2,6 +2,8 @@ Ringsail::Application.routes.draw do
 
   get "homes/index"
 
+  match "admin/previews/review_email" => "previews#review_email", :via => :get, :as => :preview_review_email
+  match "admin/previews/review_email/send" => "previews#send_review_email", :via => :post, :as => :preview_send_review_email
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users

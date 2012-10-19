@@ -54,7 +54,7 @@ class Outlet < ActiveRecord::Base
   end
   
   def self.emails_for_review
-    to_review.group("updated_by").order("outlets.updated_by").map(&:updated_by)
+    to_review.group("updated_by").map(&:updated_by).sort
   end
   
   def self.resolve(url)
