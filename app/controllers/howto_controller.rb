@@ -16,6 +16,9 @@ class HowtoController < OutletsController
     if !params[:agency_id].blank?
       # Show all accounts for this agency
       @outlets = @outlets.joins(:agencies).where(:agencies => {:shortname => params[:agency_id]})
+    elsif params[:admin]
+      # Show the accounts added by admin
+      @outlets = @outlets.updated_by('admin')
     else
       # Only show the accounts this user has submitted
       @outlets = @outlets.updated_by(@current_token.email)
