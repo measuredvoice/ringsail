@@ -1,7 +1,8 @@
 class HowtoController < OutletsController
   layout "howto"
-  before_filter :check_auth, :except => [:verify, :show, :list, :review]
+  before_filter :check_auth, :except => [:verify, :show, :list, :review, :browse]
   before_filter :check_review_auth, :only => [:review]
+  before_filter :look_up_auth, :only => [:browse]
   
   def verify
     @page_title = "Register an account"
@@ -74,4 +75,20 @@ class HowtoController < OutletsController
       end
     end
   end
+  
+  def browse
+    @page_title = "Browse accounts"
+    
+    @agencies = Agency.order('name')
+    
+    if !params[:agency_id].blank?
+      # Show all accounts for this agency
+      @agency = Agency.find_by_shortname(params[:agency_id])
+    end
+    
+    if @agency
+      @outlets = @agency.outlets.page(params[:page_number])
+    end
+  end
+  
 end

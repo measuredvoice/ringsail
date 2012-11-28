@@ -1,0 +1,121 @@
+<div class="span15">
+
+<% if @agency %>
+<h3>Social Media Accounts Managed by the <%= @agency.name %></h3>
+<% else %>
+<h3>Social Media Accounts Managed by the U.S. Federal Government</h3>
+<% end %>
+
+<p>PLACEHOLDER TEXT ABOUT BROWSING PLEASE REVISE PLACEHOLDER TEXT</p>
+
+<% if current_token %>
+<p>PLACEHOLDER TEXT ABOUT EDITING PLEASE REVISE PLACEHOLDER TEXT</p>
+<% end %>
+<hr>
+
+<p>See social media acccounts managed by<%= @agency ? ' other' : '' %> U.S. federal government agencies:</p>
+
+<form action="" method="GET">
+<div class="clearfix">
+<label for="agency_id">Agency:</label>
+<div class="input">
+<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", [params[:agency_id]]), :class => "span7", :tabindex => "1" %>
+</div>
+</div>
+
+<% if current_token %>
+<%= hidden_field_tag 'auth_token', current_token.token %>
+<% end %>
+
+<div class="actions">
+<button class="btn" type="submit">Browse</button>
+</div>
+</form>
+
+<% if @agency %>
+
+<% if flash[:alert] %>
+
+  <p class="span10 alert-message warning">
+    <%= flash[:alert] %>
+  </p>
+
+<% elsif flash[:notice] %>
+
+  <p class="span10 alert-message notice">
+    <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+  </p>
+
+<% end %>
+
+<%= paginate @outlets, :param_name => :page_number %>
+
+<table class="table">
+<thead>
+<tr>
+  <th>Service URL</th>
+  <th>Organization</th>
+  <th>Tags</th>
+  <th>Last Updated</th>
+  <% if current_token %>
+  <th>Actions</th>
+  <% end %>
+</tr>
+</thead>
+<tbody>
+<% @outlets.each do |outlet| %>
+<tr>
+  <td><a href="<%= outlet.service_url %>" target="_blank"><%= outlet.service_url %></a></td>
+  <td>
+  <% if outlet.info_url.present? %>
+  <a href="<%= outlet.info_url %>"><%= outlet.organization %></a>
+  <% else %>
+  <%= outlet.organization %>
+  <% end %>
+  </td>
+  <td><%= outlet.tag_list.join(", ") %></td>
+  <td><%= outlet.updated_at.to_s(:human) %></td>
+  <% if current_token %>
+  <td><a class="btn" href="<%= howto_add_outlet_path :service_url => outlet.service_url, :auth_token => current_token.token %>" target="_blank">Edit</a></td>
+  <% end %>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+<% end %> <%# end if @agency %>
+
+<% unless current_token %>
+
+<div>  
+  <p>If you have a .gov or .mil email address, you can make changes to these listings. Enter your email address and phone number below and we will send you a link to edit them.</p>
+
+  <%= form_tag({:controller => "howto_tokens", :action => "create"}) do %>
+
+  <div class="clearfix">
+      <label for="email">Email:</label>
+      <div class="input">
+          <%= text_field_tag('email', '', :class => "span5") %>
+      </div>
+  </div>
+
+  <div class="clearfix">
+      <label for="phone">Phone:</label>
+      <div class="input">
+          <%= text_field_tag('phone', '', :class => "span5") %>
+      </div>
+  </div>
+
+  <%= hidden_field_tag('goto', 'browse') %>
+  <%= hidden_field_tag('agency_id', params[:agency_id]) %>
+
+  <div class="actions">
+      <input type="submit" class="btn" value="Submit">
+  </div>
+  <% end %>
+</div>
+
+
+<% end %> <%# end unless current_token %>
+
+</div>

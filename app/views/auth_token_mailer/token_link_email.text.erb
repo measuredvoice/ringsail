@@ -1,6 +1,8 @@
 Hello,
 <%- if @action == 'review' -%>
 Someone (probably you) has requested to review your submissions to the USA.gov Social Media Registry.
+<%- elsif @action == 'browse' -%>
+Someone (probably you) has requested access to make changes in the USA.gov Social Media Registry.
 <%- else -%>
 Someone (probably you) has requested a change to the USA.gov Social Media Registry. 
 Account to be created or updated: <%= @service_url %>
