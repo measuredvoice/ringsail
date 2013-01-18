@@ -38,6 +38,8 @@ class Outlet < ActiveRecord::Base
   
   before_save :set_updated_by
   before_save :fix_service_info
+  before_save :clear_agency_counts
+  before_destroy :clear_agency_counts
   
   paginates_per 100
   
@@ -118,6 +120,12 @@ class Outlet < ActiveRecord::Base
       else
         self.location_name = nil
       end
+    end
+  end
+  
+  def clear_agency_counts
+    agencies.each do |agency|
+      agency.clear_outlets_count
     end
   end
 end

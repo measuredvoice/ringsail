@@ -19,7 +19,7 @@
 <div class="clearfix">
 <label for="agency_id">Agency:</label>
 <div class="input">
-<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name", [params[:agency_id]]), :class => "span7", :tabindex => "1" %>
+<%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name_with_count", [params[:agency_id]]), :class => "span7", :tabindex => "1" %>
 </div>
 </div>
 
@@ -32,7 +32,37 @@
 </div>
 </form>
 
-<% if @agency %>
+<% if @agency && @outlets.empty? %>
+
+<p>PLACEHOLDER TEXT ABOUT NO ACCOUNTS FOR THIS AGENCY. PLEASE REVISE PLACEHOLDER TEXT</p>
+
+<div>  
+  <p>If you have a .gov or .mil email address, you can add social media accounts to these listings. Enter your email address and phone number below and we will send you a link to add them.</p>
+
+  <%= form_tag({:controller => "howto_tokens", :action => "create"}) do %>
+
+  <div class="clearfix">
+      <label for="email">Email:</label>
+      <div class="input">
+          <%= text_field_tag('email', '', :class => "span5") %>
+      </div>
+  </div>
+
+  <div class="clearfix">
+      <label for="phone">Phone:</label>
+      <div class="input">
+          <%= text_field_tag('phone', '', :class => "span5") %>
+      </div>
+  </div>
+
+  <div class="actions">
+      <input type="submit" class="btn" value="Submit">
+  </div>
+  <% end %>
+</div>
+
+
+<% elsif @agency %>
 
 <% if flash[:alert] %>
 
