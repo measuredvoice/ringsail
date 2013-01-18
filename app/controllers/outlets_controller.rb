@@ -182,14 +182,17 @@ class OutletsController < ApplicationController
       @outlets = @outlets.order('account, service')
     end
 
-    if params[:service_id] and !params[:service_id].empty?
+    if params[:service_id].present?
       @outlets = @outlets.where(:service => params[:service_id])
     end
-    if params[:agency_id] and !params[:agency_id].empty?
+    if params[:agency_id].present?
       @outlets = @outlets.joins(:agencies).where(:agencies => {:shortname => params[:agency_id]})
     end
-    if params[:tag] and !params[:tag].empty?
+    if params[:tag].present?
       @outlets = @outlets.tagged_with(params[:tag])
+    end
+    if params[:language].present?
+      @outlets = @outlets.where(:language => params[:language])
     end
     
     @outlets = @outlets.page(params[:page_number]).per(@per_page)
