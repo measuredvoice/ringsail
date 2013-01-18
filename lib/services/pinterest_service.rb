@@ -4,7 +4,7 @@ class PinterestService < Service
   end
   
   def self.shortname
-    pinterest
+    'pinterest'
   end
   
   def display_name
