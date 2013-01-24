@@ -4,7 +4,7 @@ class PinterestService < Service
   end
   
   def self.shortname
-    'pinterest'
+    :pinterest
   end
   
   def display_name
@@ -12,16 +12,16 @@ class PinterestService < Service
   end
 
   def account
-      /\/(?<account>[\w-]+)$/ =~ @uri.path
+      /^\/(?<account>[\w-]+)\/?/ =~ @uri.path
     account
   end
   
   def service_url_example
-    "http://www.pinterest.com/username"
+    "http://pinterest.com/username/"
   end
   
   def service_url_canonical
-    "http://pinterest.com/#{account}"
+    "http://pinterest.com/#{account}/"
   end
 
   private

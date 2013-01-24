@@ -93,4 +93,16 @@ describe Service do
       service.account.should be_nil
     end
   end
+  
+  describe "Pinterest plugin" do
+    it "should be chosen for Pinterest URLs" do
+      service = Service.find_by_url("http://pinterest.com/michelleobama/")
+      service.shortname.should == :pinterest
+    end
+
+    it "should pick out the correct account name" do
+      service = Service.find_by_url("http://pinterest.com/michelleobama/")
+      service.account.should == 'michelleobama'
+    end
+  end
 end
