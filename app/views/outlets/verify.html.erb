@@ -1,99 +1,73 @@
-<div class="span14">
-    <% if @outlet %>
+<div class="span12">
+  <% if @outlet %>
     
-    <ul class="breadcrumb">
-      <li><a href="verify">Verify an account</a> <span class="divider">/</span></li>
-      <li class="active"><%= @outlet.service_url %></li>
-    </ul>
+  <ul class="breadcrumb">
+    <li><a href="verify">Verify an account</a> <span class="divider">/</span></li>
+    <li class="active"><%= @outlet.service_url %></li>
+  </ul>
     
-    <% if flash[:notice] %>
-    <div class="row">
-        <p class="span7 alert alert-info">
-            <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
-        </p>
-    </div>
-    <% end %>
-
-    <% if @outlet.verified? %>
-    <div class="row">
-        <p class="span7 alert alert-success">
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is managed by the U.S. federal government.
-        </p>
-    </div>
+  <% if flash[:notice] %>
+  <p class="alert alert-info">
+    <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+  </p>
+  <% end %>
+  
+  <% if @outlet.verified? %>
+  <p class="alert alert-success">
+      <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is managed by the U.S. federal government.
+  </p>
     
-	<h3>
-		Information about <a href="<%= @outlet.service_url %>"><%= @outlet.service_info.display_name %></a>
-	</h3>
+  <h3>
+    Information about <%= @outlet.service_info.display_name %>
+  </h3>
+  <table class="table condensed-table">
+    <tbody>
+      <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
+      <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
+      <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
+    </tbody>
+  </table>
+      
+  <hr>
+  
+  <p>If you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">make changes to this listing</a> on HowTo.gov.</p>
+  
+  <% else %>
+  
+  <p class="alert alert-warning">
+    <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
+  </p>  
+  <hr>
+  <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an account managed by the U.S. federal government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to this registry</a> on HowTo.gov.</p>
+  
+  <% end %>
+  
+  <% else %>
+  
+  <h3>Verify social media accounts managed by the U.S. federal government</h3>  
+  <p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the government.</p>
+  <p>This tool lets you verify if a social media account is managed by the U.S. federal government.</p>
+  <p>You can look up accounts managed by federal agencies, elected officials, heads of agencies or members of the President&rsquo;s Cabinet.</p>
 
-    <table class="span8 condensed-table">
-        <tbody>
-            <tr><td class="span5">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
-            <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url %></td></tr>
-            <tr><td>Sponsoring <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
-        </tbody>
-    </table>
+  <hr>
 
-    <hr>
-    
-    <div class="span8">
-        
-        <p>If you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">make changes to this listing</a> on HowTo.gov.
-    </div>
-
-    <% else %>
-
-    <div class="row">
-        <p class="span7 alert alert-warning">
-            <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
-        </p>
-    </div>
-
-    <hr>
-    
-    <div class="span8">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an account managed by the U.S. federal government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to this registry</a> on HowTo.gov.</p>
-
-    </div>
-<% end %>
-
-<% else %>
-<h3>Verify social media accounts managed by the U.S. federal government</h3>
-<div class="span8">
-<p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the government.</p>
-
-<p>This tool lets you verify if a social media account is managed by the U.S. federal government.</p>
-
-<p>You can look up accounts managed by federal agencies, elected officials, heads of agencies or members of the President&rsquo;s Cabinet.</p>
-</div>
-</div>
-</div>
-
-<hr>
-
-<% if flash[:alert] %>
-<div class="row">
-  <p class="span10 alert alert-warning">
+  <% if flash[:alert] %>
+  <p class="alert alert-warning">
     <%= flash[:alert] %>
   </p>
-</div>
+  
+  <% end %>
+  
+  <p><b>To see if a social media account is managed by the U.S. federal government, please type or paste its complete URL here:</b></p>
+  
+  <span class="quiet">Example: http://twitter.com/whitehouse</span>
+    <%= form_tag({:action => "verify"}, :method => :get) do %>
+    <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
+    <button class="btn btn-primary" type="submit">Verify</button>
+    <% end %>
+  
+  <h4>Types of accounts we can verify:</h4>
+  <%= render "shared/services_list" %>
+
 <% end %>
-
-
-<div class="row">
-    <div class="span7">
-        <p><b>To see if a social media account is managed by the U.S. federal government, please paste its complete URL here:</b><br><br>
-        <span class="quiet">Example: http://twitter.com/whitehouse</span>
-		</p>
-        <%= form_tag({:action => "verify"}, :method => :get) do %>
-            <input type="text" name="service_url" class="span5" value="<%= params[:service_url] %>">
-            <button class="btn primary" type="submit">Verify</button>
-        <% end %>
-    </div>
-    <div class="span4 offset1">
-        <h3>Types of accounts we can verify:</h3>
-        <%= render "shared/services_list" %>
-    </div>
-</div>
-<% end %>
-
 </div>

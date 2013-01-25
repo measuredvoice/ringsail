@@ -42,7 +42,7 @@
   <tbody>
   <% @outlets.each do |outlet| %>
     <tr>
-      <td><a href="/accounts/verify?service_url=<%= outlet.service_url %>"><%= outlet.service_url %></a></td>
+      <td><a href="<%= show_outlet_path(:service => outlet.service, :account => outlet.account) %>"><%= outlet.service_url %></a></td>
       <td><%= outlet.organization %></td>
       <td><%= outlet.service %></td>
       <td><%= outlet.account %></td>
