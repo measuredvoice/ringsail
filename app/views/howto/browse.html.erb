@@ -117,7 +117,7 @@
       
     <% end %> <%# end if @agency %>
   
-    <form action="" method="GET" class="form-inline">
+    <form action="" method="GET" >
       <fieldset>
         <label for="agency_id">Select an<%= @agency ? 'other' : '' %> agency to see its social media accounts:</label>
         <%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name_with_count", [params[:agency_id]]), :class => "span8", :tabindex => "1" %>
