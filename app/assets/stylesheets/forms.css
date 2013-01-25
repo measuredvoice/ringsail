@@ -6,7 +6,7 @@ label, input, select, textarea {
 .actions {
 	background-color: #FFF;	
 }
-.btn,
+/*.btn,
 .btn.primary {
 	border: none;
 	color: #000;
@@ -22,7 +22,7 @@ label, input, select, textarea {
 	-webkit-border-radius: 0px;
 	-moz-border-radius: 0px;
 	border-radius: 0px;
-}
+}*/
 .help-block {
 	color: #595959;	
 }
@@ -31,8 +31,6 @@ ul.as-selections li.as-original input {
 	min-width: 200px !important;	
 }
 
-	
-	
 .chzn-container-multi .chzn-choices .search-field .default {
 	color: #000;	
 }

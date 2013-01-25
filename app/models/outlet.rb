@@ -38,25 +38,25 @@ class Outlet < ActiveRecord::Base
   
   before_save :set_updated_by
   before_save :fix_service_info
+  before_save :clear_agency_counts
+  before_destroy :clear_agency_counts
   
   paginates_per 100
   
-  def verified?
-    # TODO:
-    #  Add a more formal definition of a verified outlet
-    agencies.size > 0
-  end
-  
-  def service_info
-    @service_info ||= Service.find_by_url(service_url)
-  end
-  
   def self.to_review
-    where('updated_at < ?', 6.months.ago).order('updated_at')
+    where('outlets.updated_at < ?', 6.months.ago).order('outlets.updated_at')
+  end
+  
+  def self.to_review_for(email)
+    to_review.updated_by(email)
   end
   
   def self.updated_by(email)
     where(:updated_by => email)
+  end
+  
+  def self.emails_for_review
+    to_review.group("updated_by").map(&:updated_by).sort
   end
   
   def self.resolve(url)
@@ -75,6 +75,16 @@ class Outlet < ActiveRecord::Base
       self.new(:service_url => s.service_url_canonical, :service => s.shortname, :account => s.account)
     end
   end    
+  
+  def verified?
+    # TODO:
+    #  Add a more formal definition of a verified outlet
+    agencies.size > 0
+  end
+  
+  def service_info
+    @service_info ||= Service.find_by_url(service_url)
+  end
   
   def masked_updated_by
     (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
@@ -110,6 +120,12 @@ class Outlet < ActiveRecord::Base
       else
         self.location_name = nil
       end
+    end
+  end
+  
+  def clear_agency_counts
+    agencies.each do |agency|
+      agency.clear_outlets_count
     end
   end
 end

@@ -1,0 +1,33 @@
+<div class="span14">
+
+<%#= paginate @outlets, :param_name => :page_number %>
+
+Send a preview of the six-month review notification to your email address.
+
+<table class="table">
+<thead>
+<tr>
+  <th>Email</th>
+  <th>Accounts to review</th>
+  <th></th>
+</tr>
+</thead>
+<tbody>
+<% @emails.each do |email| %>
+<tr>
+  <td><%= email == 'admin' ? 'admin (sent to default email)': email %></td>
+  <td><%= Outlet.to_review_for(email).count %></td>
+  <td>  
+    <%= form_tag({:action => "send_review_email"}) do %>
+    <%= hidden_field_tag('updater_email', email) %>
+  
+    <button type="submit" class="btn" data-confirm="This will send a preview of the email intended for <%= email %> to your email address.">Send preview email</button>
+  <% end %>
+  </td>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+
+</div>

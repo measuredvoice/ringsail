@@ -31,4 +31,22 @@ class Agency < ActiveRecord::Base
       contact.email
     end
   end
+  
+  def name_with_count
+    "#{name} (#{outlets_count} accounts)"
+  end
+  
+  def outlets_count
+    Rails.cache.fetch(outlets_count_key, :expires_in => 1.hour) do
+    outlets.count
+    end
+  end
+  
+  def clear_outlets_count
+    Rails.cache.delete(outlets_count_key)
+  end
+  
+  def outlets_count_key
+    "agency/#{id}/outlets_count"
+  end
 end

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @page_title %> | Social Media Registry API Preview</title>
+  <title><%= @page_title %> | Social Media Registry Admin</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <style type="text/css">
@@ -10,37 +10,20 @@
       background-color: #eee;
     }
     body {
-      font-family: Verdana, sans-serif;
-      padding-top: 40px;
+      padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
     }
-
-    input,
-    button,
-    select,
-    textarea {
-      font-family: Verdana, sans-serif;
-    }
-
-    table {
-      table-layout: fixed; width: 100%;
-    }
-
-    .col1 {width:40%;}
-
-    td {
-      overflow:hidden; 
-      text-overflow: ellipsis; 
-    }
-
     .container > footer p {
       text-align: center; /* center align it with the container */
+    }
+    .container {
+      width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
     }
 
     /* The white background content wrapper */
     .content {
       background-color: #fff;
       padding: 20px;
-      margin: 0 -20px;  negative indent the amount of the padding to maintain the grid system 
+      margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
       -webkit-border-radius: 0 0 6px 6px;
          -moz-border-radius: 0 0 6px 6px;
               border-radius: 0 0 6px 6px;
@@ -63,9 +46,8 @@
       border-left: 1px solid #eee;
     }
 
-    .navbar-inverse a.brand {
-      color:#FFF;
-      font-size: 1.3em;
+    .topbar .btn {
+      border: 0;
     }
 
     /* Form default text tweaks */
@@ -78,59 +60,40 @@
     
     /* Pagination tweaks */
     .pagination em, .pagination span {
-      /*float: left;*/
+      float: left;
       padding: 0 14px;
       line-height: 34px;
       border-right: 1px solid;
       border-right-color: rgba(0,0,0,0.15);
-      /*text-decoration: none;*/
+      text-decoration: none;
     }
     
-    .pagination span.last {
-      border-right: none;
-    }
-
   </style>
 </head>
 <body>
 
-
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="<%=raw ENV['REGISTRY_DOCS_URL'] %>">U.S. Government Social Media Registry API</a>
-      </div>
+<div class="topbar">
+  <div class="fill">
+    <div class="container">
+      <a class="brand" href="<%=raw ENV['REGISTRY_DOCS_URL'] %>">U.S. Government Social Media Registry</a>
     </div>
   </div>
-
+</div>
 
 <div class="container">
 
   <div class="content">
     <div class="page-header">
-      <h1>API Preview<%= @page_title ? ": #{@page_title}" : '' %></h1>
+      <h1>Admin<%= @page_title ? ": #{@page_title}" : '' %></h1>
     </div>
     <div class="row">
 
-    <%= yield %>
+<%= yield %>
 
     </div>
   </div>
 
 </div> <!-- /container -->
-
-<footer class="container">
-  <div class="row">
-  <div class="span14">
-  <div class="alert alert-info">
-	<p>This is an HTML preview of the API output from a social media registry designed to keep track of all social media accounts managed by U.S. federal government agencies and programs.</p>
-	<p>See the <a href="<%=raw ENV['REGISTRY_DOCS_URL'] %>">API documentation</a> for more information on using this API.</p>
-	</div>
-	</div>
-	</div>
-</footer>
-
-<%= render "shared/webtrends" %>
 
 </body>
 </html>

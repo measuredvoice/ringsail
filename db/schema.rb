@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120510200447) do
+ActiveRecord::Schema.define(:version => 20120926190251) do
 
   create_table "agencies", :force => true do |t|
     t.string   "name"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120510200447) do
     t.integer  "access_count"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "duration",     :default => "short"
   end
 
   add_index "auth_tokens", ["email"], :name => "index_auth_tokens_on_email"

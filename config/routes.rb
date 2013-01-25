@@ -2,6 +2,8 @@ Ringsail::Application.routes.draw do
 
   get "homes/index"
 
+  match "admin/previews/review_email" => "previews#review_email", :via => :get, :as => :preview_review_email
+  match "admin/previews/review_email/send" => "previews#send_review_email", :via => :post, :as => :preview_send_review_email
   mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   devise_for :users
@@ -52,6 +54,7 @@ Ringsail::Application.routes.draw do
   match "social-media/social-media-registry/accounts/request"  => "howto_tokens#new", :via => :get, :as => :howto_request_token
   match "social-media/social-media-registry/accounts/request"  => "howto_tokens#create", :via => :post, :as => :howto_create_token
   match "social-media/social-media-registry/accounts/tags" => "official_tags#list", :via => :get, :as => :howto_list_tags
+  match "social-media/social-media-registry/accounts/browse"     => "howto#browse", :via => :get, :as => :howto_browse_outlets
   
   # HowTo.gov embedded style
   match "embed/find" => "embed#verify", :via => :get, :as => :embed_find_outlet

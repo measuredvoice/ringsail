@@ -18,6 +18,10 @@ FactoryGirl.define do
   factory :auth_token do
     email { generate(:gov_email) }
     phone "555-1212"
+    
+    factory :auth_token_ld do
+      duration 'long'
+    end
   end
   
   factory :agency do
