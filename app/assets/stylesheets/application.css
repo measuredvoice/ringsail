@@ -4,5 +4,5 @@
  *= require autosuggest
  *= require chosen
  *= require forms
- #= require bootstrap
+ *= require bootstrap
 */

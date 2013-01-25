@@ -4,5 +4,6 @@
  *= require autosuggest
  *= require chosen
  *= require forms
- #= require howto_overrides
+ *= require bootstrap
+ *= require howto_overrides
 */
