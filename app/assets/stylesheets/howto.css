@@ -12,7 +12,7 @@ html, body {
 
 body {
 	font-family: Verdana,sans-serif;
-	font-size: 0.75em;
+	/*font-size: 0.75em;*/
 	line-height: 1.5em;
 	background: #FDFDFD url('http://howto.gov/sites/default/themes/howto/images/fade_bk.jpg') repeat-x left top;
 	color: #232D32;
@@ -90,13 +90,8 @@ a#skip-to-content-link-home {
 	margin-left: -457px;
 }
 
-.alert-error {
+.alert-warning {
 	color: #884400;
-	background-color: #ffffee;
-	border: 1px solid #884400;
-	font-size: 120%;
-	padding: .1em .8em .1em .8em;
-	margin: 1em 0 1em 0;
 }
 	
 #site-name a {
@@ -160,6 +155,7 @@ a#skip-to-content-link-home {
 	background-color: #FFF;
 	width: 900px;
 	margin: 20px auto 0 auto;
+	padding-bottom: 40px;
 }
 
 
@@ -172,22 +168,23 @@ a#skip-to-content-link-home {
 .actions {
 	border:none}
 
-.btn.primary, input.btn, .btn {
+input.btn, .btn {
   font-family: 'Lucida Grande';
   background-color: #EEE;
   border: 1px solid #999;
   font-size: 110%;
-  height: 1.3;
   padding-bottom: 3px;
   padding-left: 6px;
   padding-right: 6px;
   padding-top: 2px;
   text-align: center;
   cursor:pointer;
-	
+  margin-top: -10px;
 }
 
 a.btn {
 	text-decoration: none;
 }	
 input#tags:focus{outline:0;border-color:rgba(82, 168, 236, 0.8);-webkit-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);-moz-box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);box-shadow:inset 0 1px 3px rgba(0, 0, 0, 0.1),0 0 8px rgba(82, 168, 236, 0.6);}
+
+#lookup_blank {margin:0 0 10em 0;}

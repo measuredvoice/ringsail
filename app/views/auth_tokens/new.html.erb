@@ -1,48 +1,35 @@
-<div class="span14">
-
-<% if @goto == 'review' %>
-<h3>Review entries in this registry</h3>
-<% else %>
-<h3>Edit or update entries in this registry</h3>
-<% end %>
-
-<div class="span8">
-<p>If you have a .gov or .mil email address, you can edit or update entries in this registry.</p>
-<p>Enter your .gov or .mil email address and phone number below, and we will send you a link that will allow editing access for <strong>24 hours</strong> from the time the email is sent.</p>
-</div>
-
-<%= form_tag({:action => "create"}, :class => "form-stacked") do %>
-
-<% if flash[:alert] %>
-<div class="alert-error">
-<%= render 'shared/error_messages', :object => @auth_token %>
-</div>
-<% end %>
-
 <div class="row">
-<div class="clearfix">
-<label for="email">Email:</label>
-<div class="input">
-	<%= text_field_tag('email', @auth_token.email, :class => "span5") %>
-</div>
-</div>
+  <div class="span10">
+    <% if @goto == 'review' %>
+    <h3>Review entries in this registry</h3>
+    <% else %>
+    <h3>Edit or update entries in this registry</h3>
+    <% end %>
+    <p>If you have a .gov or .mil email address, you can edit or update entries in this registry.</p>
+    <p>Enter your .gov or .mil email address and phone number below, and we will send you a link that will allow editing access for <strong>24 hours</strong> from the time the email is sent.</p>
 
-<div class="clearfix">
-<label for="phone">Phone:</label>
-<div class="input">
-	<%= text_field_tag('phone', @auth_token.phone, :class => "span5") %>
-</div>
-</div>
+    <%= form_tag({:action => "create"}, :class => "form-stacked") do %>
 
-<% if @goto %>
-<%= hidden_field_tag('goto', @goto) %>
-<% end %>
+      <% if flash[:alert] %>
+      <div class="alert-error">
+        <%= render 'shared/error_messages', :object => @auth_token %>
+      </div>
+      <% end %>
 
+      <label for="email">Email:</label>
+      <div class="input">
+        <%= text_field_tag('email', @auth_token.email, :class => "span5") %>
+      </div>
 
-<div class="actions">
-  <input type="submit" class="btn" value="Submit">
-</div>
-</div>
-<% end %>
-
+      <label for="phone">Phone:</label>
+      <div class="input">
+        <%= text_field_tag('phone', @auth_token.phone, :class => "span5") %>
+      </div>
+    
+      <% if @goto %>
+      <%= hidden_field_tag('goto', @goto) %>
+      <% end %>
+      <input type="submit" class="btn btn-primary" value="Submit">
+    <% end %>
+  </div>
 </div>

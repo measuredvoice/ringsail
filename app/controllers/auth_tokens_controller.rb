@@ -13,7 +13,7 @@ class AuthTokensController < ApplicationController
     @auth_token = AuthToken.new(token_params)   
     
     if AuthToken.find_recent_by_email(params[:email]) || @auth_token.save
-      @page_title = "Authorization requested"
+      @page_title = "Authorization Requested"
       
       if @auth_token.token
         email_fields = [:service_url, :goto, :agency_id]

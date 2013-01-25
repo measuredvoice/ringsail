@@ -77,7 +77,7 @@ class HowtoController < OutletsController
   end
   
   def browse
-    @page_title = "Browse accounts"
+    @page_title = "Browse Social Media Accounts Managed by the U.S. Federal Government"
     
     @agencies = Agency.order('name')
     

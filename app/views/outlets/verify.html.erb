@@ -8,7 +8,7 @@
     
     <% if flash[:notice] %>
     <div class="row">
-        <p class="span7 alert-message block-message info">
+        <p class="span7 alert alert-info">
             <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
         </p>
     </div>
@@ -16,7 +16,7 @@
 
     <% if @outlet.verified? %>
     <div class="row">
-        <p class="span7 alert-message block-message success">
+        <p class="span7 alert alert-success">
             <strong>Yes!</strong> <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> is managed by the U.S. federal government.
         </p>
     </div>
@@ -43,7 +43,7 @@
     <% else %>
 
     <div class="row">
-        <p class="span7 alert-message warning">
+        <p class="span7 alert alert-warning">
             <a href="<%= @outlet.service_url %>"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
         </p>
     </div>
@@ -72,7 +72,7 @@
 
 <% if flash[:alert] %>
 <div class="row">
-  <p class="span10 alert-message warning">
+  <p class="span10 alert alert-warning">
     <%= flash[:alert] %>
   </p>
 </div>

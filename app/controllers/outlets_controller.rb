@@ -161,7 +161,7 @@ class OutletsController < ApplicationController
     @outlet.destroy
     
     if request.format == :html
-      flash[:shortnotice] = "Thank you!"
+      flash[:shortnotice] = "Thank you."
       flash[:notice] = "The entry for #{outlet_name} has been removed from the registry."
       redirect_to(
         :action => @return_to, 
