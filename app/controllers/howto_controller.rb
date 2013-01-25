@@ -5,12 +5,12 @@ class HowtoController < OutletsController
   before_filter :look_up_auth, :only => [:browse]
   
   def verify
-    @page_title = "Register an account"
+    @page_title = "Register an Account"
     super
   end
   
   def review
-    @page_title = "Review accounts"
+    @page_title = "Review Registered Social Media Accounts"
     
     @outlets = Outlet.to_review.includes(:agencies)
 
