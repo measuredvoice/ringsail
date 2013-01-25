@@ -8,12 +8,12 @@
     <hr>
 
     <% if flash[:alert] %>
-    <p class="span10 alert alert-warning">
+    <p class="alert alert-warning">
       <%= flash[:alert] %>
     </p>
 
     <% elsif flash[:notice] %>
-    <p class="span10 alert alert-info">
+    <p class="alert alert-info">
       <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
     </p>
     <% end %>
