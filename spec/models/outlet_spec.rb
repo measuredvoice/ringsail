@@ -127,6 +127,13 @@ describe Outlet do
       outlet = Outlet.resolve("http://TWitter.com/example3")
       outlet.should_not be_nil
     end
+    
+    describe "with an invalid URL" do
+      it "should not return an outlet" do
+        outlet = Outlet.resolve("this URL is invalid")
+        outlet.should be_nil
+      end
+    end
   end
   
   describe "sponsorships" do
