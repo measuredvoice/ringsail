@@ -1,4 +1,4 @@
-<div class="span14">
+<div class="span12">
 
 <h2>Sign in</h2>
 
@@ -18,14 +18,13 @@
 </div>
 </div>
 
-<% if devise_mapping.rememberable? -%>
-<div class="clearfix">
+<!-- 
+# <% if devise_mapping.rememberable? -%>
 <%= f.label :remember_me %>
-<div class="input">
 <%= f.check_box :remember_me %>
 </div>
-</div>
 <% end -%>
+ -->
 
 <div class="actions"><%= f.submit "Sign in", :class => "btn primary" %></div>
 <% end %>
