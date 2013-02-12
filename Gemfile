@@ -6,7 +6,7 @@ gem 'mysql2'
 # Templates for generating JSON and other data output
 # see https://github.com/gowalla/boxer
 gem 'boxer'
-gem 'json'
+gem 'json', '~> 1.7.7'
 gem 'rack-jsonp'
 
 # Support for social media service plugins
