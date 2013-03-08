@@ -82,6 +82,63 @@
 			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
             <button class="verify-button" type="submit">Verify</button>
         <% end %>
+        
+    
+    <p><strong>Or browse official social media accounts by agency:</strong>
+    
+    <% if @agency %>
+    <h5>Social Media Accounts Managed by the <%= @agency.name %></h5>
+  
+    <% if @outlets.empty? %>
+    <div class="no_results">
+      <p class="label label-warning">No Registered Social Media Accounts</p>
+      <p>No one has registered any social media accounts managed by the <%= @agency.name %>.</p>
+    </div>
+    
+    <% else %>
+    
+    <%= paginate @outlets, :param_name => :page_number %>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Account URL</th>
+        <th>Managing Organization</th>
+        <th>Last Updated</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @outlets.each do |outlet| %>
+        <tr>
+          <td><a href="<%= outlet.service_url %>" target="_blank"><%= outlet.service_url %></a></td>
+          <td>
+          <% if outlet.info_url.present? %>
+          <a href="<%= outlet.info_url %>"><%= outlet.organization %></a>
+          <% else %>
+          <%= outlet.organization %>
+          <% end %>
+          </td>
+          <td><%= outlet.updated_at.to_s(:human) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    
+    <%= paginate @outlets, :param_name => :page_number %>
+    
+    <% end %> <%# end if @outlets.empty? %>
+    <% end %> <%# end if @agency %>
+
+    <% unless @agencies.blank? %>
+    <form action="" method="GET" >
+      <fieldset>
+        <label for="agency_id">Select an<%= @agency ? 'other' : '' %> agency to see its social media accounts:</label>
+        <%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name_with_count", [params[:agency_id]]), :class => "span8", :tabindex => "1" %>
+        
+        <button class="btn" type="submit">Look Up Social Media Accounts</button>
+      </fieldset>
+    </form>
+    <% end %>
 
         <h3>Types of accounts we can verify:</h3>
         <%= render "shared/services_list" %>

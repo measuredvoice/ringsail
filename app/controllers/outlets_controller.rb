@@ -139,7 +139,17 @@ class OutletsController < ApplicationController
       end
       
       @services = Service.all;
-
+      
+      # Show a list of agencies (in some views)
+      @agencies = Agency.order('name')
+    
+      if params[:agency_id].present?
+        # Show all accounts for this agency
+        if @agency = Agency.find_by_shortname(params[:agency_id])
+          @outlets = @agency.outlets.page(params[:page_number])
+        end
+      end
+      
       @page_title ||= "Verify an account"
       respond_with(XBoxer.new(:result, {
         :status => "incomplete",
