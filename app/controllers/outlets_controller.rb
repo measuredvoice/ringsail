@@ -140,8 +140,8 @@ class OutletsController < ApplicationController
       
       @services = Service.all;
       
-      # Show a list of agencies (in some views)
-      @agencies = Agency.order('name')
+      # Show a list of agencies with at least 1 account (in some views)
+      @agencies = Agency.order('name').find_all {|a| a.outlets_count > 0}
     
       if params[:agency_id].present?
         # Show all accounts for this agency
