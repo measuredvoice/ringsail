@@ -146,7 +146,7 @@ class OutletsController < ApplicationController
       if params[:agency_id].present?
         # Show all accounts for this agency
         if @agency = Agency.find_by_shortname(params[:agency_id])
-          @outlets = @agency.outlets.page(params[:page_number])
+          @outlets = @agency.outlets.page(params[:page_number]).per(10)
         end
       end
       
