@@ -1,8 +1,32 @@
 /*
  * This manifest file includes CSS files required for the USA.gov embedded layout
- *= require_self
  *= require autosuggest
  *= require chosen
  *= require forms
  *= require embed-base
+ *= require_self
 */
+
+fieldset {
+  border: none;
+  padding:0;
+}
+
+table {
+  margin:1em 0;
+  border-collapse: collapse; 
+}
+
+td, th { border: 1px #CCC solid; }
+
+table thead {
+  background-color: #EEE;
+}
+
+th {padding:1em 0;}
+
+table td {
+  padding:.5em;
+}
+
+.browse_accounts {margin:3em 0 0 0;}

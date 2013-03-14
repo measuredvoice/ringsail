@@ -2,31 +2,31 @@
     
     <% if flash[:notice] %>
     <div class="alert-error">
-        <p>
-            <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
-        </p>
+      <p>
+        <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+      </p>
     </div>
     <% end %>
 
     <% if @outlet.verified? %>
     <div id="verified-account">
-        <p>
-            <strong>Yes!</strong> <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> is managed by the U.S. federal government.
-        </p>
+      <p>
+        <strong>Yes!</strong> <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> is managed by the U.S. federal government.
+      </p>
     </div>
 
-	<div role="search" id="verify-another">
-		<p><label for="service-url">To see if another social media account is managed by the U.S. federal government, please paste its complete URL here:<br><br>
-		<span class="quiet">Example: http://twitter.com/whitehouse</span>
-		</label></p>
-	</div>
-		
+    <div role="search" id="verify-another">
+      <p><label for="service-url">To see if another social media account is managed by the U.S. federal government, please paste its complete URL here:<br><br>
+        <span class="quiet">Example: http://twitter.com/whitehouse</span>
+      </label></p>
+    </div>
+
     <%= form_tag({:action => "verify"}, :method => :get) do %>
-		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
-        <button class="verify-button" type="submit">Verify</button>
+    <input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+    <button class="verify-button" type="submit">Verify</button>
     <% end %>
     <div class="quiet" id="howto-cta">
-        <p>If you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">make changes to this listing on HowTo.gov</a>.</p>
+      <p>If you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">make changes to this listing on HowTo.gov</a>.</p>
     </div>
     
 
@@ -34,113 +34,112 @@
     <% else %>
 
     <div id="not-verified-account">
-        <p>
-            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
-        </p>
+      <p>
+        <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
+      </p>
     </div>
 
-	<div role="search" id="verify-another">
-		<p><label for="service-url"><strong>To see if another social media account is managed by the U.S. federal government, please paste its complete URL here:</strong><br><br>
-			<span class="quiet">Example: http://twitter.com/whitehouse</span>
-		</label></p>
-	</div>
-		
-    <%= form_tag({:action => "verify"}, :method => :get) do %>
-		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
-        <button class="verify-button" type="submit">Verify</button>
-    <% end %>
-    
-    <div class="quiet" id="howto-cta">
-        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is managed by the U.S. federal government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to the USA.gov social media registry on HowTo.gov</a>.</p>
+    <div role="search" id="verify-another">
+      <p><label for="service-url"><strong>To see if another social media account is managed by the U.S. federal government, please paste its complete URL here:</strong><br><br>
+       <span class="quiet">Example: http://twitter.com/whitehouse</span>
+     </label></p>
+   </div>
 
-    </div>
-<% end %>
+   <%= form_tag({:action => "verify"}, :method => :get) do %>
+   <input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+   <button class="verify-button" type="submit">Verify</button>
+   <% end %>
 
-<% else %>
+   <div class="quiet" id="howto-cta">
+    <p>If you know that <em><%= @outlet.service_info.display_name %></em> is managed by the U.S. federal government and you have a .gov or .mil email address, you can <a href="http://www.howto.gov/social-media/social-media-registry/register-accounts" target="_top">add it to the USA.gov social media registry on HowTo.gov</a>.</p>
 
-<% if flash[:alert] %>
-<div class="alert-error">
-  <p>
-    <%= flash[:alert] %>
-  </p>
+  </div>
+  <% end %>
+
+  <% else %>
+
+  <% if flash[:alert] %>
+  <div class="alert-error">
+    <p>
+      <%= flash[:alert] %>
+    </p>
+  </div>
+  <% end %>
+
+  <p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the federal government.</p>
+
+  <p>This tool lets you verify if a social media account is managed by the U.S. federal government.</p>
+
+  <p>You can look up accounts managed by federal agencies, elected officials, heads of agencies or members of the President&rsquo;s Cabinet.</p>
+
+  <div role="search">
+   <p><label for="service-url"><strong>To see if a social media account is managed by the U.S. federal government, please paste its complete URL here:</strong><br><br>
+    <span class="quiet">Example: http://twitter.com/whitehouse</span>
+  </label></p>
 </div>
+
+<%= form_tag({:action => "verify"}, :method => :get) do %>
+<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+<button class="verify-button" type="submit">Verify</button>
 <% end %>
 
-		<p>The government uses social media tools like Twitter, Facebook and YouTube to connect with people and communicate official information, so it’s important to know if a social media account is really managed by the federal government.</p>
+<div class="browse_accounts">
+  <p><strong>Or browse official social media accounts by agency:</strong></p>
 
-		<p>This tool lets you verify if a social media account is managed by the U.S. federal government.</p>
+  <% if @agency %>
+  <h5>Social Media Accounts Managed by the <%= @agency.name %></h5>
 
-		<p>You can look up accounts managed by federal agencies, elected officials, heads of agencies or members of the President&rsquo;s Cabinet.</p>
-		
-		<div role="search">
-			<p><label for="service-url"><strong>To see if a social media account is managed by the U.S. federal government, please paste its complete URL here:</strong><br><br>
-				<span class="quiet">Example: http://twitter.com/whitehouse</span>
-			</label></p>
-		</div>
-		
-        <%= form_tag({:action => "verify"}, :method => :get) do %>
-			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
-            <button class="verify-button" type="submit">Verify</button>
-        <% end %>
-        
-    
-    <p><strong>Or browse official social media accounts by agency:</strong>
-    
-    <% if @agency %>
-    <h5>Social Media Accounts Managed by the <%= @agency.name %></h5>
-  
-    <% if @outlets.empty? %>
-    <div class="no_results">
-      <p class="label label-warning">No Registered Social Media Accounts</p>
-      <p>No one has registered any social media accounts managed by the <%= @agency.name %>.</p>
-    </div>
-    
-    <% else %>
-    
-    <%= paginate @outlets, :param_name => :page_number %>
+  <% if @outlets.empty? %>
+  <div class="no_results">
+    <p class="label label-warning">No Registered Social Media Accounts</p>
+    <p>No one has registered any social media accounts managed by the <%= @agency.name %>.</p>
+  </div>
 
-    <table class="table">
-      <thead>
+  <% else %>
+
+  <%= paginate @outlets, :param_name => :page_number %>
+
+  <table class="table">
+    <thead>
       <tr>
-        <th>Account URL</th>
-        <th>Managing Organization</th>
-        <th>Last Updated</th>
+        <th>URL</th>
+        <th>Managing Office</th>
       </tr>
-      </thead>
-      <tbody>
+    </thead>
+    <tbody>
       <% @outlets.each do |outlet| %>
-        <tr>
-          <td><a href="<%= outlet.service_url %>" target="_blank"><%= outlet.service_url %></a></td>
-          <td>
+      <tr>
+        <td><a href="<%= outlet.service_url %>" target="_blank"><%= outlet.service_url %></a></td>
+        <td>
           <% if outlet.info_url.present? %>
           <a href="<%= outlet.info_url %>"><%= outlet.organization %></a>
           <% else %>
           <%= outlet.organization %>
           <% end %>
-          </td>
-          <td><%= outlet.updated_at.to_s(:human) %></td>
-        </tr>
+        </td>
+      </tr>
       <% end %>
-      </tbody>
-    </table>
-    
-    <%= paginate @outlets, :param_name => :page_number %>
-    
-    <% end %> <%# end if @outlets.empty? %>
-    <% end %> <%# end if @agency %>
+    </tbody>
+  </table>
 
-    <% unless @agencies.blank? %>
-    <form action="" method="GET" >
-      <fieldset>
-        <label for="agency_id">Select an<%= @agency ? 'other' : '' %> agency to see its social media accounts:</label>
-        <%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name_with_count", [params[:agency_id]]), :class => "span8", :tabindex => "1" %>
-        
-        <button class="btn" type="submit">Look Up Social Media Accounts</button>
-      </fieldset>
-    </form>
-    <% end %>
+  <%= paginate @outlets, :param_name => :page_number %>
 
-        <h3>Types of accounts we can verify:</h3>
-        <%= render "shared/services_list" %>
+  <% end %> <%# end if @outlets.empty? %>
+  <% end %> <%# end if @agency %>
 
-<% end %>
+  <% unless @agencies.blank? %>
+  <form action="" method="GET" >
+    <fieldset>
+      <label for="agency_id">Select an<%= @agency ? 'other' : '' %> agency to see its social media accounts:</label><br>
+      <%= select_tag "agency_id", options_from_collection_for_select(@agencies, "shortname", "name_with_count", [params[:agency_id]]), :class => "span8", :tabindex => "1" %><br>
+
+      <button class="btn" type="submit">Look Up Social Media Accounts</button>
+    </fieldset>
+  </form>
+  <% end %>
+</div>
+
+  <h3>Types of accounts we can verify:</h3>
+  <%= render "shared/services_list" %>
+
+  <% end %>
