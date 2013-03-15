@@ -30,3 +30,32 @@ table td {
 }
 
 .browse_accounts {margin:3em 0 0 0;}
+
+td.service a {
+  padding: 0 0 0 16px;
+  background: url('/social-media/social-media-registry/accounts/assets/social-icons.png') no-repeat;
+}
+
+td.service a.blip {background-position:0px 0px;}
+td.service a.disqus {background-position:0px -17px;}
+td.service a.facebook {background-position:0px -37px;}
+td.service a.flickr {background-position:0px -57px;}
+td.service a.foursquare {background-position:0px -77px;}
+td.service a.github {background-position:0px -97px;}
+td.service a.google_plus {background-position:0px -117px;}
+td.service a.ideascale {background-position:0px -137px;}
+td.service a.linkedin {background-position:0px -157px;}
+td.service a.meetup {background-position:0px -177px;}
+td.service a.myspace {background-position:0px -197px;}
+td.service a.pinterest {background-position:0px -217px;}
+td.service a.scribd {background-position:0px -237px;}
+td.service a.slideshare {background-position:0px -257px;}
+td.service a.socrata {background-position:0px -277px;}
+td.service a.storify {background-position:0px -197px;}
+td.service a.tumblr {background-position:0px -317px;}
+td.service a.twitter {background-position:0px -337px;}
+td.service a.uservoice {background-position:0px -357px;}
+td.service a.ustream {background-position:0px -377px;}
+td.service a.vimeo {background-position:0px -397px;}
+td.service a.youtube {background-position:0px -417px;}
+

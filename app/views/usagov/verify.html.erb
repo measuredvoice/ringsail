@@ -102,14 +102,14 @@
   <table class="table">
     <thead>
       <tr>
-        <th>URL</th>
+        <th>Link</th>
         <th>Managing Office</th>
       </tr>
     </thead>
     <tbody>
       <% @outlets.each do |outlet| %>
       <tr>
-        <td><a href="<%= outlet.service_url %>" target="_blank"><%= outlet.service_url %></a></td>
+        <td class="service"><a href="<%= outlet.service_url %>" target="_blank" class="<%= outlet.service_info.shortname %>"><%= outlet.service_url %></a></td>
         <td>
           <% if outlet.info_url.present? %>
           <a href="<%= outlet.info_url %>"><%= outlet.organization %></a>
