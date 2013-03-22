@@ -87,7 +87,7 @@ class HowtoController < OutletsController
     end
     
     if @agency
-      @outlets = @agency.outlets.page(params[:page_number])
+      @outlets = @agency.outlets.order('service_url').page(params[:page_number])
     end
   end
   
