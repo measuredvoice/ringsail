@@ -7,7 +7,7 @@ describe Service do
     unknown.should be_nil
   end
   
-  describe "Twitter plugin" do
+  describe "definition for Twitter" do
     
     it "should be chosen for Twitter URLs" do
       service = Service.find_by_url("http://twitter.com/usagov")
@@ -25,7 +25,7 @@ describe Service do
     end
   end
   
-  describe "Facebook plugin" do
+  describe "definition for Facebook" do
     
     it "should be chosen for Facebook URLs" do
       service = Service.find_by_url("http://facebook.com/USAgov")
@@ -33,7 +33,7 @@ describe Service do
     end
   end
   
-  describe "Youtube plugin" do
+  describe "definition for Youtube" do
     
     it "should be chosen for Youtube URLs" do
       service = Service.find_by_url("http://www.youtube.com/USGovernment")
@@ -46,7 +46,7 @@ describe Service do
     end
   end
   
-  describe "Flickr plugin" do
+  describe "definition for Flickr" do
     
     it "should be chosen for Flickr URLs" do
       service = Service.find_by_url("http://www.flickr.com/groups/usagov/")
@@ -78,7 +78,7 @@ describe Service do
     end
   end
 
-  describe "Slideshare plugin" do
+  describe "definition for Slideshare" do
     
     it "should be chosen for Slideshare URLs" do
       service = Service.find_by_url("http://www.slideshare.net/nasa")
@@ -94,7 +94,7 @@ describe Service do
     end
   end
   
-  describe "Pinterest plugin" do
+  describe "definition for Pinterest" do
     it "should be chosen for Pinterest URLs" do
       service = Service.find_by_url("http://pinterest.com/michelleobama/")
       service.shortname.should == :pinterest
@@ -103,6 +103,34 @@ describe Service do
     it "should pick out the correct account name" do
       service = Service.find_by_url("http://pinterest.com/michelleobama/")
       service.account.should == 'michelleobama'
+    end
+  end
+
+  describe "definition for Instagram" do
+    it "should be chosen for Instagram URLs" do
+      service = Service.find_by_url("http://instagram.com/morgantown_wv/")
+      service.shortname.should == :instagram
+    end
+
+    it "should pick out the correct account name" do
+      service = Service.find_by_url("http://instagram.com/morgantown_wv/")
+      service.shortname.should == :instagram
+      service.account.should == 'morgantown_wv'
+      
+      service = Service.find_by_url("http://instagram.com/cityofdetroit#")
+      service.shortname.should == :instagram
+      service.account.should == 'cityofdetroit'
+    end
+
+    it "should ignore system URLs" do
+      service = Service.find_by_url("http://instagram.com/about/us/")
+      service.account.should be_nil
+
+      service = Service.find_by_url("http://instagram.com/press/")
+      service.account.should be_nil
+
+      service = Service.find_by_url("http://blog.instagram.com/")
+      service.should be_nil
     end
   end
 end
