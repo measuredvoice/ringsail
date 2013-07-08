@@ -37,6 +37,7 @@
       <th>Service</th>
       <th>Account</th>
       <th>Agencies</th>
+      <th>Tags</th>
     </tr>
   </thead>
   <tbody>
@@ -47,6 +48,7 @@
       <td><%= outlet.service %></td>
       <td><%= outlet.account %></td>
       <td><%= outlet.agencies.map {|a| a.name}.join(", ") %></td>
+      <td><%= outlet.tags.join(", ") %></td>
     </tr>
   <% end %>
   </tbody>

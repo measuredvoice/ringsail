@@ -13,6 +13,7 @@ Boxer.box(:outlet) do |box, outlet|
         :details_url  => show_outlet_url(:service => outlet.service, :account => outlet.account, :host => ENV['RINGSAIL_API_HOST']),
         :agencies     => outlet.agencies.map { |agency| Boxer.ship(:agency, agency) },
         :organization => outlet.organization,
+        :tags         => outlet.tags.map { |tag| tag.name },
       }
     else
       {}
@@ -24,7 +25,6 @@ Boxer.box(:outlet) do |box, outlet|
         :display_name => outlet.service_info.display_name,
         :info_url     => outlet.info_url,
         :language     => outlet.language,
-        :tags         => outlet.tags.map { |tag| tag.name },
         :updated_at   => outlet.updated_at.to_s(:iso),
         :updated_by   => outlet.masked_updated_by,
       }

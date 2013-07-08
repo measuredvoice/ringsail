@@ -54,6 +54,7 @@
       <tr>
         <th>Account URL</th>
         <th>Managing Organization</th>
+        <th>Tags</th>
         <th>Last Updated</th>
         <% if current_token %>
         <th>Actions</th>
@@ -71,6 +72,7 @@
           <%= outlet.organization %>
           <% end %>
           </td>
+          <td><%= outlet.tags.join(', ') %></td>
           <td><%= outlet.updated_at.to_s(:human) %></td>
           <% if current_token %>
           <td><a class="btn" href="<%= howto_add_outlet_path :service_url => outlet.service_url, :auth_token => current_token.token   %>" target="_blank">Edit</a></td>
