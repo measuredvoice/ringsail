@@ -89,7 +89,24 @@
     .pagination span.last {
       border-right: none;
     }
-
+    
+    ul.tags {
+      display: inline;
+      list-style: none;
+      margin: 0;
+    }
+    
+    ul.tags li {
+      display: inline;
+    }
+    
+    ul.tags li:after {
+      content: ", ";
+    }
+    
+    ul.tags li:last-child:after {
+      content: "";
+    }
   </style>
 </head>
 <body>
