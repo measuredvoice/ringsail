@@ -14,7 +14,6 @@ body {
 	font-family: Verdana,sans-serif;
 	font-size: 0.75em;
 	line-height: 1.5em;
-	background: #FDFDFD url('https://digitalgov.sites.usa.gov/files/2014/01/logo2.png') repeat-x left top;
 	color: #232D32;
 }
 
@@ -35,7 +34,6 @@ h2 {
 }
 		
 header {
-	background: #1D5D89 url('http://howto.gov/sites/default/themes/howto/images/header_bk.png') repeat-y left top;
 	height: 146px;
 	position: relative;
 }
@@ -105,7 +103,6 @@ a#skip-to-content-link-home {
 	height: 74px;
 	text-indent: -9999px;
 	overflow: hidden;
-	background: url(http://howto.gov/sites/default/themes/howto/images/spacer.gif) 0 0 no-repeat;
 }
 		
 #header-nav {
@@ -135,7 +132,6 @@ a#skip-to-content-link-home {
 }
 
 #header-nav li.facebook a {
-	background: url('http://howto.gov/sites/default/themes/howto/images/facebook.png') no-repeat left top;
 	text-indent: -8765px;
 	height: 17px;
 	width: 17px;
@@ -146,7 +142,6 @@ a#skip-to-content-link-home {
 }
 
 #header-nav li.twitter a {
-	background: url('http://howto.gov/sites/default/themes/howto/images/twitter.png') no-repeat left top;
 	text-indent: -8765px;
 	display: block;
 	height: 17px;
