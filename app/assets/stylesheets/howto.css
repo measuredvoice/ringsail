@@ -29,19 +29,18 @@ h2 {
 	margin: 0px auto;
 	width: 960px;
 	background: white;
-	border: 1px solid #DADADA;
-	border-top: 0px;
+		border-top: 0px;
 }
 		
 header {
-	height: 146px;
+	margin-top: 10px;
+	height: 80px;
 	position: relative;
 }
 		
 footer {
 	font-family: Arial, Verdana, sans-serif;
-	background: #1D5D8A;
-	color: white;
+	color: black;
 	text-align: center;
 	margin: 0 0 0 0;
 	padding: 20px 0 0 0;
@@ -50,7 +49,7 @@ footer {
 }
 
 footer a {
-	color: white;
+	color: black;
 }
 
 footer p {

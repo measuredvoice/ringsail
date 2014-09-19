@@ -1,7 +1,7 @@
 how<!DOCTYPE html>
 <html>
 <head>
-  <title><%= @page_title %> | HowTo.gov</title>
+  <title><%= @page_title %> | DigitalGov.gov</title>
   <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
   <%= stylesheet_link_tag    "howto" %>
   <%= javascript_include_tag "application" %>
@@ -10,13 +10,14 @@ how<!DOCTYPE html>
 	<body>
 		<div id="container">
 			<header>
-				<div id="header-inner" class="clearfix">
-					<a href="#skip-to-content-destination" id="skip-to-content-link-home" tabindex="1" name="skip-to-content-link-home">Skip to main content</a>
-					<div id="logo-title" role="banner">
-						<div id="site-name">
-							<a href="http://digitalgov.gov" title="Home" rel="home">HowTo.gov</a>
+				<div id="header" class="clearfix">
+					<div id="head-content" class="clearfix">
+						<!-- SITE-TITLE/LOGO -->
+						<div id="sitetitle">
+							<a href="http://www.digitalgov.gov" title="DigitalGov"><img src="https://digitalgov.sites.usa.gov/files/2014/01/logo2.png" alt="DigitalGov" /></a>
 						</div>
-					</div><!-- close logo-title -->
+					</div>
+				</div><!-- close logo-title -->
 					<!-- <div id="header-nav">
 						<ul class="menu level-1" role="navigation">
 							<li class="facebook">
@@ -47,14 +48,14 @@ how<!DOCTYPE html>
 				
 			</section>
 			<footer>
-					<p>
-
-						An Official Website of the US Government<br />
-
-						Sponsored by <a href="http://www.gsa.gov/portal/category/25729">GSA&#39;s Office of Citizen Services &amp; Innovative Technologies</a><br />
-
-						Managed by the <a href="http://www.usa.gov/webcontent/about/council.shtml">Federal Web Managers Council</a></p>
-						<p></p>
+				<div class="textwidget"><a href="http://www.gsa.gov" onclick="javascript:_gaq.push(['_trackEvent','outbound-widget','http://www.gsa.gov']);"><img src="http://www.digitalgov.gov/files/2013/11/logo_footer_gsa.png" alt="GSA Service Mark"></a>
+					<br>
+						U.S. General Services Administration
+					<br>
+						an official site of the U.S. Government
+					<br>
+						| <a href="http://www.digitalgov.gov/about">About</a> | <a href="http://www.digitalgov.gov/about/policies/">Site Policies</a> | <a href="http://www.digitalgov.gov/contact-us/">Contact Us</a> | 
+				</div>
 				
 			</footer>
 		</div>
