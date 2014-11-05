@@ -1,4 +1,11 @@
-# Ringsail
+# Social Media Registry (program information)
+
+* [API Documentation](http://www.usa.gov/About/developer-resources/social-media-registry.shtml)
+* [Verification Page](http://www.usa.gov/Contact/verify-social-media.shtml)
+* [Registration Page](http://registry.usa.gov/embed/find)
+
+
+# Ringsail (the underlying software) 
 
 Ringsail is a registry built in Ruby on Rails to gather, organize, and make available information about social media accounts run by large organizations.
 
