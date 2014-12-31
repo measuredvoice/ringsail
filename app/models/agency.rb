@@ -11,7 +11,7 @@
 #
 
 class Agency < ActiveRecord::Base
-  attr_accessible :name, :shortname, :info_url, :agency_contact_ids
+  #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   
   has_many :sponsorships
   has_many :outlets, :through => :sponsorships

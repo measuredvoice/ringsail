@@ -221,4 +221,11 @@ class OutletsController < ApplicationController
   def agencies_for_form
     Agency.all(:order => "name")
   end
+  private
+    def set_outlet
+      @outlet = Outlet.find(params[:id])
+    end
+    def outlet_params
+      params.require(:outlet).permit(:auth_token, :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name)
+    end
 end

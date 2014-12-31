@@ -39,4 +39,5 @@ Ringsail::Application.configure do
     :domain    => ENV['SENDGRID_DOMAIN'],
     :password  => ENV['SENDGRID_PASSWORD'],   
   }
+  config.eager_load = false
 end

@@ -10,7 +10,7 @@
 #
 
 class Sponsorship < ActiveRecord::Base
-  attr_accessible :agency_id, :outlet_id
+  #attr_accessible :agency_id, :outlet_id
 
   belongs_to :outlet
   belongs_to :agency

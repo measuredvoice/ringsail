@@ -10,7 +10,7 @@
 #
 
 class AgencyContact < ActiveRecord::Base
-  attr_accessible :agency_id, :email
+  #attr_accessible :agency_id, :email
   
   belongs_to :agency
 

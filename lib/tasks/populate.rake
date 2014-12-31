@@ -22,7 +22,7 @@ def make_agencies(options = {})
   CSV.foreach(agencies_file) do |row|
     attrs = {:name => row[0], :info_url => row[1], :shortname => row[2]}
 
-    agency = Agency.find_or_create_by_shortname(attrs)
+    agency = Agency.find_or_create_by(attrs)
     
     if (options[:force])
       agency.assign_attributes(attrs)

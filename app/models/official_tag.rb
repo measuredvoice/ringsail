@@ -10,7 +10,7 @@
 #
 
 class OfficialTag < ActiveRecord::Base
-  attr_accessible :shortname, :tag_text
+  #attr_accessible :shortname, :tag_text
   
   validates :tag_text, :presence => true
   validates :shortname, :presence => true, :uniqueness => true

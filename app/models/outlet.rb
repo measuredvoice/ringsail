@@ -17,8 +17,8 @@
 #
 
 class Outlet < ActiveRecord::Base
-  attr_accessor :auth_token
-  attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
+  #attr_accessor :auth_token
+  #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships

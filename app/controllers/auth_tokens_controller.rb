@@ -1,6 +1,6 @@
 class AuthTokensController < ApplicationController
   respond_to :html, :xml, :json
-
+  before_action :set_authtoken, except: [:index]
   def new
     @page_title = "Request authorization"
     @auth_token = AuthToken.new
@@ -38,4 +38,12 @@ class AuthTokensController < ApplicationController
       end
     end
   end
+  private 
+    def set_authtoken
+      @auth_token = AuthoToken.find(params[:id])
+    end
+    def authtoken_params
+      params.require(:authtoken).permit(:email, :phone)
+    end
+
 end

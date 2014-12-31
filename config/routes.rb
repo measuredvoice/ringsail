@@ -1,4 +1,9 @@
 Ringsail::Application.routes.draw do
+  resources :agencies do
+    collection do
+      get "autocomplete"
+    end
+  end
 
   get "homes/index"
 
@@ -66,5 +71,5 @@ Ringsail::Application.routes.draw do
   
   # GobiernoUSA.gov embedded style
   match "gobierno/verificar" => "gobierno#verify", :via => :get, :as => :gobierno_verify_outlet
-  
+
 end

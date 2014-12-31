@@ -1,0 +1,18 @@
+<div class="span14">
+
+	<%= form_tag("/search", method: "get") do %>
+		<%= label_tag(:tags, "Search for:") %>
+		<%= text_field_tag(:tags) %>
+		<%= submit_tag("Search") %>
+	<% end%>
+</br></br></br></br></br></br></br></br></br></br>
+	<!-- <label for="tags">Tags: </label>
+	<input id = "tags">  -->
+	<ul>
+		<% @agencies.each do |agency| %>
+			<li><%= agency.name %></li>
+		<% end %>
+	</ul>
+	
+
+</div>
