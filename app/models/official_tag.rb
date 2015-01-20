@@ -10,6 +10,9 @@
 #
 
 class OfficialTag < ActiveRecord::Base
+  include PublicActivity::Model
+  
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
   #attr_accessible :shortname, :tag_text
   
   validates :tag_text, :presence => true

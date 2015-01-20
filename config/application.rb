@@ -54,6 +54,6 @@ module Ringsail
     config.middleware.use Rack::JSONP
     
     # Put compiled JS and CSS assets in a proxy-friendly path
-    config.assets.prefix = "/social-media/social-media-registry/accounts/assets"
+    #config.assets.prefix = "/social-media/social-media-registry/accounts/assets"
   end
 end

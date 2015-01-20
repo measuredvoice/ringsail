@@ -1,4 +1,5 @@
 source 'http://rubygems.org'
+ruby '2.1.5'
 
 gem 'rails', '4.1.1'
 gem 'mysql2'
@@ -8,6 +9,8 @@ gem 'mysql2'
 gem 'boxer'
 gem 'json'
 gem 'rack-jsonp'
+
+gem 'public_activity'
 
 # Support for social media service plugins
 # gem 'twitter'
@@ -33,7 +36,7 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
 end
-
+gem 'bootstrap-sass', '~> 3.3.3'
 gem 'jquery-rails'
 
 gem 'jbuilder', '~> 2.2.6'

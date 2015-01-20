@@ -1,4 +1,7 @@
 Ringsail::Application.routes.draw do
+  
+  
+  # This calls should all be namespaced to admin, we should move away from railsadmin
   resources :agencies do
     collection do
       get "autocomplete"
@@ -7,14 +10,28 @@ Ringsail::Application.routes.draw do
 
   get "homes/index"
 
-  match "admin/previews/review_email" => "previews#review_email", :via => :get, :as => :preview_review_email
-  match "admin/previews/review_email/send" => "previews#send_review_email", :via => :post, :as => :preview_send_review_email
-  mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
+  # match "admin/previews/review_email" => "previews#review_email", :via => :get, :as => :preview_review_email
+  # match "admin/previews/review_email/send" => "previews#send_review_email", :via => :post, :as => :preview_send_review_email
+  
+  # we are going to replace rails admin, its not very maintainable, but a decent crud
+  # keep in the app until we are sure we've replace the functionality
+  #mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+
+  namespace :admin do
+    get '/' => 'dashboard#index'
+    resources :outlets
+    resources :users
+  end
   devise_for :users
   
   root :to => "home#index"
 
+
+
+  ######
+  # THESE ARE CURRENTLY EXISTING API CALLS
+  ######
   # API call /accounts/verify, GET
   # and synonym /accounts/{service}/{account}, GET
   match "accounts/verify" => "outlets#verify", :via => :get, :as => :verify_outlet
@@ -49,6 +66,10 @@ Ringsail::Application.routes.draw do
   # API call /locations/resolve, GET
   match "locations/resolve" => "outlet_locations#resolve", :via => :get, :as => :resolve_locations
   
+
+  ######
+  # THESE ARE CURRENTLY EMBEDDED PAGES. IF WE REPLACE THE CURRENT APP, WE MUST KEEP THIS OPERATIONAL
+  ######
   # HowTo.gov proxied style
   match "social-media/social-media-registry/accounts/register" => "howto#add", :via => :get, :as => :howto_add_outlet
   match "social-media/social-media-registry/accounts/register" => "howto#update", :via => :post, :as => :howto_update_outlet

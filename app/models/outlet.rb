@@ -17,6 +17,9 @@
 #
 
 class Outlet < ActiveRecord::Base
+  include PublicActivity::Model
+  
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 
@@ -36,7 +39,7 @@ class Outlet < ActiveRecord::Base
   validates :account, :presence => true
   validates :language, :presence => true
   
-  before_save :set_updated_by
+  # before_save :set_updated_by
   before_save :fix_service_info
   before_save :clear_agency_counts
   before_destroy :clear_agency_counts
