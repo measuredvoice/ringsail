@@ -38,14 +38,7 @@
 
   <h2 class="sub-header">Public Activity</h2>
   <div class="activities">
-    	<% @activities.each do |activity| %>  
-		  <div class="activity">  
-		  <%= link_to activity.owner.email, admin_user_path(activity.owner) if activity.owner %>  
-		  <% case activity.trackable %>
-			  <% when Outlet %>
-			  	modified outlet <%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
-		  <% end %>
-		  </div>  
-		<% end %>  
+  		<%= render partial: "activities", locals: {activities: @activities} %>
+    	
   </div>
 </div>
