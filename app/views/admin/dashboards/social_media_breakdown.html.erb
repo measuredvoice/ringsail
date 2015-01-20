@@ -9,9 +9,10 @@
   	<% largest = 0 %>
   	<% @social_media_breakdowns.each do |key, value| %>
   		<% largest = value if value > largest %>
+  		<% color = ["progress-bar-success", "progress-bar-info", "progress-bar-warning", "progress-bardanger"].sample %>
   		<h3><%= key %> Service</h3>
   		<div class="progress">
-		  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= value.to_f / largest * 100%>%">
+		  <div class="progress-bar <%= color %>" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= value.to_f / largest * 100%>%">
 		    <span class="sr-only"><%= @value %> accounts</span>
 		  </div>
 		</div>
