@@ -1,22 +1,35 @@
 <% activities.each do |activity| %>  
   <div class="activity">  
-  <% case activity.trackable %>
-	  <% when Outlet %>
-	  	<div class="panel panel-default">
-	  	  
-		  <div class="panel-body">
-	  	  	<i class="fa fa-users"></i>
-	  	  	Social Media Account: 
-	  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
-	  	  	<% case activity.key %>
-	  	  		<% when "outlet.update" %>
-	  	  		updated
-	  	  		<% when "outlet.created" %>
-	  	  		created by
-	  	  	<% end %>
-	  		on <%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %> by <%= link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner) if activity.owner %>  
-		  </div>
-		</div>		  	
-  <% end %>
+  	<div class="panel panel-default">
+  	  
+	  <div class="panel-body">
+		<% case activity.trackable %>
+		  	<% when Outlet %>
+		  	  	<i class="fa fa-users"></i>
+		  	  	Social Media Account: 
+		  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
+		  	  	<% case activity.key %>
+		  	  		<% when "outlet.update" %>
+		  	  		updated
+		  	  		<% when "outlet.created" %>
+		  	  		created by
+		  	  	<% end %>
+		  		on <%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %> by <%= link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner) if activity.owner %>  
+		  	<% when User %>
+		  		<i class="fa fa-user"></i>
+		  	  	User: 
+		  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
+		  	  	<% case activity.key %>
+		  	  		<% when "user.update" %>
+		  	  		updated
+		  	  		<% when "user.created" %>
+		  	  		created by
+		  	  	<% end %>
+		  		on <%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %> by <%= link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner) if activity.owner %>  
+
+			  	  	
+  		<% end %>
+  	  </div>
+	</div>	
   </div>  
 <% end %>  

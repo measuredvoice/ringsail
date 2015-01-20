@@ -37,8 +37,8 @@
 	        <li class="<%= "active" if request.original_url.include? "admin/outlets" %>"><a href="/admin/outlets">Social Media</a></li>
 	        <li><a href="#">Mobile Apps</a></li>
 	        <li><a href="#">Agencies</a></li>
-	        <li><a href="#">Users</a></li>
-	        <li><a href="#">Profile</a></li>
+	        <li><%= link_to "Users", admin_users_path %></li>
+	        <li><%= link_to "Profile: #{current_user.email}", edit_admin_user_path(current_user) %></li>
 	      </ul>
 	    </div>
 	  </div>
