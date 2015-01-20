@@ -1,0 +1,22 @@
+<h1>Dashboard</h1>
+<div class="col-sm-3 col-md-2 sidebar">
+	<%= render partial: "sidebar" %>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">Outlets</h1>
+
+  <div class="row placeholders">
+  	<table class="table-responsible striped">
+  		<tr>
+  			<th>Email</th>
+  			<th>Actions</th>
+  		</tr>
+  		<% @users.each do |user| %>
+  			<tr>
+  				<td><%= user.email %></td>
+  				<td><%= link_to "Edit", edit_admin_user_path(user)%></td>
+  			</tr>
+  		<% end %>
+  	</table>
+  </div>
+</div>
