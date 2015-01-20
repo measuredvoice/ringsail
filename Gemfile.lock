@@ -164,6 +164,9 @@ GEM
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
+    paper_trail (3.0.6)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     polyglot (0.3.5)
     posix-spawn (0.3.9)
     pry (0.9.12.6)
@@ -289,6 +292,7 @@ DEPENDENCIES
   json
   kaminari
   mysql2
+  paper_trail
   pry-byebug
   public_activity
   rack-jsonp

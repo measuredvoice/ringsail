@@ -11,6 +11,7 @@ gem 'json'
 gem 'rack-jsonp'
 
 gem 'public_activity'
+gem 'paper_trail'
 
 # Support for social media service plugins
 # gem 'twitter'

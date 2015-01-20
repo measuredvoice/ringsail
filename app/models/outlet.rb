@@ -17,9 +17,12 @@
 #
 
 class Outlet < ActiveRecord::Base
+  #handles logging of activity
   include PublicActivity::Model
-  
   tracked owner: Proc.new{ |controller, model| controller.current_user }
+
+  #handles versioning
+  has_paper_trail
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 

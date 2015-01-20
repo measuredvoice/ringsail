@@ -10,7 +10,12 @@
 #
 
 class OfficialTag < ActiveRecord::Base
+  #handles logging of activity
   include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
+
+  #handles versioning
+  has_paper_trail
   
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   #attr_accessible :shortname, :tag_text
