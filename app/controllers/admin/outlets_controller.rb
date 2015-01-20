@@ -1,7 +1,7 @@
 class Admin::OutletsController < Admin::AdminController
   respond_to :html, :xml, :json
 
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy]
+  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history,:restore]
   # GET /outlets
   # GET /outlets.json
   def index
@@ -60,6 +60,15 @@ class Admin::OutletsController < Admin::AdminController
       format.html { redirect_to outlets_url, notice: 'Outlet was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def history
+    @versions = @outlet.versions
+  end
+
+  def restore
+    @outlet.versions.find(params[:version_id]).reify.save!
+    redirect_to admin_outlet_path(@outlet), :notice => "Undid changes to outlet."
   end
 
   

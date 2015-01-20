@@ -11,9 +11,9 @@ class OfficialTagsController < ApplicationController
   end
   private
   	def set_official_tags
-   		@official_tag = OfficialTag.find(params[:id])
- 	end
+   		#@official_tag = OfficialTag.find(params[:id])
+ 	  end
   	def official_tags_params
    		params.require(:official_tag).permit(:shortname, :tag_text)
- 	end
+ 	  end
 end

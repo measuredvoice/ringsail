@@ -24,7 +24,12 @@ Ringsail::Application.routes.draw do
         get 'social_media_breakdown' => 'dashboards#social_media_breakdown'
       end
     end
-    resources :outlets
+    resources :outlets do
+      member do
+        get "history"
+        get "restore"
+      end
+    end
     resources :users
 
     get '/' => 'dashboards#index'
