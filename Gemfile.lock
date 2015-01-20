@@ -286,6 +286,7 @@ DEPENDENCIES
   coffee-rails
   devise
   faker
+  font-awesome-rails
   jazz_hands!
   jbuilder (~> 2.2.6)
   jquery-rails
