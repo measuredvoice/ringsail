@@ -19,9 +19,15 @@ Ringsail::Application.routes.draw do
   #mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
 
   namespace :admin do
-    get '/' => 'dashboard#index'
+    resources :dashboards do
+      collection do
+        get 'social_media_breakdown' => 'dashboards#social_media_breakdown'
+      end
+    end
     resources :outlets
     resources :users
+
+    get '/' => 'dashboards#index'
   end
   devise_for :users
   

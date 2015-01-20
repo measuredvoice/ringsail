@@ -1,0 +1,19 @@
+<h1>Dashboard</h1>
+<div class="col-sm-3 col-md-2 sidebar">
+	<%= render partial: "sidebar" %>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">Social Media Accounts</h1>
+  <div class="row placeholders">
+  	<h2>Media Breakdowns</h2>
+  	<% largest = 0 %>
+  	<% @social_media_breakdowns.each do |key, value| %>
+  		<% largest = value if value > largest %>
+  		<h3><%= key %> Service</h3>
+  		<div class="progress">
+		  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= value.to_f / largest * 100%>%">
+		    <span class="sr-only"><%= @value %> accounts</span>
+		  </div>
+		</div>
+	<% end %>
+</div>

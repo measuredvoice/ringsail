@@ -1,0 +1,24 @@
+<h1>Dashboard</h1>
+<div class="col-sm-3 col-md-2 sidebar">
+	<%= render partial: "sidebar" %>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+  <h1 class="page-header">Outlets</h1>
+
+  <div class="row placeholders">
+  	<table class="table-responsible striped">
+  		<tr>
+  			<th>Organization</th>
+  			<th>Service URL</th>
+  			<th>Actions</th>
+  		</tr>
+  		<% @outlets.each do |outlet| %>
+  			<tr>
+  				<td><%= outlet.organization %></td>
+  				<td><%= outlet.service_url %></td>
+  				<td><%= link_to "Edit", edit_admin_outlet_path(outlet)%></td>
+  			</tr>
+  		<% end %>
+  	</table>
+  </div>
+</div>

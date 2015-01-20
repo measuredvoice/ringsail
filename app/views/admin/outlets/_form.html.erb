@@ -1,0 +1,25 @@
+<%= form_for([:admin,@outlet]) do |f| %>
+  <% if @outlet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@outlet.errors.count, "error") %> prohibited this chapter from being saved:</h2>
+
+      <ul>
+      <% @outlet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :service_url %><br>
+    <%= f.text_field :service_url %>
+  </div>
+  <div class="field">
+    <%= f.label :organization %><br>
+    <%= f.text_field :organization %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
