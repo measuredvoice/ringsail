@@ -9,6 +9,8 @@
 		  	  	Social Media Account: 
 		  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
 		  	  	<% case activity.key %>
+		  	  		<% when "outlet.restored" %>
+		  	  		restored to an earlier verison
 		  	  		<% when "outlet.update" %>
 		  	  		updated
 		  	  		<% when "outlet.created" %>
@@ -20,6 +22,8 @@
 		  	  	User: 
 		  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
 		  	  	<% case activity.key %>
+		  	  		<% when "user.restored" %>
+		  	  		restored to an earlier verison
 		  	  		<% when "user.update" %>
 		  	  		updated
 		  	  		<% when "user.created" %>
