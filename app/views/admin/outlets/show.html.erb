@@ -1,5 +1,8 @@
-<p id="notice"><%= notice %></p>
-
+<h1>Dashboard</h1>
+<div class="col-sm-3 col-md-2 sidebar">
+	<%= render partial: "sidebar" %>
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 <p>
   <strong>Organization:</strong>
   <%= @outlet.organization %>
@@ -12,3 +15,4 @@
 
 <%= link_to 'Edit', edit_admin_outlet_path(@outlet) %> |
 <%= link_to 'Back', admin_outlets_path %>
+</div>

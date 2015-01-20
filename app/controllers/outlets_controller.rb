@@ -216,6 +216,8 @@ class OutletsController < ApplicationController
     respond_with(XBoxer.new(:result, Boxer.ship(:outlets, @outlets) ))
   end
 
+
+
   private
   
   def agencies_for_form

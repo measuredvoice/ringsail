@@ -3,7 +3,7 @@
 	<%= render partial: "sidebar" %>
 </div>
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h1 class="page-header">Outlets</h1>
+  <h1 class="page-header">Versions</h1>
 
   <div class="row placeholders">
   	<table class="table table-condensed table-responsible table-striped">
@@ -15,7 +15,8 @@
         <th>Updated at</th>
         <th>Actions</th>
   		</tr>
-  		<% @outlets.each do |outlet| %>
+  		<% @versions.each do |version| %>
+  			<% outlet = version.reify %>
   			<tr>
   				<td><%= outlet.service %></td>
   				<td><%= outlet.account %></td>
@@ -24,10 +25,7 @@
           <td><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
           <td>
             <ul>
-              <li><%= link_to "Show", admin_outlet_path(outlet) %> </li>
-              <li><%= link_to "Edit", edit_admin_outlet_path(outlet) %></li>
-              <li><%= link_to "Delete", admin_outlet_path(outlet), method: :delete, confirm: 'Are you certain you want to delete this?'%></li>
-              <li><%= link_to "History", history_admin_outlet_path(outlet) %></li>
+              <li><%= link_to "Restore", restore_admin_outlet_path({id: outlet.id, version_id: version.id}) %></li>
             </ul>
           </td>   
   			</tr>

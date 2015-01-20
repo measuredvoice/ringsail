@@ -22,7 +22,7 @@ class Outlet < ActiveRecord::Base
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   #handles versioning
-  has_paper_trail
+  has_paper_trail 
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 
@@ -101,7 +101,11 @@ class Outlet < ActiveRecord::Base
       agency.contact_emails(:excluding => updated_by)
     end
   end
-    
+  
+  def history
+    @versions = PaperTrail::Outlets.order('created_at DESC')
+  end
+
   private
   
   def set_updated_by
