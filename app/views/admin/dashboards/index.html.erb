@@ -41,6 +41,7 @@
 	  <h2 class="sub-header">Public Activity</h2>
 	</div>
 	<div class="col-sm-6">
+		<div id="piechart" style="height: 300px;"></div>
 
 		<div id="areachart" style="height: 300px;"></div>
 		
@@ -55,6 +56,12 @@
 				    pointSize: 2,
 				    hideHover: 'auto'
 				  });
+
+				Morris.Donut({
+				    element: 'piechart',
+				    data: <%= raw @activities_pie_json.to_json %>,
+				    formatter: function (y) { return y + " accounts" }
+				 });
 
 			</script>
 		<% end %>
