@@ -33,10 +33,28 @@
 	    </div>
 	    <div id="navbar" class="navbar-collapse collapse">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li class="<%= "active" if request.path == "/admin" %>"><a href="/admin/">Dashboard</a></li>
-	        <li class="<%= "active" if request.original_url.include? "admin/outlets" %>"><a href="/admin/outlets">Social Media</a></li>
+	        <li class=" dropdown <%= "active" if request.path == "/admin" %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Dashboard <span class = "caret"></span></a>
+	        	 <ul class="dropdown-menu" role="menu">
+		            <li><a href="#">Analytics</a></li>
+		            <li><a href="#">Export</a></li>
+		          </ul>
+
+	        </li>
+	        <li class="<%= "active" if request.original_url.include? "admin/outlets" %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Social Media <span class = "caret"></span></a>
+	        	<ul class="dropdown-menu" role="menu">
+		            <li><a href="outlets">Accounts List</a></li>
+		            <li><a href="outlets/new">Add an Account</a></li>
+		        </ul>
+
+	        </li>
+
 	        <li><a href="#">Mobile Apps</a></li>
-	        <li><a href="#">Agencies</a></li>
+	         <li class = "<%= "active" if request.original_url.include? "admin/agencies" %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Agencies<span class = "caret"></span></a>
+	        	<ul class="dropdown-menu" role="menu">
+		            <li><a href="agencies">Accounts List</a></li>
+		            <li><a href="agencies/new">Add an Account</a></li>
+		        </ul>
+	        </li>
 	        <li><%= link_to "Users", admin_users_path %></li>
 	        <li><%= link_to "Profile: #{current_user.email}", edit_admin_user_path(current_user) %></li>
 	      </ul>
