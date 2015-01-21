@@ -10,8 +10,8 @@ class Admin::OutletsController < Admin::AdminController
 
   # GET /outlets/1
   # GET /outlets/1.json
-  def show
-  end
+ # def show
+  #end
 
   # GET /outlets/new
   def new

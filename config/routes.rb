@@ -1,6 +1,18 @@
 Ringsail::Application.routes.draw do
   
   
+  namespace :admin do
+  get 'agencies/index'
+  end
+
+  namespace :admin do
+  get 'agencies/new'
+  end
+
+  namespace :admin do
+  get 'agencies/create'
+  end
+
   # This calls should all be namespaced to admin, we should move away from railsadmin
   resources :agencies do
     collection do
@@ -24,6 +36,9 @@ Ringsail::Application.routes.draw do
         get 'social_media_breakdown' => 'dashboards#social_media_breakdown'
         get 'activities' => 'dashboards#activities'
       end
+    end
+    resources :agencies do
+
     end
     resources :outlets do
       member do
