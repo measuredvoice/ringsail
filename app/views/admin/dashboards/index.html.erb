@@ -1,4 +1,3 @@
-<h1>Dashboard</h1>
 <div class="col-sm-3 col-md-2 sidebar">
 	<%= render partial: "sidebar" %>
 </div>
@@ -6,39 +5,44 @@
   <h1 class="page-header">Dashboard</h1>
 
   <div class="row placeholders">
-  	<h2>Managed Asset Counts:</h2>
-  	<h3>Social Media Accounts (<%= @outlet_count %> accounts)</h3>
-    <div class="progress">
-  	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= @outlet_count.to_f / @max_count * 100%>%">
-	    <span class="sr-only"><%= @outlet_count %> accounts</span>
-	  </div>
-	</div>
+  	<div class="col-sm-12">
+	  	<h2>Managed Asset Counts:</h2>
+	  	<h3>Social Media Accounts (<%= @outlet_count %> accounts)</h3>
+	    <div class="progress">
+	  	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: <%= @outlet_count.to_f / @max_count * 100%>%">
+		    <span class="sr-only"><%= @outlet_count %> accounts</span>
+		  </div>
+		</div>
 
-  	<h3>Tags (<%= @tag_count %> tags)</h3>
-	<div class="progress">
-	  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: <%= @tag_count.to_f / @max_count * 100%>%">
-	    <span class="sr-only"><%= @tag_count %> tags</span>
-	  </div>
-	</div>
+	  	<h3>Tags (<%= @tag_count %> tags)</h3>
+		<div class="progress">
+		  <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: <%= @tag_count.to_f / @max_count * 100%>%">
+		    <span class="sr-only"><%= @tag_count %> tags</span>
+		  </div>
+		</div>
 
-	<h3>Agencies (<%= @agency_count %> agencies)</h3>
-	<div class="progress">
-	  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @agency_count.to_f / @max_count * 100%>%">
-	    <span class="sr-only"><%= @agency_count %> agencies</span>
-	  </div>
-	</div>
+		<h3>Agencies (<%= @agency_count %> agencies)</h3>
+		<div class="progress">
+		  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @agency_count.to_f / @max_count * 100%>%">
+		    <span class="sr-only"><%= @agency_count %> agencies</span>
+		  </div>
+		</div>
 
-	<h3>Users (<%= @user_count %> users)</h3>
-	<div class="progress">
-	  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @user_count.to_f / @max_count * 100%>%">
-	    <span class="sr-only"><%= @user_count %> users</span>
-	  </div>
+		<h3>Users (<%= @user_count %> users)</h3>
+		<div class="progress">
+		  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @user_count.to_f / @max_count * 100%>%">
+		    <span class="sr-only"><%= @user_count %> users</span>
+		  </div>
+		</div>
 	</div>
   </div>
-
-  <h2 class="sub-header">Public Activity</h2>
-  <div class="activities">
-  		<%= render partial: "activities", locals: {activities: @activities} %>
-    	
+  <div class="row">
+  	<div class="col-sm-12">
+	  <h2 class="sub-header">Public Activity</h2>
+	  <div class="activities">
+	  		<%= render partial: "activities", locals: {activities: @activities} %>
+	    	
+	  </div>
+	</div>
   </div>
 </div>
