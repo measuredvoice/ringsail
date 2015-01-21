@@ -37,8 +37,11 @@ group :assets do
   gem 'coffee-rails'
   gem 'uglifier'
 end
+
 gem 'font-awesome-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
+gem 'morrisjs-rails'
+gem 'raphael-rails'
 gem 'jquery-rails'
 
 gem 'jbuilder', '~> 2.2.6'

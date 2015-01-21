@@ -158,6 +158,8 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.6.1)
     minitest (5.5.0)
+    morrisjs-rails (0.5.1)
+      railties (> 3.1, < 5)
     multi_json (1.10.1)
     mysql2 (0.3.17)
     nested_form (0.3.2)
@@ -220,6 +222,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    raphael-rails (2.1.2)
     remotipart (1.2.1)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
@@ -292,6 +295,7 @@ DEPENDENCIES
   jquery-rails
   json
   kaminari
+  morrisjs-rails
   mysql2
   paper_trail
   pry-byebug
@@ -299,6 +303,7 @@ DEPENDENCIES
   rack-jsonp
   rails (= 4.1.1)
   rails_admin!
+  raphael-rails
   rspec-rails
   sass-rails
   uglifier

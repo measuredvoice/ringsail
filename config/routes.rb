@@ -22,6 +22,7 @@ Ringsail::Application.routes.draw do
     resources :dashboards do
       collection do
         get 'social_media_breakdown' => 'dashboards#social_media_breakdown'
+        get 'activities' => 'dashboards#activities'
       end
     end
     resources :outlets do

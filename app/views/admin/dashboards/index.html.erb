@@ -39,9 +39,34 @@
   <div class="row">
   	<div class="col-sm-12">
 	  <h2 class="sub-header">Public Activity</h2>
+	</div>
+	<div class="col-sm-6">
+
+		<div id="areachart" style="height: 300px;"></div>
+		
+		<% content_for :additional_javascript do %>
+			<script>
+				Morris.Area({
+				    element: 'areachart',
+				    data: <%= raw @activites_graph_json.to_json %>,
+				    xkey: 'period',
+				    ykeys: ['activities'],
+				    labels: ['activities'],
+				    pointSize: 2,
+				    hideHover: 'auto'
+				  });
+
+			</script>
+		<% end %>
+	</div>
+  	<div class="col-sm-6">
 	  <div class="activities">
 	  		<%= render partial: "activities", locals: {activities: @activities} %>
-	    	
+	  		<div class="panel panel-default">
+	  			<div class="panel-body">
+	  				Read More...
+	  			</div>
+	  		</div>
 	  </div>
 	</div>
   </div>

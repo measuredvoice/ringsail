@@ -10,12 +10,28 @@ class Admin::DashboardsController < Admin::AdminController
   	@max_count = [@agency_count,@outlet_count,@user_count,@tag_count].sort.last
 
 
-  	@activities = PublicActivity::Activity.order("created_at desc")
+  	@activities = PublicActivity::Activity.order("created_at desc").first(10)
+
+    activities_graph = PublicActivity::Activity.connection.select_all("
+      SELECT month(created_at) as month, year(created_at) as year, count(*) as count
+      FROM activities
+      GROUP BY month(created_at) ORDER BY created_at desc;")
+    @activites_graph_json = []
+    activities_graph.each do |item|
+      @activites_graph_json << {
+        period: "#{item['month']}/#{item['year']}",
+        activities: item.count
+      }
+    end
   end
 
   def social_media_breakdown
   	@social_media_breakdowns = Outlet.all.group(:service).count
     @social_media_breakdowns = Hash[@social_media_breakdowns.sort_by{|k, v| v}.reverse]
+  end
+
+  def activities
+    @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(25)
   end
 
 end
