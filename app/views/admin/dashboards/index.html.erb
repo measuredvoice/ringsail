@@ -63,9 +63,9 @@
 	  <div class="activities">
 	  		<%= render partial: "activities", locals: {activities: @activities} %>
 	  		<div class="panel panel-default">
-	  			<div class="panel-body">
-	  				Read More...
-	  			</div>
+	  			
+	  				<%= link_to "<div class=\"panel-body\">Read More...</div>".html_safe, activities_admin_dashboards_path %>
+	  			
 	  		</div>
 	  </div>
 	</div>

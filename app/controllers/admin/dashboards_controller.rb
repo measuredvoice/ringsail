@@ -12,7 +12,7 @@ class Admin::DashboardsController < Admin::AdminController
 
   	@activities = PublicActivity::Activity.order("created_at desc").first(10)
 
-    activities_graph = PublicActivity::Activity.connection.select_all("
+    activities_graph = PublicActivity::Activity.find_by_sql("
       SELECT month(created_at) as month, year(created_at) as year, count(*) as count
       FROM activities
       GROUP BY month(created_at) ORDER BY created_at desc;")

@@ -5,7 +5,7 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
-    @outlets = Outlet.all
+    @outlets = Outlet.all.includes(:tags)
   end
 
   # GET /outlets/1
@@ -63,7 +63,7 @@ class Admin::OutletsController < Admin::AdminController
   end
 
   def history
-    @versions = @outlet.versions
+    @versions = @outlet.versions.order("created_at desc")
   end
 
   def restore
