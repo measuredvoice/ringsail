@@ -7,22 +7,30 @@
 
   <div class="row placeholders">
   	<table class="table table-condensed table-responsible table-striped">
-  		<tr>
+  		<tr class = "outlet_row">
         <th>Service</th>
+        <th>Service URL</th>
         <th>Account</th>
         <th>Agency</th>
+        <th>Info URL</th>
         <th>Updated by</th>
         <th>Updated at</th>
+        <th>Language</th>
+        <th>Tags</th>
         <th>Actions</th>
   		</tr>
   		<% @versions.each do |version| %>
   			<% outlet = version.reify %>
-  			<tr>
+  			<tr class = "outlet_row">
   				<td><%= outlet.service %></td>
-  				<td><%= outlet.account %></td>
+          <td><%= outlet.service_url %></td>
+          <td><%= outlet.account %></td>
           <td><%= outlet.organization %></td>
+          <td><%= outlet.info_url %> </td>
           <td><%= outlet.updated_by %></td>
           <td><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+          <td><%= outlet.language %></td>
+          <td><%= outlet.tags[1] %></td>
           <td>
             <ul>
               <li><%= link_to "Restore", restore_admin_outlet_path({id: outlet.id, version_id: version.id}) %></li>
