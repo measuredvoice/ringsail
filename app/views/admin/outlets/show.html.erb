@@ -1,14 +1,14 @@
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-<p>
-  <strong>Organization:</strong>
-  <%= @outlet.organization %>
-</p>
+<div class="col-sm-12 col-md-12 main">
+	<p>
+	  <strong>Organization:</strong>
+	  <%= @outlet.organization %>
+	</p>
 
-<p>
-  <strong>Service URL:</strong>
-  <%= @outlet.service_url %>
-</p>
+	<p>
+	  <strong>Service URL:</strong>
+	  <%= @outlet.service_url %>
+	</p>
 
-<%= link_to 'Edit', edit_admin_outlet_path(@outlet) %> |
-<%= link_to 'Back', admin_outlets_path %>
+	<%= link_to 'Edit', edit_admin_outlet_path(@outlet) %> |
+	<%= link_to 'Back', admin_outlets_path %>
 </div>

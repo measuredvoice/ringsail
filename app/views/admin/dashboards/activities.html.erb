@@ -1,47 +1,11 @@
-<div class="col-sm-3 col-md-2 sidebar">
-	<%= render partial: "sidebar" %>
-</div>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<div class="col-sm-12 col-md-12 main">
   <div class="row">
   	<div class="col-sm-12">
   	<h1 class="page-header">Public Activity</h1>
 	</div>
   	<div class="col-sm-12">
 
-  	  <%= paginate @activities %>
-	  <div class="activities">
-	  	<div class="panel panel-default">
-		  	<table class="table table-striped">
-		  		<tr>
-		  			<th>Item</th>
-		  			<th>Action</th>
-		  			<th>User</th>
-		  			<th>Date/Time</th>
-		  		</tr>
-		  		<% @activities.each do |activity| %>
-		  		<tr>
-		  			<td>
-		  				<% case activity.trackable %>
-			  				<% when Outlet %>
-			  					<i class="fa fa-share-alt"></i>
-						  	  	Social Media Account: 
-						  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
-						  	<% when User %>
-							  	<i class="fa fa-user"></i>
-						  	  	User: 
-						  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
-			  			<% end %>
-		  			</td>
-		  			<td><%= activity.key.split(".").last.titleize %></td>
-		  			<td><%= link_to activity.owner.email, admin_user_path(activity.trackable) %></td>
-		  			<td><%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %></td>
-		  		</tr>
-		  		<% end %>
-		  	</table>
-		  </div>
-	  </div>
-
-  	  <%= paginate @activities %>
+  	 	<%= render partial: "admin/shared/activities_table", locals: { activities: @activities} %>
 	</div>
   </div>
 </div>

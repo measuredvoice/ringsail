@@ -45,6 +45,9 @@ Ringsail::Application.routes.draw do
         get "history"
         get "restore"
       end
+      collection do 
+        get "activities"
+      end
     end
     resources :users
 

@@ -33,19 +33,20 @@
 	    </div>
 	    <div id="navbar" class="navbar-collapse collapse">
 	      <ul class="nav navbar-nav navbar-right">
-	        <li class=" dropdown <%= "active" if request.path == "/admin" %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Dashboard <span class = "caret"></span></a>
-	        	 <ul class="dropdown-menu" role="menu">
-		            <li><a href="#">Analytics</a></li>
-		            <li><a href="#">Export</a></li>
-		          </ul>
+	        <li class=" dropdown <%= "active" if request.path == "/admin" || request.original_url.include?("admin/dashboards") %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Dashboard <span class = "caret"></span></a>
+	        	<ul class="dropdown-menu" role="menu">
 
+    				<li class="<%= "active" if request.path == "/admin" %>"><a href="/admin/">Overview </a></li>
+		            <li class="<%= "active" if request.path == "/admin/dashboards/social_media_breakdown" %>"><a href="/admin/dashboards/social_media_breakdown">Social Media Breakdown</a></li>
+    				<li class="<%= "active" if request.path == "/admin/dashboards/activities" %>"><%= link_to "System Activity", activities_admin_dashboards_path %></li>
+		        </ul>
 	        </li>
 	        <li class="<%= "active" if request.original_url.include? "admin/outlets" %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Social Media <span class = "caret"></span></a>
 	        	<ul class="dropdown-menu" role="menu">
-		            <li><a href="outlets">Accounts List</a></li>
-		            <li><a href="outlets/new">Add an Account</a></li>
+		            <li><%= link_to "Accounts List", admin_outlets_path %></li>
+		            <li><%= link_to "Account Activity", activities_admin_outlets_path %></li>
+		            <li><%= link_to "Add an Account", new_admin_outlet_path %></li>
 		        </ul>
-
 	        </li>
 
 	        <li><a href="#">Mobile Apps</a></li>

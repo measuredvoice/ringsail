@@ -5,7 +5,12 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
-    @outlets = Outlet.all.includes(:tags)
+    @services = Service.all
+    if(params[:service])
+      @outlets = Outlet.where(service: params[:service]).includes(:tags).page(params[:page]).per(15)
+    else
+      @outlets = Outlet.all.includes(:tags).page(params[:page]).per(15)
+    end
   end
 
   # GET /outlets/1
@@ -62,6 +67,9 @@ class Admin::OutletsController < Admin::AdminController
     end
   end
 
+  def activities
+    @activities = PublicActivity::Activity.where(trackable_type: "Outlet").order("created_at desc").page(params[:page]).per(25)
+  end
   def history
     @versions = @outlet.versions.order("created_at desc")
   end
