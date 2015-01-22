@@ -23,7 +23,11 @@
 		  			<% end %>
 	  			</td>
 	  			<td><%= activity.key.split(".").last.titleize %></td>
-	  			<td><%= link_to activity.owner.email, admin_user_path(activity.trackable) %></td>
+	  			<td>
+	  				<% if activity.owner %>
+	  				<%= link_to activity.owner.email, admin_user_path(activity.trackable) %>
+	  				<% end %>
+	  			</td>
 	  			<td><%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %></td>
 	  		</tr>
 	  		<% end %>

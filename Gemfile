@@ -22,6 +22,7 @@ gem 'jquery-datatables-rails', '~> 3.1.1'
 # Automatic admin interface
 gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem "devise"
+gem 'devise_cas_authenticatable'
 
 # Tagging support
 gem 'acts-as-taggable-on'
