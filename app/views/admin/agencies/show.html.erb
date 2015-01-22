@@ -1,0 +1,19 @@
+<div class="col-sm-12 col-md-12 main">
+	<p>
+	  <strong>Agency Name:</strong>
+	  <%= @agency.name %>
+	</p>
+
+	<p>
+	  <strong>Short Name:</strong>
+	  <%= @agency.shortname %>
+	</p>
+
+	<p>
+	  <strong>Info URL:</strong>
+	  <%= @agency.info_url %>
+	</p>
+
+	<%= link_to 'Edit', edit_admin_agency_path(@agency) %> 
+	<%= link_to 'Back', admin_agencies_path %>
+</div>

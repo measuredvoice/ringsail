@@ -52,8 +52,8 @@
 	        <li><a href="#">Mobile Apps</a></li>
 	         <li class = "<%= "active" if request.original_url.include? "admin/agencies" %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Agencies<span class = "caret"></span></a>
 	        	<ul class="dropdown-menu" role="menu">
-		            <li><a href="agencies">Accounts List</a></li>
-		            <li><a href="agencies/new">Add an Account</a></li>
+		            <li><%= link_to "Agencies List", admin_agencies_path %> </li>
+		            <li><%= link_to "Add an Agency", new_admin_agency_path %></li>
 		        </ul>
 	        </li>
 	        <li><%= link_to "Users", admin_users_path %></li>
