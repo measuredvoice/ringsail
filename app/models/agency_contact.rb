@@ -13,7 +13,7 @@ class AgencyContact < ActiveRecord::Base
   #attr_accessible :agency_id, :email
   
   belongs_to :agency
-
+ 
   validates :agency_id, :presence => true
   validates :email, :presence   => true, 
                     :gov_email  => true

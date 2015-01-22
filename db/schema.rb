@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121043342) do
+ActiveRecord::Schema.define(version: 20150122183145) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -38,9 +38,8 @@ ActiveRecord::Schema.define(version: 20150121043342) do
     t.string   "info_url"
     t.string   "mongo_id"
     t.string   "parent_mongo_id"
+    t.integer  "parent_id"
   end
-
-  add_index "agencies", ["shortname"], name: "index_agencies_on_shortname", unique: true, using: :btree
 
   create_table "agency_contacts", force: true do |t|
     t.string   "email"
@@ -136,18 +135,21 @@ ActiveRecord::Schema.define(version: 20150121043342) do
   add_index "tags", ["name"], name: "tagging_unique_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "email",                  default: "", null: false
+    t.string   "email",                            default: "", null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0
+    t.integer  "sign_in_count",                    default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "reset_password_sent_at"
-    t.string   "reset_password_token"
-    t.string   "encrypted_password"
+    t.string   "user",                                          null: false
+    t.integer  "agency_id"
+    t.string   "phone"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "groups",              limit: 1000
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

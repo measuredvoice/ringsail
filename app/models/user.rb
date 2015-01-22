@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   #handles versioning
   has_paper_trail
 
+  belongs_to :agency
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable, :trackable
@@ -31,12 +32,16 @@ class User < ActiveRecord::Base
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       case name.to_sym
-      when :email
-        self.email = value
-      when :email_address
-        self.email = value
       when "Email-Address"
         self.email = value
+      when "Org-Agency-Name"
+        self.agency = Agency.where("name LIKE ?","%#{value}%").first
+      when "Phone"
+        self.phone = value
+      when "First-Name"
+        self.first_name = value
+      when "Last-Name"
+        self.last_name = value
       end
     end
   end

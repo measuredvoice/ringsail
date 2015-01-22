@@ -25,7 +25,7 @@
 	  				<% if activity.owner %>
 	  				<%= link_to activity.owner.email, admin_user_path(activity.trackable) %>
 	  				<% else %>
-	  				System User (may have been deleted)
+	  				system
 	  				<% end %>
 	  			</td>
 	  			<td><%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %></td>
