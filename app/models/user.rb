@@ -29,12 +29,15 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable, :trackable
 
+
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       case name.to_sym
       when :email
         self.email = value
       when :email_address
+        self.email = value
+      when "Email-Address"
         self.email = value
       end
     end

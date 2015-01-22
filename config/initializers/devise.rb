@@ -2,7 +2,7 @@
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # CAS SPECIFIC IMPLEMENTATION
-  config.cas_base_url = "http://localhost:4000/"
+  config.cas_base_url = "https://login.max.gov/cas/"
 
   # you can override these if you need to, but cas_base_url is usually enough
   # config.cas_login_url = "https://cas.myorganization.com/login"
@@ -26,7 +26,7 @@ Devise.setup do |config|
   # require user records to already exist locally before they can authenticate via
   # CAS, uncomment the following line.
   # config.cas_create_user = false
-
+  config.cas_username_column = :user
   # You can enable Single Sign Out, which by default is disabled.
   # config.cas_enable_single_sign_out = true
 

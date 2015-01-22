@@ -310,6 +310,7 @@ DEPENDENCIES
   morrisjs-rails
   mysql2
   paper_trail
+  pry
   pry-byebug
   public_activity
   rack-jsonp
