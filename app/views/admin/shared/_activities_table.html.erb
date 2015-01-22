@@ -12,20 +12,20 @@
 	  		<tr>
 	  			<td>
 	  				<% case activity.trackable %>
-		  				<% when Outlet %>
-		  					<i class="fa fa-share-alt"></i>
-					  	  	Social Media Account: 
-					  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
-					  	<% when User %>
-						  	<i class="fa fa-user"></i>
-					  	  	User: 
-					  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
+	  				<% when Outlet %>
+	  					<i class="fa fa-share-alt"></i>Social Media Account: 
+				  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
+				  	<% when User %>
+					  	<i class="fa fa-user"></i>User: 
+				  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
 		  			<% end %>
 	  			</td>
 	  			<td><%= activity.key.split(".").last.titleize %></td>
 	  			<td>
 	  				<% if activity.owner %>
 	  				<%= link_to activity.owner.email, admin_user_path(activity.trackable) %>
+	  				<% else %>
+	  				System User (may have been deleted)
 	  				<% end %>
 	  			</td>
 	  			<td><%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %></td>
