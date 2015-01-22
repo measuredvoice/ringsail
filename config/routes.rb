@@ -1,18 +1,5 @@
 Ringsail::Application.routes.draw do
   
-  
-  namespace :admin do
-  get 'agencies/index'
-  end
-
-  namespace :admin do
-  get 'agencies/new'
-  end
-
-  namespace :admin do
-  get 'agencies/create'
-  end
-
   # This calls should all be namespaced to admin, we should move away from railsadmin
   resources :agencies do
     collection do
@@ -20,7 +7,6 @@ Ringsail::Application.routes.draw do
     end
   end
 
-  get "homes/index"
 
 
   # match "admin/previews/review_email" => "previews#review_email", :via => :get, :as => :preview_review_email
