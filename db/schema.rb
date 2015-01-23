@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123175327) do
+ActiveRecord::Schema.define(version: 20150123204047) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20150123175327) do
     t.string  "language"
     t.integer "agency_id"
     t.integer "status"
+    t.string  "mongo_id",          limit: 45
   end
 
   create_table "official_tags", force: true do |t|
@@ -130,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150123175327) do
     t.string   "service"
     t.integer  "location_id"
     t.string   "location_name"
+    t.integer  "status",        default: 0
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree

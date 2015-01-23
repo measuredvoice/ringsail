@@ -13,11 +13,11 @@
 	  			<td>
 	  				<% case activity.trackable %>
 	  				<% when Outlet %>
-	  					<i class="fa fa-share-alt"></i>Social Media Account: 
 				  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
 				  	<% when User %>
-					  	<i class="fa fa-user"></i>User: 
 				  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
+				  	<% when MobileApp %>
+				  	  	<%= link_to activity.trackable.name, admin_mobile_app_path(activity.trackable) %>
 		  			<% end %>
 	  			</td>
 	  			<td><%= activity.key.split(".").last.titleize %></td>

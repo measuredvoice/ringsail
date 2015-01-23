@@ -9,7 +9,7 @@ class AddMobileApps < ActiveRecord::Migration
       	t.string :language
 
       	t.integer :agency_id
-      	t.integer :status, defaul: 0  #will use an enum, as its supported as of rails 4 enum status: { pending: 0, active: 0, archived: 1 }
+      	t.integer :status, default: 0  #will use an enum, as its supported as of rails 4 enum status: { pending: 0, active: 0, archived: 1 }
   	
       	t.string :mongo_id
   	end

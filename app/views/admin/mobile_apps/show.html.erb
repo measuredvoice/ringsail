@@ -1,0 +1,18 @@
+<div class="col-sm-12 col-md-12 main">
+	<p>
+	  <strong>Name:</strong>
+	  <%= @mobile_app.name %>
+	</p>
+
+	<p>
+	  <strong>Short Description:</strong>
+	  <%= @mobile_app.short_description %>
+	</p>
+
+	<p>
+	  <strong>Long Description:</strong>
+	  <%= @mobile_app.long_description %>
+	</p>
+	<%= link_to 'Edit', edit_admin_mobile_app_path(@mobile_app) %> |
+	<%= link_to 'Back', admin_mobile_apps_path %>
+</div>
