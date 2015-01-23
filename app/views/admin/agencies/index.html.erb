@@ -1,36 +1,34 @@
+<h1 class="page-header">Agencies</h1>
 <div class="row placeholders">
-  <div class="col-sm-12">
-    <h1 class="page-header">Agencies</h1>
-    <%=paginate @agencies%>
-  	<table id = "agency" class = "table table-striped" >
-  		<thead>
-        <tr class = "agency_row">
-          <th>Agency Name</th>
-          <th>Info URL</th>
-          <th>Updated at</th>
-          <th class = "lastlinks">Actions</th>
-    		</tr>
-      </thead>
+  <%=paginate @agencies%>
+	<table id = "agency" class = "table table-striped" >
+		<thead>
+      <tr class = "agency_row">
+        <th>Agency Name</th>
+        <th>Info URL</th>
+        <th>Updated at</th>
+        <th class = "lastlinks">Actions</th>
+  		</tr>
+    </thead>
 
-      <tbody>
-    		<% @agencies.each do |agency| %>
-    			<tr class = "tablerow">
-    				<td><%= agency.name %></td>
-            <td><%= agency.info_url %></td>
-            <td><%= agency.updated_at.strftime("%B %e, %Y %H:%M") %></td>
-            <td class = "lastlinks">
-              <ul class = "gly">
-                <li><%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %> </li>
-                <li><%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
-                <li><%= link_to admin_agency_path(agency), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"></i> <% end %></li>
-                <li><%#= link_to "History", history_admin_agency_path(agency) %></li>
-              </ul>
-            </td>   
-    			</tr>
-    		<% end %>
-      </tbody>
-  	</table>
+    <tbody>
+  		<% @agencies.each do |agency| %>
+  			<tr class = "tablerow">
+  				<td><%= agency.name %></td>
+          <td><%= agency.info_url %></td>
+          <td><%= agency.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+          <td class = "lastlinks">
+            <ul class = "gly">
+              <li><%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %> </li>
+              <li><%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
+              <li><%= link_to admin_agency_path(agency), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"></i> <% end %></li>
+              <li><%#= link_to "History", history_admin_agency_path(agency) %></li>
+            </ul>
+          </td>   
+  			</tr>
+  		<% end %>
+    </tbody>
+	</table>
     <%= paginate @agencies %>
-  </div>
 </div>
 

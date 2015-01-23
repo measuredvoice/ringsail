@@ -60,4 +60,8 @@ class Agency < ActiveRecord::Base
   def outlets_count_key
     "agency/#{id}/outlets_count"
   end
+
+  def history
+    @versions = PaperTrail::Agencies.order('created_at DESC')
+  end
 end

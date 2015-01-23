@@ -49,6 +49,15 @@ class Outlet < ActiveRecord::Base
   
   paginates_per 100
   
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |outlet|
+        csv << outlet.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   def self.to_review
     where('outlets.updated_at < ?', 6.months.ago).order('outlets.updated_at')
   end

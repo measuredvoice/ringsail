@@ -1,5 +1,4 @@
-<div class = "container">
-	<%= form_for([:admin,@agency]) do |f| %>
+<%= form_for([:admin,@agency]) do |f| %>
 		<% if @agency.errors.any? %>
 			<div id="error_explanation">
 				<h2><%= pluralize(@outlet.errors.count, "error") %> prohibited this chapter from being saved:</h2>
@@ -30,7 +29,4 @@
 		<div class="actions">
 			<%= f.submit :class => "btn btn-default" %>
 		</div>
-
-	<% end %>
-
-</div>
+<% end %>

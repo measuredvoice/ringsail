@@ -1,18 +1,28 @@
 <div class="col-sm-12 col-md-12 main">
-  <h1 class="page-header">Outlets</h1>
+    <h1 class="page-header">Outlets</h1>
 
-  <div class="row placeholders">
-  	<table class="table-responsible striped">
-  		<tr>
-  			<th>Email</th>
-  			<th>Actions</th>
-  		</tr>
-  		<% @users.each do |user| %>
-  			<tr>
-  				<td><%= user.email %></td>
-  				<td><%= link_to "Edit", edit_admin_user_path(user)%></td>
-  			</tr>
-  		<% end %>
-  	</table>
-  </div>
+    <div class="row placeholders">
+    	<table class=" table table-striped">
+        <thead>
+      		<tr = "users_row">
+      			<th>Email</th>
+            <th>Sign-in Count </th>
+            <th>Last Sign-in </th>
+      			<th>Actions</th>
+      		</tr>
+        </thead>
+        <tbody>
+      		<% @users.each do |user| %>
+      			<tr class = "gly">
+      				<td><%= user.email %></td>
+              <td><%= user.sign_in_count %> </td>
+              <td><%= user.last_sign_in_at.strftime("%B %e, %Y %H:%M") if user.last_sign_in_at? %> </td>
+      				<td><%= link_to admin_user_path(user) do %> <i class = "glyphicon glyphicon-info-sign"></i> <%end %></td>
+              <td> <%= link_to edit_admin_user_path(user) do %> <i class = "glyphicon glyphicon-pencil"> </i> <% end %></td>
+              <td> <%= link_to admin_user_path(user), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"> </i> <% end %></td>
+      			</tr>
+      		<% end %>
+        </tbody>
+    	</table>
+    </div>
 </div>

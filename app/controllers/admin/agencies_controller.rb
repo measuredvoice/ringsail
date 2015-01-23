@@ -1,6 +1,6 @@
 class Admin::AgenciesController < Admin::AdminController
   respond_to :html, :xml, :json
-  before_action :set_agency, only: [:show, :edit]
+  before_action :set_agency, only: [:show, :edit, :history,]
 
   def index 
     @agencies = Agency.all.order(name: :asc).page(params[:page]).per(15)
@@ -28,6 +28,13 @@ class Admin::AgenciesController < Admin::AdminController
         format.json { render json: @agency.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def activities
+    @activities = PublicActivity::Activity.where(trackable_type: "Agency").order("created_at desc").page(params[:page]).per(25)
+  end
+  def history
+    @versions = @agency.versions.order("created_at desc")
   end
 
   private

@@ -24,8 +24,14 @@ Ringsail::Application.routes.draw do
       end
     end
     resources :agencies do
-
+      member do
+        get "history"
+      end
+      collection do
+        get "activities"
+      end
     end
+
     resources :outlets do
       member do
         get "history"
