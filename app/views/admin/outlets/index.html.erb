@@ -12,7 +12,13 @@
           </ul>
         </div>
         <div class="col-sm-10">
-          <%= paginate @outlets %>
+          <p>
+            <%= paginate @outlets %>
+            <text>
+            </br>
+              Download: <%= link_to "CSV", admin_outlets_path(format: "csv") %> 
+            </text>
+          </p>
           <table class="table table-striped">
           <thead>
           <tr>
@@ -39,15 +45,21 @@
                 <ul class = "gly">
                   <li><%= link_to admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
                   <li><%= link_to edit_admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
-                  <li><%= link_to admin_outlet_path(outlet), method: :delete, confirm: 'Are you certain you want to delete this?' do %><i class = "glyphicon glyphicon-remove"></i> <% end %> </li>
                   <li><%= link_to history_admin_outlet_path(outlet) do %><i class = "glyphicon glyphicon-book"></i> <% end %> </li>
+                  <li class = "destroy"><%= link_to admin_outlet_path(outlet), method: :delete, :class => "delete", confirm: 'Are you certain you want to delete this?' do %><i class = "glyphicon glyphicon-remove"></i> <% end %> </li>
                 </ul>
               </td>   
           	</tr>
           <% end %>
           </tbody>
           </table>
-          <%= paginate @outlets %>
+          <p>
+            <%= paginate @outlets %>
+            <text>
+              </br>
+              Download: <%= link_to "CSV", admin_outlets_path(format: "csv") %> 
+            </text>
+          </p>
         </div>
     </div>
   </div>

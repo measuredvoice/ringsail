@@ -117,9 +117,7 @@ body {
   width: 700px;
 }
 td{    
-  width:60px; 
-  max-width:40px;
-  min-width:50px; 
+  max-width:100px;
   max-height: 20px;
   text-overflow: ellipsis;
   overflow: hidden; 
@@ -127,13 +125,27 @@ td{
   font-size: .93em;
 }
 
-
 ul.gly{
   list-style-type: none;
   li{
     display: inline;
+    margin: 0;
   }
+}
+.destroy{
+      color: red;
 }
 .lastlinks{
   text-align: right;
-}
+ }
+ text{
+  float: right;
+ }
+ .users_row{
+    td{
+      max-width: 300px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      font-size: .93em;
+    }
+ }

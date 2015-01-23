@@ -1,5 +1,5 @@
 class Admin::OutletsController < Admin::AdminController
-  respond_to :html, :xml, :json
+  respond_to :html, :xml, :json, :csv, :xls
 
   before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history,:restore]
   # GET /outlets
@@ -10,6 +10,14 @@ class Admin::OutletsController < Admin::AdminController
       @outlets = Outlet.where(service: params[:service]).includes(:tags).page(params[:page]).per(15)
     else
       @outlets = Outlet.all.includes(:tags).page(params[:page]).per(15)
+    end
+    @outs = Outlet.all
+    respond_to do |format|
+      format.html
+      format.json { render json: @outlets }
+      format.xml { render xml: @outlets }
+      format.csv { send_data @outlets.to_csv }
+      format.xls { send_data @outlets.to_csv(col_sep: "\t")}
     end
   end
 
@@ -65,6 +73,7 @@ class Admin::OutletsController < Admin::AdminController
       format.html { redirect_to outlets_url, notice: 'Outlet was successfully destroyed.' }
       format.json { head :no_content }
     end
+    redirect_to action: :index
   end
 
   def activities
