@@ -6,7 +6,6 @@ class Admin::AdminController < ApplicationController
   helper_method :current_user  
   layout "admin"
 
-
   def current_user
     if Rails.env == "development"
       @current_user ||= User.first

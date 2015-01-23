@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable, :trackable
 
+  has_many :mobile_app_users
+  has_many :mobile_apps, through: :mobile_app_users
+  
+  has_many :gallery_users
+  has_many :gallerys, through: :gallery_users
 
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
@@ -42,6 +47,8 @@ class User < ActiveRecord::Base
         self.first_name = value
       when "Last-Name"
         self.last_name = value
+      when "GroupList"
+        self.groups = value
       end
     end
   end

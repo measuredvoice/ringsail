@@ -14,4 +14,5 @@ config/too_many_secrets.rb
 .autotest
 .rspec
 .rvmrc
+data/*
 
