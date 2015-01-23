@@ -1,12 +1,27 @@
 <div class="col-sm-12 col-md-12 main">
+
+	<p>
+	  <strong>Agencies:</strong>
+	  <%= @outlet.agencies.map(&:to_s).join(', ') %>
+	</p>
 	<p>
 	  <strong>Organization:</strong>
 	  <%= @outlet.organization %>
 	</p>
 
 	<p>
+	  <strong>Service:</strong>
+	  <%= @outlet.service %>
+	</p>
+
+	<p>
 	  <strong>Service URL:</strong>
 	  <%= @outlet.service_url %>
+	</p>
+
+	<p>
+	  <strong>Updated at:</strong>
+	  <%= @outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
 	</p>
 
 	<%= link_to 'Edit', edit_admin_outlet_path(@outlet) %> |
