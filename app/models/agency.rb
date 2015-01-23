@@ -2,7 +2,7 @@
 #
 # Table name: agencies
 #
-#  id         :integer(4)      not null, primary key
+#  id         :integer          not null, primary key
 #  name       :string(255)
 #  created_at :datetime
 #  updated_at :datetime
@@ -23,8 +23,13 @@ class Agency < ActiveRecord::Base
   has_many :outlets, :through => :sponsorships
   has_many :agency_contacts
   
+  has_many :users
+  
+  belongs_to :parent, :class_name => "Agency"
+  has_many :children, :foreign_key => "parent_id", :class_name => "Agency"
+
   validates :name, :presence => true
-  validates :shortname, :presence => true
+  # validates :shortname, :presence => true
   
   paginates_per 200
 

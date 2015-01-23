@@ -2,19 +2,17 @@
 #
 # Table name: users
 #
-#  id                     :integer(4)      not null, primary key
-#  email                  :string(255)     default(""), not null
-#  encrypted_password     :string(128)     default(""), not null
-#  reset_password_token   :string(255)
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer(4)      default(0)
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string(255)
-#  last_sign_in_ip        :string(255)
-#  created_at             :datetime
-#  updated_at             :datetime
+#  id                  :integer          not null, primary key
+#  email               :string(255)      default(""), not null
+#  remember_created_at :datetime
+#  sign_in_count       :integer          default(0)
+#  current_sign_in_at  :datetime
+#  last_sign_in_at     :datetime
+#  current_sign_in_ip  :string(255)
+#  last_sign_in_ip     :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  user                :string(255)      not null
 #
 
 class User < ActiveRecord::Base
@@ -25,17 +23,25 @@ class User < ActiveRecord::Base
   #handles versioning
   has_paper_trail
 
+  belongs_to :agency
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable, :trackable
 
+
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       case name.to_sym
-      when :email
+      when "Email-Address"
         self.email = value
-      when :email_address
-        self.email = value
+      when "Org-Agency-Name"
+        self.agency = Agency.where("name LIKE ?","%#{value}%").first
+      when "Phone"
+        self.phone = value
+      when "First-Name"
+        self.first_name = value
+      when "Last-Name"
+        self.last_name = value
       end
     end
   end
