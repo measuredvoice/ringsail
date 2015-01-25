@@ -3,8 +3,8 @@
   	<div class="panel panel-default">
   	  
 	  <div class="panel-body">
-		<% case activity.trackable %>
-		  	<% when Outlet %>
+		<% case activity.trackable_type %>
+		  	<% when "Outlet" %>
 		  	  	<i class="fa fa-share-alt"></i>
 		  	  	Social Media Account: 
 		  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
@@ -17,10 +17,14 @@
 		  	  		created by
 		  	  	<% end %>
 		  		on <%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %> by <%= link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner) if activity.owner %>  
-		  	<% when User %>
+		  	<% when "User"%>
 		  		<i class="fa fa-user"></i>
 		  	  	User: 
+		  	  	<% if activity.trackable %>
 		  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
+		  	  	<% else %>
+		  	  		Deleted User
+		  	  	<% end %>
 		  	  	<% case activity.key %>
 		  	  		<% when "user.restored" %>
 		  	  		restored to an earlier verison
@@ -30,8 +34,8 @@
 		  	  		created by
 		  	  	<% end %>
 		  		on <%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %> by <%= link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner) if activity.owner %>  
-
-			  	  	
+		  	<% else %>
+			   <%= activity.inspect %>
   		<% end %>
   	  </div>
 	</div>

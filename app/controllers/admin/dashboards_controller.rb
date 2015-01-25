@@ -4,6 +4,7 @@ class Admin::DashboardsController < Admin::AdminController
   def index
   	@agency_count = Agency.count
   	@outlet_count = Outlet.count
+    @app_count = MobileApp.count
   	@user_count = User.count
   	@tag_count = OfficialTag.count
 

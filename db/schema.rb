@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150122183145) do
+ActiveRecord::Schema.define(version: 20150123204047) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -64,6 +64,52 @@ ActiveRecord::Schema.define(version: 20150122183145) do
   add_index "auth_tokens", ["email"], name: "index_auth_tokens_on_email", using: :btree
   add_index "auth_tokens", ["token"], name: "index_auth_tokens_on_token", unique: true, using: :btree
 
+  create_table "galleries", force: true do |t|
+    t.string "name"
+    t.text   "description"
+  end
+
+  create_table "gallery_users", force: true do |t|
+    t.integer "gallery_id"
+    t.integer "user_id"
+  end
+
+  create_table "mobile_app_galleries", force: true do |t|
+    t.integer "gallery_id"
+    t.integer "mobile_app_id"
+  end
+
+  create_table "mobile_app_users", force: true do |t|
+    t.integer "mobile_app_id"
+    t.integer "user_id"
+  end
+
+  create_table "mobile_app_versions", force: true do |t|
+    t.integer  "mobile_app_id"
+    t.string   "store_url"
+    t.string   "platform"
+    t.string   "version_number"
+    t.datetime "publish_date"
+    t.text     "description"
+    t.text     "whats_new"
+    t.text     "screenshot"
+    t.string   "device"
+    t.string   "language"
+    t.string   "average_rating"
+    t.integer  "number_of_ratings"
+  end
+
+  create_table "mobile_apps", force: true do |t|
+    t.string  "name"
+    t.string  "short_description"
+    t.text    "long_description"
+    t.string  "icon_url"
+    t.string  "language"
+    t.integer "agency_id"
+    t.integer "status"
+    t.string  "mongo_id",          limit: 45
+  end
+
   create_table "official_tags", force: true do |t|
     t.string   "shortname"
     t.string   "tag_text"
@@ -85,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150122183145) do
     t.string   "service"
     t.integer  "location_id"
     t.string   "location_name"
+    t.integer  "status",        default: 0
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree
@@ -151,8 +198,6 @@ ActiveRecord::Schema.define(version: 20150122183145) do
     t.string   "last_name"
     t.string   "groups",              limit: 1000
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
 
   create_table "versions", force: true do |t|
     t.string   "item_type",  null: false

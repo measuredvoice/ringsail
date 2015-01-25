@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12 main">
+    <h1 class="page-header">Mobile App Registrations</h1>
+      <div class="row placeholders">
+        <div class="col-sm-12">
+          <p>
+            <%= paginate @mobile_apps %>
+            <text>
+              Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
+            </text>
+          </p>
+          <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Short Description</th>
+            <th>Status</th>
+            <th class = "lastlinks">Actions</th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @mobile_apps.each do |app| %>
+          	<tr class = "tablerow">
+          	  <td class = "outlet_data"><%= app.name %></td>
+              <td class = "outlet_data"><%= app.short_description %></td>
+          	  <td class = "outlet_data"><%= app.status %></td>
+              <td class = "outlet_data lastlinks">
+                <ul class = "gly">
+                  <li><%= link_to admin_mobile_apps_path(app) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
+                  <li><%= link_to edit_admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
+                  <li><%= link_to history_admin_mobile_app_path(app) do %><i class = "glyphicon glyphicon-book"></i> <% end %> </li>
+                  <li class = "destroy"><%= link_to admin_mobile_app_path(app), method: :delete, :class => "delete", confirm: 'Are you certain you want to delete this?' do %><i class = "glyphicon glyphicon-remove"></i> <% end %> </li>
+                </ul>
+              </td>   
+          	</tr>
+          <% end %>
+          </tbody>
+          </table>
+          <p>
+            <text>
+              Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
+            </text>
+            <%= paginate @mobile_apps %>
+          </p>
+        </div>
+    </div>
+  </div>
+</div>
