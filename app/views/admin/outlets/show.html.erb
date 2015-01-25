@@ -20,6 +20,11 @@
 	</p>
 
 	<p>
+	  <strong>Tags:</strong>
+	  <%= @outlet.tags.map(&:to_s).join(', ') %>
+	</p>
+
+	<p>
 	  <strong>Updated at:</strong>
 	  <%= @outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
 	</p>

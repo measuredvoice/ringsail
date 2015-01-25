@@ -41,7 +41,7 @@
           		<td class = "outlet_data"><%= outlet.account %></td>
               <td class = "outlet_data"><%= outlet.organization %></td>
               <td class = "outlet_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
-              <td class = "outlet_data"><%= outlet.tags[1] %></td>
+              <td class = "outlet_data"><%= outlet.tags.map(&:to_s).join(', ')%></td>
               <td class = "outlet_data lastlinks">
                 <%= link_to admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
                 <%= link_to edit_admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
