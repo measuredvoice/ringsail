@@ -15,15 +15,34 @@
     <%= f.label :name %> </br>
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
-  </br>
   <div class="field"> 
     <%= f.label :short_description %> </br>
     <%= f.text_field :short_description, :class => "form-control formwidth" %>
   </div>
-  </br> 
   <div class="field">
     <%= f.label :long_description %> </br>
     <%= f.text_field :long_description, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :icon_url %> </br>
+    <%= f.text_field :icon_url, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :language %> </br>
+    <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+  </div>
+  <div class="field">
+    <%= f.label :agency %>(replace with autocomplete) </br>
+    <%= f.select :agency, Agency.all.collect {|x| [x.name,x.id]},{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+  </div>
+  <div class="versions">
+    <h2>Versions</h2>
+    <%= f.fields_for :mobile_app_versions do |mobile_app_version| %>
+      <%= render "mobile_app_version_fields", f: mobile_app_version %>
+    <% end %>
+    <div class="links">
+      <%= link_to_add_association "Add Version", f, :mobile_app_versions %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-default" %>

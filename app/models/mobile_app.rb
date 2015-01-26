@@ -1,3 +1,4 @@
+
 # == Schema Information
 #
 # Table name: mobile_apps
@@ -30,4 +31,5 @@ class MobileApp < ActiveRecord::Base
   has_many :users, :through => :mobile_app_users
 
   has_many :mobile_app_versions, :dependent => :destroy
+  accepts_nested_attributes_for :mobile_app_versions, allow_destroy: true
 end

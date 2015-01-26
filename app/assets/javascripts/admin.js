@@ -3,4 +3,4 @@
 //= require raphael
 //= require morris
 //= require datatables
-
+//= require cocoon
