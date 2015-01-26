@@ -1,42 +1,22 @@
 <% activities.each do |activity| %>  
-
-  	<div class="panel panel-default">
-  	  
-	  <div class="panel-body">
-		<% case activity.trackable_type %>
-		  	<% when "Outlet" %>
-		  	  	<i class="fa fa-share-alt"></i>
-		  	  	Social Media Account: 
-		  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
-		  	  	<% case activity.key %>
-		  	  		<% when "outlet.restored" %>
-		  	  		restored to an earlier verison
-		  	  		<% when "outlet.update" %>
-		  	  		updated
-		  	  		<% when "outlet.created" %>
-		  	  		created by
-		  	  	<% end %>
-		  		on <%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %> by <%= link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner) if activity.owner %>  
-		  	<% when "User"%>
-		  		<i class="fa fa-user"></i>
-		  	  	User: 
-		  	  	<% if activity.trackable %>
-		  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
-		  	  	<% else %>
-		  	  		Deleted User
-		  	  	<% end %>
-		  	  	<% case activity.key %>
-		  	  		<% when "user.restored" %>
-		  	  		restored to an earlier verison
-		  	  		<% when "user.update" %>
-		  	  		updated
-		  	  		<% when "user.created" %>
-		  	  		created by
-		  	  	<% end %>
-		  		on <%= activity.created_at.strftime("%m/%d/%Y at %I:%M:%S %p") %> by <%= link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner) if activity.owner %>  
-		  	<% else %>
-			   <%= activity.inspect %>
-  		<% end %>
-  	  </div>
-	</div>
+	<li class="<%= cycle("", "timeline-inverted") %>">
+		<div class="timeline-badge">
+			<i class="<%= activity_feed_badge_item(activity) %>"></i>
+		</div>
+		<div class="timeline-panel">
+			<div class="timeline-heading">
+				<h4 class="timeline-title"><%= activity_feed_link(activity) %></h4>
+				<p>
+					<small class="text-muted"><i class="fa fa-clock-o"></i> 
+						<%= time_ago_in_words(activity.created_at) %>
+					</small>
+				</p>
+			</div>
+			<div class="timeline-body">
+				<p>
+	  			<%= activity_feed_action_name(activity).html_safe %> by <%= activity_feed_owner(activity).html_safe %>
+				</p>
+			</div>
+		</div>
+	</li>
 <% end %>  
