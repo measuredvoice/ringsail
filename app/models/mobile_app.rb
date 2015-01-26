@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: mobile_apps
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  short_description :string(255)
+#  long_description  :text
+#  icon_url          :string(255)
+#  language          :string(255)
+#  agency_id         :integer
+#  status            :integer
+#  mongo_id          :string(45)
+#
+
 class MobileApp < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model

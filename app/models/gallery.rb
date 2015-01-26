@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: galleries
+#
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  description :text
+#
+
 class Gallery < ActiveRecord::Base
 	 #handles logging of activity
 	include PublicActivity::Model

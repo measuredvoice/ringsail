@@ -14,6 +14,7 @@
 #  service       :string(255)
 #  location_id   :integer
 #  location_name :string(255)
+#  status        :integer          default(0)
 #
 
 class Outlet < ActiveRecord::Base
@@ -23,7 +24,6 @@ class Outlet < ActiveRecord::Base
   
   enum status: { pending: 0, active: 1, under_review: 2, archived: 3  }
   #handles versioning
-  has_paper_trail 
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 
@@ -32,6 +32,8 @@ class Outlet < ActiveRecord::Base
 
   acts_as_taggable
   
+  
+  has_paper_trail 
   validates :service_url, 
     :presence   => true, 
     :format     => { :with => URI::regexp(%w(http https)) }, 

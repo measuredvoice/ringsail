@@ -13,6 +13,11 @@
 #  created_at          :datetime
 #  updated_at          :datetime
 #  user                :string(255)      not null
+#  agency_id           :integer
+#  phone               :string(255)
+#  first_name          :string(255)
+#  last_name           :string(255)
+#  groups              :string(1000)
 #
 
 class User < ActiveRecord::Base
