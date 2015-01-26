@@ -35,6 +35,10 @@ class Admin::OutletsController < Admin::AdminController
   def edit
   end
 
+  def show
+  end
+  
+
   # POST /outlets
   # POST /outlets.json
   def create
