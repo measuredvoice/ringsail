@@ -39,6 +39,8 @@ class User < ActiveRecord::Base
   has_many :gallery_users
   has_many :gallerys, through: :gallery_users
 
+  paginates_per 200
+
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       case name.to_sym
