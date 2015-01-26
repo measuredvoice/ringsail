@@ -11,6 +11,8 @@ module Admin::AdminHelper
     	link_to activity.trackable.organization, admin_outlet_path(activity.trackable)
     when "MobileApp"
     	link_to activity.trackable.name, admin_mobile_app_path(activity.trackable)
+    when "Gallery"
+      link_to activity.trackable.name, admin_gallery_path(activity.trackable)
     end
   end
   def activity_feed_badge_item(activity)
@@ -20,7 +22,9 @@ module Admin::AdminHelper
     when "Outlet"
       "fa fa-share-alt"
     when "MobileApp"
-      "fa fa-mobile"    
+      "fa fa-mobile"  
+    when "Gallery"
+      "fa fa-mobile"  
     end
   end
   def activity_feed_action_name(activity)

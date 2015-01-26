@@ -65,27 +65,7 @@
 						<div id="areachart" style="height: 300px;"></div>
 			  	</div>
 			  </div>
-				
-				<% content_for :additional_javascript do %>
-					<script>
-						Morris.Area({
-						    element: 'areachart',
-						    data: <%= raw @activites_graph_json.to_json %>,
-						    xkey: 'period',
-						    ykeys: ['activities'],
-						    labels: ['activities'],
-						    pointSize: 2,
-						    hideHover: 'auto'
-						  });
 
-						Morris.Donut({
-						    element: 'piechart',
-						    data: <%= raw @activities_pie_json.to_json %>,
-						    formatter: function (y) { return y + " accounts" }
-						 });
-
-					</script>
-				<% end %>
 			</div>
 	  	<div class="col-md-8">
 			  <div class="panel panel-default">
@@ -101,4 +81,26 @@
 			</div>
 	  </div>
 	</div>
+
+				
+<% content_for :additional_javascript do %>
+	<script>
+		Morris.Area({
+		    element: 'areachart',
+		    data: <%= raw @activites_graph_json.to_json %>,
+		    xkey: 'period',
+		    ykeys: ['activities'],
+		    labels: ['activities'],
+		    pointSize: 2,
+		    hideHover: 'auto'
+		  });
+
+		Morris.Donut({
+		    element: 'piechart',
+		    data: <%= raw @activities_pie_json.to_json %>,
+		    formatter: function (y) { return y + " accounts" }
+		 });
+
+	</script>
+<% end %>
 </div>

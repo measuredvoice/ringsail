@@ -2,7 +2,8 @@
  * This manifest file includes the CSS files required by default
  *= require_self
  *= require morris
- #= require timeline
+ *= require timeline
+ *= require datatables
  */
 
 @import "bootstrap-sprockets";
