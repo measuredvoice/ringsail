@@ -51,6 +51,16 @@ Ringsail::Application.routes.draw do
         get "activities"
       end
     end
+
+    resources :galleries do
+      member do
+        get "history"
+        get "restore"
+      end
+      collection do 
+        get "activities"
+      end
+    end
     resources :users
 
     get '/' => 'dashboards#index'
