@@ -1,0 +1,28 @@
+<%= form_for([:admin,@gallery]) do |f| %>
+  <% if @gallery.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+
+      <ul>
+      <% @gallery.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %> </br>
+    <%= f.text_field :name, :class => "form-control formwidth" %>
+  </div>
+  </br>
+  <div class="field"> 
+    <%= f.label :description %> </br>
+    <%= f.text_field :description, :class => "form-control formwidth" %>
+  </div>
+  </br> 
+  <div class="actions">
+    <%= f.submit :class => "btn btn-default" %>
+  </div>
+
+<% end %>
