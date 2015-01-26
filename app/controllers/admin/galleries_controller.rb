@@ -24,10 +24,12 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys/new
   def new
     @gallery = Gallery.new
+    @mobile_apps = MobileApp.all
   end
 
   # GET /gallerys/1/edit
   def edit
+    @mobile_apps = MobileApp.all
   end
 
   # POST /gallerys

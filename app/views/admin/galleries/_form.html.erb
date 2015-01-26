@@ -24,7 +24,7 @@
 
 
   <div class="field hidden"> 
-    <%=f.select :mobile_app_ids, MobileApp.all.collect {|x| [x.name, x.id]}, {}, :multiple => true %>
+    <%=f.select :mobile_app_ids, @mobile_apps.all.collect {|x| [x.name, x.id]}, {}, :multiple => true %>
   </div>
 
   <div class="field">
@@ -56,7 +56,7 @@
         </tr>
       </thead>
       <tbody>
-        <% MobileApp.all.each do |app| %>
+        <% @mobile_apps.all.each do |app| %>
           <tr id="app-add-<%= app.id%>">
             <td><%= app.name %></td>
             <td><%= app.short_description %></td>
@@ -101,6 +101,9 @@
       $('#app-'+id).remove();
       $('#current_reg_table tr:last').after('<tr id="app-'+id+'"><td>'+elements[0].innerHTML+'</td><td>'+elements[1].innerHTML+'</td><td><a href="javascript:remove_registration('+id+');"><i class="fa fa-remove"></i></a></td></tr>');
       array_of_registrations = $('#gallery_mobile_app_ids').val();
+      if (array_of_registrations== null){
+        array_of_registrations = [];
+      }
       array_of_registrations = array_of_registrations.concat([id+""]);
       $('#gallery_mobile_app_ids').val(array_of_registrations);
     }
