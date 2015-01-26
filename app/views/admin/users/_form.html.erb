@@ -12,10 +12,41 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.label :first_name %><br>
+    <%= f.text_field :first_name, :class => 'form-control formwidth'%>
   </div>
+  </br>
+  <div class="field">
+    <%= f.label :last_name %><br>
+    <%= f.text_field :last_name, :class => 'form-control formwidth'%>
+  </div>
+  </br>
+  <div class="field">
+    <%= f.label :user %><br>
+    <%= f.text_field :user, :class => 'form-control formwidth'%>
+  </div>
+  </br>
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email, :class => 'form-control formwidth'%>
+  </div>
+  </br>
+  <div class = "field">
+    <%= f.label :agency %></br>
+    <%= f.text_field :agency, :class => 'form-control formwidth', :disabled => true %> 
+  </div>
+  </br>
+  <div class = "field">
+    <%= f.label :groups %></br>
+    <%= f.text_field :groups, :class => "form-control formwidth", :disabled => true %>
+  </div>
+  </br>
+  <div class = "field">
+    <%= f.label :phone %></br>
+    <%= f.text_field :phone, :class => "form-control formwidth"%>
+  </div>
+  </br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-default" %>
   </div>
 <% end %>
