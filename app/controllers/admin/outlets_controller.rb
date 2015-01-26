@@ -102,7 +102,7 @@ class Admin::OutletsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:organization, :service_url)
+      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, :account, :tag_list, :language, :info_url)
     end
 
 

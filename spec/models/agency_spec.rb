@@ -2,12 +2,15 @@
 #
 # Table name: agencies
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  shortname  :string(255)
-#  info_url   :string(255)
+#  id              :integer          not null, primary key
+#  name            :string(255)
+#  created_at      :datetime
+#  updated_at      :datetime
+#  shortname       :string(255)
+#  info_url        :string(255)
+#  mongo_id        :string(255)
+#  parent_mongo_id :string(255)
+#  parent_id       :integer
 #
 
 require 'spec_helper'
