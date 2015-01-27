@@ -22,18 +22,13 @@
   </div>
   </br>
   <div class="field">
-    <%= f.label :user %><br>
-    <%= f.text_field :user, :class => 'form-control formwidth'%>
-  </div>
-  </br>
-  <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email, :class => 'form-control formwidth'%>
+    <%= f.text_field :email, :class => 'form-control formwidth', :disabled => true%>
   </div>
   </br>
   <div class = "field">
     <%= f.label :agency %></br>
-    <%= f.text_field :agency, :class => 'form-control formwidth', :disabled => true %> 
+    <%= f.text_field :agency, :class => 'form-control formwidth', :disabled => true, :value => @user.agency.name %> 
   </div>
   </br>
   <div class = "field">
