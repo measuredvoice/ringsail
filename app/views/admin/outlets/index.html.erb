@@ -24,7 +24,6 @@
             <th>Agency</th>
             <th>Service</th>
             <th>Service URL</th>
-            <th>Account</th>
             <th>Organization</th>
             <th>Updated at</th>
             <th>Tags</th>
@@ -35,10 +34,9 @@
           <tbody>
           <% @outlets.each do |outlet| %>
           	<tr class = "tablerow">
-              <td class = "table_data"><%= outlet.agencies.map(&:to_s).join(', ')%>
+              <td class = "table_data"><%= outlet.agencies.map(&:name).join(', ')%>
           		<td class = "table_data"><%= outlet.service %></td>
-              <td class = "table_data"><%= outlet.service_url %></td>
-          		<td class = "table_data"><%= outlet.account %></td>
+              <td class = "table_data"><%= link_to outlet.service_url, outlet.service_url %></td>
               <td class = "table_data"><%= outlet.organization %></td>
               <td class = "table_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
               <td class = "table_data"><%= outlet.tags.map(&:to_s).join(', ')%></td>
