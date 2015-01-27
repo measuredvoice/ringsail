@@ -14,7 +14,21 @@ Ringsail::Application.routes.draw do
   
   # we are going to replace rails admin, its not very maintainable, but a decent crud
   # keep in the app until we are sure we've replace the functionality
-  #mount RailsAdmin::Engine => '/admin', :as => 'rails_admin'
+  
+
+  #######
+  #### Admin Endpoints
+  #######
+
+  concern :activity_and_history do
+    member do
+      get "history"
+      get "restore"
+    end
+    collection do
+      get "activities"
+    end
+  end
 
   namespace :admin do
     resources :dashboards do
@@ -23,45 +37,10 @@ Ringsail::Application.routes.draw do
         get 'activities' => 'dashboards#activities'
       end
     end
-    resources :agencies do
-      member do
-        get "history"
-        get "restore"
-      end
-      collection do
-        get "activities"
-      end
-    end
-
-    resources :outlets do
-      member do
-        get "history"
-        get "restore"
-      end
-      collection do 
-        get "activities"
-      end
-    end
-
-    resources :mobile_apps do
-      member do
-        get "history"
-        get "restore"
-      end
-      collection do 
-        get "activities"
-      end
-    end
-
-    resources :galleries do
-      member do
-        get "history"
-        get "restore"
-      end
-      collection do 
-        get "activities"
-      end
-    end
+    resources :agencies, concerns: :activity_and_history
+    resources :outlets, concerns: :activity_and_history
+    resources :mobile_apps, concerns: :activity_and_history
+    resources :galleries, concerns: :activity_and_history
     resources :users
 
     get '/' => 'dashboards#index'
@@ -73,10 +52,14 @@ Ringsail::Application.routes.draw do
   #######
   namespace :api do 
     namespace :v1 do
-      resources :outlets
+      resources :outlets, only: [:index, :show]
     end
   end
   
+
+  #######
+  #### PUBLIC PAGES
+  #######
   root :to => "home#index"
 
 
