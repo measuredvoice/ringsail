@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h2><%= @page_title %></h2>
+</div>
+
+<div class="row">
+  <div class="span11">
+    <p>These accounts were updated over six months ago. Please review each account and either confirm, edit, or remove it as appropriate.</p>
+    <hr>
+
+    <% if flash[:alert] %>
+    <p class="alert alert-warning">
+      <%= flash[:alert] %>
+    </p>
+
+    <% elsif flash[:notice] %>
+    <p class="alert alert-info">
+      <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+    </p>
+    <% end %>
+
+    <%= paginate @outlets, :param_name => :page_number %>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Service URL</th>
+          <th>Organization</th>
+          <th>Agencies</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @outlets.each do |outlet| %>
+        <tr>
+          <td><a href="<%= howto_find_outlet_path(:service_url => outlet.service_url, :auth_token => @current_token.token) %>" target="_blank"><%= outlet.service_url %></a></td>
+          <td><%= outlet.organization %></td>
+          <td><%= outlet.agencies.map {|a| a.name}.join(", ") %></td>
+          <td>
+          <%= form_tag({:action => "confirm"}) do %>
+            <%= hidden_field_tag('service_url', outlet.service_url) %>
+            <%= hidden_field_tag('auth_token', @current_token.token) %>
+            <%= hidden_field_tag('return_to', 'review') %>
+            <%= hidden_field_tag('agency_id', params[:agency_id]) %>
+          
+            <button type="submit" class="btn btn-mini btn-primary">Confirm</button>
+          <% end %>
+          
+          <%= form_tag({:action => "remove"}) do %>
+            <%= hidden_field_tag('service_url', outlet.service_url) %>
+            <%= hidden_field_tag('auth_token', @current_token.token) %>
+            <%= hidden_field_tag('agency_id', params[:agency_id]) %>
+            <%= hidden_field_tag('return_to', 'review') %>
+          
+            <button type="submit" class="btn btn-mini btn-danger" data-confirm="Do you really want to remove (<%= outlet.service_info.display_name %>) from the registry?">Remove</button>
+          <% end %>
+
+          <a class="btn btn-mini" href="<%= howto_add_outlet_path :service_url => outlet.service_url, :auth_token => @current_token.token %>" target="_blank">Edit</a> 
+          
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

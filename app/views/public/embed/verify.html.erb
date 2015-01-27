@@ -1,0 +1,167 @@
+<div class="span7">
+    <% if @outlet %>
+    
+    <% if flash[:notice] %>
+    <div id="verified-account">
+        <p>
+            <strong><%= flash[:shortnotice] %></strong> <%= flash[:notice] %>
+        </p>
+    </div>
+    <% end %>
+
+    <% if @outlet.verified? %>
+
+	<h3>
+		Information about <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_info.display_name %></a>
+	</h3>
+    
+    <table>
+        <tbody>
+            <tr><td class="first-column">Organization or Program:</td><td><%= @outlet.organization %></td></tr>
+            <tr><td>Program URL:</td><td><%= link_to @outlet.info_url, @outlet.info_url, :target => "_top" %></td></tr>
+            <tr><td>Sponsoring top-level <%= pluralize_word(@outlet.agencies.count, 'Agency') %>:</td><td><%= @outlet.agencies.join(", ") %></td></tr>
+            <tr><td>Tags:</td><td><%= @outlet.tag_list.join(", ") %></td></tr>
+            <tr><td>Language:</td><td><%= @outlet.language %></td></tr>
+            <tr><td>Last updated by:</td><td><%= @outlet.updated_by.gsub(/(\w)\w+@/, '\1*****@') %></td></tr>
+            <tr><td>Last updated on:</td><td><%= @outlet.updated_at.to_s(:human) %></td></tr>    
+        </tbody>
+    </table>
+
+    <hr>
+    
+    <div>
+        
+        <p>If you have a .gov or .mil email address, you can make changes to this listing. Enter your email address and phone number below and we will send you a link to edit it.</p>
+
+        <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
+
+        <div class="clearfix">
+            <label for="email">Your Official Government Email Address:</label>
+            <div class="input">
+                <%= text_field_tag('email', '', :class => "emailfield") %>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <label for="phone">Phone:</label>
+            <div class="input">
+                <%= text_field_tag('phone', '', :class => "span5") %>
+            </div>
+        </div>
+
+        <%= hidden_field_tag('service_url', @outlet.service_url) %>
+
+        <div class="actions">
+            <input type="submit" class="btn" value="Submit">
+        </div>
+        <% end %>
+		
+		<div role="search" id="verify-another">
+			<p><label for="service-url">To look up another social media account, please paste its complete URL here:<br><br>
+				<span class="quiet">Example: http://twitter.com/whitehouse</span>
+			</label></p>
+		</div>
+		
+	    <%= form_tag({:action => "verify"}, :method => :get) do %>
+			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+	        <button class="verify-button" type="submit">Look Up</button>
+	    <% end %>
+
+		
+    </div>
+
+    <% else %>
+
+    <div id="not-verified-account">
+        <p>
+            <a href="<%= @outlet.service_url %>" target="_top"><%= @outlet.service_url %></a> has <strong>not</strong> been registered as an account managed by the U.S. federal government.
+        </p>
+    </div>
+
+    
+    <div>
+        <p>If you know that <em><%= @outlet.service_info.display_name %></em> is an official U.S. federal government social media account, you can add it to this registry. Enter your official government (.gov or .mil) email address and phone number below and we'll send you a link so you can add it to the registry.</p>
+        
+        <%= form_tag({:controller => "embed_tokens", :action => "create"}) do %>
+
+        <div class="clearfix">
+            <label for="email">Your Official Government Email Address:</label>
+            <div class="input">
+                <%= text_field_tag('email', '', :class => "emailfield") %>
+            </div>
+        </div>
+
+        <div class="clearfix">
+            <label for="phone">Phone:</label>
+            <div class="input">
+                <%= text_field_tag('phone', '', :class => "span5") %>
+            </div>
+        </div>
+
+        <%= hidden_field_tag('service_url', @outlet.service_url) %>
+
+        <div class="actions">
+                <p><span class="label important">Important!</span> You should only add accounts managed by federal agencies (including elected officials, heads of agencies, and Cabinet members) into the USA.gov Social Media Registry.</p>
+                <p><strong>Do not enter personal, employee, or other types of accounts.</strong></p>
+
+            <input type="submit" class="btn" value="Submit">
+        </div>
+        <% end %>
+
+    </div>
+	<div role="search" id="verify-another">
+		<p><label for="service-url">To look up another social media account, please paste its complete URL here:<br><br>
+			<span class="quiet">Example: http://twitter.com/whitehouse</span>
+		</label></p>
+	</div>
+		
+    <%= form_tag({:action => "verify"}, :method => :get) do %>
+		<input id="service-url" name="service_url" class="verify-url-field" type="text" value="">
+        <button class="verify-button" type="submit">Look Up</button>
+    <% end %>
+
+<% end %>
+
+<% else %>
+
+<% if flash[:alert] %>
+
+  <p class="alert-error">
+    <%= flash[:alert] %>
+  </p>
+
+<% end %>
+
+
+    <div>
+		<p>
+			Many people now use tools like Twitter, Facebook and YouTube to receive news and information. This registry identifies social media accounts managed by the federal government, to help the public know which accounts they can trust to provide factual government information.
+		</p>
+		<p>
+			If you work for the U.S. federal government and have a .gov or .mil email address, use this tool to register social media accounts managed by federal agencies (including accounts for elected officials, heads of agencies or Cabinet members). Any registered accounts should have been created under federal-compatible <a href="http://www.howto.gov/web-content/resources/tools/terms-of-service-agreements" target="_top">Terms of Service (TOS)</a>. If they weren&rsquo;t, contact your agency <a href="http://www.howto.gov/web-content/resources/tools/terms-of-service-agreements/agency-points-of-contact" target="_top">Point of Contact</a>, who can help you to bring these accounts into compliance with federal law.
+		</p>
+		<p>
+To register an account, enter the account URL in the field below and click &ldquo;Look Up&rdquo;
+			<ul>
+				<li>If it&rsquo;s not yet registered, you can add it</li>
+				<li>If it&rsquo;s already in the system, you can update it, if needed</li>
+			</ul>
+		</p>
+		
+		
+		<div role="search">
+			<p><label for="service-url"><strong>Please paste the URL of the account you'd like to register here:</strong><br><br>
+			<span class="quiet">Example: http://twitter.com/whitehouse</span>	
+			</label></p>
+		</div>
+		
+        <%= form_tag({:action => "verify"}, :method => :get) do %>
+			<input id="service-url" name="service_url" class="verify-url-field" type="text" value="<%= params[:service_url] %>">
+            <button class="verify-button" type="submit">Look Up</button>
+        <% end %>
+        <h3>Types of accounts we can verify:</h3>
+        <%= render "shared/services_list" %>
+    </div>
+<% end %>
+
+</div>
