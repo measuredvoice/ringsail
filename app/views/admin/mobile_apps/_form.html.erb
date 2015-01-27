@@ -32,8 +32,8 @@
     <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field">
-    <%= f.label :agency %>(replace with autocomplete) </br>
-    <%= f.select :agency, Agency.all.collect {|x| [x.name,x.id]},{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+    <%= f.label :agency_id %>(replace with autocomplete) </br>
+    <%= f.select :agency_id, options_from_collection_for_select(Agency.all, :id, :name, @mobile_app.agency_id ),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="versions">
     <h2>Versions</h2>

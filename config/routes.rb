@@ -66,8 +66,20 @@ Ringsail::Application.routes.draw do
     get '/' => 'dashboards#index'
   end
   devise_for :users
+
+  #######
+  #### API ENDPOINTS
+  #######
+  namespace :api do 
+    namespace :v1 do
+      resources :outlets
+    end
+  end
   
   root :to => "home#index"
+
+
+
 
 
 

@@ -72,7 +72,8 @@ class Admin::OutletsController < Admin::AdminController
   # DELETE /outlets/1
   # DELETE /outlets/1.json
   def destroy
-    @outlet.destroy
+    @outlet.archived!
+    @outlet.save!
     respond_to do |format|
       format.html { redirect_to outlets_url, notice: 'Outlet was successfully destroyed.' }
       format.json { head :no_content }
@@ -88,7 +89,7 @@ class Admin::OutletsController < Admin::AdminController
   end
 
   def restore
-    @outlet.versions.find(params[:version_id]).reify.save!
+    @outlet.versions.find(params[:version_id]).reify(:has_one=> true, :has_many => true).save!  
     redirect_to admin_outlet_path(@outlet), :notice => "Undid changes to outlet."
   end
 

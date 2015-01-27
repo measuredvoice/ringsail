@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  include AuthHelper
 
   before_filter :check_cors_preflight
   after_filter :set_cors_headers

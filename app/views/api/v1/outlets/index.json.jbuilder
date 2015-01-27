@@ -1,0 +1,1 @@
+json.array! @outlets, :id, :organization

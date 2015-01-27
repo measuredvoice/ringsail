@@ -2,7 +2,7 @@
   <h1 class="page-header">Versions</h1>
   </br>
   <% @versions.each do |version| %>
-    <% outlet = version.reify(:has_one=> true, :has_many => true) %>
+    <% outlet = version.reify({:has_one=> true, :has_many => true}) %>
       <div class = "panel panel-default">
         <div class = "panel-heading">
           <p style = "display:inline">
@@ -32,7 +32,7 @@
 
           <p>
             <strong>Tags:</strong>
-            <%= outlet.tags.map(&:to_s).join(', ') %>
+            <%= outlet.tag_list %>
           </p>
 
           <p>
