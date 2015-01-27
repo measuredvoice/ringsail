@@ -5,7 +5,7 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
-    @services = Service.all
+    @services = Outlet.all.group(:service).count
     if(params[:service])
       @outlets = Outlet.where(service: params[:service]).includes(:tags).page(params[:page]).per(15)
     else
