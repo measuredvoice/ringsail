@@ -106,6 +106,32 @@ namespace :load_apps_gallery_data do
 	    			app.users << user
 	    		end
 	    	end
+
+	    	item["Version_Details"].each do |version_details|
+	    		mobile_app_version = MobileAppVersion.find_or_create_by(mongo_id: version_details["_id"]["$oid"])
+	    		mobile_app_version.store_url = version_details["Store_Url"]
+	    		mobile_app_version.platform = version_details["Platform"]
+	    		mobile_app_version.version_number = version_details["Version_Number"]
+	    		date = Time.now
+	    		if(version_details["Published"] =~ /\d{2}\/\d{2}\/\d{4}/)
+	    			date = Date.strptime(version_details["Published"], "%m/%d/%Y")
+	    		elsif(version_details["Published"].empty?)
+	    			date = Time.at(item["created"].to_i).iso8601.to_date
+	    		else
+	    			date = Date.parse(version_details["Published"])
+	    		end
+	    		mobile_app_version.publish_date = date
+	    		mobile_app_version.description = version_details["Description"]
+	    		mobile_app_version.whats_new = version_details["Whats_New"]
+	    		mobile_app_version.screenshot = version_details["Screenshot"].empty? ? "" : version_details["Screenshot"][0]
+	    		mobile_app_version.device = version_details["Device"][0]
+	    		mobile_app_version.language = version_details["Language"] == "EN" ? "English" : "Spanish"
+	    		mobile_app_version.average_rating = version_details["Rating"]
+	    		mobile_app_version.number_of_ratings = version_details["Rating_Count"]
+	    		mobile_app_version.save!
+	    		app.mobile_app_versions << mobile_app_version
+
+	    	end
 	    	app.save!
 	    end
 
