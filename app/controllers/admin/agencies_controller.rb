@@ -1,9 +1,16 @@
 class Admin::AgenciesController < Admin::AdminController
-  respond_to :html, :xml, :json
-  before_action :set_agency, only: [:show, :edit, :history,]
+  respond_to :html, :xml, :json, :csv, :xls
+  before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore]
 
   def index 
     @agencies = Agency.all.order(name: :asc).page(params[:page]).per(15)
+    respond_to do |format|
+      format.html
+      format.json { render json: @agencies }
+      format.xml { render xml: @agencies }
+      format.csv { send_data @agencies.to_csv }
+      format.xls { send_data @agencies.to_csv(col_sep: "\t")}
+    end
   end
 
   def new
@@ -30,11 +37,30 @@ class Admin::AgenciesController < Admin::AdminController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @agency.update(agency_params)
+        format.html {redirect_to admin_agency_path(@agency), notice: 'Agency was successfully updated.'}
+        format.json  {render :show, status: :ok, location: admin_agency_path(@agency)}
+      else
+        format.html {render :edit }
+        format.json {render json: @agency.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "Agency").order("created_at desc").page(params[:page]).per(25)
   end
+
   def history
     @versions = @agency.versions.order("created_at desc")
+  end
+
+  def restore
+
+    @agency.versions.find(params[:version_id]).reify.save!
+    redirect_to admin_agency_path(@agency), :notice => "Changes were reverted."
   end
 
   private

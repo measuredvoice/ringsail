@@ -30,4 +30,14 @@ class MobileApp < ActiveRecord::Base
   has_many :users, :through => :mobile_app_users
 
   has_many :mobile_app_versions, :dependent => :destroy
+
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |outlet|
+        csv << outlet.attributes.values_at(*column_names)
+      end
+    end
+  end
+
 end
