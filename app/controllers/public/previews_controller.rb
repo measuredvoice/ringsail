@@ -1,7 +1,7 @@
-class PreviewsController < ApplicationController
+class Public::PreviewsController < ApplicationController
   layout "native_admin"
   respond_to :html
-  before_filter :authenticate_user!
+ # before_filter :authenticate_user!
   
   def review_email
     @page_title = "Preview 6-Month Review Emails"

@@ -1,4 +1,4 @@
-class ServicesController < ApplicationController
+class Public::ServicesController < ApplicationController
   respond_to :html, :xml, :json
 
   def list

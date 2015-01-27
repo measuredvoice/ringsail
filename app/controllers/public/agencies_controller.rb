@@ -1,4 +1,4 @@
-class AgenciesController < ApplicationController
+class Public::AgenciesController < ApplicationController
   respond_to :html, :xml, :json
   #before_action :set_agency, except: [:list]
   before_action :set_agency, only: [:show, :edit, :update, :destroy]

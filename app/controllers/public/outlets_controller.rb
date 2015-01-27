@@ -1,4 +1,4 @@
-class OutletsController < ApplicationController
+class Public::OutletsController < ApplicationController
   respond_to :html, :xml, :json
   respond_to :atom, :only => :list
   before_filter :check_auth, :except => [:verify, :show, :list]

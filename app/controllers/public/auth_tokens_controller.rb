@@ -1,4 +1,4 @@
-class AuthTokensController < ApplicationController
+class Public::AuthTokensController < ApplicationController
   respond_to :html, :xml, :json
   before_action :set_authtoken, except: [:index, :new, :create]
   def new
@@ -40,7 +40,7 @@ class AuthTokensController < ApplicationController
   end
   private 
     def set_authtoken
-      @auth_token = AuthoToken.find(params[:id])
+      @auth_token = AuthToken.find(params[:id])
     end
     def authtoken_params
       params.require(:authtoken).permit(:email, :phone)

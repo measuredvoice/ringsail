@@ -1,4 +1,4 @@
-rakedevelopment:
+development:
   adapter: mysql2
   database: ringsail_development
   encoding: utf8

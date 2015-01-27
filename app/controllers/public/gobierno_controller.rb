@@ -1,5 +1,5 @@
 # encoding: utf-8
-class GobiernoController < OutletsController
+class Public::GobiernoController < OutletsController
   layout "gobierno"
   
   def verify

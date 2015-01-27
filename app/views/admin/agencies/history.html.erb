@@ -2,7 +2,8 @@
   <h1 class="page-header">Versions</h1>
   </br>
   <% @versions.each do |version| %>
-    <% agency = version.reify(:has_one=> true, :has_many => true) %>
+    <% agency = version.reify(:has_one=> true, :has_many => true) 
+        if agency %>
       <%= version.whodunnit %>
       <div class = "panel panel-default">
         <div class = "panel-heading">
@@ -14,24 +15,25 @@
         <div class = "panel-body">
           <p>
             <strong>Agency:</strong>
-            <%#= agency.name %>
+            <%= agency.name %>
           </p>
 
           <p>
             <strong>Short name:</strong>
-            <%#= agency.shortname %>
+            <%= agency.shortname %>
           </p>
 
           <p>
             <strong>Info URL</strong>
-            <%#= agency.info_url %>
+            <%= agency.info_url %>
           </p>
 
           <p>
             <strong>Updated at:</strong>
-            <%#= agency.updated_at.strftime("%B %e, %Y %H:%M") %>
+            <%= agency.updated_at.strftime("%B %e, %Y %H:%M") %>
           </p>
         </div>
       </div>
-  <% end %> 
+  <%  end
+  end %> 
 </div>

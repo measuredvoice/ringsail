@@ -1,4 +1,4 @@
-class OfficialTagsController < ApplicationController
+class Public::OfficialTagsController < ApplicationController
   respond_to :html, :xml, :json
   before_action :set_official_tags, except: [:index]
 

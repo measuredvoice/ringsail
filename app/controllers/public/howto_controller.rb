@@ -1,8 +1,8 @@
-class HowtoController < OutletsController
+class Public::HowtoController < OutletsController
   layout "howto"
   before_filter :check_auth, :except => [:verify, :show, :list, :review, :browse]
   before_filter :check_review_auth, :only => [:review]
-  before_filter :look_up_auth, :only => [:browse]
+  #before_filter :look_up_auth, :only => [:browse]
   
   def verify
     @page_title = "Register an Account"

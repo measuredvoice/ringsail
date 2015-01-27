@@ -1,4 +1,4 @@
-class OutletLocationsController < ApplicationController
+class Public::OutletLocationsController < ApplicationController
   respond_to :html, :xml, :json
 
   def resolve
