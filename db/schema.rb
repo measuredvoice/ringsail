@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150123204047) do
+ActiveRecord::Schema.define(version: 20150127061616) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150123204047) do
     t.string   "language"
     t.string   "average_rating"
     t.integer  "number_of_ratings"
+    t.string   "mongo_id",          limit: 45
   end
 
   create_table "mobile_apps", force: true do |t|
@@ -198,6 +199,15 @@ ActiveRecord::Schema.define(version: 20150123204047) do
     t.string   "last_name"
     t.string   "groups",              limit: 1000
   end
+
+  create_table "version_associations", force: true do |t|
+    t.integer "version_id"
+    t.string  "foreign_key_name", null: false
+    t.integer "foreign_key_id"
+  end
+
+  add_index "version_associations", ["foreign_key_name", "foreign_key_id"], name: "index_version_associations_on_foreign_key", using: :btree
+  add_index "version_associations", ["version_id"], name: "index_version_associations_on_version_id", using: :btree
 
   create_table "versions", force: true do |t|
     t.string   "item_type",  null: false

@@ -29,6 +29,9 @@ class Admin::MobileAppsController < Admin::AdminController
 
   # GET /mobile_apps/1/edit
   def edit
+    if @mobile_app.mobile_app_versions.count == 0
+      @mobile_app.mobile_app_versions.build
+    end
   end
 
   def show
@@ -68,12 +71,12 @@ class Admin::MobileAppsController < Admin::AdminController
   # DELETE /mobile_apps/1
   # DELETE /mobile_apps/1.json
   def destroy
-    @mobile_app.destroy
+    @mobile_app.archived!
+    @mobile_app.save!
     respond_to do |format|
-      format.html { redirect_to mobile_apps_url, notice: 'MobileApp was successfully destroyed.' }
+      format.html { redirect_to admin_mobile_apps_url, notice: 'MobileApp was successfully destroyed.' }
       format.json { head :no_content }
     end
-    redirect_to action: :index
   end
 
   def activities
@@ -98,7 +101,10 @@ class Admin::MobileAppsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_app_params
-      params.require(:mobile_app).permit(:organization, :service_url)
+      params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url, 
+        :language, :agency_id, mobile_app_versions_attributes: [:id, :store_url,:platform,
+        :version_number,:publish_date,:description,:whats_new,:screenshot,:device,
+        :language,:average_rating,:number_of_ratings, :_destroy])
     end
 
 

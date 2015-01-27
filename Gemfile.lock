@@ -300,7 +300,7 @@ DEPENDENCIES
   faker
   font-awesome-rails
   jazz_hands!
-  jbuilder (~> 2.2.6)
+  jbuilder
   jquery-rails
   json
   kaminari

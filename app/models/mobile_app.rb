@@ -31,8 +31,7 @@ class MobileApp < ActiveRecord::Base
   has_many :users, :through => :mobile_app_users
 
   has_many :mobile_app_versions, :dependent => :destroy
-
-  accepts_nested_attributes_for :mobile_app_versions, allow_destroy: true
+  accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|

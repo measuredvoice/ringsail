@@ -47,7 +47,7 @@ gem 'morrisjs-rails'
 gem 'raphael-rails'
 gem 'jquery-rails'
 
-gem 'jbuilder', '~> 2.2.6'
+gem 'jbuilder'
  
 group :development do
   gem 'rspec-rails'
