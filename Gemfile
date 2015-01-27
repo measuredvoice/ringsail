@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 ruby '2.1.5'
 
-gem 'rails', '4.1.1'
+gem 'rails', '4.1.9'
 gem 'mysql2'
 
 # Templates for generating JSON and other data output
@@ -19,7 +19,6 @@ gem 'cocoon'
 # gem 'hyper-graph'
 
 # Automatic admin interface
-gem 'rails_admin', :git => 'git://github.com/sferik/rails_admin.git'
 gem "devise"
 gem 'devise_cas_authenticatable'
 
