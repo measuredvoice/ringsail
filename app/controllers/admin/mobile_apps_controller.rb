@@ -6,13 +6,13 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps.json
   def index
     @mobile_apps = MobileApp.page(params[:page]).per(15)
-    @apps = MobileApp.all
+    @allApps = MobileApp.all
     respond_to do |format|
       format.html
-      format.json {render json: @apps }
-      format.xml {render xml: @apps}
-      format.csv {send_data @apps.to_csv}
-      format.xls { send_data @apps.csv(col_sep: "\t")}
+      format.json {render json: @allApps }
+      format.xml {render xml: @allApps}
+      format.csv {send_data @allApps.to_csv}
+      format.xls { send_data @allApps.csv(col_sep: "\t")}
     end
   end
 

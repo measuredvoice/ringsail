@@ -4,12 +4,13 @@ class Admin::AgenciesController < Admin::AdminController
 
   def index 
     @agencies = Agency.all.order(name: :asc).page(params[:page]).per(15)
+    @allagencies = Agency.all.order(name: :asc)
     respond_to do |format|
       format.html
-      format.json { render json: @agencies }
-      format.xml { render xml: @agencies }
-      format.csv { send_data @agencies.to_csv }
-      format.xls { send_data @agencies.to_csv(col_sep: "\t")}
+      format.json { render json: @allagencies }
+      format.xml { render xml: @allagencies }
+      format.csv { send_data @allagencies.to_csv }
+      format.xls { send_data @allagencies.to_csv(col_sep: "\t")}
     end
   end
 
