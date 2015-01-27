@@ -8,7 +8,6 @@ gem 'mysql2'
 # see https://github.com/gowalla/boxer
 gem 'boxer'
 gem 'json'
-gem 'rack-jsonp'
 
 gem 'public_activity'
 gem 'paper_trail'
