@@ -26,6 +26,7 @@ Ringsail::Application.routes.draw do
     resources :agencies do
       member do
         get "history"
+        get "restore"
       end
       collection do
         get "activities"

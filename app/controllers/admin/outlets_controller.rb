@@ -14,17 +14,15 @@ class Admin::OutletsController < Admin::AdminController
     @outs = Outlet.all
     respond_to do |format|
       format.html
-      format.json { render json: @outlets }
-      format.xml { render xml: @outlets }
-      format.csv { send_data @outlets.to_csv }
-      format.xls { send_data @outlets.to_csv(col_sep: "\t")}
+      format.json { render json: @outs }
+      format.xml { render xml: @outs }
+      format.csv { send_data @outs.to_csv }
+      format.xls { send_data @outs.to_csv(col_sep: "\t")}
     end
   end
 
   # GET /outlets/1
   # GET /outlets/1.json
- # def show
-  #end
 
   # GET /outlets/new
   def new
@@ -84,13 +82,14 @@ class Admin::OutletsController < Admin::AdminController
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "Outlet").order("created_at desc").page(params[:page]).per(25)
   end
+  
   def history
     @versions = @outlet.versions.order("created_at desc")
   end
 
   def restore
     @outlet.versions.find(params[:version_id]).reify(:has_one=> true, :has_many => true).save!  
-    redirect_to admin_outlet_path(@outlet), :notice => "Undid changes to outlet."
+    redirect_to admin_outlet_path(@outlet), :notice => "Changes were reverted."
   end
 
   

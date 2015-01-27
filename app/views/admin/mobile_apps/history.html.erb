@@ -1,6 +1,47 @@
 <div class="row">  
-  <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Versions</h1>
-    <p>Use what we did for the outlets here</p>
-  </div>
+    </br>
+
+    <% @versions.each do |version| %>
+    <% mobile_app = version.reify(:has_one=> true, :has_many => true) %>
+      <div class = "panel panel-default">
+        <div class = "panel-heading">
+          <p style = "display:inline">
+            <h3 class = "panel-title">Changes made by: <%= User.find(version.whodunnit).email if version.whodunnit?%> </h3>
+            <%= link_to "Restore", restore_admin_mobile_app_path({id: mobile_app.id, version_id: version.id}), :class => "pull-right" %>
+          </p>
+        </div>
+        <div class = "panel-body">
+          <p>
+            <strong>Agencies:</strong>
+            <%= mobile_app.agencies.map(&:to_s).join(', ') %>
+          </p>
+          <p>
+            <strong>Organization:</strong>
+            <%= mobile_app.organization %>
+          </p>
+
+          <p>
+            <strong>Service:</strong>
+            <%= mobile_app.service %>
+          </p>
+
+          <p>
+            <strong>Service URL:</strong>
+            <%= mobile_app.service_url %>
+          </p>
+
+          <p>
+            <strong>Tags:</strong>
+            <%= mobile_app.tags.map(&:to_s).join(', ') %>
+          </p>
+
+          <p>
+            <strong>Updated at:</strong>
+            <%= mobile_app.updated_at.strftime("%B %e, %Y %H:%M") %>
+          </p>
+        </div>
+      </div>
+  <% end %> 
+
 </div>

@@ -1,0 +1,37 @@
+<div class="row">  
+  <h1 class="page-header">Versions</h1>
+  </br>
+  <% @versions.each do |version| %>
+    <% agency = version.reify(:has_one=> true, :has_many => true) %>
+      <%= version.whodunnit %>
+      <div class = "panel panel-default">
+        <div class = "panel-heading">
+          <p style = "display:inline">
+            <h3 class = "panel-title">Changes made by: <%= User.find(version.whodunnit).email if version.whodunnit? %> </h3>
+            <%= link_to "Restore", restore_admin_agency_path({id: agency.id, version_id: version.id}), :class => "pull-right" %>
+          </p>
+        </div>
+        <div class = "panel-body">
+          <p>
+            <strong>Agency:</strong>
+            <%#= agency.name %>
+          </p>
+
+          <p>
+            <strong>Short name:</strong>
+            <%#= agency.shortname %>
+          </p>
+
+          <p>
+            <strong>Info URL</strong>
+            <%#= agency.info_url %>
+          </p>
+
+          <p>
+            <strong>Updated at:</strong>
+            <%#= agency.updated_at.strftime("%B %e, %Y %H:%M") %>
+          </p>
+        </div>
+      </div>
+  <% end %> 
+</div>

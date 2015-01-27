@@ -34,10 +34,15 @@ class Agency < ActiveRecord::Base
   validates :name, :presence => true
   # validates :shortname, :presence => true
   
-  paginates_per 200
+  paginates_per 100
 
-  def to_s
-    self.name
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |agency|
+        csv << agency.attributes.values_at(*column_names)
+      end
+    end
   end
   
   def contact_emails(options = {})
@@ -67,4 +72,5 @@ class Agency < ActiveRecord::Base
   def history
     @versions = PaperTrail::Agencies.order('created_at DESC')
   end
+
 end
