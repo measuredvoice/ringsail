@@ -17,7 +17,7 @@
       		<% @users.each do |user| %>
       			<tr class = "tablerow">
       				<td class = "table_data"><%= user.email %></td>
-              <td class = "table_data"><%= Agency.find(user.agency_id) %> </td>
+              <td class = "table_data"><%= user.agency.name if user.agency %> </td>
               <td class = "table_data"><%= user.groups %> </td>
               <td class = "table_data"><%= user.sign_in_count %> </td>
               <td class = "table_data"><%= user.last_sign_in_at.strftime("%B %e, %Y %H:%M") if user.last_sign_in_at? %> </td>

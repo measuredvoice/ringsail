@@ -1,0 +1,13 @@
+<div class="col-sm-12 col-md-12 main">
+	<p>
+	  <strong>Name:</strong>
+	  <%= @gallery.name %>
+	</p>
+
+	<p>
+	  <strong>Description:</strong>
+	  <%= @gallery.description %>
+	</p>
+	<%= link_to 'Edit', edit_admin_gallery_path(@gallery) %> |
+	<%= link_to 'Back', admin_galleries_path %>
+</div>

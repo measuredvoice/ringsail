@@ -1,3 +1,4 @@
+
 # == Schema Information
 #
 # Table name: mobile_apps
@@ -31,6 +32,8 @@ class MobileApp < ActiveRecord::Base
 
   has_many :mobile_app_versions, :dependent => :destroy
 
+  accepts_nested_attributes_for :mobile_app_versions, allow_destroy: true
+
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << column_names
@@ -39,5 +42,4 @@ class MobileApp < ActiveRecord::Base
       end
     end
   end
-
 end

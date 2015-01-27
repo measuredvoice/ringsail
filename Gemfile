@@ -13,7 +13,7 @@ gem 'rack-jsonp'
 gem 'public_activity'
 gem 'paper_trail'
 
-gem 'jquery-datatables-rails', '~> 3.1.1'
+gem 'cocoon'
 
 # Support for social media service plugins
 # gem 'twitter'

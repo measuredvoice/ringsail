@@ -1,0 +1,51 @@
+<div class="nested-fields">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="field">
+        <%= f.label :store_url %> </br>
+        <%= f.text_field :store_url, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :platform %> </br>
+        <%= f.text_field :platform, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :version_number %> </br>
+        <%= f.text_field :version_number, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :publish_date %> </br>
+        <%= f.datetime_field :publish_date, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :description %> </br>
+        <%= f.text_area :description, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :whats_new %> </br>
+        <%= f.text_area :whats_new, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :screenshot %> </br>
+        <%= f.text_area :screenshot, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :device %> </br>
+        <%= f.text_field :device, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+          <%= f.label :language %> </br>
+          <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]]),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      </div>
+      <div class="field">
+        <%= f.label :average_rating %> </br>
+        <%= f.text_field :average_rating, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :number_of_ratings %> </br>
+        <%= f.text_field :number_of_ratings, :class => "form-control formwidth" %>
+      </div>
+      <%= link_to_remove_association "remove", f %>
+    </div>
+  </div>
+</div>

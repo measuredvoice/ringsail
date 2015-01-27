@@ -24,6 +24,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps/new
   def new
     @mobile_app = MobileApp.new
+    @mobile_app.mobile_app_versions.build
   end
 
   # GET /mobile_apps/1/edit

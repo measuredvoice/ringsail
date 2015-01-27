@@ -51,9 +51,14 @@
 
 	        <li class = "<%= "active" if request.original_url.include? "admin/mobile_apps" %>"><a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Mobile Apps<span class = "caret"></span></a>
 	        	<ul class="dropdown-menu" role="menu">
+	        			<li role="presentation" class="dropdown-header">Mobile Apps</li>
 		            <li><%= link_to "Mobile Apps List", admin_mobile_apps_path %> </li>
 		            <li><%= link_to "Mobile Apps Activity", activities_admin_mobile_apps_path %></li>
 		            <li><%= link_to "Add a Mobile App", new_admin_mobile_app_path %></li>
+		            <li role="presentation" class="dropdown-header">Galleries</li>
+		            <li><%= link_to "Galleries List", admin_galleries_path %> </li>
+		            <li><%= link_to "Galleries Activity", activities_admin_galleries_path %></li>
+		            <li><%= link_to "Add a Gallery", new_admin_gallery_path %></li>
 		        </ul>
 	        </li>
 

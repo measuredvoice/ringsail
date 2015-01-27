@@ -32,6 +32,7 @@ class AddMobileApps < ActiveRecord::Migration
   		t.string :language
   		t.string :average_rating #could be somethign like stars or whatever is applicable
   		t.integer :number_of_ratings
+      t.string :mongo_id
   	end
 
   	create_table :galleries do |t|
