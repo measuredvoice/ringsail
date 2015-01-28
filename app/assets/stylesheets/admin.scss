@@ -150,9 +150,12 @@ background-color: #fff;margin-left: 0px!important;}
 /*
  * Placeholder dashboard ideas
  */
-
+.tbldisplay{background-color: #fff;}
 .placeholders {
   margin-bottom: 30px;
+  background-color: #fafafa;
+  border: solid 1px #ccc;
+  padding: 15px;
 }
 .placeholders h4 {
   margin-bottom: 0;
@@ -164,6 +167,15 @@ background-color: #fff;margin-left: 0px!important;}
   display: inline-block;
   border-radius: 50%;
 }
+.verticalTabsWrap{padding: 0;}
+.verticalTabs >li{padding: 10px 0 10px 5px;}
+.verticalTabs >li > a{color:#555}
+.verticalTabs >.active{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
+.verticalTabs >li:hover{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
+
+.count{display: inline-block; min-width: 25px; padding:0 2px; margin-right: 8px;  text-align: center; }
+.count > a{color:#ff5049; font-size: 10px; font-weight: bold;}
+
 .formwidth{
   width: 700px;
 }
