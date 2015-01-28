@@ -4,7 +4,7 @@ class AddAppsGalleryAgencies < ActiveRecord::Migration
   	add_column :agencies, :parent_mongo_id, :string
   	add_column :agencies, :parent_id, :integer
   	#this index isnt necessary, and can't guarantee this on import
-    remove_index :agencies, :shortname
+    remove_index :agencies, :shortname, :unique => true
   end
 
   def self.down
