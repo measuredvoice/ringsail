@@ -14,6 +14,14 @@ class Service
     found_service
   end
 
+  def self.search_by_name(query)
+    services = []
+    self.all.each do |service|
+      services << service if service.shortname.to_s.downcase.include? query
+    end
+    services
+  end
+
   ## class methods
 
   def self.register(name, subclass)

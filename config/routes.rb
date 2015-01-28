@@ -44,6 +44,11 @@ Ringsail::Application.routes.draw do
   namespace :api do 
     namespace :v1 do
       resources :outlets, only: [:index, :show]
+      resources :multi, only: [:index, :show] do
+        collection do
+          get 'autocomplete'
+        end
+      end
     end
   end
   

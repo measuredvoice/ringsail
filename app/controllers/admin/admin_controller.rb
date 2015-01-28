@@ -1,11 +1,10 @@
 class Admin::AdminController < ApplicationController
   include PublicActivity::StoreController
-  respond_to :html, :xml, :json
+  layout "admin"
 
   before_filter :authenticate_user! unless Rails.env == "development"
   helper_method :current_user  
-  layout "admin"
-
+  
   def current_user
     if Rails.env == "development"
       @current_user ||= User.first
