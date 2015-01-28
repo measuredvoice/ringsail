@@ -16,8 +16,6 @@ class OfficialTag < ActiveRecord::Base
 
   #handles versioning
   has_paper_trail
-  
-  tracked owner: Proc.new{ |controller, model| controller.current_user }
   #attr_accessible :shortname, :tag_text
   
   validates :tag_text, :presence => true

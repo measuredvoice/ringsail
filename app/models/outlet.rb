@@ -22,7 +22,7 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   
-  enum status: { pending: 0, active: 1, under_review: 2, archived: 3  }
+  enum status: { submitted: 0, active: 1, under_review: 2, archived: 3  }
   #handles versioning
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
