@@ -1,9 +1,12 @@
 <div class="col-sm-12 col-md-12 main">
-	<h1>Editing Outlet</h1>
+	<h1>Editing Social Media Account</h1>
 
 	<%= render 'form' %>
 
-	</br>
-	<%= link_to 'Show', admin_outlet_path(@outlet) %> |
-	<%= link_to 'Back', admin_outlets_path %>
+  <div class="actions">
+    <%= yield :additional_form_links %>
+    <%= link_to 'Show', admin_outlet_path(@outlet), {:class=>"btn btn-default", role: "button"} %>
+    <%= link_to 'Back', admin_outlets_path, {:class=>"btn btn-default", role: "button"} %>
+  </div>
+
 </div>

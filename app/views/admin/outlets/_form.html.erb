@@ -13,41 +13,40 @@
 
   <div class="field">
     <%= f.label :service %> </br>
-    <%= f.text_field :service, :class => "form-control formwidth" %>
+    <%= f.select :service, options_from_collection_for_select(Service.all,:shortname,:longname,@outlet.service), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
-  </br>
   <div class="field"> 
-    <%= f.label :service_url %> </br>
+    <%= f.label :service_url %> We should look into making some of this driven by javascript from the service url</br>
     <%= f.text_field :service_url, :class => "form-control formwidth" %>
   </div>
-  </br> 
   <div class="field">
     <%= f.label :account %> </br>
-    <%= f.text_field :account, :class => "form-control formwidth" %>
+    <%= f.text_field :account, {:class => "form-control formwidth" } %>
   </div>
-  </br>
   <div class="field">
-    <%= f.label :organization %> </br>
+    <%= f.label :organization, "Social Media Account Name" %> </br>
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
-  </br>
+  <div class="field">
+    <%= f.label :agencies, "Sponsoring Agencies" %> </br>
+    <%= f.select :agencies, options_from_collection_for_select(Agency.all,:id,:name,{:selected => @outlet.agencies.map(&:id)}),
+        {}, {:class => "form-control formwidth", :multiple => true} %>
+  </div>
   <div class="field">
     <%= f.label :info_url %> </br>
     <%= f.text_field :info_url, :class => "form-control formwidth" %>
   </div>
-  </br>
   <div class="field">
-    <%= f.label :language%> </br>
-    <%= f.text_field :language, :class => "form-control formwidth" %>
+    <%= f.label :language %> </br>
+    <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @outlet.language), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
-  </br>
   <div class="field">
     <%= f.label :tag_list %> </br>
     <%= f.text_field :tag_list, :class => "form-control formwidth" %>
   </div>
-  </br>
-  <div class="actions">
-    <%= f.submit :class => "btn btn-default" %>
-  </div>
+  <br/>
+  <% content_for :additional_form_links do %>
+    <%= f.submit :class => "btn btn-primary" %>
+  <% end %>
 
 <% end %>

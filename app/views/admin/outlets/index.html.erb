@@ -39,7 +39,7 @@
           <tbody>
           <% @outlets.each do |outlet| %>
           	<tr class = "tablerow">
-              <td class = "table_data"><%= outlet.agencies.map(&:shortname).join(', ').upcase%>
+              <td class = "table_data"><%= outlet.agencies.map(&:name).join(', ').upcase%>
           		<td class = "table_data"><%= outlet.service %></td>
               <td class = "table_data"><%= link_to outlet.organization, outlet.service_url, {target: "_blank"} %></td>
               <td class = "table_data"><%= outlet.tags.map(&:to_s).join(', ')%></td>
