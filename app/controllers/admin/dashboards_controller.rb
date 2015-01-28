@@ -12,7 +12,7 @@ class Admin::DashboardsController < Admin::AdminController
   	@max_count = [@agency_count,@outlet_count,@user_count,@tag_count].sort.last
 
 
-  	@activities = PublicActivity::Activity.order("created_at desc").first(10)
+  	@activities = PublicActivity::Activity.order("created_at desc").first(5)
 
     activities_graph = PublicActivity::Activity.find_by_sql("
       SELECT month(created_at) as month, year(created_at) as year, count(*) as count

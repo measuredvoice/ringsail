@@ -28,8 +28,8 @@
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :agencies, "Sponsoring Agencies" %> </br>
-    <%= f.select :agencies, options_from_collection_for_select(Agency.all,:id,:name,{:selected => @outlet.agencies.map(&:id)}),
+    <%= f.label :agency_ids, "Sponsoring Agencies" %> </br>
+    <%= f.select :agency_ids, options_from_collection_for_select(Agency.all,:id,:name,{:selected => @outlet.agencies.map(&:id)}),
         {}, {:class => "form-control formwidth", :multiple => true} %>
   </div>
   <div class="field">
@@ -45,8 +45,9 @@
     <%= f.text_field :tag_list, :class => "form-control formwidth" %>
   </div>
   <br/>
-  <% content_for :additional_form_links do %>
+  <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
-  <% end %>
+    <%= link_to 'Back', admin_outlets_path, {:class=>"btn btn-default", role: "button"} %>
+  </div>
 
 <% end %>
