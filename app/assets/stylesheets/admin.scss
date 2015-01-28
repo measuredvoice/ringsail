@@ -35,7 +35,13 @@ body {
   padding-bottom: 3px;
   border-bottom: 1px solid #eee;
 }
-
+a, a:link, a:visited{
+   color: #ff5049;}
+.meta a, .catslide-meta a, p.sitemap-meta a{
+    outline: none;
+text-decoration: none;
+}
+    
 /*
  * Top navigation
  * Hide default border to remove 1px line.
@@ -43,6 +49,7 @@ body {
 .navbar-brand{position: absolute;
 top: 10px;
 background-color: #fff;margin-left: 0px!important;}
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand:hover{background-color: #fff!important;}
 .brandImg{ background-image: url(logo2.png); background-repeat: no-repeat; background-size: 90%;width: 120px;height: 20px;background-position-y: 5px;background-position-x: 5px; border-radius: 5px; }
 .container-fluid{
     background: #0c555d !important;
@@ -145,8 +152,15 @@ background-color: #fff;margin-left: 0px!important;}
 .main .page-header {
   margin-top: 0;
 }
-
-
+.page-header{
+    border: none!important;
+}
+h1{
+    font-size: 30px;
+letter-spacing: 0;
+line-height: 1.3em;
+    font-weight: 700;
+}
 /*
  * Placeholder dashboard ideas
  */
@@ -168,10 +182,10 @@ background-color: #fff;margin-left: 0px!important;}
   border-radius: 50%;
 }
 .verticalTabsWrap{padding: 0;}
-.verticalTabs > .list-group > a{padding: 10px 0 10px 5px;}
-.verticalTabs > .list-group >a{color:#555}
-.verticalTabs > .list-group > .active{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
-.verticalTabs > .list-group > a:hover{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
+.verticalTabs >li{padding: 10px 0 10px 5px;}
+.verticalTabs >li > a{color:#555}
+.verticalTabs >.active{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
+.verticalTabs >li:hover{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
 
 .count{display: inline-block; min-width: 25px; padding:0 2px; margin-right: 8px;  text-align: center; }
 .count > a{color:#ff5049; font-size: 10px; font-weight: bold;}
@@ -215,4 +229,7 @@ ul.gly{
 .progress-bar-purple{
   background-color: #6f5499;
 }
+/*Pagination Styles*/
+.pagination > li > a, .pagination > li > span{color:#ff5049!important;}
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus{background-color:#ff5049; color:#fff!important; border-color: #bbb; }
 
