@@ -7,9 +7,9 @@ class Admin::OutletsController < Admin::AdminController
   def index
     @services = Outlet.all.group(:service).count
     if(params[:service])
-      @outlets = Outlet.where(service: params[:service]).includes(:tags).page(params[:page]).per(15)
+      @outlets = Outlet.where(service: params[:service]).includes(:tags, :agencies).page(params[:page]).per(15)
     else
-      @outlets = Outlet.all.includes(:tags).page(params[:page]).per(15)
+      @outlets = Outlet.all.includes(:tags, :agencies).page(params[:page]).per(15)
     end
     @outs = Outlet.all
     respond_to do |format|

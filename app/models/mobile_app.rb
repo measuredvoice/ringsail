@@ -20,10 +20,10 @@ class MobileApp < ActiveRecord::Base
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   enum status: { submitted: 0, active: 1, archived: 3  }
-  #handles versioning
-  has_paper_trail
+
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
+
 
   belongs_to :agency
   
@@ -31,6 +31,9 @@ class MobileApp < ActiveRecord::Base
   has_many :users, :through => :mobile_app_users
 
   has_many :mobile_app_versions, :dependent => :destroy
+
+  has_paper_trail
+  
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
   def self.to_csv(options = {})

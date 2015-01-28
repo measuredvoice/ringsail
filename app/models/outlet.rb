@@ -33,6 +33,7 @@ class Outlet < ActiveRecord::Base
   acts_as_taggable
   
   has_paper_trail 
+  
   validates :service_url, 
     :presence   => true, 
     :format     => { :with => URI::regexp(%w(http https)) }, 
