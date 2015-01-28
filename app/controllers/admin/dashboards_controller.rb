@@ -28,7 +28,8 @@ class Admin::DashboardsController < Admin::AdminController
     matches = {
       "Outlet" => "Social Media Accounts",
       "User" => "User",
-      "MobileApp" => "Mobile Application"
+      "MobileApp" => "Mobile Application",
+      "Gallery" => "Gallery"
     }  
     activities_pie = PublicActivity::Activity.find_by_sql("
         SELECT COUNT(id) as count, trackable_type as type FROM activities GROUP BY trackable_type;")

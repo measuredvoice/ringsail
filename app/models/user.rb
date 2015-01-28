@@ -21,13 +21,6 @@
 #
 
 class User < ActiveRecord::Base
-  #handles logging of activity
-  include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }
-
-  #handles versioning
-  has_paper_trail
-
   belongs_to :agency
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
