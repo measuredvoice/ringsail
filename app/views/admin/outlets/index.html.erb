@@ -2,16 +2,18 @@
   <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Social Media Accounts</h1>
       <div class="row placeholders">
-        <div class="col-sm-2">
-          </br></br></br>
-          <ul>
-            <li><%= link_to "All (#{@outs.count})", admin_outlets_path %></li>
+        <div class="col-sm-2 verticalTabsWrap">
+          <ul class="list-unstyled verticalTabs">
+             <li><%= link_to "All", admin_outlets_path %><span class="count pull-right"><%= link_to "#{@outs.count}" ,admin_outlets_path %></span></li>
             <% @services.each do |key, value| %>
-            <li><%= link_to "#{key.titleize} (#{value})", admin_outlets_path(service: key) %></li>
+            <li>
+                <%= link_to "#{key.titleize}", admin_outlets_path(service: key) %>
+                <span class="count pull-right"><%= link_to "#{value}",admin_outlets_path %></span>
+              </li>
             <% end %>
           </ul>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-10 tbldisplay">
           <p>
             <%= paginate @outlets %>
             <text>
