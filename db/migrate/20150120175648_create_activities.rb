@@ -2,6 +2,7 @@
 class CreateActivities < ActiveRecord::Migration
   # Create table
   def self.up
+    add_column :tags, :taggings_count, :integer
     create_table :activities do |t|
       t.belongs_to :trackable, :polymorphic => true
       t.belongs_to :owner, :polymorphic => true

@@ -1,6 +1,6 @@
 class AddInformationToUsers < ActiveRecord::Migration
   def self.up
-    remove_index :users, :email, unique: true
+    remove_index :users, :email
   	add_column :users, :agency_id, :integer
   	add_column :users, :phone, :string
   	add_column :users, :first_name, :string
