@@ -19,7 +19,7 @@ class MobileApp < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  enum status: { submitted: 0, active: 1, under_review: 2, archived: 3  }
+  enum status: { submitted: 0, active: 1, archived: 3  }
   #handles versioning
   has_paper_trail
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
