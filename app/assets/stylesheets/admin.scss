@@ -40,10 +40,16 @@ body {
  * Top navigation
  * Hide default border to remove 1px line.
  */
+.navbar-brand{position: absolute;
+top: 10px;
+background-color: #fff;margin-left: 0px!important;}
+.brandImg{ background-image: url(logo2.png); background-repeat: no-repeat; background-size: 90%;width: 120px;height: 20px;background-position-y: 5px;background-position-x: 5px; border-radius: 5px; }
 .container-fluid{
     background: #0c555d !important;
     text-transform: uppercase;
     color: #fff;
+    font-size: 12px;
+    font-weight: bold;
 }
 .navbar-inverse .navbar-nav > li > a{
     color: #FFF;
@@ -52,17 +58,18 @@ body {
   border: 0;
 }
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus{
-    background: #0c555d !important;
-    border-bottom: solid 3px #ff5049;
+     background: #0c555d !important;
+    color: #ff5049;
 }
 .navbar-inverse .navbar-nav > li >a:hover, .navbar-inverse .navbar-nav > li >a:focus{
-     background: #0c555d !important;
-    border-bottom: solid 3px #ff5049;
+    background: #0c555d !important;
+    color: #ff5049;
     
 }
 .navbar-nav > li > .dropdown-menu{
     background: #0c555d !important;
     margin-top: 1px;
+    font: inherit;
     
 }
 .dropdown-menu > li > a{
