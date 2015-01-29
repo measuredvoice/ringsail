@@ -2,11 +2,11 @@
 	<div class="col-sm-12 col-md-12 main">
 	  <h1 class="page-header">Dashboard</h1>
 
-	  <div class="row placeholders">
+	  <div class="row">
 	  	<div class="col-sm-12">
-	  		<h2>Managed Asset Counts:</h2>
+	  		<h2>Managed Asset Counts</h2>
 	  		<div class="panel panel-default">
-					<div class="panel-heading"><i class="fa fa-sitemap"></i> Asset Breakdown</div>
+					<h3><i class="fa fa-sitemap"></i> Asset Breakdown</h3>
 			  	<div class="panel-body">
 						<p>Social Media Accounts (<%= @outlet_count %> accounts)</p>
 				    <div class="progress">
@@ -56,9 +56,9 @@
 			</div>
 			<div class="col-md-4">
 			  <div class="panel panel-default">
-					<div class="panel-heading">
+					<h3>
 			  		<i class="fa fa-tasks"></i> Activity Breakdown
-			  	</div>
+			  	</h3>
 			  	<div class="panel-body">
 						<div id="piechart" style="height: 300px;"></div>
 
@@ -69,9 +69,9 @@
 			</div>
 	  	<div class="col-md-8">
 			  <div class="panel panel-default">
-			  	<div class="panel-heading">
+			  	<h3>
 			  		<i class="fa fa-clock-o fa-fw"></i> Recent Timeline
-			  	</div>
+			  	</h3>
 			  	<div class="panel-body">
 			  		<ul class="timeline">
 			  			<%= render partial: "activities_feed", locals: {activities: @activities} %>

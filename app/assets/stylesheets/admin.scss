@@ -41,7 +41,36 @@ a, a:link, a:visited{
     outline: none;
 text-decoration: none;
 }
-    
+h1{
+    font-size: 30px;
+letter-spacing: 0;
+line-height: 1.3em;
+    font-weight: 700;
+}
+h2{font-size: 26px;
+letter-spacing: 0;
+line-height: 1.3em;
+font-weight: 700;}
+h3{
+    font-size: 18px;
+line-height: 1.5em;
+letter-spacing: 0;
+margin: 20px 0 20px 20px;
+border-bottom: dotted 1px #bbb;
+font-weight: 700;
+}
+.btn-primary{
+    background: #ff5049 !important;
+color: #fff !important;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+
+display: inline-block;
+border: 0;
+font-weight: 700;
+font-size: .9em;
+}
 /*
  * Top navigation
  * Hide default border to remove 1px line.
@@ -155,12 +184,7 @@ background-color: #fff;margin-left: 0px!important;}
 .page-header{
     border: none!important;
 }
-h1{
-    font-size: 30px;
-letter-spacing: 0;
-line-height: 1.3em;
-    font-weight: 700;
-}
+
 /*
  * Placeholder dashboard ideas
  */
@@ -233,3 +257,22 @@ ul.gly{
 .pagination > li > a, .pagination > li > span{color:#ff5049!important;}
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus{background-color:#ff5049; color:#fff!important; border-color: #bbb; }
 
+/*Form Styles*/
+form{border-top: dotted 1px #bbb; border-bottom: dotted 1px #bbb;padding: 5%}
+.field > label{
+    font-weight: 200;
+}
+.field{
+
+}
+.form-control{
+    border-radius: 0;
+    border: 1px solid #eeeeee;
+background: #fafafa;
+font-family: inherit;
+font-size: inherit;
+padding: 2%;
+margin: 2px 0 20px;
+display: block;
+    box-shadow:none;
+}
