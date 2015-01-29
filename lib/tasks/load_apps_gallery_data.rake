@@ -87,7 +87,7 @@ namespace :load_apps_gallery_data do
 		    	when "PENDING"
 		    		app.status = 0
 		    	when "UNDER_REVIEW"
-		    		app.status = 2
+		    		app.status = 0
 		    	when "ARCHIVED"
 		    		app.status = 3
 	    	end

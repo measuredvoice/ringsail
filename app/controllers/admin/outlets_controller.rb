@@ -7,9 +7,9 @@ class Admin::OutletsController < Admin::AdminController
   def index
     @services = Outlet.all.group(:service).count
     if(params[:service])
-      @outlets = Outlet.where(service: params[:service]).includes(:tags).page(params[:page]).per(15)
+      @outlets = Outlet.where(service: params[:service]).includes(:tags, :agencies).page(params[:page]).per(15)
     else
-      @outlets = Outlet.all.includes(:tags).page(params[:page]).per(15)
+      @outlets = Outlet.all.includes(:tags, :agencies).page(params[:page]).per(15)
     end
     @outs = Outlet.all
     respond_to do |format|
@@ -102,7 +102,7 @@ class Admin::OutletsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, :account, :tag_list, :language, :info_url)
+      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, :account, :service, :tag_list, :language, :info_url, agency_ids: [])
     end
 
 

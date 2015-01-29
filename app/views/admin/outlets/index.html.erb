@@ -2,16 +2,21 @@
   <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Social Media Accounts</h1>
       <div class="row placeholders">
-        <div class="col-sm-2">
-          </br></br></br>
-          <ul>
-            <li><%= link_to "All (#{@outs.count})", admin_outlets_path %></li>
+        <div class="col-sm-2 verticalTabsWrap">
+          <div class="list-group">
+            <%= link_to admin_outlets_path, {class: "list-group-item #{"active" if params[:service].nil? }"} do %>
+              All
+              <span class="count pull-right"><%= @outs.count %></span>
+            <%end%>
             <% @services.each do |key, value| %>
-            <li><%= link_to "#{key.titleize} (#{value})", admin_outlets_path(service: key) %></li>
+              <%= link_to admin_outlets_path(service: key), {class: "list-group-item #{"active" if key==params[:service]}"} do %>
+                <%= key %>
+                <span class="count pull-right"><%= value %></span>
+              <% end %>
             <% end %>
-          </ul>
+          </div>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-10 tbldisplay">
           <p>
             <%= paginate @outlets %>
             <text>
@@ -34,7 +39,7 @@
           <tbody>
           <% @outlets.each do |outlet| %>
           	<tr class = "tablerow">
-              <td class = "table_data"><%= outlet.agencies.map(&:shortname).join(', ').upcase%>
+              <td class = "table_data"><%= outlet.agencies.map(&:name).join(', ').upcase%>
           		<td class = "table_data"><%= outlet.service %></td>
               <td class = "table_data"><%= link_to outlet.organization, outlet.service_url, {target: "_blank"} %></td>
               <td class = "table_data"><%= outlet.tags.map(&:to_s).join(', ')%></td>
