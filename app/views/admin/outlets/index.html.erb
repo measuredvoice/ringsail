@@ -3,13 +3,13 @@
     <h1 class="page-header">Social Media Accounts</h1>
       <div class="row placeholders">
         <div class="col-sm-2 verticalTabsWrap">
-          <div class="list-group">
-            <%= link_to admin_outlets_path, {class: "list-group-item #{"active" if params[:service].nil? }"} do %>
+          <div class="list-group verticalTabs">
+            <%= link_to admin_outlets_path, {class: "list-group-item verticalTabs-item #{"active" if params[:service].nil? }"} do %>
               All
               <span class="count pull-right"><%= @outs.count %></span>
             <%end%>
             <% @services.each do |key, value| %>
-              <%= link_to admin_outlets_path(service: key), {class: "list-group-item #{"active" if key==params[:service]}"} do %>
+              <%= link_to admin_outlets_path(service: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:service]}"} do %>
                 <%= key %>
                 <span class="count pull-right"><%= value %></span>
               <% end %>
