@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150127061616) do
+ActiveRecord::Schema.define(version: 20150128193223) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -63,6 +63,15 @@ ActiveRecord::Schema.define(version: 20150127061616) do
 
   add_index "auth_tokens", ["email"], name: "index_auth_tokens_on_email", using: :btree
   add_index "auth_tokens", ["token"], name: "index_auth_tokens_on_token", unique: true, using: :btree
+
+  create_table "email_messages", force: true do |t|
+    t.integer  "current_user_id"
+    t.string   "to"
+    t.string   "subject"
+    t.text     "body"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "galleries", force: true do |t|
     t.string "name"

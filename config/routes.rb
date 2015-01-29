@@ -33,6 +33,7 @@ Ringsail::Application.routes.draw do
     resources :mobile_apps, concerns: :activity_and_history
     resources :galleries, concerns: :activity_and_history
     resources :users
+    resources :email_messages
 
     get '/' => 'dashboards#index'
   end

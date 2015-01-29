@@ -81,7 +81,16 @@
 	    </div>
 	  </div>
 	</nav>
+
 	<div class="container">
+		<% if notice %>
+			</br>
+  			<p class="alert alert-success"><%= notice %></p>
+		<% end %>
+		<% if alert %>
+			</br>
+	 		<p class="alert alert-danger"><%= alert %></p>
+		<% end %>
      	<%= yield %>
     </div>
     <%= javascript_include_tag 'admin' %>
