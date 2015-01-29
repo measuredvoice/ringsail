@@ -1,0 +1,1 @@
+json.array! @agencies, :id, :name

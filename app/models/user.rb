@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable, :trackable
 
+  has_many :email_messages
   has_many :mobile_app_users
   has_many :mobile_apps, through: :mobile_app_users
   
