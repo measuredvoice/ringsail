@@ -1,25 +1,34 @@
 source 'http://rubygems.org'
 ruby '2.1.5'
 
+# Rails
 gem 'rails', '4.1.9'
+
+# DB Connector
 gem 'mysql2'
 
 # Templates for generating JSON and other data output
 # see https://github.com/gowalla/boxer
 gem 'boxer'
 gem 'json'
+gem 'jbuilder'
 
+# Public activity
 gem 'public_activity'
+
+# Version history Gem
 gem 'paper_trail'
 
+# Makes nested forms easier
 gem 'cocoon'
 
 # Support for social media service plugins
 # gem 'twitter'
 # gem 'hyper-graph'
 
-# Automatic admin interface
+# Devise does user authentication mechanisms for us
 gem "devise"
+# Integrate devise with a CAS service (here we use OMB Max)
 gem 'devise_cas_authenticatable'
 
 # Tagging support
@@ -31,22 +40,28 @@ gem 'kaminari'
 # Location support
 gem 'yahoo-geoplanet', :git => 'git://github.com/measuredvoice/yahoo-geoplanet.git'
 
-# Gems used only for assets and not required
-# in production environments by default.
+######
+# Assets / Assets related gems
+######
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
 end
-
 gem 'font-awesome-rails'
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
 gem 'jquery-rails'
+gem 'jquery-tokeninput-rails'
 
-gem 'jbuilder'
- 
+######
+# End Assets / Assets related gems
+######
+
+######
+# Development Gems
+######
 group :development do
   gem 'rspec-rails'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
@@ -58,7 +73,13 @@ group :development do
   gem 'pry'
   # gem 'ruby-debug19'
 end
+######
+# End Development Gems
+######
 
+######
+# Testing Gems
+######
 group :test do
   # Pretty printed test output
   # gem 'turn', :require => false
@@ -70,4 +91,6 @@ group :test do
   # gem 'autotest-growl', '0.2.9'
   # gem 'factory_girl_rails', '~> 4.0.0'
 end
-
+######
+# End Testing Gems
+######
