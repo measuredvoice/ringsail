@@ -109,6 +109,9 @@ GEM
       rubycas-client (>= 2.2.1)
     diff-lcs (1.2.5)
     diffy (3.0.7)
+    dotenv (1.0.2)
+    dotenv-rails (1.0.2)
+      dotenv (= 1.0.2)
     erubis (2.7.0)
     execjs (2.2.2)
     faker (1.4.3)
@@ -259,6 +262,7 @@ DEPENDENCIES
   coffee-rails
   devise
   devise_cas_authenticatable
+  dotenv-rails
   faker
   font-awesome-rails
   jazz_hands!

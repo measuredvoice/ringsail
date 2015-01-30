@@ -93,18 +93,19 @@
 </div>				
 <% content_for :additional_javascript do %>
 	<script>
+	Morris.Donut({
+	    element: 'mobilechart',
+	    data: <%= raw @mobile_chart.to_json %>,
+	    formatter: function (y) { return y + " apps" }
+	  });
+
 		Morris.Donut({
 	    element: 'socialchart',
 	    data: <%= raw @social_chart.to_json %>,
 	    formatter: function (y) { return y + " accounts" }
 	  });
 	
-		Morris.Donut({
-	    element: 'socialchart',
-	    data: <%= raw @mobile_chart.to_json %>,
-	    formatter: function (y) { return y + " apps" }
-	  });
-
+		
 		Morris.Area({
 	    element: 'areachart',
 	    data: <%= raw @activites_graph_json.to_json %>,

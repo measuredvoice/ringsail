@@ -10,15 +10,16 @@
       </ul>
     </div>
   <% end %>
-
+  <p>Notice: All user information must be managed to OMB MAX, this is for debugging purposes only</p>
+  <p>If you have changed the information in OMB Max, try logging out of the site and back in, this will refresh the information</p>
   <div class="field">
     <%= f.label :first_name %><br>
-    <%= f.text_field :first_name, :class => 'form-control formwidth'%>
+    <%= f.text_field :first_name, :class => 'form-control formwidth', :disabled => true%>
   </div>
   </br>
   <div class="field">
     <%= f.label :last_name %><br>
-    <%= f.text_field :last_name, :class => 'form-control formwidth'%>
+    <%= f.text_field :last_name, :class => 'form-control formwidth', :disabled => true%>
   </div>
   </br>
   <div class="field">
@@ -37,8 +38,13 @@
   </div>
   </br>
   <div class = "field">
+    <%= f.label :role %></br>
+    <%= f.text_field :role, :class => "form-control formwidth", :disabled => true %>
+  </div>
+  </br>
+  <div class = "field">
     <%= f.label :phone %></br>
-    <%= f.text_field :phone, :class => "form-control formwidth"%>
+    <%= f.text_field :phone, :class => "form-control formwidth", :disabled => true%>
   </div>
   </br>
   <div class="actions">

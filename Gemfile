@@ -76,7 +76,13 @@ end
 ######
 # End Development Gems
 ######
-
+######
+# Development and Testing Gems
+######
+gem 'dotenv-rails', :groups => [:development, :test]
+######
+# End Development and Testing Gems
+######
 ######
 # Testing Gems
 ######
