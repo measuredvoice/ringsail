@@ -9,8 +9,10 @@ class Admin::EmailMessagesController < Admin::AdminController
 
 	def create
 		@email = EmailMessage.new(email_message_params)
+		@email.current_user_id = current_user.id
 		if @email.save
 			flash[:notice] = "Email successfully sent!"
+			EmailJob.perform_later @email
 			redirect_to admin_users_path
 		else
 			render "new"
@@ -25,7 +27,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 		end
 
 		def email_message_params 
-			params.require(:email_message).permit(:to, :from, :subject, :body)
+			params.require(:email_message).permit(:to, :subject, :body)
 		end
 
 end

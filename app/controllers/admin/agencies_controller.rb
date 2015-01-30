@@ -75,6 +75,6 @@ class Admin::AgenciesController < Admin::AdminController
       @agency = Agency.find(params[:id])
     end
     def agency_params
-      params.require(:agency).permit(:name, :shortname, :info_url, :agency_contact_ids)
+      params.require(:agency).permit(:name, :shortname, :info_url)
     end
 end
