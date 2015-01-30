@@ -27,8 +27,8 @@
   </div>
   </br>
   <div class = "field">
-    <%= f.label :agency %></br>
-    <%= f.text_field :agency, :class => 'form-control formwidth', :disabled => true, :value => @user.agency.name %> 
+    <%= f.label :agency_id %></br>
+    <%= f.select :agency, options_from_collection_for_select(Agency.all,:id,:name,@user.agency), {include_blank: "Select"}, {:class => 'form-control formwidth', :disabled => true} %> 
   </div>
   </br>
   <div class = "field">
