@@ -1,15 +1,14 @@
 <div class="row">
 	<div class="col-sm-12 col-md-12 main">
-	 <!-- <h1 class="page-header">Dashboard</h1>-->
+	  <!-- <h1 class="page-header">Dashboard</h1> -->
 
 <div class="row">
-    <div class="col-sm-12">
-          <h2>Managed Asset Counts</h2>
+  <div class="col-sm-12">
+    <h2>Dashboard</h2>
+    <div class="row">
 	  	<div class="col-sm-6">
-	  		
-            <h3><i class="fa fa-sitemap"></i> Asset Breakdown</h3>
-	  		<div class="panel panel-default">
-					
+	  		<h3><i class="fa fa-sitemap"></i> Asset Breakdown</h3>
+	  		<div class="panel panel-default">	
 			  	<div class="panel-body">
 						<p>Social Media Accounts (<%= @outlet_count %> accounts)</p>
 				    <div class="progress">
@@ -35,14 +34,12 @@
 						    <span class="sr-only"><%= @tag_count %> tags</span>
 						  </div>
 						</div>
-
 						<p>Agencies (<%= @agency_count %> agencies)</p>
 						<div class="progress">
 						  <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: <%= @agency_count.to_f / @max_count * 100%>%">
 						    <span class="sr-only"><%= @agency_count %> agencies</span>
 						  </div>
 						</div>
-
 						<p>Users (<%= @user_count %> users)</p>
 						<div class="progress">
 						  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: <%= @user_count.to_f / @max_count * 100%>%">
@@ -52,58 +49,71 @@
 			  	</div>
 			  </div>
 			</div>
-          <div class="col-sm-6">
-		  	 <h3><i class="fa fa-sitemap"></i> Social Media Accounts</h3>
-              <a href="/admin/dashboards/social_media_breakdown"> here </a>
-		</div>
-	  </div>
-	  <div class="row">
-	  	<div class="col-sm-12">
-			  <h2>Public Activity</h2>
-			
+			<div class="col-sm-6">
+	  		<h3><i class="fa fa-sitemap"></i> Social/Mobile Breakdown</h3>
+	  		<div class="row">
+	  			<div class="col-sm-12">
+		  			<div id="socialchart" style="height: 300px;"></div>
+		  		</div>
+	  			<div class="col-sm-12">
+		  			<div id="mobilechart" style="height: 300px;"></div>
+		  		</div>
+		  	</div>
+			</div>
+		</div>    
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12">
+	  <h2>Public Activity</h2>
+		<div class="row">
 			<div class="col-md-4">
-                <h3>
-			  		<i class="fa fa-tasks"></i> Activity Breakdown
-			  	</h3>
-			  <div class="panel panel-default">
-					
-			  	<div class="panel-body activityChart">
+        <h3><i class="fa fa-tasks"></i> Activity Breakdown</h3>
+	  		<div class="panel panel-default">
+			
+		  		<div class="panel-body activityChart">
 						<div id="piechart" style="height: 300px;"></div>
 
 						<div id="areachart" style="height: 300px;"></div>
 			  	</div>
-			  </div>
-
+		  	</div>
 			</div>
-	  	<div class="col-md-8">
-            <h3>
-			  		<i class="fa fa-clock-o fa-fw"></i> Recent Timeline
-			  	</h3>
-			  <div class="panel panel-default">
-			  	
+			<div class="col-md-8">
+        <h3><i class="fa fa-clock-o fa-fw"></i> Recent Timeline</h3>
+	  		<div class="panel panel-default">
 			  	<div class="panel-body">
 			  		<ul class="timeline">
 			  			<%= render partial: "activities_feed", locals: {activities: @activities} %>
 			  		</ul>
 			  	</div>
-			  </div>
+	  		</div>
 			</div>
-            </div>
-	  </div>
+    </div>
 	</div>
-
-				
+</div>				
 <% content_for :additional_javascript do %>
 	<script>
+		Morris.Donut({
+	    element: 'socialchart',
+	    data: <%= raw @social_chart.to_json %>,
+	    formatter: function (y) { return y + " accounts" }
+	  });
+	
+		Morris.Donut({
+	    element: 'socialchart',
+	    data: <%= raw @mobile_chart.to_json %>,
+	    formatter: function (y) { return y + " apps" }
+	  });
+
 		Morris.Area({
-		    element: 'areachart',
-		    data: <%= raw @activites_graph_json.to_json %>,
-		    xkey: 'period',
-		    ykeys: ['activities'],
-		    labels: ['activities'],
-		    pointSize: 2,
-		    hideHover: 'auto'
-		  });
+	    element: 'areachart',
+	    data: <%= raw @activites_graph_json.to_json %>,
+	    xkey: 'period',
+	    ykeys: ['activities'],
+	    labels: ['activities'],
+	    pointSize: 2,
+	    hideHover: 'auto'
+	  });
 
 		Morris.Donut({
 		    element: 'piechart',

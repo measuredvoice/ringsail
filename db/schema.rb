@@ -83,6 +83,11 @@ ActiveRecord::Schema.define(version: 20150128193223) do
     t.integer "user_id"
   end
 
+  create_table "mobile_app_agencies", force: true do |t|
+    t.integer "mobile_app_id"
+    t.integer "agency_id"
+  end
+
   create_table "mobile_app_galleries", force: true do |t|
     t.integer "gallery_id"
     t.integer "mobile_app_id"

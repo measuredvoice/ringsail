@@ -78,8 +78,13 @@ namespace :load_apps_gallery_data do
 	    	app.long_description = item["Long_Description"]
 	    	app.icon_url = item["Icon"].join(",")
 	    	app.language = item["Language"] == "EN" ? "English" : "Spanish"
-	    	if item["Agency"][0]
-	    		app.agency = Agency.find_by(mongo_id: item["Agency"][0]["Id"])
+	    	item["Agency"].each do |agency|
+	    		agency = Agency.find_by(mongo_id: agency["Id"])
+	    		if agency
+	    			app.agencies << agency
+	    		else
+	    			puts "Couldn't find agency - #{agency.inspect}"
+	    		end
 	    	end
 	    	case item["Status"]
 		    	when "PUBLIC"
