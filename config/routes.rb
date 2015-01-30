@@ -44,6 +44,7 @@ Ringsail::Application.routes.draw do
     resources :users
     resources :email_messages
 
+    get 'about' => 'admin#about'
     get '/' => 'dashboards#index'
   end
   devise_for :users
