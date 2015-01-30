@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :cas_authenticatable, :trackable, :timeoutable
 
-  enum role: { user_requested: 0, user_full: 1, admin: 2}
+  enum role: { limited_user: 0, full_user: 1, admin: 2}
   has_many :email_messages
   has_many :mobile_app_users
   has_many :mobile_apps, through: :mobile_app_users

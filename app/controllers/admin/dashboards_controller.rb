@@ -10,7 +10,7 @@ class Admin::DashboardsController < Admin::AdminController
   	@user_count = User.count
     @gallery_count = Gallery.count
   	@tag_count = OfficialTag.count
-  	@max_count = [@agency_count,@outlet_count,@user_count,@tag_count].sort.last
+  	@max_count = [@agency_count,@outlet_count,@app_count, @gallery_count,@user_count,@tag_count].sort.last
 
     ## specific breakdowns
     social_media_breakdowns = Outlet.all.group(:service).count
