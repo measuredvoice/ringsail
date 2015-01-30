@@ -25,7 +25,8 @@ class MobileApp < ActiveRecord::Base
   acts_as_taggable
 
 
-  belongs_to :agency
+  has_many :mobile_app_agencies
+  has_many :agencies, :through => :mobile_app_agencies
   
   has_many :mobile_app_users
   has_many :users, :through => :mobile_app_users

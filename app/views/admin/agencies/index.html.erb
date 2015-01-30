@@ -1,42 +1,46 @@
 <h1 class="page-header">Agencies</h1>
 <div class="row placeholders">
-  <p>
-    <%=paginate @agencies%>
-	  <text>
-      Download: <%= link_to "CSV", admin_agencies_path(format: "csv") %> 
-    </text>
-  </p>
-  <table id = "agency" class = "table table-striped" >
-		<thead>
-      <tr class = "agency_row">
-        <th>Agency Name</th>
-        <th>Info URL</th>
-        <th>Updated at</th>
-        <th class = "lastlinks">Actions</th>
-  		</tr>
-    </thead>
+  <div class="col-sm-12 col-md-12 main">
+    <p>
+      <%=paginate @agencies%>
+  	  <text>
+        Download: <%= link_to "CSV", admin_agencies_path(format: "csv") %> 
+      </text>
+    </p>
+    <table id="agency" class="table table-striped" >
+  		<thead>
+        <tr class = "agency_row">
+          <th>Agency Name</th>
+          <th>Short Name</th>
+          <th>Info URL</th>
+          <th>Updated at</th>
+          <th class = "lastlinks">Actions</th>
+    		</tr>
+      </thead>
 
-    <tbody>
-  		<% @agencies.each do |agency| %>
-  			<tr class = "tablerow">
-  				<td class = "tabledata"><%= agency.name %></td>
-          <td class = "table_data"><%= agency.info_url %></td>
-          <td class = "table_data"><%= agency.updated_at.strftime("%B %e, %Y %H:%M") %></td>
-          <td class = "table_data lastlinks">
-            <%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
-            <%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
-            <%= link_to history_admin_agency_path(agency) do %><i class = "glyphicon glyphicon-book"></i> <% end %> 
-            <%= link_to admin_agency_path(agency), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"></i> <% end %>
-          </td>   
-  			</tr>
-  		<% end %>
-    </tbody>
-	</table>
-  <p>
-    <text>
-      Download: <%= link_to "CSV", admin_agencies_path(format: "csv") %> 
-    </text>
-    <%= paginate @agencies %>
-  </p>
+      <tbody>
+    		<% @agencies.each do |agency| %>
+    			<tr class = "tablerow">
+    				<td class = "tabledata"><%= agency.name %></td>
+            <td class = "tabledata"><%= agency.shortname %></td>
+            <td class = "table_data"><%= agency.info_url %></td>
+            <td ><%= agency.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+            <td class = "table_data lastlinks">
+              <%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
+              <%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
+              <%= link_to history_admin_agency_path(agency) do %><i class = "glyphicon glyphicon-book"></i> <% end %> 
+              <%= link_to admin_agency_path(agency), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"></i> <% end %>
+            </td>   
+    			</tr>
+    		<% end %>
+      </tbody>
+  	</table>
+    <p>
+      <text>
+        Download: <%= link_to "CSV", admin_agencies_path(format: "csv") %> 
+      </text>
+      <%= paginate @agencies %>
+    </p>
+  </div>
 </div>
 

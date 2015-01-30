@@ -1,6 +1,35 @@
 <div class="row">  
-  <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Versions</h1>
-    <p>Use what we did for the outlets here</p>
-  </div>
+	</br>
+
+	<% @versions.each do |version| %>
+	<% gallery = version.reify(:has_one => true, :has_many => true)
+		if gallery %>
+		<div class = "panel panel-default">
+			<div class = "panel-heading">
+				<p style = "display:inline">
+					<h3 class = "panel-title">Changes made by: <%=User.find(version.whodunnit).email if version.whodunnit? %> </h3>
+					<%= link_to "Restore", restore_admin_gallery_path({id: gallery.id, version_id: version.id}), :class => "pull-right"%>
+				</p>
+
+				<div class = "panel-body">
+					<p>
+						<strong>Gallery:</strong>
+						<%= gallery.name %>
+					</p>
+
+					<p>
+						<strong>Mobile Apps:</strong>
+						<%= gallery.mobile_apps.map(&:name).join(', ') %>
+					</p>
+
+					<p>
+						<strong>Description:</strong>
+						<%= gallery.description %>
+					</p>
+
+				</div>
+
+    <% end 
+    	end %>
 </div>

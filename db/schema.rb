@@ -83,6 +83,11 @@ ActiveRecord::Schema.define(version: 20150128193223) do
     t.integer "user_id",    limit: 4
   end
 
+  create_table "mobile_app_agencies", force: :cascade do |t|
+    t.integer "mobile_app_id", limit: 4
+    t.integer "agency_id",     limit: 4
+  end
+
   create_table "mobile_app_galleries", force: :cascade do |t|
     t.integer "gallery_id",    limit: 4
     t.integer "mobile_app_id", limit: 4

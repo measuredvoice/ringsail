@@ -35,6 +35,11 @@ class AddMobileApps < ActiveRecord::Migration
       t.string :mongo_id
   	end
 
+    create_table :mobile_app_agencies do |t|
+      t.integer :mobile_app_id
+      t.integer :agency_id
+    end
+
   	create_table :galleries do |t|
   		t.string :name
   		t.text :description
