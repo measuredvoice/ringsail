@@ -3,7 +3,9 @@
     </br>
 
     <% @versions.each do |version| %>
-    <% mobile_app = version.reify(:has_one=> true, :has_many => true) %>
+    <% mobile_app = version.reify(:has_one=> true, :has_many => true) 
+        if mobile_app %>
+
       <div class = "panel panel-default">
         <div class = "panel-heading">
           <p style = "display:inline">
@@ -14,26 +16,26 @@
         <div class = "panel-body">
           <p>
             <strong>Agencies:</strong>
-            <%= mobile_app.agencies.map(&:to_s).join(', ') %>
+            <%#= mobile_app.agencies.map(&:to_s).join(', ') %>
           </p>
           <p>
             <strong>Organization:</strong>
-            <%= mobile_app.organization %>
+            <%#= mobile_app.organization %>
           </p>
 
           <p>
             <strong>Service:</strong>
-            <%= mobile_app.service %>
+            <%#= mobile_app.service %>
           </p>
 
           <p>
             <strong>Service URL:</strong>
-            <%= mobile_app.service_url %>
+            <%#= mobile_app.service_url %>
           </p>
 
           <p>
             <strong>Tags:</strong>
-            <%= mobile_app.tags.map(&:to_s).join(', ') %>
+            <%#= mobile_app.tags.map(&:to_s).join(', ') %>
           </p>
 
           <p>
@@ -42,6 +44,7 @@
           </p>
         </div>
       </div>
-  <% end %> 
+  <% end 
+  end %> 
 
 </div>

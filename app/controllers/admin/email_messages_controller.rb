@@ -11,6 +11,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 		@email = EmailMessage.new(email_message_params)
 		if @email.save
 			flash[:notice] = "Email successfully sent!"
+			EmailJob.perform_later @email
 			redirect_to admin_users_path
 		else
 			render "new"

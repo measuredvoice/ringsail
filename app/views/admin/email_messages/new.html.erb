@@ -1,7 +1,5 @@
 <h1 class = "page-header"> Email Registered User </h1>
 
-
-
 <%= form_for ([:admin,@email]) do |f| %>
 	<% if @email.errors.any? %>
 		<div id="error_explanation">
@@ -17,14 +15,12 @@
 
 	<div class = "field">
 		<%= f.label :to  %> </br>
-		<%= f.text_field :to,  :class => "form-control formwidth", :disabled => true %>
+		<%= f.text_field :to,  :class => "form-control formwidth" %>
 	</div>	
-	</br>
 	<div class = "field">
 		<%= f.label :subject  %> </br>
-		<%= f.text_field :subject, :class => "form-control formwidth" %>
+		<%= f.text_field :subject, :class => "form-control formwidth", autofocus: true %>
 	</div>
-	</br>
 	<div class = "field">
 		<%= f.label :body  %> </br>
 		<%= f.text_area :body, :class => "form-control formwidth", :rows => "8" %>
