@@ -11,13 +11,13 @@ class Admin::OutletsController < Admin::AdminController
     else
       @outlets = Outlet.all.includes(:tags, :agencies).page(params[:page]).per(20)
     end
-    @outs = Outlet.all
+    @allOutlets = Outlet.all
     respond_to do |format|
       format.html
-      format.json { render json: @outs }
-      format.xml { render xml: @outs }
-      format.csv { send_data @outs.to_csv }
-      format.xls { send_data @outs.to_csv(col_sep: "\t")}
+      format.json { render json: @allOutlets }
+      format.xml { render xml: @allOutlets }
+      format.csv { send_data @allOutlets.to_csv }
+      format.xls { send_data @allOutlets.to_csv(col_sep: "\t")}
     end
   end
 
