@@ -1,7 +1,7 @@
 class Admin::AgenciesController < Admin::AdminController
   respond_to :html, :xml, :json, :csv, :xls
   before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore]
-
+  protect_from_forgery except: :tokeninput
   def index 
     @agencies = Agency.all.order(name: :asc).page(params[:page]).per(15)
     respond_to do |format|
@@ -58,11 +58,18 @@ class Admin::AgenciesController < Admin::AdminController
   end
 
   def restore
-
     @agency.versions.find(params[:version_id]).reify.save!
     redirect_to admin_agency_path(@agency), :notice => "Changes were reverted."
   end
 
+  def tokeninput
+    @agencies = Agency.where("name LIKE ? OR shortname LIKE ?", "%#{params[:q]}%","%#{params[:q]}%").select([:id,:name])
+    respond_to do |format|
+      format.json { 
+        render json: @agencies
+      }
+    end
+  end
   private
     def set_agency
       @agency = Agency.find(params[:id])

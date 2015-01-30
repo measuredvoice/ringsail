@@ -28,7 +28,16 @@ Ringsail::Application.routes.draw do
         get 'activities' => 'dashboards#activities'
       end
     end
-    resources :agencies, concerns: :activity_and_history
+    resources :agencies, concerns: :activity_and_history do
+      collection do
+        get 'tokeninput'
+      end
+    end
+    resources :official_tags, concerns: :activity_and_history do
+      collection do
+        get 'tokeninput'
+      end
+    end
     resources :outlets, concerns: :activity_and_history
     resources :mobile_apps, concerns: :activity_and_history
     resources :galleries, concerns: :activity_and_history

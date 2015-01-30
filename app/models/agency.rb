@@ -28,7 +28,7 @@ class Agency < ActiveRecord::Base
   
   has_many :users
   
-  belongs_to :parent, :class_name => "Agency"
+  belongs_to :parent, :class_name => "Agency" 
   has_many :children, :foreign_key => "parent_id", :class_name => "Agency"
 
   validates :name, :presence => true

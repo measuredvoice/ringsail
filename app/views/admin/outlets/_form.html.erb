@@ -28,9 +28,8 @@
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :agency_ids, "Sponsoring Agencies" %> </br>
-    <%= f.select :agency_ids, options_from_collection_for_select(Agency.all,:id,:name,{:selected => @outlet.agencies.map(&:id)}),
-        {}, {:class => "form-control formwidth", :multiple => true} %>
+    <%= f.label :agency_tokens, "Sponsoring Agencies" %> </br>
+    <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
   </div>
   <div class="field">
     <%= f.label :info_url %> </br>
@@ -41,8 +40,8 @@
     <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @outlet.language), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field">
-    <%= f.label :tag_list %> </br>
-    <%= f.text_field :tag_list, :class => "form-control formwidth" %>
+    <%= f.label :tag_tokens %> </br>
+    <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
   <br/>
   <div class="actions">
@@ -50,4 +49,19 @@
     <%= link_to 'Back', admin_outlets_path, {:class=>"btn btn-default", role: "button"} %>
   </div>
 
+<% end %>
+
+<% content_for :additional_javascript do %>
+  <script>
+    $("#outlet_agency_tokens").tokenInput("/admin/agencies/tokeninput.json", {
+      crossDomain: false,
+      prePopulate: <%= raw @outlet.agencies.map(&:attributes).to_json %>
+    });
+
+    $("#outlet_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
+      crossDomain: false,
+      prePopulate: <%= raw @outlet.tags.to_json %>,
+      tokenValue: "name"
+    });
+  </script>
 <% end %>

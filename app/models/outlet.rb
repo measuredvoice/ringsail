@@ -118,6 +118,14 @@ class Outlet < ActiveRecord::Base
     @versions = PaperTrail::Outlets.order('created_at DESC')
   end
 
+  def agency_tokens=(ids)
+    self.agency_ids = ids.split(",")
+  end
+
+  # will rely on replacing the tokens system, but CRUDing out the info for now
+  def tag_tokens=(ids)
+    self.tag_list = ids
+  end
   private
   
   def set_updated_by
