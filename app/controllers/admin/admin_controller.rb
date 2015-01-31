@@ -6,8 +6,9 @@ class Admin::AdminController < ApplicationController
   helper_method :current_user  
   
   def about
-
+    @admins = User.where("role = ?", User.roles[:admin])
   end
+
   def current_user
     if Rails.env == "development"
       @current_user ||= User.first

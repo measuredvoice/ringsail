@@ -13,7 +13,7 @@
         <div class = "panel-body">
           <p>
             <strong>Agencies:</strong>
-            <%= outlet.agencies.map(&:to_s).join(', ') %>
+            <%= outlet.agencies.map(&:name).join(', ') %>
           </p>
           <p>
             <strong>Organization:</strong>
