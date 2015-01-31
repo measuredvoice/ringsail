@@ -1,3 +1,3 @@
-class Public::HowtoTokensController < AuthTokensController
+class Public::HowtoTokensController < Public::AuthTokensController
   layout "howto"
 end

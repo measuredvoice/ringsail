@@ -1,3 +1,3 @@
-class Public::EmbedTokensController < AuthTokensController
+class Public::EmbedTokensController < Public::OutletsController
   layout "embed"
 end

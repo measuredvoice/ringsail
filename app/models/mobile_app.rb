@@ -1,4 +1,3 @@
-
 # == Schema Information
 #
 # Table name: mobile_apps
@@ -6,12 +5,12 @@
 #  id                :integer          not null, primary key
 #  name              :string(255)
 #  short_description :string(255)
-#  long_description  :text
+#  long_description  :text(65535)
 #  icon_url          :string(255)
 #  language          :string(255)
 #  agency_id         :integer
-#  status            :integer
-#  mongo_id          :string(45)
+#  status            :integer          default("0")
+#  mongo_id          :string(255)
 #
 
 class MobileApp < ActiveRecord::Base

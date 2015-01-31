@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  email               :string(255)      default(""), not null
 #  remember_created_at :datetime
-#  sign_in_count       :integer          default(0)
+#  sign_in_count       :integer          default("0")
 #  current_sign_in_at  :datetime
 #  last_sign_in_at     :datetime
 #  current_sign_in_ip  :string(255)
@@ -17,7 +17,8 @@
 #  phone               :string(255)
 #  first_name          :string(255)
 #  last_name           :string(255)
-#  groups              :string(1000)
+#  groups              :text(65535)
+#  role                :integer          default("0")
 #
 
 class User < ActiveRecord::Base

@@ -77,8 +77,6 @@ Ringsail::Application.routes.draw do
   root :to => "public/home#index"
 
 
-
-
   ######
   # THESE ARE CURRENTLY EXISTING API CALLS
   ######

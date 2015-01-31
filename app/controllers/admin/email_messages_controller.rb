@@ -1,9 +1,21 @@
 class Admin::EmailMessagesController < Admin::AdminController
 
+	def index
+		@emails = EmailMessage.page(params[:page]).per(15)
+	end
 	def new
-		param1 = params[:param1]
 		@emails = [current_user.email]
-		@emails << param1
+		if params[:param1]
+			if !@emails.include? params[:param1]
+				@emails << params[:param1]
+			end
+		end
+		if params[:include_admins]
+			admins = User.where("role = ?", User.roles[:admin])
+			admins.each do |admin|
+				@emails << admin.email
+			end
+		end
 		@email = EmailMessage.new(to: @emails.map(&:to_s).join(', '))
 	end
 
