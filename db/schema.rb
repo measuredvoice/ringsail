@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202181132) do
+ActiveRecord::Schema.define(version: 20150202214221) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -80,6 +80,11 @@ ActiveRecord::Schema.define(version: 20150202181132) do
     t.text   "description", limit: 65535
   end
 
+  create_table "gallery_official_tags", force: :cascade do |t|
+    t.integer "gallery_id",      limit: 4
+    t.integer "official_tag_id", limit: 4
+  end
+
   create_table "gallery_users", force: :cascade do |t|
     t.integer "gallery_id", limit: 4
     t.integer "user_id",    limit: 4
@@ -93,6 +98,11 @@ ActiveRecord::Schema.define(version: 20150202181132) do
   create_table "mobile_app_galleries", force: :cascade do |t|
     t.integer "gallery_id",    limit: 4
     t.integer "mobile_app_id", limit: 4
+  end
+
+  create_table "mobile_app_official_tags", force: :cascade do |t|
+    t.integer "mobile_app_id",   limit: 4
+    t.integer "official_tag_id", limit: 4
   end
 
   create_table "mobile_app_users", force: :cascade do |t|
@@ -128,13 +138,18 @@ ActiveRecord::Schema.define(version: 20150202181132) do
   end
 
   create_table "official_tags", force: :cascade do |t|
-    t.string   "shortname",  limit: 255
-    t.string   "tag_text",   limit: 255
+    t.string   "tag_text",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "gallery_count",    limit: 4
+    t.integer  "mobile_app_count", limit: 4
+    t.integer  "outlet_count",     limit: 4
   end
 
-  add_index "official_tags", ["shortname"], name: "index_official_tags_on_shortname", unique: true, using: :btree
+  create_table "outlet_official_tags", force: :cascade do |t|
+    t.integer "outlet_id",       limit: 4
+    t.integer "official_tag_id", limit: 4
+  end
 
   create_table "outlet_users", force: :cascade do |t|
     t.integer "outlet_id", limit: 4
@@ -142,18 +157,16 @@ ActiveRecord::Schema.define(version: 20150202181132) do
   end
 
   create_table "outlets", force: :cascade do |t|
-    t.string   "service_url",   limit: 255
-    t.string   "organization",  limit: 255
-    t.string   "info_url",      limit: 255
-    t.string   "account",       limit: 255
-    t.string   "language",      limit: 255
-    t.string   "updated_by",    limit: 255
+    t.string   "service_url",  limit: 255
+    t.string   "organization", limit: 255
+    t.string   "info_url",     limit: 255
+    t.string   "account",      limit: 255
+    t.string   "language",     limit: 255
+    t.string   "updated_by",   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "service",       limit: 255
-    t.integer  "location_id",   limit: 4
-    t.string   "location_name", limit: 255
-    t.integer  "status",        limit: 4,   default: 0
+    t.string   "service",      limit: 255
+    t.integer  "status",       limit: 4,   default: 0
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree

@@ -1,0 +1,32 @@
+<h1 class="page-header">Tags</h1>
+
+<div class="row placeholders">
+  <%= paginate @tags %>     
+  <table class=" table table-striped">
+    <thead>
+      <tr = "users_row">
+        <th>Tag</th>
+        <th># Social Accounts</th>
+        <th># Mobile Apps</th>
+        <th># Galleries</th>
+        <th class = "lastlinks">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tags.each do |tag| %>
+        <tr class = "tablerow">
+          <td class = "table_data"><%= tag.tag_text %></td>
+          <td class = "table_data"><%= tag.outlet_count %></td>
+          <td class = "table_data"><%= tag.mobile_app_count %></td>
+          <td class = "table_data"><%= tag.gallery_count %></td>
+          <td class = "table_data lastlinks">
+           <%= link_to admin_official_tag_path(tag) do %> <i class = "glyphicon glyphicon-info-sign"></i> <%end %>
+           <%= link_to edit_admin_official_tag_path(tag) do %> <i class = "glyphicon glyphicon-pencil"> </i> <% end %>
+           <%= link_to admin_official_tag_path(tag), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"> </i> <% end %>
+         </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @tags %>
+</div>

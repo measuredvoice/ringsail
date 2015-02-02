@@ -33,12 +33,14 @@
       <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Status</th>
         <th>Remove</th>
       </tr>
     <% @gallery.mobile_apps.each do |app| %>
       <tr id="app-<%= app.id%>">
         <td><%= app.name %></td>
         <td><%= app.short_description %></td>
+        <td><%= app.status %></td>
         <td><%= link_to "<i class=\"fa fa-remove\">".html_safe, "javascript:remove_registration(#{app.id});" %></td>
       </tr>
     <% end %>
@@ -52,6 +54,7 @@
         <tr>
           <th>Name</th>
           <th>Description</th>
+          <th>Status</th>
           <th>Remove</th>
         </tr>
       </thead>
@@ -60,6 +63,7 @@
           <tr id="app-add-<%= app.id%>">
             <td><%= app.name %></td>
             <td><%= app.short_description %></td>
+            <td><%= app.status %></td>
             <td class="disabled"><%= link_to "<i class=\"fa fa-plus\">".html_safe, "javascript:add_registration(#{app.id});" %></td>
           </tr>
         <% end %>

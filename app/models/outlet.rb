@@ -22,7 +22,7 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   
-  enum status: { submitted: 0, active: 1, archived: 2 }
+  enum status: { submitted: 0, published: 1, archived: 2 }
   #handles versioning
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
@@ -33,9 +33,11 @@ class Outlet < ActiveRecord::Base
   has_many :outlet_users
   has_many :users, :through => :outlet_users
 
+  has_many :outlet_official_tags
+  has_many :official_tags, :through => :outlet_official_tags
   acts_as_taggable
   
-  has_paper_trail 
+  has_paper_trail :ignore => [:status]
   
   validates :service_url, 
     :presence   => true, 

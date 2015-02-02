@@ -31,11 +31,23 @@
 				  <strong>Updated at:</strong>
 				  <%= @outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
 				</p>
+
+				<p>
+				  <strong>Status:</strong>
+				  <%= @outlet.status %>
+				</p>
 	  	</div>
 		</div>
+
+		<%= link_to 'Back to Social Media', admin_outlets_path, {:class => "btn btn-default"} %>
 		<%= link_to 'Edit', edit_admin_outlet_path(@outlet), {:class => "btn btn-default"} %> 
-		<%= link_to 'Back', admin_outlets_path, {:class => "btn btn-default"} %>
-		<%= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "btn btn-default"} %> 
+		<%= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "btn btn-default"} %>
+		<% if !@outlet.published? %>
+		<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "btn btn-default"} %> 
+		<% end %>
+		<% if !@outlet.archived? %>
+		<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "btn btn-default"} %>  
+		<% end %>
 	</div>
 </div>
 <div>

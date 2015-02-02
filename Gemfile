@@ -43,9 +43,6 @@ gem 'swagger-docs'
 # Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
 gem 'rack-cors', :require => 'rack/cors'
 
-# Location support
-gem 'yahoo-geoplanet', :git => 'git://github.com/measuredvoice/yahoo-geoplanet.git'
-
 ######
 # Assets / Assets related gems
 ######
@@ -77,7 +74,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
-  # gem 'ruby-debug19'
+  gem "letter_opener"
 end
 ######
 # End Development Gems

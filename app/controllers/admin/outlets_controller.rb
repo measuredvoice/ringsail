@@ -1,7 +1,7 @@
 class Admin::OutletsController < Admin::AdminController
   respond_to :html, :xml, :json, :csv, :xls
 
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history,:restore]
+  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history, :restore, :publish, :archive]
   # GET /outlets
   # GET /outlets.json
   def index
@@ -92,9 +92,25 @@ class Admin::OutletsController < Admin::AdminController
     redirect_to admin_outlet_path(@outlet), :notice => "Changes were reverted."
   end
 
-  
+  def publish
+    Outlet.public_activity_off
+    @outlet.status = Outlet.statuses[:published]
+    @outlet.save
+    Outlet.public_activity_on
+    @outlet.create_activity :published
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account is now public"
+  end
 
-   private
+  def archive
+    Outlet.public_activity_off
+    @outlet.status = Outlet.statuses[:archived]
+    @outlet.save
+    Outlet.public_activity_on
+    @outlet.create_activity :archived
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account is now archived"
+  end
+
+  private
     # Use callbacks to share common setup or constraints between actions.
     def set_outlet
       @outlet = Outlet.find(params[:id])

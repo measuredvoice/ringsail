@@ -100,15 +100,19 @@ namespace :load_apps_gallery_data do
 		    	when "UNDER_REVIEW"
 		    		app.status = 0
 		    	when "ARCHIVED"
-		    		app.status = 3
+		    		app.status = 2
 	    	end
 	    	if item["Meta_Details"][0]
 		    	tags = []
 		    	tags << item["Meta_Details"][0]["Tag"]
 		    	tags << item["Meta_Details"][0]["Category"]
 		    	tags << item["Meta_Details"][0]["Topic"]
-		    	actual_tags = tags.flatten.join(",").downcase
-		    	app.tag_list = actual_tags
+		    	actual_tags = tags.flatten
+		    	actual_tags.each do |tag|
+		    		if !tag.blank?
+			    		app.official_tags << OfficialTag.find_or_create_by(tag_text: tag)
+			    	end
+		    	end
 		    end
 	    	contacts = item["Contact"].map{|item| item["Email1"]}
 	    	contacts.each do |contact|

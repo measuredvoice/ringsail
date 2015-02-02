@@ -1,6 +1,9 @@
     <h1 class="page-header">Users</h1>
 
     <div class="row placeholders">
+      <p>Notice: Users are managed through OMB Max.  Please contact the administrators of the OMB Max groups <%= "#{ENV['REGISTRY_ADMIN_GROUP']} & #{ENV['REGISTRY_ADMIN_GROUP']}" %>.</p>
+
+      <p>If a users information has been updated in OMB Max and they are still having issues, tell them to log out and back in, as this triggers the system to pull their data from OMB Max again</p>
       <%= paginate @users %>     
     	<table class=" table table-striped">
         <thead>

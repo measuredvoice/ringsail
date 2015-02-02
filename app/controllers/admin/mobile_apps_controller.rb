@@ -91,7 +91,23 @@ class Admin::MobileAppsController < Admin::AdminController
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Undid changes to mobile app."
   end
 
-  
+  def publish
+    MobileApp.public_activity_off
+    @mobile_app.status = MobileApp.statuses[:published]
+    @mobile_app.save
+    MobileApp.public_activity_on
+    @mobile_app.create_activity :published
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now public"
+  end
+
+  def archive
+    MobileApp.public_activity_off
+    @outlet.status = MobileApp.statuses[:archived]
+    @outlet.save
+    MobileApp.public_activity_on
+    @outlet.create_activity :archived
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now archived"
+  end
 
    private
     # Use callbacks to share common setup or constraints between actions.

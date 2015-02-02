@@ -3,6 +3,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 	def index
 		@emails = EmailMessage.page(params[:page]).per(15)
 	end
+	
 	def new
 		@emails = [current_user.email]
 		if params[:param1]
