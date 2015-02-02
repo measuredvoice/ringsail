@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.1.5'
 
 # Rails
-gem 'rails', '4.1.9'
+gem 'rails', '4.0.2'
 
 # DB Connector
 gem 'mysql2'
