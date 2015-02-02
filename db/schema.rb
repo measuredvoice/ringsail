@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150130203741) do
+ActiveRecord::Schema.define(version: 20150202181132) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -31,14 +31,16 @@ ActiveRecord::Schema.define(version: 20150130203741) do
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "agencies", force: :cascade do |t|
-    t.string   "name",            limit: 255
+    t.string   "name",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "shortname",       limit: 255
-    t.string   "info_url",        limit: 255
-    t.string   "mongo_id",        limit: 255
-    t.string   "parent_mongo_id", limit: 255
-    t.integer  "parent_id",       limit: 4
+    t.string   "shortname",         limit: 255
+    t.string   "info_url",          limit: 255
+    t.string   "mongo_id",          limit: 255
+    t.string   "parent_mongo_id",   limit: 255
+    t.integer  "parent_id",         limit: 4
+    t.integer  "outlets_count",     limit: 4,   default: 0
+    t.integer  "mobile_apps_count", limit: 4,   default: 0
   end
 
   create_table "agency_contacts", force: :cascade do |t|
@@ -134,6 +136,11 @@ ActiveRecord::Schema.define(version: 20150130203741) do
 
   add_index "official_tags", ["shortname"], name: "index_official_tags_on_shortname", unique: true, using: :btree
 
+  create_table "outlet_users", force: :cascade do |t|
+    t.integer "outlet_id", limit: 4
+    t.integer "user_id",   limit: 4
+  end
+
   create_table "outlets", force: :cascade do |t|
     t.string   "service_url",   limit: 255
     t.string   "organization",  limit: 255
@@ -210,7 +217,7 @@ ActiveRecord::Schema.define(version: 20150130203741) do
     t.string   "first_name",          limit: 255
     t.string   "last_name",           limit: 255
     t.text     "groups",              limit: 65535
-    t.integer  "role",                limit: 4,     default: 0
+    t.string   "role",                limit: 255
   end
 
   create_table "version_associations", force: :cascade do |t|

@@ -30,6 +30,9 @@ class Outlet < ActiveRecord::Base
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
 
+  has_many :outlet_users
+  has_many :users, :through => :outlet_users
+
   acts_as_taggable
   
   has_paper_trail 
@@ -47,8 +50,6 @@ class Outlet < ActiveRecord::Base
   
   # before_save :set_updated_by
   before_save :fix_service_info
-  before_save :clear_agency_counts
-  before_destroy :clear_agency_counts
   
   paginates_per 100
   
@@ -108,10 +109,13 @@ class Outlet < ActiveRecord::Base
     (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
   end
   
-  def contact_emails
-    agencies.flat_map do |agency|
-      agency.contact_emails(:excluding => updated_by)
+  def all_contacts
+    contacts_list = []
+    contacts_list << self.users
+    agencies.each do |agency|
+      contacts_list = agency.users
     end
+    contacts_list.uniq
   end
   
   def history
@@ -153,9 +157,4 @@ class Outlet < ActiveRecord::Base
     end
   end
   
-  def clear_agency_counts
-    agencies.each do |agency|
-      agency.clear_outlets_count
-    end
-  end
 end

@@ -13,7 +13,8 @@
           <th>Agency Name</th>
           <th>Short Name</th>
           <th>Info URL</th>
-          <th>Updated at</th>
+          <th># of Social Accounts</th>
+          <th># of Apps</th>
           <th class = "lastlinks">Actions</th>
     		</tr>
       </thead>
@@ -24,7 +25,8 @@
     				<td class = "tabledata"><%= agency.name %></td>
             <td class = "tabledata"><%= agency.shortname %></td>
             <td class = "table_data"><%= agency.info_url %></td>
-            <td ><%= agency.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+            <td ><%= agency.outlets_count %></td>
+            <td ><%= agency.mobile_apps_count %></td>
             <td class = "table_data lastlinks">
               <%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
               <%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
