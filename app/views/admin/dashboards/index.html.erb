@@ -53,10 +53,10 @@
 	  		<h3><i class="fa fa-sitemap"></i> Social/Mobile Breakdown</h3>
 	  		<div class="row">
 	  			<div class="col-sm-12">
-		  			<div id="socialchart" style="height: 300px;"></div>
+		  			<div id="socialchart" style="height: 250px;"></div>
 		  		</div>
 	  			<div class="col-sm-12">
-		  			<div id="mobilechart" style="height: 300px;"></div>
+		  			<div id="mobilechart" style="height: 250px;"></div>
 		  		</div>
 		  	</div>
 			</div>
@@ -93,18 +93,19 @@
 </div>				
 <% content_for :additional_javascript do %>
 	<script>
+	Morris.Donut({
+	    element: 'mobilechart',
+	    data: <%= raw @mobile_chart.to_json %>,
+	    formatter: function (y) { return y + " apps" }
+	  });
+
 		Morris.Donut({
 	    element: 'socialchart',
 	    data: <%= raw @social_chart.to_json %>,
 	    formatter: function (y) { return y + " accounts" }
 	  });
 	
-		Morris.Donut({
-	    element: 'socialchart',
-	    data: <%= raw @mobile_chart.to_json %>,
-	    formatter: function (y) { return y + " apps" }
-	  });
-
+		
 		Morris.Area({
 	    element: 'areachart',
 	    data: <%= raw @activites_graph_json.to_json %>,

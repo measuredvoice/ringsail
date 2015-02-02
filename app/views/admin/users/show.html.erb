@@ -30,7 +30,10 @@
 	  <strong>Groups:</strong>
 	  <%= @user.groups %>
 	</p>
-
+	<p>
+	  <strong>Groups:</strong>
+	  <%= @user.role.titleize if @user.role %>
+	</p>
 	<p>
 	  <strong>Phone:</strong>
 	  <%= @user.phone %>

@@ -10,13 +10,13 @@ class Admin::DashboardsController < Admin::AdminController
   	@user_count = User.count
     @gallery_count = Gallery.count
   	@tag_count = OfficialTag.count
-  	@max_count = [@agency_count,@outlet_count,@user_count,@tag_count].sort.last
+  	@max_count = [@agency_count,@outlet_count,@app_count, @gallery_count,@user_count,@tag_count].sort.last
 
     ## specific breakdowns
-    social_media_breakdowns = Outlet.all.group(:service).count
+    social_media_breakdowns = Outlet.where("status <> 2").group(:service).count
     @social_chart = []
     social_media_breakdowns.each do |k,v|
-      @social_chart << {label: k, value: v}
+      @social_chart << {label: Service.find_by_shortname(k).longname, value: v}
     end
     
     mobile_breakdowns = MobileAppVersion.all.group(:platform).count
@@ -41,7 +41,8 @@ class Admin::DashboardsController < Admin::AdminController
     matches = {
       "Outlet" => "Social Media Accounts",
       "User" => "User",
-      "MobileApp" => "Mobile Application"
+      "MobileApp" => "Mobile Application",
+      "Gallery" => "Gallery"
     }  
     activities_pie = PublicActivity::Activity.find_by_sql("
         SELECT COUNT(id) as count, trackable_type as type FROM activities GROUP BY trackable_type;")

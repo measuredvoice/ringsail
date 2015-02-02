@@ -1,0 +1,1 @@
+json.array! @mobile_apps, :id, :name, :short_description, :long_description

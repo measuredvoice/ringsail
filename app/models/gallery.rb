@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  name        :string(255)
-#  description :text
+#  description :text(65535)
 #
 
 class Gallery < ActiveRecord::Base

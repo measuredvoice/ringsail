@@ -2,7 +2,6 @@
   <% if @user.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user.errors.count, "error") %> prohibited this chapter from being saved:</h2>
-
       <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,37 +9,37 @@
       </ul>
     </div>
   <% end %>
-
+  <p>Notice: All user information must be managed to OMB MAX, this is for debugging purposes only</p>
+  <p>If you have changed the information in OMB Max, try logging out of the site and back in, this will refresh the information</p>
+  <p>If you are having issues, contact an admistrator using the dropdown under your name to email the admins</p>
   <div class="field">
     <%= f.label :first_name %><br>
-    <%= f.text_field :first_name, :class => 'form-control formwidth'%>
+    <%= f.text_field :first_name, :class => 'form-control formwidth', :disabled => true%>
   </div>
-  </br>
   <div class="field">
     <%= f.label :last_name %><br>
-    <%= f.text_field :last_name, :class => 'form-control formwidth'%>
+    <%= f.text_field :last_name, :class => 'form-control formwidth', :disabled => true%>
   </div>
-  </br>
   <div class="field">
     <%= f.label :email %><br>
     <%= f.text_field :email, :class => 'form-control formwidth', :disabled => true%>
   </div>
-  </br>
   <div class = "field">
-    <%= f.label :agency_id %></br>
+    <%= f.label :agency_id %>
     <%= f.select :agency, options_from_collection_for_select(Agency.all,:id,:name,@user.agency), {include_blank: "Select"}, {:class => 'form-control formwidth', :disabled => true} %> 
   </div>
-  </br>
   <div class = "field">
-    <%= f.label :groups %></br>
+    <%= f.label :groups %>
     <%= f.text_field :groups, :class => "form-control formwidth", :disabled => true %>
   </div>
-  </br>
   <div class = "field">
-    <%= f.label :phone %></br>
-    <%= f.text_field :phone, :class => "form-control formwidth"%>
+    <%= f.label :role %>
+    <%= f.text_field :role, :class => "form-control formwidth", :disabled => true, :value => @user.role.titleize unless @user.role == nil%>
   </div>
-  </br>
+  <div class = "field">
+    <%= f.label :phone %>
+    <%= f.text_field :phone, :class => "form-control formwidth", :disabled => true%>
+  </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-default" %>
   </div>

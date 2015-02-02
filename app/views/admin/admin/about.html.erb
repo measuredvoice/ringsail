@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="cols-sm-12">
+    <h1 class="page-header">Versions</h1>
+    <h2>Purpose</h2>
+      <p>Should discuss purpose of the app, perhaps include links to the github / github issues<p>
+    <h2>Who is Responsible</h2>
+      <h3>List of Admins <%= link_to "Email Admins", new_admin_email_message_path(include_admins: true), {:class => "btn btn-default"} %></h3>
+      <ul class="list-unstyled">
+        <% @admins.each do |admin| %>
+          <li><%= "#{admin.first_name} #{admin.last_name} - #{admin.email}" %></li>
+        <% end %>
+      <ul/>
+    <h2>When will you be contacted</h2>
+      <p>Contacts &amp; Agency Contacts will be notified when a social media account or mobile app has been in the system
+      for 6 months without changes to ensure data stays fresh</p>
+      <p>If data looks like it may no longer to be correct, an admin will mark an item as "under review".  This does not mean its status as public/archvied has been changed, just that we'd like you to take a look at it.  If its been under review for more than 2 weeks, it may be archived.</p>
+    <h2>Explain Statuses</h2>
+      <p>Submitted, Public, Archived</p>
+      <p>Items can also be deleted by the system, typically if they have been archived or adhoc by an administrator if deemed necessary</p>
+    <h2>Social Media Accounts</h2>
+      <p>Explain metadata here</p>
+    <h2>Mobile Applications</h2>
+      <p>TAlk about galleries</p>
+      <p>Explain metadata here</p>
+
+    <p>include a write up with some information about the app, when users are modified, what statuses mean.</p>
+  </div>
+</div>

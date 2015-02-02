@@ -14,7 +14,7 @@
 #  service       :string(255)
 #  location_id   :integer
 #  location_name :string(255)
-#  status        :integer          default(0)
+#  status        :integer          default("0")
 #
 
 require 'spec_helper'

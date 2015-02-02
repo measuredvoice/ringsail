@@ -1,4 +1,4 @@
-class Public::EmbedController < OutletsController
+class Public::EmbedController < Public::AuthTokensController
   layout "embed"
 
   def verify

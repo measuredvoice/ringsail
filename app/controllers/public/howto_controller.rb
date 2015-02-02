@@ -1,4 +1,4 @@
-class Public::HowtoController < OutletsController
+class Public::HowtoController < Public::OutletsController
   layout "howto"
   before_filter :check_auth, :except => [:verify, :show, :list, :review, :browse]
   before_filter :check_review_auth, :only => [:review]

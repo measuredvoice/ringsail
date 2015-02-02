@@ -9,7 +9,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "font-awesome";
+//@import "font-awesome";
 /*
  * Base structure
  */
@@ -207,14 +207,14 @@ background-color: #fff;margin-left: 0px!important;}
   border-radius: 50%;
 }
 .verticalTabsWrap{padding: 0;}
-.verticalTabs {padding: 10px 0 10px 5px;}
+.verticalTabs {}
 .verticalTabs-item:first-child{border-top-right-radius:0; border-top-left-radius:0;}
 .verticalTabs a{color:#555}
-.verticalTabs-item.active{box-shadow: 2px 2px 2px #ccc; background-color: #fff;border: none; color: #555;}
-.verticalTabs-item:hover{box-shadow: 2px 2px 2px #ccc; background-color: #fff;border: none;}
+.verticalTabs-item.active{box-shadow: 2px 2px 2px #ccc; background-color: #fff;border: solid 1px #bbb; color: #555;}
+.verticalTabs-item:hover{border: solid 1px #bbb; color: #555;}
 .verticalTabs:hover{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
-
-.count{display: inline-block; min-width: 25px; padding:0 2px; margin-right: 8px;  text-align: center; }
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{background-color: #fff; color:#555; padding-left: 35px; font-weight: bold;}
+.count{display: inline-block; min-width: 25px; padding:0 2px; margin-right: 8px;  text-align: center;color:#ff5049!important; }
 .count > a{color:#ff5049!important; font-size: 10px; font-weight: bold;}
 
 .formwidth{

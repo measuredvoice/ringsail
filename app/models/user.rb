@@ -5,7 +5,7 @@
 #  id                  :integer          not null, primary key
 #  email               :string(255)      default(""), not null
 #  remember_created_at :datetime
-#  sign_in_count       :integer          default(0)
+#  sign_in_count       :integer          default("0")
 #  current_sign_in_at  :datetime
 #  last_sign_in_at     :datetime
 #  current_sign_in_ip  :string(255)
@@ -17,22 +17,18 @@
 #  phone               :string(255)
 #  first_name          :string(255)
 #  last_name           :string(255)
-#  groups              :string(1000)
+#  groups              :text(65535)
+#  role                :integer          default("0")
 #
 
 class User < ActiveRecord::Base
-  #handles logging of activity
-  include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }
-
-  #handles versioning
-  has_paper_trail
 
   belongs_to :agency
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :cas_authenticatable, :trackable
+  devise :cas_authenticatable, :trackable, :timeoutable
 
+  enum role: { limited_user: 0, full_user: 1, admin: 2}
   has_many :email_messages
   has_many :mobile_app_users
   has_many :mobile_apps, through: :mobile_app_users
@@ -43,8 +39,9 @@ class User < ActiveRecord::Base
   paginates_per 200
 
   def cas_extra_attributes=(extra_attributes)
+    puts extra_attributes.inspect
     extra_attributes.each do |name, value|
-      case name.to_sym
+      case name
       when "Email-Address"
         self.email = value
       when "Org-Agency-Name"
@@ -57,6 +54,13 @@ class User < ActiveRecord::Base
         self.last_name = value
       when "GroupList"
         self.groups = value
+        if self.groups.include? ENV['REGISTRY_ADMIN_GROUP']
+          self.role = 2
+        elsif self.groups.include? ENV['REGISTRY_USER_GROUP']
+          self.role = 1
+        else
+          self.role = 0
+        end
       end
     end
   end

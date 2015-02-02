@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 ruby '2.1.5'
 
 # Rails
-gem 'rails', '4.0.2'
+gem 'rails', '4.2.0'
 
 # DB Connector
 gem 'mysql2'
@@ -76,7 +76,13 @@ end
 ######
 # End Development Gems
 ######
-
+######
+# Development and Testing Gems
+######
+gem 'dotenv-rails', :groups => [:development, :test]
+######
+# End Development and Testing Gems
+######
 ######
 # Testing Gems
 ######

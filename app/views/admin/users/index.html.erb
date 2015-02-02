@@ -7,7 +7,7 @@
       		<tr = "users_row">
       			<th>Email</th>
             <th>Agency</th>
-            <th>Groups </th>
+            <th>Role</th>
             <th>Sign-in Count </th>
             <th>Last Sign-in </th>
       			<th class = "lastlinks">Actions</th>
@@ -18,7 +18,7 @@
       			<tr class = "tablerow">
       				<td class = "table_data"><%= link_to user.email, new_admin_email_message_path(:param1 => user.email) %></td>
               <td class = "table_data"><%= user.agency.name if user.agency %> </td>
-              <td class = "table_data"><%= user.groups %> </td>
+              <td class = "table_data"><%= user.role.titleize if user.role %> </td>
               <td class = "table_data"><%= user.sign_in_count %> </td>
               <td class = "table_data"><%= user.last_sign_in_at.strftime("%B %e, %Y %H:%M") if user.last_sign_in_at? %> </td>
       				<td class = "table_data lastlinks">

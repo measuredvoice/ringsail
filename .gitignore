@@ -15,4 +15,5 @@ config/too_many_secrets.rb
 .rspec
 .rvmrc
 data/*
+.env
 

@@ -1,6 +1,5 @@
 <div class="row">  
   <h1 class="page-header">Versions</h1>
-  </br>
   <% @versions.each do |version| %>
     <% agency = version.reify(:has_one=> true, :has_many => true) 
         if agency %>
