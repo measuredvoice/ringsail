@@ -38,4 +38,12 @@ module Admin::AdminHelper
     	"System"
     end
   end
+
+  def user_list_format(user)
+    if user.first_name || user.last_name
+      "#{user.first_name} #{user.last_name} - #{user.email}"
+    else
+      user.email
+    end
+  end
 end

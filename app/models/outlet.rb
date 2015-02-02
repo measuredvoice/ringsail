@@ -113,9 +113,9 @@ class Outlet < ActiveRecord::Base
     contacts_list = []
     contacts_list << self.users
     agencies.each do |agency|
-      contacts_list = agency.users
+      contacts_list << agency.users
     end
-    contacts_list.uniq
+    contacts_list.flatten.uniq
   end
   
   def history
@@ -130,6 +130,11 @@ class Outlet < ActiveRecord::Base
   def tag_tokens=(ids)
     self.tag_list = ids
   end
+
+  def user_tokens=(ids)
+    self.user_ids = ids.split(",")
+  end
+
   private
   
   def set_updated_by
