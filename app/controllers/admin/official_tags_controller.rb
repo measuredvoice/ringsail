@@ -94,7 +94,7 @@ class Admin::OfficialTagsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:tag).permit(:id, :shortname, :tag_text)
+      params.require(:tag).permit(:shortname, :tag_text)
     end
 
 end

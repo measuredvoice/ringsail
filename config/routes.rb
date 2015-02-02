@@ -79,6 +79,7 @@ Ringsail::Application.routes.draw do
       end
     end
   end
+
   root :to => "public/home#index"
 
 
