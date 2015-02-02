@@ -22,7 +22,7 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   
-  enum status: { submitted: 0, active: 1, archived: 2 }
+  enum status: { submitted: 0, published: 1, archived: 2 }
   #handles versioning
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
@@ -30,9 +30,14 @@ class Outlet < ActiveRecord::Base
   has_many :sponsorships
   has_many :agencies, :through => :sponsorships
 
+  has_many :outlet_users
+  has_many :users, :through => :outlet_users
+
+  has_many :outlet_official_tags
+  has_many :official_tags, :through => :outlet_official_tags
   acts_as_taggable
   
-  has_paper_trail 
+  has_paper_trail :ignore => [:status]
   
   validates :service_url, 
     :presence   => true, 
@@ -47,8 +52,6 @@ class Outlet < ActiveRecord::Base
   
   # before_save :set_updated_by
   before_save :fix_service_info
-  before_save :clear_agency_counts
-  before_destroy :clear_agency_counts
   
   paginates_per 100
   
@@ -108,10 +111,13 @@ class Outlet < ActiveRecord::Base
     (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
   end
   
-  def contact_emails
-    agencies.flat_map do |agency|
-      agency.contact_emails(:excluding => updated_by)
+  def all_contacts
+    contacts_list = []
+    contacts_list << self.users
+    agencies.each do |agency|
+      contacts_list << agency.users
     end
+    contacts_list.flatten.uniq
   end
   
   def history
@@ -126,6 +132,11 @@ class Outlet < ActiveRecord::Base
   def tag_tokens=(ids)
     self.tag_list = ids
   end
+
+  def user_tokens=(ids)
+    self.user_ids = ids.split(",")
+  end
+
   private
   
   def set_updated_by
@@ -153,9 +164,4 @@ class Outlet < ActiveRecord::Base
     end
   end
   
-  def clear_agency_counts
-    agencies.each do |agency|
-      agency.clear_outlets_count
-    end
-  end
 end

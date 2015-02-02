@@ -16,4 +16,5 @@ class Admin::AdminController < ApplicationController
       @current_user ||= warden.authenticate(scope: :user) 
     end
   end
+
 end

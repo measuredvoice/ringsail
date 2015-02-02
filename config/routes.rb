@@ -38,10 +38,24 @@ Ringsail::Application.routes.draw do
         get 'tokeninput'
       end
     end
-    resources :outlets, concerns: :activity_and_history
-    resources :mobile_apps, concerns: :activity_and_history
+    resources :outlets, concerns: :activity_and_history do
+      member do
+        get "publish"
+        get "archive"
+      end
+    end
+    resources :mobile_apps, concerns: :activity_and_history do
+      member do
+        get "publish"
+        get "archive"
+      end
+    end
     resources :galleries, concerns: :activity_and_history
-    resources :users
+    resources :users do
+      collection do
+        get 'tokeninput'
+      end
+    end
     resources :email_messages
 
     get 'about' => 'admin#about'

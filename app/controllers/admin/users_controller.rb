@@ -62,18 +62,23 @@ class Admin::UsersController < Admin::AdminController
     end
   end
 
-  
-
-   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
+  def tokeninput
+    @users = User.where("first_name LIKE ? OR last_name LIKE ? OR email LIKE ?", "%#{params[:q]}%","%#{params[:q]}%","%#{params[:q]}%")
+    respond_to do |format|
+      format.json { render 'tokeninput'}
     end
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:email)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:email)
+  end
 
 
 end

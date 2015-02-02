@@ -13,7 +13,7 @@ class Sponsorship < ActiveRecord::Base
   #attr_accessible :agency_id, :outlet_id
 
   belongs_to :outlet
-  belongs_to :agency
+  belongs_to :agency, :counter_cache => :outlets_count
 
   validates :outlet_id, :presence => true
   validates :agency_id, :presence => true

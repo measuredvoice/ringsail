@@ -21,4 +21,7 @@ class Gallery < ActiveRecord::Base
 	has_many :gallery_users
 	has_many :users, through: :gallery_users
 
+	has_many :gallery_official_tags
+  has_many :official_tags, :through => :gallery_official_tags
+
 end

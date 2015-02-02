@@ -18,7 +18,7 @@ class MobileApp < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  enum status: { submitted: 0, active: 1, archived: 3  }
+  enum status: { submitted: 0, published: 1, archived: 2 }
 
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
@@ -32,7 +32,10 @@ class MobileApp < ActiveRecord::Base
 
   has_many :mobile_app_versions, :dependent => :destroy
 
-  has_paper_trail
+  has_many :mobile_app_official_tags
+  has_many :official_tags, :through => :mobile_app_official_tags
+
+  has_paper_trail :ignore => [:status]
   
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 

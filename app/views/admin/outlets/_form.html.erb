@@ -27,10 +27,7 @@
     <%= f.label :organization, "Social Media Account Name" %> </br>
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
-  <div class="field">
-    <%= f.label :agency_tokens, "Sponsoring Agencies" %> </br>
-    <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
-  </div>
+  
   <div class="field">
     <%= f.label :info_url %> </br>
     <%= f.text_field :info_url, :class => "form-control formwidth" %>
@@ -40,8 +37,16 @@
     <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @outlet.language), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field">
-    <%= f.label :tag_tokens %> </br>
+    <%= f.label :agency_tokens, "Sponsoring Agencies" %> </br>
+    <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
+  </div>
+  <div class="field">
+    <%= f.label :tag_tokens, "Tags" %> </br>
     <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
+  </div>
+  <div class="field">
+    <%= f.label :user_tokens, "Contacts" %> </br>
+    <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
   <br/>
   <div class="actions">
@@ -62,6 +67,15 @@
       crossDomain: false,
       prePopulate: <%= raw @outlet.tags.to_json %>,
       tokenValue: "name"
+    });
+    <% user_json = [] 
+      @outlet.users.each do |user|
+        user_json << {id: user.id, name: user_list_format(user)}
+      end
+    %>
+    $("#outlet_user_tokens").tokenInput("/admin/users/tokeninput.json", {
+      crossDomain: false,
+      prePopulate: <%= raw user_json.to_json %>
     });
   </script>
 <% end %>

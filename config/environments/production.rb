@@ -61,14 +61,18 @@ Ringsail::Application.configure do
   config.action_mailer.default_url_options = { :host => ENV['RINGSAIL_HOST'] }
 
   # Set up SendGrid for email
-  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.perform_deliveries = true
+  ActionMailer::Base.raise_delivery_errors = true
+
   ActionMailer::Base.smtp_settings = {
-    :address => "smtp.sendgrid.net",   
-    :port => 25,   
-    :authentication => :plain, 
-    :user_name => ENV['SENDGRID_USER'],   
-    :domain    => ENV['SENDGRID_DOMAIN'],
-    :password  => ENV['SENDGRID_PASSWORD'],   
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'gmail.com',
+    user_name:            '<email address>',
+    password:             '<password>',
+    authentication:       'plain',
+    enable_starttls_auto: true 
   }
   config.eager_load = true
 end

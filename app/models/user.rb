@@ -18,7 +18,7 @@
 #  first_name          :string(255)
 #  last_name           :string(255)
 #  groups              :text(65535)
-#  role                :integer          default("0")
+#  role                :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -30,11 +30,15 @@ class User < ActiveRecord::Base
 
   enum role: { limited_user: 0, full_user: 1, admin: 2}
   has_many :email_messages
+
   has_many :mobile_app_users
   has_many :mobile_apps, through: :mobile_app_users
   
   has_many :gallery_users
   has_many :gallerys, through: :gallery_users
+
+  has_many :outlet_users
+  has_many :outlets, :through => :outlet_users
 
   paginates_per 200
 

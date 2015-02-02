@@ -7,14 +7,6 @@ GIT
       rake (>= 0.8.7)
 
 GIT
-  remote: git://github.com/measuredvoice/yahoo-geoplanet.git
-  revision: e56b07cb8b3d9a9720d964a54a054372dc564f30
-  specs:
-    yahoo-geoplanet (0.2.1)
-      activesupport (> 2.1.0)
-      hpricot (> 0.6)
-
-GIT
   remote: git://github.com/nixme/jazz_hands.git
   revision: 5e4b48f145883ecb14b55bf04eacc28ac9662676
   branch: bring-your-own-debugger
@@ -71,6 +63,7 @@ GEM
       tzinfo (~> 1.1)
     acts-as-taggable-on (3.4.3)
       activerecord (>= 3.2, < 5)
+    addressable (2.3.6)
     arel (6.0.0)
     autoprefixer-rails (5.1.1)
       execjs
@@ -135,7 +128,6 @@ GEM
       posix-spawn (~> 0.3.6)
     hike (1.2.3)
     hirb (0.7.3)
-    hpricot (0.8.6)
     i18n (0.7.0)
     jbuilder (2.2.6)
       activesupport (>= 3.0.0, < 5)
@@ -149,6 +141,10 @@ GEM
     kaminari (0.16.2)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.4.3)
+      addressable (~> 2.3)
+    letter_opener (1.3.0)
+      launchy (~> 2.2)
     loofah (2.0.1)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -301,6 +297,7 @@ DEPENDENCIES
   jquery-tokeninput-rails
   json
   kaminari
+  letter_opener
   morrisjs-rails
   mysql2
   paper_trail
@@ -314,4 +311,3 @@ DEPENDENCIES
   sass-rails
   swagger-docs
   uglifier
-  yahoo-geoplanet!

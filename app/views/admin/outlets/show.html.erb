@@ -1,35 +1,77 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 main">
-	<p>
-	  <strong>Agencies:</strong>
-	  <%= @outlet.agencies.map(&:name).join(', ') %>
-	</p>
-	<p>
-	  <strong>Organization:</strong>
-	  <%= @outlet.organization %>
-	</p>
+    <h3><i class="fa fa-clock-o fa-fw"></i> Social Media Account Info</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<p>
+			  	<strong>Agencies:</strong>
+				  <%= @outlet.agencies.map(&:name).join(', ') %>
+				</p>
+				<p>
+				  <strong>Organization:</strong>
+				  <%= @outlet.organization %>
+				</p>
 
-	<p>
-	  <strong>Service:</strong>
-	  <%= @outlet.service %>
-	</p>
+				<p>
+				  <strong>Service:</strong>
+				  <%= @outlet.service %>
+				</p>
 
-	<p>
-	  <strong>Service URL:</strong>
-	  <%= @outlet.service_url %>
-	</p>
+				<p>
+				  <strong>Service URL:</strong>
+				  <%= @outlet.service_url %>
+				</p>
 
-	<p>
-	  <strong>Tags:</strong>
-	  <%= @outlet.tags.map(&:to_s).join(', ') %>
-	</p>
+				<p>
+				  <strong>Tags:</strong>
+				  <%= @outlet.tags.map(&:to_s).join(', ') %>
+				</p>
 
-	<p>
-	  <strong>Updated at:</strong>
-	  <%= @outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
-	</p>
+				<p>
+				  <strong>Updated at:</strong>
+				  <%= @outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
+				</p>
 
-	<%= link_to 'Edit', edit_admin_outlet_path(@outlet) %> |
-	<%= link_to 'Back', admin_outlets_path %>
+				<p>
+				  <strong>Status:</strong>
+				  <%= @outlet.status %>
+				</p>
+	  	</div>
+		</div>
+
+		<%= link_to 'Back to Social Media', admin_outlets_path, {:class => "btn btn-default"} %>
+		<%= link_to 'Edit', edit_admin_outlet_path(@outlet), {:class => "btn btn-default"} %> 
+		<%= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "btn btn-default"} %>
+		<% if !@outlet.published? %>
+		<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "btn btn-default"} %> 
+		<% end %>
+		<% if !@outlet.archived? %>
+		<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "btn btn-default"} %>  
+		<% end %>
+	</div>
+</div>
+<div>
+	<div class="col-sm-4">
+    <h3><i class="fa fa-user"></i> Contacts</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<p>This list comprises everyone listed either as a contact on this account, or as a contact for a connected agency</p>
+	  		<ul class="list-group">
+	  			<% @outlet.all_contacts.each do |contact| %>
+	  					<li class="list-group-item"><%= user_list_format(contact) %></li>
+	  			<% end %>
+	  		</ul>
+	  	</div>
+		</div>
+	</div>
+	<div class="col-sm-8">
+    <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Social Media Account</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<ul class="timeline">
+	  			<%= render partial: "admin/shared/activities_feed", locals: {activities: @outlet.activities.order("created_at DESC").first(5)} %>
+	  		</ul>
+	  	</div>
+		</div>
 	</div>
 </div>

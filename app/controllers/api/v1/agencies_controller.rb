@@ -42,6 +42,14 @@ class Api::V1::AgenciesController < Api::ApiController
 		@agency = Agency.find(params[:id])
 		respond_to do |format|
 			format.json { render "show"}
+		if @agency
+			respond_to do |format|
+				format.json { render "show"}
+			end
+		else
+			respond_to do |format|
+				format.json { render json: { error: "not foudn", status: :not_found}}
+			end
 		end
 	end
 end

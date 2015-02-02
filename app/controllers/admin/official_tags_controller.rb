@@ -5,7 +5,7 @@ class Admin::OfficialTagsController < Admin::AdminController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = OfficialTag.all
+    @tags = OfficialTag.all.page(params[:page]).per(params[:page_sze])
   end
 
   # GET /tags/1
