@@ -34,8 +34,14 @@ gem 'devise_cas_authenticatable'
 # Tagging support
 gem 'acts-as-taggable-on'
 
-# API pagination
+# Pagination
 gem 'kaminari'
+
+# Swagger generation
+gem 'swagger-docs'
+
+# Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
+gem 'rack-cors', :require => 'rack/cors'
 
 # Location support
 gem 'yahoo-geoplanet', :git => 'git://github.com/measuredvoice/yahoo-geoplanet.git'

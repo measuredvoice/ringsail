@@ -72,7 +72,7 @@ GEM
     acts-as-taggable-on (3.4.3)
       activerecord (>= 3.2, < 5)
     arel (6.0.0)
-    autoprefixer-rails (5.1.0)
+    autoprefixer-rails (5.1.1)
       execjs
       json
     awesome_print (1.6.1)
@@ -196,6 +196,7 @@ GEM
       i18n (>= 0.5.0)
       railties (>= 3.0.0)
     rack (1.6.0)
+    rack-cors (0.3.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -261,6 +262,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    swagger-docs (0.1.9)
+      activesupport (>= 3, < 5)
+      rails (>= 3, < 5)
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -303,9 +307,11 @@ DEPENDENCIES
   pry
   pry-byebug
   public_activity
+  rack-cors
   rails (= 4.2.0)
   raphael-rails
   rspec-rails
   sass-rails
+  swagger-docs
   uglifier
   yahoo-geoplanet!

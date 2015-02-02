@@ -16,4 +16,4 @@ config/too_many_secrets.rb
 .rvmrc
 data/*
 .env
-
+public/swagger_docs/

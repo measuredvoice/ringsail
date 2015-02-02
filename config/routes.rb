@@ -60,6 +60,7 @@ Ringsail::Application.routes.draw do
           get 'autocomplete'
         end
       end
+      resources :agencies, only: [:index, :show]
     end
   end
   

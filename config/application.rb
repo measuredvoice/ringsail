@@ -14,6 +14,14 @@ end
 
 module Ringsail
   class Application < Rails::Application
+
+    # insert rack cors first
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -40,7 +48,8 @@ module Ringsail
     config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password]
+    # We are using SSO, so this should be unecessary. Confirm and then remove.
+    config.filter_parameters += [:password, :password_confirmation]
 
     # Enable the asset pipeline
     config.assets.enabled = true
