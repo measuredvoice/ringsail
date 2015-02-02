@@ -17,3 +17,4 @@ config/too_many_secrets.rb
 data/*
 .env
 public/swagger_docs/
+.ruby-gemset
