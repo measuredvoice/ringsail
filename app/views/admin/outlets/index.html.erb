@@ -10,7 +10,7 @@
             <%end%>
             <% @services.each do |key, value| %>
               <%= link_to admin_outlets_path(service: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:service]}"} do %>
-                <%= key %>
+                <%= Service.find_by_shortname(key).longname %>
                 <span class="count pull-right"><%= value %></span>
               <% end %>
             <% end %>
