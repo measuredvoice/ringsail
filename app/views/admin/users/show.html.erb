@@ -32,7 +32,7 @@
 	</p>
 	<p>
 	  <strong>Groups:</strong>
-	  <%= @user.role.titleize %>
+	  <%= @user.role.titleize if @user.role %>
 	</p>
 	<p>
 	  <strong>Phone:</strong>

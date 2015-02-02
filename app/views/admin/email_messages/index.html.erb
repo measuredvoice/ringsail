@@ -18,7 +18,7 @@
           <td class = "table_data"><%= email.to %></td>
           <td class = "table_data"><%= email.subject %> </td>
           <td class = "table_data"><%= email.body.first(75) %> </td>
-          <td class = "table_data"><%= user.created_at.strftime("%B %e, %Y %H:%M") %> </td>
+          <td class = "table_data"><%= email.created_at.strftime("%B %e, %Y %H:%M") %> </td>
         </tr>
       <% end %>
     </tbody>

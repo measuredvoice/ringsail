@@ -34,7 +34,7 @@
   </div>
   <div class = "field">
     <%= f.label :role %>
-    <%= f.text_field :role, :class => "form-control formwidth", :disabled => true, :value => @user.role.titleize %>
+    <%= f.text_field :role, :class => "form-control formwidth", :disabled => true, :value => @user.role.titleize unless @user.role == nil%>
   </div>
   <div class = "field">
     <%= f.label :phone %>
