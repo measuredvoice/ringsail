@@ -11,7 +11,13 @@ namespace :load_apps_gallery_data do
 	    end
 
 	    json.each do |item|
-	    	agency = Agency.find_or_create_by(name: item["Name"])
+	    	agency = nil
+	    	agencies = Agency.where("name LIKE ?", "%#{item["Name"]}%")
+	    	if agencies.count == 0
+	    		agency = Agency.find_or_create_by(name: item["Name"])
+	    	else
+	    		agency = agencies.first
+	    	end
 	    	agency.mongo_id = item["Id"]
 	    	agency.parent_mongo_id = item["ParentId"]
 	    	agency.shortname = item["Acronym"] ? item["Acronym"].downcase : nil
