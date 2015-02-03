@@ -8,19 +8,19 @@ class Api::V1::AgenciesController < Api::ApiController
     param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
-    response :unauthorized
+    response :ok, "Success"
     response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable
+    response :requested_range_not_satisfiable		
+		response :not_found
 	end
 
 	swagger_api :show do
 		summary "Fetches a single agency item"
 		notes "This returns an agency based on an ID."
 		param :path, :id, :integer, :required, "ID of the agency"
-		response :ok, "Success" 
-		response :unauthorized
-		response :not_acceptable, "The request you made is not available"
-		response :requested_range_not_satisfiable
+		response :ok, "Success"
+    response :not_acceptable, "The request you made is not acceptable"
+    response :requested_range_not_satisfiable		
 		response :not_found
 	end
 

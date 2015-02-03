@@ -7,12 +7,12 @@ class Admin::OutletsController < Admin::AdminController
   def index
     @services = Outlet.all.group(:service).count
     if(params[:service])
-      @outlets = Outlet.where(service: params[:service]).includes(:tags, :agencies).page(params[:page]).per(20)
+      @outlets = Outlet.where(service: params[:service]).includes(:tags, :agencies)
     else
-      @outlets = Outlet.all.includes(:tags, :agencies).page(params[:page]).per(20)
+      @outlets = Outlet.all.includes(:tags, :agencies)
     end
     respond_to do |format|
-      format.html
+      format.html { @outlets = @outlets.page(params[:page]).per(20) }
       format.json { render json: @outlets }
       format.xml { render xml: @outlets }
       format.csv { send_data @outlets.to_csv }

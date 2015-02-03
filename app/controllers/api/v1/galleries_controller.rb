@@ -8,7 +8,7 @@ class Api::V1::GalleriesController < Api::ApiController
     param :query, :q, :string, :optional, "String to compare to the name of the galleries."
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
-    response :unauthorized
+    response :ok, "Success"
     response :not_acceptable, "The request you made is not acceptable"
     response :requested_range_not_satisfiable		
 	end
@@ -18,7 +18,6 @@ class Api::V1::GalleriesController < Api::ApiController
 		notes "This returns an gallery based on an ID."
 		param :path, :id, :integer, :required, "ID of the gallery"
 		response :ok, "Success" 
-		response :unauthorized
 		response :not_acceptable, "The request you made is not available"
 		response :requested_range_not_satisfiable
 		response :not_found

@@ -8,9 +8,10 @@ class Api::V1::TagsController < Api::ApiController
     param :query, :q, :string, :optional, "String to compare to the short name of tags."
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
-    response :unauthorized
+    response :ok, "Success"
     response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable
+    response :requested_range_not_satisfiable   
+    response :not_found
 	end
 
 	swagger_api :show do
@@ -18,9 +19,9 @@ class Api::V1::TagsController < Api::ApiController
     notes "This returns an agency based on an ID."
     param :path, :id, :integer, :optional, "ID of the tag."
     response :ok, "Success"
-    response :unauthorized
     response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable		
+    response :requested_range_not_satisfiable   
+    response :not_found	
 	end
 
 	PAGE_SIZE=25

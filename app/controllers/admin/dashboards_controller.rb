@@ -50,8 +50,6 @@ class Admin::DashboardsController < Admin::AdminController
     activities_pie.each do |item|
       @activities_pie_json << { label: matches[item.type], value: item.count}
     end
-
-   
   end
 
   def social_media_breakdown
