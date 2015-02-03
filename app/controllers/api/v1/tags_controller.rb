@@ -1,6 +1,6 @@
-class Api::V1::OfficialTagsController < Api::ApiController
+class Api::V1::TagsController < Api::ApiController
 
-	swagger_controller :official_tags, "Official Tags"
+	swagger_controller :tags, "Tags"
 
 	swagger_api :index do
 		summary "Fetches all official tags"
