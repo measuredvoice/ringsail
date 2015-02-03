@@ -8,8 +8,6 @@ class Service
     found_service = nil
     self.all.each do |service|
       found_service = service if service.shortname.to_s == shortname.to_s
-      puts service.shortname
-      puts shortname
     end
     found_service
   end
