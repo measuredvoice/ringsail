@@ -1,3 +1,8 @@
+class Swagger::Docs::Config
+  def self.transform_path(path, api_version)
+    "#{ENV['REGISTRY_HOSTNAME']}/swagger_docs/#{path}"
+  end
+end
 Swagger::Docs::Config.register_apis({
   "1.0" => {
     # the extension used for the API
@@ -5,7 +10,7 @@ Swagger::Docs::Config.register_apis({
     # the output location where your .json files are written to
     :api_file_path => "public/swagger_docs",
     # the URL base path to your API
-    :base_path => "#{ENV['REGISTRY_HOSTNAME']}",
+    :base_path => "#{ENV['REGISTRY_API_HOST']}",
     # if you want to delete all .json files at each generation
     :base_api_controller => "Api::ApiController",
     :clean_directory => true,
