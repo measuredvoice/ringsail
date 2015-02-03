@@ -72,6 +72,7 @@ Ringsail::Application.routes.draw do
       resources :social_media, only: [:index, :show] do
         collection do
           get 'verify'
+          get 'services'
         end
       end
       resources :galleries, only: [:index, :show]

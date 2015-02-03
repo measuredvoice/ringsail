@@ -6,7 +6,7 @@
           <div class="list-group verticalTabs">
             <%= link_to admin_outlets_path, {class: "list-group-item verticalTabs-item #{"active" if params[:service].nil? }"} do %>
               All
-              <span class="count pull-right"><%= @allOutlets.count %></span>
+              <span class="count pull-right"><%= Outlet.count %></span>
             <%end%>
             <% @services.each do |key, value| %>
               <%= link_to admin_outlets_path(service: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:service]}"} do %>
