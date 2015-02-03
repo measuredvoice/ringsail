@@ -1,0 +1,21 @@
+<%= form_for([:admin,@tag]) do |f| %>
+    <% if @tag.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+
+        <ul>
+        <% @tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :tag_text %> </br>
+      <%= f.text_field :tag_text, :class => "form-control formwidth" %>
+    </div>
+    <div class="actions">
+      <%= f.submit :class => "btn btn-default" %>
+    </div>
+<% end %>

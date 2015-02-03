@@ -141,9 +141,9 @@ ActiveRecord::Schema.define(version: 20150202214221) do
     t.string   "tag_text",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "gallery_count",    limit: 4
-    t.integer  "mobile_app_count", limit: 4
-    t.integer  "outlet_count",     limit: 4
+    t.integer  "gallery_count",    limit: 4,   default: 0
+    t.integer  "mobile_app_count", limit: 4,   default: 0
+    t.integer  "outlet_count",     limit: 4,   default: 0
   end
 
   create_table "outlet_official_tags", force: :cascade do |t|
