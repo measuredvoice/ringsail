@@ -6,6 +6,7 @@ class Api::V1::SocialMediaController < Api::ApiController
     summary "Fetches all accounts"
     notes "This lists all active accounts. It accepts parameters to perform basic search."
     param :query, :q, :string, :optional, "String to compare to the name of accounts"
+    params :query, :services, :service_keys, :optional, "Comma seperated list of service keys (available via services call)"
     param :query, :agencies, :ids, :optional, "Comma seperated list of agency ids"
     param :query, :tags, :ids, :optional, "Comma seperated list of tag ids"
     param :query, :page_size, :integer, :optional, "Number of results per page"
@@ -19,17 +20,20 @@ class Api::V1::SocialMediaController < Api::ApiController
   DEFAULT_PAGE=1
 
   def index
-    @outlets = Outlet.all
+    @outlets = Outlet.joins(:agencies, :official_tags)
     if params[:q]
-      @outlets = Outlet.where("account LIKE ? OR organization LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+      @outlets = @outlets.where("account LIKE ? OR organization LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
     if params[:agencies]
-      @outlets.where(agencies: params[:agencies].split(","))
+      @outlets = @outlets.where("agencies.id" =>params[:agencies].split(","))
     end
     if params[:tags]
-      @outlets.where(official_tags: params[:tags].split(","))
+      @outlets = @outlets.where("official_tags.id" => params[:tags].split(","))
     end
-    @outlets.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+    if params[:services]
+      @outlets = @outlets.where(service: params[:services].split(","))
+    end
+    @outlets = @outlets.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
       format.json { render "index" }
     end
@@ -80,13 +84,10 @@ class Api::V1::SocialMediaController < Api::ApiController
 
   def services
     ## specific breakdowns
-    service_breakdowns = Outlet.where("status <> 2").group(:service).count
-    @service_results = []
-    service_breakdowns.each do |k,v|
-      @service_results << {service_key: k, service_display_name: Service.find_by_shortname(k).longname, social_media_accounts: v}
-    end
+    @services = Outlet.where("status <> 2").group(:service).count
+
     respond_to do |format|
-      format.json { render json: @service_results }
+      format.json { render "services" }
     end
   end
 end
