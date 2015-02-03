@@ -1,4 +1,13 @@
-/* Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org> */
+/* Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org> */]
+
+body {
+  padding-top: 50px;
+    font-family: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', 'Tahoma', sans-serif;
+    color:#555;
+    font-size: 16px;
+    line-height:1.6em;
+}
+
 .swagger-section pre code {
   display: block;
   padding: 0.5em;
@@ -1161,17 +1170,19 @@
   cursor: pointer;
 }
 .swagger-section #header {
-  background-color: #89bf04;
+  background-color:#0c555d  ;
   padding: 14px;
 }
-.swagger-section #header a#logo {
-  font-size: 1.5em;
-  font-weight: bold;
-  text-decoration: none;
-  background: transparent url(../images/logo_small.png) no-repeat left center;
-  padding: 20px 0 20px 40px;
-  color: white;
+ nav a#logo {
+  background: #fff url(../images/logo2.png) no-repeat center;
+  padding: 20px 0 20px 50px;
+  display: inline-block;
+     width:180px;
+     background-size: 85%;
+     border-radius: 5px;
 }
+.headerExploreBar{position: relative;
+top: 6px;}
 .swagger-section #header form#api_selector {
   display: block;
   clear: none;
@@ -1195,8 +1206,9 @@
   font-weight: bold;
   padding: 6px 8px;
   font-size: 0.9em;
+    font-family: 'roboto condensed','source sans pro',arial, sans-serif;
   color: white;
-  background-color: #547f00;
+  background-color: #ff5049 ;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
@@ -1205,7 +1217,7 @@
   border-radius: 4px;
 }
 .swagger-section #header form#api_selector .input a#explore:hover {
-  background-color: #547f00;
+  background-color: #ff5049 ;
 }
 .swagger-section #header form#api_selector .input input {
   font-size: 0.9em;
