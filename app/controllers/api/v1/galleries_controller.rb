@@ -4,14 +4,13 @@ class Api::V1::GalleriesController < Api::ApiController
 
 	swagger_api :index do
 		summary "Fetches all galleries"
-	    notes "This lists all active galleries.  It accepts parameters to perform basic search."
-	    param :query, :q, :string, :optional, "String to compare to the name of the galleries."
-	    param :query, :page_size, :integer, :optional, "Number of results per page"
-	    param :query, :page, :integer, :optional, "Page number"
-	    response :unauthorized
-	    response :not_acceptable, "The request you made is not acceptable"
-	    response :requested_range_not_satisfiable		
-
+    notes "This lists all active galleries.  It accepts parameters to perform basic search."
+    param :query, :q, :string, :optional, "String to compare to the name of the galleries."
+    param :query, :page_size, :integer, :optional, "Number of results per page"
+    param :query, :page, :integer, :optional, "Page number"
+    response :unauthorized
+    response :not_acceptable, "The request you made is not acceptable"
+    response :requested_range_not_satisfiable		
 	end
 
 	swagger_api :show do

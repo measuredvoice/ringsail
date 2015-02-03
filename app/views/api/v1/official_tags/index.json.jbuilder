@@ -1,1 +1,1 @@
-json.array! @official_tags, :id, :shortname, :tag_text
+json.array! @official_tags, :id, :tag_text

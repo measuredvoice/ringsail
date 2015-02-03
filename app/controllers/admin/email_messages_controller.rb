@@ -22,7 +22,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 
 	def create
 		@email = EmailMessage.new(email_message_params)
-		@email.current_user_id = current_user.id
+		@email.user = current_user
 		if @email.save
 			flash[:notice] = "Email successfully sent!"
 			EmailJob.perform_later @email

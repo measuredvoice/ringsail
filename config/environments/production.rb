@@ -66,9 +66,9 @@ Ringsail::Application.configure do
   ActionMailer::Base.raise_delivery_errors = true
 
   ActionMailer::Base.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'gmail.com',
+    address:              ENV['REGISTRY_EMAIL_SERVER'],
+    port:                 ENV['REGISTRY_EMAIL_PORT'],
+    domain:               ENV['REGISTRY_EMAIL_DOMAIN'],
     user_name:            '<email address>',
     password:             '<password>',
     authentication:       'plain',

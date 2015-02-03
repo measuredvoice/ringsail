@@ -74,7 +74,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
-  gem "letter_opener"
+  gem 'letter_opener'
 end
 ######
 # End Development Gems

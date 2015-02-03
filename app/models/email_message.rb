@@ -12,7 +12,7 @@
 #
 
 class EmailMessage < ActiveRecord::Base
-	belongs_to :users
+	belongs_to :user
 
 	validates :to, :presence => true
 	validates :subject, :presence => true

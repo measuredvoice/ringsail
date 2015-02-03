@@ -6,6 +6,7 @@
     <thead>
       <tr = "users_row">
         <th>Email To</th>
+        <th>Email From</th>
         <th>Subject</th>
         <th>Body</th>
         <th>Time</th>
@@ -16,6 +17,7 @@
       <% @emails.each do |email| %>
         <tr class = "tablerow">
           <td class = "table_data"><%= email.to %></td>
+          <td class = "table_data"><%= user_list_format(email.user) %></td>
           <td class = "table_data"><%= email.subject %> </td>
           <td class = "table_data"><%= email.body.first(75) %> </td>
           <td class = "table_data"><%= email.created_at.strftime("%B %e, %Y %H:%M") %> </td>

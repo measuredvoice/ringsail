@@ -67,10 +67,10 @@ ActiveRecord::Schema.define(version: 20150202214221) do
   add_index "auth_tokens", ["token"], name: "index_auth_tokens_on_token", unique: true, using: :btree
 
   create_table "email_messages", force: :cascade do |t|
-    t.integer  "current_user_id", limit: 4
-    t.string   "to",              limit: 255
-    t.string   "subject",         limit: 255
-    t.text     "body",            limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.string   "to",         limit: 255
+    t.string   "subject",    limit: 255
+    t.text     "body",       limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -4,14 +4,15 @@ class Api::V1::AgenciesController < Api::ApiController
 
 	swagger_api :index do
 		summary "Fetches all agencies"
-	    notes "This lists all active agencies.  It accepts parameters to perform basic search."
-	    param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
-	    param :query, :page_size, :integer, :optional, "Number of results per page"
-	    param :query, :page, :integer, :optional, "Page number"
-	    response :unauthorized
-	    response :not_acceptable, "The request you made is not acceptable"
-	    response :requested_range_not_satisfiable
+    notes "This lists all active agencies.  It accepts parameters to perform basic search."
+    param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
+    param :query, :page_size, :integer, :optional, "Number of results per page"
+    param :query, :page, :integer, :optional, "Page number"
+    response :unauthorized
+    response :not_acceptable, "The request you made is not acceptable"
+    response :requested_range_not_satisfiable
 	end
+
 	swagger_api :show do
 		summary "Fetches a single agency item"
 		notes "This returns an agency based on an ID."
@@ -40,8 +41,6 @@ class Api::V1::AgenciesController < Api::ApiController
 
 	def show
 		@agency = Agency.find(params[:id])
-		respond_to do |format|
-			format.json { render "show"}
 		if @agency
 			respond_to do |format|
 				format.json { render "show"}

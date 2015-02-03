@@ -93,7 +93,7 @@ class Outlet < ActiveRecord::Base
     if existing
       return existing
     else
-      self.new(:service_url => s.service_url_canonical, :service => s.shortname, :account => s.account)
+      return nil
     end
   end    
   
@@ -153,15 +153,5 @@ class Outlet < ActiveRecord::Base
     self.account = service_info.account
   end
   
-  def set_location_name
-    if (self.location_id_changed?)
-      location = OutletLocation.find_by_id(location_id)
-      if location
-        self.location_name = location.display_name
-      else
-        self.location_name = nil
-      end
-    end
-  end
   
 end
