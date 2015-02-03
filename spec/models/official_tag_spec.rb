@@ -2,11 +2,13 @@
 #
 # Table name: official_tags
 #
-#  id         :integer          not null, primary key
-#  shortname  :string(255)
-#  tag_text   :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id               :integer          not null, primary key
+#  tag_text         :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  gallery_count    :integer          default("0")
+#  mobile_app_count :integer          default("0")
+#  outlet_count     :integer          default("0")
 #
 
 require 'spec_helper'
