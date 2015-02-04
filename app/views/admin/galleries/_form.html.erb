@@ -67,8 +67,8 @@
   <script>
     function add_mobile_app(id,status,text){
       if($('[data-id='+id+'][data-class=MobileApp]').length == 0){
-        removal_span = '<span class="pull-right"><a href="javascript:remove_registration('+
-        id+','+'MobileApp)"><i class="fa fa-remove"></i></a></span>';
+        removal_span = '<span class="pull-right"><a href="javascript:remove_registration(\''+
+        id+'\',\''+'MobileApp\')"><i class="fa fa-remove"></i></a></span>';
         var label_text = "label-danger";
         if(status.indexOf("published") ==0){
           label_text = "label-success";
@@ -80,8 +80,8 @@
     }
     function add_social_app(id,status,text){
       if($('[data-id='+id+'][data-class=Outlet]').length == 0){
-        removal_span = '<span class="pull-right"><a href="javascript:remove_registration('+
-        id+','+'Outlet)"><i class="fa fa-remove"></i></a></span>';
+        removal_span = '<span class="pull-right"><a href="javascript:remove_registration(\''+
+        id+'\',\''+'Outlet\')"><i class="fa fa-remove"></i></a></span>';
         var label_text = "label-danger";
         if(status.indexOf("published") ==0){
           label_text = "label-success";

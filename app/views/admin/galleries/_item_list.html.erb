@@ -13,7 +13,7 @@
         <%= app.service_url %>
       <% end %>
       <% if remove_link %>
-      <%= link_to "<span class=\"pull-right\"><i class=\"fa fa-remove\"></i></span>".html_safe, "javascript:remove_registration(#{app.id}, #{app.class});" %>
+      <%= link_to "<span class=\"pull-right\"><i class=\"fa fa-remove\"></i></span>".html_safe, "javascript:remove_registration('#{app.id}', '#{app.class}');" %>
       <% end %>
       <span class="label  <%= app.published? ? "label-success" : "label-danger" %>"> <%= app.status %></span> 
 
