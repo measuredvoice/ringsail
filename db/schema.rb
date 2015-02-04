@@ -130,7 +130,7 @@ ActiveRecord::Schema.define(version: 20150203195743) do
 
   create_table "mobile_apps", force: :cascade do |t|
     t.string  "name",              limit: 255
-    t.string  "short_description", limit: 255
+    t.text    "short_description", limit: 65535
     t.text    "long_description",  limit: 65535
     t.string  "icon_url",          limit: 255
     t.string  "language",          limit: 255

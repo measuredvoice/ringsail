@@ -1,0 +1,74 @@
+html, body{color:#555555; font-family:Trebuchet,Tahoma,sans-serif;height: 100%;  }
+body > .container{padding-top:60px; }
+.nav-tabs {
+    margin: 0;
+    padding: 0;
+    border: 0;    
+}
+.nav-tabs > li > a {
+    background: #DADADA;
+    border-radius: 0;
+    
+}
+.nav-tabs > li > a{background-color: #fff; border:solid 1px #ddd;}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+    background: #F5F5F5;
+   
+}
+.nav-tabs > li.active{
+    background-color:#F5F5F5;
+}
+/* Tab Content */
+.tab-pane {
+    background: #F5F5F5;
+    border-radius: 0;
+    text-align: center;
+    padding: 10px;
+    border:solid 1px #ddd;
+    padding: 30px;
+    line-height: 22px;
+}
+.tab-content{margin-bottom: 15px;}
+.searchTabs{
+   margin: 15px 0 0 0;
+    
+}
+.searchBox{width:60%; margin: auto;}
+.mediaResults{
+    border: solid 1px #ddd;
+    background-color: #fff;
+    padding: 5px;
+    margin-top: 1px;
+    list-style: none;
+    text-transform: uppercase; 
+    text-align: left;
+}
+.mediaResults > li > i{font-size: 20px;}
+.searchResultTitle{background-color: #ddd; color:#555; font-weight: 700; padding: 5px; border-bottom: dotted 1px #bbb;}
+.badge{background-color: #FF5049; color: #fff;}
+.resultRow{padding: 5px;}
+.resultRow >a{color:#555; text-decoration: underline;}
+.banner{background-color: #0C555D; color: #fff; padding: 20px; text-align: center; font-size: 28px; font-weight: 700; margin: 2px 0 2px 0;}
+.countTitle{background-color: #ddd; color:#555; text-align: center; font-size: 1.1em; text-transform: uppercase;border-radius: 5px; margin-bottom: 5px; padding: 5px; }
+.count{background-color: #ddd; color:#555; text-align: center; font-size: 1.4em; text-transform: uppercase; border-radius: 5px;}
+.socialAccounts{line-height: 28px;}
+.latestPostsContainer{
+-webkit-box-shadow: 0 1px 10px #006873;
+-moz-box-shadow: 0 1px 10px #006873;
+box-shadow: 0 1px 10px #006873;
+margin-bottom: 10px;
+    padding: 15px;
+}
+.twitterApiWrapOuter{background-color: #ddd; padding: 10px;margin-bottom: 5px;}
+.twitterApiWrapInner{background-color: #fff; border-radius: 5px; padding: 15px; line-height: 25px;}
+.twitterListTitle{font-weight: bold; font-size: 18px;}
+.twitterApiDesc{font-size:12px; color: #999; }
+.twitterCount{text-align: center; font-size: 22px; padding:15px 0 15px 0;}
+.twitterCount >div:last-child{color:#FF5049}
+.subsribeFor{background-color: #ddd; clear: both; text-align: center; padding: 15px;}
+.subsribeFor button{color: #FF5049; background-color: #fff; border-radius: 5px; box-shadow: none!important; border: solid 1px #ccc;}
+.media-heading{color:#FF5049; font-size: 14px;}
+.media-body{color:#555; font-size: 11px; height: 35px;}
+.media{border-bottom: dotted 1px #ddd;padding: 0px 5px 15px 5px; margin-top: 5px;}
+

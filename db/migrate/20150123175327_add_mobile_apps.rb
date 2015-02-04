@@ -3,7 +3,7 @@ class AddMobileApps < ActiveRecord::Migration
 
   	create_table :mobile_apps do |t|
       	t.string :name
-      	t.string :short_description
+      	t.text :short_description
       	t.text :long_description
       	t.string :icon_url
       	t.string :language

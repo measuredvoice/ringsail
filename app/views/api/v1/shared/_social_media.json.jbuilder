@@ -1,7 +1,8 @@
 json.set! :id, outlet.id
 json.set! :organizaton, outlet.organization
 json.set! :account, outlet.account
-json.set! :service, outlet.service
+json.set! :service_key, outlet.service
+json.set! :service_display_name, Service.find_by_shortname(outlet.service).longname
 json.set! :service_url, outlet.service_url
 json.set! :info_url, outlet.info_url
 json.set! :language, outlet.language
