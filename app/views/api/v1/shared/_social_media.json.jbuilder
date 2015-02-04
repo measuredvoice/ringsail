@@ -9,7 +9,7 @@ json.agencies do
   json.array! outlet.agencies, partial: "api/v1/shared/agency", as: :agency
 end
 json.tags do
-  json.array! outlet.official_tags, partial: "api/v1/shared/official_tag", as: :official_tag
+  json.array! outlet.official_tags, partial: "api/v1/shared/official_tag", as: :official_tag, counts: false
 end
 json.set! :created_at, outlet.created_at
 json.set! :udpated_at, outlet.updated_at
