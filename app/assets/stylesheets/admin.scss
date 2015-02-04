@@ -330,6 +330,17 @@ display: block;
 .table th .current {
   background-color: #eee; font-size: 12px;font-weight: bold!important;
 }
+.table th a:hover:after{
+    content: ' ';
+    width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+    border-top: 5px solid #ccc;
+     position: relative;
+top: 9px;
+left: 3px;
+   }
 
 .table th .asc:after {
   content: ' ';
@@ -362,6 +373,7 @@ left: 8px;
 /*Table Styles*/
 .table{font-size: 14px;}
 .table thead{background-color: #eee; font-size: 12px;}
-.table th a{text-decoration: none;}
+.table th a:hover{color:#ff5049;}
+.table th a{color:#555;text-decoration: none;}
 .midWidth{width:32%}
 
