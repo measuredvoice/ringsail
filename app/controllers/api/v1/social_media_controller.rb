@@ -13,7 +13,8 @@ class Api::V1::SocialMediaController < Api::ApiController
     param :query, :page, :integer, :optional, "Page number"
     response :unauthorized
     response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable 
+    response :requested_range_not_satisfiable   
+    response :not_found
   end
 
   PAGE_SIZE=25

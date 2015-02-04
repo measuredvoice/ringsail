@@ -11,7 +11,8 @@ class Api::V1::GalleriesController < Api::ApiController
     param :query, :page, :integer, :optional, "Page number"
     response :ok, "Success"
     response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable		
+    response :requested_range_not_satisfiable			
+		response :not_found
 	end
 
 	swagger_api :show do
