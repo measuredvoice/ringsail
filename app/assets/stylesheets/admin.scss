@@ -327,24 +327,41 @@ display: block;
 .activityChart{text-align: center;}
 
 /* table sort order caret */
-.pretty th .current {
-  padding-right: 12px;
-  background-repeat: no-repeat;
-  background-position: right center;
+.table th .current {
+  background-color: #eee; font-size: 12px;font-weight: bold!important;
 }
 
-.pretty th .asc {
-  background-image: url(/images/sort_asc.png);
-  background-color:black;
+.table th .asc:after {
+  content: ' ';
+    width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	
+	border-top: 5px solid #000;
+     position: relative;
+top: 9px;
+left: 8px;
+  
 }
 
-.pretty th .desc {
-  background-image: url(/images/sort_desc.png);
+.table th .desc:after {
+ content: ' ';
+    width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	
+	border-bottom: 5px solid #000;
+    position: relative;
+top: -8px;
+left: 8px;
+   
 }
 
 /*Table Styles*/
 .table{font-size: 14px;}
-.table thead{
-background-color: #eee;}
+.table thead{background-color: #eee; font-size: 12px;}
+.table th a{text-decoration: none;}
 .midWidth{width:32%}
 
