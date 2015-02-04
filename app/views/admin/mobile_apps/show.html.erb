@@ -21,9 +21,40 @@
 				<%= link_to 'Back', admin_mobile_apps_path %>
 			</div>
 		</div>
+		<%= link_to "Back to Mobile Apps", admin_mobile_apps_path, {:class => "btn btn-default"} %>		
+		<%= link_to "Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %>
+		<%= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %>
+		<% if !@mobile_app.published? %>
+			<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %> 
+		<% end %>
+		<% if !@mobile_app.archived? %>
+			<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "btn btn-default"} %>  
+		<% end %>
 	</div>
 </div>
 
 <div class = "row">
-
+	<div class="col-sm-4">
+    <h3><i class="fa fa-user"></i> Contacts</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<p>This list comprises everyone listed either as a contact on this mobile app.</p>
+	  		<ul class="list-group">
+	  			<% @mobile_app.users.each do |user| %>
+	  					<li class="list-group-item"><%= user_list_format(user) %></li>
+	  			<% end %>
+	  		</ul>
+	  	</div>
+		</div>
+	</div>
+	<div class="col-sm-8">
+    <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Mobile App</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<ul class="timeline">
+	  			<%= render partial: "admin/shared/activities_feed", locals: {activities: @mobile_app.activities.order("created_at DESC").first(5)} %>
+	  		</ul>
+	  	</div>
+		</div>
+	</div>
 </div>
