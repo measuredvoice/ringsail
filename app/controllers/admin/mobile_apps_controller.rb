@@ -1,7 +1,7 @@
 class Admin::MobileAppsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :history,:restore]
+  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :history,:restore,:archive, :publish]
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
@@ -112,10 +112,10 @@ class Admin::MobileAppsController < Admin::AdminController
 
   def archive
     MobileApp.public_activity_off
-    @outlet.status = MobileApp.statuses[:archived]
-    @outlet.save
+    @mobile_app.status = MobileApp.statuses[:archived]
+    @mobile_app.save
     MobileApp.public_activity_on
-    @outlet.create_activity :archived
+    @mobile_app.create_activity :archived
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now archived"
   end
 
