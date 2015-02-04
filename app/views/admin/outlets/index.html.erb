@@ -27,12 +27,12 @@
           <table class="table table-striped">
           <thead>
           <tr>
-            <th>Agency</th>
-            <th>Service</th>
-            <th>Social Media Account </th>
-            <th>Tags</th>
-            <th>Status</th>
-            <th>Updated at</th>
+            <th><%= sortable "", "Agency" %></th>
+            <th><%= sortable "service_url", "Service" %></th>
+            <th><%= sortable "account", "Social Media Account " %></th>
+            <th><%= sortable "", "Tags" %></th>
+            <th><%= sortable "status", "Status" %></th>
+            <th><%= sortable "updated_at", "Updated at" %></th>
             <th class = "lastlinks">Actions</th>
           </tr>
           </thead>

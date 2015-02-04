@@ -1,9 +1,10 @@
 class Admin::AgenciesController < Admin::AdminController
+  helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
   before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore]
   protect_from_forgery except: :tokeninput
   def index 
-    @agencies = Agency.all.order(name: :asc).page(params[:page]).per(15)
+    @agencies = Agency.all.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
     @allagencies = Agency.all.order(name: :asc)
     respond_to do |format|
       format.html
@@ -77,5 +78,13 @@ class Admin::AgenciesController < Admin::AdminController
     end
     def agency_params
       params.require(:agency).permit(:name, :shortname, :info_url)
+    end
+
+    def sort_column
+      Agency.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

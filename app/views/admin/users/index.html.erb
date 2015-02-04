@@ -8,11 +8,11 @@
     	<table class=" table table-striped">
         <thead>
       		<tr = "users_row">
-      			<th>Email</th>
-            <th>Agency</th>
-            <th>Role</th>
-            <th>Sign-in Count </th>
-            <th>Last Sign-in </th>
+      			<th><%= sortable "email", "Email" %></th>
+            <th><%= sortable "Agency" %></th>
+            <th><%= sortable "Role" %></th>
+            <th><%= sortable "sign_in_count", "sign-in Count" %></th>
+            <th><%= sortable "Last Sign-in" %> </th>
       			<th class = "lastlinks">Actions</th>
       		</tr>
         </thead>
