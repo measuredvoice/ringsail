@@ -24,53 +24,55 @@
 
 
   <div class="field hidden"> 
-    <%=f.select :mobile_app_ids, @mobile_apps.all.collect {|x| [x.name, x.id]}, {}, :multiple => true %>
+    <%= f.hidden_field :gallery_items_ol, :value => "" %>
   </div>
 
   <div class="field">
-    <h3>Current Registrations</h3>
-    <table id="current_reg_table" class="table table-striped">
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Status</th>
-        <th>Remove</th>
-      </tr>
-    <% @gallery.mobile_apps.each do |app| %>
-      <tr id="app-<%= app.id%>">
-        <td><%= app.name %></td>
-        <td><%= app.short_description %></td>
-        <td><%= app.status %></td>
-        <td><%= link_to "<i class=\"fa fa-remove\">".html_safe, "javascript:remove_registration(#{app.id});" %></td>
-      </tr>
-    <% end %>
-    </table>
-  </div>
+    <h3>Gallery Collection</h3>
+    <ol id="gallery-collection" class="list-group gallery-collection">
+      <% @gallery.gallery_items.map(&:item).each do |app| %>
+        <li class="list-group-item" data-class="<%= app.class %>" data-id="<%= app.id %>">
+          <% if app.class == MobileApp %>
+            Mobile App:
+            <%= app.name %>-
+            <%= app.short_description %>
+          <% else %>
+            Social Media:
+            <% if app.organization %>
+              <%= app.organization %> - 
+            <% end %>
+            <%= app.service_url %>
+          <% end %>
+          <%= link_to "<span class=\"pull-right\"><i class=\"fa fa-remove\"></i></span>".html_safe, "javascript:remove_registration(#{app.id}, #{app.class});" %>
+          <span class="label  <%= app.published? ? "label-success" : "label-danger" %>"> <%= app.status %></span> 
 
-  <div class="field">
-    <h3>Add New Registrations</h3>
-    <table id="all_reg_table" class="table table-striped" cellspacing="0" width="100%">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @mobile_apps.all.each do |app| %>
-          <tr id="app-add-<%= app.id%>">
-            <td><%= app.name %></td>
-            <td><%= app.short_description %></td>
-            <td><%= app.status %></td>
-            <td class="disabled"><%= link_to "<i class=\"fa fa-plus\">".html_safe, "javascript:add_registration(#{app.id});" %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </li>
+      <% end %>
+    </ol>
   </div>
+  <div role="tabpanel">
 
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#mobile_apps" aria-controls="mobile_apps" role="tab" data-toggle="tab">Add Mobile Applications</a></li>
+      <li role="presentation"><a href="#social_media" aria-controls="social_media" role="tab" data-toggle="tab">Add Social Media Accounts</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="mobile_apps">
+        <table id="all_mobile_table" class="table table-striped" cellspacing="0" width="100%">
+          
+        </table>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="social_media">
+        <table id="all_social_table" class="table table-striped" cellspacing="0" width="100%">
+        
+        </table>
+      </div>
+    </div>
+
+  </div>
   </br> 
   <div class="actions">
     <%= f.submit :class => "btn btn-default" %>
@@ -80,36 +82,83 @@
     
 <% content_for :additional_javascript do %>
   <script>
-    $(document).ready(function(){
-      $('#all_reg_table').DataTable();
-    });
-    function remove_registration(id){
-      $('#app-'+id).remove();
-      array_of_registrations = $('#gallery_mobile_app_ids').val();
-      index_of_element = array_of_registrations.indexOf(id +"");
-      if(array_of_registrations.length == 1){
-        array_of_registrations = []
-      }else if(index_of_element == array_of_registrations.length-1){
-        array_of_registrations = array_of_registrations.slice(0,index_of_element);
-      }else if(index_of_element == 0){
-        array_of_registrations=array_of_registrations.slice(index_of_element+1,array_of_registrations.length);
+    function add_mobile_app(id,status,text){
+      if($('[data-id='+id+'][data-class=MobileApp]').length == 0){
+        removal_span = '<span class="pull-right"><a href="javascript:remove_registration('+
+        id+','+'MobileApp)"><i class="fa fa-remove"></i></a></span>';
+        var label_text = "label-danger";
+        if(status.indexOf("published") ==0){
+          label_text = "label-success";
+        }
+        label_span = ' <span class="label '+ label_text+'">'+ status+'</span>';
+        li_element = '<li class="list-group-item" data-class="MobileApp" data-id="'+id+'">' + text + removal_span + label_span +'</li>';
+        $('#gallery-collection').append(li_element);
       }
-      else{
-        array_of_registrations = array_of_registrations.slice(0,index_of_element).concat(array_of_registrations.slice(index_of_element+1,array_of_registrations.length));
+    }
+    function add_social_app(id,status,text){
+      if($('[data-id='+id+'][data-class=Outlet]').length == 0){
+        removal_span = '<span class="pull-right"><a href="javascript:remove_registration('+
+        id+','+'Outlet)"><i class="fa fa-remove"></i></a></span>';
+        var label_text = "label-danger";
+        if(status.indexOf("published") ==0){
+          label_text = "label-success";
+        }
+        label_span = ' <span class="label '+ label_text+'">'+ status+'</span>';
+        li_element = '<li class="list-group-item" data-class="Outlet" data-id="'+id+'">' + text + removal_span + label_span +'</li>'
+        $('#gallery-collection').append(li_element);
       }
-      $('#gallery_mobile_app_ids').val(array_of_registrations);
     }
 
-    function add_registration(id){
-      var elements = $('#app-add-'+id).children("td");
-      $('#app-'+id).remove();
-      $('#current_reg_table tr:last').after('<tr id="app-'+id+'"><td>'+elements[0].innerHTML+'</td><td>'+elements[1].innerHTML+'</td><td><a href="javascript:remove_registration('+id+');"><i class="fa fa-remove"></i></a></td></tr>');
-      array_of_registrations = $('#gallery_mobile_app_ids').val();
-      if (array_of_registrations== null){
-        array_of_registrations = [];
-      }
-      array_of_registrations = array_of_registrations.concat([id+""]);
-      $('#gallery_mobile_app_ids').val(array_of_registrations);
+    function remove_registration(id,class_name){
+      $('[data-id='+id+'][data-class='+class_name+']').remove();
     }
+    $(document).ready(function(){
+      $("ol.gallery-collection").sortable();
+      $('form').on('submit',function(e){
+        var data = $("ol.gallery-collection").sortable("serialize").get();
+        var jsonString = JSON.stringify(data);
+        $('#gallery_gallery_items_ol').val(jsonString);
+      })
+      $('#all_mobile_table').dataTable({
+        "ajax":{
+          "url": "/admin/mobile_apps/datatables.json"
+        },
+        "columns":[
+          {"title": "Name", "data": "name"},
+          {"title": "Short Description", "data": "short_description"},
+          { "title": "Status", "data": "status" },
+          { "title": "Add", render: function(data,type,full,meta){
+            // go back and add only the necessary objects. perhaps use
+            var text = 'Mobile App: '
+            if(full["name"]){
+              text += full["name"]+' - ';
+            }
+            text += full["short_description"];
+            return '<a href=\'javascript:add_mobile_app('+full["id"]+',"'+full["status"]+'","'+text+'")\'><i class="fa fa-plus"></i></a>';
+          }}
+        ]
+      });
+      $('#all_social_table').dataTable({
+        "ajax":{
+          "url": "/admin/outlets/datatables.json"
+        },
+        "columns":[
+          {"title": "Name", "data": "organization"},
+          {"title": "Service", "data": "service"},
+          {"title": "Service URL", "data": "service_url"},
+          { "title": "Status", "data": "status" },
+          { "title": "Add", render: function(data,type,full,meta){
+            var text = 'Social Media: ';
+            if(full["organization"]){
+              text += full["organizaiton"] + ': ';
+            }
+            text += full["service_url"];
+            return '<a href=\'javascript:add_social_app('+full["id"]+',"'+full["status"]+'","'+text+'")\'><i class="fa fa-plus"></i></a>';
+          }}
+        ]
+      });
+    });
+
+  
   </script>
 <% end %>

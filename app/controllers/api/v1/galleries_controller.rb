@@ -38,7 +38,7 @@ class Api::V1::GalleriesController < Api::ApiController
 	end
 
 	def show
-		@gallery = Gallery.find(params[:id])
+		@gallery = Gallery.includes(:gallery_items).find(params[:id])
 		respond_to do |format|
 			format.json { render "show" }
 		end

@@ -25,8 +25,6 @@ class Admin::DashboardsController < Admin::AdminController
       @mobile_chart << {label: k, value: v}
     end
     ## Activities stuff
-  	@activities = PublicActivity::Activity.order("created_at desc").first(5)
-
     activities_graph = PublicActivity::Activity.find_by_sql("
       SELECT month(created_at) as month, year(created_at) as year, count(*) as count
       FROM activities
@@ -47,9 +45,17 @@ class Admin::DashboardsController < Admin::AdminController
     activities_pie = PublicActivity::Activity.find_by_sql("
         SELECT COUNT(id) as count, trackable_type as type FROM activities GROUP BY trackable_type;")
     @activities_pie_json = []
+
     activities_pie.each do |item|
       @activities_pie_json << { label: matches[item.type], value: item.count}
     end
+
+    # TAG CLOUD
+    @tag_cloud = OfficialTag.find_by_sql("SELECT tag_text as text, 
+      (gallery_count + outlet_count + mobile_app_count) as weight 
+      FROM official_tags 
+      ORDER BY (gallery_count + outlet_count + mobile_app_count) DESC
+      LIMIT 80")
   end
 
   def social_media_breakdown

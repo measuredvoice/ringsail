@@ -6,6 +6,7 @@
  *= require datatables
  *= require custom-token-input
  *= require font-awesome
+ *= require jqcloud
  */
 
 @import "bootstrap-sprockets";
@@ -29,6 +30,24 @@ body {
     line-height:1.6em;
 }
 
+body.dragging, body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.gallery-collection li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.gallery-collection li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
 
 /*
  * Global add-ons

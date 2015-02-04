@@ -1,1 +1,1 @@
-json.array! @galleries, :id, :name, :description
+json.array! @galleries, partial: "api/v1/shared/gallery", as: :gallery

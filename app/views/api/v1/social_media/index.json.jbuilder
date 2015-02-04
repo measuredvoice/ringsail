@@ -1,1 +1,1 @@
-json.array! @outlets, :id, :organization, :service
+json.array! @outlets, partial: "api/v1/shared/social_media", as: :outlet

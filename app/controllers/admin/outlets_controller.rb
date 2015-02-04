@@ -20,6 +20,17 @@ class Admin::OutletsController < Admin::AdminController
     end
   end
 
+
+  def datatables
+    @outlets = Outlet.all
+    respond_to do |format|
+      format.json {
+        render json: {
+          data: @outlets
+        }
+      }
+    end
+  end
   # GET /outlets/1
   # GET /outlets/1.json
 
