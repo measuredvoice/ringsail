@@ -50,8 +50,8 @@
       <%= render "mobile_app_version_fields", f: mobile_app_version %>
     <% end %>
       
-    <div class="links">
-      <%= link_to_add_association "Add Version", f, :mobile_app_versions %>
+    <div class="buttonRow">
+      <%= link_to_add_association "Add Version", f, :mobile_app_versions , {:class => "fa fa-plus"} %>
     </div>
     </fieldset>
   </div>

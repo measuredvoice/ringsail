@@ -17,24 +17,26 @@
 				  <strong>Long Description:</strong>
 				  <%= @mobile_app.long_description %>
 				</p>
-				<%= link_to 'Edit', edit_admin_mobile_app_path(@mobile_app) %> |
-				<%= link_to 'Back', admin_mobile_apps_path %>
+<!--				<%= link_to 'Edit', edit_admin_mobile_app_path(@mobile_app) %> |-->
+<!--				<%= link_to 'Back', admin_mobile_apps_path %>-->
 			</div>
-		</div>
-		<%= link_to "Back to Mobile Apps", admin_mobile_apps_path, {:class => "btn btn-default"} %>		
-		<%= link_to "Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %>
-		<%= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %>
+             <div class="buttonRow">
+		<%= link_to "Back to Mobile Apps", admin_mobile_apps_path, {:class => "fa fa-angle-double-left"} %>		
+		<%= link_to "Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "fa fa-pencil"} %>
+		<%= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
 		<% if !@mobile_app.published? %>
-			<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %> 
+			<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
 		<% end %>
 		<% if !@mobile_app.archived? %>
-			<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "btn btn-default"} %>  
-		<% end %>
+			<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "fa fa-archive"} %>  
+            <% end %></div>
+		</div>
+       
 	</div>
 </div>
 
-<div class = "row">
-	<div class="col-sm-4">
+<div class = "row container col-sm-12 col-md-12">
+	<div class="col-lg-4 col-sm-12 col-md-4">
     <h3><i class="fa fa-user"></i> Contacts</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
@@ -47,7 +49,7 @@
 	  	</div>
 		</div>
 	</div>
-	<div class="col-sm-8">
+	<div class="col-lg-8 col-sm-12 col-md-8">
     <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Mobile App</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">

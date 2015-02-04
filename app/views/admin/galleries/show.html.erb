@@ -23,14 +23,17 @@
 				  <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: false} %>
 				</p>
 			</div>
+             <div class="buttonRow">
+		<%= link_to "Back to Galleries", admin_galleries_path, {:class => "fa fa-angle-double-left"} %>
+		<%= link_to "Edit", edit_admin_gallery_path(@gallery), {:class => "fa fa-pencil"} %>		
+		<%= link_to "History", history_admin_gallery_path(@gallery), {:class => "fa fa-history "} %>
+        </div>
 		</div>
-		<%= link_to "Back to Galleries", admin_galleries_path, {:class => "btn btn-default"} %>
-		<%= link_to "Edit", edit_admin_gallery_path(@gallery), {:class => "btn btn-default"} %>		
-		<%= link_to "History", history_admin_gallery_path(@gallery), {:class => "btn btn-default"} %>
+       
 	</div>
 </div>
-<div class = "row">
-	<div class = "col-sm-4">
+<div class = "row container col-sm-12 col-md-12">
+	<div class = "col-lg-4 col-sm-12 col-md-4">
 		<h3><i class="fa fa-user"></i> Contacts</h3>
 		<div class="panel panel-default">
 	  		<div class="panel-body">
@@ -44,7 +47,7 @@
 	  	</div>		
 	</div>
 
-	<div class = "col-sm-8">
+	<div class = "col-lg-8 col-sm-12 col-md-8">
 		<h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Gallery</h3>
 		<div class="panel panel-default">
 	  		<div class="panel-body">
