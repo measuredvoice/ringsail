@@ -1,4 +1,5 @@
 class Admin::OutletsController < Admin::AdminController
+  helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
 
   before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history, :restore, :publish, :archive]
@@ -9,7 +10,7 @@ class Admin::OutletsController < Admin::AdminController
     if(params[:service])
       @outlets = Outlet.where(service: params[:service]).includes(:tags, :agencies)
     else
-      @outlets = Outlet.all.includes(:tags, :agencies)
+      @outlets = Outlet.all.order(sort_column + " " + sort_direction).includes(:tags, :agencies)
     end
     respond_to do |format|
       format.html { @outlets = @outlets.page(params[:page]).per(20) }
@@ -131,5 +132,11 @@ class Admin::OutletsController < Admin::AdminController
       params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, :account, :service, :tag_tokens, :language, :info_url, :agency_tokens, :user_tokens)
     end
 
-
+    def sort_column
+      Outlet.column_names.include?(params[:sort]) ? params[:sort] : "account"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
 end

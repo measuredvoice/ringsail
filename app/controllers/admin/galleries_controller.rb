@@ -1,12 +1,12 @@
 class Admin::GalleriesController < Admin::AdminController
+  helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-
   before_action :set_gallery, only: [:show, :edit, :update, :destroy, :history,:restore]
   # GET /gallerys
   # GET /gallerys.json
   def index
 
-    @galleries = Gallery.page(params[:page]).per(25)
+    @galleries = Gallery.all.order(sort_column + " " +sort_direction).page(params[:page]).per(25)
     respond_to do |format|
       format.html
       format.json { render json: @gallerys }
@@ -95,8 +95,15 @@ class Admin::GalleriesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description, :gallery_items_ol)
+      params.require(:gallery).permit(:name, :description, :tag_tokens, :gallery_items_ol)
     end
 
+    def sort_column
+      Gallery.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
 
 end

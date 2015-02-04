@@ -10,11 +10,11 @@
     <table id="agency" class="table table-striped" >
   		<thead>
         <tr class = "agency_row">
-          <th>Agency Name</th>
-          <th>Short Name</th>
-          <th>Info URL</th>
-          <th># of Social Accounts</th>
-          <th># of Apps</th>
+          <th><%= sortable "name", "Agency Name" %></th>
+          <th><%= sortable "shortname", "Short Name" %></th>
+          <th><%= sortable "info_url", "Info URL" %></th>
+          <th><%= sortable "outlets_count", "# of Social Accounts" %></th>
+          <th><%= sortable "mobile_apps_count", "# of Apps" %></th>
           <th class = "lastlinks">Actions</th>
     		</tr>
       </thead>

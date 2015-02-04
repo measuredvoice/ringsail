@@ -1,11 +1,11 @@
 class Admin::MobileAppsController < Admin::AdminController
+  helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :history,:restore]
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    @mobile_apps = MobileApp.page(params[:page]).per(15)
+    @mobile_apps = MobileApp.all.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
     @allApps = MobileApp.all
     respond_to do |format|
       format.html
@@ -133,5 +133,12 @@ class Admin::MobileAppsController < Admin::AdminController
         :language,:average_rating,:number_of_ratings, :_destroy])
     end
 
+    def sort_column
+      MobileApp.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end    
 
 end

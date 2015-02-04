@@ -325,8 +325,27 @@ display: block;
 .timeline > li > .timeline-badge{background-color:#ff5049!important;padding: 12px;}
 .timeline > li > .timeline-panel{z-index: 200;}
 .activityChart{text-align: center;}
+<<<<<<< HEAD
+
+/* table sort order caret */
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(/images/sort_asc.png);
+  background-color:black;
+}
+
+.pretty th .desc {
+  background-image: url(/images/sort_desc.png);
+}
+
 /*Table Styles*/
 .table{font-size: 14px;}
 .table thead{
 background-color: #eee;}
 .midWidth{width:32%}
+

@@ -1,11 +1,11 @@
 class Admin::UsersController < Admin::AdminController
+  helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json
-
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.page(params[:page]).per(15)
+    @users = User.all.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
   end
 
   # GET /users/1
@@ -80,5 +80,12 @@ class Admin::UsersController < Admin::AdminController
     params.require(:user).permit(:email)
   end
 
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "email"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 
 end

@@ -49,4 +49,8 @@ class MobileApp < ActiveRecord::Base
       end
     end
   end
+
+   def tag_tokens=(ids)
+    self.official_tag_ids = ids.split(',')
+  end
 end
