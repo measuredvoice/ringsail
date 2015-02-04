@@ -6,6 +6,7 @@ class Api::V1::GalleriesController < Api::ApiController
 		summary "Fetches all galleries"
     notes "This lists all active galleries.  It accepts parameters to perform basic search."
     param :query, :q, :string, :optional, "String to compare to the name of the galleries."
+    param :query, :tags, :ids, :optional, "Comma seperated list of tag ids"
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
     response :ok, "Success"
@@ -27,11 +28,15 @@ class Api::V1::GalleriesController < Api::ApiController
 	DEFAULT_PAGE = 1
 
 	def	index	
+    @galleries = Gallery.joins(:official_tags)
 		if params[:q]
-			@galleries = Gallery.where("name LIKE ?", "%#{params[:q]}%").page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
-		else
-			@galleries = Gallery.all.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+			@galleries = @galleries.where("name LIKE ? or description LIKE ?", 
+				"%#{params[:q]}%", "%#{params[:q]}%")
 		end
+		if params[:tags]
+      @galleries = @galleries.where("official_tags.id" => params[:tags].split(","))
+    end
+		@galleries = @galleries.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "index" }
 		end

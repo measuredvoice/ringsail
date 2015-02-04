@@ -8,6 +8,16 @@
 	  <strong>Description:</strong>
 	  <%= @gallery.description %>
 	</p>
+
+	<p>
+	  <strong>Tags:</strong>
+	  <%= @gallery.official_tags.map(&:tag_text).join(', ') %>
+	</p>
+
+	<p>
+	  <strong>Gallery Items:</strong>
+	  <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: false} %>
+	</p>
 	<%= link_to 'Edit', edit_admin_gallery_path(@gallery) %> |
 	<%= link_to 'Back', admin_galleries_path %>
 </div>

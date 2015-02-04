@@ -15,12 +15,14 @@
     <%= f.label :name %> </br>
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
-  </br>
   <div class="field"> 
     <%= f.label :description %> </br>
     <%= f.text_field :description, :class => "form-control formwidth" %>
   </div>
-  </br> 
+  <div class="field">
+    <%= f.label :tag_tokens, "Tags" %> </br>
+    <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
+  </div>
 
 
   <div class="field hidden"> 
@@ -29,26 +31,7 @@
 
   <div class="field">
     <h3>Gallery Collection</h3>
-    <ol id="gallery-collection" class="list-group gallery-collection">
-      <% @gallery.gallery_items.map(&:item).each do |app| %>
-        <li class="list-group-item" data-class="<%= app.class %>" data-id="<%= app.id %>">
-          <% if app.class == MobileApp %>
-            Mobile App:
-            <%= app.name %>-
-            <%= app.short_description %>
-          <% else %>
-            Social Media:
-            <% if app.organization %>
-              <%= app.organization %> - 
-            <% end %>
-            <%= app.service_url %>
-          <% end %>
-          <%= link_to "<span class=\"pull-right\"><i class=\"fa fa-remove\"></i></span>".html_safe, "javascript:remove_registration(#{app.id}, #{app.class});" %>
-          <span class="label  <%= app.published? ? "label-success" : "label-danger" %>"> <%= app.status %></span> 
-
-        </li>
-      <% end %>
-    </ol>
+    <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: true} %>
   </div>
   <div role="tabpanel">
 
@@ -119,6 +102,16 @@
         var jsonString = JSON.stringify(data);
         $('#gallery_gallery_items_ol').val(jsonString);
       })
+      var tags = [];
+      var gallery_tags = <%= raw @gallery.official_tags.to_json %>;
+      for(var i =0; i< gallery_tags.length; i++){
+        tags.push({id: gallery_tags[i]["id"], name: gallery_tags[i]["tag_text"]})
+      }
+
+      $("#gallery_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
+        crossDomain: false,
+        prePopulate: tags
+      });
       $('#all_mobile_table').dataTable({
         "ajax":{
           "url": "/admin/mobile_apps/datatables.json"
@@ -157,6 +150,8 @@
           }}
         ]
       });
+
+      
     });
 
   

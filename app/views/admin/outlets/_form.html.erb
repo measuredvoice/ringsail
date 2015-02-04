@@ -63,10 +63,14 @@
       prePopulate: <%= raw @outlet.agencies.map(&:attributes).to_json %>
     });
 
+    var tags = [];
+    var official_tags = <%= raw @outlet.official_tags.to_json %>;
+    for(var i =0; i< official_tags.length; i++){
+      tags.push({id: official_tags[i]["id"], name: official_tags[i]["tag_text"]})
+    }
     $("#outlet_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,
-      prePopulate: <%= raw @outlet.tags.to_json %>,
-      tokenValue: "name"
+      prePopulate: tags
     });
     <% user_json = [] 
       @outlet.users.each do |user|

@@ -111,6 +111,7 @@ legend {
     display:inline-block!important;
 
 }
+.center{text-align: center;}
 /*
  * Top navigation
  * Hide default border to remove 1px line.
@@ -282,6 +283,8 @@ ul.gly{
  }
  text{
   float: right;
+font-size: 13px;
+margin: 5px 0 5px 0;
  }
  .users_row{
     td{
@@ -322,6 +325,7 @@ display: block;
 .timeline > li > .timeline-badge{background-color:#ff5049!important;padding: 12px;}
 .timeline > li > .timeline-panel{z-index: 200;}
 .activityChart{text-align: center;}
+<<<<<<< HEAD
 
 /* table sort order caret */
 .pretty th .current {
@@ -338,3 +342,10 @@ display: block;
 .pretty th .desc {
   background-image: url(/images/sort_desc.png);
 }
+
+/*Table Styles*/
+.table{font-size: 14px;}
+.table thead{
+background-color: #eee;}
+.midWidth{width:32%}
+

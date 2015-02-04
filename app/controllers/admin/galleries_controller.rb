@@ -95,7 +95,7 @@ class Admin::GalleriesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description, :gallery_items_ol)
+      params.require(:gallery).permit(:name, :description, :tag_tokens, :gallery_items_ol)
     end
 
     def sort_column

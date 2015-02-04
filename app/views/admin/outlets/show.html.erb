@@ -24,7 +24,7 @@
 
 				<p>
 				  <strong>Tags:</strong>
-				  <%= @outlet.tags.map(&:to_s).join(', ') %>
+				  <%= @outlet.official_tags.map(&:tag_text).join(', ') %>
 				</p>
 
 				<p>

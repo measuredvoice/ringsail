@@ -80,7 +80,7 @@ class Admin::OfficialTagsController < Admin::AdminController
   end
 
   def tokeninput
-    @tags = OfficialTag.where("shortname LIKE ? OR tag_Text LIKE ?", "%#{params[:q]}%","%#{params[:q]}%").select([:id,:tag_text])
+    @tags = OfficialTag.where("tag_Text LIKE ?", "%#{params[:q]}%").select([:id,:tag_text])
     respond_to do |format|
       format.json { render 'tokeninput'}
     end
