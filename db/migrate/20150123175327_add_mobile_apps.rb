@@ -45,11 +45,6 @@ class AddMobileApps < ActiveRecord::Migration
   		t.text :description
   	end
 
-  	create_table :mobile_app_galleries do |t|
-  		t.integer :gallery_id
-  		t.integer :mobile_app_id
-  	end
-
   	create_table :gallery_users do |t|
   		t.integer :gallery_id
   		t.integer :user_id

@@ -16,6 +16,16 @@ class Admin::MobileAppsController < Admin::AdminController
     end
   end
 
+  def datatables
+    @mobile_apps = MobileApp.all
+    respond_to do |format|
+      format.json {
+        render json: {
+          data: @mobile_apps
+        }
+      }
+    end
+  end
   # GET /mobile_apps/1
   # GET /mobile_apps/1.json
  # def show

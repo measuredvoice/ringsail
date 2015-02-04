@@ -79,12 +79,12 @@
 		  	</div>
 			</div>
 			<div class="col-md-8">
-        <h3><i class="fa fa-clock-o fa-fw"></i> Recent Timeline</h3>
+        <h3><i class="fa fa-clock-o fa-fw"></i> Popular Tags</h3>
 	  		<div class="panel panel-default">
 			  	<div class="panel-body">
-			  		<ul class="timeline">
-			  			<%= render partial: "admin/shared/activities_feed", locals: {activities: @activities} %>
-			  		</ul>
+			  		<div id="tags" style="height:400px; width:100%;">
+
+			  		</div>
 			  	</div>
 	  		</div>
 			</div>
@@ -120,8 +120,30 @@
 		    element: 'piechart',
 		    data: <%= raw @activities_pie_json.to_json %>,
 		    formatter: function (y) { return y + " accounts" }
-		 });
+		});
 
+		var word_cloud = <%= raw @tag_cloud.to_json %>;
+		$('#tags').jQCloud(word_cloud);
+		var rtime = new Date(1, 1, 2000, 12,00,00);
+		var timeout = false;
+		var delta = 200;
+		$(window).resize(function() {
+		    rtime = new Date();
+		    if (timeout === false) {
+		        timeout = true;
+		        setTimeout(resizeend, delta);
+		    }
+		});
+
+		function resizeend() {
+		    if (new Date() - rtime < delta) {
+		        setTimeout(resizeend, delta);
+		    } else {
+		        timeout = false;
+						$('#tags').css("width", "100%") 
+						$('#tags').empty().jQcloud(word_cloud) 
+		    }               
+		}
 	</script>
 <% end %>
 </div>

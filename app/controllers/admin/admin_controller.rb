@@ -3,6 +3,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   before_filter :authenticate_user! unless Rails.env == "development"
+  before_filter :banned_user
   helper_method :current_user  
   
   def about
@@ -14,6 +15,12 @@ class Admin::AdminController < ApplicationController
       @current_user ||= User.first
     else
       @current_user ||= warden.authenticate(scope: :user) 
+    end
+  end
+
+  def banned_user
+    if current_user.banned?
+      render "about", notice: "You have been banned from the system you may want to email an admin directly if you believe this to be in error."
     end
   end
 

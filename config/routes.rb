@@ -43,11 +43,17 @@ Ringsail::Application.routes.draw do
         get "publish"
         get "archive"
       end
+      collection do
+        get "datatables"
+      end
     end
     resources :mobile_apps, concerns: :activity_and_history do
       member do
         get "publish"
         get "archive"
+      end
+      collection do
+        get "datatables"
       end
     end
     resources :galleries, concerns: :activity_and_history

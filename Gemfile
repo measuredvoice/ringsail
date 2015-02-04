@@ -57,6 +57,7 @@ gem 'morrisjs-rails'
 gem 'raphael-rails'
 gem 'jquery-rails'
 gem 'jquery-tokeninput-rails'
+gem "jqcloud-rails"
 
 ######
 # End Assets / Assets related gems

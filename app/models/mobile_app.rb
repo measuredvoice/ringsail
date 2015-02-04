@@ -23,6 +23,8 @@ class MobileApp < ActiveRecord::Base
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
 
+  has_many :gallery_items, as: :item
+  has_many :galleries, through: :gallery_items, source: "MobileApp"
 
   has_many :mobile_app_agencies
   has_many :agencies, :through => :mobile_app_agencies
@@ -33,7 +35,7 @@ class MobileApp < ActiveRecord::Base
   has_many :mobile_app_versions, :dependent => :destroy
 
   has_many :mobile_app_official_tags
-  has_many :official_tags, :through => :mobile_app_official_tags
+  has_many :official_tags, :through => :mobile_app_official_tags, counter_cache: "mobile_app_count"
 
   has_paper_trail :ignore => [:status]
   

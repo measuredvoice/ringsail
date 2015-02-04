@@ -1,2 +1,1 @@
-json.set! :id, @agency.id
-json.set! :name, @agency.name
+json.partial! "api/v1/shared/agency", gallery: @agency

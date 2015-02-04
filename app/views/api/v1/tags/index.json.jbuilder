@@ -1,1 +1,1 @@
-json.array! @official_tags, :id, :tag_text
+json.array! @official_tags, partial: "api/v1/shared/official_tag", as: :official_tag

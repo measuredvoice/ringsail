@@ -32,7 +32,11 @@ class Outlet < ActiveRecord::Base
   has_many :users, :through => :outlet_users
 
   has_many :outlet_official_tags
-  has_many :official_tags, :through => :outlet_official_tags
+  has_many :official_tags, :through => :outlet_official_tags, counter_cache: "outlet_count"
+
+  has_many :gallery_items, as: :item
+  has_many :galleries, through: :gallery_items, source: "Outlet"
+
   acts_as_taggable
   
   has_paper_trail :ignore => [:status]

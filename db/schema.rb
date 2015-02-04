@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202214221) do
+ActiveRecord::Schema.define(version: 20150203195743) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -80,6 +80,13 @@ ActiveRecord::Schema.define(version: 20150202214221) do
     t.text   "description", limit: 65535
   end
 
+  create_table "gallery_items", force: :cascade do |t|
+    t.integer "gallery_id", limit: 4
+    t.integer "item_id",    limit: 4
+    t.string  "item_type",  limit: 255
+    t.integer "item_order", limit: 4,   default: 0
+  end
+
   create_table "gallery_official_tags", force: :cascade do |t|
     t.integer "gallery_id",      limit: 4
     t.integer "official_tag_id", limit: 4
@@ -93,11 +100,6 @@ ActiveRecord::Schema.define(version: 20150202214221) do
   create_table "mobile_app_agencies", force: :cascade do |t|
     t.integer "mobile_app_id", limit: 4
     t.integer "agency_id",     limit: 4
-  end
-
-  create_table "mobile_app_galleries", force: :cascade do |t|
-    t.integer "gallery_id",    limit: 4
-    t.integer "mobile_app_id", limit: 4
   end
 
   create_table "mobile_app_official_tags", force: :cascade do |t|
