@@ -49,4 +49,8 @@ class Gallery < ActiveRecord::Base
   	end
   	self.gallery_items.where('item_id NOT IN (?)', ids).destroy_all
   end
+
+  def tag_tokens=(ids)
+    self.official_tag_ids = ids.split(',')
+  end
 end

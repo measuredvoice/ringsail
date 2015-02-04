@@ -131,8 +131,8 @@ class Outlet < ActiveRecord::Base
   end
 
   # will rely on replacing the tokens system, but CRUDing out the info for now
-  def tag_tokens=(ids)
-    self.tag_list = ids
+   def tag_tokens=(ids)
+    self.official_tag_ids = ids.split(',')
   end
 
   def user_tokens=(ids)
