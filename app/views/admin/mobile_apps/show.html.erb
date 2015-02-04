@@ -1,18 +1,29 @@
-<div class="col-sm-12 col-md-12 main">
-	<p>
-	  <strong>Name:</strong>
-	  <%= @mobile_app.name %>
-	</p>
+<div class = "row">
+	<div class="col-sm-12 col-md-12 main">
+		<h3><i class="fa fa-clock-o fa-fw"></i> Mobile App Info</h3>
+		<div class="panel panel-default">
+	  		<div class="panel-body">
+				<p>
+				  <strong>Name:</strong>
+				  <%= @mobile_app.name %>
+				</p>
 
-	<p>
-	  <strong>Short Description:</strong>
-	  <%= @mobile_app.short_description %>
-	</p>
+				<p>
+				  <strong>Short Description:</strong>
+				  <%= @mobile_app.short_description %>
+				</p>
 
-	<p>
-	  <strong>Long Description:</strong>
-	  <%= @mobile_app.long_description %>
-	</p>
-	<%= link_to 'Edit', edit_admin_mobile_app_path(@mobile_app) %> |
-	<%= link_to 'Back', admin_mobile_apps_path %>
+				<p>
+				  <strong>Long Description:</strong>
+				  <%= @mobile_app.long_description %>
+				</p>
+				<%= link_to 'Edit', edit_admin_mobile_app_path(@mobile_app) %> |
+				<%= link_to 'Back', admin_mobile_apps_path %>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class = "row">
+
 </div>

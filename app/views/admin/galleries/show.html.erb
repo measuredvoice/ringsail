@@ -1,23 +1,57 @@
-<div class="col-sm-12 col-md-12 main">
-	<p>
-	  <strong>Name:</strong>
-	  <%= @gallery.name %>
-	</p>
+<div class="row">
+	<div class="col-sm-12 col-md-12 main">
+		<h3><i class="fa fa-clock-o fa-fw"></i> Gallery Info</h3>
+		<div class="panel panel-default">
+	  		<div class="panel-body">
+				<p>
+				  <strong>Name:</strong>
+				  <%= @gallery.name %>
+				</p>
 
-	<p>
-	  <strong>Description:</strong>
-	  <%= @gallery.description %>
-	</p>
+				<p>
+				  <strong>Description:</strong>
+				  <%= @gallery.description %>
+				</p>
 
-	<p>
-	  <strong>Tags:</strong>
-	  <%= @gallery.official_tags.map(&:tag_text).join(', ') %>
-	</p>
+				<p>
+				  <strong>Tags:</strong>
+				  <%= @gallery.official_tags.map(&:tag_text).join(', ') %>
+				</p>
 
-	<p>
-	  <strong>Gallery Items:</strong>
-	  <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: false} %>
-	</p>
-	<%= link_to 'Edit', edit_admin_gallery_path(@gallery) %> |
-	<%= link_to 'Back', admin_galleries_path %>
+				<p>
+				  <strong>Gallery Items:</strong>
+				  <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: false} %>
+				</p>
+			</div>
+		</div>
+		<%= link_to "Back to Galleries", admin_galleries_path, {:class => "btn btn-default"} %>
+		<%= link_to "Edit", edit_admin_gallery_path(@gallery), {:class => "btn btn-default"} %>		
+		<%= link_to "History", history_admin_gallery_path(@gallery), {:class => "btn btn-default"} %>
+	</div>
+</div>
+<div class = "row">
+	<div class = "col-sm-4">
+		<h3><i class="fa fa-user"></i> Contacts</h3>
+		<div class="panel panel-default">
+	  		<div class="panel-body">
+	  			<p>This list comprises everyone listed either as a contact on this gallery.</p>
+	  			<ul class="list-group">
+	  				<% @gallery.users.each do |user| %>
+	  					<li class="list-group-item"><%= user_list_format(user) %></li>
+	  				<% end %>
+	  			</ul>	  			
+	  		</div>
+	  	</div>		
+	</div>
+
+	<div class = "col-sm-8">
+		<h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Gallery</h3>
+		<div class="panel panel-default">
+	  		<div class="panel-body">
+	  			<ul class="timeline">
+	  				<%= render partial: "admin/shared/activities_feed", locals: {activities: @gallery.activities.order("created_at DESC").first(5)} %>
+	  			</ul>
+	  		</div>
+		</div>	
+	</div>
 </div>
