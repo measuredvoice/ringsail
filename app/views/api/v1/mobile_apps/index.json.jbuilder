@@ -1,1 +1,1 @@
-json.array! @mobile_apps, :id, :name, :short_description, :long_description
+json.array! @mobile_apps, partial: "api/v1/shared/mobile_app", as: :mobile_app

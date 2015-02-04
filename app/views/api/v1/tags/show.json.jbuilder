@@ -1,1 +1,1 @@
-json.partial! "api/v1/shared/official_tag", official_tag: @official_tag
+json.partial! "api/v1/shared/official_tag", official_tag: @official_tag, counts: true
