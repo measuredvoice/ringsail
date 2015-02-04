@@ -1,11 +1,11 @@
 class Admin::OfficialTagsController < Admin::AdminController
+  helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-
   before_filter :set_tag, only: [:edit, :show, :update]
   # GET /tags
   # GET /tags.json
   def index
-    @tags = OfficialTag.all.page(params[:page]).per(params[:page_sze])
+    @tags = OfficialTag.all.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_sze])
   end
 
   # GET /tags/1
@@ -95,6 +95,14 @@ class Admin::OfficialTagsController < Admin::AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
       params.require(:official_tag).permit(:id, :tag_text)
+    end
+
+    def sort_column
+      OfficialTag.column_names.include?(params[:sort]) ? params[:sort] : "tag_text"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
 end

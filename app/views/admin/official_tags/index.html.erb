@@ -5,10 +5,10 @@
   <table class=" table table-striped">
     <thead>
       <tr = "users_row">
-        <th>Tag</th>
-        <th># Social Accounts</th>
-        <th># Mobile Apps</th>
-        <th># Galleries</th>
+        <th><%= sortable "tag_text", "Tag" %></th>
+        <th><%= sortable "outlet_count", "# Social Accounts" %></th>
+        <th><%= sortable "mobile_app_count", "# Mobile Apps" %></th>
+        <th><%= sortable "gallery_count", "# Galleries" %></th>
         <th class = "lastlinks">Actions</th>
       </tr>
     </thead>
