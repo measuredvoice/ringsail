@@ -1,1 +1,1 @@
-json.array! @agencies, :id, :name
+json.array! @agencies, partial: "api/v1/shared/agency", as: :agency

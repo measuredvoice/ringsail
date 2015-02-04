@@ -1,6 +1,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.tokeninput
+//= require jquery.sortable
+//= require jqcloud
 //= require bootstrap-sprockets
 //= require raphael
 //= require morris

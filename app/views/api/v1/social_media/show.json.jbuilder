@@ -1,2 +1,1 @@
-json.set! :id, @outlet.id
-json.set! :organizaton, @outlet.organization
+json.partial! "api/v1/shared/social_media", outlet: @outlet
