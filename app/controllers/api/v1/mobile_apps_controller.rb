@@ -30,7 +30,7 @@ class Api::V1::MobileAppsController < Api::ApiController
     if params[:tags] && params[:tags] != ""
       @mobile_apps = @mobile_apps.where("official_tags.id" => params[:tags].split(","))
     end
-		@mobile_apps = @mobile_apps.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+		@mobile_apps = @mobile_apps.uniq.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "index" }
 		end		
