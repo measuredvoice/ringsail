@@ -1,7 +1,7 @@
 /* Example tokeninput style #1: Token vertical list*/
 ul.token-input-list {
     overflow: hidden; 
-    min-height:40px;
+    min-height:35px;
     width:71.2%;
     border: 1px solid #eee;
     cursor: text;
@@ -13,6 +13,13 @@ ul.token-input-list {
     background-color: #fafafa;
     list-style-type: none;
     clear: left;
+}
+ul.token-input-list .token-input-input-token::after{
+    content: "Type Your Search Term";
+    color:#ccc;
+    position: relative;
+left: -345px;
+
 }
 
 ul.token-input-list li {
