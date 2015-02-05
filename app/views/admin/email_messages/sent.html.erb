@@ -1,0 +1,15 @@
+<h1 class = "page-header"> Sent!</h1>
+<div class = "field">
+  <p>To: <%= @email.to %></p>
+</div>  
+<div class = "field">
+  <p>Subject: <%= @email.subject %></p>
+</div>
+<div class = "field">
+ <p>Body:</p>
+ <p><%= @email.body%></p>
+</div>
+<div class = "buttonRow">
+  <%= link_to 'About', admin_about_path,{:class => "glyphicon glyphicon-info-sign"} %>
+  <%= link_to 'Dashboard', admin_path(), {:class => "fa fa-home"} %> 
+</div>

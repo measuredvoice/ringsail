@@ -5,17 +5,20 @@ class Admin::EmailMessagesController < Admin::AdminController
 	end
 	
 	def new
-		@emails = [current_user.email]
-		if params[:param1]
-			if !@emails.include? params[:param1]
-				@emails << params[:param1]
-			end
-		end
+		@emails = []
 		if params[:include_admins]
 			admins = User.where("role = ?", User.roles[:admin])
 			admins.each do |admin|
 				@emails << admin.email
 			end
+		end
+		if params[:param1]
+			if !@emails.include? params[:param1]
+				@emails << params[:param1]
+			end
+		end
+		if !@emails.include? current_user.email
+			@emails << current_user.email
 		end
 		@email = EmailMessage.new(to: @emails.map(&:to_s).join(', '))
 	end
@@ -26,7 +29,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 		if @email.save
 			flash[:notice] = "Email successfully sent!"
 			EmailJob.perform_later @email
-			redirect_to admin_users_path
+			render 'sent'
 		else
 			render "new"
 		end

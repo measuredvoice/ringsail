@@ -22,7 +22,10 @@ class OfficialTag < ActiveRecord::Base
   #attr_accessible :shortname, :tag_text
   
   validates :tag_text, :presence => true, :uniqueness => true
- 
+
+  has_many :outlet_official_tags, :dependent => :destroy
+  has_many :outlets, through: :outlet_official_tags
+  has_paper_trail
   def tag_text=(text)
     write_attribute(:tag_text, text.downcase)
   end

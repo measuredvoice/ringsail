@@ -94,7 +94,7 @@ class Admin::OutletsController < Admin::AdminController
   end
   
   def history
-    @versions = @outlet.versions.order("created_at desc")
+    @versions = @outlet.versions
   end
 
   def restore

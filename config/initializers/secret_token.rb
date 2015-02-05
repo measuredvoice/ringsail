@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Ringsail::Application.config.secret_token = ENV['RAILS_COOKIE_TOKEN']
+Ringsail::Application.config.secret_token = ENV['REGISTRY_RAILS_COOKIE_TOKEN']

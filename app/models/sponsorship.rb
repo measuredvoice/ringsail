@@ -15,6 +15,7 @@ class Sponsorship < ActiveRecord::Base
   belongs_to :outlet
   belongs_to :agency, :counter_cache => :outlets_count
 
+  has_paper_trail 
   validates :outlet_id, :presence => true
   validates :agency_id, :presence => true
 end
