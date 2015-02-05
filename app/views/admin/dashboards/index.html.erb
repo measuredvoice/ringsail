@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row dashboard">
 	<div class="col-sm-12 col-md-12 main">
 	  <!-- <h1 class="page-header">Dashboard</h1> -->
 
@@ -6,7 +6,8 @@
   <div class="col-sm-12">
     <h2>Dashboard</h2>
     <div class="row">
-	  	<div class="col-sm-6">
+	  	<div class="col-sm-12 col-md-6">
+            <div class="activity-trackers">
 	  		<h3><i class="fa fa-sitemap"></i> Asset Breakdown</h3>
 	  		<div class="panel panel-default">	
 			  	<div class="panel-body">
@@ -48,49 +49,53 @@
 						</div>
 			  	</div>
 			  </div>
+        </div>
 			</div>
-			<div class="col-sm-6">
-	  		<h3><i class="fa fa-sitemap"></i> Social/Mobile Breakdown</h3>
-	  		<div class="row">
-	  			<div class="col-sm-12">
-		  			<div id="socialchart" style="height: 250px;"></div>
-		  		</div>
-	  			<div class="col-sm-12">
-		  			<div id="mobilechart" style="height: 250px;"></div>
-		  		</div>
-		  	</div>
+			<div class="col-sm-12 col-md-6">
+                <div class="activity-trackers">
+                    <h3><i class="fa fa-sitemap"></i> Social/Mobile Breakdown</h3>
+                    <div class="row">
+                        <div class="col-sm-6 col-md-12">
+                            <div id="socialchart" style="height: 250px;"></div>
+                        </div>
+                        <div class="col-sm-6 col-md-12">
+                            <div id="mobilechart" style="height: 250px;"></div>
+                        </div>
+                    </div>
+                    </div>
 			</div>
 		</div>    
 	</div>
 </div>
 <div class="row">
 	<div class="col-sm-12">
-	  <h2>Public Activity</h2>
-		<div class="row">
-			<div class="col-md-4">
-        <h3><i class="fa fa-tasks"></i> Activity Breakdown</h3>
+        <div class="activity-trackers">
+		 <h3><i class="fa fa-tasks"></i>Activity Breakdown</h3>
 	  		<div class="panel panel-default">
-			
 		  		<div class="panel-body activityChart">
-						<div id="piechart" style="height: 300px;"></div>
+						<div class="col-md-4"><div id="piechart" style="height: 300px;"></div></div>
 
-						<div id="areachart" style="height: 300px;"></div>
+                    <div class="col-md-8"><div id="areachart" style="height: 300px;"></div></div>
 			  	</div>
 		  	</div>
-			</div>
-			<div class="col-md-8">
+			
+    </div>
+	</div>
+</div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="activity-trackers">  
         <h3><i class="fa fa-clock-o fa-fw"></i> Popular Tags</h3>
 	  		<div class="panel panel-default">
 			  	<div class="panel-body">
-			  		<div id="tags" style="height:400px; width:100%;">
+			  		<div id="tags" style="height:200px; width:100%;">
 
 			  		</div>
 			  	</div>
 	  		</div>
+                </div>
 			</div>
-    </div>
-	</div>
-</div>				
+        </div>
 <% content_for :additional_javascript do %>
 	<script>
 	Morris.Donut({
