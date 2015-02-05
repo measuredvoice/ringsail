@@ -124,9 +124,9 @@
             // go back and add only the necessary objects. perhaps use
             var text = 'Mobile App: '
             if(full["name"]){
-              text += full["name"]+' - ';
+              text += escape(full["name"])+' - ';
             }
-            text += full["short_description"];
+            text += escape(full["short_description"]);
             return '<a href=\'javascript:add_mobile_app('+full["id"]+',"'+full["status"]+'","'+text+'")\'><i class="fa fa-plus"></i></a>';
           }}
         ]
@@ -143,7 +143,7 @@
           { "title": "Add", render: function(data,type,full,meta){
             var text = 'Social Media: ';
             if(full["organization"]){
-              text += full["organization"] + ' - ';
+              text += escape(full["organization"]) + ' - ';
             }
             text += full["service_url"];
             return '<a href=\'javascript:add_social_app('+full["id"]+',"'+full["status"]+'","'+text+'")\'><i class="fa fa-plus"></i></a>';
