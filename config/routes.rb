@@ -83,7 +83,11 @@ Ringsail::Application.routes.draw do
         end
       end
       resources :galleries, only: [:index, :show]
-      resources :mobile_apps, only: [:index, :show]
+      resources :mobile_apps, only: [:index, :show] do
+        collection do
+          get 'tokeninput'
+        end
+      end
       resources :tags, only: [:index, :show]
       resources :multi, only: [:index, :show] do
         collection do
