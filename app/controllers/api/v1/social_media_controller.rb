@@ -22,16 +22,16 @@ class Api::V1::SocialMediaController < Api::ApiController
 
   def index
     @outlets = Outlet.joins(:agencies, :official_tags)
-    if params[:q]
+    if params[:q] && params[:q] != ""
       @outlets = @outlets.where("account LIKE ? OR organization LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    if params[:agencies]
+    if params[:agencies] && params[:agencies] != ""
       @outlets = @outlets.where("agencies.id" =>params[:agencies].split(","))
     end
-    if params[:tags]
+    if params[:tags] && params[:tags] != ""
       @outlets = @outlets.where("official_tags.id" => params[:tags].split(","))
     end
-    if params[:services]
+    if params[:services] && params[:services] != ""
       @outlets = @outlets.where(service: params[:services].split(","))
     end
     @outlets = @outlets.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
@@ -90,5 +90,30 @@ class Api::V1::SocialMediaController < Api::ApiController
     respond_to do |format|
       format.json { render "services" }
     end
+  end
+
+  swagger_api :tokeninput do
+    summary "Returns a list of tokens to help with search interfaces"
+    notes "This returns tokens representing services, agencies, tags, and a basic text search token for the purpose of building search dialogs"
+    param :query, :q, :string, :optional, "String to compare to the various values"
+    response :ok, "Success"
+    response :not_acceptable, "The request you made is not acceptable"
+    response :requested_range_not_satisfiable   
+    response :not_found
+  end
+
+
+  def tokeninput
+    @query = params[:q]
+    if @query
+      @agencies = Agency.where("name LIKE ?","%#{@query}%")
+      @services = Service.search_by_name(@query)
+      @tags = OfficialTag.where("tag_text LIKE ?", "%#{@query}%")
+      @items = [@query,@agencies,@services,@tags].flatten
+      render 'tokeninput'
+    else
+      render json: {metadata: {query: "", error:"No query provided"}}
+    end
+
   end
 end

@@ -81,8 +81,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # DELETE /mobile_apps/1
   # DELETE /mobile_apps/1.json
   def destroy
-    @mobile_app.archived!
-    @mobile_app.save!
+    @mobile_app.destroy!
     respond_to do |format|
       format.html { redirect_to admin_mobile_apps_url, notice: 'MobileApp was successfully destroyed.' }
       format.json { head :no_content }

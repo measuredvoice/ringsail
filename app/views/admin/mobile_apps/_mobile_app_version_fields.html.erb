@@ -1,6 +1,7 @@
 <div class="nested-fields">
-  <div class="">
-    <div class="">
+    <fieldset>
+
+      <legend>Version</legend>
       <div class="field">
         <%= f.label :store_url %> </br>
         <%= f.text_field :store_url, :class => "form-control formwidth" %>
@@ -46,6 +47,5 @@
         <%= f.text_field :number_of_ratings, :class => "form-control formwidth" %>
       </div>
       <div class="buttonRow"><%= link_to_remove_association "Remove", f, {:class => "fa fa-times"}  %></div>
-    </div>
-  </div>
+  </fieldset>
 </div>

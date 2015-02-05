@@ -79,6 +79,7 @@ Ringsail::Application.routes.draw do
         collection do
           get 'verify'
           get 'services'
+          get 'tokeninput'
         end
       end
       resources :galleries, only: [:index, :show]
@@ -87,6 +88,7 @@ Ringsail::Application.routes.draw do
       resources :multi, only: [:index, :show] do
         collection do
           get 'autocomplete'
+          get 'tokeninput'
         end
       end
       resources :agencies, only: [:index, :show]
