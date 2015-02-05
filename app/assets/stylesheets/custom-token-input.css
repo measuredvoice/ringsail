@@ -1,7 +1,11 @@
 /* Example tokeninput style #1: Token vertical list*/
+@font-face{
+    font-family:FontAwesome;
+    font-weight:400;font-style:normal;
+}
 ul.token-input-list {
     overflow: hidden; 
-    min-height:40px;
+    min-height:35px;
     width:71.2%;
     border: 1px solid #eee;
     cursor: text;
@@ -14,6 +18,14 @@ ul.token-input-list {
     list-style-type: none;
     clear: left;
 }
+ul.token-input-list .token-input-input-token::before{
+     font-family: 'FontAwesome';
+    content:"\f002   Type Your Search Term";
+    padding:0 5px 0 15px;  
+    color: #ccc;
+    font-size: 13px;
+}
+
 
 ul.token-input-list li {
     list-style-type: none;

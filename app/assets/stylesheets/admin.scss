@@ -114,6 +114,9 @@ legend {
     display:inline-block!important;
 
 }
+fieldset > div {
+    line-height: 15px;
+}
 .center{text-align: center;}
 .bg-info{padding: 15px; background-color: #fafafa; border: solid 1px #eee; margin-bottom: 2px; }
 /*Dashboard Styles*/
@@ -243,7 +246,7 @@ background-color: #fff;margin-left: 0px!important;}
 /*
  * Placeholder dashboard ideas
  */
-.tbldisplay{background-color: #fff;}
+.tbldisplay{background-color: #fff;overflow: scroll;}
 .placeholders {
   margin-bottom: 30px;
   background-color: #fafafa;
@@ -274,6 +277,7 @@ background-color: #fff;margin-left: 0px!important;}
 .formwidth{
   width: 700px;
 }
+
 .table_data{    
   max-width:100px;
   max-height: 20px;
