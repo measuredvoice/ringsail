@@ -25,7 +25,13 @@ ul.token-input-list .token-input-input-token::before{
     color: #ccc;
     font-size: 13px;
 }
-
+div.field ul.token-input-focused .token-input-input-token::before{
+     font-family: 'FontAwesome';
+     content: "";
+    padding:0 5px 0 15px;  
+    color: #ccc;
+    font-size: 13px;
+}
 
 ul.token-input-list li {
     list-style-type: none;
