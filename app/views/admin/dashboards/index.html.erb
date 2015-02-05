@@ -98,12 +98,14 @@
 	<script>
 	Morris.Donut({
 	    element: 'mobilechart',
+	    resize: true,
 	    data: <%= raw @mobile_chart.to_json %>,
 	    formatter: function (y) { return y + " apps" }
 	  });
 
 		Morris.Donut({
 	    element: 'socialchart',
+	    resize: true,
 	    data: <%= raw @social_chart.to_json %>,
 	    formatter: function (y) { return y + " accounts" }
 	  });
@@ -116,11 +118,13 @@
 	    ykeys: ['activities'],
 	    labels: ['activities'],
 	    pointSize: 2,
+	    resize: true,
 	    hideHover: 'auto'
 	  });
 
 		Morris.Donut({
 		    element: 'piechart',
+	    	resize: true,
 		    data: <%= raw @activities_pie_json.to_json %>,
 		    formatter: function (y) { return y + " accounts" }
 		});
@@ -144,12 +148,6 @@
 	    } else {
 	        timeout = false;
 					$('#tags').css("width", "100%");
-
-					$('#socialchart').css("width", "50%");
-
-					$('#socialchart').css("height", "100%");
-					$('#mobilechart').css("width", "50%");
-					$('#mobilechart').css("height", "100%");
 					$('#tags').empty();
 					$('#tags').jQCloud(word_cloud);
 	    }               

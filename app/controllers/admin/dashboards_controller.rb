@@ -55,7 +55,7 @@ class Admin::DashboardsController < Admin::AdminController
       (gallery_count + outlet_count + mobile_app_count) as weight 
       FROM official_tags 
       ORDER BY (gallery_count + outlet_count + mobile_app_count) DESC
-      LIMIT 80")
+      LIMIT 50")
   end
 
   def social_media_breakdown
