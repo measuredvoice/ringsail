@@ -143,7 +143,7 @@
           { "title": "Add", render: function(data,type,full,meta){
             var text = 'Social Media: ';
             if(full["organization"]){
-              text += full["organizaiton"] + ': ';
+              text += full["organization"] + ' - ';
             }
             text += full["service_url"];
             return '<a href=\'javascript:add_social_app('+full["id"]+',"'+full["status"]+'","'+text+'")\'><i class="fa fa-plus"></i></a>';

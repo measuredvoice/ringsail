@@ -20,4 +20,16 @@ class Api::V1::MultiController < Api::ApiController
       render json: {metadata: {query: "", error:"No query provided"}}
     end
   end
+
+  def tokeninput
+    query = params[:q]
+    @agencies = Agency.where("name LIKE ?","%#{query}%")
+    @services = Service.search_by_name(query)
+    @tags = OfficialTag.where("tag_text LIKE ?", "%#{query}%")
+    if query
+      render 'autocomplete'
+    else
+      render json: {metadata: {query: "", error:"No query provided"}}
+    end
+  end
 end
