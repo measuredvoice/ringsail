@@ -51,6 +51,14 @@ class Admin::AgenciesController < Admin::AdminController
     end
   end
 
+  def destroy
+    @agency.destroy!
+    respond_to do |format|
+      format.html { redirect_to admin_agencies_url, notice: "Agency was successfully destroyed."}
+      format.json { head :no_content }
+    end
+  end
+
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "Agency").order("created_at desc").page(params[:page]).per(25)
   end
