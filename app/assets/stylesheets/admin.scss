@@ -28,12 +28,13 @@ body {
     color:#555;
     font-size: 16px;
     line-height:1.6em;
+//    background: #f5f5f5 url('bodybg1.jpg') 0 0 fixed;
+   
 }
 
 body.dragging, body.dragging * {
   cursor: move !important;
 }
-
 .dragged {
   position: absolute;
   opacity: 0.5;
@@ -52,7 +53,7 @@ ol.gallery-collection li.placeholder:before {
 /*
  * Global add-ons
  */
-
+.container{}
 .sub-header {
   padding-bottom: 3px;
   border-bottom: 1px solid #eee;
@@ -115,6 +116,16 @@ legend {
 }
 .center{text-align: center;}
 .bg-info{padding: 15px; background-color: #fafafa; border: solid 1px #eee; margin-bottom: 2px; }
+/*Dashboard Styles*/
+.dashboard{background-color: #fff;}
+.activity-trackers{
+    border: solid 1px #ccc;
+background-color: #fafafa;
+border-radius: 8px;
+box-shadow: 1px 1px 15px #ddd;
+    padding: 15px;
+    margin-top: 15px;
+}
 /*
  * Top navigation
  * Hide default border to remove 1px line.
