@@ -68,33 +68,32 @@
 	</div>
 </div>
 <div class="row">
+  <div class="col-md-12">
+    <div class="activity-trackers">  
+      <h3><i class="fa fa-clock-o fa-fw"></i> Popular Tags</h3>
+	  	<div class="panel panel-default">
+		  	<div class="panel-body">
+		  		<div id="tags" style="height:200px; width:100%;">
+
+		  		</div>
+		  	</div>
+	  	</div>
+    </div>
+	</div>
+</div>
+<div class="row">
 	<div class="col-sm-12">
     <div class="activity-trackers">
 		 <h3><i class="fa fa-tasks"></i>Activity Breakdown</h3>
   		<div class="panel panel-default">
 	  		<div class="panel-body activityChart">
 					<div class="col-md-4"><div id="piechart" style="height: 300px;"></div></div>
-
-                  <div class="col-md-8"><div id="areachart" style="height: 300px;"></div></div>
+					<div class="col-md-8"><div id="areachart" style="height: 300px;"></div></div>
 		  	</div>
 	  	</div>
     </div>
 	</div>
 </div>
-        <div class="row">
-            <div class="col-md-12">
-              <div class="activity-trackers">  
-        <h3><i class="fa fa-clock-o fa-fw"></i> Popular Tags</h3>
-	  		<div class="panel panel-default">
-			  	<div class="panel-body">
-			  		<div id="tags" style="height:200px; width:100%;">
-
-			  		</div>
-			  	</div>
-	  		</div>
-                </div>
-			</div>
-        </div>
 <% content_for :additional_javascript do %>
 	<script>
 	Morris.Donut({
@@ -134,19 +133,20 @@
 		$(window).resize(function() {
 		    rtime = new Date();
 		    if (timeout === false) {
-		        timeout = true;
-		        setTimeout(resizeend, delta);
+	        timeout = true;
+	        setTimeout(resizeend, delta);
 		    }
 		});
 
 		function resizeend() {
-		    if (new Date() - rtime < delta) {
-		        setTimeout(resizeend, delta);
-		    } else {
-		        timeout = false;
-						$('#tags').css("width", "100%") 
-						$('#tags').empty().jQcloud(word_cloud) 
-		    }               
+	    if (new Date() - rtime < delta) {
+	        setTimeout(resizeend, delta);
+	    } else {
+	        timeout = false;
+					$('#tags').css("width", "100%");
+					$('#tags').empty();
+					$('#tags').jQCloud(word_cloud);
+	    }               
 		}
 	</script>
 <% end %>
