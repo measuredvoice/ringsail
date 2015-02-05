@@ -89,8 +89,10 @@ color: #fff !important;
 border-radius: 3px;
 display: inline-block;
 border: 0;
-font-weight: 700;
+font-weight: normal;
 font-size: .9em;
+font-family:    'roboto condensed','source sans pro',arial, sans-serif;
+   
 }
 fieldset {
     border: 1px solid #eee !important;
@@ -112,6 +114,7 @@ legend {
 
 }
 .center{text-align: center;}
+.bg-info{padding: 15px; background-color: #fafafa; border: solid 1px #eee; margin-bottom: 2px; }
 /*
  * Top navigation
  * Hide default border to remove 1px line.
