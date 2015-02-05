@@ -1,19 +1,54 @@
-<div class="col-sm-12 col-md-12 main">
-	<p>
-	  <strong>Agency Name:</strong>
-	  <%= @agency.name %>
-	</p>
+<div class = "row">
+	<div class="col-sm-12 col-md-12 main">
+		<h3><i class="fa fa-clock-o fa-fw"></i> Agency Info</h3>
+		<div class = "panel panel-default">
+			<div class = "panel-body">
+				<p>
+				  <strong>Agency Name:</strong>
+				  <%= @agency.name %>
+				</p>
 
-	<p>
-	  <strong>Short Name:</strong>
-	  <%= @agency.shortname %>
-	</p>
+				<p>
+				  <strong>Short Name:</strong>
+				  <%= @agency.shortname %>
+				</p>
 
-	<p>
-	  <strong>Info URL:</strong>
-	  <%= @agency.info_url %>
-	</p>
+				<p>
+				  <strong>Info URL:</strong>
+				  <%= @agency.info_url %>
+				</p>
+				<div class = "buttonRow">
+					<%= link_to 'Back to Agencies', admin_agencies_path,{:class => "fa fa-angle-double-left"} %>
+					<%= link_to 'Edit', edit_admin_agency_path(@agency), {:class => "fa fa-pencil"} %> 
+					<%= link_to "History", history_admin_agency_path(@agency), {:class => "fa fa-history"} %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-	<%= link_to 'Edit', edit_admin_agency_path(@agency) %> 
-	<%= link_to 'Back', admin_agencies_path %>
+<div class = "row container col-sm-12 col-md-12">
+	<div class="col-lg-4 col-sm-12 col-md-4">
+    <h3><i class="fa fa-user"></i> Contacts</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<p>This list comprises everyone listed as a contact for this agency.</p>
+	  		<ul class="list-group">
+	  			<% @agency.users.each do |user| %>
+	  					<li class="list-group-item"><%= user_list_format(user) %></li>
+	  			<% end %>
+	  		</ul>
+	  	</div>
+		</div>
+	</div>
+	<div class="col-lg-8 col-sm-12 col-md-8">
+    <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Agency</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<ul class="timeline">
+	  			<%= render partial: "admin/shared/activities_feed", locals: {activities: @agency.activities.order("created_at DESC").first(5)} %>
+	  		</ul>
+	  	</div>
+		</div>
+	</div>
 </div>
