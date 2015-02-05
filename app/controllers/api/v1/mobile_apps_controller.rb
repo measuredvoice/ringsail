@@ -20,14 +20,14 @@ class Api::V1::MobileAppsController < Api::ApiController
 
 	def index
 		@mobile_apps = MobileApp.joins(:agencies, :official_tags)
-    if params[:q]
-      @mobile_apps = @mobile_apps.where("name LIKE ? or short_description LIKE ? or long_description LIKE ?", 
+    if params[:q] && params[:q] != ""
+      @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? or mobile_apps.short_description LIKE ? or long_description LIKE ?", 
       	"%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
     end
-    if params[:agencies]
+    if params[:agencies] && params[:agencies] != ""
       @mobile_apps = @mobile_apps.where("agencies.id" =>params[:agencies].split(","))
     end
-    if params[:tags]
+    if params[:tags] && params[:tags] != ""
       @mobile_apps = @mobile_apps.where("official_tags.id" => params[:tags].split(","))
     end
 		@mobile_apps = @mobile_apps.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
@@ -51,4 +51,29 @@ class Api::V1::MobileAppsController < Api::ApiController
 			format.json { render "show" }
 		end		
 	end
+
+
+  swagger_api :tokeninput do
+    summary "Returns a list of tokens to help with search interfaces"
+    notes "This returns tokens representing agencies, tags, and a basic text search token for the purpose of building search dialogs"
+    param :query, :q, :string, :optional, "String to compare to the various values"
+    response :ok, "Success"
+    response :not_acceptable, "The request you made is not acceptable"
+    response :requested_range_not_satisfiable   
+    response :not_found
+  end
+
+
+  def tokeninput
+    @query = params[:q]
+    if @query
+      @agencies = Agency.where("name LIKE ?","%#{@query}%")
+      @tags = OfficialTag.where("tag_text LIKE ?", "%#{@query}%")
+      @items = [@query,@agencies,@tags].flatten
+      render 'tokeninput'
+    else
+      render json: {metadata: {query: "", error:"No query provided"}}
+    end
+
+  end
 end

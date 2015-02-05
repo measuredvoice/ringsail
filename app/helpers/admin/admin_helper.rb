@@ -53,5 +53,17 @@ module Admin::AdminHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
+
+  def outlet_organization_name(outlet)
+    if outlet.organization
+      if outlet.organization.blank?
+        outlet.service_url
+      else
+        outlet.organization
+      end
+    else
+      outlet.service_url
+    end
+  end
   
 end

@@ -79,14 +79,20 @@ Ringsail::Application.routes.draw do
         collection do
           get 'verify'
           get 'services'
+          get 'tokeninput'
         end
       end
       resources :galleries, only: [:index, :show]
-      resources :mobile_apps, only: [:index, :show]
+      resources :mobile_apps, only: [:index, :show] do
+        collection do
+          get 'tokeninput'
+        end
+      end
       resources :tags, only: [:index, :show]
       resources :multi, only: [:index, :show] do
         collection do
           get 'autocomplete'
+          get 'tokeninput'
         end
       end
       resources :agencies, only: [:index, :show]
