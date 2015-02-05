@@ -49,7 +49,6 @@
               <td class = "table_data lastlinks">
                 <%= link_to admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
                 <%= link_to edit_admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
-                <%= link_to history_admin_outlet_path(outlet) do %><i class = "glyphicon glyphicon-book"></i> <% end %> 
                 <%= link_to admin_outlet_path(outlet), method: :delete, :class => "delete", "data-confirm" => 'Are you certain you want to delete this?' do %><i class = "glyphicon glyphicon-remove"></i> <% end %> 
               </td>   
           	</tr>

@@ -81,10 +81,9 @@ class Admin::OutletsController < Admin::AdminController
   # DELETE /outlets/1
   # DELETE /outlets/1.json
   def destroy
-    @outlet.archived!
-    @outlet.save!
+    @outlet.destroy!
     respond_to do |format|
-      format.html { redirect_to outlets_url, notice: 'Outlet was successfully destroyed.' }
+      format.html { redirect_to admin_outlets_url, notice: 'Outlet was successfully destroyed.' }
       format.json { head :no_content }
     end
     redirect_to action: :index
