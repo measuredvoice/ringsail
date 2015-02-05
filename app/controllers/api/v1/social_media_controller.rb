@@ -68,9 +68,15 @@ class Api::V1::SocialMediaController < Api::ApiController
   end
 
   def verify
-    @outlet = Outlet.resolve(params[:url])
-    respond_to do |format|
-      format.json { render "show" }
+    @outlet = Outlet.resolve(params[:q])
+    if @outlet
+      respond_to do |format|
+        format.json { render "show" }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { error: "No social media account found for: #{params[:q]}"} }
+      end
     end
   end
 
