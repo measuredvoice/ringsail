@@ -22,7 +22,7 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   
-  enum status: { submitted: 0, published: 1, archived: 2 }
+  enum status: { under_review: 0, published: 1, archived: 2 }
   #handles versioning
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
@@ -42,7 +42,7 @@ class Outlet < ActiveRecord::Base
   has_many :users, :through => :outlet_users
 
   has_many :outlet_official_tags, dependent: :destroy
-  has_many :official_tags, :through => :outlet_official_tags, source: :official_tag, counter_cache: "outlet_count"
+  has_many :official_tags, :through => :outlet_official_tags, source: :official_tag
 
   has_many :gallery_items, as: :item, dependent: :destroy
   has_many :galleries, through: :gallery_items, source: "Outlet"
@@ -142,9 +142,10 @@ class Outlet < ActiveRecord::Base
       language: self.language,
       short_description: self.short_description,
       long_description: self.long_description,
-      agency_ids: self.agency_ids,
+      agency_ids: self.agency_ids || [],
       user_ids: self.user_ids || [],
-      official_tag_ids: self.official_tag_ids || []
+      official_tag_ids: self.official_tag_ids || [],
+      status: self.status
     })
     self.save!
     Outlet.public_activity_on

@@ -52,7 +52,7 @@ class Admin::OutletsController < Admin::AdminController
   # POST /outlets.json
   def create
     @outlet = Outlet.new(outlet_params)
-
+    @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.save
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully created.' }
@@ -67,6 +67,7 @@ class Admin::OutletsController < Admin::AdminController
   # PATCH/PUT /outlets/1
   # PATCH/PUT /outlets/1.json
   def update
+    @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.update(outlet_params)
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully updated.' }

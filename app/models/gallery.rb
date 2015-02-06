@@ -19,7 +19,7 @@ class Gallery < ActiveRecord::Base
 	has_many :users, through: :gallery_users
 
 	has_many :gallery_official_tags
-  has_many :official_tags, :through => :gallery_official_tags, counter_cache: "gallery_count"
+  has_many :official_tags, :through => :gallery_official_tags
 
   has_many :gallery_items, -> { order "item_order ASC"}, dependent: :destroy
   has_many :mobile_apps, :through => :gallery_items, :source => :item, :source_type => "MobileApp"

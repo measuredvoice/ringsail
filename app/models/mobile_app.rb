@@ -35,7 +35,7 @@ class MobileApp < ActiveRecord::Base
   has_many :mobile_app_versions, :dependent => :destroy
 
   has_many :mobile_app_official_tags
-  has_many :official_tags, :through => :mobile_app_official_tags, counter_cache: "mobile_app_count"
+  has_many :official_tags, :through => :mobile_app_official_tags
 
   has_paper_trail :ignore => [:status]
   

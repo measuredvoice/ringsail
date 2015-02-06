@@ -1,22 +1,27 @@
 <p>
-  <strong>Agencies:</strong>
-  <%= outlet.agencies.map(&:name).join(', ') %>
-</p>
-<p>
-  <strong>Organization:</strong>
+  <strong>Social Media Account Name:</strong>
   <%= outlet.organization %>
 </p>
 
 <p>
-  <strong>Service:</strong>
-  <%= outlet.service %>
+  <strong>Agencies:</strong>
+  <%= outlet.agencies.map(&:name).join(', ') %>
 </p>
 
 <p>
-  <strong>Service URL:</strong>
-  <%= outlet.service_url %>
+  <strong>Service / URL:</strong>
+  <%= outlet.service %> / <%= outlet.service_url %>
 </p>
 
+<p>
+  <strong>Short Description:</strong>
+  <%= @outlet.short_description %>
+</p>
+
+<p>
+  <strong>Long Description:</strong>
+  <%= @outlet.long_description %>
+</p>
 <p>
   <strong>Tags:</strong>
   <%= outlet.official_tags.map(&:tag_text).join(', ') %>
@@ -29,5 +34,5 @@
 
 <p>
   <strong>Status:</strong>
-  <%= outlet.status %>
+  <%= outlet.status.humanize %>
 </p>
