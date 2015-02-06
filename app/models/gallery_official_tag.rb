@@ -13,10 +13,9 @@ class GalleryOfficialTag < ActiveRecord::Base
 
   after_save :update_counter_cache
   after_destroy :update_counter_cache
-  
+
   def update_counter_cache
-    self.official_tag.gallery_count = Gallery.includes(:official_tags).where(
-      "official_tags.id = ? AND galleries.draft_id IS NOT NULL", self.official_tag_id)
+    self.official_tag.gallery_count = self.official_tag.galleries.where("draft_id IS NOT NULL").count
     self.official_tag.save
   end
 end

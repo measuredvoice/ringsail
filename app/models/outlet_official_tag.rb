@@ -16,8 +16,7 @@ class OutletOfficialTag < ActiveRecord::Base
   after_destroy :update_counter_cache
   
   def update_counter_cache
-    self.official_tag.gallery_count = Outlet.includes(:official_tags).where(
-      "official_tags.id = ? AND outlets.draft_id IS NOT NULL", self.official_tag_id)
+    self.official_tag.outlet_count = self.official_tag.outlets.where("draft_id IS NOT NULL").count
     self.official_tag.save
   end
 end

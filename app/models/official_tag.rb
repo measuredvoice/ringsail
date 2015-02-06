@@ -25,6 +25,13 @@ class OfficialTag < ActiveRecord::Base
 
   has_many :outlet_official_tags, :dependent => :destroy
   has_many :outlets, through: :outlet_official_tags
+
+  has_many :mobile_app_official_tags, :dependent => :destroy
+  has_many :mobile_apps, through: :mobile_app_official_tags
+
+  has_many :gallery_official_tags, :dependent => :destroy
+  has_many :galleries, through: :gallery_official_tags
+  
   has_paper_trail
   def tag_text=(text)
     write_attribute(:tag_text, text.downcase)

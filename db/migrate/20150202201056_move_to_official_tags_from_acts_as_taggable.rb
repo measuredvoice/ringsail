@@ -21,10 +21,6 @@ class MoveToOfficialTagsFromActsAsTaggable < ActiveRecord::Migration
       t.integer :official_tag_id
     end
 
-    Outlet.find_each do |outlet|
-      outlet.tags.each do |tag|
-        outlet.official_tags << OfficialTag.find_or_create_by(tag_text: tag.name)
-      end
-    end
+    
   end
 end

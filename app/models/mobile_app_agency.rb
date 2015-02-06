@@ -16,8 +16,7 @@ class MobileAppAgency < ActiveRecord::Base
   after_destroy :update_counter_cache
   
   def update_counter_cache
-    self.agency.mobile_app_count = MobileApp.includes(:agencies).where(
-      "agency.id = ? AND mobile_apps.draft_id IS NOT NULL", self.agency_id)
+    self.agency.mobile_app_count = self.agency.mobile_apps.where("draft_id IS NOT NULL").count
     self.agency.save
   end
 end

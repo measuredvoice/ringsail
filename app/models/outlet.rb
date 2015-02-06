@@ -42,7 +42,7 @@ class Outlet < ActiveRecord::Base
   has_many :users, :through => :outlet_users
 
   has_many :outlet_official_tags, dependent: :destroy
-  has_many :official_tags, :through => :outlet_official_tags, source: :official_tag
+  has_many :official_tags, :through => :outlet_official_tags
 
   has_many :gallery_items, as: :item, dependent: :destroy
   has_many :galleries, through: :gallery_items, source: "Outlet"
