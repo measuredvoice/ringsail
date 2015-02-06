@@ -2,17 +2,19 @@
 #
 # Table name: outlets
 #
-#  id           :integer          not null, primary key
-#  service_url  :string(255)
-#  organization :string(255)
-#  info_url     :string(255)
-#  account      :string(255)
-#  language     :string(255)
-#  updated_by   :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  service      :string(255)
-#  status       :integer          default("0")
+#  id                :integer          not null, primary key
+#  service_url       :string(255)
+#  organization      :string(255)
+#  info_url          :string(255)
+#  account           :string(255)
+#  language          :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  service           :string(255)
+#  status            :integer          default("0")
+#  draft_id          :integer
+#  short_description :text(65535)
+#  long_description  :text(65535)
 #
 
 class Outlet < ActiveRecord::Base
@@ -25,30 +27,40 @@ class Outlet < ActiveRecord::Base
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
 
-  has_many :sponsorships
+  # Outlets have a relationship to themselvs
+  # The "published" outlet will have a draft_id pointing to its parent
+  # The "draft" outlet will not have a draft_id field
+  # This will allow easy querying on the public / admin portion of the application
+  has_one :published_outlet, class_name: "Outlet", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft_outlet, class_name: "Outlet", foreign_key: "draft_id"
+
+  # These are has and belongs to many relationships
+  has_many :sponsorships, dependent: :destroy
   has_many :agencies, :through => :sponsorships
 
-  has_many :outlet_users
+  has_many :outlet_users, dependent: :destroy
   has_many :users, :through => :outlet_users
 
   has_many :outlet_official_tags, dependent: :destroy
   has_many :official_tags, :through => :outlet_official_tags, source: :official_tag, counter_cache: "outlet_count"
 
-  has_many :gallery_items, as: :item
+  has_many :gallery_items, as: :item, dependent: :destroy
   has_many :galleries, through: :gallery_items, source: "Outlet"
 
+  # acts as taggable is being kept until we do a final data migration (needed for backwards compatibility)
   acts_as_taggable
   
-  has_paper_trail ignore: [:status]
+  # Only drafts should have a paper trail.
+  # Published outlets should not.
+  has_paper_trail :if => Proc.new { |t| t.draft_id == nil }
   
   validates :service_url, 
     :presence   => true, 
-    :format     => { :with => URI::regexp(%w(http https)) }, 
-    :uniqueness => { :case_sensitive => false }
+    :format     => { :with => URI::regexp(%w(http https)) }
   validates :info_url,
     :format     => { :with => URI::regexp(%w(http https)), 
                      :allow_blank => true}
-  validates :agencies, :presence => true
+  # validates :agencies, :presence => true
   validates :account, :presence => true
   validates :language, :presence => true
   
@@ -70,18 +82,6 @@ class Outlet < ActiveRecord::Base
     where('outlets.updated_at < ?', 6.months.ago).order('outlets.updated_at')
   end
   
-  def self.to_review_for(email)
-    to_review.updated_by(email)
-  end
-  
-  def self.updated_by(email)
-    where(:updated_by => email)
-  end
-  
-  def self.emails_for_review
-    to_review.group("updated_by").map(&:updated_by).sort
-  end
-  
   def self.resolve(url)
     return nil if url.nil? or url.empty?
 
@@ -99,19 +99,10 @@ class Outlet < ActiveRecord::Base
     end
   end    
   
-  def verified?
-    # TODO:
-    #  Add a more formal definition of a verified outlet
-    agencies.size > 0
-  end
-  
   def service_info
     @service_info ||= Service.find_by_url(service_url)
   end
   
-  def masked_updated_by
-    (updated_by || '').gsub(/(\w)\w+@/, '\1*****@')
-  end
   
   def all_contacts
     contacts_list = []
@@ -137,6 +128,36 @@ class Outlet < ActiveRecord::Base
 
   def user_tokens=(ids)
     self.user_ids = ids.split(",")
+  end
+
+  def published!
+    Outlet.public_activity_off
+    self.status = Outlet.statuses[:published]
+    self.published_outlet.destroy! if self.published_outlet
+    self.published_outlet = Outlet.create!({
+      service_url: self.service_url,
+      service: self.service,
+      organization: self.organization,
+      account: self.account,
+      language: self.language,
+      short_description: self.short_description,
+      long_description: self.long_description,
+      agency_ids: self.agency_ids,
+      user_ids: self.user_ids || [],
+      official_tag_ids: self.official_tag_ids || []
+    })
+    self.save!
+    Outlet.public_activity_on
+    self.create_activity :published
+  end
+
+  def archived!
+    Outlet.public_activity_off
+    self.status = Outlet.statuses[:archived]
+    self.published_outlet.destroy! if self.published_outlet
+    self.save!
+    Outlet.public_activity_on
+    self.create_activity :archived
   end
 
   private

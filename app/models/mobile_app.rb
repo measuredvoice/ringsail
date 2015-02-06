@@ -4,7 +4,7 @@
 #
 #  id                :integer          not null, primary key
 #  name              :string(255)
-#  short_description :string(255)
+#  short_description :text(65535)
 #  long_description  :text(65535)
 #  icon_url          :string(255)
 #  language          :string(255)

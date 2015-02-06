@@ -1,0 +1,33 @@
+<p>
+  <strong>Agencies:</strong>
+  <%= outlet.agencies.map(&:name).join(', ') %>
+</p>
+<p>
+  <strong>Organization:</strong>
+  <%= outlet.organization %>
+</p>
+
+<p>
+  <strong>Service:</strong>
+  <%= outlet.service %>
+</p>
+
+<p>
+  <strong>Service URL:</strong>
+  <%= outlet.service_url %>
+</p>
+
+<p>
+  <strong>Tags:</strong>
+  <%= outlet.official_tags.map(&:tag_text).join(', ') %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= outlet.status %>
+</p>

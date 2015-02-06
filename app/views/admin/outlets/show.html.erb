@@ -1,57 +1,37 @@
 <div class="row">
-  <div class="col-sm-12 col-md-12 main">
+  <div class="col-sm-6 col-md-6">
     <h3><i class="fa fa-clock-o fa-fw"></i> Social Media Account Info</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
-	  		<p>
-			  	<strong>Agencies:</strong>
-				  <%= @outlet.agencies.map(&:name).join(', ') %>
-				</p>
-				<p>
-				  <strong>Organization:</strong>
-				  <%= @outlet.organization %>
-				</p>
-
-				<p>
-				  <strong>Service:</strong>
-				  <%= @outlet.service %>
-				</p>
-
-				<p>
-				  <strong>Service URL:</strong>
-				  <%= @outlet.service_url %>
-				</p>
-
-				<p>
-				  <strong>Tags:</strong>
-				  <%= @outlet.official_tags.map(&:tag_text).join(', ') %>
-				</p>
-
-				<p>
-				  <strong>Updated at:</strong>
-				  <%= @outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
-				</p>
-
-				<p>
-				  <strong>Status:</strong>
-				  <%= @outlet.status %>
-				</p>
-				<div class="buttonRow">
-					<%= link_to 'Back to Social Media', admin_outlets_path, {:class => "fa fa-angle-double-left"} %>
-					<%= link_to 'Edit', edit_admin_outlet_path(@outlet), {:class => "fa fa-pencil"} %> 
-					<%= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "fa fa-history"} %>
-					<% if !@outlet.published? %>
-					<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
-					<% end %>
-					<% if !@outlet.archived? %>
-					<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>  
-					<% end %>
-	    	</div>
+	  		<%= render partial: "outlet_details", locals: {outlet: @outlet} %>
 	  	</div>
 		</div>
 	</div>
+	<div class="col-sm-6 col-md-6">
+    <h3><i class="fa fa-clock-o fa-fw"></i> Published Social Media Account Info</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<% if @outlet.published_outlet %>
+	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published_outlet} %>
+	  		<% else %>
+	  			<p>No information is currently published for this social media account</p>
+	  		<% end %>
+	    </div>
+	  </div>
+	</div>
 </div>
-<div class = "row container col-sm-12 col-md-12">
+<div class="row">
+	<div class="buttonRow">
+		<%= link_to 'Back to Social Media', admin_outlets_path, {:class => "fa fa-angle-double-left"} %>
+		<%= link_to 'Edit', edit_admin_outlet_path(@outlet), {:class => "fa fa-pencil"} %> 
+		<%= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "fa fa-history"} %>
+		<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
+		<% if @outlet.published_outlet%>
+		<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>  
+		<% end %>
+	</div>
+</div>
+<div class = "row">
 	<div class="col-lg-4 col-sm-12 col-md-4">
     <h3><i class="fa fa-user"></i> Contacts</h3>
 		<div class="panel panel-default">

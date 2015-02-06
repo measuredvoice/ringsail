@@ -103,20 +103,12 @@ class Admin::OutletsController < Admin::AdminController
   end
 
   def publish
-    Outlet.public_activity_off
-    @outlet.status = Outlet.statuses[:published]
-    @outlet.save
-    Outlet.public_activity_on
-    @outlet.create_activity :published
+    @outlet.published!
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account is now public"
   end
 
   def archive
-    Outlet.public_activity_off
-    @outlet.status = Outlet.statuses[:archived]
-    @outlet.save
-    Outlet.public_activity_on
-    @outlet.create_activity :archived
+    @outlet.archived!
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account is now archived"
   end
 
