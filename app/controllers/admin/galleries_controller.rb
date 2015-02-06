@@ -6,9 +6,9 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys.json
   def index
     if current_user.admin?
-      @galleries = Gallery.joins(:official_tags, :agencies).all
+      @galleries = Gallery.joins(:official_tags, :agencies).all.uniq
     else
-      @galleries = Gallery.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id)
+      @galleries = Gallery.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id).uniq
     end
     @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(25)
     respond_to do |format|

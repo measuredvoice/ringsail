@@ -64,9 +64,12 @@ gem "jqcloud-rails"
 ######
 
 ######
-# Development Gems
+# Development and Testing Gems
 ######
-group :development do
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'coveralls'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'faker'
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
@@ -77,25 +80,5 @@ group :development do
   gem 'letter_opener'
 end
 ######
-# End Development Gems
-######
-######
-# Development and Testing Gems
-######
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-  gem 'coveralls'
-end
-######
 # End Development and Testing Gems
-######
-######
-# Testing Gems
-######
-group :test do
-  # bundlePretty printed test output
-  gem 'factory_girl_rails'
-end
-######
-# End Testing Gems
 ######

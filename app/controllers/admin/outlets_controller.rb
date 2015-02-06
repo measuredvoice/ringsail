@@ -7,12 +7,14 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets.json
   def index
     if current_user.admin?
-      @outlets = Outlet.joins(:official_tags, :agencies).all
+      @outlets = Outlet.joins(:official_tags, :agencies).all.uniq
       @services = Outlet.all.group(:service).count
     else
-      @outlets = Outlet.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id)
+      @outlets = Outlet.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id).uniq
       @services = @outlets.group(:service).count
     end
+
+    @total_outlets = @outlets.count
     if(params[:service])
       @outlets = @outlets.where(service: params[:service]).order(sort_column + " " + sort_direction)
     else
