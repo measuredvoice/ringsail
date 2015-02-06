@@ -18,3 +18,4 @@ data/*
 .env
 public/swagger_docs/
 .ruby-gemset
+coverage/

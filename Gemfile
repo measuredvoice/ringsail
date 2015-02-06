@@ -84,6 +84,7 @@ end
 ######
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
+  gem 'coveralls'
 end
 ######
 # End Development and Testing Gems
