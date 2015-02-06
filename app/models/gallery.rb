@@ -27,6 +27,9 @@ class Gallery < ActiveRecord::Base
 	has_many :gallery_official_tags, dependent: :destroy
   has_many :official_tags, :through => :gallery_official_tags
 
+  has_many :gallery_agencies, dependent: :destroy
+  has_many :agencies, :through => :gallery_agencies
+
   has_many :gallery_items, -> { order "item_order ASC"}, dependent: :destroy
   has_many :mobile_apps, :through => :gallery_items, :source => :item, :source_type => "MobileApp"
   has_many :outlets, :through => :gallery_items, :source => :item, :source_type => "Outlet"
@@ -65,5 +68,9 @@ class Gallery < ActiveRecord::Base
 
   def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')
+  end
+
+  def agency_tokens=(ids)
+    self.agency_ids = ids.split(',')
   end
 end

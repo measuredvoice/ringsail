@@ -5,7 +5,12 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    @mobile_apps = MobileApp.all.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
+    if current_user.admin?
+      @mobile_apps = MobileApp.joins(:official_tags, :agencies).all
+    else
+      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id)
+    end
+    @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
     @allApps = MobileApp.all
     respond_to do |format|
       format.html

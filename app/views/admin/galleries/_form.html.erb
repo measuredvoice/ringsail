@@ -20,6 +20,10 @@
     <%= f.text_field :description, :class => "form-control formwidth" %>
   </div>
   <div class="field">
+    <%= f.label :agency_tokens, "Agencies" %> </br>
+    <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => "" }%>
+  </div>
+  <div class="field">
     <%= f.label :tag_tokens, "Tags" %> </br>
     <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
@@ -74,7 +78,7 @@
           label_text = "label-success";
         }
         label_span = ' <span class="label '+ label_text+'">'+ status+'</span>';
-        li_element = '<li class="list-group-item" data-class="MobileApp" data-id="'+id+'">' + text + removal_span + label_span +'</li>';
+        li_element = '<li class="list-group-item" data-class="MobileApp" data-id="'+id+'"><i class="fa fa-arrows"></i> ' + text + removal_span + label_span +'</li>';
         $('#gallery-collection').append(li_element);
       }
     }
@@ -87,7 +91,7 @@
           label_text = "label-success";
         }
         label_span = ' <span class="label '+ label_text+'">'+ status+'</span>';
-        li_element = '<li class="list-group-item" data-class="Outlet" data-id="'+id+'">' + text + removal_span + label_span +'</li>'
+        li_element = '<li class="list-group-item" data-class="Outlet" data-id="'+id+'"><i class="fa fa-arrows"></i> ' + text + removal_span + label_span +'</li>'
         $('#gallery-collection').append(li_element);
       }
     }
@@ -111,6 +115,11 @@
       $("#gallery_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
         crossDomain: false,
         prePopulate: tags
+      });
+
+      $("#gallery_agency_tokens").tokenInput("/admin/agencies/tokeninput.json", {
+        crossDomain: false,
+        prePopulate: <%= raw @gallery.agencies.map(&:attributes).to_json %>
       });
       $('#all_mobile_table').dataTable({
         "ajax":{

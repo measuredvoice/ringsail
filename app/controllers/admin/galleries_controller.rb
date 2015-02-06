@@ -5,8 +5,12 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys
   # GET /gallerys.json
   def index
-
-    @galleries = Gallery.all.order(sort_column + " " +sort_direction).page(params[:page]).per(25)
+    if current_user.admin?
+      @galleries = Gallery.joins(:official_tags, :agencies).all
+    else
+      @galleries = Gallery.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id)
+    end
+    @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(25)
     respond_to do |format|
       format.html
       format.json { render json: @gallerys }
@@ -95,7 +99,7 @@ class Admin::GalleriesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description, :tag_tokens, :gallery_items_ol)
+      params.require(:gallery).permit(:name, :description, :tag_tokens, :agency_tokens, :gallery_items_ol)
     end
 
     def sort_column

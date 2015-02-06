@@ -13,6 +13,7 @@
 #  parent_id        :integer
 #  outlet_count     :integer          default("0")
 #  mobile_app_count :integer          default("0")
+#  gallery_count    :integer          default("0")
 #
 
 class Agency < ActiveRecord::Base
@@ -35,6 +36,9 @@ class Agency < ActiveRecord::Base
   has_many :mobile_app_agencies
   has_many :mobile_apps, :through => :mobile_app_agencies
   
+  has_many :gallery_agencies, dependent: :destroy
+  has_many :galleries, :through => :gallery_agencies
+
   #each agency has users tied to them (not necessarily contacts)
   has_many :users
   

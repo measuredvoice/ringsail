@@ -6,11 +6,17 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
-    @services = Outlet.all.group(:service).count
-    if(params[:service])
-      @outlets = Outlet.where(service: params[:service]).includes(:tags, :agencies)
+    if current_user.admin?
+      @outlets = Outlet.joins(:official_tags, :agencies).all
+      @services = Outlet.all.group(:service).count
     else
-      @outlets = Outlet.all.order(sort_column + " " + sort_direction).includes(:tags, :agencies)
+      @outlets = Outlet.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id)
+      @services = @outlets.group(:service).count
+    end
+    if(params[:service])
+      @outlets = @outlets.where(service: params[:service]).order(sort_column + " " + sort_direction)
+    else
+      @outlets = @outlets.all.order(sort_column + " " + sort_direction)
     end
     respond_to do |format|
       format.html { @outlets = @outlets.page(params[:page]).per(20) }

@@ -1,6 +1,7 @@
 <ol id="gallery-collection" class="list-group gallery-collection">
   <% gallery_items.map(&:item).each do |app| %>
     <li class="list-group-item" data-class="<%= app.class %>" data-id="<%= app.id %>">
+      <i class="fa fa-arrows"></i> 
       <% if app.class == MobileApp %>
         Mobile App:
         <%= app.name %> -

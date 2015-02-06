@@ -1,5 +1,7 @@
 # Social Media Registry (program information)
 
+[![Build Status](https://travis-ci.org/ctacdev/social-media-registry.svg?branch=develop)](https://travis-ci.org/ctacdev/social-media-registry)
+
 * [API Documentation](http://www.usa.gov/About/developer-resources/social-media-registry.shtml)
 * [Verification Page](http://www.usa.gov/Contact/verify-social-media.shtml)
 * [Registration Page](http://registry.usa.gov/embed/find)
