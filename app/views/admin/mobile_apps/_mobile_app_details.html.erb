@@ -1,0 +1,18 @@
+<p>
+  <strong>Name:</strong>
+  <%= mobile_app.name %>
+</p>
+
+<p>
+  <strong>Short Description:</strong>
+  <%= mobile_app.short_description %>
+</p>
+
+<p>
+  <strong>Long Description:</strong>
+  <%= mobile_app.long_description %>
+</p>
+
+<% mobile_app.mobile_app_versions.each do |mav| %>
+  Version Platform: <%= mav.platform %>
+<% end %>

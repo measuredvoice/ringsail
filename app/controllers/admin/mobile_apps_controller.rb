@@ -6,9 +6,9 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps.json
   def index
     if current_user.admin?
-      @mobile_apps = MobileApp.joins(:official_tags, :agencies).all.uniq
+      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
-      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ?", current_user.agency.id).uniq
+      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
     end
     @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
     @allApps = MobileApp.all
@@ -106,20 +106,12 @@ class Admin::MobileAppsController < Admin::AdminController
   end
 
   def publish
-    MobileApp.public_activity_off
-    @mobile_app.status = MobileApp.statuses[:published]
-    @mobile_app.save
-    MobileApp.public_activity_on
-    @mobile_app.create_activity :published
+    @mobile_app.published!
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now public"
   end
 
   def archive
-    MobileApp.public_activity_off
-    @mobile_app.status = MobileApp.statuses[:archived]
-    @mobile_app.save
-    MobileApp.public_activity_on
-    @mobile_app.create_activity :archived
+    @mobile_app.archived!
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now archived"
   end
 

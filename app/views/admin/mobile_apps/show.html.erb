@@ -1,41 +1,39 @@
 <div class = "row">
-	<div class="col-sm-12 col-md-12 main">
+	<div class="col-sm-6">
 		<h3><i class="fa fa-clock-o fa-fw"></i> Mobile App Info</h3>
 		<div class="panel panel-default">
-	  		<div class="panel-body">
-				<p>
-				  <strong>Name:</strong>
-				  <%= @mobile_app.name %>
-				</p>
-
-				<p>
-				  <strong>Short Description:</strong>
-				  <%= @mobile_app.short_description %>
-				</p>
-
-				<p>
-				  <strong>Long Description:</strong>
-				  <%= @mobile_app.long_description %>
-				</p>
- 				<div class="buttonRow">
-					<%= link_to "Back to Mobile Apps", admin_mobile_apps_path, {:class => "fa fa-angle-double-left"} %>		
-					<%= link_to "Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "fa fa-pencil"} %>
-					<%= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
-					<% if !@mobile_app.published? %>
-						<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
-					<% end %>
-					<% if !@mobile_app.archived? %>
-						<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "fa fa-archive"} %>  
-	      	<% end %>
-    		</div>
+	  	<div class="panel-body">
+				<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app } %>	
 			</div>
-      
-		</div>
-       
+		</div>  
+	</div>
+	<div class="col-sm-6">
+		<h3><i class="fa fa-clock-o fa-fw"></i> Published Mobile App Info</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<% if @mobile_app.published_mobile_app %>
+	  		<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app.published_mobile_app } %>	
+	  		<% else %>
+	  			<p>No information is currently published for this mobile application.</p>
+	  		<% end %>
+ 			</div>
+		</div> 
 	</div>
 </div>
-
-<div class = "row container col-sm-12 col-md-12">
+<div class="row">
+	<div class="col-sm-12">
+		<div class="buttonRow">
+			<%= link_to "Back to Mobile Apps", admin_mobile_apps_path, {:class => "fa fa-angle-double-left"} %>		
+			<%= link_to "Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "fa fa-pencil"} %>
+			<%= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
+			<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
+			<% if @mobile_app.published_mobile_app %>
+				<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "fa fa-archive"} %>  
+    	<% end %>
+		</div>
+	</div>
+</div>
+<div class = "row container">
 	<div class="col-lg-4 col-sm-12 col-md-4">
     <h3><i class="fa fa-user"></i> Contacts</h3>
 		<div class="panel panel-default">
