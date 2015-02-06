@@ -1,4 +1,4 @@
-class Addpolymorphicgalleryitems < ActiveRecord::Migration
+class AddPolymorphicGalleryItems < ActiveRecord::Migration
   def change
     create_table :gallery_items do |t|
       t.integer :gallery_id

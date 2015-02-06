@@ -25,8 +25,8 @@
     				<td class = "tabledata midWidth"><%= agency.name %></td>
             <td class = "tabledata"><%= agency.shortname %></td>
             <td class = "table_data"><%= agency.info_url %></td>
-            <td class="center"><%= agency.outlets_count %></td>
-            <td class="center"><%= agency.mobile_apps_count %></td>
+            <td class="center"><%= agency.outlet_count %></td>
+            <td class="center"><%= agency.mobile_app_count %></td>
             <td class = "table_data lastlinks">
               <%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
               <%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>

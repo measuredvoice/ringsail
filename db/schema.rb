@@ -31,26 +31,17 @@ ActiveRecord::Schema.define(version: 20150206150212) do
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "agencies", force: :cascade do |t|
-    t.string   "name",              limit: 255
+    t.string   "name",             limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "shortname",         limit: 255
-    t.string   "info_url",          limit: 255
-    t.string   "mongo_id",          limit: 255
-    t.string   "parent_mongo_id",   limit: 255
-    t.integer  "parent_id",         limit: 4
-    t.integer  "outlets_count",     limit: 4,   default: 0
-    t.integer  "mobile_apps_count", limit: 4,   default: 0
+    t.string   "shortname",        limit: 255
+    t.string   "info_url",         limit: 255
+    t.string   "mongo_id",         limit: 255
+    t.string   "parent_mongo_id",  limit: 255
+    t.integer  "parent_id",        limit: 4
+    t.integer  "outlet_count",     limit: 4,   default: 0
+    t.integer  "mobile_app_count", limit: 4,   default: 0
   end
-
-  create_table "agency_contacts", force: :cascade do |t|
-    t.string   "email",      limit: 255
-    t.string   "agency_id",  limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "agency_contacts", ["agency_id"], name: "index_agency_contacts_on_agency_id", using: :btree
 
   create_table "auth_tokens", force: :cascade do |t|
     t.string   "token",        limit: 255
@@ -76,8 +67,12 @@ ActiveRecord::Schema.define(version: 20150206150212) do
   end
 
   create_table "galleries", force: :cascade do |t|
-    t.string "name",        limit: 255
-    t.text   "description", limit: 65535
+    t.string  "name",              limit: 255
+    t.text    "description",       limit: 65535
+    t.integer "draft_id",          limit: 4
+    t.text    "short_description", limit: 65535
+    t.text    "long_description",  limit: 65535
+    t.integer "status",            limit: 4
   end
 
   create_table "gallery_items", force: :cascade do |t|
@@ -137,6 +132,7 @@ ActiveRecord::Schema.define(version: 20150206150212) do
     t.integer "agency_id",         limit: 4
     t.integer "status",            limit: 4,     default: 0
     t.string  "mongo_id",          limit: 255
+    t.integer "draft_id",          limit: 4
   end
 
   create_table "official_tags", force: :cascade do |t|

@@ -67,7 +67,6 @@ gem "jqcloud-rails"
 # Development Gems
 ######
 group :development do
-  gem 'rspec-rails'
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
   gem 'faker'
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
@@ -83,7 +82,9 @@ end
 ######
 # Development and Testing Gems
 ######
-gem 'dotenv-rails', :groups => [:development, :test]
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
 ######
 # End Development and Testing Gems
 ######
@@ -91,15 +92,8 @@ gem 'dotenv-rails', :groups => [:development, :test]
 # Testing Gems
 ######
 group :test do
-  # Pretty printed test output
-  # gem 'turn', :require => false
-  # gem 'rspec-rails', '2.6.1'
-  # gem 'webrat', '0.7.1'
-  # gem 'autotest', '4.4.6'
-  # gem 'autotest-rails-pure', '4.1.2'
-  # gem 'autotest-fsevent', '0.2.4'
-  # gem 'autotest-growl', '0.2.9'
-  # gem 'factory_girl_rails', '~> 4.0.0'
+  # bundlePretty printed test output
+  gem 'factory_girl_rails'
 end
 ######
 # End Testing Gems

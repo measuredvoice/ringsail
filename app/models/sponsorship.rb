@@ -13,7 +13,16 @@ class Sponsorship < ActiveRecord::Base
   #attr_accessible :agency_id, :outlet_id
 
   belongs_to :outlet
-  belongs_to :agency, :counter_cache => :outlets_count
+  belongs_to :agency
 
   has_paper_trail 
+
+  after_save :update_counter_cache
+  after_destroy :update_counter_cache
+  
+  def update_counter_cache
+    self.agency.outlet_count = Outlet.includes(:agencies).where(
+      "agency.id = ? AND outlets.draft_id IS NOT NULL", self.agency_id)
+    self.agency.save
+  end
 end

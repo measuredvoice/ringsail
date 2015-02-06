@@ -11,4 +11,13 @@ class OutletOfficialTag < ActiveRecord::Base
   belongs_to :outlet
   belongs_to :official_tag, counter_cache: :outlet_count
   has_paper_trail 
+
+  after_save :update_counter_cache
+  after_destroy :update_counter_cache
+  
+  def update_counter_cache
+    self.official_tag.gallery_count = Outlet.includes(:official_tags).where(
+      "official_tags.id = ? AND outlets.draft_id IS NOT NULL", self.official_tag_id)
+    self.official_tag.save
+  end
 end

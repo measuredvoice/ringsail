@@ -11,6 +11,7 @@
 #  agency_id         :integer
 #  status            :integer          default("0")
 #  mongo_id          :string(255)
+#  draft_id          :integer
 #
 
 class MobileApp < ActiveRecord::Base
@@ -18,26 +19,26 @@ class MobileApp < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  enum status: { submitted: 0, published: 1, archived: 2 }
+  enum status: { under_review: 0, published: 1, archived: 2 }
 
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
 
-  has_many :gallery_items, as: :item
+  has_many :gallery_items, as: :item, dependent: :destroy
   has_many :galleries, through: :gallery_items, source: "MobileApp"
 
-  has_many :mobile_app_agencies
+  has_many :mobile_app_agencies, dependent: :destroy
   has_many :agencies, :through => :mobile_app_agencies
   
-  has_many :mobile_app_users
+  has_many :mobile_app_users, dependent: :destroy
   has_many :users, :through => :mobile_app_users
 
   has_many :mobile_app_versions, :dependent => :destroy
 
-  has_many :mobile_app_official_tags
+  has_many :mobile_app_official_tags, dependent: :destroy
   has_many :official_tags, :through => :mobile_app_official_tags
 
-  has_paper_trail :ignore => [:status]
+  has_paper_trail
   
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
