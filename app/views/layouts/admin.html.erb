@@ -87,7 +87,17 @@
 		            <li><%= link_to "Profile", edit_admin_user_path(current_user) %></li>
 		            <li><%= link_to "Email Admins", new_admin_email_message_path(include_admins: true) %></li>
 		            <li><%= link_to "About Application", admin_about_path %></li>
+
 		            <li><%= link_to "Logout", destroy_user_session_path %></li>
+		            <% if Rails.env.development?  %>
+		            	<li role="presentation" class="dropdown-header">Impersonate</li>
+		            	<% User.roles.each do |k,v| 
+		            		  user = User.where(role: v).first 
+		            		  if user %>
+				                <li><%= link_to k.humanize, admin_impersonate_path(user_id: user.id) %></li>
+				            <% end %>
+		            	<% end %>
+		            <% end %>
 		        </ul>
 	        </li>
 	      </ul>

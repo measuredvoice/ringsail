@@ -18,7 +18,7 @@
 #  first_name          :string(255)
 #  last_name           :string(255)
 #  groups              :text(65535)
-#  role                :integer
+#  role                :integer          default("0")
 #
 
 class User < ActiveRecord::Base

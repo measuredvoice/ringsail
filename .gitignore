@@ -10,7 +10,6 @@ tmp/
 .DS_Store
 bin/
 config/database.yml
-config/too_many_secrets.rb
 .autotest
 .rspec
 .rvmrc

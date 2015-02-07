@@ -175,7 +175,6 @@ Ringsail::Application.routes.draw do
   end
 
   namespace :admin do
-    get 'dashboards' => "dashboards#index"
     resources :agencies, concerns: :activity_and_history do
       collection do
         get 'tokeninput'
@@ -212,7 +211,13 @@ Ringsail::Application.routes.draw do
     end
     resources :email_messages
 
+    # in a development environment, allow 
+    # use of impersonation
+    if Rails.env.development?
+      get 'impersonate' => 'admin#impersonate'
+    end
     get 'about' => 'admin#about'
+    get 'dashboards' => "dashboards#index"
     get '/' => 'dashboards#index'
   end
   devise_for :users

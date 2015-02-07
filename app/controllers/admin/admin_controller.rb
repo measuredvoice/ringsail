@@ -2,7 +2,7 @@ class Admin::AdminController < ApplicationController
   include PublicActivity::StoreController
   layout "admin"
 
-  before_filter :authenticate_user! unless Rails.env == "development"
+  before_filter :authenticate_user! unless Rails.env.development?
   before_filter :banned_user?, except: [:about]
   helper_method :current_user  
   
@@ -10,9 +10,18 @@ class Admin::AdminController < ApplicationController
     @admins = User.where("role = ?", User.roles[:admin])
   end
 
+  def impersonate
+    session[:user_id] = params[:user_id]
+    redirect_to admin_dashboards_path, notice: "Now impersonating: #{current_user.first_name} #{current_user.last_name} with role: #{current_user.role.humanize}"
+  end
+
   def current_user
-    if Rails.env == "development"
-      @current_user ||= User.first
+    if Rails.env.development?
+      if session[:user_id]
+        @current_user ||= User.find(session[:user_id])
+      else
+        @current_user ||= User.first
+      end
     else
       @current_user ||= warden.authenticate(scope: :user) 
     end
