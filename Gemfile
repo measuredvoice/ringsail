@@ -67,16 +67,25 @@ gem "jqcloud-rails"
 # Development and Testing Gems
 ######
 group :development, :test do
+
+  #
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'coveralls'
-  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  
+  # generate fake data in tests & seeds files
   gem 'faker'
+  
+  # nice debug tools
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
-  gem 'pry-byebug'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
+
+  # adds table data to model files, handy for tracking columns
+  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+
+  # open emails in browser on send
   gem 'letter_opener'
 end
 ######
