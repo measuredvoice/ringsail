@@ -21,7 +21,7 @@ class Api::V1::SocialMediaController < Api::ApiController
   DEFAULT_PAGE=1
 
   def index
-    @outlets = Outlet.joins(:agencies, :official_tags)
+    @outlets = Outlet.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
     if params[:q] && params[:q] != ""
       @outlets = @outlets.where("account LIKE ? OR organization LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
     end
@@ -34,7 +34,7 @@ class Api::V1::SocialMediaController < Api::ApiController
     if params[:services] && params[:services] != ""
       @outlets = @outlets.where(service: params[:services].split(","))
     end
-    @outlets = @outlets.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+    @outlets = @outlets.uniq.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
       format.json { render "index" }
     end
@@ -51,7 +51,7 @@ class Api::V1::SocialMediaController < Api::ApiController
   end
 
   def show
-    @outlet = Outlet.find(params[:id])
+    @outlet = Outlet.find_by(draft_id: params[:id])
     respond_to do |format|
       format.json { render "show" }
     end

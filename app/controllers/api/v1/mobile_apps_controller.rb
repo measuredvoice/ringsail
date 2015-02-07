@@ -19,7 +19,7 @@ class Api::V1::MobileAppsController < Api::ApiController
 	DEFAULT_PAGE=1
 
 	def index
-		@mobile_apps = MobileApp.joins(:agencies, :official_tags)
+		@mobile_apps = MobileApp.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
     if params[:q] && params[:q] != ""
       @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? or mobile_apps.short_description LIKE ? or long_description LIKE ?", 
       	"%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
@@ -46,7 +46,7 @@ class Api::V1::MobileAppsController < Api::ApiController
 		response :not_found
 	end
 	def show
-		@mobile_app =  MobileApp.find(params[:id])
+		@mobile_app =  MobileApp.find_by(draft_id: params[:id])
 		respond_to do |format|
 			format.json { render "show" }
 		end		

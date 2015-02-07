@@ -29,15 +29,15 @@ class Api::V1::GalleriesController < Api::ApiController
 	DEFAULT_PAGE = 1
 
 	def	index	
-    @galleries = Gallery.joins(:official_tags)
-		if params[:q]
+    @galleries = Gallery.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
+		if params[:q] && params[:q] != ""
 			@galleries = @galleries.where("name LIKE ? or description LIKE ?", 
 				"%#{params[:q]}%", "%#{params[:q]}%")
 		end
-		if params[:tags]
+		if params[:tags] && params[:tags] != ""
       @galleries = @galleries.where("official_tags.id" => params[:tags].split(","))
     end
-		@galleries = @galleries.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+		@galleries = @galleries.uniq.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "index" }
 		end

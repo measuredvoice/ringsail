@@ -26,7 +26,7 @@ class MobileApp < ActiveRecord::Base
   # The "draft" outlet will not have a draft_id field
   # This will allow easy querying on the public / admin portion of the application
   has_one :published_mobile_app, class_name: "MobileApp", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft_mobile_appoutlet, class_name: "MobileApp", foreign_key: "draft_id"
+  belongs_to :draft_mobile_app, class_name: "MobileApp", foreign_key: "draft_id"
 
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
@@ -58,10 +58,17 @@ class MobileApp < ActiveRecord::Base
     end
   end
 
-   def tag_tokens=(ids)
+  def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')
   end
 
+  def agency_tokens(ids)
+    self.agency_ids = ids.split(',')
+  end
+
+  def user_tokens(ids)
+    self.user_ids = ids.split(',')
+  end
   def published!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:published]

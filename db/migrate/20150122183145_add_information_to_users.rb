@@ -6,10 +6,11 @@ class AddInformationToUsers < ActiveRecord::Migration
   	add_column :users, :first_name, :string
   	add_column :users, :last_name, :string
   	add_column :users, :groups, :text
-    add_column :users, :role, :string
+    add_column :users, :role, :integer
   end
 
   def self.down
+    remove_column :users, :role, :integer
   	remove_column :users, :agency_id, :integer
   	remove_column :users, :phone, :string
   	remove_column :users, :first_name, :string

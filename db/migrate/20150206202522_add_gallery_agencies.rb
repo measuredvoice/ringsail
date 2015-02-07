@@ -8,4 +8,5 @@ class AddGalleryAgencies < ActiveRecord::Migration
 
     add_column :agencies, :gallery_count, :integer, default: 0
   end
+
 end

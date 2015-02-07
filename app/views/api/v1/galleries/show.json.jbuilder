@@ -1,7 +1,7 @@
 json.partial! "api/v1/shared/gallery", gallery: @gallery
 json.gallery_items do
   json.array! @gallery.gallery_items do |gallery_item|
-    if gallery_item.item.status = 1
+    if gallery_item.published_item
       if gallery_item.item.class == MobileApp
         json.type "Mobile App"
         json.partial! "api/v1/shared/mobile_app", mobile_app: gallery_item.item

@@ -18,6 +18,14 @@ class Gallery < ActiveRecord::Base
 
   enum status: { under_review: 0, published: 1, archived: 2 }
 
+   # Outlets have a relationship to themselvs
+  # The "published" outlet will have a draft_id pointing to its parent
+  # The "draft" outlet will not have a draft_id field
+  # This will allow easy querying on the public / admin portion of the application
+  has_one :published_gallery, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft_gallery, class_name: "Gallery", foreign_key: "draft_id"
+
+
 	#handles versioning
 	has_paper_trail
 	
@@ -34,7 +42,19 @@ class Gallery < ActiveRecord::Base
   has_many :mobile_apps, :through => :gallery_items, :source => :item, :source_type => "MobileApp"
   has_many :outlets, :through => :gallery_items, :source => :item, :source_type => "Outlet"
 
+  # These are rewritten accessors to handle the draft/published stuff that we are doing
 
+  def published_gallery_items
+    self.gallery_items.where(status: 1)
+  end
+
+  def published_mobile_apps
+    MobileApp.where("draft_id IN (?)",self.mobile_app_ids)
+  end
+
+  def published_outlets
+    Outlet.where("draft_id IN (?)", self.outlet_ids)
+  end
   # This handles a json serialized format from the administrative end.
   # It is to allowed ordering of lists in the forms
   # Please be careful if messing with this, its senssitive
@@ -66,11 +86,52 @@ class Gallery < ActiveRecord::Base
   	self.gallery_items.where('item_id NOT IN (?)', ids).destroy_all
   end
 
+
+  def published!
+    Gallery.public_activity_off
+    self.status = Gallery.statuses[:published]
+    self.published_gallery.destroy! if self.published_gallery
+    self.published_gallery = Gallery.create!({
+      name: self.name,
+      short_description: self.short_description,
+      long_description: self.long_description,
+      agency_ids: self.agency_ids || [],
+      user_ids: self.user_ids || [],
+      official_tag_ids: self.official_tag_ids || [],
+      status: self.status
+    })
+    self.gallery_items.each do |mav|
+      self.published_gallery.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
+    end
+    self.save!
+    MobileApp.public_activity_on
+    self.create_activity :published
+  end
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  description       :text(65535)
+#  draft_id          :integer
+#  short_description :text(65535)
+#  long_description  :text(65535)
+#  status            :integer
+#
+  def archived!
+    Gallery.public_activity_off
+    self.status = Gallery.statuses[:archived]
+    self.published_gallery.destroy! if self.published_gallery
+    self.save!
+    Gallery.public_activity_on
+    self.create_activity :archived
+  end
   def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')
   end
 
-  def agency_tokens=(ids)
+  def agency_tokens(ids)
     self.agency_ids = ids.split(',')
+  end
+
+  def user_tokens(ids)
+    self.user_ids = ids.split(',')
   end
 end

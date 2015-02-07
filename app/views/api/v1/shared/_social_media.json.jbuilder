@@ -1,4 +1,4 @@
-json.set! :id, outlet.id
+json.set! :id, outlet.draft_id
 json.set! :organizaton, outlet.organization
 json.set! :account, outlet.account
 json.set! :service_key, outlet.service

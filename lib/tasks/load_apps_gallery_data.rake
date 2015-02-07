@@ -1,4 +1,18 @@
 namespace :load_apps_gallery_data do
+
+	desc "update all"
+	task :update_all, [:file] => :environment do |t,args|
+		PublicActivity.enabled = false
+		Outlet.update_all(status: 1)
+    Outlet.where(status: 1).each do |outlet|
+      outlet.published!
+    end
+    MobileApp.update_all(status: 1)
+    MobileApp.where(status: 1).each do |mobile_app|
+      mobile_app.published!
+    end
+    Gallery.update_all(status: 1)
+	end
   desc "Fill agencies"
   task :agencies, [:file] => :environment do |t, args|
 	filepath= args[:file] || "data/current/agencies.json"

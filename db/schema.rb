@@ -221,22 +221,22 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",               limit: 255,   default: "", null: false
+    t.string   "email",               limit: 255
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",       limit: 4,     default: 0
+    t.integer  "sign_in_count",       limit: 4
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",  limit: 255
     t.string   "last_sign_in_ip",     limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user",                limit: 255,                null: false
+    t.string   "user",                limit: 255,   null: false
     t.integer  "agency_id",           limit: 4
     t.string   "phone",               limit: 255
     t.string   "first_name",          limit: 255
     t.string   "last_name",           limit: 255
     t.text     "groups",              limit: 65535
-    t.string   "role",                limit: 255
+    t.integer  "role",                limit: 4
   end
 
   create_table "version_associations", force: :cascade do |t|

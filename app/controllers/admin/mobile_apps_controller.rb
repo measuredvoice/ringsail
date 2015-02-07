@@ -6,9 +6,9 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps.json
   def index
     if current_user.admin?
-      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
-      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
     end
     @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
     @allApps = MobileApp.all
@@ -124,7 +124,7 @@ class Admin::MobileAppsController < Admin::AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_app_params
       params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url, 
-        :language, agency_ids: [], user_ids: [], mobile_app_versions_attributes: [:id, :store_url,:platform,
+        :language, :agency_tokens, :user_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
         :version_number,:publish_date,:description,:whats_new,:screenshot,:device,
         :language,:average_rating,:number_of_ratings, :_destroy])
     end
