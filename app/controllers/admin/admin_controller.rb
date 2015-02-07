@@ -3,7 +3,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   before_filter :authenticate_user! unless Rails.env == "development"
-  before_filter :banned_user
+  before_filter :banned_user, except: [:about]
   helper_method :current_user  
   
   def about
@@ -20,7 +20,7 @@ class Admin::AdminController < ApplicationController
 
   def banned_user
     if current_user.banned?
-      render "about", notice: "You have been banned from the system you may want to email an admin directly if you believe this to be in error."
+      redirect_to admin_about_path, status: 302, notice: "You have been banned from the system you may want to email an admin directly if you believe this to be in error."
     end
   end
 

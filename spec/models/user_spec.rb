@@ -24,5 +24,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should pass validations" do
+    user = FactoryGirl.create(:user)
+    expect(user.valid?).to eq(true)
+  end
+
+  it "should return admin status IFF an admin" do
+    admin_user = FactoryGirl.create(:admin)
+    expect(admin_user.admin?).to eq(true)
+    user = FactoryGirl.create(:user)
+    expect(user.admin?).to eq(false)
+  end
+
 end
