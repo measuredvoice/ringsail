@@ -3,15 +3,17 @@ class Admin::AgenciesController < Admin::AdminController
   respond_to :html, :xml, :json, :csv, :xls
   before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore]
   protect_from_forgery except: :tokeninput
+ 
+  before_filter :require_admin, except: [:tokeninput]
+
   def index 
-    @agencies = Agency.all.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
-    @allagencies = Agency.all.order(name: :asc)
+    @agencies = Agency.all.order(sort_column + " " + sort_direction)
     respond_to do |format|
-      format.html
-      format.json { render json: @allagencies }
-      format.xml { render xml: @allagencies }
-      format.csv { send_data @allagencies.to_csv }
-      format.xls { send_data @allagencies.to_csv(col_sep: "\t")}
+      format.html { @agencies = @agencies.page(params[:page]).per(15) }
+      format.json { render json: @agencies }
+      format.xml { render xml: @agencies }
+      format.csv { send_data @agencies.to_csv }
+      format.xls { send_data @agencies.to_csv(col_sep: "\t")}
     end
   end
 

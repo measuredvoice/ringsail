@@ -37,7 +37,7 @@ FactoryGirl.define do
     role User.roles[:full_user]
   end
 
-  factory :admin, parent: :user do
+  factory :admin_user, parent: :user do
     role User.roles[:admin]
   end
 

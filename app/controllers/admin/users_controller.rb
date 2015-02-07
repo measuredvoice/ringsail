@@ -2,6 +2,9 @@ class Admin::UsersController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
+
+  before_filter :require_admin, except: [:edit, :update, :tokeninput]
   # GET /users
   # GET /users.json
   def index
@@ -20,6 +23,14 @@ class Admin::UsersController < Admin::AdminController
 
   # GET /users/1/edit
   def edit
+    # restrict to admin users or users looking at their own profile
+    puts current_user.id
+    puts @user.id
+    if current_user.id != @user.id
+      unless current_user.admin?
+        redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
+      end
+    end
   end
 
   # POST /users
@@ -41,6 +52,10 @@ class Admin::UsersController < Admin::AdminController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    # restrict to admin users or users looking at their own profile
+    if !current_user.admin? || current_user.id != @user.id
+      redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
+    end
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to admin_user_path(@user), notice: 'User was successfully updated.' }

@@ -30,7 +30,7 @@ RSpec.describe User, type: :model do
   end
 
   it "should return admin status IFF an admin" do
-    admin_user = FactoryGirl.create(:admin)
+    admin_user = FactoryGirl.create(:admin_user)
     expect(admin_user.admin?).to eq(true)
     user = FactoryGirl.create(:user)
     expect(user.admin?).to eq(false)

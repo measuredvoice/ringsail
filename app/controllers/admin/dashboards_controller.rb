@@ -58,12 +58,4 @@ class Admin::DashboardsController < Admin::AdminController
       LIMIT 50")
   end
 
-  def social_media_breakdown
-  	
-  end
-
-  def activities
-    @activities = PublicActivity::Activity.order("created_at desc").page(params[:page]).per(25)
-  end
-
 end

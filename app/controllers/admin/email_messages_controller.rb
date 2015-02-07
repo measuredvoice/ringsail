@@ -1,5 +1,7 @@
 class Admin::EmailMessagesController < Admin::AdminController
 
+	before_filter :require_admin, except: [:new, :create, :show]
+
 	def index
 		@emails = EmailMessage.page(params[:page]).per(15)
 	end
@@ -21,6 +23,10 @@ class Admin::EmailMessagesController < Admin::AdminController
 			@emails << current_user.email
 		end
 		@email = EmailMessage.new(to: @emails.map(&:to_s).join(', '))
+	end
+
+	def show
+
 	end
 
 	def create

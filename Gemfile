@@ -68,10 +68,12 @@ gem "jqcloud-rails"
 ######
 group :development, :test do
 
-  #
+  # testing gems
   gem 'rspec-rails', '~> 3.0'
   gem 'factory_girl_rails'
   gem 'coveralls'
+  gem "capybara" #feature specs
+  gem 'database_cleaner'
   
   # generate fake data in tests & seeds files
   gem 'faker'

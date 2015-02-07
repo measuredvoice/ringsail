@@ -1,0 +1,1 @@
+rails runner "User.first.admin? ? User.first.limited_user! : User.first.admin!"

@@ -9,7 +9,7 @@ class Admin::GalleriesController < Admin::AdminController
 
       @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
-      @galleries = Gallery.includes(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @galleries = Gallery.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
     end
     @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(25)
     respond_to do |format|
