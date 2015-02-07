@@ -1,0 +1,22 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: ringsail_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: ringsail_test
+
+production:
+  <<: *default
+  database: ENV['REGISTRY_DB_NAME']
+  host: ENV['REGISTRY_DB_HOST']
+  user: ENV['REGISTRY_DB_USER']
+  password: ENV['REGISTRY_DB_PASS']
