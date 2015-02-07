@@ -1,5 +1,3 @@
-.bundle
-db/*.sqlite3*
 log/*.log
 *.log
 tmp/
@@ -9,8 +7,6 @@ tmp/
 .project
 .DS_Store
 bin/
-config/database.yml
-.autotest
 .rspec
 .rvmrc
 data/*
