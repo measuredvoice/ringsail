@@ -12,7 +12,7 @@ class Admin::AdminController < ApplicationController
 
   def impersonate
     session[:user_id] = params[:user_id]
-    redirect_to admin_dashboards_path, notice: "Now impersonating: #{current_user.first_name} #{current_user.last_name} with role: #{current_user.role.humanize}"
+    redirect_to admin_dashboards_path, notice: "Now impersonating: #{current_user.email} with role: #{current_user.role.humanize}"
   end
 
   def current_user

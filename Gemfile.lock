@@ -120,6 +120,9 @@ GEM
     diff-lcs (1.2.5)
     diffy (3.0.7)
     docile (1.1.5)
+    dotenv (2.0.0.beta)
+    dotenv-rails (2.0.0.beta)
+      dotenv (= 2.0.0.beta)
     erubis (2.7.0)
     execjs (2.3.0)
     factory_girl (4.5.0)
@@ -316,6 +319,7 @@ DEPENDENCIES
   database_cleaner
   devise
   devise_cas_authenticatable
+  dotenv-rails (= 2.0.0.beta)
   factory_girl_rails
   faker
   font-awesome-rails

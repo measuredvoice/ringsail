@@ -89,6 +89,7 @@ group :development, :test do
 
   # open emails in browser on send
   gem 'letter_opener'
+  gem "dotenv-rails", "2.0.0.beta"
 end
 ######
 # End Development and Testing Gems

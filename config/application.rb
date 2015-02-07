@@ -1,7 +1,4 @@
 require File.expand_path('../boot', __FILE__)
-
-secrets_file = File.expand_path('../too_many_secrets', __FILE__)
-require secrets_file if File.exists?(secrets_file + '.rb')
 require 'csv'
 require 'rails/all'
 
@@ -10,7 +7,10 @@ if defined?(Bundler)
   Bundler.require(*Rails.groups)
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
+
+   Dotenv::Railtie.load
 end
+
 
 module Ringsail
   class Application < Rails::Application
@@ -22,6 +22,7 @@ module Ringsail
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
