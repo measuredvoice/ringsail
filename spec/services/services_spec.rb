@@ -18,4 +18,11 @@ RSpec.describe Service do
       expect(service.service_url_example).to be_a_kind_of(String)
     end
   end
+  
+  it "should define urls it handles" do
+    Service.all.each do |service|
+      expect(service.handles?(URI.parse(service.service_url_example))).to be_truthy
+    end
+  end
+
 end
