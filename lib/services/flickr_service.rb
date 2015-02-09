@@ -16,11 +16,11 @@ class FlickrService < Service
     account
   end
   
-  def service_url_example
+  def self.service_url_example
     "http://flickr.com/photos/username"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://flickr.com/photos/#{account}"
   end
   

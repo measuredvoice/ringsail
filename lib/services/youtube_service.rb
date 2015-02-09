@@ -23,11 +23,11 @@ class YoutubeService < Service
     account
   end
   
-  def service_url_example
+  def self.service_url_example
     "http://www.youtube.com/username"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://youtube.com/#{account}"
   end
 

@@ -22,11 +22,11 @@ class TwitterService < Service
     @details[:account_id]
   end
 
-  def service_url_example
+  def self.service_url_example
     "http://twitter.com/username"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://twitter.com/#{account}"
   end
 

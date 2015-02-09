@@ -16,11 +16,11 @@ class PosterousService < Service
     account
   end
 
-  def service_url_example
+  def self.service_url_example
     "http://username.posterous.com/"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://#{account}.posterous.com/"
   end
 
