@@ -37,5 +37,13 @@ RSpec.describe Admin::AgenciesController, type: :controller do
     end
    end
 
+   describe "POST #create" do 
+    it "creates an agency" do
+      sign_in FactoryGirl.create(:admin_user)
+      agency = FactoryGirl.attributes_for(:agency)
+      post :create, agency: agency
+      expect(response).to redirect_to(admin_agency_path(assigns(:agency)))
+    end
+   end
 
 end

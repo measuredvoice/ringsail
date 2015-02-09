@@ -1,5 +1,5 @@
 PublicActivity.enabled = false
-DatabaseCleaner.clean
+DatabaseCleaner.clean_with :truncation
 
 AGENCIES_NUM = 5
 USERS_NUM = 5 #users will always make a minimum of 4 (one for each role)
@@ -14,7 +14,7 @@ puts "Adding agencies with count of #{AGENCIES_NUM}"
 		shortname: "#{Faker::Company.suffix} #{agency_number}"
 	})
 end
-puts "Finished addingagencies with count of #{AGENCIES_NUM}"
+puts "Finished adding agencies with count of #{AGENCIES_NUM}"
 
 puts "Create users with each role"
 User.roles.each do |role|
@@ -22,7 +22,7 @@ User.roles.each do |role|
 		email: Faker::Internet.email,
 		sign_in_count: rand(1..100),
 		user: Faker::Internet.user_name,
-		agency_id: rand(1..AGENCIES_NUM),
+		agency: Agency.offset(rand(Agency.count)).first,
 		phone: Faker::PhoneNumber.phone_number,
 		first_name: Faker::Name.first_name,
 		last_name: Faker::Name.last_name,
@@ -30,6 +30,7 @@ User.roles.each do |role|
 	})
 end
 puts "Finished with users for roles"
+
 user_count = User.all.count
 if user_count < USERS_NUM
 	puts "Adding additional users to reach count of #{USERS_NUM}"
@@ -39,7 +40,7 @@ if user_count < USERS_NUM
 			email: Faker::Internet.email,
 			sign_in_count: rand(1..100),
 			user: Faker::Internet.user_name,
-			agency_id: rand(1..AGENCIES_NUM),
+			agency: Agency.offset(rand(Agency.count)).first,
 			phone: Faker::PhoneNumber.phone_number,
 			first_name: Faker::Name.first_name,
 			last_name: Faker::Name.last_name,
@@ -49,12 +50,15 @@ if user_count < USERS_NUM
 	puts "Finished adding additional users to reach count of #{USERS_NUM}"
 end
 
+puts "Adding tags to get to #{TAGS_NUM}"
 (1..TAGS_NUM).each do |tag_number|
 	OfficialTag.create!({
 		tag_text: "#{Faker::Lorem.word} #{tag_number}"
 	})
 end
+puts "Finished tags to get to #{TAGS_NUM}"
 
+puts "Adding outlets to get to #{OUTLETS_NUM}"
 (1..OUTLETS_NUM).each do |outlet_number|
 	random_service = Service.all.sample
 	language = ["English","Spanish"].sample
@@ -68,17 +72,19 @@ end
 		long_description: Faker::Lorem.paragraph,
 		language: language,
 		status: status,
-		agency_ids: [Agency.offset(rand(Agency.count)).first],
+		agencies: [Agency.offset(rand(Agency.count)).first],
 		official_tags: [OfficialTag.offset(rand(OfficialTag.count)).first],
 		users: [User.offset(rand(User.count)).first]
 	})
 end
+puts "Finished Adding Outlets to get to #{OUTLETS_NUM}"
 
 
+puts "Adding mobile apps to get to #{APPS_NUM}"
 (1..APPS_NUM).each do |app_number|
 	language = ["English","Spanish"].sample
 	status = MobileApp.statuses.values.sample
-	MobileApp.create!({
+	ma = MobileApp.create({
 		name: Faker::App.name,
 		short_description: Faker::Lorem.sentence,
 		long_description: Faker::Lorem.paragraph,
@@ -87,9 +93,23 @@ end
 		status: status,
 		agencies: [Agency.offset(rand(Agency.count)).first],
 		official_tags: [OfficialTag.offset(rand(OfficialTag.count)).first],
-		users: [User.offset(rand(User.count)).first]
+		users: [User.offset(rand(User.count)).first],
 	})
+	ma.mobile_app_versions << MobileAppVersion.create({
+		store_url: Faker::Internet.url,
+		platform: ["iOS","Android","Web App", "Blackberry"].sample,
+		version_number: "v1",
+		publish_date: DateTime.current,
+		description: Faker::Lorem.paragraph,
+		whats_new: Faker::Lorem.paragraph,
+		screenshot: Faker::Company.logo,
+		device: Faker::Hacker.abbreviation,
+		language: language,
+		average_rating: "5",
+		number_of_ratings: 50
+	})
+	ma.save
 end
-
+puts "Finished adding mobile apps to get to #{APPS_NUM}"
 
 
