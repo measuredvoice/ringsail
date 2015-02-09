@@ -3,6 +3,8 @@ class Admin::OutletsController < Admin::AdminController
   respond_to :html, :xml, :json, :csv, :xls
 
   before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history, :restore, :publish, :archive]
+
+  before_filter :require_admin, only: [:publish]
   # GET /outlets
   # GET /outlets.json
   def index

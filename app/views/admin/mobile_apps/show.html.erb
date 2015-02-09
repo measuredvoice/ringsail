@@ -26,7 +26,9 @@
 			<%= link_to "Back to Mobile Apps", admin_mobile_apps_path, {:class => "fa fa-angle-double-left"} %>		
 			<%= link_to "Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "fa fa-pencil"} %>
 			<%= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
-			<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
+			<% if current_user.admin? %>
+				<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
+			<% end %>
 			<% if @mobile_app.published_mobile_app %>
 				<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "fa fa-archive"} %>  
     	<% end %>
