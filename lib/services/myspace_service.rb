@@ -16,11 +16,11 @@ class MyspaceService < Service
     account
   end
   
-  def service_url_example
+  def self.service_url_example
     "http://www.myspace.com/username"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://myspace.com/#{account}"
   end
 

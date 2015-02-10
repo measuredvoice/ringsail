@@ -3,7 +3,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   before_filter :authenticate_user! unless Rails.env.development?
-  before_filter :banned_user?, except: [:about]
+  before_filter :banned_user?, except: [:about, :impersonate]
   helper_method :current_user  
   
   def about

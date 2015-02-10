@@ -16,11 +16,11 @@ class IdeascaleService < Service
     account
   end
 
-  def service_url_example
+  def self.service_url_example
     "http://example.ideascale.com/"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://#{account}.ideascale.com/"
   end
 

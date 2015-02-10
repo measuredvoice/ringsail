@@ -25,9 +25,11 @@
 		<%= link_to 'Back to Social Media', admin_outlets_path, {:class => "fa fa-angle-double-left"} %>
 		<%= link_to 'Edit', edit_admin_outlet_path(@outlet), {:class => "fa fa-pencil"} %> 
 		<%= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "fa fa-history"} %>
-		<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
+		<% if current_user.admin? %>
+			<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
+		<% end %>
 		<% if @outlet.published_outlet%>
-		<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>  
+			<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>  
 		<% end %>
 	</div>
 </div>

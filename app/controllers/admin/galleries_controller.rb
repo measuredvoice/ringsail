@@ -90,6 +90,16 @@ class Admin::GalleriesController < Admin::AdminController
     redirect_to admin_gallery_path(@gallery), :notice => "Undid changes to mobile app."
   end
 
+  def publish
+    @gallery.published
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery has been published."
+  end
+
+  def archive
+    @gallery.archived!
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery has been published."
+  end
+
   
 
    private

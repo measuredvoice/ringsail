@@ -20,11 +20,11 @@ class BlipService < Service
     account
   end
   
-  def service_url_example
+  def self.service_url_example
     "http://www.blip.tv/username"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://blip.tv/#{account}"
   end
 

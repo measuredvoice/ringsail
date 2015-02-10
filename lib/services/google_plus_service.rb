@@ -24,11 +24,11 @@ class GooglePlusService < Service
     account
   end
   
-  def service_url_example
+  def self.service_url_example
     "https://plus.google.com/110031535020051778989/posts"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "https://plus.google.com/#{account}"
   end
   

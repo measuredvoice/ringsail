@@ -2,6 +2,8 @@ class Admin::MobileAppsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :history,:restore,:archive, :publish]
+
+  before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
@@ -96,6 +98,7 @@ class Admin::MobileAppsController < Admin::AdminController
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "MobileApp").order("created_at desc").page(params[:page]).per(25)
   end
+
   def history
     @versions = @mobile_app.versions.order("created_at desc")
   end

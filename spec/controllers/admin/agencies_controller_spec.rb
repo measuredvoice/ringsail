@@ -101,8 +101,9 @@ RSpec.describe Admin::AgenciesController, type: :controller do
     end
   end
 
-  describe "POST #create" do
-    it "responds successfully with an HTTP 200 status code for admin users" do
+
+  describe "POST #create" do 
+    it "creates an agency" do
       sign_in FactoryGirl.create(:admin_user)
       agency = FactoryGirl.attributes_for(:agency)
       post :create, agency: agency
@@ -175,5 +176,6 @@ RSpec.describe Admin::AgenciesController, type: :controller do
       expect(response).to redirect_to (admin_about_url)
     end
   end
+
 
 end

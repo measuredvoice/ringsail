@@ -20,11 +20,11 @@ class LivestreamService < Service
     account
   end
   
-  def service_url_example
+  def self.service_url_example
      "http://new.livestream.com/username"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://new.livestream.com/#{account}"
   end
 

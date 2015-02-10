@@ -16,11 +16,11 @@ class MeetupService < Service
     account
   end
   
-  def service_url_example
+  def self.service_url_example
     "http://www.meetup.com/example"
   end
   
-  def service_url_canonical
+  def self.service_url_canonical
     "http://meetup.com/#{account}"
   end
 
