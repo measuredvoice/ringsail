@@ -27,10 +27,13 @@
     <%= f.label :organization, "Social Media Account Name" %> </br>
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
-  
   <div class="field">
-    <%= f.label :info_url %> </br>
-    <%= f.text_field :info_url, :class => "form-control formwidth" %>
+    <%= f.label :short_description %> </br>
+    <%= f.text_field :short_description, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :long_description %> </br>
+    <%= f.text_area :long_description, :class => "form-control formwidth" %>
   </div>
   <div class="field">
     <%= f.label :language %> </br>

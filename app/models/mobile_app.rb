@@ -62,11 +62,11 @@ class MobileApp < ActiveRecord::Base
     self.official_tag_ids = ids.split(',')
   end
 
-  def agency_tokens(ids)
+  def agency_tokens=(ids)
     self.agency_ids = ids.split(',')
   end
 
-  def user_tokens(ids)
+  def user_tokens=(ids)
     self.user_ids = ids.split(',')
   end
   def published!
