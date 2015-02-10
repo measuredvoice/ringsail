@@ -31,8 +31,8 @@ class Api::V1::GalleriesController < Api::ApiController
 	def	index	
     @galleries = Gallery.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
 		if params[:q] && params[:q] != ""
-			@galleries = @galleries.where("name LIKE ? or description LIKE ?", 
-				"%#{params[:q]}%", "%#{params[:q]}%")
+			@galleries = @galleries.where("name LIKE ? or short_description LIKE ? or long_description LIKE ?", 
+				"%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
 		end
 		if params[:tags] && params[:tags] != ""
       @galleries = @galleries.where("official_tags.id" => params[:tags].split(","))

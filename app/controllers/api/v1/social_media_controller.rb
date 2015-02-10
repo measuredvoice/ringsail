@@ -23,7 +23,8 @@ class Api::V1::SocialMediaController < Api::ApiController
   def index
     @outlets = Outlet.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
     if params[:q] && params[:q] != ""
-      @outlets = @outlets.where("account LIKE ? OR organization LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%")
+      @outlets = @outlets.where("account LIKE ? OR organization LIKE ? OR short_description LIKE ? OR long_description LIKE ?", 
+        "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
     end
     if params[:agencies] && params[:agencies] != ""
       @outlets = @outlets.where("agencies.id" =>params[:agencies].split(","))
