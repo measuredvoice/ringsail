@@ -53,21 +53,28 @@ class Outlet < ActiveRecord::Base
   # Only drafts should have a paper trail.
   # Published outlets should not.
   has_paper_trail :if => Proc.new { |t| t.draft_id == nil }
-  
+  validates :service, 
+    :presence   => true
   validates :service_url, 
     :presence   => true, 
     :format     => { :with => URI::regexp(%w(http https)) }
-  validates :info_url,
-    :format     => { :with => URI::regexp(%w(http https)), 
-                     :allow_blank => true}
   # validates :agencies, :presence => true
-  validates :account, :presence => true
+
+  # validate :service_info
+  # validates :account, :presence => true
   validates :language, :presence => true
   
-  # before_save :set_updated_by
-  before_save :fix_service_info
-  
   paginates_per 100
+
+  # def service_info
+  #   if self.service_url && self.service
+  #     if self.service_info.account
+  #       self.account = self.service_info.account
+  #     else
+  #       self.errors.push(:service_url, "should be able to be parsed from URL, check the format you provided. If you believe this to be in error, contact an administrator")
+  #     end
+  #   end
+  # end
   
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -170,12 +177,5 @@ class Outlet < ActiveRecord::Base
     else
       self.updated_by ||= 'admin'
     end
-  end
-  
-  def fix_service_info
-    self.service = service_info.shortname
-    self.account = service_info.account
-  end
-  
-  
+  end  
 end

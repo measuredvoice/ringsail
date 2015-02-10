@@ -16,17 +16,18 @@
     <%= f.select :service, options_for_select(Service.all.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field"> 
-    <%= f.label :service_url %> format(<span id="format-help">pick a service for format help</span>)</br>
+    <%= f.label :service_url %> with format(<span id="format-help">pick a service for format help</span>)</br>
     <%= f.text_field :service_url, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :account %> </br>
+    <%= f.label :account %> (username from above url)</br>
     <%= f.text_field :account, {:class => "form-control formwidth" } %>
   </div>
   <div class="field">
     <%= f.label :organization, "Social Media Account Name" %> </br>
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
+  
   <div class="field">
     <%= f.label :short_description %> </br>
     <%= f.text_field :short_description, :class => "form-control formwidth" %>
@@ -92,5 +93,8 @@
         $('#format-help').html($('#outlet_service option:selected').data("format-helper"));
       }
     });
+     if(!(typeof $('#outlet_service option:selected').data("format-helper") === 'undefined')){
+        $('#format-help').html($('#outlet_service option:selected').data("format-helper"));
+     }
   </script>
 <% end %>
