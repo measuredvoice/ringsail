@@ -43,6 +43,7 @@ gem 'swagger-docs'
 # Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
 gem 'rack-cors', :require => 'rack/cors'
 
+
 ######
 # Assets / Assets related gems
 ######
@@ -89,6 +90,11 @@ group :development, :test do
 
   # open emails in browser on send
   gem 'letter_opener'
+
+
+  # Unicorn app server for hosting purposes in dev environment. Will be replaced with phusion passenger in 'real' host
+  gem 'unicorn'
+  
   gem "dotenv-rails", "2.0.0.beta"
 end
 ######
