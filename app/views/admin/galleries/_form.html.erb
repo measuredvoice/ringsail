@@ -16,8 +16,12 @@
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
   <div class="field"> 
-    <%= f.label :description %> </br>
-    <%= f.text_field :description, :class => "form-control formwidth" %>
+    <%= f.label :short_description %> </br>
+    <%= f.text_field :short_description, :class => "form-control formwidth" %>
+  </div>
+  <div class="field"> 
+    <%= f.label :long_description %> </br>
+    <%= f.text_area :long_description, :class => "form-control formwidth" %>
   </div>
   <div class="field">
     <%= f.label :agency_tokens, "Agencies" %> </br>
@@ -35,6 +39,7 @@
 
   <div class="field">
     <h3>Gallery Collection</h3>
+    <p><span class="label  label-warning">Notice!</span>  You can add unpublished items to a gallery, but the API will only feed out items that have a currently published version.</p>
     <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: true} %>
   </div>
   <div role="tabpanel">
