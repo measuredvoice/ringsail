@@ -21,7 +21,7 @@ class LinkedinService < Service
   end
   
   def self.service_url_example
-    "http://www.linkedin.com/company/example"
+    "http://www.linkedin.com/company/username"
   end
   
   def self.service_url_canonical
