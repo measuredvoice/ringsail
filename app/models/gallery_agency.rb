@@ -16,7 +16,7 @@ class GalleryAgency < ActiveRecord::Base
   after_destroy :update_counter_cache
   
   def update_counter_cache
-    self.agency.gallery_count = self.agency.galleries.where("draft_id IS NOT NULL").count
-    self.agency.save
+    self.agency.gallery_count = self.agency.galleries.where("draft_id IS NULL").count
+    self.agency.save!
   end
 end
