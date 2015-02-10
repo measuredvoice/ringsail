@@ -12,7 +12,15 @@
   <strong>Long Description:</strong>
   <%= mobile_app.long_description %>
 </p>
-
+<hr>
 <% mobile_app.mobile_app_versions.each do |mav| %>
-  Version Platform: <%= mav.platform %>
+  Store url: <%= mav.store_url %> </br>
+  Version Platform: <%= mav.platform %> </br>
+  Version Number: <%= mav.version_number %> </br>
+  What's new: <%= mav.whats_new %>
+  Publish Date: <%= mav.publish_date %> </br>
+  Device: <%= mav.device %> </br>
+  Language: <%= mav.language %> </br>
+  Average Rating: <%= mav.average_rating %> </br>
+  Number of Ratings: <%= mav.number_of_ratings %> </br>
 <% end %>
