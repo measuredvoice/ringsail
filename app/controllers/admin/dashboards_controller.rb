@@ -13,7 +13,7 @@ class Admin::DashboardsController < Admin::AdminController
   	@max_count = [@agency_count,@outlet_count,@app_count, @gallery_count,@user_count,@tag_count].sort.last
 
     ## specific breakdowns
-    social_media_breakdowns = Outlet.where("status <> 2 AND draft_id IS NULL").group(:service).count
+    social_media_breakdowns = Outlet.where("draft_id IS NULL").group(:service).count
     @social_chart = []
     social_media_breakdowns.each do |k,v|
       @social_chart << {label: Service.find_by_shortname(k).longname, value: v}
