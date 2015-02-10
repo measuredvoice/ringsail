@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DigitalGov Registry Swagger</title>
+  <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
+  <%= stylesheet_link_tag    "swagger" %>
+</head>
+
+<body class="swagger-section">
+  <%= yield %>
+  <%= javascript_include_tag "swagger" %>
+  <%= yield :additional_javascript %>
+</body>
+</html>

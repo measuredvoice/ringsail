@@ -256,15 +256,11 @@ Ringsail::Application.routes.draw do
   #######
   #### PUBLIC PAGES
   #######
-  namespace :public do
-    resources :agencies do
-      collection do
-        get "autocomplete"
-      end
-    end
+  scope module: :public do
+    get "swagger" => "swagger#index"
   end
 
-  root :to => "public/home#index"
+  root :to => "public/swagger#index"
 
 
   ######
