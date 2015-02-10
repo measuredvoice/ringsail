@@ -18,7 +18,11 @@ class Admin::AdminController < ApplicationController
   def current_user
     if Rails.env.development?
       if session[:user_id]
-        @current_user ||= User.find(session[:user_id])
+        if User.where(id: session[:user_id]).count > 0
+          @current_user ||= User.find(session[:user_id])
+        else
+          @current_user ||= User.first
+        end
       else
         @current_user ||= User.first
       end
