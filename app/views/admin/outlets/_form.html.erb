@@ -96,5 +96,13 @@
      if(!(typeof $('#outlet_service option:selected').data("format-helper") === 'undefined')){
         $('#format-help').html($('#outlet_service option:selected').data("format-helper"));
      }
+    $('#outlet_service_url').on("change",function(item){
+      $.get("/admin/outlets/account_for_url",{
+          url: $('#outlet_service_url').val()
+        },function(data){
+          $('#outlet_account').val(data.account);
+          $('#outlet_service').val(data.service);
+      });
+    });
   </script>
 <% end %>

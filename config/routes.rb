@@ -192,6 +192,7 @@ Ringsail::Application.routes.draw do
       end
       collection do
         get "datatables"
+        get "account_for_url"
       end
     end
     resources :mobile_apps, concerns: :activity_and_history do

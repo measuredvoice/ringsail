@@ -42,6 +42,16 @@ class Admin::OutletsController < Admin::AdminController
       }
     end
   end
+
+  def account_for_url
+    service = Service.find_by_url(params[:url])
+    account = { account: "", service: ""}
+    if service
+      account = { account: service.account,
+        service: service.shortname }
+    end
+    render json: account
+  end
   # GET /outlets/1
   # GET /outlets/1.json
 
