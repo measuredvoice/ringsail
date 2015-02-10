@@ -63,7 +63,7 @@ puts "Adding outlets to get to #{OUTLETS_NUM}"
 	random_service = Service.all.sample
 	language = ["English","Spanish"].sample
 	status = Outlet.statuses.values.sample
-	Outlet.create!({
+	out = Outlet.create!({
 		service: random_service.shortname,
 		service_url: random_service.service_url_example,
 		info_url: Faker::Internet.url,
@@ -76,6 +76,9 @@ puts "Adding outlets to get to #{OUTLETS_NUM}"
 		official_tags: [OfficialTag.offset(rand(OfficialTag.count)).first],
 		users: [User.offset(rand(User.count)).first]
 	})
+	if out.published?
+		out.published!
+	end
 end
 puts "Finished Adding Outlets to get to #{OUTLETS_NUM}"
 
@@ -108,6 +111,9 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 		average_rating: "5",
 		number_of_ratings: 50
 	})
+	if ma.published?
+		ma.published!
+	end
 	ma.save
 end
 puts "Finished adding mobile apps to get to #{APPS_NUM}"
