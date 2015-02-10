@@ -203,7 +203,12 @@ Ringsail::Application.routes.draw do
         get "datatables"
       end
     end
-    resources :galleries, concerns: :activity_and_history
+    resources :galleries, concerns: :activity_and_history do
+      member do
+        get "publish"
+        get "archive"
+      end
+    end
     resources :users do
       collection do
         get 'tokeninput'

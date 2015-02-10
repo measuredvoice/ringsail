@@ -1,7 +1,7 @@
 class Admin::GalleriesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :history,:restore]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :history,:restore, :publish, :archive]
   # GET /gallerys
   # GET /gallerys.json
   def index
@@ -91,13 +91,13 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def publish
-    @gallery.published
-    redirect_to admin_gallery_path(@gallery), :notice => "Gallery has been published."
+    @gallery.published!
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now public."
   end
 
   def archive
     @gallery.archived!
-    redirect_to admin_gallery_path(@gallery), :notice => "Gallery has been published."
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now archived."
   end
 
   

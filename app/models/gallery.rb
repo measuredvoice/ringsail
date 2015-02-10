@@ -107,14 +107,7 @@ class Gallery < ActiveRecord::Base
     MobileApp.public_activity_on
     self.create_activity :published
   end
-#  id                :integer          not null, primary key
-#  name              :string(255)
-#  description       :text(65535)
-#  draft_id          :integer
-#  short_description :text(65535)
-#  long_description  :text(65535)
-#  status            :integer
-#
+  
   def archived!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archived]
@@ -127,11 +120,11 @@ class Gallery < ActiveRecord::Base
     self.official_tag_ids = ids.split(',')
   end
 
-  def agency_tokens(ids)
+  def agency_tokens=(ids)
     self.agency_ids = ids.split(',')
   end
 
-  def user_tokens(ids)
+  def user_tokens=(ids)
     self.user_ids = ids.split(',')
   end
 end

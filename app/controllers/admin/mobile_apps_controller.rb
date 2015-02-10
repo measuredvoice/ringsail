@@ -110,12 +110,13 @@ class Admin::MobileAppsController < Admin::AdminController
 
   def publish
     @mobile_app.published!
-    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now public"
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now public."
+
   end
 
   def archive
     @mobile_app.archived!
-    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now archived"
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now archived."
   end
 
    private
