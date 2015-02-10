@@ -24,7 +24,7 @@ class Admin::MobileAppsController < Admin::AdminController
   end
 
   def datatables
-    @mobile_apps = MobileApp.all
+    @mobile_apps = MobileApp.where("draft_id IS NULL").uniq
     respond_to do |format|
       format.json {
         render json: {

@@ -33,7 +33,7 @@ class Admin::OutletsController < Admin::AdminController
 
 
   def datatables
-    @outlets = Outlet.all
+    @outlets = Outlet.where("draft_id IS NULL").uniq
     respond_to do |format|
       format.json {
         render json: {
