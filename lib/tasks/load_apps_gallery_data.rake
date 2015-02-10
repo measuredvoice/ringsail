@@ -177,7 +177,7 @@ namespace :load_apps_gallery_data do
 
     File.readlines(filepath).each do |f|
       item = JSON.load( f )
-    	gallery = Gallery.find_or_create_by(name: item["Name"],description: item["Description"])
+    	gallery = Gallery.find_or_create_by(name: item["Name"],long_description: item["Description"])
     	
     	registrations = item["Registration"].map{|item| item["Id"]}
 

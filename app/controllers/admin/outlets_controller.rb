@@ -115,12 +115,12 @@ class Admin::OutletsController < Admin::AdminController
 
   def publish
     @outlet.published!
-    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account is now public"
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now public."
   end
 
   def archive
     @outlet.archived!
-    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account is now archived"
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived"
   end
 
   private

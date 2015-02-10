@@ -42,7 +42,6 @@ class AddMobileApps < ActiveRecord::Migration
 
   	create_table :galleries do |t|
   		t.string :name
-  		t.text :description
   	end
 
   	create_table :gallery_users do |t|

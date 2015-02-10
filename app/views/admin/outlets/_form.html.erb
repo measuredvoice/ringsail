@@ -13,10 +13,10 @@
 
   <div class="field">
     <%= f.label :service %> </br>
-    <%= f.select :service, options_from_collection_for_select(Service.all,:shortname,:longname,@outlet.service), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
+    <%= f.select :service, options_for_select(Service.all.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field"> 
-    <%= f.label :service_url %> We should look into making some of this driven by javascript from the service url</br>
+    <%= f.label :service_url %> format(<span id="format-help">pick a service for format help</span>)</br>
     <%= f.text_field :service_url, :class => "form-control formwidth" %>
   </div>
   <div class="field">
@@ -80,6 +80,14 @@
     $("#outlet_user_tokens").tokenInput("/admin/users/tokeninput.json", {
       crossDomain: false,
       prePopulate: <%= raw user_json.to_json %>
+    });
+
+    $('#outlet_service').on("change",function(item){
+      if(typeof $('#outlet_service option:selected').data("format-helper") === 'undefined'){
+        $('#format-help').html("Pick a service for format help");
+      }else{
+        $('#format-help').html($('#outlet_service option:selected').data("format-helper"));
+      }
     });
   </script>
 <% end %>
