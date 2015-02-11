@@ -1,4 +1,4 @@
-json.array! @tags do |tag|
-  json.id tag.id
-  json.name tag.tag_text
+json.array! @official_tags do |official_tag|
+  json.id official_tag.id
+  json.name official_tag.tag_text
 end

@@ -1,7 +1,7 @@
 <h1 class="page-header">Users</h1>
 
 <div class="row placeholders">
-  <%= paginate @emails %>     
+  <%= paginate @email_messages %>     
   <table class=" table table-striped">
     <thead>
       <tr = "users_row">
@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @emails.each do |email| %>
+      <% @email_messages.each do |email| %>
         <tr class = "tablerow">
           <td class = "table_data"><%= email.to %></td>
           <td class = "table_data"><%= user_list_format(email.user) %></td>
@@ -24,5 +24,5 @@
       <% end %>
     </tbody>
   </table>
-  <%= paginate @emails %>
+  <%= paginate @email_messages %>
 </div>

@@ -153,9 +153,9 @@ RSpec.describe Admin::OutletsController, type: :controller do
   describe "PUT #update/:id" do
     it "responds successfully with an HTTP 200 status code for admin users" do
       sign_in FactoryGirl.create(:admin_user)
-      outlet = FactoryGirl.attributes_for(:outlet, :name => "abcdedfh")
-      put :update, outlet: outlet
-      response.should be_success
+      outlet = FactoryGirl.create(:outlet)
+      outlet_attributes = FactoryGirl.attributes_for(:outlet)
+      put :update, id: outlet.id, outlet: outlet_attributes
       expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
      end
 

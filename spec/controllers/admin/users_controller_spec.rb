@@ -114,25 +114,26 @@ RSpec.describe Admin::UsersController, type: :controller do
     it "responds successfully with an HTTP 200 status code for admin users" do
       sign_in FactoryGirl.create(:admin_user)
       user = FactoryGirl.attributes_for(:user)
+      user[:role] = "limited_user"
       post :create, user: user
       expect(response).to redirect_to(admin_user_path(assigns(:user)))
     end
 
     it "should redirect users who are not admins" do
       sign_in FactoryGirl.create(:banned_user)
-      user = FactoryGirl.create(:user)
+      user = FactoryGirl.attributes_for(:user)
       post :create, user: user
-      expect(response).to redirect_to (admin_about_url)
+      expect(response).to redirect_to(admin_about_url)
 
       sign_in FactoryGirl.create(:limited_user)
       user = FactoryGirl.attributes_for(:user)
       post :create, user: user
-      expect(response).to redirect_to (admin_about_url)
+      expect(response).to redirect_to(admin_about_url)
 
       sign_in FactoryGirl.create(:full_user)
       user = FactoryGirl.attributes_for(:user)
       post :create, user: user
-      expect(response).to redirect_to (admin_about_url)
+      expect(response).to redirect_to(admin_about_url)
     end
   end
 

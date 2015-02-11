@@ -24,8 +24,6 @@ class Admin::UsersController < Admin::AdminController
   # GET /users/1/edit
   def edit
     # restrict to admin users or users looking at their own profile
-    puts current_user.id
-    puts @user.id
     if current_user.id != @user.id
       unless current_user.admin?
         redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
@@ -92,7 +90,7 @@ class Admin::UsersController < Admin::AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :user, :agency_id, :phone, :first_name, :last_name, :groups, :role)
   end
 
   def sort_column

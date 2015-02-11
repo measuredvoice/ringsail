@@ -1,10 +1,10 @@
-<%= form_for([:admin,@tag]) do |f| %>
-    <% if @tag.errors.any? %>
+<%= form_for([:admin,@official_tag]) do |f| %>
+    <% if @official_tag.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+        <h2><%= pluralize(@official_tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
 
         <ul>
-        <% @tag.errors.full_messages.each do |message| %>
+        <% @official_tag.errors.full_messages.each do |message| %>
         <li><%= message %></li>
         <% end %>
         </ul>
