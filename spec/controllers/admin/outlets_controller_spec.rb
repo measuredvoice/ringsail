@@ -178,4 +178,57 @@ RSpec.describe Admin::OutletsController, type: :controller do
   end
 
 
+  describe "GET /outlets/:id/publish" do
+    it "should allow admins to publish an outlet" do
+      sign_in FactoryGirl.create(:admin_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :publish, id: outlet.id
+      expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
+    end
+
+    it "should redirect non-admins trying to publish an outlet" do
+      sign_in FactoryGirl.create(:banned_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :publish, id: outlet.id
+      expect(response).to redirect_to (admin_about_url)
+
+      sign_in FactoryGirl.create(:limited_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :publish, id: outlet.id
+      expect(response).to redirect_to (admin_about_url)
+
+      sign_in FactoryGirl.create(:full_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :publish, id: outlet.id
+      expect(response).to redirect_to (admin_about_url)
+    end
+  end
+
+  describe "GET /outlets/:id/archived" do
+    it "should allow admins to archive an outlet" do
+      sign_in FactoryGirl.create(:admin_user)
+      outlet = FactoryGirl.create(:outlet)
+      outlet.published!
+      get :archive, id: outlet.id
+      expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
+    end
+
+    it "should redirect non-admins trying to archive an outlet" do
+      sign_in FactoryGirl.create(:banned_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :archive, id: outlet.id
+      expect(response).to redirect_to (admin_about_url)
+
+      sign_in FactoryGirl.create(:limited_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :archive, id: outlet.id
+      expect(response).to redirect_to (admin_about_url)
+
+      sign_in FactoryGirl.create(:full_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :archive, id: outlet.id
+      expect(response).to redirect_to (admin_about_url)
+    end
+  end
+
 end
