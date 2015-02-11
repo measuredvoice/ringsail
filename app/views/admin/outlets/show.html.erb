@@ -11,8 +11,8 @@
     <h3><i class="fa fa-clock-o fa-fw"></i> Published Social Media Account Info</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
-	  		<% if @outlet.published_outlet %>
-	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published_outlet} %>
+	  		<% if @outlet.published %>
+	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published } %>
 	  		<% else %>
 	  			<p>No information is currently published for this social media account</p>
 	  		<% end %>
@@ -28,7 +28,7 @@
 		<% if current_user.admin? %>
 			<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
 		<% end %>
-		<% if @outlet.published_outlet%>
+		<% if @outlet.published %>
 			<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>  
 		<% end %>
 	</div>

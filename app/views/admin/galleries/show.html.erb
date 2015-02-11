@@ -11,8 +11,8 @@
 		<h3><i class="fa fa-clock-o fa-fw"></i> Published Gallery Info</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
-	  		<% if @gallery.published_gallery %>
-	  		<%= render partial: "gallery_details", locals: { gallery: @gallery.published_gallery } %>	
+	  		<% if @gallery.published %>
+	  		<%= render partial: "gallery_details", locals: { gallery: @gallery.published } %>	
 	  		<% else %>
 	  			<p>No information is currently published for this gallery.</p>
 	  		<% end %>
@@ -29,7 +29,7 @@
 			<% if current_user.admin? %>
 				<%= link_to 'Publish', publish_admin_gallery_path(@gallery), {:class => "fa fa-bullhorn"} %> 
 			<% end %>
-			<% if @gallery.published_gallery %>
+			<% if @gallery.published %>
 				<%= link_to 'Archive', archive_admin_gallery_path(@gallery), {:class=> "fa fa-archive"} %>  
     	<% end %>
 		</div>

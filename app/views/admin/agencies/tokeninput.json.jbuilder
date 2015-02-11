@@ -1,4 +1,5 @@
-json.array! @agencies do |agencie|
+json.array! @agencies do |agency|
   json.id  agency.id
   json.name agency.name
 end
+

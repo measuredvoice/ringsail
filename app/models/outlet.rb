@@ -31,8 +31,8 @@ class Outlet < ActiveRecord::Base
   # The "published" outlet will have a draft_id pointing to its parent
   # The "draft" outlet will not have a draft_id field
   # This will allow easy querying on the public / admin portion of the application
-  has_one :published_outlet, class_name: "Outlet", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft_outlet, class_name: "Outlet", foreign_key: "draft_id"
+  has_one :published, class_name: "Outlet", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft, class_name: "Outlet", foreign_key: "draft_id"
 
   # These are has and belongs to many relationships
   has_many :sponsorships, dependent: :destroy
@@ -140,8 +140,8 @@ class Outlet < ActiveRecord::Base
   def published!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:published]
-    self.published_outlet.destroy! if self.published_outlet
-    self.published_outlet = Outlet.create!({
+    self.published.destroy! if self.published
+    self.published = Outlet.create!({
       service_url: self.service_url,
       service: self.service,
       organization: self.organization,
@@ -162,7 +162,7 @@ class Outlet < ActiveRecord::Base
   def archived!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:archived]
-    self.published_outlet.destroy! if self.published_outlet
+    self.published.destroy! if self.published
     self.save!
     Outlet.public_activity_on
     self.create_activity :archived

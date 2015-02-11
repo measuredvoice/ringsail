@@ -11,8 +11,8 @@
 		<h3><i class="fa fa-clock-o fa-fw"></i> Published Mobile App Info</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
-	  		<% if @mobile_app.published_mobile_app %>
-	  		<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app.published_mobile_app } %>	
+	  		<% if @mobile_app.published %>
+	  		<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app.published } %>	
 	  		<% else %>
 	  			<p>No information is currently published for this mobile application.</p>
 	  		<% end %>
@@ -29,7 +29,7 @@
 			<% if current_user.admin? %>
 				<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
 			<% end %>
-			<% if @mobile_app.published_mobile_app %>
+			<% if @mobile_app.published %>
 				<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "fa fa-archive"} %>  
     	<% end %>
 		</div>

@@ -17,12 +17,12 @@ class Gallery < ActiveRecord::Base
 
   enum status: { under_review: 0, published: 1, archived: 2 }
 
-   # Outlets have a relationship to themselvs
+  # Galleries have a relationship to themselvs
   # The "published" outlet will have a draft_id pointing to its parent
   # The "draft" outlet will not have a draft_id field
   # This will allow easy querying on the public / admin portion of the application
-  has_one :published_gallery, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft_gallery, class_name: "Gallery", foreign_key: "draft_id"
+  has_one :published, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft, class_name: "Gallery", foreign_key: "draft_id"
 
 
 	#handles versioning
@@ -89,8 +89,8 @@ class Gallery < ActiveRecord::Base
   def published!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:published]
-    self.published_gallery.destroy! if self.published_gallery
-    self.published_gallery = Gallery.create!({
+    self.published.destroy! if self.published
+    self.published = Gallery.create!({
       name: self.name,
       short_description: self.short_description,
       long_description: self.long_description,
@@ -100,7 +100,7 @@ class Gallery < ActiveRecord::Base
       status: self.status
     })
     self.gallery_items.each do |mav|
-      self.published_gallery.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
+      self.published.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
     end
     self.save!
     MobileApp.public_activity_on
@@ -110,7 +110,7 @@ class Gallery < ActiveRecord::Base
   def archived!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archived]
-    self.published_gallery.destroy! if self.published_gallery
+    self.published.destroy! if self.published
     self.save!
     Gallery.public_activity_on
     self.create_activity :archived

@@ -25,8 +25,8 @@ class MobileApp < ActiveRecord::Base
   # The "published" outlet will have a draft_id pointing to its parent
   # The "draft" outlet will not have a draft_id field
   # This will allow easy querying on the public / admin portion of the application
-  has_one :published_mobile_app, class_name: "MobileApp", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft_mobile_app, class_name: "MobileApp", foreign_key: "draft_id"
+  has_one :published, class_name: "MobileApp", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft, class_name: "MobileApp", foreign_key: "draft_id"
 
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
@@ -72,8 +72,8 @@ class MobileApp < ActiveRecord::Base
   def published!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:published]
-    self.published_mobile_app.destroy! if self.published_mobile_app
-    self.published_mobile_app = MobileApp.create!({
+    self.published.destroy! if self.published
+    self.published = MobileApp.create!({
       name: self.name,
       short_description: self.short_description,
       long_description: self.long_description,
@@ -85,7 +85,7 @@ class MobileApp < ActiveRecord::Base
       status: self.status
     })
     self.mobile_app_versions.each do |mav|
-      self.published_mobile_app.mobile_app_versions << MobileAppVersion.create(mav.attributes.except!("id","mobile_app_id"))
+      self.published.mobile_app_versions << MobileAppVersion.create(mav.attributes.except!("id","mobile_app_id"))
     end
     self.save!
     MobileApp.public_activity_on
@@ -106,7 +106,7 @@ class MobileApp < ActiveRecord::Base
   def archived!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:archived]
-    self.published_mobile_app.destroy! if self.published_mobile_app
+    self.published.destroy! if self.published
     self.save!
     MobileApp.public_activity_on
     self.create_activity :archived
