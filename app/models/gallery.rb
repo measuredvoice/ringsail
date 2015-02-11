@@ -4,7 +4,6 @@
 #
 #  id                :integer          not null, primary key
 #  name              :string(255)
-#  description       :text(65535)
 #  draft_id          :integer
 #  short_description :text(65535)
 #  long_description  :text(65535)
