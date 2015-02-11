@@ -8,8 +8,6 @@ gem 'rails', '4.2.0'
 gem 'mysql2'
 
 # Templates for generating JSON and other data output
-# see https://github.com/gowalla/boxer
-gem 'boxer'
 gem 'json'
 gem 'jbuilder'
 
