@@ -15,7 +15,10 @@
           <%= link_to "Swagger Docs", swagger_path %>
         </li>
         <li class="<%= "active" if request.path.include?("search") %>">
-          <%= link_to "Search the API", search_path %>
+          <%= link_to "Search Examples", search_path %>
+        </li>
+        <li class="<%= "active" if request.path.include?("widgets") %>">
+          <%= link_to "Widget Examples", widgets_path %>
         </li>
       </ul>
     </div>

@@ -262,6 +262,7 @@ Ringsail::Application.routes.draw do
   scope module: :public do
     get "swagger" => "swagger#index"
     get "search" => "search#index"
+    get "widgets" => "widgets#index"
   end
 
   root :to => "public/swagger#index"
