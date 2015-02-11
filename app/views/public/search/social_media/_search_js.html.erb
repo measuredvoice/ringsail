@@ -1,0 +1,62 @@
+<script id="social-media-template" type="text/x-handlebars-template">
+  <div class="media">
+    <div class="media-body text-overflow">
+      <a href="{{service_url}}"><h4 class="media-heading">
+      {{#if organization}}
+        {{organization}}
+      {{else}}
+        {{service_display_name}}:{{service_url}}
+      {{/if}}
+      </h4></a>
+      {{#each agencies}}
+        {{name}}
+      {{/each}}
+    </div>
+  </div>
+</script>
+
+<script>
+  var source_social_media_template   = $("#social-media-template").html();
+  var social_media_template = Handlebars.compile(source_social_media_template); 
+
+  $("#search-social-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media/tokeninput.json", {
+    crossDomain: false,
+    tokenFormatter: function(item){
+      return '<li>'+ item.name +'</li>';
+    },
+    tokenValue: "key"
+  });
+
+  $('#social-media-search').submit(function(e){
+    e.preventDefault();
+    tokens = $("#search-social-box").tokenInput("get");
+    agencies = [];
+    services = [];
+    tags = []
+    text = []
+    for(var i=0; i < tokens.length; i ++){
+      split_data = tokens[i]["key"].split("|");
+      if(split_data[0].indexOf("service")==0){
+        services.push(split_data[1])
+      }else if(split_data[0].indexOf("agency")==0){
+        agencies.push(split_data[1])
+      }else if(split_data[0].indexOf("tag")==0){
+        tags.push(split_data[1])
+      }else if(split_data[0].indexOf("text")==0){
+        text.push(split_data[1])
+      }else{
+
+      }
+    }
+    $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media.json",{
+      q: text.join(" "),
+      agencies: agencies.join(","),
+      services: services.join(","),
+      tags: tags.join(",")
+    }, function(data){
+      for(var i =0; i<data.length; i++){
+        $('#social-media-collection').append(social_media_template(data[i]));
+      }
+    })
+  });
+</script>

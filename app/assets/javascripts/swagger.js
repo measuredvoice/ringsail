@@ -1,5 +1,6 @@
 //= require swagger/shred.bundle.js
 //= require swagger/jquery-1.8.0.min
+//= require jquery_ujs
 //= require swagger/jquery.slideto.min
 //= require swagger/jquery.wiggle.min
 //= require swagger/jquery.ba-bbq.min
@@ -9,3 +10,4 @@
 //= require swagger/swagger.js
 //= require swagger/swagger-ui
 //= require swagger/highlight.7.3.pack
+//= require bootstrap-sprockets

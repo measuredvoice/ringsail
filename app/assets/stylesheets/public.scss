@@ -1,12 +1,8 @@
 /*
  * This manifest file includes the CSS files required by default
  *= require_self
- *= require morris
- *= require timeline
- *= require datatables
- *= require custom-token-input
  *= require font-awesome
- *= require jqcloud
+ *= require custom-token-input
  */
 
 @import "bootstrap-sprockets";
@@ -350,9 +346,9 @@ display: block;
 .table th a:hover:after{
     content: ' ';
     width: 0; 
-	height: 0; 
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
     border-top: 5px solid #ccc;
      position: relative;
 top: 9px;
@@ -362,11 +358,11 @@ left: 3px;
 .table th .asc:after {
   content: ' ';
     width: 0; 
-	height: 0; 
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	
-	border-top: 5px solid #000;
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  
+  border-top: 5px solid #000;
      position: relative;
 top: 9px;
 left: 8px;
@@ -376,11 +372,11 @@ left: 8px;
 .table th .desc:after {
  content: ' ';
     width: 0; 
-	height: 0; 
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	
-	border-bottom: 5px solid #000;
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  
+  border-bottom: 5px solid #000;
     position: relative;
 top: -8px;
 left: 8px;

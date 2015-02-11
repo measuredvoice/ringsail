@@ -3,10 +3,11 @@
 <head>
   <title>DigitalGov Registry Swagger</title>
   <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
-  <%= stylesheet_link_tag    "swagger" %>
+  <%= stylesheet_link_tag  "swagger" %>
+  <%= yield :additional_css %>
 </head>
-
-<body class="swagger-section">
+<body>
+  <%= render partial: "layouts/shared_public_header" %>
   <%= yield %>
   <%= javascript_include_tag "swagger" %>
   <%= yield :additional_javascript %>

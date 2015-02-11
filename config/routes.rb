@@ -1,7 +1,6 @@
 # == Route Map
 #
 #                          Prefix Verb   URI Pattern                                                     Controller#Action
-#                admin_dashboards GET    /admin/dashboards(.:format)                                     admin/dashbaords#index
 #       tokeninput_admin_agencies GET    /admin/agencies/tokeninput(.:format)                            admin/agencies#tokeninput
 #            history_admin_agency GET    /admin/agencies/:id/history(.:format)                           admin/agencies#history
 #            restore_admin_agency GET    /admin/agencies/:id/restore(.:format)                           admin/agencies#restore
@@ -29,6 +28,7 @@
 #            publish_admin_outlet GET    /admin/outlets/:id/publish(.:format)                            admin/outlets#publish
 #            archive_admin_outlet GET    /admin/outlets/:id/archive(.:format)                            admin/outlets#archive
 #        datatables_admin_outlets GET    /admin/outlets/datatables(.:format)                             admin/outlets#datatables
+#   account_for_url_admin_outlets GET    /admin/outlets/account_for_url(.:format)                        admin/outlets#account_for_url
 #            history_admin_outlet GET    /admin/outlets/:id/history(.:format)                            admin/outlets#history
 #            restore_admin_outlet GET    /admin/outlets/:id/restore(.:format)                            admin/outlets#restore
 #        activities_admin_outlets GET    /admin/outlets/activities(.:format)                             admin/outlets#activities
@@ -54,6 +54,8 @@
 #                                 PATCH  /admin/mobile_apps/:id(.:format)                                admin/mobile_apps#update
 #                                 PUT    /admin/mobile_apps/:id(.:format)                                admin/mobile_apps#update
 #                                 DELETE /admin/mobile_apps/:id(.:format)                                admin/mobile_apps#destroy
+#           publish_admin_gallery GET    /admin/galleries/:id/publish(.:format)                          admin/galleries#publish
+#           archive_admin_gallery GET    /admin/galleries/:id/archive(.:format)                          admin/galleries#archive
 #           history_admin_gallery GET    /admin/galleries/:id/history(.:format)                          admin/galleries#history
 #           restore_admin_gallery GET    /admin/galleries/:id/restore(.:format)                          admin/galleries#restore
 #      activities_admin_galleries GET    /admin/galleries/activities(.:format)                           admin/galleries#activities
@@ -82,7 +84,9 @@
 #                                 PATCH  /admin/email_messages/:id(.:format)                             admin/email_messages#update
 #                                 PUT    /admin/email_messages/:id(.:format)                             admin/email_messages#update
 #                                 DELETE /admin/email_messages/:id(.:format)                             admin/email_messages#destroy
+#               admin_impersonate GET    /admin/impersonate(.:format)                                    admin/admin#impersonate
 #                     admin_about GET    /admin/about(.:format)                                          admin/admin#about
+#                admin_dashboards GET    /admin/dashboards(.:format)                                     admin/dashboards#index
 #                           admin GET    /admin(.:format)                                                admin/dashboards#index
 #                    user_service GET    /users/service(.:format)                                        devise/cas_sessions#service
 #            user_single_sign_out POST   /users/service(.:format)                                        devise/cas_sessions#single_sign_out
@@ -110,16 +114,8 @@
 #                    api_v1_multi GET    /api/v1/multi/:id(.:format)                                     api/v1/multi#show
 #                                 GET    /api/v1/agencies(.:format)                                      api/v1/agencies#index
 #                                 GET    /api/v1/agencies/:id(.:format)                                  api/v1/agencies#show
-#    autocomplete_public_agencies GET    /public/agencies/autocomplete(.:format)                         public/agencies#autocomplete
-#                 public_agencies GET    /public/agencies(.:format)                                      public/agencies#index
-#                                 POST   /public/agencies(.:format)                                      public/agencies#create
-#               new_public_agency GET    /public/agencies/new(.:format)                                  public/agencies#new
-#              edit_public_agency GET    /public/agencies/:id/edit(.:format)                             public/agencies#edit
-#                   public_agency GET    /public/agencies/:id(.:format)                                  public/agencies#show
-#                                 PATCH  /public/agencies/:id(.:format)                                  public/agencies#update
-#                                 PUT    /public/agencies/:id(.:format)                                  public/agencies#update
-#                                 DELETE /public/agencies/:id(.:format)                                  public/agencies#destroy
-#                            root GET    /                                                               public/home#index
+#                         swagger GET    /swagger(.:format)                                              public/swagger#index
+#                            root GET    /                                                               public/swagger#index
 #                   verify_outlet GET    /accounts/verify(.:format)                                      public/outlets#verify
 #                     show_outlet GET    /accounts/:service/:account(.:format)                           public/outlets#verify {:account=>/[\w.@\+-]+?/, :format=>/html|json|xml/}
 #                    list_outlets GET    /accounts(.:format)                                             public/outlets#list
@@ -226,6 +222,7 @@ Ringsail::Application.routes.draw do
     get 'dashboards' => "dashboards#index"
     get '/' => 'dashboards#index'
   end
+  
   devise_for :users
 
   #######
@@ -264,6 +261,7 @@ Ringsail::Application.routes.draw do
   #######
   scope module: :public do
     get "swagger" => "swagger#index"
+    get "search" => "search#index"
   end
 
   root :to => "public/swagger#index"

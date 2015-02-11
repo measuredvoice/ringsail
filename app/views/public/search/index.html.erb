@@ -1,0 +1,88 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h1> Search pages</h1>
+    <p>These are widgets performing search against the API.  Social Media Search, Social Media Verification, and Mobile Apps Search are included</p>
+    <div role="tabpanel">
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a></li>
+        <li role="presentation"><a href="#verify_social" aria-controls="profile" role="tab" data-toggle="tab">Verify Social Media</a></li>
+        <li role="presentation"><a href="#search_mobile" aria-controls="messages" role="tab" data-toggle="tab">Search Mobile Applications</a></li>
+        <li role="presentation"><a href="#code_examples" aria-controls="messages" role="tab" data-toggle="tab">Code Examples</a></li>
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="search_social">
+          <%= render partial: "public/search/social_media/search_html" %>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="verify_social">
+          <%= render partial: "public/search/social_media/verify_html" %>
+
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="search_mobile">
+          <%= render partial: "public/search/mobile_apps/search_html" %>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="code_examples">
+          <div class="row">
+            <div class="col-sm-12">
+              <h2>Social Media Search</h2>
+              <h3>HTML Markup</h3>
+              <div class="well">
+                <pre>
+<%= "#{render(partial: "public/search/social_media/search_html")}" %>
+                </pre>
+              </div>
+            <h3>Javascript</h3>
+              <div class="well">
+                <pre>
+<%= "#{render(partial: "public/search/social_media/search_js")}" %>
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <h2>Verify Social Media</h2>
+              <h3>HTML Markup</h3>
+              <div class="well">
+                <pre>
+<%= "#{render(partial: "public/search/social_media/verify_html")}" %>
+                </pre>
+              </div>
+              <h3>Javascript</h3>
+              <div class="well">
+                <pre>
+<%= "#{render(partial: "public/search/social_media/verify_js")}" %>
+                </pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <h2>Search Mobile</h2>
+              <h3>HTML Markup</h3>
+              <div class="well">
+                <pre>
+<%= "#{render(partial: "public/search/mobile_apps/search_html")}" %>
+                </pre>
+              </div>
+              <h3>Javascript</h3>
+              <div class="well">
+                <pre>
+<%= "#{render(partial: "public/search/mobile_apps/search_js")}" %>
+                </pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% content_for :additional_javascript do %>
+  <%= render partial: "public/search/social_media/search_js" %>
+  <%= render partial: "public/search/social_media/verify_js" %>
+  <%= render partial: "public/search/mobile_apps/search_js" %>
+<% end %>
