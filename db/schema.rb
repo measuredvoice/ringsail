@@ -69,7 +69,6 @@ ActiveRecord::Schema.define(version: 20150206202522) do
 
   create_table "galleries", force: :cascade do |t|
     t.string  "name",              limit: 255
-    t.text    "description",       limit: 65535
     t.integer "draft_id",          limit: 4
     t.text    "short_description", limit: 65535
     t.text    "long_description",  limit: 65535

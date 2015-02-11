@@ -1,6 +1,7 @@
 json.set! :id, gallery.id
 json.set! :name, gallery.name
-json.set! :description, gallery.description
+json.set! :short_description, gallery.short_description
+json.set! :long_description, gallery.long_description
 json.set! :mobile_apps_count, gallery.published_mobile_apps.where(status: 1).count
 json.set! :social_media_count, gallery.published_outlets.where(status: 1).count
 json.tags do
