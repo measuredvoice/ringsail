@@ -17,12 +17,6 @@
 #
 
 class Agency < ActiveRecord::Base
-  #handles logging of activity
-  include PublicActivity::Model
-  tracked owner: Proc.new{ |controller, model| controller.current_user }
-
-  #handles versioning
-  has_paper_trail
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   
   # each agency has social media outlets

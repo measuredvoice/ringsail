@@ -61,27 +61,13 @@ class Admin::AgenciesController < Admin::AdminController
     end
   end
 
-  def activities
-    @activities = PublicActivity::Activity.where(trackable_type: "Agency").order("created_at desc").page(params[:page]).per(25)
-  end
-
-  def history
-    @versions = @agency.versions.order("created_at desc")
-  end
-
-  def restore
-    @agency.versions.find(params[:version_id]).reify.save!
-    redirect_to admin_agency_path(@agency), :notice => "Changes were reverted."
-  end
-
   def tokeninput
     @agencies = Agency.where("name LIKE ? OR shortname LIKE ?", "%#{params[:q]}%","%#{params[:q]}%").select([:id,:name])
     respond_to do |format|
-      format.json { 
-        render json: @agencies
-      }
+      format.json { render 'tokeninput'}
     end
   end
+
   private
     def set_agency
       @agency = Agency.find(params[:id])

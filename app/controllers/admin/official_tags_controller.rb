@@ -67,20 +67,7 @@ class Admin::OfficialTagsController < Admin::AdminController
     end
     redirect_to action: :index
   end
-
-  def activities
-    @activities = PublicActivity::Activity.where(trackable_type: "OfficialTag").order("created_at desc").page(params[:page]).per(25)
-  end
   
-  def history
-    @versions = @official_tag.versions.order("created_at desc")
-  end
-
-  def restore
-    @official_tag.versions.find(params[:version_id]).reify(:has_one=> true, :has_many => true).save!  
-    redirect_to admin_tag_path(@official_tag), :notice => "Changes were reverted."
-  end
-
   def tokeninput
     @official_tags = OfficialTag.where("tag_Text LIKE ?", "%#{params[:q]}%").select([:id,:tag_text])
     respond_to do |format|

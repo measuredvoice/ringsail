@@ -161,5 +161,14 @@ RSpec.describe Admin::UsersController, type: :controller do
     end
   end
 
+  describe "GET /users/tokeninput" do
+    it "should allow lookup of users by text" do
+      user = FactoryGirl.create(:admin_user)
+      sign_in user
+      get :tokeninput, format: :json, q: user.first_name.first(2)
+      expect(assigns[:users]).to match([user])
+      expect(response).to render_template("tokeninput")
+    end
+  end
 
 end

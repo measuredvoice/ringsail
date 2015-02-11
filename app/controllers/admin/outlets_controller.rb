@@ -119,7 +119,7 @@ class Admin::OutletsController < Admin::AdminController
   end
 
   def restore
-    @outlet.versions.find(params[:version_id]).reify(:has_one=> true, :has_many => true).save!  
+    @outlet.versions.find(params[:version_id]).reify(:has_many => true).save!  
     redirect_to admin_outlet_path(@outlet), :notice => "Changes were reverted."
   end
 

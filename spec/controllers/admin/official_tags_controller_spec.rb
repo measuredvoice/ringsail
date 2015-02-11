@@ -185,5 +185,14 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
     end
   end
 
+  describe "GET /official_tags/tokeninput" do
+    it "should allow lookup of tags by text" do
+      sign_in FactoryGirl.create(:admin_user)
+      official_tag = FactoryGirl.create(:official_tag)
+      get :tokeninput, format: :json, q: official_tag.tag_text.first(2)
+      expect(assigns[:official_tags]).to match([official_tag])
+      expect(response).to render_template("tokeninput")
+    end
+  end
 
 end

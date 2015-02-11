@@ -177,5 +177,14 @@ RSpec.describe Admin::AgenciesController, type: :controller do
     end
   end
 
+  describe "GET /agencies/tokeninput" do
+    it "should allow lookup of agencies by text" do
+      sign_in FactoryGirl.create(:admin_user)
+      agency = FactoryGirl.create(:agency, name: "ZZZZZ")
+      get :tokeninput, format: :json, q: agency.name.first(2)
+      expect(assigns[:agencies]).to match([agency])
+      expect(response).to render_template("tokeninput")
+    end
+  end
 
 end

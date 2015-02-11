@@ -231,4 +231,26 @@ RSpec.describe Admin::OutletsController, type: :controller do
     end
   end
 
+  describe "GET /outlets/activities" do
+    it "should allow users to view all activities" do
+      sign_in FactoryGirl.create(:admin_user)
+      get :activities
+      expect(response).to be_success
+      expect(assigns[:activities]).to match_array(PublicActivity::Activity.where(trackable_type: "Outlet"))
+      expect(response).to render_template("activities")
+    end
+  end
+
+  describe "GET /outlets/:id/history" do
+    it "should allow users to view all activities" do
+      sign_in FactoryGirl.create(:admin_user)
+      outlet = FactoryGirl.create(:outlet)
+      outlet.published!
+      get :history, id: outlet.id
+      expect(response).to be_success
+      expect(assigns[:versions]).to match(outlet.versions)
+      expect(response).to render_template("history")
+    end
+  end
+
 end
