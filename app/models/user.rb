@@ -24,8 +24,7 @@
 class User < ActiveRecord::Base
 
   belongs_to :agency
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  
   devise :cas_authenticatable, :trackable, :timeoutable
 
   enum role: { limited_user: 0, full_user: 1, admin: 2, banned: 3}

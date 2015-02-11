@@ -6,9 +6,7 @@
 //
 //= require jquery
 //= require jquery-ui
-//= require search.js
 //= require jquery_ujs
-//= require_tree .
 
 
 
