@@ -22,6 +22,8 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   
+  scope :api, -> { where("draft_id IS NOT NULL") }
+  
   enum status: { under_review: 0, published: 1, archived: 2 }
   #handles versioning
   #attr_accessor :auth_token

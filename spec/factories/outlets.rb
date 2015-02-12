@@ -22,7 +22,6 @@ FactoryGirl.define do
     account Faker::Internet.user_name
     organization Faker::Company.name
     language Faker::Lorem.word #May want to pull language out to a table, but also probably unnecessary
-    info_url Faker::Internet.url
     short_description Faker::Lorem.sentence
     long_description Faker::Lorem.paragraph
     # these all represent attributes that can be picked

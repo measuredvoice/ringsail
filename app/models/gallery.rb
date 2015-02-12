@@ -15,6 +15,9 @@ class Gallery < ActiveRecord::Base
 	include PublicActivity::Model
 	tracked owner: Proc.new{ |controller, model| controller.current_user }
 
+  scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
+  scope :api, -> { where("draft_id IS NOT NULL") }
+
   enum status: { under_review: 0, published: 1, archived: 2 }
 
   # Galleries have a relationship to themselvs
@@ -40,8 +43,6 @@ class Gallery < ActiveRecord::Base
   has_many :gallery_items, -> { order "item_order ASC"}, dependent: :destroy
   has_many :mobile_apps, :through => :gallery_items, :source => :item, :source_type => "MobileApp"
   has_many :outlets, :through => :gallery_items, :source => :item, :source_type => "Outlet"
-
-  # These are rewritten accessors to handle the draft/published stuff that we are doing
 
   def published_gallery_items
     self.gallery_items.where(status: 1)
@@ -115,6 +116,7 @@ class Gallery < ActiveRecord::Base
     Gallery.public_activity_on
     self.create_activity :archived
   end
+  
   def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')
   end

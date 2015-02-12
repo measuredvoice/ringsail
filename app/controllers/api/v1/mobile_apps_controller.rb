@@ -19,7 +19,7 @@ class Api::V1::MobileAppsController < Api::ApiController
 	DEFAULT_PAGE=1
 
 	def index
-		@mobile_apps = MobileApp.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
+		@mobile_apps = MobileApp.api.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
     if params[:q] && params[:q] != ""
       @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? or mobile_apps.short_description LIKE ? or mobile_apps.long_description LIKE ?", 
       	"%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")

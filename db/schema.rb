@@ -162,7 +162,6 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   create_table "outlets", force: :cascade do |t|
     t.string   "service_url",       limit: 255
     t.string   "organization",      limit: 255
-    t.string   "info_url",          limit: 255
     t.string   "account",           limit: 255
     t.string   "language",          limit: 255
     t.datetime "created_at"

@@ -29,7 +29,7 @@ class Api::V1::GalleriesController < Api::ApiController
 	DEFAULT_PAGE = 1
 
 	def	index	
-    @galleries = Gallery.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
+    @galleries = Gallery.api.includes(:agencies, :official_tags)
 		if params[:q] && params[:q] != ""
 			@galleries = @galleries.where("name LIKE ? or short_description LIKE ? or long_description LIKE ?", 
 				"%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
@@ -44,7 +44,7 @@ class Api::V1::GalleriesController < Api::ApiController
 	end
 
 	def show
-		@gallery = Gallery.includes(:gallery_items).find(params[:id])
+		@gallery = Gallery.find_by(draft_id: params[:id]).includes(:gallery_items)
 		respond_to do |format|
 			format.json { render "show" }
 		end

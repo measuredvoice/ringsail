@@ -11,7 +11,8 @@ puts "Adding agencies with count of #{AGENCIES_NUM}"
 (1..AGENCIES_NUM).each do |agency_number|
 	Agency.create!({
 		name: Faker::Company.name,
-		shortname: "#{Faker::Company.suffix} #{agency_number}"
+		shortname: "#{Faker::Company.suffix} #{agency_number}",
+		info_url: Faker::Internet.url
 	})
 end
 puts "Finished adding agencies with count of #{AGENCIES_NUM}"
@@ -66,8 +67,8 @@ puts "Adding outlets to get to #{OUTLETS_NUM}"
 	out = Outlet.create!({
 		service: random_service.shortname,
 		service_url: random_service.service_url_example,
-		info_url: Faker::Internet.url,
 		account: Faker::Internet.user_name,
+		organization: Faker::Internet.user_name,
 		short_description: Faker::Lorem.sentence,
 		long_description: Faker::Lorem.paragraph,
 		language: language,
