@@ -1,0 +1,6 @@
+AllCops:
+  RunRailsCops: true
+  Exclude:
+    - 'lib/generators/**/*'
+
+inherit_from: .rubocop_todo.yml
