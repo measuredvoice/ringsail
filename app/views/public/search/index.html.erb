@@ -23,54 +23,81 @@
         <div role="tabpanel" class="tab-pane fade" id="code_examples">
           <div class="row">
             <div class="col-sm-12">
-              <h2>Social Media Search</h2>
-              <h3>HTML Markup</h3>
-              <div class="well">
-                <pre>
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingOne">
+                    <h2 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Social Media Search
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">
+                      <h3>HTML Markup</h3>
+                      <div class="well">
+                        <pre>
 <%= "#{render(partial: "public/search/social_media/search_html")}" %>
-                </pre>
-              </div>
-            <h3>Javascript</h3>
-              <div class="well">
-                <pre>
+                        </pre>
+                      </div>
+                      <h3>Javascript</h3>
+                      <div class="well">
+                        <pre>
 <%= "#{render(partial: "public/search/social_media/search_js")}" %>
-                </pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-12">
-              <h2>Verify Social Media</h2>
-              <h3>HTML Markup</h3>
-              <div class="well">
-                <pre>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingTwo">
+                    <h2 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Verify Social Media
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                       <h3>HTML Markup</h3>
+                      <div class="well">
+                        <pre>
 <%= "#{render(partial: "public/search/social_media/verify_html")}" %>
-                </pre>
-              </div>
-              <h3>Javascript</h3>
-              <div class="well">
-                <pre>
+                        </pre>
+                      </div>
+                      <h3>Javascript</h3>
+                      <div class="well">
+                        <pre>
 <%= "#{render(partial: "public/search/social_media/verify_js")}" %>
-                </pre>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-sm-12">
-              <h2>Search Mobile</h2>
-              <h3>HTML Markup</h3>
-              <div class="well">
-                <pre>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="headingThree">
+                    <h2 class="panel-title">
+                      <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Search Mobile
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                    <div class="panel-body">
+                      <div class="well">
+                        <pre>
 <%= "#{render(partial: "public/search/mobile_apps/search_html")}" %>
-                </pre>
-              </div>
-              <h3>Javascript</h3>
-              <div class="well">
-                <pre>
+                        </pre>
+                      </div>
+                      <h3>Javascript</h3>
+                      <div class="well">
+                        <pre>
 <%= "#{render(partial: "public/search/mobile_apps/search_js")}" %>
-                </pre>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
