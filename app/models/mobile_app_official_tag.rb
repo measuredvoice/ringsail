@@ -15,7 +15,8 @@ class MobileAppOfficialTag < ActiveRecord::Base
   after_destroy :update_counter_cache
   
   def update_counter_cache
-    self.official_tag.mobile_app_count = self.official_tag.mobile_apps.where("draft_id IS NULL").count
+    self.official_tag.draft_mobile_app_count = self.official_tag.mobile_apps.where("draft_id IS NULL").count
+    self.official_tag.published_mobile_app_count = self.official_tag.mobile_apps.where("draft_id IS NOT NULL").count
     self.official_tag.save
   end
 end

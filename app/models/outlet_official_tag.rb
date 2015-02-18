@@ -9,14 +9,15 @@
 
 class OutletOfficialTag < ActiveRecord::Base
   belongs_to :outlet
-  belongs_to :official_tag, counter_cache: :outlet_count
+  belongs_to :official_tag
   has_paper_trail 
 
   after_save :update_counter_cache
   after_destroy :update_counter_cache
   
   def update_counter_cache
-    self.official_tag.outlet_count = self.official_tag.outlets.where("draft_id IS NULL").count
+    self.official_tag.draft_outlet_count = self.official_tag.outlets.where("draft_id IS NULL").count
+    self.official_tag.published_outlet_count = self.official_tag.outlets.where("draft_id IS NOT NULL").count
     self.official_tag.save
   end
 end

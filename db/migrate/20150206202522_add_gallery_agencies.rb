@@ -6,7 +6,8 @@ class AddGalleryAgencies < ActiveRecord::Migration
       t.integer :agency_id
     end
 
-    add_column :agencies, :gallery_count, :integer, default: 0
+    add_column :agencies, :draft_gallery_count, :integer, default: 0
+    add_column :agencies, :published_gallery_count, :integer, default: 0
   end
 
 end

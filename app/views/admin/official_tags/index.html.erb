@@ -16,9 +16,9 @@
       <% @official_tags.each do |official_tag| %>
         <tr class = "tablerow">
           <td class = "table_data"><%= official_tag.tag_text %></td>
-          <td class = "table_data"><%= official_tag.outlet_count %></td>
-          <td class = "table_data"><%= official_tag.mobile_app_count %></td>
-          <td class = "table_data"><%= official_tag.gallery_count %></td>
+          <td class = "table_data"><%= official_tag.draft_outlet_count %> (<%= official_tag.published_outlet_count %>)</td>
+          <td class = "table_data"><%= official_tag.draft_mobile_app_count %> (<%= official_tag.published_outlet_count %>)</td>
+          <td class = "table_data"><%= official_tag.draft_gallery_count %> (<%= official_tag.published_outlet_count %>)</td>
           <td class = "table_data lastlinks">
            <%= link_to admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-info-sign"></i> <%end %>
            <%= link_to edit_admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-pencil"> </i> <% end %>

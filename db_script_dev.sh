@@ -12,4 +12,4 @@ rake db:drop
 rake db:create
 rake db:migrate
 rake db:seed
-rvmsudo unicorn_rails -c config/unicorn.rb --env development
+rails s

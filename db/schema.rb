@@ -31,17 +31,20 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "agencies", force: :cascade do |t|
-    t.string   "name",             limit: 255
+    t.string   "name",                       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "shortname",        limit: 255
-    t.string   "info_url",         limit: 255
-    t.string   "mongo_id",         limit: 255
-    t.string   "parent_mongo_id",  limit: 255
-    t.integer  "parent_id",        limit: 4
-    t.integer  "outlet_count",     limit: 4,   default: 0
-    t.integer  "mobile_app_count", limit: 4,   default: 0
-    t.integer  "gallery_count",    limit: 4,   default: 0
+    t.string   "shortname",                  limit: 255
+    t.string   "info_url",                   limit: 255
+    t.string   "mongo_id",                   limit: 255
+    t.string   "parent_mongo_id",            limit: 255
+    t.integer  "parent_id",                  limit: 4
+    t.integer  "draft_outlet_count",         limit: 4,   default: 0
+    t.integer  "draft_mobile_app_count",     limit: 4,   default: 0
+    t.integer  "published_outlet_count",     limit: 4,   default: 0
+    t.integer  "published_mobile_app_count", limit: 4,   default: 0
+    t.integer  "draft_gallery_count",        limit: 4,   default: 0
+    t.integer  "published_gallery_count",    limit: 4,   default: 0
   end
 
   create_table "auth_tokens", force: :cascade do |t|
@@ -141,12 +144,15 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   end
 
   create_table "official_tags", force: :cascade do |t|
-    t.string   "tag_text",         limit: 255
+    t.string   "tag_text",                   limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "gallery_count",    limit: 4,   default: 0
-    t.integer  "mobile_app_count", limit: 4,   default: 0
-    t.integer  "outlet_count",     limit: 4,   default: 0
+    t.integer  "draft_gallery_count",        limit: 4,   default: 0
+    t.integer  "draft_mobile_app_count",     limit: 4,   default: 0
+    t.integer  "draft_outlet_count",         limit: 4,   default: 0
+    t.integer  "published_gallery_count",    limit: 4,   default: 0
+    t.integer  "published_mobile_app_count", limit: 4,   default: 0
+    t.integer  "published_outlet_count",     limit: 4,   default: 0
   end
 
   create_table "outlet_official_tags", force: :cascade do |t|

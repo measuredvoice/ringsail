@@ -13,9 +13,9 @@
           <th><%= sortable "name", "Agency Name" %></th>
           <th><%= sortable "shortname", "Short Name" %></th>
           <th><%= sortable "info_url", "Info URL" %></th>
-          <th><%= sortable "outlets_count", "# of Social Accounts" %></th>
-          <th><%= sortable "mobile_apps_count", "# of Apps" %></th>
-          <th><%= sortable "galleries_count", "# of Galleries" %></th>
+          <th><%= sortable "draft_outlets_count", "# of Social Accounts (published)" %></th>
+          <th><%= sortable "draft_mobile_apps_count", "# of Apps (published)" %></th>
+          <th><%= sortable "draft_galleries_count", "# of Galleries (published)" %></th>
           <th class = "lastlinks">Actions</th>
     		</tr>
       </thead>
@@ -26,9 +26,9 @@
     				<td class = "tabledata midWidth"><%= agency.name %></td>
             <td class = "tabledata"><%= agency.shortname %></td>
             <td class = "table_data"><%= agency.info_url %></td>
-            <td class="center"><%= agency.outlet_count %></td>
-            <td class="center"><%= agency.mobile_app_count %></td>
-            <td class="center"><%= agency.gallery_count %></td>
+            <td class="center"><%= agency.draft_outlet_count %> (<%= agency.published_outlet_count %>)</td>
+            <td class="center"><%= agency.draft_mobile_app_count %> (<%= agency.published_mobile_app_count %>)</td>
+            <td class="center"><%= agency.draft_gallery_count %> (<%= agency.published_gallery_count %>)</td>
             <td class = "table_data lastlinks">
               <%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
               <%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
