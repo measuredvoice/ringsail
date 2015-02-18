@@ -89,6 +89,8 @@ group :development, :test do
   # open emails in browser on send
   gem 'letter_opener'
 
+  # Ruby style checking
+  gem 'rubocop', require: false
 
   # Unicorn app server for hosting purposes in dev environment. Will be replaced with phusion passenger in 'real' host
   gem 'unicorn'
