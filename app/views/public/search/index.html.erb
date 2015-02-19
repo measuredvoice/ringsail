@@ -112,4 +112,12 @@
   <%= render partial: "public/search/social_media/search_js" %>
   <%= render partial: "public/search/social_media/verify_js" %>
   <%= render partial: "public/search/mobile_apps/search_js" %>
+  <script>  
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      $('.flex-active').toggleClass('flex-active');
+      e.currentTarget.className = "flex-active";
+    })
+
+
+  </script>
 <% end %>
