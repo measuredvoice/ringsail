@@ -5,12 +5,13 @@
  *= require digitalgovtheme/style-responsive
  *= require digitalgovtheme/custom
  *= require digitalgovtheme/other-custom
- *= require font-awesome
-
 
 
 
 * THESE FILES AND EVERYTHING BELOW ARE REQUIRED TO BE PORTED TO PUBLIC SITE.
+
+ *= require font-awesome
+
  *= require custom-token-input.css
  */
 @import "bootstrap-sprockets";

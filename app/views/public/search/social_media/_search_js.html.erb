@@ -15,17 +15,35 @@
   </div>
 </script>
 
+<script id="token-input-li-template" type="text/x-handlebars-template">
+  <li id="social-li-{{id}}" data-id="{{id}}">
+  {{name}}
+  <a href="javascript:remove_token('{{id}}');">X</a>
+  </li>
+</script>
+
 <script>
+  var source_social_media_li_template   = $("#token-input-li-template").html();
   var source_social_media_template   = $("#social-media-template").html();
   var social_media_template = Handlebars.compile(source_social_media_template); 
+  var social_media_li_template = Handlebars.compile(source_social_media_li_template); 
 
   $("#search-social-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media/tokeninput.json", {
     crossDomain: false,
     tokenFormatter: function(item){
       return '<li>'+ item.name +'</li>';
     },
-    tokenValue: "key"
+    tokenValue: "key",
+    onAdd: function(item){
+      item["id"]= item["key"].replace("|","-")
+      $('#social-tokens').append(social_media_li_template(item));
+    }
   });
+  function remove_token(id){
+    key = id.replace("-","|")
+    $("#search-social-box").tokenInput("remove", {"key": key});
+    $("#social-li-"+id).remove();
+  }
 
   $('#social-media-search').submit(function(e){
     e.preventDefault();
