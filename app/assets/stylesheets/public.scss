@@ -57,7 +57,9 @@ div.form-group ul.token-input-focused .token-input-input-token::before{
    color: #ccc;
    font-size: 13px;
 }
-
+.token-input-token{
+    display: none !important;
+}
 .form-control {
 border-radius: 0;
 border: 1px solid #ddd;
