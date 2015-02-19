@@ -1,15 +1,15 @@
 <div class="row">
-  <div class="col-sm-12">
-    <h1> Search pages</h1>
+  <div class="col-sm-12 entry widget-wrap">
+    <h1 class=""> Search pages</h1>
     <p>These are widgets performing search against the API.  Social Media Search, Social Media Verification, and Mobile Apps Search are included</p>
-    <div role="tabpanel">
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a></li>
+    <div class="featured-tabs clearfix" role="tabpanel">
+      <ul class="flextabs-custom-controls clearfix" role="tablist">
+        <li role="presentation" class="tab-pop firstab"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab" class="flex-active">Search Social Media Accounts</a></li>
         <li role="presentation"><a href="#verify_social" aria-controls="profile" role="tab" data-toggle="tab">Verify Social Media</a></li>
         <li role="presentation"><a href="#search_mobile" aria-controls="messages" role="tab" data-toggle="tab">Search Mobile Applications</a></li>
         <li role="presentation"><a href="#code_examples" aria-controls="messages" role="tab" data-toggle="tab">Code Examples</a></li>
       </ul>
-      <div class="tab-content">
+      <div class="tab-content flextabs clearfix">
         <div role="tabpanel" class="tab-pane fade in active" id="search_social">
           <%= render partial: "public/search/social_media/search_html" %>
         </div>
