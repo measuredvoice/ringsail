@@ -44,7 +44,7 @@ class Api::V1::GalleriesController < Api::ApiController
 	end
 
 	def show
-		@gallery = Gallery.find_by(draft_id: params[:id]).includes(:gallery_items)
+		@gallery = Gallery.where(draft_id: params[:id]).includes(:mobile_apps, :outlets).first
 		respond_to do |format|
 			format.json { render "show" }
 		end

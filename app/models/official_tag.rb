@@ -27,7 +27,7 @@ class OfficialTag < ActiveRecord::Base
   
   has_paper_trail
   def tag_text=(text)
-    write_attribute(:tag_text, text.downcase)
+    self[:tag_text] = text.downcase
   end
 
 end

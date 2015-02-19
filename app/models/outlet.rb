@@ -92,7 +92,7 @@ class Outlet < ActiveRecord::Base
   end
   
   def self.resolve(url)
-    return nil if url.nil? or url.empty?
+    return nil if url.nil? || url.empty?
 
     url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
     
@@ -131,7 +131,7 @@ class Outlet < ActiveRecord::Base
   end
 
   # will rely on replacing the tokens system, but CRUDing out the info for now
-   def tag_tokens=(ids)
+  def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')
   end
 
