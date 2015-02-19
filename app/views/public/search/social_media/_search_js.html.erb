@@ -26,9 +26,9 @@
 </script>
 
 <script>
-  var source_social_media_li_template   = $("#token-input-li-template").html();
   var source_social_media_template   = $("#social-media-template").html();
   var social_media_template = Handlebars.compile(source_social_media_template); 
+  var source_social_media_li_template   = $("#token-input-li-template").html();
   var social_media_li_template = Handlebars.compile(source_social_media_li_template); 
 
   $("#search-social-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media/tokeninput.json", {
@@ -40,6 +40,7 @@
     onAdd: function(item){
       item["id"]= item["key"].replace("|","-")
       $('#social-tokens').append(social_media_li_template(item));
+      $('#social-media-search').submit();
     }
   });
   function remove_token(id){
@@ -50,6 +51,7 @@
 
   $('#social-media-search').submit(function(e){
     e.preventDefault();
+    $('#social-media-collection').empty();
     tokens = $("#search-social-box").tokenInput("get");
     agencies = [];
     services = [];
