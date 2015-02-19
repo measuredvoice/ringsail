@@ -22,7 +22,7 @@
   {{name}}
 
   {{count}}
-  <a href="javascript:remove_mobile_token('{{id}}');">X</a>
+  <a href="javascript:remove_mobile_token('{{id}}');"><i class="fa fa-times"></i></a>
   </li>
 </script>
 
@@ -49,6 +49,7 @@
     key = id.replace("-","|")
     $("#search-social-box").tokenInput("remove", {"key": key});
     $("#social-li-"+id).remove();
+    $('#mobile-search').submit();
   }
 
   $('#mobile-search').submit(function(e){
