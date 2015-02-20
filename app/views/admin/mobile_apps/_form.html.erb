@@ -1,9 +1,10 @@
 <%= form_for([:admin,@mobile_app]) do |f| %>
   <% if @mobile_app.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@mobile_app.errors.count, "error") %> prohibited this chapter from being saved:</h2>
+      <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+          <span class="sr-only">Error:</span><%= pluralize(@mobile_app.errors.count, "error") %> prohibited this mobile app from being saved</div>
 
-      <ul>
+      <ul class="inlineErrorMsgs">
       <% @mobile_app.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -36,6 +37,10 @@
     <%= f.label :agency_tokens, "Sponsoring Agencies" %> </br>
     <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => 
       ""} %>
+  </div>
+  <div class="field">
+    <%= f.label :tag_tokens, "Tags" %> </br>
+    <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
   <div class="contacts">
     <div class="field">
@@ -72,6 +77,16 @@
     $("#mobile_app_user_tokens").tokenInput("/admin/users/tokeninput.json", {
       crossDomain: false,
       prePopulate: <%= raw user_json.to_json %>
+    });
+
+    var tags = [];
+    var official_tags = <%= raw @mobile_app.official_tags.to_json %>;
+    for(var i =0; i< official_tags.length; i++){
+      tags.push({id: official_tags[i]["id"], name: humanize(official_tags[i]["tag_type"])+': '+official_tags[i]["tag_text"]})
+    }
+    $("#mobile_app_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
+      crossDomain: false,
+      prePopulate: tags
     });
   </script>
 <% end %>

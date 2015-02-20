@@ -11,9 +11,14 @@
       <p>
       {{short_description}}
       </p>
-      {{#each agencies}}
+      <p>
+      Agencies:{{#each agencies}}
         {{name}}
       {{/each}}
+      </p>
+      <p>
+      Tags List: {{#each tags}} {{tag_text}} {{/each}}
+      </p>
     </div>
   </div>
 </script>
@@ -34,12 +39,6 @@
 
   $("#search-social-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media/tokeninput.json", {
     crossDomain: false,
-    tokenFormatter: function(item){
-      return '<li>'+ item.name +'<span class="count-li">'+item.count+'</span></li>';
-    },
-    resultsFormatter: function(item){
-        return '<li>'+ item.name +'<span class="count-li">'+item.count+'</span></li>';
-    },
     tokenValue: "key",
     onAdd: function(item){
       item["id"]= item["key"].replace("|","-")

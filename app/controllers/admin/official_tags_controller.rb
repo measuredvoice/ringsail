@@ -7,7 +7,14 @@ class Admin::OfficialTagsController < Admin::AdminController
   # GET /tags
   # GET /tags.json
   def index
-    @official_tags = OfficialTag.all.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_sze])
+    if params[:type]
+      @official_tags = OfficialTag.where(tag_type: params[:type])
+    else
+      @official_tags = OfficialTag.all
+    end
+    @total_tags = OfficialTag.all.count
+    @types = OfficialTag.group(:tag_type).count
+    @official_tags = @official_tags.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_sze])
   end
 
   # GET /tags/1
@@ -23,6 +30,7 @@ class Admin::OfficialTagsController < Admin::AdminController
   end
 
   def show
+  
   end
   
 
@@ -69,7 +77,7 @@ class Admin::OfficialTagsController < Admin::AdminController
   end
   
   def tokeninput
-    @official_tags = OfficialTag.where("tag_Text LIKE ?", "%#{params[:q]}%").select([:id,:tag_text])
+    @official_tags = OfficialTag.where("tag_Text LIKE ?", "%#{params[:q]}%")
     respond_to do |format|
       format.json { render 'tokeninput'}
     end
@@ -83,7 +91,7 @@ class Admin::OfficialTagsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:official_tag).permit(:id, :tag_text)
+      params.require(:official_tag).permit(:id, :tag_text, :tag_type)
     end
 
     def sort_column

@@ -1,32 +1,54 @@
-<h1 class="page-header">Tags</h1>
+<div class="row">
+  <div class="col-sm-12 col-md-12 main">
+    <h1 class="page-header">Tags</h1>
 
-<div class="row placeholders">
-  <%= paginate @official_tags %>     
-  <table class=" table table-striped">
-    <thead>
-      <tr = "users_row">
-        <th><%= sortable "tag_text", "Tag" %></th>
-        <th><%= sortable "outlet_count", "# Social Accounts" %></th>
-        <th><%= sortable "mobile_app_count", "# Mobile Apps" %></th>
-        <th><%= sortable "gallery_count", "# Galleries" %></th>
-        <th class = "lastlinks">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @official_tags.each do |official_tag| %>
-        <tr class = "tablerow">
-          <td class = "table_data"><%= official_tag.tag_text %></td>
-          <td class = "table_data"><%= official_tag.draft_outlet_count %> (<%= official_tag.published_outlet_count %>)</td>
-          <td class = "table_data"><%= official_tag.draft_mobile_app_count %> (<%= official_tag.published_outlet_count %>)</td>
-          <td class = "table_data"><%= official_tag.draft_gallery_count %> (<%= official_tag.published_outlet_count %>)</td>
-          <td class = "table_data lastlinks">
-           <%= link_to admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-info-sign"></i> <%end %>
-           <%= link_to edit_admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-pencil"> </i> <% end %>
-           <%= link_to admin_official_tag_path(official_tag), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"> </i> <% end %>
-         </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @official_tags %>
+    <div class="row placeholders">
+      <div class="col-xs-12 col-sm-3 col-md-2 verticalTabsWrap">
+        <div class="list-group verticalTabs">
+          <%= link_to admin_official_tags_path, {class: "list-group-item verticalTabs-item #{"active" if params[:type].nil? }"} do %>
+            All
+            <span class="count pull-right"><%= @total_tags %></span>
+          <%end%>
+          <% @types.each do |key, value| %>
+            <%= link_to admin_official_tags_path(type: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:type]}"} do %>
+              <%= OfficialTag.tag_types.invert[key].humanize %>
+              <span class="count pull-right"><%= value %></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
+        <%= paginate @official_tags %>     
+        <table class=" table table-striped">
+          <thead>
+            <tr = "users_row">
+              <th><%= sortable "tag_text", "Tag" %></th>
+              <th><%= sortable "tag_type", "Type" %></th>
+              <th><%= sortable "outlet_count", "# Social Accounts" %></th>
+              <th><%= sortable "mobile_app_count", "# Mobile Apps" %></th>
+              <th><%= sortable "gallery_count", "# Galleries" %></th>
+              <th class = "lastlinks">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @official_tags.each do |official_tag| %>
+              <tr class = "tablerow">
+                <td class = "table_data"><%= official_tag.tag_text %></td>
+                <td class = "table_data"><%= official_tag.tag_type.humanize %></td>
+                <td class = "table_data"><%= official_tag.draft_outlet_count %> (<%= official_tag.published_outlet_count %>)</td>
+                <td class = "table_data"><%= official_tag.draft_mobile_app_count %> (<%= official_tag.published_outlet_count %>)</td>
+                <td class = "table_data"><%= official_tag.draft_gallery_count %> (<%= official_tag.published_outlet_count %>)</td>
+                <td class = "table_data lastlinks">
+                 <%= link_to admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-info-sign"></i> <%end %>
+                 <%= link_to edit_admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-pencil"> </i> <% end %>
+                 <%= link_to admin_official_tag_path(official_tag), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"> </i> <% end %>
+               </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <%= paginate @official_tags %>
+      </dvi>
+    </div>
+  </div>
 </div>

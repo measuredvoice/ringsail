@@ -51,6 +51,15 @@ class MobileApp < ActiveRecord::Base
   
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
+  validates :name, :presence => true
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  
+
+  def self.platform_counts
+    MobileAppVersion.joins(:mobile_app).where("mobile_apps.draft_id IS NULL").group(:platform).distinct("mobile_app_id, platform").count
+  end
+
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << column_names

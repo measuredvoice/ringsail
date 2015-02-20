@@ -12,7 +12,14 @@ class Admin::MobileAppsController < Admin::AdminController
     else
       @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
     end
+    if params[:platform] && !params[:platform].blank?
+      @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
+    end
     @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
+
+    @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
+    @platform_counts = MobileApp.platform_counts
+
     @allApps = MobileApp.all
     respond_to do |format|
       format.html

@@ -107,6 +107,10 @@ padding: 5px;
 .media-body{
     padding:15px 0  15px 25px;
 }
+
+.media > .pull-left{
+  padding-left: 15px;
+}
 .badge{
     background-color:#ff5049;
     color: #fff;

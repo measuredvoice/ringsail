@@ -244,7 +244,11 @@ Ringsail::Application.routes.draw do
           get 'tokeninput'
         end
       end
-      resources :tags, only: [:index, :show]
+      resources :tags, only: [:index, :show] do
+        collection do
+          get 'types'
+        end
+      end
       resources :multi, only: [:index, :show] do
         collection do
           get 'autocomplete'

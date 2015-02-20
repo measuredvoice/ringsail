@@ -58,6 +58,8 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets/new
   def new
     @outlet = Outlet.new
+    @outlet.agencies << current_user.agency
+    @outlet.users << current_user
   end
 
   # GET /outlets/1/edit
