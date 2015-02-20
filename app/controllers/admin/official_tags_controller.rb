@@ -1,7 +1,7 @@
 class Admin::OfficialTagsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_filter :set_tag, only: [:edit, :show, :update]
+  before_filter :set_tag, only: [:edit, :show, :update, :history, :restore]
 
   before_filter :require_admin, except: [:tokeninput]
   # GET /tags
@@ -66,6 +66,15 @@ class Admin::OfficialTagsController < Admin::AdminController
       format.json { head :no_content }
     end
     redirect_to action: :index
+  end
+
+  def history
+    @versions = @official_tag.versions
+  end
+
+  def restore
+    @official_tag.versions.find(params[:version_id]).reify(:has_many => true).save!
+    redirect_to admin_official_tag_path(@official_tag), :notice => "changes were reverted."
   end
   
   def tokeninput

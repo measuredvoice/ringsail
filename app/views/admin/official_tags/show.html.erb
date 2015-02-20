@@ -9,16 +9,17 @@
 
       <dl class="dl-horizontal">
         <dt>Social media</dt>
-        <dd><%= @official_tag.outlet_count%></dd>
+        <dd><%= @official_tag.draft_outlet_count%></dd>
         <dt>Mobile App Count</dt>
-        <dd><%= @official_tag.mobile_app_count%></dd>
+        <dd><%= @official_tag.draft_mobile_app_count%></dd>
         <dt>Gallery Count</dt>
-        <dd><%= @official_tag.gallery_count%></dd>
+        <dd><%= @official_tag.draft_gallery_count%></dd>
       </dl>
 
       <div class = "buttonRow">
         <%= link_to 'Back to Tags', admin_official_tags_path, {:class => "fa fa-angel-double-left"} %>
-        <%= link_to 'Edit', edit_admin_official_tag_path(@official_tag), {:class => "fa fa-pencil"} %> 
+        <%#= link_to 'History', history_admin_official_tag_path(@official_tag), {:class => "faf fa-history"} %>
+        <%= link_to 'Edit', edit_admin_official_tag_path(@official_tag), {:class => "fa fa-pencil"} %>
       </div>
     </div>
   </div>   

@@ -30,4 +30,7 @@ class OfficialTag < ActiveRecord::Base
     self[:tag_text] = text.downcase
   end
 
+  def history
+    @versions = PaperTrail::OfficialTag.order('created_at DESC')   
+  end
 end

@@ -40,14 +40,5 @@
 	  	</div>
 		</div>
 	</div>
-	<div class="col-lg-8 col-sm-12 col-md-8">
-    <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Agency</h3>
-		<div class="panel panel-default">
-	  	<div class="panel-body">
-	  		<ul class="timeline">
-	  			<%= render partial: "admin/shared/activities_feed", locals: {activities: @agency.activities.order("created_at DESC").first(5)} %>
-	  		</ul>
-	  	</div>
-		</div>
-	</div>
+
 </div>
