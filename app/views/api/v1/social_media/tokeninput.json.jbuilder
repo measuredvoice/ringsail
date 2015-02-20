@@ -8,10 +8,10 @@ json.array! @items do |item|
     json.set! :name, "Agency: #{item.name}"
     json.set! :count, item.published_outlet_count
   elsif item.class == OfficialTag
-    json.set! :key, "tag|{item.id}"
+    json.set! :key, "tag|#{item.id}"
     json.set! :name, "Tag: #{item.tag_text}"
     json.set! :count, item.published_outlet_count
-  else
+  else  
     json.set! :key, "text|#{item}"
     json.set! :name, "Text: #{item}"
   end

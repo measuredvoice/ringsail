@@ -14,3 +14,8 @@ $(function() {
     $('.alert').slideUp(500);
   }, 1500);
 });
+
+function humanize(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

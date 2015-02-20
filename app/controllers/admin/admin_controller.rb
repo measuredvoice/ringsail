@@ -12,7 +12,8 @@ class Admin::AdminController < ApplicationController
 
   def impersonate
     session[:user_id] = params[:user_id]
-    redirect_to admin_dashboards_path, notice: "Now impersonating: #{current_user.email} with role: #{current_user.role.humanize}"
+    @current_user = User.find(params[:user_id])
+    redirect_to admin_dashboards_path, notice: "Now impersonating: #{User.find(params[:user_id]).email} with role: #{User.find(params[:user_id]).role.humanize}"
   end
 
   def current_user

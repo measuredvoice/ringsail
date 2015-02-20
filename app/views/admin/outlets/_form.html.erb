@@ -3,7 +3,7 @@
     <div id="error_explanation">
         
       <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span><%= pluralize(@outlet.errors.count, "error") %> prohibited this chapter from being saved</div>
+  <span class="sr-only">Error:</span><%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</div>
 
       <ul class="inlineErrorMsgs">
       <% @outlet.errors.full_messages.each do |message| %>
@@ -69,10 +69,11 @@
       prePopulate: <%= raw @outlet.agencies.map(&:attributes).to_json %>
     });
 
+    
     var tags = [];
     var official_tags = <%= raw @outlet.official_tags.to_json %>;
     for(var i =0; i< official_tags.length; i++){
-      tags.push({id: official_tags[i]["id"], name: official_tags[i]["tag_text"]})
+      tags.push({id: official_tags[i]["id"], name: humanize(official_tags[i]["tag_type"])+': '+official_tags[i]["tag_text"]})
     }
     $("#outlet_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,

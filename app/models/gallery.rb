@@ -44,6 +44,10 @@ class Gallery < ActiveRecord::Base
   has_many :mobile_apps, :through => :gallery_items, :source => :item, :source_type => "MobileApp"
   has_many :outlets, :through => :gallery_items, :source => :item, :source_type => "Outlet"
 
+  validates :name, :presence => true
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  
   def published_gallery_items
     self.gallery_items.where(status: 1)
   end

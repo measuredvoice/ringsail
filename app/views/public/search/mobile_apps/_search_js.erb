@@ -34,9 +34,6 @@
 
   $("#search-mobile-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/mobile_apps/tokeninput.json", {
     crossDomain: false,
-    tokenFormatter: function(item){
-      return '<li>'+ item.name +' '+ item.count + '</li>';
-    },
     tokenValue: "key",
     onAdd: function(item){
       item["id"]= item["key"].replace("|","-")

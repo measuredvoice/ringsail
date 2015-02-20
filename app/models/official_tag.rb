@@ -16,6 +16,8 @@ class OfficialTag < ActiveRecord::Base
   
   validates :tag_text, :presence => true, :uniqueness => true
 
+  enum tag_type: { category: 0, geographic: 1} # 0 will be the default, in this case, category
+
   has_many :outlet_official_tags, :dependent => :destroy
   has_many :outlets, through: :outlet_official_tags
 
