@@ -174,6 +174,7 @@ RSpec.describe Admin::OutletsController, type: :controller do
       outlet = FactoryGirl.create(:outlet)
       put :update, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
+    end
   end
 
 

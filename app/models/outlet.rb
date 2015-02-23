@@ -24,7 +24,7 @@ class Outlet < ActiveRecord::Base
   
   scope :api, -> { where("draft_id IS NOT NULL") }
   
-  enum status: { under_review: 0, published: 1, archived: 2 }
+  enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
   #handles versioning
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
