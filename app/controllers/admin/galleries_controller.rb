@@ -5,8 +5,7 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys
   # GET /gallerys.json
   def index
-    if current_user.admin?
-
+    if current_user.admin? || current_user.full_user?
       @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
       @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).uniq
