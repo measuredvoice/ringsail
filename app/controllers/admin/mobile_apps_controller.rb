@@ -7,7 +7,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    if current_user.admin?
+    if current_user.admin? || current_user.full_user?
       @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
       @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq

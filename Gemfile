@@ -73,6 +73,7 @@ group :development, :test do
   gem 'coveralls'
   gem "capybara" #feature specs
   gem 'database_cleaner'
+  gem 'guard-rspec', require: false
   
   # generate fake data in tests & seeds files
   gem 'faker'

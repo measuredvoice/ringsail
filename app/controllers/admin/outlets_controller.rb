@@ -8,7 +8,7 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
-    if current_user.admin?
+    if current_user.admin? || current_user.full_user?
       @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
       @services = Outlet.all.group(:service).count
     else

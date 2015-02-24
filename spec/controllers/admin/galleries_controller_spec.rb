@@ -103,8 +103,11 @@ RSpec.describe Admin::GalleriesController, type: :controller do
 
 	describe "POST #create" do 
 		it "creates a gallery" do
-	  		sign_in FactoryGirl.create(:admin_user)
+				user = FactoryGirl.create(:admin_user)
+	  		sign_in user
 	  		gallery = FactoryGirl.attributes_for(:gallery)
+	  		gallery[:agency_tokens] = user.agency_id.to_s
+      	gallery[:user_tokens] = user.id.to_s
 	  		post :create, gallery: gallery
 	  		expect(response).to redirect_to(admin_gallery_path(assigns(:gallery)))
 		end
