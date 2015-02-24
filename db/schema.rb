@@ -153,7 +153,6 @@ ActiveRecord::Schema.define(version: 20150206202522) do
     t.integer  "published_gallery_count",    limit: 4,   default: 0
     t.integer  "published_mobile_app_count", limit: 4,   default: 0
     t.integer  "published_outlet_count",     limit: 4,   default: 0
-    t.integer  "tag_type",                   limit: 4,   default: 0
   end
 
   create_table "outlet_official_tags", force: :cascade do |t|

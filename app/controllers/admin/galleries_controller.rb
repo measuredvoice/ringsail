@@ -23,8 +23,8 @@ class Admin::GalleriesController < Admin::AdminController
 
   # GET /gallerys/1
   # GET /gallerys/1.json
- # def show
-  #end
+  def show
+  end
 
   # GET /gallerys/new
   def new
