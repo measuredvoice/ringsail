@@ -3,7 +3,7 @@
     </br>
 
     <% @versions.each do |version| %>
-    <% mobile_app = version.reify(:has_one=> true, :has_many => true) 
+    <% mobile_app = version.reify(:has_one => true, :has_many => true) 
         if mobile_app %>
 
       <div class = "panel panel-default">

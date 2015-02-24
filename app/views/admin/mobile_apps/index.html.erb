@@ -11,7 +11,7 @@
             <% @platform_counts.each do |key, value| %>
               <%= link_to admin_mobile_apps_path(platform: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:platform]}"} do %>
                 <%= key %>
-                <span class="count pull-right"><%= value %></span>
+                <span class="count pull-right"><%= value %></span></br>
               <% end %>
             <% end %>
           </div>

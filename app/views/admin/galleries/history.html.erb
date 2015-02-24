@@ -11,25 +11,28 @@
 					<h3 class = "panel-title">Changes made by: <%=User.find(version.whodunnit).email if version.whodunnit? %> </h3>
 					<%= link_to "Restore", restore_admin_gallery_path({id: gallery.id, version_id: version.id}), :class => "pull-right"%>
 				</p>
+			</div>
+			<div class = "panel-body">
+				<p>
+					<strong>Gallery:</strong>
+					<%= gallery.name %>
+				</p>
 
-				<div class = "panel-body">
-					<p>
-						<strong>Gallery:</strong>
-						<%= gallery.name %>
-					</p>
+				<p>
+					<strong>Mobile Apps:</strong>
+					<%= gallery.mobile_apps.map(&:name).join(', ') %>
+				</p>
 
-					<p>
-						<strong>Mobile Apps:</strong>
-						<%= gallery.mobile_apps.map(&:name).join(', ') %>
-					</p>
+				<p>
+					<strong>Short Description:</strong>
+					<%= gallery.short_description %>
+				</p>
 
-					<p>
-						<strong>Description:</strong>
-						<%= gallery.description %>
-					</p>
-
-				</div>
-
-    <% end 
-    	end %>
+				<p>
+					<strong>Long Description:</strong>
+					<%= gallery.long_description %>
+				</p>
+			</div>
+		</div>
+    <% end end %>
 </div>

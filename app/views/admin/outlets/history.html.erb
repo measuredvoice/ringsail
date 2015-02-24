@@ -2,7 +2,7 @@
   <h1 class="page-header">Versions</h1>
   </br>
   <% @versions.each do |version| %>
-    <% outlet = version.reify({:has_many => true}) %>
+    <% outlet = version.reify(:has_one => true, :has_many => true) if outlet %>
       <div class = "panel panel-default">
         <div class = "panel-heading">
           <p style = "display:inline">
