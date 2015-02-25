@@ -1,7 +1,7 @@
 class Admin::GalleriesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :history,:restore, :publish, :archive]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :publish, :archive]
   # GET /gallerys
   # GET /gallerys.json
   def index
@@ -85,14 +85,6 @@ class Admin::GalleriesController < Admin::AdminController
 
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "Gallery").order("created_at desc").page(params[:page]).per(25)
-  end
-  def history
-    @versions = @gallery.versions.order("created_at desc")
-  end
-
-  def restore
-    @gallery.versions.find(params[:version_id]).reify.save!
-    redirect_to admin_gallery_path(@gallery), :notice => "Undid changes to mobile app."
   end
 
   def publish

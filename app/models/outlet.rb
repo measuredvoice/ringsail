@@ -52,9 +52,7 @@ class Outlet < ActiveRecord::Base
   # acts as taggable is being kept until we do a final data migration (needed for backwards compatibility)
   acts_as_taggable
   
-  # Only drafts should have a paper trail.
   # Published outlets should not.
-  has_paper_trail# :if => Proc.new { |t| t.draft_id == nil }
   validates :service, 
     :presence   => true
   validates :service_url, 
@@ -124,10 +122,6 @@ class Outlet < ActiveRecord::Base
     contacts_list.flatten.uniq
   end
   
-  # def history
-  #   @versions = PaperTrail::Outlets.order('created_at DESC')
-  # end
-
   def agency_tokens=(ids)
     self.agency_ids = ids.split(",")
   end

@@ -27,12 +27,8 @@ class OfficialTag < ActiveRecord::Base
   has_many :gallery_official_tags, :dependent => :destroy
   has_many :galleries, through: :gallery_official_tags
   
-  has_paper_trail
   def tag_text=(text)
     self[:tag_text] = text.downcase
   end
 
-  def history
-    @versions = PaperTrail::OfficialTag.order('created_at DESC')   
-  end
 end

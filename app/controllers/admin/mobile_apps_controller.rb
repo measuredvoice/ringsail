@@ -1,7 +1,7 @@
 class Admin::MobileAppsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :history,:restore,:archive, :publish]
+  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :archive, :publish]
 
   before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
@@ -104,15 +104,6 @@ class Admin::MobileAppsController < Admin::AdminController
 
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "MobileApp").order("created_at desc").page(params[:page]).per(25)
-  end
-
-  def history
-    @versions = @mobile_app.versions.order("created_at desc")
-  end
-
-  def restore
-    @mobile_app.versions.find(params[:version_id]).reify.save!
-    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Undid changes to mobile app."
   end
 
   def publish

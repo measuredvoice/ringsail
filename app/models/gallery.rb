@@ -26,10 +26,6 @@ class Gallery < ActiveRecord::Base
   # This will allow easy querying on the public / admin portion of the application
   has_one :published, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
   belongs_to :draft, class_name: "Gallery", foreign_key: "draft_id"
-
-
-	#handles versioning
-	has_paper_trail
 	
 	has_many :gallery_users, dependent: :destroy
 	has_many :users, through: :gallery_users

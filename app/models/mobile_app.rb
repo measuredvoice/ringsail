@@ -47,7 +47,6 @@ class MobileApp < ActiveRecord::Base
   has_many :mobile_app_official_tags, dependent: :destroy
   has_many :official_tags, :through => :mobile_app_official_tags
 
-  has_paper_trail
   
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 

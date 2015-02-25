@@ -2,7 +2,7 @@ class Admin::OutletsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
 
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history, :restore, :publish, :archive]
+  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :publish, :archive]
 
   before_filter :require_admin, only: [:publish]
   # GET /outlets
@@ -116,15 +116,6 @@ class Admin::OutletsController < Admin::AdminController
     @activities = PublicActivity::Activity.where(trackable_type: "Outlet").order("created_at desc").page(params[:page]).per(25)
   end
   
-  def history
-    @versions = @outlet.versions
-  end
-
-  def restore
-    @outlet.versions.find(params[:version_id]).reify(:has_many => true).save!  
-    redirect_to admin_outlet_path(@outlet), :notice => "Changes were reverted."
-  end
-
   def publish
     @outlet.published!
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now public."

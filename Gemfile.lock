@@ -207,7 +207,6 @@ GEM
       nenv (~> 0.1)
       shellany (~> 0.0)
     orm_adapter (0.5.0)
-    paper_trail (3.0.6)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
     parser (2.2.0.3)
@@ -389,7 +388,6 @@ DEPENDENCIES
   letter_opener
   morrisjs-rails
   mysql2
-  paper_trail
   pry
   public_activity
   rack-cors

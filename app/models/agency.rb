@@ -60,8 +60,5 @@ class Agency < ActiveRecord::Base
     end
   end
   
-  def history
-    @versions = PaperTrail::Agencies.order('created_at DESC')
-  end
 
 end
