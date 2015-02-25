@@ -1,10 +1,10 @@
 class Admin::UsersController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-
-  before_filter :require_admin, except: [:edit, :update, :tokeninput]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_notification_settings, :update_notification_settings, :notifications]
+  before_action :require_admin, only: [:index]
+  before_action :require_admin_or_owner, except: [:index, :tokeninput]
   # GET /users
   # GET /users.json
   def index
@@ -14,6 +14,7 @@ class Admin::UsersController < Admin::AdminController
   # GET /users/1
   # GET /users/1.json
   def show
+
   end
 
   # GET /users/new
@@ -23,10 +24,23 @@ class Admin::UsersController < Admin::AdminController
 
   # GET /users/1/edit
   def edit
-    # restrict to admin users or users looking at their own profile
-    if current_user.id != @user.id
-      unless current_user.admin?
-        redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
+
+  end
+
+  # Get /users/1/edit_notifications
+  def edit_notification_settings
+
+  end
+
+  # PATCH/PUT /users/1/update_notifications
+  def update_notification_settings
+    respond_to do |format|
+      if @user.update(notification_params)
+        format.html { redirect_to edit_notification_settings_admin_user_path(@user), notice: 'Notifications were successfully updated.' }
+        format.json { render :show, status: :ok, location: admin_user_path(@user) }
+      else
+        format.html { render :edit_notification_settings }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -50,10 +64,6 @@ class Admin::UsersController < Admin::AdminController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    # restrict to admin users or users looking at their own profile
-    if !current_user.admin? || current_user.id != @user.id
-      redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
-    end
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to admin_user_path(@user), notice: 'User was successfully updated.' }
@@ -91,6 +101,10 @@ class Admin::UsersController < Admin::AdminController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     params.require(:user).permit(:email, :user, :agency_id, :phone, :first_name, :last_name, :groups, :role)
+  end
+
+  def notification_params
+    params.require(:user).permit(:agency_notifications,:contact_notifications)
   end
 
   def sort_column

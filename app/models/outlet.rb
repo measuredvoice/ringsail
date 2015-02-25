@@ -5,7 +5,6 @@
 #  id                :integer          not null, primary key
 #  service_url       :string(255)
 #  organization      :string(255)
-#  info_url          :string(255)
 #  account           :string(255)
 #  language          :string(255)
 #  created_at        :datetime
@@ -20,8 +19,11 @@
 class Outlet < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model
+  include Notifications
+  
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   
+  scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
   scope :api, -> { where("draft_id IS NOT NULL") }
   
   enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
@@ -111,17 +113,7 @@ class Outlet < ActiveRecord::Base
   def service_info
     @service_info ||= Service.find_by_url(service_url)
   end
-  
-  
-  def all_contacts
-    contacts_list = []
-    contacts_list << self.users
-    agencies.each do |agency|
-      contacts_list << agency.users
-    end
-    contacts_list.flatten.uniq
-  end
-  
+    
   def agency_tokens=(ids)
     self.agency_ids = ids.split(",")
   end

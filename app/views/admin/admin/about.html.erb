@@ -5,7 +5,12 @@
       <p>Should discuss purpose of the app, perhaps include links to the github / github issues<p>
     <h3>Who is Responsible</h3>
       <div>List of Admins 
-          <span class="buttonRow"><%= link_to "Email Admins", new_admin_email_message_path(include_admins: true), {:class => "fa fa-pencil"} %></div></div>
+        <span class="buttonRow">
+          <% unless current_user.banned? %>
+            <%= link_to "Email Admins", new_admin_email_message_path(include_admins: true), {:class => "fa fa-pencil"} %>
+          <% end %>
+        </span>
+      </div>
       <ul class="list-unstyled">
         <% @admins.each do |admin| %>
           <li><%= "#{admin.first_name} #{admin.last_name} - #{admin.email}" %></li>

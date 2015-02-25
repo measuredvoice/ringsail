@@ -8,11 +8,11 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
-    if current_user.admin? || current_user.full_user?
+    if current_user.cross_agency?
       @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
       @services = Outlet.all.group(:service).count
     else
-      @outlets = Outlet.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
       @services = @outlets.group(:service).count
     end
 
@@ -77,6 +77,7 @@ class Admin::OutletsController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.save
+        @outlet.build_notifications(:created)
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully created.' }
         format.json { render :show, status: :created, location: @outlet }
       else
@@ -92,6 +93,8 @@ class Admin::OutletsController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.update(outlet_params)
+
+        @outlet.build_notifications(:updated)
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }
       else
@@ -118,11 +121,13 @@ class Admin::OutletsController < Admin::AdminController
   
   def publish
     @outlet.published!
+    @outlet.build_notifications(:published)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now public."
   end
 
   def archive
     @outlet.archived!
+    @outlet.build_notifications(:archived)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived"
   end
 
