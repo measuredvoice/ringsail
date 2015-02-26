@@ -29,6 +29,7 @@ FactoryGirl.define do
 
     agencies {create_list(:agency, 1)}
     users {create_list(:user, 1)}
+    mobile_app_versions { create_list(:mobile_app_version,1)}
 
 	after(:create) do |mobile_app, evaluator|
 		agencies_count = evaluator.agencies_count.to_i - 1 
