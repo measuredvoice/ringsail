@@ -14,14 +14,19 @@
         </div>
       <% end %>
       <div class="field">
-        <%= f.label :contact_notifications, "Contact Notifications: " %>
+        <%= f.label :contact_notifications, "Contact Notification Emails: " %>
         <%= f.check_box :contact_notifications %>
         <p>Determines if you will receive notifications when items you are listed as a contact on are submitted, published, archived, or need to be reviewed.</p>
       </div>
       <div class="field">
-        <%= f.label :agency_notifications, "Agency Notifications: " %>
+        <%= f.label :agency_notifications, "Agency Notification Emails: " %>
         <%= f.check_box :agency_notifications %>
         <p>Determines if you will receive notifications when items which list your agency is listed as a sponsor for are submitted, published, archived, or need to be reviewed.</p>
+      </div>
+      <div class="field">
+        <%= f.label :email_notification_type, "Email Type: " %>
+        <%= f.select :email_notification_type, User.email_notification_types.keys.to_a.map{|w| [w.humanize, w]}, {}, :class => "form-control formwidth" %>
+        <p>Choose between plain-text simple emails and full html emails with extra markup</p>
       </div>
       <div class="actions">
         <%= f.submit "Update Settings", :class => "btn btn-primary" %>

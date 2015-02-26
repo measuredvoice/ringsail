@@ -104,7 +104,7 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def notification_params
-    params.require(:user).permit(:agency_notifications,:contact_notifications)
+    params.require(:user).permit(:agency_notifications,:contact_notifications, :email_notification_type)
   end
 
   def sort_column

@@ -95,7 +95,7 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 (1..APPS_NUM).each do |app_number|
 	language = ["English","Spanish"].sample
 	status = MobileApp.statuses.values.sample
-	ma = MobileApp.create({
+	ma = MobileApp.new({
 		name: Faker::App.name,
 		short_description: Faker::Lorem.sentence,
 		long_description: Faker::Lorem.paragraph,
@@ -105,8 +105,21 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 		agencies: [Agency.offset(rand(Agency.count)).first],
 		official_tags: [OfficialTag.offset(rand(OfficialTag.count)).first],
 		users: [User.offset(rand(User.count)).first],
+		mobile_app_versions: [MobileAppVersion.create({
+			store_url: Faker::Internet.url,
+			platform: ["iOS","Android","Web App", "Blackberry"].sample,
+			version_number: "v1",
+			publish_date: DateTime.current,
+			description: Faker::Lorem.paragraph,
+			whats_new: Faker::Lorem.paragraph,
+			screenshot: Faker::Company.logo,
+			device: Faker::Hacker.abbreviation,
+			language: language,
+			average_rating: "5",
+			number_of_ratings: 50
+		})]
 	})
-	ma.mobile_app_versions << MobileAppVersion.create({
+	ma.mobile_app_versions << MobileAppVersion.new({
 		store_url: Faker::Internet.url,
 		platform: ["iOS","Android","Web App", "Blackberry"].sample,
 		version_number: "v1",
@@ -119,10 +132,10 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 		average_rating: "5",
 		number_of_ratings: 50
 	})
+	ma.save
 	if ma.published?
 		ma.published!
 	end
-	ma.save
 end
 puts "Finished adding mobile apps to get to #{APPS_NUM}"
 

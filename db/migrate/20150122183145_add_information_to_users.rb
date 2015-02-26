@@ -9,6 +9,7 @@ class AddInformationToUsers < ActiveRecord::Migration
     add_column :users, :role, :integer, default: 0
     add_column :users, :agency_notifications, :boolean, default: false
     add_column :users, :contact_notifications, :boolean, default: true
+    add_column :users, :email_notification_type, :integer, default: 0
 
     create_table :notifications do |t|
       t.integer :user_id

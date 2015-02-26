@@ -237,24 +237,25 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                 limit: 255
+    t.string   "email",                   limit: 255
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",         limit: 4
+    t.integer  "sign_in_count",           limit: 4
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",    limit: 255
-    t.string   "last_sign_in_ip",       limit: 255
+    t.string   "current_sign_in_ip",      limit: 255
+    t.string   "last_sign_in_ip",         limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user",                  limit: 255,                   null: false
-    t.integer  "agency_id",             limit: 4
-    t.string   "phone",                 limit: 255
-    t.string   "first_name",            limit: 255
-    t.string   "last_name",             limit: 255
-    t.text     "groups",                limit: 65535
-    t.integer  "role",                  limit: 4,     default: 0
-    t.boolean  "agency_notifications",  limit: 1,     default: false
-    t.boolean  "contact_notifications", limit: 1,     default: true
+    t.string   "user",                    limit: 255,                   null: false
+    t.integer  "agency_id",               limit: 4
+    t.string   "phone",                   limit: 255
+    t.string   "first_name",              limit: 255
+    t.string   "last_name",               limit: 255
+    t.text     "groups",                  limit: 65535
+    t.integer  "role",                    limit: 4,     default: 0
+    t.boolean  "agency_notifications",    limit: 1,     default: false
+    t.boolean  "contact_notifications",   limit: 1,     default: true
+    t.integer  "email_notification_type", limit: 4,     default: 0
   end
 
   create_table "version_associations", force: :cascade do |t|

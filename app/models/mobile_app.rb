@@ -56,7 +56,7 @@ class MobileApp < ActiveRecord::Base
   validates :name, :presence => true
   validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
-  validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one version" } 
+  validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one mobile app version" } 
   
 
   def self.platform_counts
@@ -88,7 +88,7 @@ class MobileApp < ActiveRecord::Base
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:published]
     self.published.destroy! if self.published
-    self.published = MobileApp.create!({
+    ma = MobileApp.new({
       name: self.name,
       short_description: self.short_description,
       long_description: self.long_description,
@@ -97,12 +97,13 @@ class MobileApp < ActiveRecord::Base
       agency_ids: self.agency_ids || [],
       user_ids: self.user_ids || [],
       official_tag_ids: self.official_tag_ids || [],
-      status: self.status
+      status: self.status,
+      draft_id: self.id
     })
     self.mobile_app_versions.each do |mav|
-      self.published.mobile_app_versions << MobileAppVersion.create(mav.attributes.except!("id","mobile_app_id"))
+      ma.mobile_app_versions << MobileAppVersion.new(mav.attributes.except!("id","mobile_app_id"))
     end
-    self.save!
+    ma.save!
     MobileApp.public_activity_on
     self.create_activity :published
   end

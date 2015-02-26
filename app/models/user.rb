@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
   devise :cas_authenticatable, :trackable, :timeoutable
 
   enum role: { limited_user: 0, full_user: 1, admin: 2, banned: 3}
+  enum email_notification_type: { full_html_email: 0, plain_text_email: 1 }
+
   has_many :email_messages
 
   has_many :mobile_app_users
