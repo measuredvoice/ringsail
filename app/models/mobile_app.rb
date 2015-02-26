@@ -56,10 +56,11 @@ class MobileApp < ActiveRecord::Base
   validates :name, :presence => true
   validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one version" } 
   
 
   def self.platform_counts
-    MobileAppVersion.joins(:mobile_app).where("mobile_apps.draft_id IS NULL").group(:platform).distinct("mobile_app_id, platform").count
+    joins(:mobile_app_versions).where("mobile_apps.draft_id IS NULL").group(:platform).distinct("mobile_app_id, platform").count
   end
 
   def self.to_csv(options = {})
@@ -82,7 +83,7 @@ class MobileApp < ActiveRecord::Base
   def user_tokens=(ids)
     self.user_ids = ids.split(',')
   end
-  
+
   def published!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:published]

@@ -122,7 +122,7 @@
 		    element: 'piechart',
 	    	resize: true,
 		    data: <%= raw @activities_pie_json.to_json %>,
-		    formatter: function (y) { return y + " accounts" }
+		    formatter: function (y) { return y + " activities" }
 		});
 
 		var word_cloud = <%= raw @tag_cloud.to_json %>;
