@@ -93,7 +93,6 @@ class Admin::OutletsController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.update(outlet_params)
-
         @outlet.build_notifications(:updated)
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }

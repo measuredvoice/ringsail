@@ -9,6 +9,7 @@
             <th>Link To Item (opens in new tab)</th>
             <th><%= sortable "message_type", "Activity Type" %></th>
             <th><%= sortable "message", "Message" %></th>
+            <th><%= sortable "created_at", "Notification Created" %></th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
               </td>
               <td class="table_data"><%= notification.message_type %></td>
               <td class="table_data"><%= notification.message %></td>
+              <td class="table_data"><%= notification.created_at.strftime("%B %e, %Y %H:%M") %></td>
             </tr>
           <% end %>
         </tbody>

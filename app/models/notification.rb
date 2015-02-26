@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
   after_create :send_notification
 
   def send_notification
-    NotificationMailer.email(self).deliver_later
+    # NotificationMailer.email(self).deliver_later
   end
   
 end

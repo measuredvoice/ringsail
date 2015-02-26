@@ -9,10 +9,10 @@ class Admin::NotificationsController < Admin::AdminController
   # GET /users/1/notifications
   # GET /users/1/notifications.json
   def index
-    @notifications = @user.notifications.all.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_size])
     if(current_user.id == @user.id)
-      @notifications.update_all(has_read: true)
+      @user.notifications.update_all(has_read: true)
     end
+    @notifications = @user.notifications.all.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_size])
   end
 
   # GET /users/1/nofications/1

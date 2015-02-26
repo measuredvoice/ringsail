@@ -17,6 +17,8 @@
 class MobileApp < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model
+  include Notifications
+  
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
@@ -80,6 +82,7 @@ class MobileApp < ActiveRecord::Base
   def user_tokens=(ids)
     self.user_ids = ids.split(',')
   end
+  
   def published!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:published]

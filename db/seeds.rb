@@ -9,9 +9,10 @@ APPS_NUM = 40
 
 puts "Adding agencies with count of #{AGENCIES_NUM}"
 (1..AGENCIES_NUM).each do |agency_number|
+	name = "Department of #{Faker::Commerce.department(2, true)}"
 	Agency.create!({
-		name: Faker::Company.name,
-		shortname: "#{Faker::Company.suffix} #{agency_number}",
+		name: name ,
+		shortname: name.split(" ").map{|w| w[0,1].capitalize }.join.gsub!(/\W+/, ''),
 		info_url: Faker::Internet.url
 	})
 end
