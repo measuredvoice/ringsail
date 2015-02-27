@@ -119,19 +119,6 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 			number_of_ratings: 50
 		})]
 	})
-	ma.mobile_app_versions << MobileAppVersion.new({
-		store_url: Faker::Internet.url,
-		platform: ["iOS","Android","Web App", "Blackberry"].sample,
-		version_number: "v1",
-		publish_date: DateTime.current,
-		description: Faker::Lorem.paragraph,
-		whats_new: Faker::Lorem.paragraph,
-		screenshot: Faker::Company.logo,
-		device: Faker::Hacker.abbreviation,
-		language: language,
-		average_rating: "5",
-		number_of_ratings: 50
-	})
 	ma.save
 	if ma.published?
 		ma.published!

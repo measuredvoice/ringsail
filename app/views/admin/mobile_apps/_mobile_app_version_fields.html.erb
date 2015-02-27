@@ -7,7 +7,7 @@
       </div>
      <div class="field">
           <%= f.label :platform %> </br>
-          <%= f.select :platform, options_for_select(MobileAppVersion.all.pluck(:platform).uniq),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+          <%= f.select :platform, options_for_select(MobileAppVersion.all.pluck(:platform).uniq,f.object.platform),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div>
       <div class="field">
         <%= f.label :version_number %> </br>
