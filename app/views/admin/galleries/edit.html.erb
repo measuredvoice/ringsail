@@ -3,8 +3,9 @@
 		<h1>Editing Gallery</h1>
 
 		<%= render 'form' %>
-
-		<%= link_to 'Show', admin_gallery_path(@gallery) %> |
-		<%= link_to 'Back', admin_galleries_path %>
+    <div class="buttonRow">
+  		<%= link_to 'Show', admin_gallery_path(@gallery) %>
+  		<%= link_to 'Back', admin_galleries_path %>
+    </end>
 	</div>
 </div>

@@ -1,10 +1,9 @@
 <div class="row">  
+  <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Versions</h1>
-	</br>
-
-	<% @versions.each do |version| %>
-	<% gallery = version.reify(:has_one => true, :has_many => true)
-		if gallery %>
+		<% @versions.each do |version| %>
+		<% gallery = version.reify(:has_one => true, :has_many => true)
+			if gallery %>
 		<div class = "panel panel-default">
 			<div class = "panel-heading">
 				<p style = "display:inline">
@@ -17,22 +16,21 @@
 					<strong>Gallery:</strong>
 					<%= gallery.name %>
 				</p>
-
 				<p>
 					<strong>Mobile Apps:</strong>
 					<%= gallery.mobile_apps.map(&:name).join(', ') %>
 				</p>
-
 				<p>
 					<strong>Short Description:</strong>
 					<%= gallery.short_description %>
 				</p>
-
 				<p>
 					<strong>Long Description:</strong>
 					<%= gallery.long_description %>
 				</p>
 			</div>
 		</div>
-    <% end end %>
+	  <% end 
+	  end %>
+	</div>
 </div>

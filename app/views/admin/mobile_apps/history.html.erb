@@ -1,11 +1,9 @@
 <div class="row">  
+  <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Versions</h1>
-    </br>
-
     <% @versions.each do |version| %>
     <% mobile_app = version.reify(:has_one => true, :has_many => true) 
-        if mobile_app %>
-
+      if mobile_app %>
       <div class = "panel panel-default">
         <div class = "panel-heading">
           <p style = "display:inline">
@@ -13,40 +11,34 @@
             <%= link_to "Restore", restore_admin_mobile_app_path({id: mobile_app.id, version_id: version.id}), :class => "pull-right" %>
           </p>
         </div>
-        <div class = "panel-body">
-           <p>
+        <div class="panel-body">
+          <p>
             <strong>Mobile App:</strong>
             <%= mobile_app.name %>
           </p>
-
           <p>
             <strong>Agencies:</strong>
             <%= mobile_app.agencies.map(&:name).join(', ') %>
           </p>
-
-           <p>
+          <p>
             <strong>Users</strong>
             <%= mobile_app.users.map(&:email).join(', ') %>
           </p>
-
-           <p>
+          <p>
             <strong>Short Description:</strong>
             <%= mobile_app.short_description %>
           </p>
-
-           <p>
+          <p>
             <strong>Long Description:</strong>
             <%= mobile_app.long_description %>
           </p>
-
            <p>
             <strong>Icon url:</strong>
             <%= mobile_app.icon_url %>
           </p>
-
         </div>
       </div>
-  <% end
-  end %> 
-
+    <% end
+    end %> 
+  </div>
 </div>
