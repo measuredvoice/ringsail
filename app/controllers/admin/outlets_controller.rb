@@ -2,17 +2,17 @@ class Admin::OutletsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
 
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :history, :restore, :publish, :archive]
+  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :publish, :archive]
 
   before_filter :require_admin, only: [:publish]
   # GET /outlets
   # GET /outlets.json
   def index
-    if current_user.admin?
+    if current_user.cross_agency?
       @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
       @services = Outlet.all.group(:service).count
     else
-      @outlets = Outlet.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
       @services = @outlets.group(:service).count
     end
 
@@ -58,6 +58,8 @@ class Admin::OutletsController < Admin::AdminController
   # GET /outlets/new
   def new
     @outlet = Outlet.new
+    @outlet.agencies << current_user.agency
+    @outlet.users << current_user
   end
 
   # GET /outlets/1/edit
@@ -75,6 +77,7 @@ class Admin::OutletsController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.save
+        @outlet.build_notifications(:created)
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully created.' }
         format.json { render :show, status: :created, location: @outlet }
       else
@@ -90,6 +93,7 @@ class Admin::OutletsController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.update(outlet_params)
+        @outlet.build_notifications(:updated)
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }
       else
@@ -114,22 +118,15 @@ class Admin::OutletsController < Admin::AdminController
     @activities = PublicActivity::Activity.where(trackable_type: "Outlet").order("created_at desc").page(params[:page]).per(25)
   end
   
-  def history
-    @versions = @outlet.versions
-  end
-
-  def restore
-    @outlet.versions.find(params[:version_id]).reify(:has_many => true).save!  
-    redirect_to admin_outlet_path(@outlet), :notice => "Changes were reverted."
-  end
-
   def publish
     @outlet.published!
+    @outlet.build_notifications(:published)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now public."
   end
 
   def archive
     @outlet.archived!
+    @outlet.build_notifications(:archived)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived"
   end
 
@@ -141,7 +138,7 @@ class Admin::OutletsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, :account, :service, :tag_tokens, :language, :agency_tokens, :user_tokens)
+      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, :account, :service, :language, :agency_tokens, :user_tokens,:tag_tokens)
     end
 
     def sort_column

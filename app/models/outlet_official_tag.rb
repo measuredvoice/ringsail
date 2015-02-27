@@ -10,7 +10,6 @@
 class OutletOfficialTag < ActiveRecord::Base
   belongs_to :outlet
   belongs_to :official_tag
-  has_paper_trail 
 
   after_save :update_counter_cache
   after_destroy :update_counter_cache

@@ -8,6 +8,7 @@ class MoveToOfficialTagsFromActsAsTaggable < ActiveRecord::Migration
     add_column :official_tags, :published_gallery_count, :integer, default: 0
     add_column :official_tags, :published_mobile_app_count, :integer, default: 0
     add_column :official_tags, :published_outlet_count, :integer, default: 0
+    add_column :official_tags, :tag_type, :integer, default: 0
 
     create_table :mobile_app_official_tags do |t|
       t.integer :mobile_app_id

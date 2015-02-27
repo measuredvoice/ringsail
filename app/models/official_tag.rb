@@ -2,19 +2,25 @@
 #
 # Table name: official_tags
 #
-#  id               :integer          not null, primary key
-#  tag_text         :string(255)
-#  created_at       :datetime
-#  updated_at       :datetime
-#  gallery_count    :integer          default("0")
-#  mobile_app_count :integer          default("0")
-#  outlet_count     :integer          default("0")
+#  id                         :integer          not null, primary key
+#  tag_text                   :string(255)
+#  created_at                 :datetime
+#  updated_at                 :datetime
+#  draft_gallery_count        :integer          default("0")
+#  draft_mobile_app_count     :integer          default("0")
+#  draft_outlet_count         :integer          default("0")
+#  published_gallery_count    :integer          default("0")
+#  published_mobile_app_count :integer          default("0")
+#  published_outlet_count     :integer          default("0")
+#  tag_type                   :integer          default("0")
 #
 
 class OfficialTag < ActiveRecord::Base
   #attr_accessible :shortname, :tag_text
   
   validates :tag_text, :presence => true, :uniqueness => true
+
+  enum tag_type: { category: 0, geographic: 1} # 0 will be the default, in this case, category
 
   has_many :outlet_official_tags, :dependent => :destroy
   has_many :outlets, through: :outlet_official_tags
@@ -25,7 +31,6 @@ class OfficialTag < ActiveRecord::Base
   has_many :gallery_official_tags, :dependent => :destroy
   has_many :galleries, through: :gallery_official_tags
   
-  has_paper_trail
   def tag_text=(text)
     self[:tag_text] = text.downcase
   end

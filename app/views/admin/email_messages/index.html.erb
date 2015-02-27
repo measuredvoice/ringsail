@@ -1,28 +1,32 @@
-<h1 class="page-header">Users</h1>
+<div class="row">
+  <div class="col-sm-12">
+  <h1 class="page-header">Users</h1>
 
-<div class="row placeholders">
-  <%= paginate @email_messages %>     
-  <table class=" table table-striped">
-    <thead>
-      <tr = "users_row">
-        <th>Email To</th>
-        <th>Email From</th>
-        <th>Subject</th>
-        <th>Body</th>
-        <th>Time</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @email_messages.each do |email| %>
-        <tr class = "tablerow">
-          <td class = "table_data"><%= email.to %></td>
-          <td class = "table_data"><%= user_list_format(email.user) %></td>
-          <td class = "table_data"><%= email.subject %> </td>
-          <td class = "table_data"><%= email.body.first(75) %> </td>
-          <td class = "table_data"><%= email.created_at.strftime("%B %e, %Y %H:%M") %> </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <%= paginate @email_messages %>
+    <div class="row placeholders">
+      <%= paginate @email_messages %>     
+      <table class=" table table-striped">
+        <thead>
+          <tr = "users_row">
+            <th>Email To</th>
+            <th>Email From</th>
+            <th>Subject</th>
+            <th>Body</th>
+            <th>Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @email_messages.each do |email| %>
+            <tr class = "tablerow">
+              <td class = "table_data"><%= email.to %></td>
+              <td class = "table_data"><%= user_list_format(email.user) %></td>
+              <td class = "table_data"><%= email.subject %> </td>
+              <td class = "table_data"><%= email.body.first(75) %> </td>
+              <td class = "table_data"><%= email.created_at.strftime("%B %e, %Y %H:%M") %> </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @email_messages %>
+    </div>
+  </div>
 </div>

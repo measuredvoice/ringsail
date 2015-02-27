@@ -1,12 +1,11 @@
 class Admin::GalleriesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :history,:restore, :publish, :archive]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :publish, :archive]
   # GET /gallerys
   # GET /gallerys.json
   def index
-    if current_user.admin?
-
+    if current_user.cross_agency?
       @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
       @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).uniq
@@ -23,8 +22,8 @@ class Admin::GalleriesController < Admin::AdminController
 
   # GET /gallerys/1
   # GET /gallerys/1.json
- # def show
-  #end
+  def show
+  end
 
   # GET /gallerys/new
   def new
@@ -87,14 +86,6 @@ class Admin::GalleriesController < Admin::AdminController
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "Gallery").order("created_at desc").page(params[:page]).per(25)
   end
-  def history
-    @versions = @gallery.versions.order("created_at desc")
-  end
-
-  def restore
-    @gallery.versions.find(params[:version_id]).reify.save!
-    redirect_to admin_gallery_path(@gallery), :notice => "Undid changes to mobile app."
-  end
 
   def publish
     @gallery.published!
@@ -116,7 +107,7 @@ class Admin::GalleriesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description, :tag_tokens, :short_description, :long_description, :agency_tokens, :gallery_items_ol)
+      params.require(:gallery).permit(:name, :description, :tag_tokens, :short_description, :long_description, :agency_tokens, :user_tokens, :gallery_items_ol)
     end
 
     def sort_column

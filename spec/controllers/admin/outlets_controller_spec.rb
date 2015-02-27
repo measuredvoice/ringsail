@@ -104,55 +104,65 @@ RSpec.describe Admin::OutletsController, type: :controller do
 
   describe "POST #create" do 
     it "creates an outlet" do
-      sign_in FactoryGirl.create(:admin_user)
+      user = FactoryGirl.create(:admin_user)
+      sign_in user
       outlet = FactoryGirl.attributes_for(:outlet)
+      outlet[:agency_tokens] = user.agency_id.to_s
+      outlet[:user_tokens] = user.id.to_s
       post :create, outlet: outlet
       expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
     end
 
-    it "should redirect users who are not admins" do
+    it "should redirect users who are can not create outlets" do
       sign_in FactoryGirl.create(:banned_user)
       outlet = FactoryGirl.create(:outlet)
-      post :create, outlet: outlet
-      expect(response).to redirect_to (admin_about_url)
-
-      sign_in FactoryGirl.create(:limited_user)
-      post :create, outlet: outlet
-      expect(response).to redirect_to (admin_about_url)
-
-      sign_in FactoryGirl.create(:full_user)
       post :create, outlet: outlet
       expect(response).to redirect_to (admin_about_url)
     end
   end
 
   describe "GET #new" do
-    it "responds successfully with an HTTP 200 status code for admin users" do
+    it "responds successfully with an HTTP 200 status code for user who can create outlets" do
       sign_in FactoryGirl.create(:admin_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :new
+      expect(response).to render_template("new")
+
+      sign_in FactoryGirl.create(:limited_user)
+      outlet = FactoryGirl.create(:outlet)
+      get :new
+      expect(response).to render_template("new")
+
+      sign_in FactoryGirl.create(:full_user)
       outlet = FactoryGirl.create(:outlet)
       get :new
       expect(response).to render_template("new")
     end
 
-    it "should redirect users who are not admins" do
+    it "should redirect users who can not create outlets" do
       sign_in FactoryGirl.create(:banned_user)
       outlet = FactoryGirl.create(:outlet)
-      get :new
-      expect(response).to redirect_to (admin_about_url)
-
-      sign_in FactoryGirl.create(:limited_user)
-      get :new
-      expect(response).to redirect_to (admin_about_url)
-
-      sign_in FactoryGirl.create(:full_user)
       get :new
       expect(response).to redirect_to (admin_about_url)
     end
   end
 
   describe "PUT #update/:id" do
-    it "responds successfully with an HTTP 200 status code for admin users" do
+    it "responds successfully with an HTTP 200 status code for users with permission to do so" do
       sign_in FactoryGirl.create(:admin_user)
+      outlet = FactoryGirl.create(:outlet)
+      outlet_attributes = FactoryGirl.attributes_for(:outlet)
+      put :update, id: outlet.id, outlet: outlet_attributes
+      expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
+
+
+      sign_in FactoryGirl.create(:limited_user)
+      outlet = FactoryGirl.create(:outlet)
+      outlet_attributes = FactoryGirl.attributes_for(:outlet)
+      put :update, id: outlet.id, outlet: outlet_attributes
+      expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
+
+      sign_in FactoryGirl.create(:full_user)
       outlet = FactoryGirl.create(:outlet)
       outlet_attributes = FactoryGirl.attributes_for(:outlet)
       put :update, id: outlet.id, outlet: outlet_attributes
@@ -161,16 +171,6 @@ RSpec.describe Admin::OutletsController, type: :controller do
 
     it "should redirect users who are not admins" do
       sign_in FactoryGirl.create(:banned_user)
-      outlet = FactoryGirl.create(:outlet)
-      put :update, id: outlet.id
-      expect(response).to redirect_to (admin_about_url)
-
-      sign_in FactoryGirl.create(:limited_user)
-      outlet = FactoryGirl.create(:outlet)
-      put :update, id: outlet.id
-      expect(response).to redirect_to (admin_about_url)
-
-      sign_in FactoryGirl.create(:full_user)
       outlet = FactoryGirl.create(:outlet)
       put :update, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
@@ -248,7 +248,6 @@ RSpec.describe Admin::OutletsController, type: :controller do
       outlet.published!
       get :history, id: outlet.id
       expect(response).to be_success
-      expect(assigns[:versions]).to match(outlet.versions)
       expect(response).to render_template("history")
     end
   end

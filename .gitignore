@@ -6,7 +6,6 @@ tmp/
 *~
 .project
 .DS_Store
-bin/
 .rspec
 .rvmrc
 data/*

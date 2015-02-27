@@ -13,12 +13,14 @@
 class Gallery < ActiveRecord::Base
 	 #handles logging of activity
 	include PublicActivity::Model
+  include Notifications
+  
 	tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
   scope :api, -> { where("draft_id IS NOT NULL") }
 
-  enum status: { under_review: 0, published: 1, archived: 2 }
+  enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
 
   # Galleries have a relationship to themselvs
   # The "published" outlet will have a draft_id pointing to its parent
@@ -26,10 +28,6 @@ class Gallery < ActiveRecord::Base
   # This will allow easy querying on the public / admin portion of the application
   has_one :published, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
   belongs_to :draft, class_name: "Gallery", foreign_key: "draft_id"
-
-
-	#handles versioning
-	has_paper_trail
 	
 	has_many :gallery_users, dependent: :destroy
 	has_many :users, through: :gallery_users
@@ -44,6 +42,10 @@ class Gallery < ActiveRecord::Base
   has_many :mobile_apps, :through => :gallery_items, :source => :item, :source_type => "MobileApp"
   has_many :outlets, :through => :gallery_items, :source => :item, :source_type => "Outlet"
 
+  validates :name, :presence => true
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  
   def published_gallery_items
     self.gallery_items.where(status: 1)
   end
@@ -55,35 +57,39 @@ class Gallery < ActiveRecord::Base
   def published_outlets
     Outlet.where("draft_id IN (?)", self.outlet_ids)
   end
+  
   # This handles a json serialized format from the administrative end.
   # It is to allowed ordering of lists in the forms
   # Please be careful if messing with this, its senssitive
   def gallery_items_ol=(list)
-  	gallery_list = JSON.parse(list)[0]
-  	ids = []
-  	gallery_list.each_with_index do |item,index|
-  		if ["MobileApp","Outlet"].include? item["class"]
-  			if item["class"].constantize.find(item["id"])
-		  		new_item =  GalleryItem.find_or_create_by({
-		  			gallery_id: self.id,
-		  			item_id: item["id"],
-		  			item_type: item["class"]
-		  		})
-		  		new_item.item_order = index
-		  		new_item.save!
-		  		ids << item["id"]
-		  	else
-          # This error occurs if an invalid id is provided, generally should only be found by devs
-		  		self.errors.add(:base, "Couldn't find item to add to gallery")
-		  	end
-	  	else
-        # This error would require either a developer or something trying to do wrong to reach
-	  		self.errors.add(:base, "A gallery item was of the wrong class")
-	  	end
-  	end
-    # cleanup all records not found in the list this time. required due to way we are handling
-    # data serialization
-  	self.gallery_items.where('item_id NOT IN (?)', ids).destroy_all
+    if list
+    	gallery_list = JSON.parse(list)[0]
+    	ids = []
+    	gallery_list.each_with_index do |item,index|
+    		if ["MobileApp","Outlet"].include? item["class"]
+    			if item["class"].constantize.find(item["id"])
+  		  		new_item =  GalleryItem.find_or_create_by({
+  		  			gallery_id: self.id,
+  		  			item_id: item["id"],
+  		  			item_type: item["class"]
+  		  		})
+  		  		new_item.item_order = index
+  		  		new_item.save!
+  		  		ids << item["id"]
+  		  	else
+            # This error occurs if an invalid id is provided, generally should only be found by devs
+  		  		self.errors.add(:base, "Couldn't find item to add to gallery")
+  		  	end
+  	  	else
+          # This error would require either a developer or something trying to do wrong to reach
+  	  		self.errors.add(:base, "A gallery item was of the wrong class")
+  	  	end
+    	end
+      # cleanup all records not found in the list this time. required due to way we are handling
+      # data serialization
+    else
+    	self.gallery_items.where('item_id NOT IN (?)', ids).destroy_all
+    end
   end
 
 

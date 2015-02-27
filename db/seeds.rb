@@ -1,17 +1,21 @@
 PublicActivity.enabled = false
 DatabaseCleaner.clean_with :truncation
 
-AGENCIES_NUM = 5
+AGENCIES_NUM = 3
 USERS_NUM = 5 #users will always make a minimum of 4 (one for each role)
-TAGS_NUM = 5
-OUTLETS_NUM = 5
-APPS_NUM = 5
+TAGS_NUM = 6
+OUTLETS_NUM = 40
+APPS_NUM = 40
 
 puts "Adding agencies with count of #{AGENCIES_NUM}"
+agencie_names = ["Department of Mysteries", 
+	"Department of Magical Accidents and Catastrophes",
+	"Department of Magical Transportation"]
 (1..AGENCIES_NUM).each do |agency_number|
+	name = "Department of #{Faker::Commerce.department(2, true)}"
 	Agency.create!({
-		name: Faker::Company.name,
-		shortname: "#{Faker::Company.suffix} #{agency_number}",
+		name: agencie_names[agency_number-1] ,
+		shortname: agencie_names[agency_number-1].split(" ").map{|w| w[0,1].capitalize }.join.gsub!(/\W+/, ''),
 		info_url: Faker::Internet.url
 	})
 end
@@ -52,9 +56,12 @@ if user_count < USERS_NUM
 end
 
 puts "Adding tags to get to #{TAGS_NUM}"
+tag_names = [
+ "Health & Fitness", "Education", "Travel", "Reference", "Recreation","Scientific"
+ ]
 (1..TAGS_NUM).each do |tag_number|
 	OfficialTag.create!({
-		tag_text: "#{Faker::Lorem.word} #{tag_number}"
+		tag_text: tag_names[tag_number-1]
 	})
 end
 puts "Finished tags to get to #{TAGS_NUM}"
@@ -88,7 +95,7 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 (1..APPS_NUM).each do |app_number|
 	language = ["English","Spanish"].sample
 	status = MobileApp.statuses.values.sample
-	ma = MobileApp.create({
+	ma = MobileApp.new({
 		name: Faker::App.name,
 		short_description: Faker::Lorem.sentence,
 		long_description: Faker::Lorem.paragraph,
@@ -98,8 +105,21 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 		agencies: [Agency.offset(rand(Agency.count)).first],
 		official_tags: [OfficialTag.offset(rand(OfficialTag.count)).first],
 		users: [User.offset(rand(User.count)).first],
+		mobile_app_versions: [MobileAppVersion.create({
+			store_url: Faker::Internet.url,
+			platform: ["iOS","Android","Web App", "Blackberry"].sample,
+			version_number: "v1",
+			publish_date: DateTime.current,
+			description: Faker::Lorem.paragraph,
+			whats_new: Faker::Lorem.paragraph,
+			screenshot: Faker::Company.logo,
+			device: Faker::Hacker.abbreviation,
+			language: language,
+			average_rating: "5",
+			number_of_ratings: 50
+		})]
 	})
-	ma.mobile_app_versions << MobileAppVersion.create({
+	ma.mobile_app_versions << MobileAppVersion.new({
 		store_url: Faker::Internet.url,
 		platform: ["iOS","Android","Web App", "Blackberry"].sample,
 		version_number: "v1",
@@ -112,10 +132,10 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 		average_rating: "5",
 		number_of_ratings: 50
 	})
+	ma.save
 	if ma.published?
 		ma.published!
 	end
-	ma.save
 end
 puts "Finished adding mobile apps to get to #{APPS_NUM}"
 

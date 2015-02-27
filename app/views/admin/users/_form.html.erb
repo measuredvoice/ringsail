@@ -1,7 +1,7 @@
 <%= form_for([:admin,@user]) do |f| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this chapter from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this social media account from being saved:</h2>
       <ul>
       <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -9,11 +9,10 @@
       </ul>
     </div>
   <% end %>
-<div class="bg-info">
+  <div class="bg-info">
   <p>Notice: All user information must be managed to OMB MAX, this is for debugging purposes only</p>
   <p>If you have changed the information in OMB Max, try logging out of the site and back in, this will refresh the information</p>
   <p>If you are having issues, contact an admistrator using the dropdown under your name to email the admins</p></div>
-<form>
   <div class="field">
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name, :class => 'form-control formwidth', :disabled => true%>
@@ -28,7 +27,7 @@
   </div>
   <div class = "field">
     <%= f.label :agency_id %>
-    <%= f.select :agency, options_from_collection_for_select(Agency.all,:id,:name,@user.agency), {include_blank: "Select"}, {:class => 'form-control formwidth', :disabled => true} %> 
+    <%= f.select :agency, options_from_collection_for_select(Agency.all,:id,:name,@user.agency.id), {include_blank: "Select"}, {:class => 'form-control formwidth', :disabled => true} %> 
   </div>
   <div class = "field">
     <%= f.label :groups %>

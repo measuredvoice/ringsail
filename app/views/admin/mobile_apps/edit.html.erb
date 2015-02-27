@@ -3,10 +3,9 @@
   	<h1>Editing Mobile App Registration</h1>
 
   	<%= render 'form' %>
-
-  	</br>
-  	<%= link_to 'Show', admin_mobile_app_path(@mobile_app) %> |
-  	<%= link_to 'Back', admin_mobile_apps_path %>
-
+    <div class="buttonRow">
+    	<%= link_to 'Show', admin_mobile_app_path(@mobile_app) %>
+    	<%= link_to 'Back', admin_mobile_apps_path %>
+    </div>
   </div>
 </div>

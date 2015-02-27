@@ -14,9 +14,6 @@ gem 'jbuilder'
 # Public activity
 gem 'public_activity'
 
-# Version history Gem
-gem 'paper_trail'
-
 # Makes nested forms easier
 gem 'cocoon'
 
@@ -73,6 +70,7 @@ group :development, :test do
   gem 'coveralls'
   gem "capybara" #feature specs
   gem 'database_cleaner'
+  gem 'guard-rspec', require: false
   
   # generate fake data in tests & seeds files
   gem 'faker'

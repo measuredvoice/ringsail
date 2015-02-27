@@ -10,5 +10,4 @@
 class OutletUser < ActiveRecord::Base
   belongs_to :user
   belongs_to :outlet
-  has_paper_trail
 end

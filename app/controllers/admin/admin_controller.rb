@@ -3,7 +3,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   before_filter :authenticate_user! unless Rails.env.development?
-  before_filter :banned_user?, except: [:about, :impersonate]
+  before_filter :banned_user?, except: [:about, :impersonate, :dashboard]
   helper_method :current_user  
   
   def about
@@ -12,7 +12,8 @@ class Admin::AdminController < ApplicationController
 
   def impersonate
     session[:user_id] = params[:user_id]
-    redirect_to admin_dashboards_path, notice: "Now impersonating: #{current_user.email} with role: #{current_user.role.humanize}"
+    @current_user = User.find(params[:user_id])
+    redirect_to admin_dashboards_path, notice: "Now impersonating: #{User.find(params[:user_id]).email} with role: #{User.find(params[:user_id]).role.humanize}"
   end
 
   def current_user
@@ -40,6 +41,12 @@ class Admin::AdminController < ApplicationController
   def require_admin
     if !current_user.admin?
       redirect_to admin_dashboards_path, notice: "You shouldn't be going there... here is the dashboard instead."
+    end
+  end
+
+  def require_admin_or_owner
+    if !current_user.admin? && current_user.id != @user.id
+      redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
     end
   end
 
