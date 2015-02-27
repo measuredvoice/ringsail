@@ -186,7 +186,7 @@ border-radius: 4px;
 .dropdown-menu >li >a:hover{
      color: #ff5049!important;
 }
-.dropdown-menu >li >a:focus{
+.dropdown-menu >li >a:focus,.dropdown-menu >li >a:active {
     color: #ff5049!important;
     border:dotted 1px #ff5049;
     box-shadow: none!important;
@@ -194,6 +194,9 @@ border-radius: 4px;
 .nav .open a{
     background: #0c555d !important;
     color: #ff5049;
+}
+.nav .open a:focus, .nav .open a:active{
+    border:dotted 1px #ff5049;
 }
 .navbar-nav > .active > a{
     color:#ff5049!important;
@@ -247,7 +250,12 @@ border-radius: 4px;
     color: #ccc;
     line-height:1.8em;
 }
-
+.container > .navbar-header{
+    background-color:#0c555d;
+}
+.navbar-toggle .icon-bar{
+    background-color:#ff5049;
+}
 /*
  * Sidebar
  */
