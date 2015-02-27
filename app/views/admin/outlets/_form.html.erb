@@ -103,8 +103,12 @@
       $.get("/admin/outlets/account_for_url",{
           url: $('#outlet_service_url').val()
         },function(data){
-          $('#outlet_account').val(data.account);
-          $('#outlet_service').val(data.service);
+          if(data.account){
+            $('#outlet_account').val(data.account);
+          }
+          if(data.service){
+            $('#outlet_service').val(data.service);
+          }
       });
     });
   </script>
