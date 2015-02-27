@@ -6,7 +6,8 @@
 
         <p>If a users information has been updated in OMB Max and they are still having issues, tell them to log out and back in, as this triggers the system to pull their data from OMB Max again</p></div>
     <div class="placeholders">
-    <%= paginate @users %>     
+    <%= paginate @users %>  
+    <%= page_entries_info @users %>   
   	<table class=" table table-striped">
       <thead>
     		<tr class="users_row">

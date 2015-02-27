@@ -3,7 +3,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 	before_filter :require_admin, except: [:new, :create, :show]
 
 	def index
-		@email_messages = EmailMessage.page(params[:page]).per(15)
+		@email_messages = EmailMessage.all.page(params[:page]).per(15)
 	end
 	
 	def new

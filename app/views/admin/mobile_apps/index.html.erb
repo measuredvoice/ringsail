@@ -6,7 +6,6 @@
           <div class="list-group verticalTabs">
             <%= link_to admin_mobile_apps_path, {class: "list-group-item verticalTabs-item #{"active" if params[:platform].nil? }"} do %>
               All
-              <span class="count pull-right"><%= @total_mobile_apps %></span>
             <%end%>
             <% @platform_counts.each do |key, value| %>
               <%= link_to admin_mobile_apps_path(platform: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:platform]}"} do %>
@@ -20,6 +19,7 @@
         <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
           <p>
             <%= paginate @mobile_apps %>
+            <%= page_entries_info @mobile_apps %>
             <text>
               Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
             </text>

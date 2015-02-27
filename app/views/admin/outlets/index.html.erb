@@ -5,8 +5,7 @@
       <div class="col-xs-12 col-sm-3 col-md-2 verticalTabsWrap">
         <div class="list-group verticalTabs">
           <%= link_to admin_outlets_path, {class: "list-group-item verticalTabs-item #{"active" if params[:service].nil? }"} do %>
-            All
-            <span class="count pull-right"><%= @total_outlets %></span>
+            All         
           <%end%>
           <% @services.each do |key, value| %>
             <%= link_to admin_outlets_path(service: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:service]}"} do %>
@@ -19,10 +18,10 @@
       <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
         <p>
           <text>
-            </br></br>
             Download: <%= link_to "CSV", admin_outlets_path(format: "csv") %> 
           </text>
           <%= paginate @outlets %>
+          <%= page_entries_info @outlets %>
         </p>
         <table class="table table-striped">
         <thead>

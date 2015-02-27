@@ -3,6 +3,7 @@
     <h1 class="page-header">Agencies</h1>
     <p>
       <%=paginate @agencies%>
+      <%= page_entries_info @agencies %>  
   	  <text>
         Download: <%= link_to "CSV", admin_agencies_path(format: "csv") %> 
       </text>

@@ -1,8 +1,11 @@
 <div class="row">
-  <div class="col-sm-12">
-    <h1 class="page-header">Notifications for User: <%= @user.email %> </h1><%= link_to "Edit Notification Settings", edit_notification_settings_admin_user_path(@user) %>
+  <div class="col-sm-12 col-md-12 main">
+    <h1 class="page-header">Notifications for User: <%= @user.email %> </h1>
+
+    <%= link_to "Edit Notification Settings", edit_notification_settings_admin_user_path(@user), :class => "btn btn-default" %><br/><br/>
     <div class="placeholders">
       <%= paginate @notifications %>     
+      <%= page_entries_info @notifications %>
       <table class=" table table-striped">
         <thead>
           <tr class="users_row">

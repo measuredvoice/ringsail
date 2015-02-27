@@ -5,6 +5,7 @@
       <div class="col-sm-12">
         <p>
           <%= paginate @galleries %>
+          <%= page_entries_info @galleries %> 
           <text>
             Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
           </text>
