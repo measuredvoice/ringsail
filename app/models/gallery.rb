@@ -13,6 +13,8 @@
 class Gallery < ActiveRecord::Base
 	 #handles logging of activity
 	include PublicActivity::Model
+  include Notifications
+  
 	tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }

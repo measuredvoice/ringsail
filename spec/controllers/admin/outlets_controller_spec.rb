@@ -248,7 +248,6 @@ RSpec.describe Admin::OutletsController, type: :controller do
       outlet.published!
       get :history, id: outlet.id
       expect(response).to be_success
-      expect(assigns[:versions]).to match(outlet.versions)
       expect(response).to render_template("history")
     end
   end

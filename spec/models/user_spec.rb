@@ -2,23 +2,25 @@
 #
 # Table name: users
 #
-#  id                  :integer          not null, primary key
-#  email               :string(255)
-#  remember_created_at :datetime
-#  sign_in_count       :integer
-#  current_sign_in_at  :datetime
-#  last_sign_in_at     :datetime
-#  current_sign_in_ip  :string(255)
-#  last_sign_in_ip     :string(255)
-#  created_at          :datetime
-#  updated_at          :datetime
-#  user                :string(255)      not null
-#  agency_id           :integer
-#  phone               :string(255)
-#  first_name          :string(255)
-#  last_name           :string(255)
-#  groups              :text(65535)
-#  role                :integer          default("0")
+#  id                    :integer          not null, primary key
+#  email                 :string(255)
+#  remember_created_at   :datetime
+#  sign_in_count         :integer
+#  current_sign_in_at    :datetime
+#  last_sign_in_at       :datetime
+#  current_sign_in_ip    :string(255)
+#  last_sign_in_ip       :string(255)
+#  created_at            :datetime
+#  updated_at            :datetime
+#  user                  :string(255)      not null
+#  agency_id             :integer
+#  phone                 :string(255)
+#  first_name            :string(255)
+#  last_name             :string(255)
+#  groups                :text(65535)
+#  role                  :integer          default("0")
+#  agency_notifications  :boolean          default("0")
+#  contact_notifications :boolean          default("1")
 #
 
 require 'rails_helper'

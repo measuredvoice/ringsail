@@ -7,20 +7,22 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    if current_user.admin? || current_user.full_user?
+    if current_user.cross_agency?
       @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      @platform_counts = @mobile_apps.platform_counts
+      @total_mobile_apps = @mobile_apps.count
     else
-      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @mobile_apps = MobileApp.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @platform_counts = @mobile_apps.platform_counts
+      @total_mobile_apps = @mobile_apps.count
     end
     if params[:platform] && !params[:platform].blank?
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
     end
     @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
 
-    @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
-    @platform_counts = MobileApp.platform_counts
+    
 
-    @allApps = MobileApp.all
     respond_to do |format|
       format.html
       format.json {render json: @allApps }
@@ -72,6 +74,9 @@ class Admin::MobileAppsController < Admin::AdminController
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully created.' }
         format.json { render :show, status: :created, location: @mobile_app }
       else
+        if @mobile_app.mobile_app_versions.empty?
+          @mobile_app.mobile_app_versions.build
+        end
         format.html { render :new }
         format.json { render json: @mobile_app.errors, status: :unprocessable_entity }
       end

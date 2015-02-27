@@ -40,7 +40,7 @@
 	  	<div class="panel-body">
 	  		<p>This list comprises everyone listed either as a contact on this account, or as a contact for a connected agency</p>
 	  		<ul class="list-group">
-	  			<% @outlet.all_contacts.each do |contact| %>
+	  			<% @outlet.notifications_users_list.each do |contact| %>
 	  					<li class="list-group-item"><%= user_list_format(contact) %></li>
 	  			<% end %>
 	  		</ul>

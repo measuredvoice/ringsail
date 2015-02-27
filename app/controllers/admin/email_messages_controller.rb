@@ -34,7 +34,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 		@email.user = current_user
 		if @email.save
 			flash[:notice] = "Email successfully sent!"
-			EmailJob.perform_later @email
+			EmailMessageMailer.email(@email).deliver_later
 			render 'sent'
 		else
 			render "new"
