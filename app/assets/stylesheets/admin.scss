@@ -160,15 +160,21 @@ border-radius: 4px;
     list-style: none;
     color: #a94442;
 }
+.wrapping{
+    margin-top: 25px;
+}
 /*
  * Top navigation
  * Hide default border to remove 1px line.
  */
-.navbar-brand{position: absolute;
+/*.navbar-brand{position: absolute;
 top: 10px;
 background-color: #fff;margin-left: 0px!important;}
 .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand:hover{background-color: #fff!important;}
-.brandImg{ background-image: url(logo2.png); background-repeat: no-repeat; background-size: 90%;width: 120px;height: 20px;background-position-y: 5px;background-position-x: 5px; border-radius: 5px; }
+.brandImg{ background-image: url(logo2.png); background-repeat: no-repeat; background-size: 90%;width: 120px;height: 20px;background-position-y: 5px;background-position-x: 5px; border-radius: 5px; }*/
+
+.navBrand{background-color: #fafafa!important;  text-align: left;padding: 5px 45px;}
+.brandImg{ background-image: url(logo2.png); background-repeat: no-repeat; height: 45px;  width:240px; display:inline-block; background-size: 100%;}
 .container-fluid{
     background: #0c555d !important;
     text-transform: uppercase;
