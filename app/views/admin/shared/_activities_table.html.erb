@@ -1,4 +1,5 @@
 <%= paginate activities %>
+<%= page_entries_info activities %>  
   <div class="activities">
   	<div class="panel panel-default">
 	  	<table class="table table-striped">
@@ -19,6 +20,8 @@
 					  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
 					  	<% when MobileApp %>
 					  	  	<%= link_to activity.trackable.name, admin_mobile_app_path(activity.trackable) %>
+					  	<% when Gallery %>
+					  	  	<%= link_to activity.trackable.name, admin_gallery_path(activity.trackable) %>
 			  			<% end %>
 			  		<% else %>
 			  			Deleted
