@@ -30,7 +30,11 @@ body {
 //    background: #f5f5f5 url('bodybg1.jpg') 0 0 fixed;
    
 }
-
+#navbar-container{
+  padding-left:0px;
+  padding-right:0px;
+  width:100%;
+}
 body.dragging, body.dragging * {
   cursor: move !important;
 }
@@ -165,7 +169,7 @@ border-radius: 4px;
 }
 
 /*Navbar Styles*/
-.navBrand{background-color: #fafafa!important;  text-align: left;padding: 5px 0 5px 0;}
+.navBrand{background-color: #fafafa!important;  text-align: left;padding: 5px 0 5px 10px;}
 .brandImg{ background-image: url(logo2.png); background-repeat: no-repeat; height: 45px;  width:240px; display:inline-block; background-size: 100%;}
 .navbar-collapse{
     background: #0c555d !important;
