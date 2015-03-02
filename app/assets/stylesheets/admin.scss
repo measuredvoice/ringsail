@@ -108,12 +108,12 @@ fieldset {
     margin: 1.4em 0 1.5em 0 !important;
     -webkit-box-shadow:  0px 0px 0px 0px #000;
             box-shadow:  0px 0px 0px 0px #000;
-    width:700px!important;
+    width:100%;
     background: #eee;
     
 }
 fieldset .formwidth{
-    width:620px;  
+    width:100%;  
 }
 fieldset .form-control{
     background-color: #fff!important;
@@ -165,7 +165,7 @@ border-radius: 4px;
 }
 
 /*Navbar Styles*/
-.navBrand{background-color: #fafafa!important;  text-align: left;padding: 5px 0 5px 0;}
+.navBrand{background-color: #fff!important;  text-align: left;padding: 5px 0 5px 15px;}
 .brandImg{ background-image: url(logo2.png); background-repeat: no-repeat; height: 45px;  width:240px; display:inline-block; background-size: 100%;}
 .navbar-collapse{
     background: #0c555d !important;
@@ -411,6 +411,7 @@ padding: 2%;
 margin: 2px 0 20px;
 display: block;
     box-shadow:none;
+    width:100%;
 }
 /*DasboardStyles*/
 .timeline > li > .timeline-badge{background-color:#ff5049!important;padding: 12px;}
@@ -467,6 +468,9 @@ left: 8px;
 .table th a:hover{color:#ff5049;}
 .table th a{color:#555;text-decoration: none;}
 .midWidth{width:32%}
+.tab-content{
+    width:100%;
+}
 
 /*buttonrow*/
 .buttonRow a{display: inline-block; width:120px;margin-right: 18px;

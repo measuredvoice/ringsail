@@ -304,6 +304,7 @@ table.dataTable td {
     border: solid 1px #ddd;
 padding: 25px;
 margin-top: -1px;
+    overflow-x: scroll;
 }
 .dataTables_wrapper .dataTables_length {
   float: left;

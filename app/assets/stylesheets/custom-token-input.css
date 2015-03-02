@@ -6,7 +6,7 @@
 ul.token-input-list {
     overflow: hidden; 
     min-height:42px;
-    width:700px;
+    width:100%;
     border: 1px solid #ddd;
     cursor: text;
     font-size: 12px;
