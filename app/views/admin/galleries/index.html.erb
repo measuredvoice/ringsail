@@ -3,13 +3,14 @@
     <h1 class="page-header">Galleries</h1>
     <div class="row placeholders">
       <div class="col-sm-12">
-        <p>
+        <div>
           <%= paginate @galleries %>
           <%= page_entries_info @galleries %> 
           <text>
+            <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
             Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
           </text>
-        </p>
+        </div>
         <table class="table table-striped">
         <thead>
         <tr>
@@ -38,12 +39,13 @@
         <% end %>
         </tbody>
         </table>
-        <p>
+        <div>
           <text>
+            <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
             Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
           </text>
           <%= paginate @galleries %>
-        </p>
+        </div>
       </div>
     </div>
   </div>

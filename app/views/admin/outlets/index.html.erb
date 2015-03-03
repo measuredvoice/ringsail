@@ -16,13 +16,16 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
-        <p>
-          <text>
-            Download: <%= link_to "CSV", admin_outlets_path(format: "csv") %> 
-          </text>
+        <div>
           <%= paginate @outlets %>
           <%= page_entries_info @outlets %>
-        </p>
+
+          <text>
+            <%= link_to "Add an Account", new_admin_outlet_path, :class => "btn btn-default" %>
+            Download: <%= link_to "CSV", admin_outlets_path(format: "csv") %> 
+          </text>
+
+        </div>
         <table class="table table-striped">
         <thead>
         <tr>
@@ -54,13 +57,13 @@
         <% end %>
         </tbody>
         </table>
-        <p>
+        <div>
           <text>
-            </br>
+            <%= link_to "Add an Account", new_admin_outlet_path, :class => "btn btn-default" %>
             Download: <%= link_to "CSV", admin_outlets_path(format: "csv") %> 
           </text>
           <%= paginate @outlets %>
-        </p>
+        </div>
       </div>
     </div>
   </div>
