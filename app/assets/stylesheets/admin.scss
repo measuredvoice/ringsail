@@ -349,7 +349,7 @@ text-align: center;
 /*
  * Placeholder dashboard ideas
  */
-.tbldisplay{background-color: #fff;overflow: scroll; min-height: 965px;}
+.tbldisplay{background-color: #fff;overflow: scroll; min-height: 200px;}
 .placeholders {
   margin-bottom: 30px;
   background-color: #fafafa;
@@ -503,7 +503,7 @@ left: 8px;
 }
 
 /*buttonrow*/
-.buttonRow a{display: inline-block; width:120px;margin-right: 18px;
+.buttonRow a{display: inline-block; margin-right: 22px;
 font-size: 14px;letter-spacing: 1px;}
 .buttonRow{padding:0 0 15px 15px;}
 
