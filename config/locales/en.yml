@@ -5,6 +5,7 @@ en:
   activerecord:
     models:
       outlet: "Social Media Account"
+      mobile_app: "Mobile Product"
       user: "Contact"
     attributes:
       outlet:

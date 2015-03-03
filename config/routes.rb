@@ -190,7 +190,7 @@ Ringsail::Application.routes.draw do
         get 'tokeninput'
       end
     end
-    resources :outlets, concerns: :activity_and_history do
+    resources :social_media, as: :outlets, concerns: :activity_and_history do
       member do
         get "publish"
         get "archive"

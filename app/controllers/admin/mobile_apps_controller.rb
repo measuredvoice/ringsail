@@ -19,14 +19,11 @@ class Admin::MobileAppsController < Admin::AdminController
     if params[:platform] && !params[:platform].blank?
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
     end
-    @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
+    @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction)
 
     respond_to do |format|
-      format.html
-      format.json {render json: @allApps }
-      format.xml {render xml: @allApps}
-      format.csv {send_data @allApps.to_csv}
-      format.xls { send_data @allApps.csv(col_sep: "\t")}
+      format.html { @mobile_apps = @mobile_apps.page(params[:page]).per(15) }
+      format.csv { send_data @mobile_apps.to_csv}
     end
   end
 

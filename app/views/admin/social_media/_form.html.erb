@@ -100,7 +100,7 @@
         $('#format-help').html($('#outlet_service option:selected').data("format-helper"));
      }
     $('#outlet_service_url').on("change",function(item){
-      $.get("/admin/outlets/account_for_url",{
+      $.get("/admin/social_media/account_for_url",{
           url: $('#outlet_service_url').val()
         },function(data){
           if(data.account){

@@ -14,14 +14,24 @@
         </div>
       <% end %>
       <div class="field">
-        <%= f.label :contact_notifications, "Contact Notification Emails: " %>
+        <%= f.label :contact_notifications %>
         <%= f.check_box :contact_notifications %>
-        <p>Determines if you will receive notifications when items you are listed as a contact on are submitted, published, archived, or need to be reviewed.</p>
+        <p>Determines if you will receive notifications when items you are listed as a contact on are submitted, published, archived, or needs to be reviewed.</p>
+      </div>
+       <div class="field">
+        <%= f.label :contact_notifications_emails %>
+        <%= f.check_box :contact_notifications_emails %>
+        <p>Determines if you will receive an email along with a contact notification.</p>
       </div>
       <div class="field">
-        <%= f.label :agency_notifications, "Agency Notification Emails: " %>
+        <%= f.label :agency_notifications %>
         <%= f.check_box :agency_notifications %>
-        <p>Determines if you will receive notifications when items which list your agency is listed as a sponsor for are submitted, published, archived, or need to be reviewed.</p>
+        <p>Determines if you will receive notifications when your agency is listed as a sponsor for are submitted, published, archived, or needs to be reviewed.</p>
+      </div>
+      <div class="field">
+        <%= f.label :agency_notifications_emails %>
+        <%= f.check_box :agency_notifications_emails %>
+        <p>Determines if you will receive an email along with an agency notification.</p>
       </div>
       <div class="field">
         <%= f.label :email_notification_type, "Email Type: " %>

@@ -10,25 +10,23 @@ class Admin::GalleriesController < Admin::AdminController
     else
       @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).uniq
     end
-    @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(25)
+    @galleries = @galleries.order(sort_column + " " +sort_direction)
+
     respond_to do |format|
-      format.html
-      format.json { render json: @gallerys }
-      format.xml { render xml: @gallerys }
+      format.html { @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(15) }
       format.csv { send_data @gallerys.to_csv }
-      format.xls { send_data @gallerys.to_csv(col_sep: "\t")}
     end
   end
 
   # GET /gallerys/1
   # GET /gallerys/1.json
   def show
+    
   end
 
   # GET /gallerys/new
   def new
     @gallery = Gallery.new
-    @mobile_apps = MobileApp.all
   end
 
   # GET /gallerys/1/edit
@@ -107,7 +105,7 @@ class Admin::GalleriesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description, :tag_tokens, :short_description, :long_description, :agency_tokens, :user_tokens, :gallery_items_ol)
+      params.require(:gallery).permit(:name, :description, :short_description, :long_description, :agency_tokens, :user_tokens, :tag_tokens, :gallery_items_ol)
     end
 
     def sort_column

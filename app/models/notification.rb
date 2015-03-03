@@ -17,7 +17,10 @@ class Notification < ActiveRecord::Base
   after_create :send_notification
 
   def send_notification
-    # NotificationMailer.email(self).deliver_later
+    if ( notification_type == :agency && user.agency_notifications_emails ) ||
+        ( notification_type == :contact && user.contact_notifiations_emails )  
+      NotificationMailer.email(self).deliver_later
+    end
   end
   
 end

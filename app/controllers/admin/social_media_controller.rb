@@ -1,4 +1,4 @@
-class Admin::OutletsController < Admin::AdminController
+class Admin::SocialMediaController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
 
@@ -24,10 +24,7 @@ class Admin::OutletsController < Admin::AdminController
     end
     respond_to do |format|
       format.html { @outlets = @outlets.page(params[:page]).per(20) }
-      format.json { render json: @outlets }
-      format.xml { render xml: @outlets }
       format.csv { send_data @outlets.to_csv }
-      format.xls { send_data @outlets.to_csv(col_sep: "\t")}
     end
   end
 
