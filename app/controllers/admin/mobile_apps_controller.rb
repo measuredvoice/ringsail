@@ -21,8 +21,6 @@ class Admin::MobileAppsController < Admin::AdminController
     end
     @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
 
-    
-
     respond_to do |format|
       format.html
       format.json {render json: @allApps }
