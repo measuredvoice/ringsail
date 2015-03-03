@@ -4,8 +4,9 @@
     <div class="bg-info">
         <p>Notice: Users are managed through OMB Max.  Please contact the administrators of the OMB Max groups <%= "#{ENV['REGISTRY_ADMIN_GROUP']} & #{ENV['REGISTRY_ADMIN_GROUP']}" %>.</p>
 
-        <p>If a users information has been updated in OMB Max and they are still having issues, tell them to log out and back in, as this triggers the system to pull their data from OMB Max again</p></div>
-    <div class="row placeholders">
+        <p>If a users information has been updated in OMB Max and they are still having issues, tell them to log out and back in, as this triggers the system to pull their data from OMB Max again</p>
+      </div>
+    <div class="placeholders">
     <%= paginate @users %>  
     <%= page_entries_info @users %>   
   	<table class=" table table-striped">

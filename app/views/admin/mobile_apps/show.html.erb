@@ -1,6 +1,6 @@
 <div class = "row">
 	<div class="col-sm-6">
-		<h3><i class="fa fa-clock-o fa-fw"></i> Mobile App Info</h3>
+		<h3><i class="fa fa-clock-o fa-fw"></i> Mobile Product Info</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
 				<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app } %>	
@@ -8,13 +8,13 @@
 		</div>  
 	</div>
 	<div class="col-sm-6">
-		<h3><i class="fa fa-clock-o fa-fw"></i> Published Mobile App Info</h3>
+		<h3><i class="fa fa-clock-o fa-fw"></i> Published Mobile Product Info</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
 	  		<% if @mobile_app.published %>
 	  		<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app.published } %>	
 	  		<% else %>
-	  			<p>No information is currently published for this mobile application.</p>
+	  			<p>No information is currently published for this mobile product.</p>
 	  		<% end %>
  			</div>
 		</div> 
@@ -23,7 +23,7 @@
 <div class="row">
 	<div class="col-sm-12">
 		<div class="buttonRow">
-			<%= link_to "Back to Mobile Apps", admin_mobile_apps_path, {:class => "fa fa-angle-double-left"} %>		
+			<%= link_to "Back to Mobile Products", admin_mobile_apps_path, {:class => "fa fa-angle-double-left"} %>		
 			<%= link_to "Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "fa fa-pencil"} %>
 			<%#= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
 			<% if current_user.admin? %>
@@ -50,7 +50,7 @@
 		</div>
 	</div>
 	<div class="col-lg-8 col-sm-12 col-md-8">
-    <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Mobile App</h3>
+    <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Mobile Product</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
 	  		<ul class="timeline">
