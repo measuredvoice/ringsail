@@ -2,6 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  Outlet: "Social Media Account"
+  MobileApp: "Mobile Product"
+  Gallery: "Gallery"
   activerecord:
     models:
       outlet: "Social Media Account"
