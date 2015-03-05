@@ -18,7 +18,6 @@
   <strong>Tags:</strong>
   <%= gallery.official_tags.map(&:tag_text).join(', ') %>
 </p>
-
 <p>
   <strong>Gallery Items:</strong>
   <%= render partial: "item_list", locals: {gallery_items: gallery.gallery_items, remove_link: false} %>

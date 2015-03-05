@@ -26,7 +26,8 @@ class Outlet < ActiveRecord::Base
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
   scope :api, -> { where("draft_id IS NOT NULL") }
   
-  enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
+  enum status: { under_review: 0, published: 1, archived: 2, 
+    publish_requested: 3, archive_requested: 4 }
   #handles versioning
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
@@ -153,6 +154,22 @@ class Outlet < ActiveRecord::Base
     self.save!
     Outlet.public_activity_on
     self.create_activity :archived
+  end
+
+  def publish_requested!
+    Outlet.public_activity_off
+    self.status = Outlet.statuses[:publish_requested]
+    self.save!
+    Outlet.public_activity_on
+    self.create_activity :publish_requested
+  end
+
+  def archive_requested!
+    Outlet.public_activity_off
+    self.status = Outlet.statuses[:archive_requested]
+    self.save!
+    Outlet.public_activity_on
+    self.create_activity :archive_requested
   end
 
   private

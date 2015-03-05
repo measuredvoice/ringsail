@@ -1,7 +1,8 @@
 class Admin::MobileAppsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :archive, :publish]
+  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, 
+    :archive, :publish, :request_archive, :request_publish]
 
   before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
@@ -115,6 +116,18 @@ class Admin::MobileAppsController < Admin::AdminController
   def archive
     @mobile_app.archived!
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now archived."
+  end
+
+  def request_publish
+    @mobile_app.publish_requested!
+    @mobile_app.build_admin_notifications(:publish_requested)
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be published."
+  end
+
+  def request_archive
+    @mobile_app.archive_requested!
+    @mobile_app.build_admin_notifications(:archive_requested)
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be archived."
   end
 
    private

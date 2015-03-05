@@ -22,11 +22,11 @@
                 <% case notification.item_type
                   when "Outlet"
                   %>
-                  <%= link_to "Social Media Account", admin_outlet_path(notification.item_id), "target" =>"_blank" %>
+                  <%= link_to "Social Media Account: #{notification.item.try(:organization)}", admin_outlet_path(notification.item_id), "target" =>"_blank" %>
                 <%when "MobileApp" %>
-                <%= link_to "Mobile App",admin_mobile_app_path(notification.item_id), "target" =>"_blank"  %>
+                <%= link_to "Mobile App: #{notification.item.try(:name)}",admin_mobile_app_path(notification.item_id), "target" =>"_blank"  %>
                 <%when "Gallery" %>
-                <%= link_to "Gallery", admin_gallery_path(notification.item_id), "target" =>"_blank"  %>
+                <%= link_to "Gallery: #{notification.item.try(:name)}", admin_gallery_path(notification.item_id), "target" =>"_blank"  %>
                 <% else %>
                 N/A
                 <% end %>

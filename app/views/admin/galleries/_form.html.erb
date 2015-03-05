@@ -46,6 +46,7 @@
 
   <div class="field">
     <h3>Gallery Collection</h3>
+    <p>These items are added using the table below. You may reorder them by dragging the item in the interface<p>
     <p><span class="label  label-warning">Notice!</span>  You can add unpublished items to a gallery, but the API will only feed out items that have a currently published version.</p>
     <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: true} %>
   </div>

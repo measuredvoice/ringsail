@@ -12,7 +12,12 @@
 		<div class="panel panel-default">
 	  	<div class="panel-body">
 	  		<% if @gallery.published %>
-	  		<%= render partial: "gallery_details", locals: { gallery: @gallery.published } %>	
+	  			<p>
+		  			<strong>API Link</strong>
+		  			<%= link_to api_v1_gallery_url(@gallery), 
+		  				api_v1_gallery_url(@gallery) %>
+		  		</p>
+	  			<%= render partial: "gallery_details", locals: { gallery: @gallery.published } %>	
 	  		<% else %>
 	  			<p>No information is currently published for this gallery.</p>
 	  		<% end %>
@@ -28,10 +33,13 @@
 			<%= link_to "Edit", edit_admin_gallery_path(@gallery), {:class => "fa fa-pencil"} %>	
 			<% if current_user.admin? %>
 				<%= link_to 'Publish', publish_admin_gallery_path(@gallery), {:class => "fa fa-bullhorn"} %> 
-			<% end %>
-			<% if @gallery.published %>
 				<%= link_to 'Archive', archive_admin_gallery_path(@gallery), {:class=> "fa fa-archive"} %>  
-    	<% end %>
+			<% else %>
+				<%= link_to 'Request Publish', request_publish_admin_gallery_path(@gallery), {:class => "fa fa-bullhorn"} %> 
+				<% if @gallery.published %>
+				<%= link_to 'Request Archive', request_archive_admin_gallery_path(@gallery), {:class=> "fa fa-archive"} %> 
+				<% end %>
+			<% end %>
 		</div>
 	</div>
 </div>

@@ -12,6 +12,11 @@
 		<div class="panel panel-default">
 	  	<div class="panel-body">
 	  		<% if @outlet.published %>
+	  			<p>
+		  			<strong>API Link</strong>
+		  			<%= link_to api_v1_social_medium_url(id:@outlet), 
+		  				api_v1_social_medium_url(id: @outlet) %>
+		  		</p>
 	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published } %>
 	  		<% else %>
 	  			<p>No information is currently published for this social media account</p>
@@ -27,9 +32,12 @@
 <!-- 		<%#= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "fa fa-history"} %> -->
 		<% if current_user.admin? %>
 			<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
-		<% end %>
-		<% if @outlet.published %>
-			<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>  
+			<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>
+		<% else %>
+			<%= link_to 'Request Publish', request_publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
+			<% if @outlet.published %>
+				<%= link_to 'Request Archive', request_archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>
+			<% end %>
 		<% end %>
 	</div>
 </div>

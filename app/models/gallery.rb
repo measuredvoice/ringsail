@@ -122,6 +122,22 @@ class Gallery < ActiveRecord::Base
     Gallery.public_activity_on
     self.create_activity :archived
   end
+
+  def publish_requested!
+    Gallery.public_activity_off
+    self.status = Gallery.statuses[:publish_requested]
+    self.save!
+    Gallery.public_activity_on
+    self.create_activity :publish_requested
+  end
+
+  def archive_requested!
+    Gallery.public_activity_off
+    self.status = Gallery.statuses[:archive_requested]
+    self.save!
+    Gallery.public_activity_on
+    self.create_activity :archive_requested
+  end
   
   def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')

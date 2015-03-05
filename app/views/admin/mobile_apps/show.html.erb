@@ -12,6 +12,11 @@
 		<div class="panel panel-default">
 	  	<div class="panel-body">
 	  		<% if @mobile_app.published %>
+	  			<p>
+		  			<strong>API Link</strong>
+		  			<%= link_to api_v1_mobile_app_url(@mobile_app), 
+		  				api_v1_mobile_app_url(@mobile_app) %>
+		  		</p>
 	  		<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app.published } %>	
 	  		<% else %>
 	  			<p>No information is currently published for this mobile product.</p>
@@ -28,9 +33,12 @@
 			<%#= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
 			<% if current_user.admin? %>
 				<%= link_to 'Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
-			<% end %>
-			<% if @mobile_app.published %>
 				<%= link_to 'Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "fa fa-archive"} %>  
+			<% else %>
+				<%= link_to 'Request Publish', request_publish_admin_mobile_app_path(@mobile_app), {:class => "fa fa-bullhorn"} %> 
+				<% if @mobile_app.published %>
+					<%= link_to 'Request Archive', request_archive_admin_mobile_app_path(@mobile_app), {:class=> "fa fa-archive"} %>  
+				<% end %>
     	<% end %>
 		</div>
 	</div>

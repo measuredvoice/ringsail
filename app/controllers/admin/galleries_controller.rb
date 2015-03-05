@@ -1,14 +1,15 @@
 class Admin::GalleriesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :publish, :archive]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, 
+    :publish, :archive, :request_archive, :request_publish]
   # GET /gallerys
   # GET /gallerys.json
   def index
     if current_user.cross_agency?
       @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
-      @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).uniq
+      @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).where("draft_id IS NULL").uniq
     end
     @galleries = @galleries.order(sort_column + " " +sort_direction)
 
@@ -87,15 +88,27 @@ class Admin::GalleriesController < Admin::AdminController
 
   def publish
     @gallery.published!
+    @gallery.build_notifications(:published)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now public."
   end
 
   def archive
     @gallery.archived!
+    @gallery.build_notifications(:archived)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now archived."
   end
 
-  
+  def request_publish
+    @gallery.publish_requested!
+    @gallery.build_admin_notifications(:publish_requested)
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be published."
+  end
+
+  def request_archive
+    @gallery.archive_requested!
+    @gallery.build_admin_notifications(:archive_requested)
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be archived."
+  end
 
    private
     # Use callbacks to share common setup or constraints between actions.

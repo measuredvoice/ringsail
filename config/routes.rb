@@ -25,21 +25,21 @@
 #                                         PATCH  /admin/official_tags/:id(.:format)                              admin/official_tags#update
 #                                         PUT    /admin/official_tags/:id(.:format)                              admin/official_tags#update
 #                                         DELETE /admin/official_tags/:id(.:format)                              admin/official_tags#destroy
-#                    publish_admin_outlet GET    /admin/outlets/:id/publish(.:format)                            admin/outlets#publish
-#                    archive_admin_outlet GET    /admin/outlets/:id/archive(.:format)                            admin/outlets#archive
-#                datatables_admin_outlets GET    /admin/outlets/datatables(.:format)                             admin/outlets#datatables
-#           account_for_url_admin_outlets GET    /admin/outlets/account_for_url(.:format)                        admin/outlets#account_for_url
-#                    history_admin_outlet GET    /admin/outlets/:id/history(.:format)                            admin/outlets#history
-#                    restore_admin_outlet GET    /admin/outlets/:id/restore(.:format)                            admin/outlets#restore
-#                activities_admin_outlets GET    /admin/outlets/activities(.:format)                             admin/outlets#activities
-#                           admin_outlets GET    /admin/outlets(.:format)                                        admin/outlets#index
-#                                         POST   /admin/outlets(.:format)                                        admin/outlets#create
-#                        new_admin_outlet GET    /admin/outlets/new(.:format)                                    admin/outlets#new
-#                       edit_admin_outlet GET    /admin/outlets/:id/edit(.:format)                               admin/outlets#edit
-#                            admin_outlet GET    /admin/outlets/:id(.:format)                                    admin/outlets#show
-#                                         PATCH  /admin/outlets/:id(.:format)                                    admin/outlets#update
-#                                         PUT    /admin/outlets/:id(.:format)                                    admin/outlets#update
-#                                         DELETE /admin/outlets/:id(.:format)                                    admin/outlets#destroy
+#                    publish_admin_outlet GET    /admin/social_media/:id/publish(.:format)                       admin/social_media#publish
+#                    archive_admin_outlet GET    /admin/social_media/:id/archive(.:format)                       admin/social_media#archive
+#                datatables_admin_outlets GET    /admin/social_media/datatables(.:format)                        admin/social_media#datatables
+#           account_for_url_admin_outlets GET    /admin/social_media/account_for_url(.:format)                   admin/social_media#account_for_url
+#                    history_admin_outlet GET    /admin/social_media/:id/history(.:format)                       admin/social_media#history
+#                    restore_admin_outlet GET    /admin/social_media/:id/restore(.:format)                       admin/social_media#restore
+#                activities_admin_outlets GET    /admin/social_media/activities(.:format)                        admin/social_media#activities
+#                           admin_outlets GET    /admin/social_media(.:format)                                   admin/social_media#index
+#                                         POST   /admin/social_media(.:format)                                   admin/social_media#create
+#                        new_admin_outlet GET    /admin/social_media/new(.:format)                               admin/social_media#new
+#                       edit_admin_outlet GET    /admin/social_media/:id/edit(.:format)                          admin/social_media#edit
+#                            admin_outlet GET    /admin/social_media/:id(.:format)                               admin/social_media#show
+#                                         PATCH  /admin/social_media/:id(.:format)                               admin/social_media#update
+#                                         PUT    /admin/social_media/:id(.:format)                               admin/social_media#update
+#                                         DELETE /admin/social_media/:id(.:format)                               admin/social_media#destroy
 #                publish_admin_mobile_app GET    /admin/mobile_apps/:id/publish(.:format)                        admin/mobile_apps#publish
 #                archive_admin_mobile_app GET    /admin/mobile_apps/:id/archive(.:format)                        admin/mobile_apps#archive
 #            datatables_admin_mobile_apps GET    /admin/mobile_apps/datatables(.:format)                         admin/mobile_apps#datatables
@@ -179,6 +179,14 @@ Ringsail::Application.routes.draw do
       get "activities"
     end
   end
+  concern :publish_and_archive do 
+    member do
+      get "publish"
+      get "request_publish"
+      get "archive"
+      get "request_archive"
+    end
+  end
   namespace :admin do
     resources :agencies, concerns: :activity_and_history do
       collection do
@@ -190,30 +198,21 @@ Ringsail::Application.routes.draw do
         get 'tokeninput'
       end
     end
-    resources :social_media, as: :outlets, concerns: :activity_and_history do
-      member do
-        get "publish"
-        get "archive"
-      end
+    resources :social_media, as: :outlets, 
+      concerns: [:activity_and_history, :publish_and_archive] do
       collection do
         get "datatables"
         get "account_for_url"
       end
     end
-    resources :mobile_apps, concerns: :activity_and_history do
-      member do
-        get "publish"
-        get "archive"
-      end
+    resources :mobile_apps, 
+      concerns: [:activity_and_history, :publish_and_archive] do
       collection do
         get "datatables"
       end
     end
-    resources :galleries, concerns: :activity_and_history do
-      member do
-        get "publish"
-        get "archive"
-      end
+    resources :galleries, 
+      concerns: [:activity_and_history, :publish_and_archive] do
     end
     resources :users do
       collection do
@@ -249,7 +248,7 @@ Ringsail::Application.routes.draw do
   #######
   #### API ENDPOINTS
   #######
-  namespace :api do 
+  namespace :api, defaults: {format: :json} do 
     namespace :v1 do
       resources :agencies, only: [:index, :show]
       resources :social_media, only: [:index, :show] do

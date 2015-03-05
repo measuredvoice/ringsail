@@ -24,7 +24,8 @@ class MobileApp < ActiveRecord::Base
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
   scope :api, -> { where("draft_id IS NOT NULL") }
 
-  enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
+  enum status: { under_review: 0, published: 1, archived: 2, 
+    publish_requested: 3, archive_requested: 4 }
 
   # Outlets have a relationship to themselvs
   # The "published" outlet will have a draft_id pointing to its parent
@@ -127,4 +128,21 @@ class MobileApp < ActiveRecord::Base
     MobileApp.public_activity_on
     self.create_activity :archived
   end
+
+  def publish_requested!
+    MobileApp.public_activity_off
+    self.status = MobileApp.statuses[:publish_requested]
+    self.save!
+    MobileApp.public_activity_on
+    self.create_activity :publish_requested
+  end
+
+  def archive_requested!
+    MobileApp.public_activity_off
+    self.status = MobileApp.statuses[:archive_requested]
+    self.save!
+    MobileApp.public_activity_on
+    self.create_activity :archive_requested
+  end
+ 
 end

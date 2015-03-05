@@ -2,7 +2,8 @@ class Admin::SocialMediaController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
 
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy, :publish, :archive]
+  before_action :set_outlet, only: [:show, :edit, :update, :destroy, 
+    :publish, :archive, :request_publish, :request_archive]
 
   before_filter :require_admin, only: [:publish]
   # GET /outlets
@@ -125,6 +126,18 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.archived!
     @outlet.build_notifications(:archived)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived"
+  end
+
+  def request_publish
+    @outlet.publish_requested!
+    @outlet.build_admin_notifications(:publish_requested)
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be published."
+  end
+
+  def request_archive
+    @outlet.archive_requested!
+    @outlet.build_admin_notifications(:archive_requested)
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be archived."
   end
 
   private

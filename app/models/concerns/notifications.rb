@@ -14,6 +14,12 @@ module Notifications
     end
   end
 
+  def build_admin_notifications(message_type, message="")
+    User.where(role: User.roles[:admin]).each do |notification_user|
+      Notification.create!(item: self, user: notification_user, notification_type: :admin, message_type: message_type, message: message)
+    end
+  end
+
   def notifications_users_list
     contact_users = users.where(contact_notifications: true)
     contact_user_ids = contact_users.map(&:id)

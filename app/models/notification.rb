@@ -2,12 +2,16 @@
 #
 # Table name: notifications
 #
-#  id           :integer          not null, primary key
-#  user_id      :integer
-#  item_id      :integer
-#  item_type    :integer
-#  message      :integer
-#  message_type :integer
+#  id                :integer          not null, primary key
+#  user_id           :integer
+#  item_id           :integer
+#  item_type         :string(255)
+#  message           :string(255)
+#  message_type      :string(255)
+#  notification_type :string(255)
+#  has_read          :boolean          default("0")
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 class Notification < ActiveRecord::Base
