@@ -20,10 +20,7 @@
   <div class="field"> 
     <%= f.label :service_url %> with format(<span id="format-help">pick a service for format help</span>)</br>
     <%= f.text_field :service_url, :class => "form-control formwidth" %>
-  </div>
-  <div class="field">
-    <%= f.label :account %> (username from above url)</br>
-    <%= f.text_field :account, {:class => "form-control formwidth" } %>
+    <%= f.hidden_field :account %>
   </div>
   <div class="field">
     <%= f.label :organization, "Social Media Account Name" %> </br>
