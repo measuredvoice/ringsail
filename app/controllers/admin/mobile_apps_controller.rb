@@ -139,7 +139,7 @@ class Admin::MobileAppsController < Admin::AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_app_params
       params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url, 
-        :language, :agency_tokens, :user_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
+        :language, :agency_tokens, :user_tokens, :tag_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
         :version_number,:publish_date,:description,:whats_new,:screenshot,:device,
         :language,:average_rating,:number_of_ratings, :_destroy])
     end
