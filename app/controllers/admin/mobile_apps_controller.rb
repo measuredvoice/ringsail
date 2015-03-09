@@ -131,7 +131,7 @@ class Admin::MobileAppsController < Admin::AdminController
   end
 
   def version_details_for_url
-    @details_object = MobileAppVersion.version_details_for_url(params[:store_url])
+    @details_object = AppStore.find_details_by_url(params[:store_url])
     respond_to do |format|
       format.json { render json: @details_object }
     end

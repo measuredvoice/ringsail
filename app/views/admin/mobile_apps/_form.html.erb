@@ -107,18 +107,36 @@
 
     $('.version-details').on('click',function(e){
       e.preventDefault();
+      version_parent = $(this).parent().parent();
       store_url = $(this).parent().parent().find("input[name$='store_url]']").val();
       $.get('/admin/mobile_apps/version_details_for_url',
         {store_url: store_url},
         function(data){
-          populate_version_details(data,$(this).parent().parent())
+          populate_version_details(data,version_parent)
         }
       );
     });
 
-    function pouplate_version_details(data, parent_element){
+    function populate_version_details(data, el){
+      if(data["platform"]){
+        el.find("[name$='platform]']").val(data["platform"]);
+      }
+      if(data["version"]){
+        el.find("[name$='version_number]']").val(data["version"]);
+      }
+      if(data["language"]){
+        el.find("[name$='language]']").val(data["language"]);
+      }
+      if(data["average_rating"]){
+        el.find("[name$='average_rating]']").val(data["average_rating"]);
+      }
+      if(data["number_of_ratings"]){
+        el.find("[name$='number_of_ratings]']").val(data["number_of_ratings"]);
+      }
       console.log(data);
-      console.log(parent_element)
+      if(data["screenshot"]){
+        el.find("[name$='screenshot]']").val(data["screenshot"]);
+      }
     }
   </script>
 <% end %>
