@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :service %> </br>
+    <%= f.label :service, "Account Type" %> </br>
     <%= f.select :service, options_for_select(Service.all.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field"> 
