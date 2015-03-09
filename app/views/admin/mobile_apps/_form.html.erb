@@ -104,5 +104,21 @@
       crossDomain: false,
       prePopulate: tags
     });
+
+    $('.version-details').on('click',function(e){
+      e.preventDefault();
+      store_url = $(this).parent().parent().find("input[name$='store_url]']").val();
+      $.get('/admin/mobile_apps/version_details_for_url',
+        {store_url: store_url},
+        function(data){
+          populate_version_details(data,$(this).parent().parent())
+        }
+      );
+    });
+
+    function pouplate_version_details(data, parent_element){
+      console.log(data);
+      console.log(parent_element)
+    }
   </script>
 <% end %>

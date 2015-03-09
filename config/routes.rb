@@ -209,6 +209,7 @@ Ringsail::Application.routes.draw do
       concerns: [:activity_and_history, :publish_and_archive] do
       collection do
         get "datatables"
+        get "version_details_for_url"
       end
     end
     resources :galleries, 

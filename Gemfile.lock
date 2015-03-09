@@ -265,10 +265,7 @@ GEM
       activesupport (= 4.2.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-<<<<<<< HEAD
-=======
     rainbow (2.0.0)
->>>>>>> 93e9363e0c7ae85cd0332e004bed28480eb10672
     raindrops (0.13.0)
     rake (10.4.2)
     raphael-rails (2.1.2)

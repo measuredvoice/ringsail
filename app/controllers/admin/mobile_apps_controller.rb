@@ -130,6 +130,13 @@ class Admin::MobileAppsController < Admin::AdminController
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be archived."
   end
 
+  def version_details_for_url
+    @details_object = MobileAppVersion.version_details_for_url(params[:store_url])
+    respond_to do |format|
+      format.json { render json: @details_object }
+    end
+  end
+
    private
     # Use callbacks to share common setup or constraints between actions.
     def set_mobile_app

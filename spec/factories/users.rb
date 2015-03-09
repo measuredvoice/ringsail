@@ -3,9 +3,9 @@
 # Table name: users
 #
 #  id                           :integer          not null, primary key
-#  email                        :string(255)
+#  email                        :string(255)      default(""), not null
 #  remember_created_at          :datetime
-#  sign_in_count                :integer
+#  sign_in_count                :integer          default("0")
 #  current_sign_in_at           :datetime
 #  last_sign_in_at              :datetime
 #  current_sign_in_ip           :string(255)

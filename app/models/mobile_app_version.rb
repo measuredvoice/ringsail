@@ -24,4 +24,22 @@ class MobileAppVersion < ActiveRecord::Base
 
   validates :store_url, presence: true
   validates :platform, presence: true
+
+
+  def self.version_details_for_url(link)
+    # Looks for Ids in the url
+    id = link.match(/id=(.+?)(\&|$)/i);
+
+    # Failing that, check for Apple Store id with different regex
+    if id == nil
+      id = link.match(/\/id(\d+)(\?|$)/i);
+    end
+    binding.pry
+    # Return an ID or null
+    if (typeof(id) == "object" && id != nil)
+      return id[1];
+    else
+      return {}
+    end
+  end
 end

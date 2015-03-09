@@ -238,9 +238,9 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                        limit: 255
+    t.string   "email",                        limit: 255,   default: "",    null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                limit: 4
+    t.integer  "sign_in_count",                limit: 4,     default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",           limit: 255

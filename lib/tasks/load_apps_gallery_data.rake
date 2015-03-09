@@ -81,6 +81,12 @@ namespace :load_apps_gallery_data do
   task :mobile_apps, [:file] => :environment do |t, args|
 	filepath= args[:file] || "data/current/registrations.json"
 	PublicActivity.enabled = false
+  Gallery.skip_callback(:save)
+  MobileApp.skip_callback(:save)
+  MobileAppVersion.skip_callback(:save)
+  Gallery.skip_callback(:create)
+  MobileApp.skip_callback(:create)
+  MobileAppVersion.skip_callback(:create)
 	if filepath
 	    File.readlines(filepath).each do |f|
 	      item = JSON.load( f )
@@ -156,12 +162,12 @@ namespace :load_apps_gallery_data do
 		    		mobile_app_version.language = version_details["Language"] == "EN" ? "English" : "Spanish"
 		    		mobile_app_version.average_rating = version_details["Rating"]
 		    		mobile_app_version.number_of_ratings = version_details["Rating_Count"]
-		    		mobile_app_version.save!
+		    		mobile_app_version.save(:validate => false)
 		    		app.mobile_app_versions << mobile_app_version
 
 		    	end
 		    end
-	    	app.save!
+	    	app.save(:validate => false)
 	    end
 
 	else
@@ -173,6 +179,12 @@ namespace :load_apps_gallery_data do
   task :galleries, [:file] => :environment do |t, args|
 	filepath= args[:file] || "data/current/galleries.json"
 	PublicActivity.enabled = false
+  Gallery.skip_callback(:save)
+  MobileApp.skip_callback(:save)
+  MobileAppVersion.skip_callback(:save)
+  Gallery.skip_callback(:create)
+  MobileApp.skip_callback(:create)
+  MobileAppVersion.skip_callback(:create)
 	if filepath
 
     File.readlines(filepath).each do |f|
@@ -181,6 +193,7 @@ namespace :load_apps_gallery_data do
     	
     	registrations = item["Registration"].map{|item| item["Id"]}
 
+      
     	registrations.each do |registration|
     		mobile_app = MobileApp.find_by(mongo_id: registration)
     		if mobile_app
@@ -195,8 +208,7 @@ namespace :load_apps_gallery_data do
     			gallery.users << user
     		end
     	end
-
-    	gallery.save!
+    	gallery.save(:validate => false)
     end
 
 	else
