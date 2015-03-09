@@ -52,9 +52,9 @@ class Admin::DashboardsController < Admin::AdminController
 
     # TAG CLOUD
     @tag_cloud = OfficialTag.find_by_sql("SELECT tag_text as text, 
-      (gallery_count + outlet_count + mobile_app_count) as weight 
+      (draft_gallery_count + draft_outlet_count + draft_mobile_app_count) as weight 
       FROM official_tags 
-      ORDER BY (gallery_count + outlet_count + mobile_app_count) DESC
+      ORDER BY (draft_gallery_count + draft_outlet_count + draft_mobile_app_count) DESC
       LIMIT 50")
   end
 

@@ -17,4 +17,6 @@ class EmailMessage < ActiveRecord::Base
 	validates :to, :presence => true
 	validates :subject, :presence => true
 	validates :body, :presence => true
+
+  paginates_per 25
 end

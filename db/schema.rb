@@ -31,17 +31,20 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "agencies", force: :cascade do |t|
-    t.string   "name",             limit: 255
+    t.string   "name",                       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "shortname",        limit: 255
-    t.string   "info_url",         limit: 255
-    t.string   "mongo_id",         limit: 255
-    t.string   "parent_mongo_id",  limit: 255
-    t.integer  "parent_id",        limit: 4
-    t.integer  "outlet_count",     limit: 4,   default: 0
-    t.integer  "mobile_app_count", limit: 4,   default: 0
-    t.integer  "gallery_count",    limit: 4,   default: 0
+    t.string   "shortname",                  limit: 255
+    t.string   "info_url",                   limit: 255
+    t.string   "mongo_id",                   limit: 255
+    t.string   "parent_mongo_id",            limit: 255
+    t.integer  "parent_id",                  limit: 4
+    t.integer  "draft_outlet_count",         limit: 4,   default: 0
+    t.integer  "draft_mobile_app_count",     limit: 4,   default: 0
+    t.integer  "published_outlet_count",     limit: 4,   default: 0
+    t.integer  "published_mobile_app_count", limit: 4,   default: 0
+    t.integer  "draft_gallery_count",        limit: 4,   default: 0
+    t.integer  "published_gallery_count",    limit: 4,   default: 0
   end
 
   create_table "auth_tokens", force: :cascade do |t|
@@ -69,7 +72,6 @@ ActiveRecord::Schema.define(version: 20150206202522) do
 
   create_table "galleries", force: :cascade do |t|
     t.string  "name",              limit: 255
-    t.text    "description",       limit: 65535
     t.integer "draft_id",          limit: 4
     t.text    "short_description", limit: 65535
     t.text    "long_description",  limit: 65535
@@ -141,13 +143,29 @@ ActiveRecord::Schema.define(version: 20150206202522) do
     t.integer "draft_id",          limit: 4
   end
 
-  create_table "official_tags", force: :cascade do |t|
-    t.string   "tag_text",         limit: 255
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id",           limit: 4
+    t.integer  "item_id",           limit: 4
+    t.string   "item_type",         limit: 255
+    t.string   "message",           limit: 255
+    t.string   "message_type",      limit: 255
+    t.string   "notification_type", limit: 255
+    t.boolean  "has_read",          limit: 1,   default: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "gallery_count",    limit: 4,   default: 0
-    t.integer  "mobile_app_count", limit: 4,   default: 0
-    t.integer  "outlet_count",     limit: 4,   default: 0
+  end
+
+  create_table "official_tags", force: :cascade do |t|
+    t.string   "tag_text",                   limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "draft_gallery_count",        limit: 4,   default: 0
+    t.integer  "draft_mobile_app_count",     limit: 4,   default: 0
+    t.integer  "draft_outlet_count",         limit: 4,   default: 0
+    t.integer  "published_gallery_count",    limit: 4,   default: 0
+    t.integer  "published_mobile_app_count", limit: 4,   default: 0
+    t.integer  "published_outlet_count",     limit: 4,   default: 0
+    t.integer  "tag_type",                   limit: 4,   default: 0
   end
 
   create_table "outlet_official_tags", force: :cascade do |t|
@@ -163,7 +181,6 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   create_table "outlets", force: :cascade do |t|
     t.string   "service_url",       limit: 255
     t.string   "organization",      limit: 255
-    t.string   "info_url",          limit: 255
     t.string   "account",           limit: 255
     t.string   "language",          limit: 255
     t.datetime "created_at"
@@ -221,42 +238,27 @@ ActiveRecord::Schema.define(version: 20150206202522) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",               limit: 255
+    t.string   "email",                        limit: 255
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",       limit: 4
+    t.integer  "sign_in_count",                limit: 4
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip",  limit: 255
-    t.string   "last_sign_in_ip",     limit: 255
+    t.string   "current_sign_in_ip",           limit: 255
+    t.string   "last_sign_in_ip",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user",                limit: 255,               null: false
-    t.integer  "agency_id",           limit: 4
-    t.string   "phone",               limit: 255
-    t.string   "first_name",          limit: 255
-    t.string   "last_name",           limit: 255
-    t.text     "groups",              limit: 65535
-    t.integer  "role",                limit: 4,     default: 0
+    t.string   "user",                         limit: 255,                   null: false
+    t.integer  "agency_id",                    limit: 4
+    t.string   "phone",                        limit: 255
+    t.string   "first_name",                   limit: 255
+    t.string   "last_name",                    limit: 255
+    t.text     "groups",                       limit: 65535
+    t.integer  "role",                         limit: 4,     default: 0
+    t.boolean  "agency_notifications",         limit: 1,     default: false
+    t.boolean  "agency_notifications_emails",  limit: 1,     default: false
+    t.boolean  "contact_notifications",        limit: 1,     default: true
+    t.boolean  "contact_notifications_emails", limit: 1,     default: true
+    t.integer  "email_notification_type",      limit: 4,     default: 0
   end
-
-  create_table "version_associations", force: :cascade do |t|
-    t.integer "version_id",       limit: 4
-    t.string  "foreign_key_name", limit: 255, null: false
-    t.integer "foreign_key_id",   limit: 4
-  end
-
-  add_index "version_associations", ["foreign_key_name", "foreign_key_id"], name: "index_version_associations_on_foreign_key", using: :btree
-  add_index "version_associations", ["version_id"], name: "index_version_associations_on_version_id", using: :btree
-
-  create_table "versions", force: :cascade do |t|
-    t.string   "item_type",  limit: 255,   null: false
-    t.integer  "item_id",    limit: 4,     null: false
-    t.string   "event",      limit: 255,   null: false
-    t.string   "whodunnit",  limit: 255
-    t.text     "object",     limit: 65535
-    t.datetime "created_at"
-  end
-
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end

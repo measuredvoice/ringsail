@@ -17,16 +17,22 @@
 class MobileApp < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model
+  include Notifications
+  
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  enum status: { under_review: 0, published: 1, archived: 2 }
+  scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
+  scope :api, -> { where("draft_id IS NOT NULL") }
+
+  enum status: { under_review: 0, published: 1, archived: 2, 
+    publish_requested: 3, archive_requested: 4 }
 
   # Outlets have a relationship to themselvs
   # The "published" outlet will have a draft_id pointing to its parent
   # The "draft" outlet will not have a draft_id field
   # This will allow easy querying on the public / admin portion of the application
-  has_one :published_mobile_app, class_name: "MobileApp", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft_mobile_app, class_name: "MobileApp", foreign_key: "draft_id"
+  has_one :published, class_name: "MobileApp", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft, class_name: "MobileApp", foreign_key: "draft_id"
 
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
@@ -45,9 +51,18 @@ class MobileApp < ActiveRecord::Base
   has_many :mobile_app_official_tags, dependent: :destroy
   has_many :official_tags, :through => :mobile_app_official_tags
 
-  has_paper_trail
   
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
+
+  validates :name, :presence => true
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one mobile app version" } 
+  
+
+  def self.platform_counts
+    joins(:mobile_app_versions).where("mobile_apps.draft_id IS NULL").group(:platform).distinct("mobile_app_id, platform").count
+  end
 
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -62,18 +77,19 @@ class MobileApp < ActiveRecord::Base
     self.official_tag_ids = ids.split(',')
   end
 
-  def agency_tokens(ids)
+  def agency_tokens=(ids)
     self.agency_ids = ids.split(',')
   end
 
-  def user_tokens(ids)
+  def user_tokens=(ids)
     self.user_ids = ids.split(',')
   end
+
   def published!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:published]
-    self.published_mobile_app.destroy! if self.published_mobile_app
-    self.published_mobile_app = MobileApp.create!({
+    self.published.destroy! if self.published
+    ma = MobileApp.new({
       name: self.name,
       short_description: self.short_description,
       long_description: self.long_description,
@@ -82,12 +98,13 @@ class MobileApp < ActiveRecord::Base
       agency_ids: self.agency_ids || [],
       user_ids: self.user_ids || [],
       official_tag_ids: self.official_tag_ids || [],
-      status: self.status
+      status: self.status,
+      draft_id: self.id
     })
     self.mobile_app_versions.each do |mav|
-      self.published_mobile_app.mobile_app_versions << MobileAppVersion.create(mav.attributes.except!("id","mobile_app_id"))
+      ma.mobile_app_versions << MobileAppVersion.new(mav.attributes.except!("id","mobile_app_id"))
     end
-    self.save!
+    ma.save!
     MobileApp.public_activity_on
     self.create_activity :published
   end
@@ -106,9 +123,26 @@ class MobileApp < ActiveRecord::Base
   def archived!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:archived]
-    self.published_mobile_app.destroy! if self.published_mobile_app
+    self.published.destroy! if self.published
     self.save!
     MobileApp.public_activity_on
     self.create_activity :archived
   end
+
+  def publish_requested!
+    MobileApp.public_activity_off
+    self.status = MobileApp.statuses[:publish_requested]
+    self.save!
+    MobileApp.public_activity_on
+    self.create_activity :publish_requested
+  end
+
+  def archive_requested!
+    MobileApp.public_activity_off
+    self.status = MobileApp.statuses[:archive_requested]
+    self.save!
+    MobileApp.public_activity_on
+    self.create_activity :archive_requested
+  end
+ 
 end

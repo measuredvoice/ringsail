@@ -19,9 +19,9 @@ class Api::V1::MobileAppsController < Api::ApiController
 	DEFAULT_PAGE=1
 
 	def index
-		@mobile_apps = MobileApp.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
+		@mobile_apps = MobileApp.api.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
     if params[:q] && params[:q] != ""
-      @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? or mobile_apps.short_description LIKE ? or long_description LIKE ?", 
+      @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? or mobile_apps.short_description LIKE ? or mobile_apps.long_description LIKE ?", 
       	"%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
     end
     if params[:agencies] && params[:agencies] != ""
@@ -69,6 +69,7 @@ class Api::V1::MobileAppsController < Api::ApiController
     if @query
       @agencies = Agency.where("name LIKE ?","%#{@query}%")
       @tags = OfficialTag.where("tag_text LIKE ?", "%#{@query}%")
+      @service_breakdown = Outlet.where("draft_id IS NULL").group(:service).count
       @items = [@query,@agencies,@tags].flatten
       render 'tokeninput'
     else

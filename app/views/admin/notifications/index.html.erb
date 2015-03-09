@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12 main">
+    <h1 class="page-header">Notifications for User: <%= @user.email %> </h1>
+
+    <%= link_to "Edit Notification Settings", edit_notification_settings_admin_user_path(@user), :class => "btn btn-default" %><br/><br/>
+    <div class="placeholders">
+      <%= paginate @notifications %>     
+      <%= page_entries_info @notifications %>
+      <table class=" table table-striped">
+        <thead>
+          <tr class="users_row">
+            <th>Link To Item (opens in new tab)</th>
+            <th><%= sortable "message_type", "Activity Type" %></th>
+            <th><%= sortable "message", "Message" %></th>
+            <th><%= sortable "created_at", "Notification Created" %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @notifications.each do |notification| %>
+            <tr class="tablerow">
+              <td class="table_data">
+                <% case notification.item_type
+                  when "Outlet"
+                  %>
+                  <%= link_to "Social Media Account: #{notification.item.try(:organization)}", admin_outlet_path(notification.item_id), "target" =>"_blank" %>
+                <%when "MobileApp" %>
+                <%= link_to "Mobile App: #{notification.item.try(:name)}",admin_mobile_app_path(notification.item_id), "target" =>"_blank"  %>
+                <%when "Gallery" %>
+                <%= link_to "Gallery: #{notification.item.try(:name)}", admin_gallery_path(notification.item_id), "target" =>"_blank"  %>
+                <% else %>
+                N/A
+                <% end %>
+              </td>
+              <td class="table_data"><%= notification.message_type %></td>
+              <td class="table_data"><%= notification.message %></td>
+              <td class="table_data"><%= notification.created_at.strftime("%B %e, %Y %H:%M") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= paginate @notifications %>
+    </div>
+  </div>
+</div>

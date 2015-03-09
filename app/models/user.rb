@@ -2,33 +2,39 @@
 #
 # Table name: users
 #
-#  id                  :integer          not null, primary key
-#  email               :string(255)
-#  remember_created_at :datetime
-#  sign_in_count       :integer
-#  current_sign_in_at  :datetime
-#  last_sign_in_at     :datetime
-#  current_sign_in_ip  :string(255)
-#  last_sign_in_ip     :string(255)
-#  created_at          :datetime
-#  updated_at          :datetime
-#  user                :string(255)      not null
-#  agency_id           :integer
-#  phone               :string(255)
-#  first_name          :string(255)
-#  last_name           :string(255)
-#  groups              :text(65535)
-#  role                :integer          default("0")
+#  id                           :integer          not null, primary key
+#  email                        :string(255)
+#  remember_created_at          :datetime
+#  sign_in_count                :integer
+#  current_sign_in_at           :datetime
+#  last_sign_in_at              :datetime
+#  current_sign_in_ip           :string(255)
+#  last_sign_in_ip              :string(255)
+#  created_at                   :datetime
+#  updated_at                   :datetime
+#  user                         :string(255)      not null
+#  agency_id                    :integer
+#  phone                        :string(255)
+#  first_name                   :string(255)
+#  last_name                    :string(255)
+#  groups                       :text(65535)
+#  role                         :integer          default("0")
+#  agency_notifications         :boolean          default("0")
+#  agency_notifications_emails  :boolean          default("0")
+#  contact_notifications        :boolean          default("1")
+#  contact_notifications_emails :boolean          default("1")
+#  email_notification_type      :integer          default("0")
 #
 
 class User < ActiveRecord::Base
 
   belongs_to :agency
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
+  
   devise :cas_authenticatable, :trackable, :timeoutable
 
   enum role: { limited_user: 0, full_user: 1, admin: 2, banned: 3}
+  enum email_notification_type: { full_html_email: 0, plain_text_email: 1 }
+
   has_many :email_messages
 
   has_many :mobile_app_users
@@ -40,10 +46,12 @@ class User < ActiveRecord::Base
   has_many :outlet_users
   has_many :outlets, :through => :outlet_users
 
+  has_many :notifications
+  serialize :agency_notifications_settings, :contact_notifications_settings
+
   paginates_per 200
 
   def cas_extra_attributes=(extra_attributes)
-    puts extra_attributes.inspect
     extra_attributes.each do |name, value|
       case name
       when "Email-Address"
@@ -67,6 +75,10 @@ class User < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def cross_agency?
+    admin? || full_user?
   end
 
 end

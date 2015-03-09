@@ -17,7 +17,7 @@ class TumblrService < Service
   end
 
   def self.service_url_example
-    "http://example.tumblr.com/"
+    "http://username.tumblr.com/"
   end
   
   def self.service_url_canonical

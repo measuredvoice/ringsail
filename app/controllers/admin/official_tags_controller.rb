@@ -7,7 +7,14 @@ class Admin::OfficialTagsController < Admin::AdminController
   # GET /tags
   # GET /tags.json
   def index
-    @tags = OfficialTag.all.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_sze])
+    if params[:type]
+      @official_tags = OfficialTag.where(tag_type: params[:type])
+    else
+      @official_tags = OfficialTag.all
+    end
+    @total_tags = OfficialTag.all.count
+    @types = OfficialTag.group(:tag_type).count
+    @official_tags = @official_tags.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_sze])
   end
 
   # GET /tags/1
@@ -15,7 +22,7 @@ class Admin::OfficialTagsController < Admin::AdminController
 
   # GET /tags/new
   def new
-    @tag = OfficialTag.new
+    @official_tag = OfficialTag.new
   end
 
   # GET /tags/1/edit
@@ -23,21 +30,22 @@ class Admin::OfficialTagsController < Admin::AdminController
   end
 
   def show
+  
   end
   
 
   # POST /tags
   # POST /tags.json
   def create
-    @tag = OfficialTag.new(tag_params)
+    @official_tag = OfficialTag.new(tag_params)
 
     respond_to do |format|
-      if @tag.save
-        format.html { redirect_to admin_official_tag_path(@tag), notice: 'tag was successfully created.' }
-        format.json { render :show, status: :created, location: @tag }
+      if @official_tag.save
+        format.html { redirect_to admin_official_tag_path(@official_tag), notice: 'tag was successfully created.' }
+        format.json { render :show, status: :created, location: @official_tag }
       else
         format.html { render :new }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        format.json { render json: @official_tag.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -46,12 +54,12 @@ class Admin::OfficialTagsController < Admin::AdminController
   # PATCH/PUT /tags/1.json
   def update
     respond_to do |format|
-      if @tag.update(tag_params)
-        format.html { redirect_to admin_official_tag_path(@tag), notice: 'tag was successfully updated.' }
-        format.json { render :show, status: :ok, location: admin_tag_path(@tag) }
+      if @official_tag.update(tag_params)
+        format.html { redirect_to admin_official_tag_path(@official_tag), notice: 'tag was successfully updated.' }
+        format.json { render :show, status: :ok, location: admin_tag_path(@official_tag) }
       else
         format.html { render :edit }
-        format.json { render json: @tag.errors, status: :unprocessable_entity }
+        format.json { render json: @official_tag.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,8 +67,8 @@ class Admin::OfficialTagsController < Admin::AdminController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    @tag.archived!
-    @tag.save!
+    @official_tag.archived!
+    @official_tag.save!
     respond_to do |format|
       format.html { redirect_to tags_url, notice: 'tag was successfully destroyed.' }
       format.json { head :no_content }
@@ -68,21 +76,8 @@ class Admin::OfficialTagsController < Admin::AdminController
     redirect_to action: :index
   end
 
-  def activities
-    @activities = PublicActivity::Activity.where(trackable_type: "OfficialTag").order("created_at desc").page(params[:page]).per(25)
-  end
-  
-  def history
-    @versions = @tag.versions.order("created_at desc")
-  end
-
-  def restore
-    @tag.versions.find(params[:version_id]).reify(:has_one=> true, :has_many => true).save!  
-    redirect_to admin_tag_path(@tag), :notice => "Changes were reverted."
-  end
-
   def tokeninput
-    @tags = OfficialTag.where("tag_Text LIKE ?", "%#{params[:q]}%").select([:id,:tag_text])
+    @official_tags = OfficialTag.where("tag_Text LIKE ?", "%#{params[:q]}%")
     respond_to do |format|
       format.json { render 'tokeninput'}
     end
@@ -91,12 +86,12 @@ class Admin::OfficialTagsController < Admin::AdminController
    private
     # Use callbacks to share common setup or constraints between actions.
     def set_tag
-      @tag = OfficialTag.find(params[:id])
+      @official_tag = OfficialTag.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tag_params
-      params.require(:official_tag).permit(:id, :tag_text)
+      params.require(:official_tag).permit(:id, :tag_text, :tag_type)
     end
 
     def sort_column

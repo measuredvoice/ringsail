@@ -5,7 +5,6 @@
 #  id                :integer          not null, primary key
 #  service_url       :string(255)
 #  organization      :string(255)
-#  info_url          :string(255)
 #  account           :string(255)
 #  language          :string(255)
 #  created_at        :datetime
@@ -20,9 +19,15 @@
 class Outlet < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model
+  include Notifications
+  
   tracked owner: Proc.new{ |controller, model| controller.current_user }
   
-  enum status: { under_review: 0, published: 1, archived: 2 }
+  scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
+  scope :api, -> { where("draft_id IS NOT NULL") }
+  
+  enum status: { under_review: 0, published: 1, archived: 2, 
+    publish_requested: 3, archive_requested: 4 }
   #handles versioning
   #attr_accessor :auth_token
   #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
@@ -31,8 +36,8 @@ class Outlet < ActiveRecord::Base
   # The "published" outlet will have a draft_id pointing to its parent
   # The "draft" outlet will not have a draft_id field
   # This will allow easy querying on the public / admin portion of the application
-  has_one :published_outlet, class_name: "Outlet", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft_outlet, class_name: "Outlet", foreign_key: "draft_id"
+  has_one :published, class_name: "Outlet", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft, class_name: "Outlet", foreign_key: "draft_id"
 
   # These are has and belongs to many relationships
   has_many :sponsorships, dependent: :destroy
@@ -50,24 +55,28 @@ class Outlet < ActiveRecord::Base
   # acts as taggable is being kept until we do a final data migration (needed for backwards compatibility)
   acts_as_taggable
   
-  # Only drafts should have a paper trail.
   # Published outlets should not.
-  has_paper_trail :if => Proc.new { |t| t.draft_id == nil }
-  
+  validates :service, 
+    :presence   => true
   validates :service_url, 
     :presence   => true, 
     :format     => { :with => URI::regexp(%w(http https)) }
-  validates :info_url,
-    :format     => { :with => URI::regexp(%w(http https)), 
-                     :allow_blank => true}
-  # validates :agencies, :presence => true
-  validates :account, :presence => true
+
   validates :language, :presence => true
-  
-  # before_save :set_updated_by
-  before_save :fix_service_info
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
   
   paginates_per 100
+
+  # def service_info
+  #   if self.service_url && self.service
+  #     if self.service_info.account
+  #       self.account = self.service_info.account
+  #     else
+  #       self.errors.push(:service_url, "should be able to be parsed from URL, check the format you provided. If you believe this to be in error, contact an administrator")
+  #     end
+  #   end
+  # end
   
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
@@ -83,7 +92,7 @@ class Outlet < ActiveRecord::Base
   end
   
   def self.resolve(url)
-    return nil if url.nil? or url.empty?
+    return nil if url.nil? || url.empty?
 
     url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
     
@@ -102,27 +111,13 @@ class Outlet < ActiveRecord::Base
   def service_info
     @service_info ||= Service.find_by_url(service_url)
   end
-  
-  
-  def all_contacts
-    contacts_list = []
-    contacts_list << self.users
-    agencies.each do |agency|
-      contacts_list << agency.users
-    end
-    contacts_list.flatten.uniq
-  end
-  
-  def history
-    @versions = PaperTrail::Outlets.order('created_at DESC')
-  end
-
+    
   def agency_tokens=(ids)
     self.agency_ids = ids.split(",")
   end
 
   # will rely on replacing the tokens system, but CRUDing out the info for now
-   def tag_tokens=(ids)
+  def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')
   end
 
@@ -133,8 +128,8 @@ class Outlet < ActiveRecord::Base
   def published!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:published]
-    self.published_outlet.destroy! if self.published_outlet
-    self.published_outlet = Outlet.create!({
+    self.published.destroy! if self.published
+    self.published = Outlet.create!({
       service_url: self.service_url,
       service: self.service,
       organization: self.organization,
@@ -155,10 +150,26 @@ class Outlet < ActiveRecord::Base
   def archived!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:archived]
-    self.published_outlet.destroy! if self.published_outlet
+    self.published.destroy! if self.published
     self.save!
     Outlet.public_activity_on
     self.create_activity :archived
+  end
+
+  def publish_requested!
+    Outlet.public_activity_off
+    self.status = Outlet.statuses[:publish_requested]
+    self.save!
+    Outlet.public_activity_on
+    self.create_activity :publish_requested
+  end
+
+  def archive_requested!
+    Outlet.public_activity_off
+    self.status = Outlet.statuses[:archive_requested]
+    self.save!
+    Outlet.public_activity_on
+    self.create_activity :archive_requested
   end
 
   private
@@ -170,12 +181,5 @@ class Outlet < ActiveRecord::Base
     else
       self.updated_by ||= 'admin'
     end
-  end
-  
-  def fix_service_info
-    self.service = service_info.shortname
-    self.account = service_info.account
-  end
-  
-  
+  end  
 end

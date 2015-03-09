@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DigitalGov Registry Examples</title>
+  <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
+  <%= stylesheet_link_tag    "public" %>
+  <%= yield :additional_css %>
+</head>
+<body class="home page page-id-472 page-template page-template-page-widgetized-php fwidth unboxed hidetitle centercatnav bodybg1" data-twttr-rendered="true">
+  <%= render partial: "layouts/fixed_nav" %>
+  <div id="outer-wrap">
+    <%= render partial: "layouts/top_nav" %>
+    <%= render partial: "layouts/header" %>
+    <div id="wrap">
+      <div id="page" class="clearfix">
+        <div class="page-border clearfix">
+          <div id="contentleft" class="clearfix">
+            <div id="content" class="clearfix">
+              <div class="" id="single-page-202">
+                <div class="entry">
+                  <%= yield %>
+                </div>
+              </div>
+            </div> <!-- End #content div --> 
+            <div style="clear:both;margin-bottom:20px;"></div>
+          </div> <!-- End #contentleft div -->
+        </div> <!-- End .page-border div -->
+      </div> <!-- End #page div -->
+    </div>
+  </div>
+  <%= render partial: "layouts/digital_gov_static_footer" %>
+  <%= javascript_include_tag "public" %>
+  <%= yield :additional_javascript %>
+</body>
+</html>

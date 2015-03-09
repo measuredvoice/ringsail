@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12 main">
+    <h1 class = "page-header">Editing User Notifications: <%= @user.email %></h1>
+
+    <%= form_for([:admin,@user], :url => update_notification_settings_admin_user_path(@user)) do |f| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this social media account from being saved:</h2>
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="field">
+        <%= f.label :contact_notifications %>
+        <%= f.check_box :contact_notifications %>
+        <p>Determines if you will receive notifications when items you are listed as a contact on are submitted, published, archived, or needs to be reviewed.</p>
+      </div>
+       <div class="field">
+        <%= f.label :contact_notifications_emails %>
+        <%= f.check_box :contact_notifications_emails %>
+        <p>Determines if you will receive an email along with a contact notification.</p>
+      </div>
+      <div class="field">
+        <%= f.label :agency_notifications %>
+        <%= f.check_box :agency_notifications %>
+        <p>Determines if you will receive notifications when your agency is listed as a sponsor for are submitted, published, archived, or needs to be reviewed.</p>
+      </div>
+      <div class="field">
+        <%= f.label :agency_notifications_emails %>
+        <%= f.check_box :agency_notifications_emails %>
+        <p>Determines if you will receive an email along with an agency notification.</p>
+      </div>
+      <div class="field">
+        <%= f.label :email_notification_type, "Email Type: " %>
+        <%= f.select :email_notification_type, User.email_notification_types.keys.to_a.map{|w| [w.humanize, w]}, {}, :class => "form-control formwidth" %>
+        <p>Choose between plain-text simple emails and full html emails with extra markup</p>
+      </div>
+      <div class="actions">
+        <%= f.submit "Update Settings", :class => "btn btn-primary" %>
+        <%= link_to 'Back to Notifications', admin_user_notifications_path(user_id: @user), :class => "btn btn-default" %>
+      </div>
+    <% end %>
+  </div>
+</div>

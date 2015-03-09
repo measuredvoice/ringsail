@@ -29,9 +29,10 @@ class <%= file_name.capitalize  %>Service < Service
 
   def fetch_details
     {
-      :account=  => acount
+      :account => account
     }
   end
 end
 
-Service.register(:<%=file_name.downcase %>,<%= file_name.capitalize %>Service)
+
+Service.register(:<%= file_name.downcase %>,<%= file_name.capitalize %>Service)

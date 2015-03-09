@@ -17,7 +17,7 @@ class IdeascaleService < Service
   end
 
   def self.service_url_example
-    "http://example.ideascale.com/"
+    "http://username.ideascale.com/"
   end
   
   def self.service_url_canonical

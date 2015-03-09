@@ -1,0 +1,45 @@
+<script id="verify-social-media-template" type="text/x-handlebars-template">
+  <div class="media">
+    <div class="media-body text-overflow">
+      <a href="{{service_url}}"><h4 class="media-heading">
+      {{#if organization}}
+        {{organization}}
+      {{else}}
+        {{service_display_name}}:{{service_url}}
+      {{/if}} - VERIFIED
+      </h4></a>
+      {{#each agencies}}
+        {{name}}
+      {{/each}}
+    </div>
+  </div>
+</script>
+
+<script id="error-template" type="text/x-handlebars-template">
+  <div class="media">
+    <div class="media-body text-overflow">
+      {{error}}
+    </div>
+  </div>
+</script>
+
+<script>
+  var source   = $("#verify-social-media-template").html();
+  var verify_social_media_template = Handlebars.compile(source); 
+  source   = $("#error-template").html();
+  var error_template = Handlebars.compile(source); 
+
+  $('#social-media-verify').submit(function(e){
+    e.preventDefault();
+    $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media/verify.json",{
+        q: $("#verify-social-box").val()
+      }, function(data){
+        if(data.error){
+          $('#verify-social-media-collection').append(error_template(data));
+        }else{
+          $('#verify-social-media-collection').append(verify_social_media_template(data));
+        }
+      }
+    );
+  });
+</script>

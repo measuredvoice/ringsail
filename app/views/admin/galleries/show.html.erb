@@ -1,34 +1,46 @@
-<div class="row">
-	<div class="col-sm-12 col-md-12 main">
+<div class = "row">
+	<div class="col-sm-6">
 		<h3><i class="fa fa-clock-o fa-fw"></i> Gallery Info</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
-				<p>
-				  <strong>Name:</strong>
-				  <%= @gallery.name %>
-				</p>
-
-				<p>
-				  <strong>Description:</strong>
-				  <%= @gallery.description %>
-				</p>
-
-				<p>
-				  <strong>Tags:</strong>
-				  <%= @gallery.official_tags.map(&:tag_text).join(', ') %>
-				</p>
-
-				<p>
-				  <strong>Gallery Items:</strong>
-				  <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: false} %>
-				</p>
-        <div class="buttonRow">
-					<%= link_to "Back to Galleries", admin_galleries_path, {:class => "fa fa-angle-double-left"} %>
-					<%= link_to "Edit", edit_admin_gallery_path(@gallery), {:class => "fa fa-pencil"} %>	
-        </div>
+				<%= render partial: "gallery_details", locals: { gallery: @gallery } %>	
 			</div>
+		</div>  
+	</div>
+	<div class="col-sm-6">
+		<h3><i class="fa fa-clock-o fa-fw"></i> Published Gallery Info</h3>
+		<div class="panel panel-default">
+	  	<div class="panel-body">
+	  		<% if @gallery.published %>
+	  			<p>
+		  			<strong>API Link</strong>
+		  			<%= link_to api_v1_gallery_url(@gallery), 
+		  				api_v1_gallery_url(@gallery) %>
+		  		</p>
+	  			<%= render partial: "gallery_details", locals: { gallery: @gallery.published } %>	
+	  		<% else %>
+	  			<p>No information is currently published for this gallery.</p>
+	  		<% end %>
+ 			</div>
+		</div> 
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="buttonRow">
+			<%= link_to "Back to Galleries", admin_galleries_path, {:class => "fa fa-angle-double-left"} %>
+			<%= link_to "Edit", edit_admin_gallery_path(@gallery), {:class => "fa fa-pencil"} %>	
+			<% if current_user.admin? %>
+				<%= link_to 'Publish', publish_admin_gallery_path(@gallery), {:class => "fa fa-bullhorn"} %> 
+				<%= link_to 'Archive', archive_admin_gallery_path(@gallery), {:class=> "fa fa-archive"} %>  
+			<% else %>
+				<%= link_to 'Request Publish', request_publish_admin_gallery_path(@gallery), {:class => "fa fa-bullhorn"} %> 
+				<% if @gallery.published %>
+				<%= link_to 'Request Archive', request_archive_admin_gallery_path(@gallery), {:class=> "fa fa-archive"} %> 
+				<% end %>
+			<% end %>
 		</div>
-       
 	</div>
 </div>
 <div class = "row container col-sm-12 col-md-12">

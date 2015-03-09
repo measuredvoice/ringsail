@@ -1,9 +1,11 @@
 <%= form_for([:admin,@gallery]) do |f| %>
   <% if @gallery.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@gallery.errors.count, "error") %> prohibited this gallery from being saved:</h2>
+        
+      <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+  <span class="sr-only">Error:</span><%= pluralize(@gallery.errors.count, "error") %> prohibited this social media account from being saved</div>
 
-      <ul>
+      <ul class="inlineErrorMsgs">
       <% @gallery.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -16,18 +18,27 @@
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
   <div class="field"> 
-    <%= f.label :description %> </br>
-    <%= f.text_field :description, :class => "form-control formwidth" %>
+    <%= f.label :short_description %> </br>
+    <%= f.text_field :short_description, :class => "form-control formwidth" %>
+  </div>
+  <div class="field"> 
+    <%= f.label :long_description %> </br>
+    <%= f.text_area :long_description, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :agency_tokens, "Agencies" %> </br>
+    <%= f.label :agency_tokens, "Sponsoring Agencies" %> </br>
     <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
   <div class="field">
     <%= f.label :tag_tokens, "Tags" %> </br>
     <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
-
+  <div class="contacts">
+    <div class="field">
+      <%= f.label :user_tokens, "Contacts" %></br>
+      <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => ""} %>
+    </div>
+  </div>
 
   <div class="field hidden"> 
     <%= f.hidden_field :gallery_items_ol, :value => "" %>
@@ -35,6 +46,8 @@
 
   <div class="field">
     <h3>Gallery Collection</h3>
+    <p>These items are added using the table below. You may reorder them by dragging the item in the interface<p>
+    <p><span class="label  label-warning">Notice!</span>  You can add unpublished items to a gallery, but the API will only feed out items that have a currently published version.</p>
     <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: true} %>
   </div>
   <div role="tabpanel">
@@ -116,7 +129,14 @@
         crossDomain: false,
         prePopulate: tags
       });
-
+      <% user_json = [] 
+      @gallery.users.each do |user|
+        user_json << {id: user.id, name: user_list_format(user)}
+      end%>
+      $("#gallery_user_tokens").tokenInput("/admin/users/tokeninput.json", {
+        crossDomain: false,
+        prePopulate: <%= raw user_json.to_json %>
+      });
       $("#gallery_agency_tokens").tokenInput("/admin/agencies/tokeninput.json", {
         crossDomain: false,
         prePopulate: <%= raw @gallery.agencies.map(&:attributes).to_json %>
@@ -142,7 +162,7 @@
       });
       $('#all_social_table').dataTable({
         "ajax":{
-          "url": "/admin/outlets/datatables.json"
+          "url": "/admin/social_media/datatables.json"
         },
         "columns":[
           {"title": "Name", "data": "organization"},

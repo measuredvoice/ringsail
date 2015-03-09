@@ -1,9 +1,0 @@
-<% if object.errors.any? %>
-    <div id="error_explanation">
-        <p class="alert alert-error">
-            <strong>Please try again.</strong> <% object.errors.full_messages.each do |msg| %>
-                <%= msg %>. 
-            <% end %>
-        </p>
-    </div>
-<% end %>

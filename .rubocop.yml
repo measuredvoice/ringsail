@@ -1,0 +1,7 @@
+AllCops:
+  RunRailsCops: true
+  Exclude:
+    - 'lib/generators/**/*'
+    - 'db/seeds.rb'
+
+inherit_from: .rubocop_todo.yml

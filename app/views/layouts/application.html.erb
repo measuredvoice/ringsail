@@ -1,153 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= @page_title %> | Social Media Registry API Preview</title>
+  <title>Unused layout</title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
-  <style type="text/css">
-    /* Override some bootstrap defaults */
-    html, body {
-      background-color: #eee;
-    }
-    body {
-      font-family: Verdana, sans-serif;
-      padding-top: 40px;
-    }
-
-    input,
-    button,
-    select,
-    textarea {
-      font-family: Verdana, sans-serif;
-    }
-
-    table {
-      table-layout: fixed; width: 100%;
-    }
-
-    .col1 {width:40%;}
-
-    td {
-      overflow:hidden; 
-      text-overflow: ellipsis; 
-    }
-
-    .container > footer p {
-      text-align: center; /* center align it with the container */
-    }
-
-    /* The white background content wrapper */
-    .content {
-      background-color: #fff;
-      padding: 20px;
-      margin: 0 -20px;  negative indent the amount of the padding to maintain the grid system 
-      -webkit-border-radius: 0 0 6px 6px;
-         -moz-border-radius: 0 0 6px 6px;
-              border-radius: 0 0 6px 6px;
-      -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-         -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-              box-shadow: 0 1px 2px rgba(0,0,0,.15);
-    }
-
-    /* Page header tweaks */
-    .page-header {
-      background-color: #f5f5f5;
-      padding: 20px 20px 10px;
-      margin: -20px -20px 20px;
-    }
-
-    /* Give a quick and non-cross-browser friendly divider */
-    .content .span4 {
-      margin-left: 0;
-      padding-left: 19px;
-      border-left: 1px solid #eee;
-    }
-
-    .navbar-inverse a.brand {
-      color:#FFF;
-      font-size: 1.3em;
-    }
-
-    /* Form default text tweaks */
-    input::-webkit-input-placeholder {
-      color:    gray;
-    }
-    input:-moz-placeholder {
-      color:    gray;
-    }
-    
-    /* Pagination tweaks */
-    .pagination em, .pagination span {
-      /*float: left;*/
-      padding: 0 14px;
-      line-height: 34px;
-      border-right: 1px solid;
-      border-right-color: rgba(0,0,0,0.15);
-      /*text-decoration: none;*/
-    }
-    
-    .pagination span.last {
-      border-right: none;
-    }
-    
-    ul.tags {
-      display: inline;
-      list-style: none;
-      margin: 0;
-    }
-    
-    ul.tags li {
-      display: inline;
-    }
-    
-    ul.tags li:after {
-      content: ", ";
-    }
-    
-    ul.tags li:last-child:after {
-      content: "";
-    }
-  </style>
 </head>
 <body>
+  <div>
+    <h1>Unused Layout</h1>
+    <p>If you see this layout, something probably happened.  Seemingly bad, but who are we to judge?</p>
+    <p>If you'd like to access something else, try these links<p>
 
+    <ul>
+      <li><%= link_to "admin", admin_dashboard_path %></li>
+      <li><%= link_to "swagger", swagger_path %></li>
+    </ul>
 
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <a class="brand" href="<%=raw ENV['REGISTRY_DOCS_URL'] %>">U.S. Government Social Media Registry API</a>
-      </div>
-    </div>
   </div>
-
-
-<div class="container">
-
-  <div class="content">
-    <div class="page-header">
-      <h1>API Preview<%= @page_title ? ": #{@page_title}" : '' %></h1>
-    </div>
-    <div class="row">
-
-    <%= yield %>
-
-    </div>
-  </div>
-
-</div> <!-- /container -->
-
-<footer class="container">
-  <div class="row">
-  <div class="span14">
-  <div class="alert alert-info">
-	<p>This is an HTML preview of the API output from a social media registry designed to keep track of all social media accounts managed by U.S. federal government agencies and programs.</p>
-	<p>See the <a href="<%=raw ENV['REGISTRY_DOCS_URL'] %>">API documentation</a> for more information on using this API.</p>
-	</div>
-	</div>
-	</div>
-</footer>
-
-<%= render "shared/webtrends" %>
 
 </body>
 </html>

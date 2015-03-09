@@ -1,0 +1,41 @@
+<p>
+  <strong>Social Media Account Name:</strong>
+  <%= outlet.organization %>
+</p>
+
+<p>
+  <strong>Agencies:</strong>
+  <%= outlet.agencies.map(&:name).join(', ') %>
+</p>
+
+<p>
+  <strong>Account Type:</strong>
+  <%= outlet.service %>
+</p>
+<p>
+  <strong>Account URL:</strong>
+  <%= outlet.service_url %>
+</p>
+<p>
+  <strong>Short Description:</strong>
+  <%= @outlet.short_description %>
+</p>
+
+<p>
+  <strong>Long Description:</strong>
+  <%= @outlet.long_description %>
+</p>
+<p>
+  <strong>Tags:</strong>
+  <%= outlet.official_tags.map(&:tag_text).join(', ') %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= outlet.status.humanize %>
+</p>

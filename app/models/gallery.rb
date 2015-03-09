@@ -4,7 +4,6 @@
 #
 #  id                :integer          not null, primary key
 #  name              :string(255)
-#  description       :text(65535)
 #  draft_id          :integer
 #  short_description :text(65535)
 #  long_description  :text(65535)
@@ -14,20 +13,21 @@
 class Gallery < ActiveRecord::Base
 	 #handles logging of activity
 	include PublicActivity::Model
+  include Notifications
+  
 	tracked owner: Proc.new{ |controller, model| controller.current_user }
 
-  enum status: { under_review: 0, published: 1, archived: 2 }
+  scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
+  scope :api, -> { where("draft_id IS NOT NULL") }
 
-   # Outlets have a relationship to themselvs
+  enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
+
+  # Galleries have a relationship to themselvs
   # The "published" outlet will have a draft_id pointing to its parent
   # The "draft" outlet will not have a draft_id field
   # This will allow easy querying on the public / admin portion of the application
-  has_one :published_gallery, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft_gallery, class_name: "Gallery", foreign_key: "draft_id"
-
-
-	#handles versioning
-	has_paper_trail
+  has_one :published, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
+  belongs_to :draft, class_name: "Gallery", foreign_key: "draft_id"
 	
 	has_many :gallery_users, dependent: :destroy
 	has_many :users, through: :gallery_users
@@ -42,8 +42,10 @@ class Gallery < ActiveRecord::Base
   has_many :mobile_apps, :through => :gallery_items, :source => :item, :source_type => "MobileApp"
   has_many :outlets, :through => :gallery_items, :source => :item, :source_type => "Outlet"
 
-  # These are rewritten accessors to handle the draft/published stuff that we are doing
-
+  validates :name, :presence => true
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  
   def published_gallery_items
     self.gallery_items.where(status: 1)
   end
@@ -55,43 +57,47 @@ class Gallery < ActiveRecord::Base
   def published_outlets
     Outlet.where("draft_id IN (?)", self.outlet_ids)
   end
+  
   # This handles a json serialized format from the administrative end.
   # It is to allowed ordering of lists in the forms
   # Please be careful if messing with this, its senssitive
   def gallery_items_ol=(list)
-  	gallery_list = JSON.parse(list)[0]
-  	ids = []
-  	gallery_list.each_with_index do |item,index|
-  		if ["MobileApp","Outlet"].include? item["class"]
-  			if item["class"].constantize.find(item["id"])
-		  		new_item =  GalleryItem.find_or_create_by({
-		  			gallery_id: self.id,
-		  			item_id: item["id"],
-		  			item_type: item["class"]
-		  		})
-		  		new_item.item_order = index
-		  		new_item.save!
-		  		ids << item["id"]
-		  	else
-          # This error occurs if an invalid id is provided, generally should only be found by devs
-		  		self.errors.add(:base, "Couldn't find item to add to gallery")
-		  	end
-	  	else
-        # This error would require either a developer or something trying to do wrong to reach
-	  		self.errors.add(:base, "A gallery item was of the wrong class")
-	  	end
-  	end
-    # cleanup all records not found in the list this time. required due to way we are handling
-    # data serialization
-  	self.gallery_items.where('item_id NOT IN (?)', ids).destroy_all
+    if list
+    	gallery_list = JSON.parse(list)[0]
+    	ids = []
+    	gallery_list.each_with_index do |item,index|
+    		if ["MobileApp","Outlet"].include? item["class"]
+    			if item["class"].constantize.find(item["id"])
+  		  		new_item =  GalleryItem.find_or_create_by({
+  		  			gallery_id: self.id,
+  		  			item_id: item["id"],
+  		  			item_type: item["class"]
+  		  		})
+  		  		new_item.item_order = index
+  		  		new_item.save!
+  		  		ids << item["id"]
+  		  	else
+            # This error occurs if an invalid id is provided, generally should only be found by devs
+  		  		self.errors.add(:base, "Couldn't find item to add to gallery")
+  		  	end
+  	  	else
+          # This error would require either a developer or something trying to do wrong to reach
+  	  		self.errors.add(:base, "A gallery item was of the wrong class")
+  	  	end
+    	end
+      # cleanup all records not found in the list this time. required due to way we are handling
+      # data serialization
+    else
+    	self.gallery_items.where('item_id NOT IN (?)', ids).destroy_all
+    end
   end
 
 
   def published!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:published]
-    self.published_gallery.destroy! if self.published_gallery
-    self.published_gallery = Gallery.create!({
+    self.published.destroy! if self.published
+    self.published = Gallery.create!({
       name: self.name,
       short_description: self.short_description,
       long_description: self.long_description,
@@ -101,37 +107,47 @@ class Gallery < ActiveRecord::Base
       status: self.status
     })
     self.gallery_items.each do |mav|
-      self.published_gallery.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
+      self.published.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
     end
     self.save!
     MobileApp.public_activity_on
     self.create_activity :published
   end
-#  id                :integer          not null, primary key
-#  name              :string(255)
-#  description       :text(65535)
-#  draft_id          :integer
-#  short_description :text(65535)
-#  long_description  :text(65535)
-#  status            :integer
-#
+  
   def archived!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archived]
-    self.published_gallery.destroy! if self.published_gallery
+    self.published.destroy! if self.published
     self.save!
     Gallery.public_activity_on
     self.create_activity :archived
   end
+
+  def publish_requested!
+    Gallery.public_activity_off
+    self.status = Gallery.statuses[:publish_requested]
+    self.save!
+    Gallery.public_activity_on
+    self.create_activity :publish_requested
+  end
+
+  def archive_requested!
+    Gallery.public_activity_off
+    self.status = Gallery.statuses[:archive_requested]
+    self.save!
+    Gallery.public_activity_on
+    self.create_activity :archive_requested
+  end
+  
   def tag_tokens=(ids)
     self.official_tag_ids = ids.split(',')
   end
 
-  def agency_tokens(ids)
+  def agency_tokens=(ids)
     self.agency_ids = ids.split(',')
   end
 
-  def user_tokens(ids)
+  def user_tokens=(ids)
     self.user_ids = ids.split(',')
   end
 end

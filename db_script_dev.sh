@@ -1,4 +1,4 @@
-# THESE DO A PROD CONVERSION IN THIS ORDER. SAVE FOR PROD
+
 # rake db:drop
 # rake db:create
 # mysql -u root ringsail_development < data/current/socialmed.sql
@@ -13,4 +13,3 @@ rake db:drop
 rake db:create
 rake db:migrate
 rake db:seed
-rvmsudo unicorn_rails -c /config/unicorn.rb -D --env development

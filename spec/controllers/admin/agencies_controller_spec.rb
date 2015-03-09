@@ -153,10 +153,10 @@ RSpec.describe Admin::AgenciesController, type: :controller do
   describe "PUT #update/:id" do
     it "responds successfully with an HTTP 200 status code for admin users" do
       sign_in FactoryGirl.create(:admin_user)
-      agency = FactoryGirl.attributes_for(:agency, :name => "abcdedfh")
-      put :update, agency: agency
-      response.should be_success
-      expect(response).to redirect_to(admin_agency_path(assigns(:agency)))
+      agency = FactoryGirl.create(:agency)
+      agency_attributes = FactoryGirl.attributes_for(:agency)
+      put :update, id: agency.id, agency: agency_attributes
+      expect(response).to redirect_to(admin_agency_url(assigns(:agency)))
      end
 
     it "should redirect users who are not admins" do
@@ -177,5 +177,14 @@ RSpec.describe Admin::AgenciesController, type: :controller do
     end
   end
 
+  describe "GET /agencies/tokeninput" do
+    it "should allow lookup of agencies by text" do
+      sign_in FactoryGirl.create(:admin_user)
+      agency = FactoryGirl.create(:agency, name: "ZZZZZ")
+      get :tokeninput, format: :json, q: agency.name.first(2)
+      expect(assigns[:agencies]).to match([agency])
+      expect(response).to render_template("tokeninput")
+    end
+  end
 
 end

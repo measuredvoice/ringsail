@@ -1,30 +1,35 @@
 class Admin::MobileAppsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, :history,:restore,:archive, :publish]
+  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, 
+    :archive, :publish, :request_archive, :request_publish]
 
   before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    if current_user.admin?
+    if current_user.cross_agency?
       @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      @platform_counts = @mobile_apps.platform_counts
+      @total_mobile_apps = @mobile_apps.count
     else
-      @mobile_apps = MobileApp.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @mobile_apps = MobileApp.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @platform_counts = @mobile_apps.platform_counts
+      @total_mobile_apps = @mobile_apps.count
     end
-    @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
-    @allApps = MobileApp.all
+    if params[:platform] && !params[:platform].blank?
+      @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
+    end
+    @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction)
+
     respond_to do |format|
-      format.html
-      format.json {render json: @allApps }
-      format.xml {render xml: @allApps}
-      format.csv {send_data @allApps.to_csv}
-      format.xls { send_data @allApps.csv(col_sep: "\t")}
+      format.html { @mobile_apps = @mobile_apps.page(params[:page]).per(15) }
+      format.csv { send_data @mobile_apps.to_csv}
     end
   end
 
   def datatables
-    @mobile_apps = MobileApp.all
+    @mobile_apps = MobileApp.where("draft_id IS NULL").uniq
     respond_to do |format|
       format.json {
         render json: {
@@ -65,6 +70,9 @@ class Admin::MobileAppsController < Admin::AdminController
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully created.' }
         format.json { render :show, status: :created, location: @mobile_app }
       else
+        if @mobile_app.mobile_app_versions.empty?
+          @mobile_app.mobile_app_versions.build
+        end
         format.html { render :new }
         format.json { render json: @mobile_app.errors, status: :unprocessable_entity }
       end
@@ -99,23 +107,27 @@ class Admin::MobileAppsController < Admin::AdminController
     @activities = PublicActivity::Activity.where(trackable_type: "MobileApp").order("created_at desc").page(params[:page]).per(25)
   end
 
-  def history
-    @versions = @mobile_app.versions.order("created_at desc")
-  end
-
-  def restore
-    @mobile_app.versions.find(params[:version_id]).reify.save!
-    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Undid changes to mobile app."
-  end
-
   def publish
     @mobile_app.published!
-    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now public"
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now public."
+
   end
 
   def archive
     @mobile_app.archived!
-    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App is now archived"
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now archived."
+  end
+
+  def request_publish
+    @mobile_app.publish_requested!
+    @mobile_app.build_admin_notifications(:publish_requested)
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be published."
+  end
+
+  def request_archive
+    @mobile_app.archive_requested!
+    @mobile_app.build_admin_notifications(:archive_requested)
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be archived."
   end
 
    private
@@ -127,7 +139,7 @@ class Admin::MobileAppsController < Admin::AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_app_params
       params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url, 
-        :language, :agency_tokens, :user_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
+        :language, :agency_tokens, :user_tokens, :tag_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
         :version_number,:publish_date,:description,:whats_new,:screenshot,:device,
         :language,:average_rating,:number_of_ratings, :_destroy])
     end

@@ -1,0 +1,24 @@
+<p>
+  <strong>Name:</strong>
+  <%= gallery.name %>
+</p>
+<p>
+  <strong>Short Description:</strong>
+  <%= gallery.short_description %>
+</p>
+<p>
+  <strong>Long Description:</strong>
+  <%= gallery.long_description %>
+</p>
+<p>
+  <strong>Agencies:</strong>
+  <%= gallery.agencies.map(&:name).join(', ') %>
+</p>
+<p>
+  <strong>Tags:</strong>
+  <%= gallery.official_tags.map(&:tag_text).join(', ') %>
+</p>
+<p>
+  <strong>Gallery Items:</strong>
+  <%= render partial: "item_list", locals: {gallery_items: gallery.gallery_items, remove_link: false} %>
+</p>

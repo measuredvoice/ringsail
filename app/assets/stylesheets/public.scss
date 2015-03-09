@@ -1,0 +1,119 @@
+/*
+ * This manifest file includes the CSS files required by default
+ *= require digitalgovtheme/style
+ *= require digitalgovtheme/style-font
+ *= require digitalgovtheme/style-responsive
+ *= require digitalgovtheme/custom
+ *= require digitalgovtheme/other-custom
+
+
+
+* THESE FILES AND EVERYTHING BELOW ARE REQUIRED TO BE PORTED TO PUBLIC SITE.
+
+ *= require font-awesome
+
+ *= require custom-token-input.css
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/////////////////////////
+// FROM ADMIN
+////////////////////////.
+body{
+    font-family: Trebuchet,Tahoma,sans-serif;
+    font-size: 16px;
+line-height: 1.6em;
+color: #555;
+font-weight: 400;
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: Trebuchet,Tahoma,sans-serif;
+}
+h1{
+    font-size: 30px;
+letter-spacing: 0;
+line-height: 1.3em;
+    font-weight: 700;
+}
+p{
+    margin-top: 0px;
+margin-bottom: 20px;
+}
+
+.entry ul, .entry ol{
+    margin: 0!important;
+}
+ul.token-input-list{   
+background-color: #ffffff;
+}
+ul.token-input-list li input{
+    background-color: #fff;
+}
+div.form-group ul.token-input-focused .token-input-input-token::before{
+    font-family: 'FontAwesome';
+    content: "";
+   padding:0 5px 0 15px;  
+   color: #ccc;
+   font-size: 13px;
+}
+.token-input-token{
+    display: none !important;
+}
+.form-control {
+border-radius: 0;
+border: 1px solid #ddd;
+background: #fff;
+font-family: inherit;
+font-size: inherit;
+padding: 3%;
+width: 700px!important;
+box-shadow: none;}
+
+::-webkit-input-placeholder {
+   color: #ccc;
+    font-size: 13px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #ccc; 
+     font-size: 13px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #ccc;  
+     font-size: 13px;
+}
+
+:-ms-input-placeholder {  
+   color: #ccc;  
+     font-size: 13px;
+}
+.button{
+    border-radius: 0;
+}
+.agencyResults{
+    margin: 0;
+    padding: 0;
+}
+.agencyResults div{
+  display: block;
+border-bottom: dotted 1px #ddd;
+margin: 0 15px 0 15px;
+background-color: #f1f1f1;
+padding: 5px;
+
+}
+.media-body{
+    padding:15px 0  15px 25px;
+}
+
+.media > .pull-left{
+  padding-left: 15px;
+}
+.badge{
+    background-color:#ff5049;
+    color: #fff;
+    
+    
+}

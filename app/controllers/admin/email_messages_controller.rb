@@ -3,7 +3,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 	before_filter :require_admin, except: [:new, :create, :show]
 
 	def index
-		@emails = EmailMessage.page(params[:page]).per(15)
+		@email_messages = EmailMessage.all.page(params[:page]).per(15)
 	end
 	
 	def new
@@ -34,7 +34,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 		@email.user = current_user
 		if @email.save
 			flash[:notice] = "Email successfully sent!"
-			EmailJob.perform_later @email
+			EmailMessageMailer.email(@email).deliver_later
 			render 'sent'
 		else
 			render "new"

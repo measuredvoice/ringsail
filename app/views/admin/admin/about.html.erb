@@ -1,34 +1,73 @@
-<div class="row container">
-  <div class="cols-sm-12">
+<div class="row">
+  <div class="col-sm-12 col-md-4 main">
+    <div class="list-group">
+      <a href="#about-purpose" class="list-group-item">About</a>
+      <a href="#about-social-media" class="list-group-item">Social Media</a>
+      <a href="#about-mobile-products" class="list-group-item">Mobile Products</a>
+      <a href="#about-galleries" class="list-group-item">Galleries</a>
+      <a href="#about-tagging" class="list-group-item">Tagging</a>
+      <a href="#about-statuses" class="list-group-item">Statuses</a>
+      <a href="#about-notifications" class="list-group-item">Notifications</a>
+      <a href="#about-contact-us" class="list-group-item">Contact Us</a>
+    </div>     
+  </div>
+  <div class="col-sm-12 col-md-8 main wrapper">
     <h1 class="page-header">About</h1>
-    <h3>Purpose</h3>
-      <p>Should discuss purpose of the app, perhaps include links to the github / github issues<p>
-    <h3>Who is Responsible</h3>
+    <div id="about-pupose">
+      <h2>Purpose</h2>
+      <p>This application serves as an authoritative source of the social media accounts and mobile applications of the United States federal government.<p>
+      <p>It provides an API so that people, corporations, and government entities have programmatic access to search, verify, and disable the social media accounts and mobile products of the United States federal government.
+    </div>
+    <div id="about-social-media">
+      <h2>Social Media Outlets</h2>
+      <p>Social Media Outlets are utilized by government entities to distribute information and connect with the people</p>
+      <p>By centralizing a list of social media outlets sponsored by government entities, this system provides an ability for social media companies and the american people to verify the authenticity of these accounts.</p>
+      <p>This registry also allows users to find contact information about who, specifically, is responsible for these organizational accounts</p>
+    </div>
+    <div id="about-mobile-products">
+      <h2>Mobile Products</h2>
+      <p>By centralizing a list of mobile products sponsored by government entities, this system provides an ability for mobile app stores as well as end users to validate the authenticity of these products and applications</p>
+    </div>
+    <div id="about-galleries">
+      <h2>Galleries</h2>
+      <p>Galleries serve as ad-hoc collections of both mobile products and social media outlets.</p>
+      <p>These galleries allow government users to create collection of mobile products and social media accounts to power widgets on your website.</P>
+    </div>
+    <div id="about-tagging">
+      <h2>Tagging</h2>
+      <p>Each item can be tagged based on category or geographical information</p>
+      <p>Tags in the system are currently curated by administrators, so if you feel that you need a tag, contact them to discuss its inclusion in the sytem</p>
+    </div>  
+    <div id="about-statuses">
+      <h2>Publishing &amp; Statuses</h2>
+      <p>Each social media outlet, mobile product, and gallery has a status tied to that item. Once an item has been pubslished, edits to that item will not affect the published version until an administrator has re-published the item.</p>
+      <p>The statuses are as such:<p>
+      <ul class="list-group">
+        <li class="list-group-item">Under Review: Item is new into the system or currently being edited</li>
+        <li class="list-group-item">Published: Item is current published in the system.  If an item is modified, the published version will not be modified until it has been published again by an administrator</li>
+        <li class="list-group-item">Archived: Item is no longer published, and is marked as not relevant for review.  Archived items can be modified at any time and they will be placed back into the "Under Review" state</li>
+      </ul>
+    </div>
+    <div id="about-notifications">
+      <h2>Notifications &amp; Contact</h2>
+      <p>This system includes a notification system in an opt-in/opt-out basis.</p>
+      <p>By default, you will receive notifications whenever a social media account, gallery, or mobile product that you are listed on as a contact is created, updated, published, or archived.  You can opt-out of this by going to the notications page, and clicking edit notification settings.  You may opt out of emails or notifications all together.</p>
+      <p>By opting in, you may receive notifications whenever a social media account, gallery, or mobile product that with which your agency is listed as a sponsor is  created, updated, published, or archived.  You can opt-in to this by going to the notications page, and clicking edit notification settings.</p>
+    </div>
+    <div id="about-contact-us">
+      <h2>Contact Us</h2>
       <div>List of Admins 
-          <span class="buttonRow"><%= link_to "Email Admins", new_admin_email_message_path(include_admins: true), {:class => "fa fa-pencil"} %></div></div>
+        <span class="buttonRow">
+          <% unless current_user.banned? %>
+            <%= link_to "Email Admins", new_admin_email_message_path(include_admins: true), {:class => "fa fa-pencil"} %>
+          <% end %>
+        </span>
+      </div>
       <ul class="list-unstyled">
         <% @admins.each do |admin| %>
           <li><%= "#{admin.first_name} #{admin.last_name} - #{admin.email}" %></li>
         <% end %>
       <ul/>
-    <h3>When will you be contacted</h3>
-      <p>Contacts &amp; Agency Contacts will be notified when a social media account or mobile app has been in the system
-      for 6 months without changes to ensure data stays fresh</p>
-      <p>You should list yourself as an agency contact if you would like to be notified of changes / need for review related to all items where the agency is listed as related</p>
-      <p>You should add yourself as the contact on an item if you'd like to be 
-      <p>If data looks like it may no longer to be correct, an admin will mark an item as "under review".  This does not mean its status as public/archvied has been changed, just that we'd like you to take a look at it.  If its been under review for more than 2 weeks, it may be archived.</p>
-    <h3>Explain Statuses</h3>
-      <p>Submitted, Public, Archived</p>
-      <p>Items can also be deleted by the system, typically if they have been archived for an extended period of time (1 year+) or adhoc by an administrator if deemed necessary</p>
-    <h3>Tags</h3>
-      <p>Tagging is limited to a set of specific elements for purposes of preventing unnecessary, inappropriate, or duplicative tags.</p>
-      <p>If you'd like a tag added, and feel we have missed something, feel free to email the admins with your request and/or explanation if appropriate</p>
-    <h3>Social Media Accounts</h3>
-      <p>Explain metadata here</p>
-    <h3>Mobile Applications</h3>
-      <p>TAlk about galleries</p>
-      <p>Explain metadata here</p>
-
-    <p>include a write up with some information about the app, when users are modified, what statuses mean.</p>
+    </div>
   </div>
 </div>

@@ -1,0 +1,39 @@
+<div class="row">
+	<div class="col-sm-12">
+		<h1 class="page-header">Versions</h1>
+		<% @versions.each do |version| %>
+			<% official_tag  = version.reify({:has_many => true}) %>
+			<div class = "panel panel-default">
+				<div class = "panel-heading">
+					<p style = "display:inline">
+						<h3 class = "panel-title">Changes made by: <%#= User.find(version.whodunnit).email %> </h3>
+						<%= link_to "Restore", restore_admin_official_tag_path({id: official_tag.id, version_id: version.id}), :class => "pull-right" %>
+					</p>	
+				</div>
+
+				<div class = "panel-body">
+					<p>
+						<strong>Tag:</strong>
+						<%= official_tag.tag_text %>
+					</p>
+
+					<p>
+						<strong>Social Media Count:</strong>
+						<%= official_tag.draft_outlet_count %>
+					</p>
+
+					<p>
+						<strong>Mobile App Count:</strong>
+						<%= official_tag.draft_mobile_app_count %>
+					</p>
+
+					<p>
+						<strong>Gallery Count:</strong>
+						<%= official_tag.draft_gallery_count %>
+					</p>		
+
+				</div>
+			</div>		
+		<% end %>
+	</div>
+</div>

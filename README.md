@@ -1,7 +1,7 @@
 # Social Media Registry (program information)
 
 [![Build Status](https://travis-ci.org/ctacdev/social-media-registry.svg?branch=develop)](https://travis-ci.org/ctacdev/social-media-registry)
-[![Coverage Status](https://coveralls.io/repos/ctacdev/social-media-registry/badge.svg)](https://coveralls.io/r/ctacdev/social-media-registry)
+[![Coverage Status](https://coveralls.io/repos/ctacdev/social-media-registry/badge.svg?branch=develop)](https://coveralls.io/r/ctacdev/social-media-registry?branch=develop)
 
 * [API Documentation](http://www.usa.gov/About/developer-resources/social-media-registry.shtml)
 * [Verification Page](http://www.usa.gov/Contact/verify-social-media.shtml)
@@ -31,6 +31,7 @@ Ringsail is built on Ruby 2.1.5 and Rails 4.1.1, backed by a MySQL 5 database (o
 Commands:
 rake db:create
 rake db:migrate
+rake db:seed
 rails s
 
 ## Information on specific features
@@ -38,6 +39,10 @@ rails s
 ### Single Sign On
 
 For the purposes of Single Sign-On (SSO), Ringsail integrates with OMB.MAX.  For this integration to work, the domain name of the service must be configured with OMB MAX as an external dependency.  It also requires configuration of groups in the secrets.yml file (the user and administrator groups to check against). Leaving these blanks will cause every user account to have either user level or administrator level access.
+
+In development mode, users form the db:seeds file will be created with each level of access available in the system.  There should be no need to integrate with a CAS provider for development purposes
+
+If you are looking to run your own version of the application, either modify the authentication mechanism or integrate with a cas provider.
 
 ### Social Media Accounts
 
@@ -50,6 +55,12 @@ The major goals of social media accounts is to be able to search, sort, and veri
 Social Media services change rapidly, so Ringsail allows new services to be added as plug-ins in the folder 'lib/services'
 
 See `lib/services/twitter_service.rb` for a good example of the service plug-in style.
+
+You can generate a new plugin using a generator with the format below:
+
+'rails g service service_name'
+
+where service name is the name of the service, and the key that will be used in the database to tie services of the same type together.
 
 To submit a new service for inclusion in this registry, please fork this repository, add your service, and submit a pull request with the proposed change.
 
@@ -66,4 +77,4 @@ Mobile application apis change less rapidly than services, but we've deigned to 
 
 ### Workflow
 
-Current workflow consists of regular users submitting social media and mobile applications into a "Pending" status.  Administrators can review these and place them in an 'active' state.  After 6 months without being modified, records will be placed in an "under review" status.  These "under review" items will be completely viewable by the public, but users tied to the records as contacts will be notified they should come in and upkeep them.  Adminstrators and Users can both place items as "archived" to remove them from public purview.
+Current workflow consists of regular users submitting social media and mobile applications into a "Pending" status.  Administrators can review these and place them in an 'Published' state.  After 6 months without being modified, records will be placed in an "under review" status and contacts for their related agency and record will be notified.  These "under review" items will be completely viewable by the public, but administrative users may archive them if they are not attended to.

@@ -1,10 +1,10 @@
-<%= form_for([:admin,@tag]) do |f| %>
-    <% if @tag.errors.any? %>
+<%= form_for([:admin,@official_tag]) do |f| %>
+    <% if @official_tag.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(@tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
+        <h2><%= pluralize(@official_tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
 
         <ul>
-        <% @tag.errors.full_messages.each do |message| %>
+        <% @official_tag.errors.full_messages.each do |message| %>
         <li><%= message %></li>
         <% end %>
         </ul>
@@ -12,8 +12,12 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :tag_text %> </br>
+      <%= f.label :tag_text, "Tag" %> </br>
       <%= f.text_field :tag_text, :class => "form-control formwidth" %>
+    </div>
+     <div class="field">
+      <%= f.label :tag_type, "Type" %> </br>
+      <%= f.select :tag_type, OfficialTag.tag_types.keys.to_a.map{ |w| [w.humanize, w]}, {}, :class => "form-control formwidth" %>
     </div>
     <div class="actions">
       <%= f.submit :class => "btn btn-primary" %>

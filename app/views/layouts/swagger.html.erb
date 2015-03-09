@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DigitalGov Registry Examples</title>
+    <link rel="icon" href="../favicon.ico">
+  <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
+  <%= stylesheet_link_tag    "public" %>
+  <%= stylesheet_link_tag    "swagger" %>
+  <%= yield :additional_css %>
+</head>
+<body class="home page page-id-472 page-template page-template-page-widgetized-php fwidth unboxed hidetitle centercatnav bodybg1" data-twttr-rendered="true">
+  <%= render partial: "layouts/fixed_nav" %>
+  <div id="fixednav">
+    <div class="limit clearfix">
+      <!-- FIXED NAVIGATION MENU -->
+      <ul class="fixednav">
+        <li class="<%= "active" if request.path == "/" || request.path.include?("swagger") %>">
+          <%= link_to "Swagger Docs", swagger_path %>
+        </li>
+        <li class="<%= "active" if request.path.include?("search") %>">
+          <%= link_to "Search Examples", search_path %>
+        </li>
+        <li class="<%= "active" if request.path.include?("widgets") %>">
+          <%= link_to "Widget Examples", widgets_path %>
+        </li>
+      </ul>
+      <!-- SOCIAL MEDIA ICONS -->
+    </div>
+  </div>
+  <div id="outer-wrap">
+    <%= render partial: "layouts/top_nav" %>
+    <%= render partial: "layouts/header" %>
+    <div id="wrap">
+      <div id="page" class="clearfix">
+        <div class="page-border clearfix">
+          <div id="contentleft" class="clearfix">
+            <div id="content" class="clearfix">
+              <div class="" id="single-page-202">
+                <div class="entry">
+                  <%= yield %>
+                </div>
+              </div>
+            </div> <!-- End #content div --> 
+            <div style="clear:both;margin-bottom:20px;"></div>
+          </div> <!-- End #contentleft div -->
+        </div> <!-- End .page-border div -->
+      </div> <!-- End #page div -->
+    </div>
+  </div>
+  <%= render partial: "layouts/digital_gov_static_footer" %>
+  <%= javascript_include_tag "swagger" %>
+  <%= yield :additional_javascript %>
+</body>
+</html>

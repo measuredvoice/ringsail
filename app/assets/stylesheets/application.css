@@ -1,9 +1,6 @@
 /*
  * This manifest file includes the CSS files required by default
  *= require_self
- *= require autosuggest
- *= require chosen
- *= require forms
 */
 
 @import "bootstrap";

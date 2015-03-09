@@ -8,16 +8,11 @@ gem 'rails', '4.2.0'
 gem 'mysql2'
 
 # Templates for generating JSON and other data output
-# see https://github.com/gowalla/boxer
-gem 'boxer'
 gem 'json'
 gem 'jbuilder'
 
 # Public activity
 gem 'public_activity'
-
-# Version history Gem
-gem 'paper_trail'
 
 # Makes nested forms easier
 gem 'cocoon'
@@ -75,6 +70,7 @@ group :development, :test do
   gem 'coveralls'
   gem "capybara" #feature specs
   gem 'database_cleaner'
+  gem 'guard-rspec', require: false
   
   # generate fake data in tests & seeds files
   gem 'faker'
@@ -91,6 +87,8 @@ group :development, :test do
   # open emails in browser on send
   gem 'letter_opener'
 
+  # Ruby style checking
+  gem 'rubocop', require: false
 
   # Unicorn app server for hosting purposes in dev environment. Will be replaced with phusion passenger in 'real' host
   gem 'unicorn'

@@ -17,7 +17,7 @@ class UservoiceService < Service
   end
 
   def self.service_url_example
-    "http://example.uservoice.com/"
+    "http://username.uservoice.com/"
   end
   
   def self.service_url_canonical

@@ -5,7 +5,6 @@
 #  id                :integer          not null, primary key
 #  service_url       :string(255)
 #  organization      :string(255)
-#  info_url          :string(255)
 #  account           :string(255)
 #  language          :string(255)
 #  created_at        :datetime

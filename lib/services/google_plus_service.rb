@@ -25,7 +25,7 @@ class GooglePlusService < Service
   end
   
   def self.service_url_example
-    "https://plus.google.com/110031535020051778989/posts"
+    "https://plus.google.com/username/posts"
   end
   
   def self.service_url_canonical

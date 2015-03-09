@@ -1,10 +1,11 @@
 json.set! :id, outlet.draft_id
-json.set! :organizaton, outlet.organization
+json.set! :organization, outlet.organization
 json.set! :account, outlet.account
 json.set! :service_key, outlet.service
+json.set! :short_description, outlet.short_description
+json.set! :long_description, outlet.long_description
 json.set! :service_display_name, Service.find_by_shortname(outlet.service).longname
 json.set! :service_url, outlet.service_url
-json.set! :info_url, outlet.info_url
 json.set! :language, outlet.language
 json.agencies do
   json.array! outlet.agencies, partial: "api/v1/shared/agency", as: :agency

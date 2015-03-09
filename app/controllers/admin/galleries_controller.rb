@@ -1,35 +1,33 @@
 class Admin::GalleriesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, :history,:restore]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy, 
+    :publish, :archive, :request_archive, :request_publish]
   # GET /gallerys
   # GET /gallerys.json
   def index
-    if current_user.admin?
-
+    if current_user.cross_agency?
       @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
     else
-      @galleries = Gallery.joins(:official_tags, :agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).where("draft_id IS NULL").uniq
     end
-    @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(25)
+    @galleries = @galleries.order(sort_column + " " +sort_direction)
+
     respond_to do |format|
-      format.html
-      format.json { render json: @gallerys }
-      format.xml { render xml: @gallerys }
+      format.html { @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(15) }
       format.csv { send_data @gallerys.to_csv }
-      format.xls { send_data @gallerys.to_csv(col_sep: "\t")}
     end
   end
 
   # GET /gallerys/1
   # GET /gallerys/1.json
- # def show
-  #end
+  def show
+    
+  end
 
   # GET /gallerys/new
   def new
     @gallery = Gallery.new
-    @mobile_apps = MobileApp.all
   end
 
   # GET /gallerys/1/edit
@@ -41,11 +39,17 @@ class Admin::GalleriesController < Admin::AdminController
   # POST /gallerys.json
   def create
     @gallery = Gallery.new(gallery_params)
-
     respond_to do |format|
       if @gallery.save
-        format.html { redirect_to admin_gallery_path(@gallery), notice: 'Gallery was successfully created.' }
-        format.json { render :show, status: :created, location: @gallery }
+
+        @gallery.gallery_items_ol = gallery_params[:gallery_items_ol]
+        if @gallery.save
+          format.html { redirect_to admin_gallery_path(@gallery), notice: 'Gallery was successfully created.' }
+          format.json { render :show, status: :created, location: @gallery }
+        else
+          format.html { render :new }
+          format.json { render json: @gallery.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new }
         format.json { render json: @gallery.errors, status: :unprocessable_entity }
@@ -81,26 +85,30 @@ class Admin::GalleriesController < Admin::AdminController
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "Gallery").order("created_at desc").page(params[:page]).per(25)
   end
-  def history
-    @versions = @gallery.versions.order("created_at desc")
-  end
-
-  def restore
-    @gallery.versions.find(params[:version_id]).reify.save!
-    redirect_to admin_gallery_path(@gallery), :notice => "Undid changes to mobile app."
-  end
 
   def publish
-    @gallery.published
-    redirect_to admin_gallery_path(@gallery), :notice => "Gallery has been published."
+    @gallery.published!
+    @gallery.build_notifications(:published)
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now public."
   end
 
   def archive
     @gallery.archived!
-    redirect_to admin_gallery_path(@gallery), :notice => "Gallery has been published."
+    @gallery.build_notifications(:archived)
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now archived."
   end
 
-  
+  def request_publish
+    @gallery.publish_requested!
+    @gallery.build_admin_notifications(:publish_requested)
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be published."
+  end
+
+  def request_archive
+    @gallery.archive_requested!
+    @gallery.build_admin_notifications(:archive_requested)
+    redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be archived."
+  end
 
    private
     # Use callbacks to share common setup or constraints between actions.
@@ -110,7 +118,7 @@ class Admin::GalleriesController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gallery_params
-      params.require(:gallery).permit(:name, :description, :tag_tokens, :agency_tokens, :gallery_items_ol)
+      params.require(:gallery).permit(:name, :description, :short_description, :long_description, :agency_tokens, :user_tokens, :tag_tokens, :gallery_items_ol)
     end
 
     def sort_column
