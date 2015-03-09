@@ -148,7 +148,9 @@ class Admin::SocialMediaController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, :account, :service, :language, :agency_tokens, :user_tokens,:tag_tokens)
+      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, 
+        :account, :service, :language, :agency_tokens, :user_tokens, :tag_tokens,
+        :short_description, :long_description)
     end
 
     def sort_column
