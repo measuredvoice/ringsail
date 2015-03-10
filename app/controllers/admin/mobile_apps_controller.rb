@@ -130,6 +130,13 @@ class Admin::MobileAppsController < Admin::AdminController
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be archived."
   end
 
+  def version_details_for_url
+    @details_object = AppStore.find_details_by_url(params[:store_url])
+    respond_to do |format|
+      format.json { render json: @details_object }
+    end
+  end
+
    private
     # Use callbacks to share common setup or constraints between actions.
     def set_mobile_app
@@ -139,7 +146,7 @@ class Admin::MobileAppsController < Admin::AdminController
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_app_params
       params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url, 
-        :language, :agency_tokens, :user_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
+        :language, :agency_tokens, :user_tokens, :tag_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
         :version_number,:publish_date,:description,:whats_new,:screenshot,:device,
         :language,:average_rating,:number_of_ratings, :_destroy])
     end

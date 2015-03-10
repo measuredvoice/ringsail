@@ -14,16 +14,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :service %> </br>
+    <%= f.label :service, "Account Type" %> </br>
     <%= f.select :service, options_for_select(Service.all.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field"> 
-    <%= f.label :service_url %> with format(<span id="format-help">pick a service for format help</span>)</br>
+    <%= f.label :service_url, "Service URL:" %> Format Help - <span id="format-help">pick an account type for format help</span></br>
     <%= f.text_field :service_url, :class => "form-control formwidth" %>
-  </div>
-  <div class="field">
-    <%= f.label :account %> (username from above url)</br>
-    <%= f.text_field :account, {:class => "form-control formwidth" } %>
+    <%= f.hidden_field :account %>
   </div>
   <div class="field">
     <%= f.label :organization, "Social Media Account Name" %> </br>

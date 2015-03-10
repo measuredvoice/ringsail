@@ -17,11 +17,11 @@
 #  number_of_ratings :integer
 #  mongo_id          :string(255)
 #
-
 class MobileAppVersion < ActiveRecord::Base
 	
   belongs_to :mobile_app
 
   validates :store_url, presence: true
   validates :platform, presence: true
+
 end

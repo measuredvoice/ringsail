@@ -4,6 +4,9 @@
       <div class="field">
         <%= f.label :store_url, "Store URL / Location" %> </br>
         <%= f.text_field :store_url, :class => "form-control formwidth" %>
+        <%= link_to "Get Version Details From URL", "#", :class=>"btn btn-default version-details" %>
+        <span class="version-retrieving hidden"><i class="fa fa-refresh fa-spin"></i></span>
+        <span class="version-messages"></span>
       </div>
      <div class="field">
           <%= f.label :platform %> </br>
@@ -15,14 +18,14 @@
       </div>
       <div class="field">
         <%= f.label :publish_date %> </br>
-        <%= f.datetime_field :publish_date, :class => "form-control formwidth" %>
+        <%= f.date_select :publish_date, order: [:day, :month, :year], add_month_numbers: true, prompt: true, :class => "form-control formwidth" %>
       </div>
       <div class="field">
         <%= f.label :description %> </br>
         <%= f.text_area :description, :class => "form-control formwidth" %>
       </div>
       <div class="field">
-        <%= f.label :whats_new %> </br>
+        <%= f.label :whats_new, "What's New" %> </br>
         <%= f.text_area :whats_new, :class => "form-control formwidth" %>
       </div>
       <div class="field">
@@ -31,7 +34,10 @@
       </div>
       <div class="field">
         <%= f.label :device %> </br>
-        <%= f.text_field :device, :class => "form-control formwidth" %>
+        <%= f.select :device, options_for_select([["Mobile Phone","Mobile Phone"],
+          ["Mobile Web Browser","Mobile Web Browser"],
+          ["Tablet","Tablet"]
+          ]),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div>
       <div class="field">
           <%= f.label :language %> </br>

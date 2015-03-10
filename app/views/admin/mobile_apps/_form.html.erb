@@ -104,5 +104,45 @@
       crossDomain: false,
       prePopulate: tags
     });
+
+    $('.version-details').on('click',function(e){
+      e.preventDefault();
+      version_parent = $(this).parent().parent();
+      store_url = version_parent.find("input[name$='store_url]']").val();
+      version_parent.find(".version-retrieving").removeClass('hidden');
+      $.get('/admin/mobile_apps/version_details_for_url',
+        {store_url: store_url},
+        function(data){
+          populate_version_details(data,version_parent);
+          version_parent.find(".version-retrieving").addClass('hidden');
+        }
+      );
+    });
+
+    function populate_version_details(data, el){
+      if(data["platform"]){
+        el.find("[name$='platform]']").val(data["platform"]);
+      }
+      if(data["version"]){
+        el.find("[name$='version_number]']").val(data["version"]);
+      }
+      if(data["language"]){
+        el.find("[name$='language]']").val(data["language"]);
+      }
+      if(data["average_rating"]){
+        el.find("[name$='average_rating]']").val(data["average_rating"]);
+      }
+      if(data["number_of_ratings"]){
+        el.find("[name$='number_of_ratings]']").val(data["number_of_ratings"]);
+      }
+      if(data["screenshot"]){
+        el.find("[name$='screenshot]']").val(data["screenshot"]);
+      }
+      if(!data["platform"]){
+        version_parent.find(".version-messages").text("No details found for given URL.")
+      }else{
+        version_parent.find(".version-messages").text("Updated retrieved attributes.")
+      }
+    }
   </script>
 <% end %>
