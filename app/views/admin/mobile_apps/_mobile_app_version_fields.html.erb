@@ -5,6 +5,8 @@
         <%= f.label :store_url, "Store URL / Location" %> </br>
         <%= f.text_field :store_url, :class => "form-control formwidth" %>
         <%= link_to "Get Version Details From URL", "#", :class=>"btn btn-default version-details" %>
+        <span class="version-retrieving hidden"><i class="fa fa-refresh fa-spin"></i></span>
+        <span class="version-messages"></span>
       </div>
      <div class="field">
           <%= f.label :platform %> </br>

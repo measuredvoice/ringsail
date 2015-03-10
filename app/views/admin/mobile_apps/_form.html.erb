@@ -108,11 +108,13 @@
     $('.version-details').on('click',function(e){
       e.preventDefault();
       version_parent = $(this).parent().parent();
-      store_url = $(this).parent().parent().find("input[name$='store_url]']").val();
+      store_url = version_parent.find("input[name$='store_url]']").val();
+      version_parent.find(".version-retrieving").removeClass('hidden');
       $.get('/admin/mobile_apps/version_details_for_url',
         {store_url: store_url},
         function(data){
-          populate_version_details(data,version_parent)
+          populate_version_details(data,version_parent);
+          version_parent.find(".version-retrieving").addClass('hidden');
         }
       );
     });
@@ -133,9 +135,13 @@
       if(data["number_of_ratings"]){
         el.find("[name$='number_of_ratings]']").val(data["number_of_ratings"]);
       }
-      console.log(data);
       if(data["screenshot"]){
         el.find("[name$='screenshot]']").val(data["screenshot"]);
+      }
+      if(!data["platform"]){
+        version_parent.find(".version-messages").text("No details found for given URL.")
+      }else{
+        version_parent.find(".version-messages").text("Updated retrieved attributes.")
       }
     }
   </script>
