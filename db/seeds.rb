@@ -4,8 +4,8 @@ DatabaseCleaner.clean_with :truncation
 AGENCIES_NUM = 3
 USERS_NUM = 5 #users will always make a minimum of 4 (one for each role)
 TAGS_NUM = 6
-OUTLETS_NUM = 40
-APPS_NUM = 40
+OUTLETS_NUM = 100 # was 40
+APPS_NUM = 100 # was 40
 
 puts "Adding agencies with count of #{AGENCIES_NUM}"
 agencie_names = ["Department of Mysteries", 

@@ -23,8 +23,16 @@ class Admin::SocialMediaController < Admin::AdminController
     else
       @outlets = @outlets.all.order(sort_column + " " + sort_direction)
     end
+    per_page_count = 25
+    if cookies[:per_page_count]
+      per_page_count = cookies[:per_page_count]
+    end
+    if params[:per_page]
+      per_page_count = params[:per_page]
+      cookies[:per_page_count] = per_page_count
+    end
     respond_to do |format|
-      format.html { @outlets = @outlets.page(params[:page]).per(20) }
+      format.html { @outlets = @outlets.page(params[:page]).per(per_page_count.to_i) }    
       format.csv { send_data @outlets.to_csv }
     end
   end
