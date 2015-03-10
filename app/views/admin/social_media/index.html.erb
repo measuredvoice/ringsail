@@ -20,7 +20,11 @@
           <%= form_tag admin_outlets_path, method: :get, id: 'per_page_form' do %>
             <label>Items per page: </label>
             <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count] || 25) %>
-            <%= submit_tag "Update", id: 'per_page_submit' %>    
+            <% if params[:service] %>
+              <%= submit_tag "Update", id: 'per_page_submit', name: "per_page_submit", value: params[:service] %>                
+            <% else %>
+              <%= submit_tag "Update", id: 'per_page_submit' %>    
+            <% end %>
           <% end %>          
           <%= paginate @outlets %>        
           <%= page_entries_info @outlets %>

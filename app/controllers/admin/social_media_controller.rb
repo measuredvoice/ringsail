@@ -16,6 +16,9 @@ class Admin::SocialMediaController < Admin::AdminController
       @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
       @services = @outlets.group(:service).count
     end
+    if params[:per_page_submit]
+      params[:service] = params[:per_page_submit]
+    end
 
     @total_outlets = @outlets.count
     if(params[:service])
