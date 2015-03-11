@@ -14,9 +14,12 @@
         <table class="table table-striped">
         <thead>
         <tr>
+          <th>Agency</th>
           <th><%= sortable "name", "Name" %></th>
           <th>Description</th>
-          <th>Number of Apps</th>
+          <th>Number of Social Media Accounts</th>
+          <th>Number of Mobile Products</th>
+          <th><%= sortable "updated_at", "Updated At:" %></th>
           <th class = "lastlinks">Actions</th>
         </tr>
         </thead>
@@ -24,9 +27,11 @@
         <tbody>
         <% @galleries.each do |gallery| %>
         	<tr class = "tablerow">
+            <td class = "outlet_data"><%= gallery.agencies.map(&:name).join(', ').upcase %></td>
         	  <td class = "outlet_data"><%= gallery.name %></td>
-            <td class = "outlet_data"><%= gallery.short_description %></td>
+            <td class = "outlet_data"><%= gallery.outlets.count %></td>
         	  <td class = "outlet_data"><%= gallery.mobile_apps.count %></td>
+            <td class = "outlet_data"><%= gallery.updated_at.strftime("%B %e, %Y %H:%M") %></td>
             <td class = "outlet_data lastlinks">
               <ul class = "gly">
                 <li><%= link_to admin_gallery_path(gallery) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>

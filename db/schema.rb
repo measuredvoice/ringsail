@@ -71,11 +71,13 @@ ActiveRecord::Schema.define(version: 20150310144904) do
   end
 
   create_table "galleries", force: :cascade do |t|
-    t.string  "name",              limit: 255
-    t.integer "draft_id",          limit: 4
-    t.text    "short_description", limit: 65535
-    t.text    "long_description",  limit: 65535
-    t.integer "status",            limit: 4
+    t.string   "name",              limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "draft_id",          limit: 4
+    t.text     "short_description", limit: 65535
+    t.text     "long_description",  limit: 65535
+    t.integer  "status",            limit: 4
   end
 
   create_table "gallery_agencies", force: :cascade do |t|
