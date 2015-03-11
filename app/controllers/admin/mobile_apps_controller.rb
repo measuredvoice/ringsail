@@ -50,11 +50,6 @@ class Admin::MobileAppsController < Admin::AdminController
     @mobile_app.agencies << current_user.agency
     @mobile_app.users << current_user
     @mobile_app.mobile_app_versions.build
-    if !@mobile_app.users.include? current_user
-      @mobile_app.agencies << current_user.agency      
-      @mobile_app.users << current_user
-    end
-    #binding.pry
   end
 
   # GET /mobile_apps/1/edit

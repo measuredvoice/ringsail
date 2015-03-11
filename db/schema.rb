@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310144904) do
+ActiveRecord::Schema.define(version: 20150206202522) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -170,14 +170,6 @@ ActiveRecord::Schema.define(version: 20150310144904) do
     t.integer  "published_mobile_app_count", limit: 4,   default: 0
     t.integer  "published_outlet_count",     limit: 4,   default: 0
     t.integer  "tag_type",                   limit: 4,   default: 0
-  end
-
-  create_table "outlet_bulk_uploads", force: :cascade do |t|
-    t.string   "filename",     limit: 255
-    t.string   "content_type", limit: 255
-    t.binary   "data",         limit: 65535
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
   end
 
   create_table "outlet_official_tags", force: :cascade do |t|
