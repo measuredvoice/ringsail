@@ -48,10 +48,10 @@
             <% @outlets.each do |outlet| %>
 
           	<tr class = "tablerow">
-              <td class = "table_data"><%= outlet.agencies.map(&:name).join(', ').upcase%>
+              <td class = "table_data"><%= outlet.agencies.map(&:name).join(', ').upcase %></td>
           		<td class = "table_data"><%= outlet.service %></td>
               <td class = "table_data"><%= link_to outlet_organization_name(outlet), outlet.service_url, {target: "_blank"} %></td>
-              <td class = "table_data"><%= outlet.tags.map(&:to_s).join(', ')%></td>
+              <td class = "table_data"><%= outlet.tags.map(&:to_s).join(', ') %></td>
               <td class="table_data"><%= outlet.status.titleize %></td>
               <td class = "table_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
 

@@ -28,9 +28,12 @@
           <table class="table table-striped">
           <thead>
           <tr>
+            <th>Agency</th>
             <th><%= sortable "name", "Name" %></th>
             <th>Short Description</th>
+            <th>Tags</th>
             <th><%= sortable "status", "Status" %></th>
+            <th><%= sortable "updated_at", "Updated At" %></th>
             <th class = "lastlinks">Actions</th>
           </tr>
           </thead>
@@ -38,9 +41,12 @@
           <tbody>
           <% @mobile_apps.each do |app| %>
           	<tr class = "tablerow">
+              <td class = "table_data"><%= app.agencies.map(&:name).join(', ').upcase %></td>
           	  <td class = "table_data"><%= app.name %></td>
               <td class = "table_data"><%= app.short_description %></td>
-          	  <td class = "table_data"><%= app.status %></td>
+              <td class = "table_data"><%= app.status.titleize %></td>
+          	  <td class = "table_data"><%= app.tags.map(&:to_s).join(', ') %></td>
+              <td class = "table_data"><%= app.updated_at.strftime("%B %e, %Y %H:%M") %></td>
               <td class = "table_data lastlinks">
                 <ul class = "gly">
                   <li><%= link_to admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>

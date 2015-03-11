@@ -12,6 +12,7 @@ class AddMobileApps < ActiveRecord::Migration
       	t.integer :status, default: 0  #will use an enum, as its supported as of rails 4 enum status: { pending: 0, active: 0, archived: 1 }
   	
       	t.string :mongo_id
+        t.timestamps
   	end
 
   	create_table :mobile_app_users do |t|
