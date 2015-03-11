@@ -16,26 +16,16 @@ class Admin::SocialMediaController < Admin::AdminController
       @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
       @services = @outlets.group(:service).count
     end
-    if params[:hidden_service_value]
-      params[:service] = params[:hidden_service_value]
-    end
-
+    num_items = items_per_page_handler
     @total_outlets = @outlets.count
     if(params[:service])
       @outlets = @outlets.where(service: params[:service]).order(sort_column + " " + sort_direction)
     else
       @outlets = @outlets.all.order(sort_column + " " + sort_direction)
     end
-    per_page_count = 25
-    if cookies[:per_page_count]
-      per_page_count = cookies[:per_page_count]
-    end
-    if params[:per_page]
-      per_page_count = params[:per_page]
-      cookies[:per_page_count] = per_page_count
-    end
+
     respond_to do |format|
-      format.html { @outlets = @outlets.page(params[:page]).per(per_page_count.to_i) }    
+      format.html { @outlets = @outlets.page(params[:page]).per(num_items) }    
       format.csv { send_data @outlets.to_csv }
     end
   end
@@ -170,5 +160,20 @@ class Admin::SocialMediaController < Admin::AdminController
   
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def items_per_page_handler
+      per_page_count = 25
+      if params[:hidden_service_value]
+        params[:service] = params[:hidden_service_value]
+      end      
+      if cookies[:per_page_count_social_media_accounts]
+        per_page_count = cookies[:per_page_count_social_media_accounts]
+      end
+      if params[:per_page]
+        per_page_count = params[:per_page]
+        cookies[:per_page_count_social_media_accounts] = per_page_count
+      end
+      return per_page_count.to_i        
     end
 end

@@ -17,13 +17,14 @@ class Admin::MobileAppsController < Admin::AdminController
       @platform_counts = @mobile_apps.platform_counts
       @total_mobile_apps = @mobile_apps.count
     end
+    num_items = items_per_page_handler    
     if params[:platform] && !params[:platform].blank?
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
     end
     @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction)
 
     respond_to do |format|
-      format.html { @mobile_apps = @mobile_apps.page(params[:page]).per(15) }
+      format.html { @mobile_apps = @mobile_apps.page(params[:page]).per(num_items) }
       format.csv { send_data @mobile_apps.to_csv}
     end
   end
@@ -49,6 +50,11 @@ class Admin::MobileAppsController < Admin::AdminController
     @mobile_app.agencies << current_user.agency
     @mobile_app.users << current_user
     @mobile_app.mobile_app_versions.build
+    if !@mobile_app.users.include? current_user
+      @mobile_app.agencies << current_user.agency      
+      @mobile_app.users << current_user
+    end
+    #binding.pry
   end
 
   # GET /mobile_apps/1/edit
@@ -161,4 +167,18 @@ class Admin::MobileAppsController < Admin::AdminController
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end    
 
+    def items_per_page_handler
+      per_page_count = 25
+      if params[:hidden_platform_value]
+        params[:platform] = params[:hidden_platform_value]
+      end      
+      if cookies[:per_page_count_mobile_registrations]
+        per_page_count = cookies[:per_page_count_mobile_registrations]
+      end
+      if params[:per_page]
+        per_page_count = params[:per_page]
+        cookies[:per_page_count_mobile_registrations] = per_page_count
+      end
+      return per_page_count.to_i        
+    end    
 end

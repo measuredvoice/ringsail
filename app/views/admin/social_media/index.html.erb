@@ -15,12 +15,13 @@
           <% end %>
         </div>
       </div>
+
       <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
         <div>            
-          <%= form_tag admin_outlets_path, method: :get, id: 'per_page_form' do %>
+          <%= form_tag admin_outlets_path, method: :get, class: 'per_page_form' do %>
             <label>Items per page: </label>
-            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count] || 25) %>
-            <%= submit_tag "Update", id: 'per_page_submit' %>    
+            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) %>
+            <%= submit_tag "Update", class: 'per_page_submit' %>    
             <% if params[:service] %>
               <%= hidden_field_tag :hidden_service_value, params[:service] %>            
             <% end %>            
