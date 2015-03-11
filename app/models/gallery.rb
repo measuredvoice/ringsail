@@ -64,31 +64,37 @@ class Gallery < ActiveRecord::Base
   def gallery_items_ol=(list)
     if list
     	gallery_list = JSON.parse(list)[0]
-    	ids = []
-    	gallery_list.each_with_index do |item,index|
-    		if ["MobileApp","Outlet"].include? item["class"]
-    			if item["class"].constantize.find(item["id"])
-  		  		new_item =  GalleryItem.find_or_create_by({
-  		  			gallery_id: self.id,
-  		  			item_id: item["id"],
-  		  			item_type: item["class"]
-  		  		})
-  		  		new_item.item_order = index
-  		  		new_item.save!
-  		  		ids << item["id"]
-  		  	else
-            # This error occurs if an invalid id is provided, generally should only be found by devs
-  		  		self.errors.add(:base, "Couldn't find item to add to gallery")
-  		  	end
-  	  	else
-          # This error would require either a developer or something trying to do wrong to reach
-  	  		self.errors.add(:base, "A gallery item was of the wrong class")
-  	  	end
-    	end
+      if gallery_list.count != 0
+        mobile_ids = []
+        social_ids = []
+      	gallery_list.each_with_index do |item,index|
+      		if ["MobileApp","Outlet"].include? item["class"]
+      			if item["class"].constantize.find(item["id"])
+              gallery_items <<  GalleryItem.find_or_create_by({
+    		  			item_id: item["id"],
+    		  			item_type: item["class"],
+                item_order: index
+    		  		}) if !GalleryItem.find_by(gallery_id: id, item_id: item["id"], item_type: item["class"])
+    		  		mobile_ids << item["id"] if item["class"] == "MobileApp"
+              social_ids << item["id"] if item["class"] == "Outlet"
+    		  	else
+              # This error occurs if an invalid id is provided, generally should only be found by devs
+    		  		self.errors.add(:base, "Couldn't find item to add to gallery")
+    		  	end
+    	  	else
+            # This error would require either a developer or something trying to do wrong to reach
+    	  		self.errors.add(:base, "A gallery item was of the wrong class")
+    	  	end
+      	end
+        GalleryItem.where(gallery_id: id).where("item_id NOT IN (?) AND item_type = 'MobileApp'", mobile_ids).destroy_all
+        GalleryItem.where(gallery_id: id).where("item_id NOT IN (?) AND item_type = 'Outlet'", social_ids).destroy_all
+      else
+        GalleryItem.where(gallery_id: id).destroy_all
+      end
       # cleanup all records not found in the list this time. required due to way we are handling
       # data serialization
     else
-    	self.gallery_items.where('item_id NOT IN (?)', ids).destroy_all
+    	GalleryItem.where(gallery_id: id).destroy_all
     end
   end
 
