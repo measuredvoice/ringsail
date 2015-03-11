@@ -6,6 +6,8 @@ USERS_NUM = 5 #users will always make a minimum of 4 (one for each role)
 TAGS_NUM = 6
 OUTLETS_NUM = 100 # was 40
 APPS_NUM = 100 # was 40
+GALLERIES_NUM = 100 
+
 
 puts "Adding agencies with count of #{AGENCIES_NUM}"
 agencie_names = ["Department of Mysteries", 
@@ -125,5 +127,24 @@ puts "Adding mobile apps to get to #{APPS_NUM}"
 	end
 end
 puts "Finished adding mobile apps to get to #{APPS_NUM}"
+
+
+puts "Adding galleries to get to #{GALLERIES_NUM}"
+(1..GALLERIES_NUM).each do |gallery_number|
+	status = Gallery.statuses.values.sample
+	gallery = Gallery.create!({
+		name: Faker::App.name,		
+		short_description: Faker::Lorem.sentence,
+		long_description: Faker::Lorem.paragraph,
+		status: status,
+		users: [User.offset(rand(User.count)).first],
+		agencies: [Agency.offset(rand(Agency.count)).first]		
+	})
+	if gallery.published?
+	  gallery.published!
+	end
+end
+puts "Finished Adding Galleries to get to #{GALLERIES_NUM}"
+
 
 

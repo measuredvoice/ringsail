@@ -11,10 +11,11 @@ class Admin::GalleriesController < Admin::AdminController
     else
       @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).where("draft_id IS NULL").uniq
     end
+    num_items = items_per_page_handler        
     @galleries = @galleries.order(sort_column + " " +sort_direction)
 
     respond_to do |format|
-      format.html { @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(15) }
+      format.html { @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(num_items) }
       format.csv { send_data @gallerys.to_csv }
     end
   end
@@ -129,4 +130,15 @@ class Admin::GalleriesController < Admin::AdminController
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
+    def items_per_page_handler
+      per_page_count = 25    
+      if cookies[:per_page_count_galleries]
+        per_page_count = cookies[:per_page_count_galleries]
+      end
+      if params[:per_page]
+        per_page_count = params[:per_page]
+        cookies[:per_page_count_galleries] = per_page_count
+      end
+      return per_page_count.to_i        
+    end      
 end
