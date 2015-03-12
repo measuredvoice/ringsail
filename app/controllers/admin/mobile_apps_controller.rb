@@ -20,6 +20,8 @@ class Admin::MobileAppsController < Admin::AdminController
     num_items = items_per_page_handler    
     if params[:platform] && !params[:platform].blank?
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
+    elsif params[:q] && !params[:q].blank?
+      @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")    
     end
     @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction)
 

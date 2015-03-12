@@ -11,7 +11,10 @@ class Admin::GalleriesController < Admin::AdminController
     else
       @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).where("draft_id IS NULL").uniq
     end
-    num_items = items_per_page_handler        
+    num_items = items_per_page_handler     
+    if params[:q] && !params[:q].blank?
+      @galleries = @galleries.where("galleries.name LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
+    end       
     @galleries = @galleries.order(sort_column + " " +sort_direction)
 
     respond_to do |format|

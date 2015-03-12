@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
-          <div>
+          <div style="height:40px;">
             <%= form_tag admin_mobile_apps_path, method: :get, class: 'per_page_form' do %>
               <label>Items per page: </label>
               <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_mobile_registrations] || 25) %>
@@ -25,7 +25,14 @@
               <% if params[:platform] %>
                 <%= hidden_field_tag :hidden_platform_value, params[:platform] %>            
               <% end %>            
-            <% end %>              
+            <% end %>   
+            <%= form_tag admin_mobile_apps_path, class: 'admin_search_form', method: "get" do %>
+              <%= label_tag(:q, "Search for:") %>            
+              <%= text_field_tag(:q) %>
+              <%= submit_tag "Search", class: 'admin_search_submit' %>
+            <% end %>          
+          </div>
+          <div>                       
             <%= paginate @mobile_apps %>
             <%= page_entries_info @mobile_apps %>
             <text>

@@ -20,6 +20,8 @@ class Admin::SocialMediaController < Admin::AdminController
     @total_outlets = @outlets.count
     if(params[:service])
       @outlets = @outlets.where(service: params[:service]).order(sort_column + " " + sort_direction)
+    elsif params[:q] && params[:q] != ""
+      @outlets = @outlets.where("account LIKE ? OR service_url LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
     else
       @outlets = @outlets.all.order(sort_column + " " + sort_direction)
     end
