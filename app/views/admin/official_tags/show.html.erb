@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-sm-12 col-md-12 main">
-    <h3><i class="fa fa-clock-o fa-fw"></i> Tags Info</h3>
+  <div class="col-sm-12 col-md-12">
+    <h1 class="page-header"><i class="fa fa-clock-o fa-fw"></i> Tags Info</h1>
     <div class = "panel panel-default">
       <div class = "panel-body">
         <p>
@@ -13,21 +13,24 @@
         </p>
         <dl class="dl-horizontal">
 
-          <dt>Social media (published)</dt>
-          <dd><%= @official_tag.draft_outlet_count%> (<%= @official_tag.published_outlet_count%>)</dd>
-          <dt>Mobile App Count (published)</dt>
-          <dd><%= @official_tag.draft_mobile_app_count%> (<%= @official_tag.published_mobile_app_count%>)</dd>
-          <dt>Gallery Count (published)</dt>
-          <dd><%= @official_tag.draft_gallery_count%> (<%= @official_tag.published_gallery_count%>)</dd>
+          <dt>Social Media</dt>
+          <dd><%= @official_tag.draft_outlet_count%> (<%= @official_tag.published_outlet_count%> published)</dd>
+          <dt>Mobile Products</dt>
+          <dd><%= @official_tag.draft_mobile_app_count%> (<%= @official_tag.published_mobile_app_count%> published)</dd>
+          <dt>Galleries</dt>
+          <dd><%= @official_tag.draft_gallery_count%> (<%= @official_tag.published_gallery_count%> published)</dd>
 
         </dl>
-
-        <div class = "buttonRow">
-          <%= link_to 'Back to Tags', admin_official_tags_path, {:class => "fa fa-angel-double-left"} %>
-          <%#= link_to 'History', history_admin_official_tag_path(@official_tag), {:class => "faf fa-history"} %>
-          <%= link_to 'Edit', edit_admin_official_tag_path(@official_tag), {:class => "fa fa-pencil"} %>
-        </div>
       </div>
     </div>   
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="buttonRow">
+      <%= link_to 'Back to Tags', admin_official_tags_path, {:class => "fa fa-angel-double-left"} %>
+      <%#= link_to 'History', history_admin_official_tag_path(@official_tag), {:class => "faf fa-history"} %>
+      <%= link_to 'Edit', edit_admin_official_tag_path(@official_tag), {:class => "fa fa-pencil"} %>
+    </div>
   </div>
 </div>

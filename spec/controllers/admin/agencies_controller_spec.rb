@@ -14,11 +14,11 @@ RSpec.describe Admin::AgenciesController, type: :controller do
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :index
       expect(response).to redirect_to(admin_about_url)
     end
@@ -52,11 +52,11 @@ RSpec.describe Admin::AgenciesController, type: :controller do
       get :show, id: agency.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :show, id: agency.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :show, id: agency.id
       expect(response).to redirect_to (admin_about_url)
     end
@@ -84,11 +84,11 @@ RSpec.describe Admin::AgenciesController, type: :controller do
       get :edit, id: agency.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :edit, id: agency.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :edit, id: agency.id
       expect(response).to redirect_to (admin_about_url)
     end
@@ -116,11 +116,11 @@ RSpec.describe Admin::AgenciesController, type: :controller do
       post :create, agency: agency
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       post :create, agency: agency
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       post :create, agency: agency
       expect(response).to redirect_to (admin_about_url)
     end
@@ -140,11 +140,11 @@ RSpec.describe Admin::AgenciesController, type: :controller do
       get :new
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :new
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :new
       expect(response).to redirect_to (admin_about_url)
     end
@@ -165,12 +165,12 @@ RSpec.describe Admin::AgenciesController, type: :controller do
       put :update, id: agency.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       agency = FactoryGirl.create(:agency)
       put :update, id: agency.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       agency = FactoryGirl.create(:agency)
       put :update, id: agency.id
       expect(response).to redirect_to (admin_about_url)

@@ -27,19 +27,19 @@
 #
 
 FactoryGirl.define do
-  factory :user, aliases: [:limited_user] do 
+  factory :user do 
     email Faker::Internet.email
     user Faker::Internet.user_name
     phone Faker::PhoneNumber.phone_number
     first_name Faker::Name.first_name
     last_name Faker::Name.first_name
     groups "#{Faker::Company.name},#{Faker::Company.name},#{Faker::Company.name}"
-    role User.roles[:limited_user]
+    role User.roles[:user]
     association :agency, factory: :agency
   end
 
-  factory :full_user, parent: :user do
-    role User.roles[:full_user]
+  factory :super_user, parent: :user do
+    role User.roles[:super_user]
   end
 
   factory :admin_user, parent: :user do

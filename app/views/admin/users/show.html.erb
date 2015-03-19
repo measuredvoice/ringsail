@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-12 col-md-12 main">
-    <h3><i class="fa fa-clock-o fa-fw"></i> User Info</h3>
+    <h1 class="page-header"><i class="fa fa-clock-o fa-fw"></i> User Info</h1>
     <div class="panel panel-default">
       <div class="panel-body">
 				<p id="notice"><%= notice %></p>
@@ -27,7 +27,7 @@
 
 				<p>
 				  <strong>Agency:</strong>
-				  <%= @user.agency %>
+				  <%= "#{@user.agency.name} (#{@user.agency.shortname})" %>
 				</p>
 
 				<p>
@@ -44,8 +44,12 @@
 				</p>
       </div>
   	</div>
-	  <div class="buttonRow">
-	    <%= link_to 'Back', admin_users_path, {:class => "fa fa-angle-double-left"} %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12 col-md-12 main">
+		<div class="buttonRow">
+			<%= link_to 'Back', admin_users_path, {:class => "fa fa-angle-double-left"} %>
 			<%= link_to 'Edit', edit_admin_user_path(@user), {:class => "fa fa-pencil"}  %> 
 	  </div>
 	</div>

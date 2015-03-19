@@ -10,7 +10,14 @@
       </div>
      <div class="field">
           <%= f.label :platform %> </br>
-          <%= f.select :platform, options_for_select(MobileAppVersion.all.pluck(:platform).uniq,f.object.platform),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+          <%= f.select :platform, options_for_select(
+              [["Android","Android"],
+              ["Blackberry","Blackberry"],
+              ["iOS","iOS"],
+              ["Mobile Web","Mobile Web"],
+              ["Windows","Windows"]],f.object.platform),
+              {include_blank: "Select"}, 
+              {:class => "form-control formwidth"} %>
       </div>
       <div class="field">
         <%= f.label :version_number %> </br>
@@ -34,7 +41,8 @@
       </div>
       <div class="field">
         <%= f.label :device %> </br>
-        <%= f.select :device, options_for_select([["Mobile Phone","Mobile Phone"],
+        <%= f.select :device, options_for_select([
+          ["Mobile Phone","Mobile Phone"],
           ["Mobile Web Browser","Mobile Web Browser"],
           ["Tablet","Tablet"]
           ]),{include_blank: "Select"}, {:class => "form-control formwidth"} %>

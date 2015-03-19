@@ -22,7 +22,7 @@
                 <% case notification.item_type
                   when "Outlet"
                   %>
-                  <%= link_to "Social Media Account: #{notification.item.try(:organization)}", admin_outlet_path(notification.item_id), "target" =>"_blank" %>
+                  <%= link_to "Social Media Account: #{notification.item.try(:organization)}", admin_outlet_path(notification.item_id) %>
                 <%when "MobileApp" %>
                 <%= link_to "Mobile App: #{notification.item.try(:name)}",admin_mobile_app_path(notification.item_id), "target" =>"_blank"  %>
                 <%when "Gallery" %>

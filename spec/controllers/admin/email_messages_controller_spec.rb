@@ -15,11 +15,11 @@ RSpec.describe Admin::EmailMessagesController, type: :controller do
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :index
       expect(response).to redirect_to(admin_about_url)
     end
@@ -47,13 +47,13 @@ RSpec.describe Admin::EmailMessagesController, type: :controller do
       expect(response).to render_template("sent")
 
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       email_message = FactoryGirl.attributes_for(:email_message)
       post :create, email_message: email_message
       expect(response).to be_success
       expect(response).to render_template("sent")
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       email_message = FactoryGirl.attributes_for(:email_message)
       post :create, email_message: email_message
       expect(response).to be_success
@@ -76,13 +76,13 @@ RSpec.describe Admin::EmailMessagesController, type: :controller do
       expect(response).to be_success
       expect(response).to render_template("new")
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       email_message = FactoryGirl.create(:email_message)
       get :new
       expect(response).to be_success
       expect(response).to render_template("new")
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       email_message = FactoryGirl.create(:email_message)
       get :new
       expect(response).to be_success

@@ -16,12 +16,12 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       official_tag = FactoryGirl.create(:official_tag)
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       official_tag = FactoryGirl.create(:official_tag)
       get :index
       expect(response).to redirect_to(admin_about_url)
@@ -57,11 +57,11 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
       get :show, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :show, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :show, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
     end
@@ -89,11 +89,11 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
       get :edit, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :edit, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :edit, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
     end
@@ -121,12 +121,12 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
       post :create, official_tag: official_tag
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       official_tag = FactoryGirl.attributes_for(:official_tag)
       post :create, official_tag: official_tag
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       official_tag = FactoryGirl.attributes_for(:official_tag)
       post :create, official_tag: official_tag
       expect(response).to redirect_to (admin_about_url)
@@ -148,11 +148,11 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
       get :new
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :new
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :new
       expect(response).to redirect_to(admin_about_url)
     end
@@ -173,12 +173,12 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
       put :update, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       official_tag = FactoryGirl.create(:official_tag)
       put :update, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       official_tag = FactoryGirl.create(:official_tag)
       put :update, id: official_tag.id
       expect(response).to redirect_to (admin_about_url)
