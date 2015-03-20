@@ -14,11 +14,11 @@ RSpec.describe Admin::MobileAppsController, type: :controller do
 			get :index
 			expect(response).to redirect_to(admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			get :index
 			expect(response).to redirect_to(admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			get :index
 			expect(response).to redirect_to(admin_about_url)
 		end
@@ -52,11 +52,11 @@ RSpec.describe Admin::MobileAppsController, type: :controller do
 			get :show, id: mobile_app.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			get :show, id: mobile_app.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			get :show, id: mobile_app.id
 			expect(response).to redirect_to (admin_about_url)
 		end
@@ -84,11 +84,11 @@ RSpec.describe Admin::MobileAppsController, type: :controller do
       		get :edit, id: mobile_app.id
       		expect(response).to redirect_to(admin_about_url)
 
-      		sign_in FactoryGirl.create(:limited_user)
+      		sign_in FactoryGirl.create(:user)
       		get :edit, id: mobile_app.id
       		expect(response).to redirect_to(admin_about_url)
 
-      		sign_in FactoryGirl.create(:full_user)
+      		sign_in FactoryGirl.create(:super_user)
       		get :edit, id: mobile_app.id
       		expect(response).to redirect_to(admin_about_url)
 		end
@@ -115,11 +115,11 @@ RSpec.describe Admin::MobileAppsController, type: :controller do
 			post :create, mobile_app: mobile_app
 			expect(response).to redirect_to(admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			post :create, mobile_app: mobile_app
 			expect(response).to redirect_to(admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			post :create, mobile_app: mobile_app
 			expect(response).to redirect_to(admin_about_url)
 		end
@@ -139,11 +139,11 @@ RSpec.describe Admin::MobileAppsController, type: :controller do
 			get :new
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			get :new
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			get :new
 			expect(response).to redirect_to (admin_about_url)
 	    end
@@ -164,12 +164,12 @@ RSpec.describe Admin::MobileAppsController, type: :controller do
 			put :update, id: mobile_app.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			mobile_app = FactoryGirl.create(:mobile_app)
 			put :update, id: mobile_app.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			mobile_app = FactoryGirl.create(:mobile_app)
 			put :update, id: mobile_app.id
 			expect(response).to redirect_to (admin_about_url)

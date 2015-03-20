@@ -1,6 +1,6 @@
 <div class = "row">
-	<div class="col-sm-12 col-md-12 main">
-		<h3><i class="fa fa-clock-o fa-fw"></i> Agency Info</h3>
+	<div class="col-sm-12 col-md-12">
+		<h1 class="page-header">Agency Info</h1>
 		<div class = "panel panel-default">
 			<div class = "panel-body">
 				<p>
@@ -17,16 +17,30 @@
 				  <strong>Info URL:</strong>
 				  <%= @agency.info_url %>
 				</p>
-				<div class = "buttonRow">
-					<%= link_to 'Back to Agencies', admin_agencies_path,{:class => "fa fa-angle-double-left"} %>
-					<%= link_to 'Edit', edit_admin_agency_path(@agency), {:class => "fa fa-pencil"} %> 
-				</div>
+
+				<dl class="dl-horizontal">
+
+          <dt>Social Media</dt>
+          <dd><%= @agency.draft_outlet_count%> (<%= @agency.published_outlet_count%> published)</dd>
+          <dt>Mobile Products</dt>
+          <dd><%= @agency.draft_mobile_app_count%> (<%= @agency.published_mobile_app_count%> published)</dd>
+          <dt>Galleries</dt>
+          <dd><%= @agency.draft_gallery_count%> (<%= @agency.published_gallery_count%> published)</dd>
+
+        </dl>
 			</div>
 		</div>
 	</div>
 </div>
-
-<div class = "row container col-sm-12 col-md-12">
+<div class="row">
+	<div class="col-sm-12 col-md-12">
+		<div class="buttonRow">
+			<%= link_to 'Back to Agencies', admin_agencies_path,{:class => "fa fa-angle-double-left"} %>
+			<%= link_to 'Edit', edit_admin_agency_path(@agency), {:class => "fa fa-pencil"} %> 
+		</div>
+	</div>
+</div>
+<div class = "row">
 	<div class="col-lg-4 col-sm-12 col-md-4">
     <h3><i class="fa fa-user"></i> Contacts</h3>
 		<div class="panel panel-default">

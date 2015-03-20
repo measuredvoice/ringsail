@@ -14,11 +14,11 @@ RSpec.describe Admin::SocialMediaController, type: :controller do
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :index
       expect(response).to redirect_to(admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :index
       expect(response).to redirect_to(admin_about_url)
     end
@@ -52,11 +52,11 @@ RSpec.describe Admin::SocialMediaController, type: :controller do
       get :show, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :show, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :show, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
     end
@@ -84,11 +84,11 @@ RSpec.describe Admin::SocialMediaController, type: :controller do
       get :edit, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       get :edit, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       get :edit, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
     end
@@ -128,12 +128,12 @@ RSpec.describe Admin::SocialMediaController, type: :controller do
       get :new
       expect(response).to render_template("new")
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       outlet = FactoryGirl.create(:outlet)
       get :new
       expect(response).to render_template("new")
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       outlet = FactoryGirl.create(:outlet)
       get :new
       expect(response).to render_template("new")
@@ -156,13 +156,13 @@ RSpec.describe Admin::SocialMediaController, type: :controller do
       expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
 
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       outlet = FactoryGirl.create(:outlet)
       outlet_attributes = FactoryGirl.attributes_for(:outlet)
       put :update, id: outlet.id, outlet: outlet_attributes
       expect(response).to redirect_to(admin_outlet_path(assigns(:outlet)))
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       outlet = FactoryGirl.create(:outlet)
       outlet_attributes = FactoryGirl.attributes_for(:outlet)
       put :update, id: outlet.id, outlet: outlet_attributes
@@ -192,12 +192,12 @@ RSpec.describe Admin::SocialMediaController, type: :controller do
       get :publish, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       outlet = FactoryGirl.create(:outlet)
       get :publish, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       outlet = FactoryGirl.create(:outlet)
       get :publish, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
@@ -219,12 +219,12 @@ RSpec.describe Admin::SocialMediaController, type: :controller do
       get :archive, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:limited_user)
+      sign_in FactoryGirl.create(:user)
       outlet = FactoryGirl.create(:outlet)
       get :archive, id: outlet.id
       expect(response).to redirect_to (admin_about_url)
 
-      sign_in FactoryGirl.create(:full_user)
+      sign_in FactoryGirl.create(:super_user)
       outlet = FactoryGirl.create(:outlet)
       get :archive, id: outlet.id
       expect(response).to redirect_to (admin_about_url)

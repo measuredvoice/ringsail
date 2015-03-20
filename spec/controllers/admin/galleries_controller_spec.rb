@@ -13,11 +13,11 @@ RSpec.describe Admin::GalleriesController, type: :controller do
 			get :index
 			expect(response).to redirect_to(admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			get :index
 			expect(response).to redirect_to(admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			get :index
 			expect(response).to redirect_to(admin_about_url)
 		end
@@ -51,11 +51,11 @@ RSpec.describe Admin::GalleriesController, type: :controller do
 			get :show, id: gallery.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			get :show, id: gallery.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			get :show, id: gallery.id
 			expect(response).to redirect_to (admin_about_url)
 		end
@@ -83,11 +83,11 @@ RSpec.describe Admin::GalleriesController, type: :controller do
 			get :edit, id: gallery.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			get :edit, id: gallery.id
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			get :edit, id: gallery.id
 			expect(response).to redirect_to (admin_about_url)
 		end
@@ -118,11 +118,11 @@ RSpec.describe Admin::GalleriesController, type: :controller do
 			post :create, gallery: gallery
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			post :create, gallery: gallery
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			post :create, gallery: gallery
 			expect(response).to redirect_to (admin_about_url)
 		end
@@ -142,11 +142,11 @@ RSpec.describe Admin::GalleriesController, type: :controller do
 			get :new
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:limited_user)
+			sign_in FactoryGirl.create(:user)
 			get :new
 			expect(response).to redirect_to (admin_about_url)
 
-			sign_in FactoryGirl.create(:full_user)
+			sign_in FactoryGirl.create(:super_user)
 			get :new
 			expect(response).to redirect_to (admin_about_url)
 		end
@@ -167,12 +167,12 @@ RSpec.describe Admin::GalleriesController, type: :controller do
 	  		put :update, id: gallery.id
 	  		expect(response).to redirect_to (admin_about_url)
 
-	  		sign_in FactoryGirl.create(:limited_user)
+	  		sign_in FactoryGirl.create(:user)
 	  		gallery = FactoryGirl.create(:gallery)
 	  		put :update, id: gallery.id
 	  		expect(response).to redirect_to (admin_about_url)
 
-	  		sign_in FactoryGirl.create(:full_user)
+	  		sign_in FactoryGirl.create(:super_user)
 	  		gallery = FactoryGirl.create(:gallery)
 	  		put :update, id: gallery.id
 	  		expect(response).to redirect_to (admin_about_url)

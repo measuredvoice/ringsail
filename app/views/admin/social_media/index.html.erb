@@ -61,14 +61,14 @@
 
             <tr class = "tablerow">
               <td class = "table_data"><%= outlet.agencies.map(&:name).join(', ').upcase %></td>
-              <td class = "table_data"><%= outlet.service %></td>
-              <td class = "table_data"><%= link_to outlet_organization_name(outlet), outlet.service_url, {target: "_blank"} %></td>
+          		<td class = "table_data"><%= outlet.service %></td>
+              <td class = "table_data"><%= outlet.organization %></td>
               <td class = "table_data">
                 <% outlet.official_tags.each do |tag| %>
                   <%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %>
                 <% end %>
               </td>
-              <td class = "table_data"><%= outlet.status.titleize %></td>
+              <td class="table_data"><%= outlet.status.titleize %></td>
               <td class = "table_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
 
               <td class = "table_data lastlinks">
