@@ -348,7 +348,7 @@ text-align: center;
 /*
  * Placeholder dashboard ideas
  */
-.tbldisplay{background-color: #fff;overflow: scroll; min-height: 200px;}
+.tbldisplay{background-color: #fff;overflow: scroll; min-height: 200px; height: 130%;}
 
 .placeholders {
   margin-bottom: 30px;
@@ -507,12 +507,15 @@ font-size: 14px;letter-spacing: 1px;}
 .buttonRow{padding:0 0 15px 15px;}
 
 /* per page controls */
-.per_page_form{position: relative; border-style:none; height:40px; right:0px; width:270px; top:0px; padding:0px; margin-left:5px;}
-.per_page_submit{width: 60px; height:27px;}
+.per-page-form{position: relative; border-style:none; height:40px; right:0px; width:270px; top:70px; padding:0px; margin-left:5px;}
+.per-page-submit{width: 60px; height:25px;}
 
 /* search */
-.admin_search_form {position: relative; border-style:none; height:40px; right:0px; width:330px; top:-40px; padding:0px; margin-left:560px; margin-right:0px;}
-.admin_search_submit{width: 60px; height:27px;}
+.admin-search-form {position: static; border-style:none; height:40px; right:0px; width:350px; top:-40px; padding:0px; margin-left:560px; margin-right:0px;}
+.admin-search-submit{width: 60px; height:25px; top:-20px;}
+.admin-search-group2 {position:absolute; top:70px; left:560px;}
+
+.paginated-results {position:relative; top:70px;}
 
 
 

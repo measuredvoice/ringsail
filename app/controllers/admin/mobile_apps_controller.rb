@@ -18,16 +18,24 @@ class Admin::MobileAppsController < Admin::AdminController
       @total_mobile_apps = @mobile_apps.count
     end
     num_items = items_per_page_handler    
+    @tagIDs = []
+    @tags = []
+    if params[:tag_tokens] && params[:tag_tokens] != ""
+      @tagIDs = params[:tag_tokens].split(',')        
+      @tagIDs.each do |t|    @tags << get_tag(t)    end 
+      @mobile_apps = @mobile_apps.joins(:official_tags).where("tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ?", tag_text(@tags[0]), tag_text(@tags[1]), tag_text(@tags[2]), tag_text(@tags[3]), tag_text(@tags[4]))
+    end    
     if params[:platform] && !params[:platform].blank?
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
     elsif params[:q] && !params[:q].blank?
       @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")    
+      @search_terms = params[:q]   
     end
-    @mobile_apps = @mobile_apps.order(sort_column + " " + sort_direction)
+    @mobile_apps = @mobile_apps.all.order("mobile_apps." + sort_column + " " + sort_direction)
 
     respond_to do |format|
       format.html { @mobile_apps = @mobile_apps.page(params[:page]).per(num_items) }
-      format.csv { send_data @mobile_apps.to_csv}
+      format.csv { send_data @mobile_apps.to_csv}      
     end
   end
 
@@ -177,5 +185,13 @@ class Admin::MobileAppsController < Admin::AdminController
         cookies[:per_page_count_mobile_registrations] = per_page_count
       end
       return per_page_count.to_i        
+    end    
+
+    def get_tag(tag_id)
+      !tag_id.nil? ? OfficialTag.find_by(id: tag_id) : nil
+    end
+
+    def tag_text(tag)
+      !tag.nil? ? tag.tag_text : nil 
     end    
 end
