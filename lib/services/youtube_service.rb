@@ -6,6 +6,10 @@ class YoutubeService < Service
   def self.shortname
     :youtube
   end
+
+  def self.longname
+    "YouTube"
+  end
   
   def display_name
     "#{account} on YouTube"
