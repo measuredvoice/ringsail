@@ -57,7 +57,10 @@ class User < ActiveRecord::Base
       when "Email-Address"
         self.email = value
       when "Org-Agency-Name"
-        self.agency = Agency.where("name LIKE ?","%#{value}%").first
+        @agency = Agency.where("name LIKE ?","%#{value}%").first
+        if @agency == nil
+          self.agency = Agency.create!(name: value)
+        end
       when "Phone"
         self.phone = value
       when "First-Name"
