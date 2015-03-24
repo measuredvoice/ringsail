@@ -127,7 +127,8 @@
 
       $("#gallery_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
         crossDomain: false,
-        prePopulate: tags
+        prePopulate: tags,
+      preventDuplicates: true
       });
       <% user_json = [] 
       @gallery.users.each do |user|
@@ -135,11 +136,13 @@
       end%>
       $("#gallery_user_tokens").tokenInput("/admin/users/tokeninput.json", {
         crossDomain: false,
-        prePopulate: <%= raw user_json.to_json %>
+        prePopulate: <%= raw user_json.to_json %>,
+      preventDuplicates: true
       });
       $("#gallery_agency_tokens").tokenInput("/admin/agencies/tokeninput.json", {
         crossDomain: false,
-        prePopulate: <%= raw @gallery.agencies.map(&:attributes).to_json %>
+        prePopulate: <%= raw @gallery.agencies.map(&:attributes).to_json %>,
+      preventDuplicates: true
       });
       $('#all_mobile_table').dataTable({
         "ajax":{

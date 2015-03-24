@@ -18,15 +18,17 @@
 
       <div class="col-xs-12 col-sm-12 col-md-10 ">
         <%= form_tag admin_outlets_path, method: :get, class: 'form-inline' do %>
-           <div class="form-group">
-          <% if params[:service] %>
-            <%= hidden_field_tag :hidden_service_value, params[:service] %>            
-          <% end %>            
-              <%= text_field_tag :tag_tokens, nil, value: ""  %>     </div>
           <div class="form-group">
-          <label>Items per page: </label>
-          <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) %>
-          <%= submit_tag "Update", class: 'hidden per-page-submit form-group-btn' %>    </div>
+            <% if params[:service] %>
+              <%= hidden_field_tag :hidden_service_value, params[:service] %>            
+            <% end %>            
+            <%= text_field_tag :tag_tokens, nil, value: ""  %>     
+          </div>
+          <div class="form-group">
+            <label>Items per page: </label>
+            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) %>
+            <%= submit_tag "Update", class: 'hidden per-page-submit form-group-btn' %>    
+          </div>
           <div class="form-group">     
 <!--            <%= label_tag(:q, "Search for:") %>            -->
             <%= text_field_tag(:q, params[:q], :placeholder => "Search") %>
@@ -94,21 +96,19 @@
     var tags = [];
     $("#tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,
-      prePopulate: tags
+      prePopulate: tags,
+      preventDuplicates: true
     });
 
     // Populate with tags selected before the page load.
     <% @tags.each_with_index do |t, i| %> 
-        add_tag("<%=t.id%>", "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
+        add_tag(<%=t.id%>, "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
     <% end %>
 
 
     function add_tag(id,name){
       $("#tag_tokens").tokenInput("add", {id: id, name: name});
     }    
-
-
-    window.onload = init;
 
   </script>
 <% end %>

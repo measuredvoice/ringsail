@@ -93,36 +93,17 @@
     var tags = [];
     $("#tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,
-      prePopulate: tags
+      prePopulate: tags,
+      preventDuplicates: true
     });
 
     // Populate with tags selected before the page load.
     <% @tags.each_with_index do |t, i| %> 
-        add_tag("<%=@tagIDs[i]%>", "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
+        add_tag(<%=@tagIDs[i]%>, "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
     <% end %>
-
-    function init() {
-      // Adjust token-input-list to fit layout for this page.
-      document.getElementsByClassName('token-input-list')[0].style.width='250%';
-      document.getElementsByClassName('token-input-list')[0].style.lineHeight='22px';      
-      document.getElementsByClassName('token-input-list')[0].style.minHeight='10px';  
-      document.getElementsByClassName('token-input-list')[0].style.position='relative';         
-      document.getElementsByClassName('token-input-list')[0].style.left='-555px';    
-      document.getElementsByClassName('token-input-list')[0].style.top='-35px';         
-
-      // The code below updates content for the token-input-input-token::before pseudo-element. 
-      $('head').append(document.createElement('style'));
-      var tagTokenStyleSheet = document.styleSheets[document.styleSheets.length-1];
-      var tagTokenRule = "ul.token-input-list .token-input-input-token::before { content: '\\f002  Add Tags Here'; }";
-      if (tagTokenStyleSheet.insertRule) { tagTokenStyleSheet.insertRule(tagTokenRule, tagTokenStyleSheet.cssRules.length); }
-    };
-
     function add_tag(id,name){
       $("#tag_tokens").tokenInput("add", {id: id, name: name});
     }    
-
-
-    window.onload = init;
 
   </script>
 <% end %>

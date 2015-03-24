@@ -63,7 +63,8 @@
   <script>
     $("#outlet_agency_tokens").tokenInput("/admin/agencies/tokeninput.json", {
       crossDomain: false,
-      prePopulate: <%= raw @outlet.agencies.map(&:attributes).to_json %>
+      prePopulate: <%= raw @outlet.agencies.map(&:attributes).to_json %>,
+      preventDuplicates: true
     });
 
     
@@ -74,7 +75,8 @@
     }
     $("#outlet_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,
-      prePopulate: tags
+      prePopulate: tags,
+      preventDuplicates: true
     });
     <% user_json = [] 
       @outlet.users.each do |user|
@@ -83,7 +85,8 @@
     %>
     $("#outlet_user_tokens").tokenInput("/admin/users/tokeninput.json", {
       crossDomain: false,
-      prePopulate: <%= raw user_json.to_json %>
+      prePopulate: <%= raw user_json.to_json %>,
+      preventDuplicates: true
     });
 
     $('#outlet_service').on("change",function(item){
