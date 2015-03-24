@@ -17,22 +17,19 @@
         </div>
 
         <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
-          <div style="height:40px;">
-            <%= form_tag admin_mobile_apps_path, method: :get, class: 'per-page-form' do %>
-              <label>Items per page: </label>
-              <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_mobile_registrations] || 25) %>
-              <%= submit_tag "Update", class: 'per-page-submit' %>    
-              <% if params[:platform] %>
-                <%= hidden_field_tag :hidden_platform_value, params[:platform] %>            
-              <% end %>            
-              <%= text_field_tag :tag_tokens, nil, value: ""  %>   
-              <div class="admin-search-group2">                               
-                <%= label_tag(:q, "Search for:") %>            
-                <%= text_field_tag(:q, @search_terms) %>
-                <%= submit_tag "Search", class: 'admin-search-submit' %>
-              </div>              
-            <% end %>    
-          </div>
+          <%= form_tag admin_mobile_apps_path, method: :get, class: 'per-page-form' do %>
+            <label>Items per page: </label>
+            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_mobile_registrations] || 25) %>
+            <% if params[:platform] %>
+              <%= hidden_field_tag :hidden_platform_value, params[:platform] %>            
+            <% end %>            
+            <%= text_field_tag :tag_tokens, nil, value: ""  %>   
+            <div class="admin-search-group2">                               
+              <%= label_tag(:q, "Search for:") %>            
+              <%= text_field_tag(:q, @search_terms) %>
+              <%= submit_tag "Update", class: 'admin-search-submit' %>
+            </div>              
+          <% end %> 
           <div class="paginated-results">   
             <div>                                                         
               <%= paginate @mobile_apps %>

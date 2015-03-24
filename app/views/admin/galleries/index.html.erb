@@ -3,16 +3,12 @@
     <h1 class="page-header">Galleries</h1>
     <div class="row placeholders">
       <div class="col-sm-12">
-        <div style="height:40px;">
           <%= form_tag admin_galleries_path, method: :get, class: 'per-page-form' do %>
             <label>Items per page: </label>
             <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_galleries] || 25) %>
-            <%= submit_tag "Update", class: 'per-page-submit' %>              
-          <% end %>    
-          <%= form_tag admin_galleries_path, class: 'admin-search-form', method: "get", style: "margin-left:740px;" do %>
             <%= label_tag(:q, "Search for:") %>            
             <%= text_field_tag(:q) %>
-            <%= submit_tag "Search", class: 'admin-search-submit' %>
+            <%= submit_tag "Update", class: 'admin-search-submit' %>
           <% end %>          
         </div>
         <div class="paginated-results">           
