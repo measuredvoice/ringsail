@@ -2,7 +2,7 @@
   <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Social Media Accounts</h1>
     <div class="row placeholders">
-      <div class="col-xs-12 col-sm-3 col-md-2 verticalTabsWrap">
+      <div class="col-xs-12 col-sm-12 col-md-2 verticalTabsWrap">
         <div class="list-group verticalTabs">
           <%= link_to admin_outlets_path, {class: "list-group-item verticalTabs-item #{"active" if params[:service].nil? }"} do %>
             All         
@@ -16,19 +16,21 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
-        <%= form_tag admin_outlets_path, method: :get, class: 'per-page-form admin-search-form' do %>
-          <label>Items per page: </label>
-          <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) %>
-          <%= submit_tag "Update", class: 'per-page-submit' %>    
+      <div class="col-xs-12 col-sm-12 col-md-10 ">
+        <%= form_tag admin_outlets_path, method: :get, class: 'form-inline' do %>
+           <div class="form-group">
           <% if params[:service] %>
             <%= hidden_field_tag :hidden_service_value, params[:service] %>            
           <% end %>            
-          <%= text_field_tag :tag_tokens, nil, value: ""  %>     
-          <div class="admin-search-group2">     
-            <%= label_tag(:q, "Search for:") %>            
-            <%= text_field_tag(:q, params[:q]) %>
-            <%= submit_tag "Search", class: 'admin-search-submit' %>
+              <%= text_field_tag :tag_tokens, nil, value: ""  %>     </div>
+          <div class="form-group">
+          <label>Items per page: </label>
+          <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) %>
+          <%= submit_tag "Update", class: 'hidden per-page-submit form-group-btn' %>    </div>
+          <div class="form-group">     
+<!--            <%= label_tag(:q, "Search for:") %>            -->
+            <%= text_field_tag(:q, params[:q], :placeholder => "Search") %>
+            <%= submit_tag "Update", class: 'admin-search-submit form-group-btn' %>
           </div>
         <% end %> 
         <div class="paginated-results">   

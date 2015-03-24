@@ -2,13 +2,16 @@
   <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Galleries</h1>
     <div class="row placeholders">
-      <div class="col-sm-12">
-          <%= form_tag admin_galleries_path, method: :get, class: 'per-page-form' do %>
+      <div class="col-xs-12 col-sm-12 col-md-12">
+          <%= form_tag admin_galleries_path, method: :get, class: 'form-inline' do %>
+          <div class="form-group">
             <label>Items per page: </label>
-            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_galleries] || 25) %>
-            <%= label_tag(:q, "Search for:") %>            
-            <%= text_field_tag(:q) %>
-            <%= submit_tag "Update", class: 'admin-search-submit' %>
+            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_galleries] || 25) %></div>
+          <div class="form-group">
+<!--            <%= label_tag(:q, "Search for:") %>            -->
+             <%= text_field_tag(:q, params[:q], :placeholder => "Search") %>
+            <%= submit_tag "Update", class: 'admin-search-submit form-group-btn' %>
+          </div>
           <% end %>          
         </div>
         <div class="paginated-results">           

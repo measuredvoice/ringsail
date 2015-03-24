@@ -32,6 +32,29 @@ ul.token-input-list .token-input-input-token::before .token-input-input-token.yo
     color: #ccc;
     font-size: 13px;
 }
+.form-group label{
+    font-weight: 300;
+}
+.form-inline select{
+    height: 35px;
+    border: solid 1px #ddd;
+}
+.form-group ul.token-input-list li input{
+    width:280px!important;
+}
+.form-group .token-input-list{
+width:auto!important;
+    position: relative;
+    top:0!important;
+    left:0!important;
+}
+.form-group ul.token-input-list{
+    line-height: 35px!important;
+    min-height:35px; 
+}
+.form-group div.field ul.token-input-focused{
+    width:300px!important;
+}
 div.field ul.token-input-focused .token-input-input-token::before{
     font-family: 'FontAwesome';
     content: "";
