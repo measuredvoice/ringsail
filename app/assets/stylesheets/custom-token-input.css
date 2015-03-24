@@ -10,24 +10,31 @@ ul.token-input-list {
     border: 1px solid #ddd;
     cursor: text;
     font-size: 12px;
-   font-family: Trebuchet,Tahoma,sans-serif;
+    font-family: Trebuchet,Tahoma,sans-serif;
     z-index: 999;
     margin: 0;
     padding: 0;
     background-color: #fafafa;
     list-style-type: none;
-    clear: left;line-height: 32px;
+    clear: left;line-height: 52px;
 }
 ul.token-input-list .token-input-input-token::before{
-     font-family: 'FontAwesome';
-    content:"\f002   Type Your Search Term";
+    font-family: 'FontAwesome';
+    content:"\f002   Type Your Search Terms";
+    padding:0 5px 0 15px;  
+    color: #ccc;
+    font-size: 13px;
+}
+ul.token-input-list .token-input-input-token::before .token-input-input-token.yoman::before{
+    font-family: 'FontAwesome';
+    content:"\f002   Add Tags here";
     padding:0 5px 0 15px;  
     color: #ccc;
     font-size: 13px;
 }
 div.field ul.token-input-focused .token-input-input-token::before{
-     font-family: 'FontAwesome';
-     content: "";
+    font-family: 'FontAwesome';
+    content: "";
     padding:0 5px 0 15px;  
     color: #ccc;
     font-size: 13px;

@@ -8,7 +8,8 @@ class Admin::SocialMediaController < Admin::AdminController
   before_filter :require_admin, only: [:publish]
   # GET /outlets
   # GET /outlets.json
-  def index
+  def index    
+    @outlet = Outlet.first
     if current_user.cross_agency?
       @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
       @services = Outlet.all.group(:service).count
@@ -21,8 +22,16 @@ class Admin::SocialMediaController < Admin::AdminController
     if(params[:service])
       @outlets = @outlets.where(service: params[:service]).order(sort_column + " " + sort_direction)
     end
+    @tagIDs = []
+    @tags = []
+    if params[:tag_tokens] && params[:tag_tokens] != ""
+      @tagIDs = params[:tag_tokens].split(',')        
+      @tagIDs.each do |t|    @tags << get_tag(t)    end 
+      @outlets = @outlets.joins(:official_tags).where("tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ?", tag_text(@tags[0]), tag_text(@tags[1]), tag_text(@tags[2]), tag_text(@tags[3]), tag_text(@tags[4]))
+    end
     if params[:q] && params[:q] != ""
       @outlets = @outlets.where("account LIKE ? OR service_url LIKE ? OR organization LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
+      @search_terms = params[:q]
     else
       @outlets = @outlets.all.order(sort_column + " " + sort_direction)
     end
@@ -179,4 +188,13 @@ class Admin::SocialMediaController < Admin::AdminController
       end
       return per_page_count.to_i        
     end
+
+    def get_tag(tag_id)
+      !tag_id.nil? ? OfficialTag.find_by(id: tag_id) : nil
+    end
+
+    def tag_text(tag)
+      !tag.nil? ? tag.tag_text : nil 
+    end
+
 end

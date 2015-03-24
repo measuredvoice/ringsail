@@ -4,61 +4,63 @@
     <div class="row placeholders">
       <div class="col-sm-12">
         <div style="height:40px;">
-          <%= form_tag admin_galleries_path, method: :get, class: 'per_page_form' do %>
+          <%= form_tag admin_galleries_path, method: :get, class: 'per-page-form' do %>
             <label>Items per page: </label>
             <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_galleries] || 25) %>
-            <%= submit_tag "Update", class: 'per_page_submit' %>              
+            <%= submit_tag "Update", class: 'per-page-submit' %>              
           <% end %>    
-          <%= form_tag admin_galleries_path, class: 'admin_search_form', method: "get", style: "margin-left:740px;" do %>
+          <%= form_tag admin_galleries_path, class: 'admin-search-form', method: "get", style: "margin-left:740px;" do %>
             <%= label_tag(:q, "Search for:") %>            
             <%= text_field_tag(:q) %>
-            <%= submit_tag "Search", class: 'admin_search_submit' %>
+            <%= submit_tag "Search", class: 'admin-search-submit' %>
           <% end %>          
         </div>
-        <div>                
-          <%= paginate @galleries %>
-          <%= page_entries_info @galleries %> 
-          <text>
-            <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
-            Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
-          </text>
-        </div>
-        <table class="table table-striped">
-        <thead>
-        <tr>
-          <th>Agency</th>
-          <th><%= sortable "name", "Name" %></th>
-          <th>Number of Social Media Accounts</th>
-          <th>Number of Mobile Products</th>
-          <th><%= sortable "updated_at", "Updated At:" %></th>
-          <th class = "lastlinks">Actions</th>
-        </tr>
-        </thead>
+        <div class="paginated-results">           
+          <div>                
+            <%= paginate @galleries %>
+            <%= page_entries_info @galleries %> 
+            <text>
+              <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
+              Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
+            </text>
+          </div>
+          <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>Agency</th>
+            <th><%= sortable "name", "Name" %></th>
+            <th>Number of Social Media Accounts</th>
+            <th>Number of Mobile Products</th>
+            <th><%= sortable "updated_at", "Updated At:" %></th>
+            <th class = "lastlinks">Actions</th>
+          </tr>
+          </thead>
 
-        <tbody>
-        <% @galleries.each do |gallery| %>
-        	<tr class = "tablerow">
-            <td class = "outlet_data"><%= gallery.agencies.map(&:name).join(', ').upcase %></td>
-        	  <td class = "outlet_data"><%= gallery.name %></td>
-            <td class = "outlet_data"><%= gallery.outlets.count %></td>
-        	  <td class = "outlet_data"><%= gallery.mobile_apps.count %></td>
-            <td class = "outlet_data"><%= gallery.updated_at.strftime("%B %e, %Y %H:%M") %></td>
-            <td class = "outlet_data lastlinks">
-              <ul class = "gly">
-                <li><%= link_to admin_gallery_path(gallery) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
-                <li><%= link_to edit_admin_gallery_path(gallery) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
-              </ul>
-            </td>   
-        	</tr>
-        <% end %>
-        </tbody>
-        </table>
-        <div>
-          <text>
-            <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
-            Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
-          </text>
-          <%= paginate @galleries %>
+          <tbody>
+          <% @galleries.each do |gallery| %>
+          	<tr class = "tablerow">
+              <td class = "outlet_data"><%= gallery.agencies.map(&:name).join(', ').upcase %></td>
+        	    <td class = "outlet_data"><%= gallery.name %></td>
+              <td class = "outlet_data"><%= gallery.outlets.count %></td>
+          	  <td class = "outlet_data"><%= gallery.mobile_apps.count %></td>
+              <td class = "outlet_data"><%= gallery.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+              <td class = "outlet_data lastlinks">
+                <ul class = "gly">
+                  <li><%= link_to admin_gallery_path(gallery) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
+                  <li><%= link_to edit_admin_gallery_path(gallery) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
+                </ul>
+             </td>   
+        	 </tr>
+          <% end %>
+          </tbody>
+          </table>
+          <div>
+            <text>
+              <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
+              Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
+            </text>
+            <%= paginate @galleries %>
+          </div>
         </div>
       </div>
     </div>
