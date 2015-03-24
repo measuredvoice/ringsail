@@ -13,11 +13,12 @@ puts "Adding agencies with count of #{AGENCIES_NUM}"
 agencie_names = ["Department of Mysteries", 
 	"Department of Magical Accidents and Catastrophes",
 	"Department of Magical Transportation"]
+agency_acronyms = ["DM", "DMAC", "DMT"]
 (1..AGENCIES_NUM).each do |agency_number|
 	name = "Department of #{Faker::Commerce.department(2, true)}"
 	Agency.create!({
 		name: agencie_names[agency_number-1] ,
-		shortname: agencie_names[agency_number-1].split(" ").map{|w| w[0,1].capitalize }.join.gsub!(/\W+/, ''),
+		shortname: agency_acronyms[agency_number-1],
 		info_url: Faker::Internet.url
 	})
 end

@@ -47,10 +47,10 @@
         <table class="table table-striped">
           <thead>
             <tr>
+              <th> Department</th>
               <th><%= sortable "service_url", "Service" %></th>
               <th><%= sortable "organization", "Social Media Account " %></th>
               <th> Tags</th>
-              <th><%= sortable "status", "Status" %></th>
               <th><%= sortable "updated_at", "Updated at" %></th>
               <th class = "lastlinks">Actions</th>
             </tr>
@@ -59,14 +59,22 @@
             <% @outlets.each do |outlet| %>
 
             <tr class = "tablerow">
+              <td class = "table_data">
+                <ul>
+                  <% outlet.agencies.each do |agency| %>
+                    <li><%= agency.shortname %></li>
+                  <% end %>
+                </ul>
+              </td>
           		<td class = "table_data"><%= outlet.service %></td>
               <td class = "table_data"><%= outlet.organization %></td>
               <td class = "table_data">
+                <ul>
                 <% outlet.official_tags.each do |tag| %>
-                  <%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %>
+                  <li><%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %></li>
                 <% end %>
+                </ul>
               </td>
-              <td class="table_data"><%= outlet.status.titleize %></td>
               <td class = "table_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
 
               <td class = "table_data lastlinks">
