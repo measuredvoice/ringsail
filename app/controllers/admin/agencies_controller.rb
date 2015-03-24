@@ -22,12 +22,13 @@ class Admin::AgenciesController < Admin::AdminController
   end
 
   def show
-  end
-
-  def edit
     if @agency
       @agency = Agency.where(:id=> @agency.id).includes(:outlets,:mobile_apps,:galleries).first
     end
+  end
+
+  def edit
+    
   end
 
   def create
