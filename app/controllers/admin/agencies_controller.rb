@@ -26,7 +26,7 @@ class Admin::AgenciesController < Admin::AdminController
 
   def edit
     if @agency
-      @agency = Agency.where(:id=> @official_tag.id).includes(:outlets,:mobile_apps,:galleries).first
+      @agency = Agency.where(:id=> @agency.id).includes(:outlets,:mobile_apps,:galleries).first
     end
   end
 
