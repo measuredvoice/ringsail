@@ -30,7 +30,9 @@ class Admin::OfficialTagsController < Admin::AdminController
   end
 
   def show
-  
+    if @official_tag
+      @official_tag = OfficialTag.where(:id=> @official_tag.id).includes(:outlets,:mobile_apps,:galleries).first
+    end
   end
   
 

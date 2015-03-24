@@ -25,8 +25,6 @@
               <% if params[:platform] %>
                 <%= hidden_field_tag :hidden_platform_value, params[:platform] %>            
               <% end %>            
-            <% end %>   
-            <%= form_tag admin_mobile_apps_path, class: 'admin-search-form', method: "get" do %>
               <%= text_field_tag :tag_tokens, nil, value: ""  %>   
               <div class="admin-search-group2">                               
                 <%= label_tag(:q, "Search for:") %>            
@@ -47,7 +45,6 @@
             <table class="table table-striped">
             <thead>
             <tr>
-              <th>Agency</th>
               <th><%= sortable "name", "Name" %></th>
               <th>Tags</th>
               <th><%= sortable "status", "Status" %></th>
@@ -58,7 +55,6 @@
             <tbody>
             <% @mobile_apps.each do |app| %>
             	<tr class = "tablerow">
-                <td class = "table_data"><%= app.agencies.map(&:name).join(', ').upcase %></td>
             	  <td class = "table_data"><%= app.name %></td>
                 <td class = "table_data">
                   <% app.official_tags.each do |tag| %>

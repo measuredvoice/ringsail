@@ -18,19 +18,17 @@
 
       <div class="col-xs-12 col-sm-9 col-md-10 tbldisplay">
         <div style="height:40px;">
-          <%= form_tag admin_outlets_path, method: :get, class: 'per-page-form' do %>
+          <%= form_tag admin_outlets_path, method: :get, class: 'per-page-form admin-search-form' do %>
             <label>Items per page: </label>
             <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) %>
             <%= submit_tag "Update", class: 'per-page-submit' %>    
             <% if params[:service] %>
               <%= hidden_field_tag :hidden_service_value, params[:service] %>            
             <% end %>            
-          <% end %>            
-          <%= form_tag admin_outlets_path, class: 'admin-search-form', method: "get" do %>
             <%= text_field_tag :tag_tokens, nil, value: ""  %>     
             <div class="admin-search-group2">     
               <%= label_tag(:q, "Search for:") %>            
-              <%= text_field_tag(:q, @search_terms) %>
+              <%= text_field_tag(:q, params[:q]) %>
               <%= submit_tag "Search", class: 'admin-search-submit' %>
             </div>
           <% end %>                    
@@ -47,7 +45,6 @@
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Agency</th>
               <th><%= sortable "service_url", "Service" %></th>
               <th><%= sortable "organization", "Social Media Account " %></th>
               <th> Tags</th>
@@ -60,7 +57,6 @@
             <% @outlets.each do |outlet| %>
 
             <tr class = "tablerow">
-              <td class = "table_data"><%= outlet.agencies.map(&:name).join(', ').upcase %></td>
           		<td class = "table_data"><%= outlet.service %></td>
               <td class = "table_data"><%= outlet.organization %></td>
               <td class = "table_data">
@@ -103,24 +99,9 @@
 
     // Populate with tags selected before the page load.
     <% @tags.each_with_index do |t, i| %> 
-        add_tag("<%=@tagIDs[i]%>", "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
+        add_tag("<%=t.id%>", "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
     <% end %>
 
-    function init() {
-      // Adjust token-input-list to fit layout for this page.
-      document.getElementsByClassName('token-input-list')[0].style.width='250%';
-      document.getElementsByClassName('token-input-list')[0].style.lineHeight='22px';      
-      document.getElementsByClassName('token-input-list')[0].style.minHeight='10px';  
-      document.getElementsByClassName('token-input-list')[0].style.position='relative';         
-      document.getElementsByClassName('token-input-list')[0].style.left='-555px';    
-      document.getElementsByClassName('token-input-list')[0].style.top='-35px';         
-
-      // The code below updates content for the token-input-input-token::before pseudo-element. 
-      $('head').append(document.createElement('style'));
-      var tagTokenStyleSheet = document.styleSheets[document.styleSheets.length-1];
-      var tagTokenRule = "ul.token-input-list .token-input-input-token::before { content: '\\f002  Add Tags Here'; }";
-      if (tagTokenStyleSheet.insertRule) { tagTokenStyleSheet.insertRule(tagTokenRule, tagTokenStyleSheet.cssRules.length); }
-    };
 
     function add_tag(id,name){
       $("#tag_tokens").tokenInput("add", {id: id, name: name});

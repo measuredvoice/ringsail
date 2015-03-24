@@ -25,7 +25,9 @@ class Admin::AgenciesController < Admin::AdminController
   end
 
   def edit
-
+    if @agency
+      @agency = Agency.where(:id=> @official_tag.id).includes(:outlets,:mobile_apps,:galleries).first
+    end
   end
 
   def create

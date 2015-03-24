@@ -14,7 +14,7 @@ class Admin::SocialMediaController < Admin::AdminController
       @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
       @services = Outlet.all.group(:service).count
     else
-      @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
+      @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags,:agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
       @services = @outlets.group(:service).count
     end
     num_items = items_per_page_handler
@@ -22,18 +22,13 @@ class Admin::SocialMediaController < Admin::AdminController
     if(params[:service])
       @outlets = @outlets.where(service: params[:service]).order(sort_column + " " + sort_direction)
     end
-    @tagIDs = []
     @tags = []
     if params[:tag_tokens] && params[:tag_tokens] != ""
-      @tagIDs = params[:tag_tokens].split(',')        
-      @tagIDs.each do |t|    @tags << get_tag(t)    end 
-      @outlets = @outlets.joins(:official_tags).where("tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ?", tag_text(@tags[0]), tag_text(@tags[1]), tag_text(@tags[2]), tag_text(@tags[3]), tag_text(@tags[4]))
+      @tags = OfficialTag.where(:id => params[:tag_tokens].split(','))
+      @outlets = @outlets.joins(:official_tags).where("official_tags.id" => params[:tag_tokens].split(","))
     end
     if params[:q] && params[:q] != ""
       @outlets = @outlets.where("account LIKE ? OR service_url LIKE ? OR organization LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
-      @search_terms = params[:q]
-    else
-      @outlets = @outlets.all.order(sort_column + " " + sort_direction)
     end
 
     respond_to do |format|

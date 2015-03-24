@@ -1,6 +1,5 @@
 json.set! :id, agency.id
 json.set! :name, agency.name
-json.set! :acronym, agency.shortname
 json.set! :info_url, agency.info_url
 json.set! :mobile_app_count, agency.published_mobile_app_count
 json.set! :social_media_count, agency.published_outlet_count

@@ -7,12 +7,6 @@
 				  <strong>Agency Name:</strong>
 				  <%= @agency.name %>
 				</p>
-
-				<p>
-				  <strong>Short Name:</strong>
-				  <%= @agency.shortname %>
-				</p>
-
 				<p>
 				  <strong>Info URL:</strong>
 				  <%= @agency.info_url %>
@@ -41,7 +35,7 @@
 	</div>
 </div>
 <div class = "row">
-	<div class="col-lg-4 col-sm-12 col-md-4">
+	<div class="col-lg-3 col-sm-12 col-md-3">
     <h3><i class="fa fa-user"></i> Contacts</h3>
 		<div class="panel panel-default">
 	  	<div class="panel-body">
@@ -54,4 +48,46 @@
 	  	</div>
 		</div>
 	</div>
+	<div class="col-lg-3 col-sm-12 col-md-3">
+    <h3>Social Media Accounts</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @agency.outlets.each do |outlet| %>
+            <li class="list-group-item">
+              <%= link_to outlet.organization, admin_outlet_path(outlet) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-12 col-md-3">
+    <h3>Mobile Apps</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @agency.mobile_apps.each do |mobile_app| %>
+            <li class="list-group-item">
+              <%= link_to mobile_app.name, admin_mobile_app_path(mobile_app) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-3 col-sm-12 col-md-3">
+    <h3>Galleries</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @agency.galleries.each do |gallery| %>
+            <li class="list-group-item">
+              <%= link_to gallery.name, admin_gallery_path(gallery) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

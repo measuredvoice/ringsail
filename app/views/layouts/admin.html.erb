@@ -48,7 +48,7 @@
 		            <% if current_user.admin? %>
 		            <li><%= link_to "Social Media Accounts Activity", activities_admin_outlets_path %></li>
 		            <% end %>
-		            <li><%= link_to "Add an Account", new_admin_outlet_path %></li>
+		            <li><%= link_to "Add a Social Media Account", new_admin_outlet_path %></li>
 		        </ul>
 	        </li>
 	        <li class = "<%= "active" if request.original_url.include? "admin/mobile_apps" %>">
