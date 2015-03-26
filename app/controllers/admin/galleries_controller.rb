@@ -22,7 +22,7 @@ class Admin::GalleriesController < Admin::AdminController
 
     respond_to do |format|
       format.html { @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(num_items) }
-      format.csv { send_data @gallerys.to_csv }
+      format.csv { send_data @galleries.to_csv }
     end
   end
 

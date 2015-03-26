@@ -26,7 +26,6 @@
             <%= page_entries_info @galleries %> 
             <text>
               <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
-              Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
             </text>
           </div>
           <table class="table table-striped">
@@ -68,7 +67,6 @@
           <div>
             <text>
               <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
-              Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
             </text>
             <%= paginate @galleries %>
           </div>
