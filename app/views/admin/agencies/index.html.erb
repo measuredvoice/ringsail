@@ -9,12 +9,12 @@
           <%= submit_tag "Update", class: 'per-page-submit form-group-btn' %>    
         </div>    
       <% end %>       
-      <%=paginate @agencies%>
+      <%= paginate @agencies %>
       <%= page_entries_info @agencies %> 
       <table id="agency" class="table table-striped" >
     		<thead>
           <tr class = "agency_row">
-            <th><%= sortable "name", "Agency Name" %></th>=
+            <th><%= sortable "name", "Agency Name" %></th>
             <th><%= sortable "draft_outlets_count", "# of Social Accounts (published)" %></th>
             <th><%= sortable "draft_mobile_apps_count", "# of Apps (published)" %></th>
             <th><%= sortable "draft_galleries_count", "# of Galleries (published)" %></th>

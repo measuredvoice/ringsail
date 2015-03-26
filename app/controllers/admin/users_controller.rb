@@ -9,7 +9,11 @@ class Admin::UsersController < Admin::AdminController
   # GET /users.json
   def index
     num_items = items_per_page_handler        
-    @users = User.all.order(sort_column + " " + sort_direction).page(params[:page]).per(num_items)
+    @users = User.all
+    if !params[:agency].blank?
+      @users = @users.where(agency: params[:agency])
+    end
+    @users = @users.order(sort_column + " " + sort_direction).page(params[:page]).per(num_items)
   end
 
   # GET /users/1
