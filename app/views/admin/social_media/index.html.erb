@@ -75,7 +75,7 @@
           		<td class = "table_data"><%= outlet.service %></td>
               <td class = "table_data"><%= outlet.organization %></td>
               <td class = "table_data">
-                <ul>
+                <ul class="table_list">
                 <% outlet.official_tags.each do |tag| %>
                   <li><%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %></li>
                 <% end %>
