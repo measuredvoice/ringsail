@@ -109,13 +109,13 @@ class Admin::GalleriesController < Admin::AdminController
 
   def request_publish
     @gallery.publish_requested!
-    @gallery.build_admin_notifications(:publish_requested)
+    @gallery.build_notifications(:publish_requested)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be published."
   end
 
   def request_archive
     @gallery.archive_requested!
-    @gallery.build_admin_notifications(:archive_requested)
+    @gallery.build_notifications(:archive_requested)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be archived."
   end
 

@@ -141,13 +141,13 @@ class Admin::SocialMediaController < Admin::AdminController
 
   def request_publish
     @outlet.publish_requested!
-    @outlet.build_admin_notifications(:publish_requested)
+    @outlet.build_notifications(:publish_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be published."
   end
 
   def request_archive
     @outlet.archive_requested!
-    @outlet.build_admin_notifications(:archive_requested)
+    @outlet.build_notifications(:archive_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be archived."
   end
 

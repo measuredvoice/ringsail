@@ -138,13 +138,13 @@ class Admin::MobileAppsController < Admin::AdminController
 
   def request_publish
     @mobile_app.publish_requested!
-    @mobile_app.build_admin_notifications(:publish_requested)
+    @mobile_app.build_notifications(:publish_requested)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be published."
   end
 
   def request_archive
     @mobile_app.archive_requested!
-    @mobile_app.build_admin_notifications(:archive_requested)
+    @mobile_app.build_notifications(:archive_requested)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be archived."
   end
 
