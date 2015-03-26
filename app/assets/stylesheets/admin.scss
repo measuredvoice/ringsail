@@ -20,6 +20,9 @@
   padding: 0;
   margin: 0;
 }
+.td{
+  word-wrap: break-word;
+}
 body {
   padding-top: 50px;
     font-family: Trebuchet,Tahoma,sans-serif;
@@ -392,9 +395,6 @@ text-align: center;
 .table_data{    
   max-width:100px;
   max-height: 20px;
-  text-overflow: ellipsis;
-  overflow: hidden; 
-  white-space: nowrap;
   font-size: .93em;
 }
 ul.gly{
