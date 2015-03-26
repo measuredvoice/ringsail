@@ -86,9 +86,7 @@ class Gallery < ActiveRecord::Base
     		  			item_id: item["id"],
     		  			item_type: item["class"],
                 item_order: index
-    		  		}) if !GalleryItem.find_by(gallery_id: id, item_id: item["id"], item_type: item["class"])
-    		  		mobile_ids << item["id"] if item["class"] == "MobileApp"
-              social_ids << item["id"] if item["class"] == "Outlet"
+    		  		})
     		  	else
               # This error occurs if an invalid id is provided, generally should only be found by devs
     		  		self.errors.add(:base, "Couldn't find item to add to gallery")
@@ -98,8 +96,6 @@ class Gallery < ActiveRecord::Base
     	  		self.errors.add(:base, "A gallery item was of the wrong class")
     	  	end
       	end
-        GalleryItem.where(gallery_id: id).where("item_id NOT IN (?) AND item_type = 'MobileApp'", mobile_ids).destroy_all
-        GalleryItem.where(gallery_id: id).where("item_id NOT IN (?) AND item_type = 'Outlet'", social_ids).destroy_all
       else
         GalleryItem.where(gallery_id: id).destroy_all
       end
