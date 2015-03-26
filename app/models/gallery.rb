@@ -78,6 +78,7 @@ class Gallery < ActiveRecord::Base
       if gallery_list.count != 0
         mobile_ids = []
         social_ids = []
+        gallery_items.destroy_all
       	gallery_list.each_with_index do |item,index|
       		if ["MobileApp","Outlet"].include? item["class"]
       			if item["class"].constantize.find(item["id"])
