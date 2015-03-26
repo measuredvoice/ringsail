@@ -12,6 +12,9 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet = Outlet.first
     if current_user.cross_agency?
       @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      if !params[:agency].blank?
+         @outlets = @outlets.where("agencies.id" => params[:agency])
+      end 
       @services = Outlet.all.group(:service).count
     else
       @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags,:agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq

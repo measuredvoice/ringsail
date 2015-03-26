@@ -10,6 +10,9 @@ class Admin::MobileAppsController < Admin::AdminController
   def index
     if current_user.cross_agency?
       @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      if !params[:agency].blank?
+         @mobile_apps = @mobile_apps.where("agencies.id" => params[:agency])
+      end
       @platform_counts = @mobile_apps.platform_counts
       @total_mobile_apps = @mobile_apps.count
     else
