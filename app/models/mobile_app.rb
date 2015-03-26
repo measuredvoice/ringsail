@@ -105,6 +105,7 @@ class MobileApp < ActiveRecord::Base
       ma.mobile_app_versions << MobileAppVersion.new(mav.attributes.except!("id","mobile_app_id"))
     end
     ma.save(validate: false)
+    self.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :published
   end

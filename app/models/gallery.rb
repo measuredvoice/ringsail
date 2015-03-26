@@ -117,6 +117,7 @@ class Gallery < ActiveRecord::Base
      new_gallery.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
     end
     new_gallery.save(validate: false)
+    self.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :published
   end
