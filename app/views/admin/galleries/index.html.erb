@@ -26,6 +26,7 @@
           <table class="table table-striped">
           <thead>
           <tr>
+            <th>Department</th>
             <th><%= sortable "name", "Name" %></th>
             <th>Number of Social Media Accounts</th>
             <th>Number of Mobile Products</th>
@@ -37,6 +38,13 @@
           <tbody>
           <% @galleries.each do |gallery| %>
           	<tr class = "tablerow">
+              <td class = "outlet_data">
+                <ul class="table_list">
+                  <% gallery.agencies.each do |agency| %>
+                    <li><%= agency.name %></li>
+                  <% end %>
+                </ul>
+              </td>
         	    <td class = "outlet_data"><%= gallery.name %></td>
               <td class = "outlet_data"><%= gallery.outlets.count %></td>
           	  <td class = "outlet_data"><%= gallery.mobile_apps.count %></td>
