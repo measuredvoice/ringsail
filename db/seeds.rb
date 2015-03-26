@@ -1,24 +1,24 @@
 PublicActivity.enabled = false
 DatabaseCleaner.clean_with :truncation
 
-AGENCIES_NUM = 3
-USERS_NUM = 5 #users will always make a minimum of 4 (one for each role)
-TAGS_NUM = 6
+AGENCIES_NUM = 100
+USERS_NUM = 100 #users will always make a minimum of 4 (one for each role)
+TAGS_NUM = 100
 OUTLETS_NUM = 100 # was 40
 APPS_NUM = 100 # was 40
 GALLERIES_NUM = 100 
 
 
 puts "Adding agencies with count of #{AGENCIES_NUM}"
-agencie_names = ["Department of Mysteries", 
+agency_names = ["Department of Mysteries", 
 	"Department of Magical Accidents and Catastrophes",
 	"Department of Magical Transportation"]
 agency_acronyms = ["DM", "DMAC", "DMT"]
 (1..AGENCIES_NUM).each do |agency_number|
 	name = "Department of #{Faker::Commerce.department(2, true)}"
 	Agency.create!({
-		name: agencie_names[agency_number-1] ,
-		shortname: agency_acronyms[agency_number-1],
+		name: agency_names[rand(0..agency_names.size-1)],
+		shortname: agency_acronyms[rand(0..agency_acronyms.size-1)],
 		info_url: Faker::Internet.url
 	})
 end
@@ -64,7 +64,7 @@ tag_names = [
  ]
 (1..TAGS_NUM).each do |tag_number|
 	OfficialTag.create!({
-		tag_text: tag_names[tag_number-1]
+		tag_text: tag_names[rand(0..tag_names.size-1)] + " " + Faker::Lorem.characters(4)
 	})
 end
 puts "Finished tags to get to #{TAGS_NUM}"
