@@ -9,17 +9,11 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index    
-    @outlet = Outlet.first
-    if current_user.cross_agency?
-      @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
-      if !params[:agency].blank?
-         @outlets = @outlets.where("agencies.id" => params[:agency])
-      end 
-      @services = Outlet.all.group(:service).count
-    else
-      @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags,:agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
-      @services = @outlets.group(:service).count
-    end
+    @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+    @services = @outlets.group(:service).count
+    if !params[:agency].blank?
+       @outlets = @outlets.where("agencies.id" => params[:agency])
+    end 
     num_items = items_per_page_handler
     @total_outlets = @outlets.count
     if(params[:service])

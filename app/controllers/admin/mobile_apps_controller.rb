@@ -8,18 +8,12 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    if current_user.cross_agency?
-      @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
-      if !params[:agency].blank?
-         @mobile_apps = @mobile_apps.where("agencies.id" => params[:agency])
-      end
-      @platform_counts = @mobile_apps.platform_counts
-      @total_mobile_apps = @mobile_apps.count
-    else
-      @mobile_apps = MobileApp.by_agency(current_user.agency.id).includes(:official_tags).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
-      @platform_counts = @mobile_apps.platform_counts
-      @total_mobile_apps = @mobile_apps.count
+    @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+    if !params[:agency].blank?
+       @mobile_apps = @mobile_apps.where("agencies.id" => params[:agency])
     end
+    @platform_counts = @mobile_apps.platform_counts
+    @total_mobile_apps = @mobile_apps.count
     num_items = items_per_page_handler    
     @tagIDs = []
     @tags = []
