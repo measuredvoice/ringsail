@@ -8,8 +8,16 @@ class Admin::UsersController < Admin::AdminController
   # GET /users
   # GET /users.json
   def index
-    num_items = items_per_page_handler        
+    num_items = items_per_page_handler    
+     
     @users = User.all.order(sort_column + " " + sort_direction).page(params[:page]).per(num_items)
+
+    if params[:agencies] && params[:agencies][:agency_id] != ""
+      @users = @users.where(:agency_id => params[:agencies][:agency_id].to_i)            
+    end
+    if params[:q] && params[:q] != ""
+      @users = @users.where("last_name LIKE ? OR first_name LIKE ? OR email LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%")      
+    end       
   end
 
   # GET /users/1

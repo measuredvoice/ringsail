@@ -1,7 +1,7 @@
 PublicActivity.enabled = false
 DatabaseCleaner.clean_with :truncation
 
-AGENCIES_NUM = 100
+AGENCIES_NUM = 3
 USERS_NUM = 100 #users will always make a minimum of 4 (one for each role)
 TAGS_NUM = 100
 OUTLETS_NUM = 100 # was 40
@@ -17,8 +17,8 @@ agency_acronyms = ["DM", "DMAC", "DMT"]
 (1..AGENCIES_NUM).each do |agency_number|
 	name = "Department of #{Faker::Commerce.department(2, true)}"
 	Agency.create!({
-		name: agency_names[rand(0..agency_names.size-1)],
-		shortname: agency_acronyms[rand(0..agency_acronyms.size-1)],
+		name: agency_names[agency_number-1],
+		shortname: agency_acronyms[agency_number-1],
 		info_url: Faker::Internet.url
 	})
 end

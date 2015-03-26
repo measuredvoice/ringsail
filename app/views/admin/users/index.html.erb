@@ -11,8 +11,11 @@
         <div class="form-group">
           <label>Items per page: </label>
           <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_users] || 25) %>
-          <%= submit_tag "Update", class: 'per-page-submit form-group-btn' %>    
-        </div>    
+          <%= submit_tag "Update", class: 'hide per-page-submit form-group-btn' %>    
+          <%= collection_select(:agencies, :agency_id, Agency.all, :id, :name, prompt: true) %>
+          <%= text_field_tag(:q, params[:q], :placeholder => "Search") %>
+          <%= submit_tag "Update", class: 'admin-search-submit form-group-btn' %>
+        </div>        
       <% end %>      
     <%= paginate @users %>  
     <%= page_entries_info @users %>   
