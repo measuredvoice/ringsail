@@ -140,6 +140,15 @@
       if(data["screenshot"]){
         el.find("[name$='screenshot]']").val(data["screenshot"]);
       }
+      if(data["publish_day"]){
+        el.find("[name$='publish_date(3i)]']").val(data["publish_day"]);       
+      }
+      if(data["publish_month"]){
+        el.find("[name$='publish_date(2i)]']").val(data["publish_month"]); 
+      }
+      if(data["publish_year"]){
+       el.find("[name$='publish_date(1i)]']").val(data["publish_year"]); 
+      }
       if(!data["platform"]){
         version_parent.find(".version-messages").text("No details found for given URL.")
       }else{
