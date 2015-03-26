@@ -10,6 +10,9 @@ class Admin::MobileAppsController < Admin::AdminController
   def index
     if current_user.cross_agency?
       @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      if !params[:agency].blank?
+         @mobile_apps = @mobile_apps.where("agencies.id" => params[:agency])
+      end
       @platform_counts = @mobile_apps.platform_counts
       @total_mobile_apps = @mobile_apps.count
     else
@@ -122,24 +125,26 @@ class Admin::MobileAppsController < Admin::AdminController
 
   def publish
     @mobile_app.published!
+    @mobile_app.build_notifications(:published)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now public."
 
   end
 
   def archive
     @mobile_app.archived!
+    @mobile_app.build_notifications(:archived)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now archived."
   end
 
   def request_publish
     @mobile_app.publish_requested!
-    @mobile_app.build_admin_notifications(:publish_requested)
+    @mobile_app.build_notifications(:publish_requested)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be published."
   end
 
   def request_archive
     @mobile_app.archive_requested!
-    @mobile_app.build_admin_notifications(:archive_requested)
+    @mobile_app.build_notifications(:archive_requested)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, has a request in with admins to be archived."
   end
 

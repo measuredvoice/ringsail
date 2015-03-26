@@ -9,10 +9,12 @@
     <div class="placeholders">
       <%= form_tag admin_users_path, method: :get, class: 'form-inline' do %>
         <div class="form-group">
+          <%= select_tag :agency, content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency]) %>
+        </div>
+        <div class="form-group">
           <label>Items per page: </label>
           <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_users] || 25) %>
           <%= submit_tag "Update", class: 'hide per-page-submit form-group-btn' %>    
-          <%= collection_select(:agencies, :agency_id, Agency.all, :id, :name, prompt: true) %>
           <%= text_field_tag(:q, params[:q], :placeholder => "Search") %>
           <%= submit_tag "Update", class: 'admin-search-submit form-group-btn' %>
         </div>        

@@ -8,6 +8,9 @@ class Admin::GalleriesController < Admin::AdminController
   def index
     if current_user.cross_agency?
       @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      if !params[:agency].blank?
+         @galleries = @galleries.where("agencies.id" => params[:agency])
+      end
     else
       @galleries = Gallery.by_agency(current_user.agency.id).includes(:official_tags).where("draft_id IS NULL").uniq
     end
@@ -19,7 +22,7 @@ class Admin::GalleriesController < Admin::AdminController
 
     respond_to do |format|
       format.html { @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(num_items) }
-      format.csv { send_data @gallerys.to_csv }
+      format.csv { send_data @galleries.to_csv }
     end
   end
 
@@ -106,13 +109,13 @@ class Admin::GalleriesController < Admin::AdminController
 
   def request_publish
     @gallery.publish_requested!
-    @gallery.build_admin_notifications(:publish_requested)
+    @gallery.build_notifications(:publish_requested)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be published."
   end
 
   def request_archive
     @gallery.archive_requested!
-    @gallery.build_admin_notifications(:archive_requested)
+    @gallery.build_notifications(:archive_requested)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, has a request in with admins to be archived."
   end
 
@@ -128,7 +131,7 @@ class Admin::GalleriesController < Admin::AdminController
     end
 
     def sort_column
-      Gallery.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      Gallery.column_names.include?(params[:sort]) ? params[:sort] : "galleries.name"
     end
   
     def sort_direction

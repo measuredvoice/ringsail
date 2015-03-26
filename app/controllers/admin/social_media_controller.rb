@@ -12,6 +12,9 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet = Outlet.first
     if current_user.cross_agency?
       @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+      if !params[:agency].blank?
+         @outlets = @outlets.where("agencies.id" => params[:agency])
+      end 
       @services = Outlet.all.group(:service).count
     else
       @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags,:agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
@@ -138,13 +141,13 @@ class Admin::SocialMediaController < Admin::AdminController
 
   def request_publish
     @outlet.publish_requested!
-    @outlet.build_admin_notifications(:publish_requested)
+    @outlet.build_notifications(:publish_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be published."
   end
 
   def request_archive
     @outlet.archive_requested!
-    @outlet.build_admin_notifications(:archive_requested)
+    @outlet.build_notifications(:archive_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be archived."
   end
 

@@ -18,7 +18,12 @@
 
         <div class="col-xs-12 col-sm-12 col-md-10 ">
           <%= form_tag admin_mobile_apps_path, method: :get, class: 'form-inline' do %>
-               <div class="form-group"> <%= text_field_tag :tag_tokens, nil, value: ""  %></div>
+            <% if current_user.cross_agency? %>
+            <div class="form-group">
+              <%= select_tag :agency, content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency]) %>
+            </div>
+            <% end %>
+            <div class="form-group"> <%= text_field_tag :tag_tokens, nil, value: ""  %></div>
             <div class="form-group">
             <label>Items per page: </label>
             <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_mobile_registrations] || 25) %>
