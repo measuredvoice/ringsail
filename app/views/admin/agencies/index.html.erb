@@ -2,6 +2,13 @@
   <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Agencies</h1>
     <div class="row placeholders">
+      <%= form_tag admin_agencies_path, method: :get, class: 'form-inline' do %>
+        <div class="form-group">
+          <label>Items per page: </label>
+          <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_agencies] || 25) %>
+          <%= submit_tag "Update", class: 'per-page-submit form-group-btn' %>    
+        </div>    
+      <% end %>       
       <%=paginate @agencies%>
       <%= page_entries_info @agencies %> 
       <table id="agency" class="table table-striped" >

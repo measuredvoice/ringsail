@@ -7,6 +7,13 @@
         <p>If a users information has been updated in OMB Max and they are still having issues, tell them to log out and back in, as this triggers the system to pull their data from OMB Max again</p>
       </div>
     <div class="placeholders">
+      <%= form_tag admin_users_path, method: :get, class: 'form-inline' do %>
+        <div class="form-group">
+          <label>Items per page: </label>
+          <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_users] || 25) %>
+          <%= submit_tag "Update", class: 'per-page-submit form-group-btn' %>    
+        </div>    
+      <% end %>      
     <%= paginate @users %>  
     <%= page_entries_info @users %>   
   	<table class=" table table-striped">
