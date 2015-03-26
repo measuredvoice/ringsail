@@ -104,7 +104,7 @@ class MobileApp < ActiveRecord::Base
     self.mobile_app_versions.each do |mav|
       ma.mobile_app_versions << MobileAppVersion.new(mav.attributes.except!("id","mobile_app_id"))
     end
-    ma.save!
+    ma.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :published
   end
@@ -124,7 +124,7 @@ class MobileApp < ActiveRecord::Base
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:archived]
     self.published.destroy! if self.published
-    self.save!
+    self.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :archived
   end

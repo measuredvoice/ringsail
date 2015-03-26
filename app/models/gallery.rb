@@ -103,19 +103,20 @@ class Gallery < ActiveRecord::Base
     Gallery.public_activity_off
     self.status = Gallery.statuses[:published]
     self.published.destroy! if self.published
-    self.published = Gallery.create!({
+    new_gallery = Gallery.new({
       name: self.name,
       short_description: self.short_description,
       long_description: self.long_description,
       agency_ids: self.agency_ids || [],
       user_ids: self.user_ids || [],
       official_tag_ids: self.official_tag_ids || [],
-      status: self.status
+      status: self.status,
+      draft_id: self.id
     })
     self.gallery_items.each do |mav|
-      self.published.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
+     new_gallery.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
     end
-    self.save!
+    new_gallery.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :published
   end
@@ -124,7 +125,7 @@ class Gallery < ActiveRecord::Base
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archived]
     self.published.destroy! if self.published
-    self.save!
+    self.save(validate: false)
     Gallery.public_activity_on
     self.create_activity :archived
   end
