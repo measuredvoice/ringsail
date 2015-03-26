@@ -119,7 +119,9 @@
   		<p class="alert alert-success"><%= notice %></p>
 		<% end %>
 		<% if alert %>
+			<% unless alert.start_with?("Your session") || alert.start_with?("You need to") %>
 	 		<p class="alert alert-danger"><%= alert %></p>
+	 		<% end %>
 		<% end %>
     <%= yield %>
   </div>
