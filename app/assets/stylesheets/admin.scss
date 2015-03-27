@@ -389,6 +389,9 @@ text-align: center;
 .verticalTabs-item.active{box-shadow: 2px 0px 8px #ccc; background-color: #fff;border: solid 1px #bbb; color: #555;}
 .verticalTabs-item:hover{border: solid 1px #bbb; color: #555;}
 .verticalTabs:hover{box-shadow: 2px 2px 2px #ccc; background-color: #fff;}
+.list-group-item{
+    overflow-wrap: break-word;
+}
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus{background-color: #fff; color:#555; padding-left: 15px; border: none;}
 .count{display: inline-block; min-width: 25px; padding:0 2px; margin-right: 8px;  text-align: center;color:#ff5049!important; }
 .count > a{color:#ff5049!important; font-size: 10px; font-weight: bold;}
