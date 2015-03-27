@@ -65,6 +65,11 @@ ol.gallery-collection li{
     cursor: move;
     background-color: #fafafa;
 }
+/*Sub Nav Tab Panel*/
+.subnav-tabpanel{}
+.subnav-tabpanel  li.active > a:hover, .nav-tabs > li.active > a:focus{
+    color:#fff!important;
+}
 
 /*
  * Global add-ons
@@ -454,6 +459,16 @@ margin: 2px 0 20px;
 display: block;
     box-shadow:none;
     width:100%;
+}
+.form-control-inline {
+    border-radius: 0;
+    border: 1px solid #ddd;
+background: #fafafa;
+font-family: inherit;
+font-size: inherit;
+margin: 2px 0 20px;
+display: inline;
+    box-shadow:none;
 }
 /*DasboardStyles*/
 .timeline > li > .timeline-badge{background-color:#ff5049!important;padding: 12px;}
