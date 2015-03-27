@@ -176,7 +176,7 @@ border-radius: 4px;
 .wrapping{
     margin-top: 25px;
 }
-
+.top-buffer { margin-top:5px; }
 /*Navbar Styles*/
 .navBrand{background-color: #fafafa!important;  text-align: left;padding: 5px 0 0 150px;transition: left 0.5s;}
 @media (max-width: 1060px) {
@@ -393,9 +393,10 @@ text-align: center;
 }
 
 .table_data{    
-  max-width:100px;
+  max-width:300px;
   max-height: 20px;
   font-size: .93em;
+      overflow-wrap: break-word;
 }
 ul.gly{
   list-style-type: none;
@@ -522,6 +523,7 @@ font-size: 14px;letter-spacing: 1px;}
 .form-inline{
     padding: 15px;
     background-color: #fff;
+    overflow: hidden;
 }
 .form-inline input{
     height: 35px;
