@@ -75,3 +75,7 @@
     </div>
   </div>
 </div>
+
+<%= form_tag galleries_export_admin_galleries_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
+  <%= hidden_field_tag :ids %>
+<% end %>

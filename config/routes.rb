@@ -209,12 +209,16 @@ Ringsail::Application.routes.draw do
     resources :mobile_apps, 
       concerns: [:activity_and_history, :publish_and_archive] do
       collection do
+        post "mobile_apps_export"
         get "datatables"
         get "version_details_for_url"
       end
     end
     resources :galleries, 
       concerns: [:activity_and_history, :publish_and_archive] do
+      collection do
+        post "galleries_export"
+      end
     end
     resources :users do
       collection do

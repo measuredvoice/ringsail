@@ -16,112 +16,77 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-          <%= form_tag admin_mobile_apps_path, method: :get, class: 'form-inline' do %>
-            <% if current_user.cross_agency? %>
-            <div class="row">
-                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
-                  <%= select_tag :agency, content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency]) %>
-                </div>
-                <% end %>
-                <div class="form-group col-xs-12 col-sm-6 col-md-8 col-lg-8"> <%= text_field_tag :tag_tokens, nil, value: ""  %></div>
-            </div>
-            <div class="row top-buffer">
-            <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
-            <label>Items per page: </label>
-            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_mobile_registrations] || 25) , class: 'perpage-display' %>
-            <% if params[:platform] %>
-              <%= hidden_field_tag :hidden_platform_value, params[:platform] %>            
-            <% end %>            
-              </div>
-         
-            <div class="form-group col-xs-12 col-sm-6 col-md-8 col-lg-8">                               
-<!--              <%= label_tag(:q, "Search for:") %>            -->
-              <%= text_field_tag(:q, params[:q], class: 'search-field', :placeholder => "Search") %>
-              <%= submit_tag "Update", class: 'form-group-btn admin-search-submit' %>
-            </div>
-            </div>
-          <% end %> 
-          <div class="paginated-results">   
-            <div>                                                         
-              <%= paginate @mobile_apps %>
-              <%= page_entries_info @mobile_apps %>
-              <text>
-                <%= link_to "Add a Mobile App", new_admin_mobile_app_path,:class=> "btn btn-default" %>
-                Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
-              </text>
-            </div>            
-            <table class="table table-striped">
-            <thead>
-            <tr>
-              <th> Department</th>
-              <th><%= sortable "name", "Name" %></th>
-              <th>Tags</th>
-              <th><%= sortable "status", "Status" %></th>
-              <th><%= sortable "updated_at", "Updated At" %></th>
-              <th class = "lastlinks">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @mobile_apps.each do |app| %>
-            	<tr class = "tablerow">
-                <td class = "table_data">
-                  <ul class="table_list">
-                    <% app.agencies.each do |agency| %>
-                      <li><%= agency.name %></li>
-                    <% end %>
-                  </ul>
-                </td>
-            	  <td class = "table_data"><%= app.name %></td>
-                <td class = "table_data">
-                  <ul class="table_list">
-                  <% app.official_tags.each do |tag| %>
-                    <li><%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %></li>
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">   
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>      
+          <table class="table table-striped" id="data-tables">
+          <thead>
+          <tr>
+            <th> Department</th>
+            <th><%= sortable "name", "Name" %></th>
+            <th>Tags</th>
+            <th><%= sortable "status", "Status" %></th>
+            <th><%= sortable "updated_at", "Updated At" %></th>
+            <th class = "lastlinks">Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @mobile_apps.each do |app| %>
+          	<tr class = "tablerow">
+              <td class = "table_data">
+                <ul class="table_list">
+                  <% app.agencies.each do |agency| %>
+                    <li><%= agency.name %></li>
                   <% end %>
-                  </ul>
-                </td>              
-                <td class = "table_data"><%= app.status.titleize %></td>
-                <td class = "table_data"><%= app.updated_at.strftime("%B %e, %Y %H:%M") %></td>
-                <td class = "table_data lastlinks">
-                  <ul class = "gly">
-                    <li><%= link_to admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
-                    <li><%= link_to edit_admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
-                  </ul>
-                </td>   
-            	</tr>
-            <% end %>
-            </tbody>
-            </table>
-            <div>
-              <text>
-                <%= link_to "Add a Mobile App", new_admin_mobile_app_path,:class=> "btn btn-default" %>
-                Download: <%= link_to "CSV", admin_mobile_apps_path(format: "csv") %> 
-              </text>
-              <%= paginate @mobile_apps %>
-            </div>
-          </div>
-        </div>
+                </ul>
+              </td>
+          	  <td class = "table_data"><%= app.name %></td>
+              <td class = "table_data">
+                <ul class="table_list">
+                <% app.official_tags.each do |tag| %>
+                  <li><%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %></li>
+                <% end %>
+                </ul>
+              </td>              
+              <td class = "table_data"><%= app.status.titleize %></td>
+              <td class = "table_data"><%= app.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+              <td class = "table_data lastlinks">
+                <ul class = "gly">
+                  <li><%= link_to admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
+                  <li><%= link_to edit_admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
+                </ul>
+              </td>   
+          	</tr>
+          <% end %>
+          </tbody>
+          </table>
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>  
+         </div>
+      </div>
     </div>
   </div>
 </div>
 
-
+<%= form_tag mobile_apps_export_admin_mobile_apps_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
+  <%= hidden_field_tag :ids %>
+<% end %>
 <% content_for :additional_javascript do %>
   <script>
-    var tags = [];
-    $("#tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
-      crossDomain: false,
-      prePopulate: tags,
-      preventDuplicates: true
-    });
+    var data_tables = null;
+    $(document).ready(function() {
+       data_tables = $('#data-tables').DataTable();
+    } );
 
-    // Populate with tags selected before the page load.
-    <% @tags.each_with_index do |t, i| %> 
-        add_tag(<%=@tagIDs[i]%>, "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
-    <% end %>
-    function add_tag(id,name){
-      $("#tag_tokens").tokenInput("add", {id: id, name: name});
-    }    
+
+    all_ids = "";
+    function export_csv(){
+      rows = $("#data-tables").dataTable().$('tr', {"filter":"applied"});
+      all_ids = []
+      for(var i =0; i<rows.length; i++){
+        all_ids.push(rows[i].id);
+      }
+      $('#ids').val(all_ids.join(","));
+      $('#csv_export').submit();
+    }
 
   </script>
 <% end %>

@@ -10,32 +10,20 @@ class Admin::MobileAppsController < Admin::AdminController
   def index
     @mobile_apps = MobileApp.where("draft_id IS NULL").uniq
     
-    if !params[:agency].blank?
-       @mobile_apps = @mobile_apps.joins(:agencies).where("agencies.id" => params[:agency])
-    end
-    @total_mobile_apps = @mobile_apps.count
-    num_items = items_per_page_handler    
-    @tagIDs = []
-    @tags = []
-    if params[:tag_tokens] && params[:tag_tokens] != ""
-      @tagIDs = params[:tag_tokens].split(',') 
-      @tags = OfficialTag.where("id IN (?)", params[:tag_tokens].split(',') )
-      @mobile_apps = @mobile_apps.joins(:official_tags).where("official_tags.id" => params[:tag_tokens].split(","))
-    end    
     if params[:platform] && params[:platform] != ""
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
     end
-    if params[:q] && params[:q] != ""
-        @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? OR short_description LIKE ? 
-        OR long_description LIKE ?", 
-        "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")     
-    end
-    
-    @mobile_apps = @mobile_apps.order("mobile_apps." + sort_column + " " + sort_direction)
     @platform_counts = @mobile_apps.platform_counts
     respond_to do |format|
-      format.html { @mobile_apps = @mobile_apps.page(params[:page]).per(num_items) }
+      format.html { @mobile_apps = @mobile_apps }
       format.csv { send_data @mobile_apps.to_csv}      
+    end
+  end
+
+  def mobile_apps_export
+    @mobile_apps = MobileApp.where("id in (?)", params[:ids].split(",")).includes(:official_tags,:users,:agencies,:mobile_app_versions)
+     respond_to do |format|  
+      format.csv { send_data @mobile_apps.to_csv }
     end
   end
 
