@@ -72,6 +72,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'guard-rspec', require: false
   
+  gem 'shoulda-matchers'
   # generate fake data in tests & seeds files
   gem 'faker'
   

@@ -22,9 +22,13 @@
 require 'rails_helper'
 
 RSpec.describe Agency, type: :model do
-  it "should pass validations" do
-    agency = FactoryGirl.create(:agency)
-    expect(agency.valid?).to eq(true)
-  end
+	it { is_expected.to validate_presence_of :name }
+	it { should have_many(:mobile_app_agencies) }
+	it { should have_many(:mobile_apps) }
+	it { should have_many(:gallery_agencies) }
+	it { should have_many(:galleries) }
+	it { should have_many(:users) }
+	it { should belong_to(:parent)}
+	it { should have_many(:children)}
 
 end
