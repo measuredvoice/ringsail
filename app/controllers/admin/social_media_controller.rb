@@ -9,31 +9,34 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index    
-    @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
-    @services = @outlets.group(:service).count
+    @outlets = Outlet.includes(:official_tags,:agencies).references(:official_tags,:agencies).where("draft_id IS NULL")
+
     if !params[:agency].blank?
-       @outlets = @outlets.where("agencies.id" => params[:agency])
+       @outlets = @outlets.where("agencies.id IN (?)",params[:agency].split(","))
     end 
     num_items = items_per_page_handler
     @total_outlets = @outlets.count
     if(params[:service])
-      @outlets = @outlets.where(service: params[:service]).order(sort_column + " " + sort_direction)
+      @outlets = @outlets.where(service: params[:service])
     end
     @tags = []
     if params[:tag_tokens] && params[:tag_tokens] != ""
       @tags = OfficialTag.where(:id => params[:tag_tokens].split(','))
-      @outlets = @outlets.joins(:official_tags).where("official_tags.id" => params[:tag_tokens].split(","))
+      @outlets = @outlets.where("official_tags.id IN (?)",params[:tag_tokens].split(","))
     end
     if params[:q] && params[:q] != ""
-      @outlets = @outlets.where("account LIKE ? OR service_url LIKE ? OR organization LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
+      @outlets = @outlets.where("account LIKE ? OR service_url LIKE ? 
+        OR organization LIKE ? OR short_description LIKE ? 
+        OR long_description LIKE ? OR service LIKE ?",
+       "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%", 
+       "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
     end
-
+    @services = @outlets.group(:service).count
     respond_to do |format|
-      format.html { @outlets = @outlets.page(params[:page]).per(num_items) }    
+      format.html { @outlets = @outlets.order(sort_column + " " + sort_direction) }    
       format.csv { send_data @outlets.to_csv }
     end
   end
-
 
   def datatables
     @outlets = Outlet.where("draft_id IS NULL").uniq
@@ -159,7 +162,7 @@ class Admin::SocialMediaController < Admin::AdminController
     end
 
     def sort_column
-      Outlet.column_names.include?(params[:sort]) ? params[:sort] : "account"
+      params[:sort] ? params[:sort] : "account"
     end
   
     def sort_direction

@@ -7,6 +7,7 @@
 //= require raphael
 //= require morris
 //= require datatables
+//= require datatables.bootstrap
 //= require cocoon
 
 $(function() {

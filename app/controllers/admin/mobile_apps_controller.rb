@@ -8,28 +8,31 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    @mobile_apps = MobileApp.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+    @mobile_apps = MobileApp.where("draft_id IS NULL").uniq
+    
     if !params[:agency].blank?
-       @mobile_apps = @mobile_apps.where("agencies.id" => params[:agency])
+       @mobile_apps = @mobile_apps.joins(:agencies).where("agencies.id" => params[:agency])
     end
-    @platform_counts = @mobile_apps.platform_counts
     @total_mobile_apps = @mobile_apps.count
     num_items = items_per_page_handler    
     @tagIDs = []
     @tags = []
     if params[:tag_tokens] && params[:tag_tokens] != ""
-      @tagIDs = params[:tag_tokens].split(',')        
-      @tagIDs.each do |t|    @tags << get_tag(t)    end 
-      @mobile_apps = @mobile_apps.joins(:official_tags).where("tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ? OR tag_text LIKE ?", tag_text(@tags[0]), tag_text(@tags[1]), tag_text(@tags[2]), tag_text(@tags[3]), tag_text(@tags[4]))
+      @tagIDs = params[:tag_tokens].split(',') 
+      @tags = OfficialTag.where("id IN (?)", params[:tag_tokens].split(',') )
+      @mobile_apps = @mobile_apps.joins(:official_tags).where("official_tags.id" => params[:tag_tokens].split(","))
     end    
-    if params[:platform] && !params[:platform].blank?
-      @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions:{platform: params[:platform]})
-    elsif params[:q] && !params[:q].blank?
-      @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")    
-      @search_terms = params[:q]   
+    if params[:platform] && params[:platform] != ""
+      @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
     end
-    @mobile_apps = @mobile_apps.all.order("mobile_apps." + sort_column + " " + sort_direction)
-
+    if params[:q] && params[:q] != ""
+        @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? OR short_description LIKE ? 
+        OR long_description LIKE ?", 
+        "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")     
+    end
+    
+    @mobile_apps = @mobile_apps.order("mobile_apps." + sort_column + " " + sort_direction)
+    @platform_counts = @mobile_apps.platform_counts
     respond_to do |format|
       format.html { @mobile_apps = @mobile_apps.page(params[:page]).per(num_items) }
       format.csv { send_data @mobile_apps.to_csv}      
