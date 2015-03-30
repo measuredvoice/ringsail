@@ -10,26 +10,10 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets.json
   def index    
     @outlets = Outlet.includes(:official_tags,:agencies).references(:official_tags,:agencies).where("draft_id IS NULL")
-
-    if !params[:agency].blank?
-       @outlets = @outlets.where("agencies.id IN (?)",params[:agency].split(","))
-    end 
     num_items = items_per_page_handler
     @total_outlets = @outlets.count
     if(params[:service])
       @outlets = @outlets.where(service: params[:service])
-    end
-    @tags = []
-    if params[:tag_tokens] && params[:tag_tokens] != ""
-      @tags = OfficialTag.where(:id => params[:tag_tokens].split(','))
-      @outlets = @outlets.where("official_tags.id IN (?)",params[:tag_tokens].split(","))
-    end
-    if params[:q] && params[:q] != ""
-      @outlets = @outlets.where("account LIKE ? OR service_url LIKE ? 
-        OR organization LIKE ? OR short_description LIKE ? 
-        OR long_description LIKE ? OR service LIKE ?",
-       "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%", 
-       "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
     end
     @services = @outlets.group(:service).count
     respond_to do |format|
