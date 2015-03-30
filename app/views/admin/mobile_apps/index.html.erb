@@ -16,27 +16,31 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-10 ">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
           <%= form_tag admin_mobile_apps_path, method: :get, class: 'form-inline' do %>
             <% if current_user.cross_agency? %>
-            <div class="form-group">
-              <%= select_tag :agency, content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency]) %>
+            <div class="row">
+                <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+                  <%= select_tag :agency, content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency]) %>
+                </div>
+                <% end %>
+                <div class="form-group col-xs-12 col-sm-6 col-md-8 col-lg-8"> <%= text_field_tag :tag_tokens, nil, value: ""  %></div>
             </div>
-            <% end %>
-            <div class="form-group"> <%= text_field_tag :tag_tokens, nil, value: ""  %></div>
-            <div class="form-group">
+            <div class="row top-buffer">
+            <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
             <label>Items per page: </label>
-            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_mobile_registrations] || 25) %>
+            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_mobile_registrations] || 25) , class: 'perpage-display' %>
             <% if params[:platform] %>
               <%= hidden_field_tag :hidden_platform_value, params[:platform] %>            
             <% end %>            
               </div>
          
-            <div class="form-group">                               
+            <div class="form-group col-xs-12 col-sm-6 col-md-8 col-lg-8">                               
 <!--              <%= label_tag(:q, "Search for:") %>            -->
-              <%= text_field_tag(:q, params[:q], :placeholder => "Search") %>
+              <%= text_field_tag(:q, params[:q], class: 'search-field', :placeholder => "Search") %>
               <%= submit_tag "Update", class: 'form-group-btn admin-search-submit' %>
-            </div>              
+            </div>
+            </div>
           <% end %> 
           <div class="paginated-results">   
             <div>                                                         
