@@ -26,7 +26,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 	end
 
 	def show
-
+		@email = EmailMessage.find(params[:id])
 	end
 
 	def create

@@ -19,8 +19,8 @@
             <tr class = "tablerow">
               <td class = "table_data"><%= email.to %></td>
               <td class = "table_data"><%= user_list_format(email.user) %></td>
-              <td class = "table_data"><%= email.subject %> </td>
-              <td class = "table_data"><%= email.body.first(75) %> </td>
+              <td class = "table_data"><%= link_to email.subject, admin_email_message_path(email.id) %> </td>
+              <td class = "table_data"><%= link_to email.body.first(75), admin_email_message_path(email.id) %> </td>
               <td class = "table_data"><%= email.created_at.strftime("%B %e, %Y %H:%M") %> </td>
             </tr>
           <% end %>
