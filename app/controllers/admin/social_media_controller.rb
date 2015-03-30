@@ -38,6 +38,13 @@ class Admin::SocialMediaController < Admin::AdminController
     end
   end
 
+  def social_media_export
+    @outlets = Outlet.where("id IN (?)",params[:ids].split(",")).includes(:official_tags,:users,:agencies)
+    respond_to do |format|  
+      format.csv { send_data @outlets.to_csv }
+    end
+  end
+
   def datatables
     @outlets = Outlet.where("draft_id IS NULL").uniq
     respond_to do |format|

@@ -16,6 +16,7 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>
         <table class="table table-striped" id="data-tables">
           <thead>
             <tr>
@@ -30,7 +31,7 @@
           <tbody>
             <% @outlets.each do |outlet| %>
 
-            <tr class = "tablerow">
+            <tr id="<%=outlet.id%>" class="tablerow">
               <td class = "table_data">
                   
                   <ul class="table_list">
@@ -58,11 +59,14 @@
             <% end %>
           </tbody>
         </table>
+        <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>
       </div>
     </div>
   </div>
 </div>
-
+<%= form_tag social_media_export_admin_outlets_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
+  <%= hidden_field_tag :ids %>
+<% end %>
 
 <% content_for :additional_javascript do %>
   <script>
@@ -72,15 +76,22 @@
     //   prePopulate: tags,
     //   preventDuplicates: true
     // });
-
+    var data_tables = null;
     $(document).ready(function() {
-      $('#data-tables').dataTable();
+       data_tables = $('#data-tables').DataTable();
     } );
-    // Populate with tags selected before the page load.
-    <% @tags.each_with_index do |t, i| %> 
-        add_tag(<%=t.id%>, "<%=t.tag_type.humanize + ': ' + t.tag_text%>")       
-    <% end %>
 
+
+    all_ids = "";
+    function export_csv(){
+      rows = $("#data-tables").dataTable().$('tr', {"filter":"applied"});
+      all_ids = []
+      for(var i =0; i<rows.length; i++){
+        all_ids.push(rows[i].id);
+      }
+      $('#ids').val(all_ids.join(","));
+      $('#csv_export').submit();
+    }
 
     function add_tag(id,name){
       $("#tag_tokens").tokenInput("add", {id: id, name: name});

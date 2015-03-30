@@ -201,6 +201,7 @@ Ringsail::Application.routes.draw do
     resources :social_media, as: :outlets, 
       concerns: [:activity_and_history, :publish_and_archive] do
       collection do
+        post "social_media_export"
         get "datatables"
         get "account_for_url"
       end
