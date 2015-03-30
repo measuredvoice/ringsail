@@ -315,6 +315,8 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
     shellany (0.0.1)
+    shoulda-matchers (2.8.0)
+      activesupport (>= 3.0.0)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -396,6 +398,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0)
   rubocop
   sass-rails
+  shoulda-matchers
   swagger-docs
   uglifier
   unicorn
