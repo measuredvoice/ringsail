@@ -25,7 +25,7 @@
       </div>
       <div class="field">
         <%= f.label :publish_date %> </br>
-        <%= f.date_select :publish_date, {order: [:day, :month, :year], add_month_numbers: true, prompt: true}, {:class => "form-control-inline" } %>
+        <%= f.date_select :publish_date, order: [:day, :month, :year], add_month_numbers: true, prompt: true, :class => "form-control formwidth" %>
       </div>
       <div class="field">
         <%= f.label :description %> </br>

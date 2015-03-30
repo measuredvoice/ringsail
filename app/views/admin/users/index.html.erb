@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-12 col-md-12 main">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main">
     <h1 class="page-header">Users</h1>
     <div class="bg-info">
         <p>Notice: Users are managed through OMB Max.  Please contact the administrators of the OMB Max groups <%= "#{ENV['REGISTRY_ADMIN_GROUP']} & #{ENV['REGISTRY_ADMIN_GROUP']}" %>.</p>
@@ -7,6 +7,22 @@
         <p>If a users information has been updated in OMB Max and they are still having issues, tell them to log out and back in, as this triggers the system to pull their data from OMB Max again</p>
       </div>
     <div class="placeholders">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= form_tag admin_users_path, method: :get, class: 'form-inline' do %>
+        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+          <%= select_tag :agency, content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency]) %>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+          <label>Items per page: </label>
+          <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_users] || 25), class: 'perpage-display' %>
+          <%= submit_tag "Update", class: 'hide per-page-submit form-group-btn' %> 
+        </div> 
+        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+          <%= text_field_tag(:q, params[:q], class: 'search-field', :placeholder => "Search") %>
+          <%= submit_tag "Update", class: 'admin-search-submit form-group-btn' %>
+        </div>     
+      <% end %> 
+        </div>
     <%= paginate @users %>  
     <%= page_entries_info @users %>   
   	<table class=" table table-striped">

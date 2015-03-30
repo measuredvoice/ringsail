@@ -12,9 +12,10 @@ class Admin::OfficialTagsController < Admin::AdminController
     else
       @official_tags = OfficialTag.all
     end
+    num_items = items_per_page_handler            
     @total_tags = OfficialTag.all.count
     @types = OfficialTag.group(:tag_type).count
-    @official_tags = @official_tags.order(sort_column + " " + sort_direction).page(params[:page]).per(params[:page_sze])
+    @official_tags = @official_tags.order(sort_column + " " + sort_direction).page(params[:page]).per(num_items)
   end
 
   # GET /tags/1
@@ -103,5 +104,17 @@ class Admin::OfficialTagsController < Admin::AdminController
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
+
+    def items_per_page_handler
+      per_page_count = 25    
+      if cookies[:per_page_count_tags]
+        per_page_count = cookies[:per_page_count_tags]
+      end
+      if params[:per_page]
+        per_page_count = params[:per_page]
+        cookies[:per_page_count_tags] = per_page_count
+      end
+      return per_page_count.to_i        
+    end      
 
 end

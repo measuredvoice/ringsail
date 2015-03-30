@@ -32,12 +32,12 @@
         <%= f.label :agency_notifications_emails %>
         <%= f.check_box :agency_notifications_emails %>
         <p>Determines if you will receive an email along with an agency notification.</p>
-      </div>
+      </div><!-- 
       <div class="field">
-        <%= f.label :email_notification_type, "Email Type: " %>
-        <%= f.select :email_notification_type, User.email_notification_types.keys.to_a.map{|w| [w.humanize, w]}, {}, :class => "form-control formwidth" %>
+        <%#= f.label :email_notification_type, "Email Type: " %>
+        <%#= f.select :email_notification_type, User.email_notification_types.keys.to_a.map{|w| [w.humanize, w]}, {}, :class => "form-control formwidth" %>
         <p>Choose between plain-text simple emails and full html emails with extra markup</p>
-      </div>
+      </div> -->
       <div class="actions">
         <%= f.submit "Update Settings", :class => "btn btn-primary" %>
         <%= link_to 'Back to Notifications', admin_user_notifications_path(user_id: @user), :class => "btn btn-default" %>

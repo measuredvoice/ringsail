@@ -80,9 +80,10 @@ class Outlet < ActiveRecord::Base
   
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
-      csv << column_names
-      all.each do |outlet|
-        csv << outlet.attributes.values_at(*column_names)
+      csv << (column_names + ["agencies" ,"contacts" ,"tags"])
+
+      self.all.includes(:agencies,:users,:official_tags).each do |outlet|
+        csv << (outlet.attributes.values_at(*column_names) + [outlet.agencies.map(&:name).join("|") ,outlet.users.map(&:email).join("|"),outlet.official_tags.map(&:tag_text).join("|")])
       end
     end
   end
@@ -129,7 +130,7 @@ class Outlet < ActiveRecord::Base
     Outlet.public_activity_off
     self.status = Outlet.statuses[:published]
     self.published.destroy! if self.published
-    self.published = Outlet.create!({
+    new_outlet = Outlet.new({
       service_url: self.service_url,
       service: self.service,
       organization: self.organization,
@@ -140,9 +141,11 @@ class Outlet < ActiveRecord::Base
       agency_ids: self.agency_ids || [],
       user_ids: self.user_ids || [],
       official_tag_ids: self.official_tag_ids || [],
-      status: self.status
+      status: self.status,
+      draft_id: self.id
     })
-    self.save!
+    new_outlet.save(validate: false)
+    self.save(validate: false)
     Outlet.public_activity_on
     self.create_activity :published
   end
@@ -151,7 +154,7 @@ class Outlet < ActiveRecord::Base
     Outlet.public_activity_off
     self.status = Outlet.statuses[:archived]
     self.published.destroy! if self.published
-    self.save!
+    self.save(validate: false)
     Outlet.public_activity_on
     self.create_activity :archived
   end

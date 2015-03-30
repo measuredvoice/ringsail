@@ -28,7 +28,7 @@
 
 
   <div class="field">
-    <%= f.label :name %> </br>
+    <%= f.label :name , "Name*"%> </br>
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
   <div class="field"> 
@@ -49,7 +49,7 @@
     <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field">
-    <%= f.label :agency_tokens, "Sponsoring Agencies" %> </br>
+    <%= f.label :agency_tokens, "Sponsoring Agencies*" %> </br>
     <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
   </div>
   <div class="field">
@@ -58,18 +58,19 @@
   </div>
   <div class="contacts">
     <div class="field">
-      <%= f.label :user_tokens, "Contacts" %></br>
+      <%= f.label :user_tokens, "Contacts*" %></br>
       <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => ""} %>
     </div>
   </div>
   <div class="versions">
-      <%= f.fields_for :mobile_app_versions do |mobile_app_version| %>
-        <%= render "mobile_app_version_fields",{ f: mobile_app_version, mav: mobile_app_version } %>
-      <% end %>
-        
-      <div class="buttonRow">
-        <%= link_to_add_association "Add Version", f, :mobile_app_versions , {:class => "fa fa-plus"} %>
-      </div>
+    <p>At least one version of the app must be given.</p>
+    <%= f.fields_for :mobile_app_versions do |mobile_app_version| %>
+      <%= render "mobile_app_version_fields",{ f: mobile_app_version, mav: mobile_app_version } %>
+    <% end %>
+      
+    <div class="buttonRow">
+      <%= link_to_add_association "Add Version", f, :mobile_app_versions , {:class => "fa fa-plus"} %>
+    </div>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
@@ -139,6 +140,15 @@
       }
       if(data["screenshot"]){
         el.find("[name$='screenshot]']").val(data["screenshot"]);
+      }
+      if(data["publish_day"]){
+        el.find("[name$='publish_date(3i)]']").val(data["publish_day"]);       
+      }
+      if(data["publish_month"]){
+        el.find("[name$='publish_date(2i)]']").val(data["publish_month"]); 
+      }
+      if(data["publish_year"]){
+       el.find("[name$='publish_date(1i)]']").val(data["publish_year"]); 
       }
       if(!data["platform"]){
         version_parent.find(".version-messages").text("No details found for given URL.")

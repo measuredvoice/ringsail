@@ -9,14 +9,11 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index    
-    @outlet = Outlet.first
-    if current_user.cross_agency?
-      @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
-      @services = Outlet.all.group(:service).count
-    else
-      @outlets = Outlet.by_agency(current_user.agency.id).includes(:official_tags,:agencies).where("agencies.id = ? AND draft_id IS NULL", current_user.agency.id).uniq
-      @services = @outlets.group(:service).count
-    end
+    @outlets = Outlet.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+    @services = @outlets.group(:service).count
+    if !params[:agency].blank?
+       @outlets = @outlets.where("agencies.id" => params[:agency])
+    end 
     num_items = items_per_page_handler
     @total_outlets = @outlets.count
     if(params[:service])
@@ -64,7 +61,7 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets/new
   def new
     @outlet = Outlet.new
-    @outlet.agencies << current_user.agency
+    @outlet.agencies << current_user.agency if current_user.agency
     @outlet.users << current_user
   end
 
@@ -138,13 +135,13 @@ class Admin::SocialMediaController < Admin::AdminController
 
   def request_publish
     @outlet.publish_requested!
-    @outlet.build_admin_notifications(:publish_requested)
+    @outlet.build_notifications(:publish_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be published."
   end
 
   def request_archive
     @outlet.archive_requested!
-    @outlet.build_admin_notifications(:archive_requested)
+    @outlet.build_notifications(:archive_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be archived."
   end
 

@@ -2,12 +2,21 @@
   <div class="col-sm-12 col-md-12 main">
     <h1 class="page-header">Agencies</h1>
     <div class="row placeholders">
-      <%=paginate @agencies%>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <%= form_tag admin_agencies_path, method: :get, class: 'form-inline' do %>
+        <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+          <label>Items per page: </label>
+          <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_agencies] || 25) , class: 'perpage-display' %>
+          <%= submit_tag "Update", class: 'per-page-submit form-group-btn' %>    
+        </div>    
+            <% end %> 
+        </div>      
+      <%= paginate @agencies %>
       <%= page_entries_info @agencies %> 
       <table id="agency" class="table table-striped" >
     		<thead>
           <tr class = "agency_row">
-            <th><%= sortable "name", "Agency Name" %></th>=
+            <th><%= sortable "name", "Agency Name" %></th>
             <th><%= sortable "draft_outlets_count", "# of Social Accounts (published)" %></th>
             <th><%= sortable "draft_mobile_apps_count", "# of Apps (published)" %></th>
             <th><%= sortable "draft_galleries_count", "# of Galleries (published)" %></th>
@@ -24,9 +33,7 @@
               <td class="center"><%= agency.draft_gallery_count %> (<%= agency.published_gallery_count %>)</td>
               <td class = "table_data lastlinks">
                 <%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
-                <%= link_to edit_admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
                 <!-- <%#= link_to history_admin_agency_path(agency) do %><i class = "glyphicon glyphicon-book"></i> <#% end %>  -->
-                <%= link_to admin_agency_path(agency), method: :delete, "data-confirm" => 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"></i> <% end %>
               </td>   
       			</tr>
       		<% end %>

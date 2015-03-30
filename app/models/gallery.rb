@@ -57,6 +57,17 @@ class Gallery < ActiveRecord::Base
   def published_outlets
     Outlet.where("draft_id IN (?)", self.outlet_ids)
   end
+
+  
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << (column_names + ["agencies" ,"contacts" ,"tags"])
+
+      self.all.includes(:agencies,:users,:official_tags).each do |outlet|
+        csv << (outlet.attributes.values_at(*column_names) + [outlet.agencies.map(&:name).join("|") ,outlet.users.map(&:email).join("|"),outlet.official_tags.map(&:tag_text).join("|")])
+      end
+    end
+  end
   
   # This handles a json serialized format from the administrative end.
   # It is to allowed ordering of lists in the forms
@@ -67,6 +78,7 @@ class Gallery < ActiveRecord::Base
       if gallery_list.count != 0
         mobile_ids = []
         social_ids = []
+        gallery_items.destroy_all
       	gallery_list.each_with_index do |item,index|
       		if ["MobileApp","Outlet"].include? item["class"]
       			if item["class"].constantize.find(item["id"])
@@ -74,9 +86,7 @@ class Gallery < ActiveRecord::Base
     		  			item_id: item["id"],
     		  			item_type: item["class"],
                 item_order: index
-    		  		}) if !GalleryItem.find_by(gallery_id: id, item_id: item["id"], item_type: item["class"])
-    		  		mobile_ids << item["id"] if item["class"] == "MobileApp"
-              social_ids << item["id"] if item["class"] == "Outlet"
+    		  		})
     		  	else
               # This error occurs if an invalid id is provided, generally should only be found by devs
     		  		self.errors.add(:base, "Couldn't find item to add to gallery")
@@ -86,8 +96,6 @@ class Gallery < ActiveRecord::Base
     	  		self.errors.add(:base, "A gallery item was of the wrong class")
     	  	end
       	end
-        GalleryItem.where(gallery_id: id).where("item_id NOT IN (?) AND item_type = 'MobileApp'", mobile_ids).destroy_all
-        GalleryItem.where(gallery_id: id).where("item_id NOT IN (?) AND item_type = 'Outlet'", social_ids).destroy_all
       else
         GalleryItem.where(gallery_id: id).destroy_all
       end
@@ -103,19 +111,21 @@ class Gallery < ActiveRecord::Base
     Gallery.public_activity_off
     self.status = Gallery.statuses[:published]
     self.published.destroy! if self.published
-    self.published = Gallery.create!({
+    new_gallery = Gallery.new({
       name: self.name,
       short_description: self.short_description,
       long_description: self.long_description,
       agency_ids: self.agency_ids || [],
       user_ids: self.user_ids || [],
       official_tag_ids: self.official_tag_ids || [],
-      status: self.status
+      status: self.status,
+      draft_id: self.id
     })
     self.gallery_items.each do |mav|
-      self.published.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
+     new_gallery.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
     end
-    self.save!
+    new_gallery.save(validate: false)
+    self.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :published
   end
@@ -124,7 +134,7 @@ class Gallery < ActiveRecord::Base
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archived]
     self.published.destroy! if self.published
-    self.save!
+    self.save(validate: false)
     Gallery.public_activity_on
     self.create_activity :archived
   end

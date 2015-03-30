@@ -14,7 +14,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %> </br>
+    <%= f.label :name, "Name*" %> </br>
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
   <div class="field"> 
@@ -26,7 +26,7 @@
     <%= f.text_area :long_description, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :agency_tokens, "Sponsoring Agencies" %> </br>
+    <%= f.label :agency_tokens, "Sponsoring Agencies*" %> </br>
     <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
   <div class="field">
@@ -35,7 +35,7 @@
   </div>
   <div class="contacts">
     <div class="field">
-      <%= f.label :user_tokens, "Contacts" %></br>
+      <%= f.label :user_tokens, "Contacts*" %></br>
       <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => ""} %>
     </div>
   </div>
@@ -48,12 +48,12 @@
     <h3>Gallery Collection</h3>
     <p>These items are added using the table below. You may reorder them by dragging the item in the interface<p>
     <p><span class="label  label-warning">Notice!</span>  You can add unpublished items to a gallery, but the API will only feed out items that have a currently published version.</p>
-    <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: true} %>
+    <%= render partial: "item_list", locals: {gallery_items: @gallery.gallery_items, remove_link: true, show_move: true} %>
   </div>
   <div role="tabpanel">
 
     <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs subnav-tabpanel" role="tablist">
       <li role="presentation" class="active"><a href="#mobile_apps" aria-controls="mobile_apps" role="tab" data-toggle="tab">Add Mobile Applications</a></li>
       <li role="presentation"><a href="#social_media" aria-controls="social_media" role="tab" data-toggle="tab">Add Social Media Accounts</a></li>
     </ul>

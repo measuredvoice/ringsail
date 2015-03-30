@@ -16,24 +16,32 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-sm-12 col-md-10 ">
+      <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
         <%= form_tag admin_outlets_path, method: :get, class: 'form-inline' do %>
-          <div class="form-group">
+          <% if current_user.cross_agency? %>
+             <div class="row"><div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
+            <%= select_tag :agency, content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency])%>
+          </div>
+          <% end %>
+          <div class="form-group col-xs-12 col-sm-6 col-md-8 col-lg-8">
             <% if params[:service] %>
               <%= hidden_field_tag :hidden_service_value, params[:service] %>            
             <% end %>            
             <%= text_field_tag :tag_tokens, nil, value: ""  %>     
+                 </div>
           </div>
-          <div class="form-group">
+          <div class="row top-buffer">
+          <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
             <label>Items per page: </label>
-            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) %>
+            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_social_media_accounts] || 25) , class: 'perpage-display' %>
             <%= submit_tag "Update", class: 'hidden per-page-submit form-group-btn' %>    
           </div>
-          <div class="form-group">     
+        
+          <div class="form-group col-xs-12 col-sm-6 col-md-8 col-lg-8">     
 <!--            <%= label_tag(:q, "Search for:") %>            -->
-            <%= text_field_tag(:q, params[:q], :placeholder => "Search") %>
+            <%= text_field_tag(:q, params[:q], class: 'search-field', :placeholder => "Search") %>
             <%= submit_tag "Update", class: 'admin-search-submit form-group-btn' %>
-          </div>
+              </div></div>
         <% end %> 
         <div class="paginated-results">   
           <div>                           
@@ -60,16 +68,17 @@
 
             <tr class = "tablerow">
               <td class = "table_data">
-                <ul>
-                  <% outlet.agencies.each do |agency| %>
-                    <li><%= agency.name %></li>
-                  <% end %>
-                </ul>
+                  
+                  <ul class="table_list">
+                    <% outlet.agencies.each do |agency| %>
+                      <li><%= agency.name %></li>
+                    <% end %>
+                  </ul>
               </td>
           		<td class = "table_data"><%= outlet.service %></td>
               <td class = "table_data"><%= outlet.organization %></td>
               <td class = "table_data">
-                <ul>
+                <ul class="table_list">
                 <% outlet.official_tags.each do |tag| %>
                   <li><%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %></li>
                 <% end %>

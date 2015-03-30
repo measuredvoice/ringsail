@@ -8,7 +8,15 @@ class Admin::UsersController < Admin::AdminController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.order(sort_column + " " + sort_direction).page(params[:page]).per(15)
+    num_items = items_per_page_handler        
+    @users = User.all
+    if !params[:agency].blank?
+      @users = @users.where(agency: params[:agency])
+    end
+    if params[:q] && !params[:q].blank?
+      @users = @users.where("last_name LIKE ? OR first_name LIKE ? OR email LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%")      
+    end      
+    @users = @users.order(sort_column + " " + sort_direction).page(params[:page]).per(num_items)
   end
 
   # GET /users/1
@@ -114,5 +122,17 @@ class Admin::UsersController < Admin::AdminController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
+
+  def items_per_page_handler
+    per_page_count = 25    
+    if cookies[:per_page_count_users]
+      per_page_count = cookies[:per_page_count_users]
+    end
+    if params[:per_page]
+      per_page_count = params[:per_page]
+      cookies[:per_page_count_users] = per_page_count
+    end
+    return per_page_count.to_i        
+  end   
 
 end

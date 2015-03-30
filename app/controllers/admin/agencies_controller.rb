@@ -8,8 +8,9 @@ class Admin::AgenciesController < Admin::AdminController
 
   def index 
     @agencies = Agency.all.order(sort_column + " " + sort_direction)
+    num_items = items_per_page_handler    
     respond_to do |format|
-      format.html { @agencies = @agencies.page(params[:page]).per(15) }
+      format.html { @agencies = @agencies.page(params[:page]).per(num_items) }
       format.json { render json: @agencies }
       format.xml { render xml: @agencies }
       format.csv { send_data @agencies.to_csv }
@@ -86,4 +87,16 @@ class Admin::AgenciesController < Admin::AdminController
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
+
+    def items_per_page_handler
+      per_page_count = 25    
+      if cookies[:per_page_count_agencies]
+        per_page_count = cookies[:per_page_count_agencies]
+      end
+      if params[:per_page]
+        per_page_count = params[:per_page]
+        cookies[:per_page_count_agencies] = per_page_count
+      end
+      return per_page_count.to_i        
+    end    
 end
