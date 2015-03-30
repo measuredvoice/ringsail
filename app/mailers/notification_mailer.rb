@@ -6,9 +6,9 @@ class NotificationMailer < ActionMailer::Base
     subject = "#{t(@notification.item.class)} has been #{@notification.message_type}"
     body = "#{@notification.message}"
     mail(:to => @notification.user.email, :subject => subject) do |format|
-      format.html {
-        render "body"
-      }
+    format.html {
+      render "body"
+    }
 
     end
   end

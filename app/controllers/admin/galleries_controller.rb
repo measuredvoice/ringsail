@@ -31,7 +31,7 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys/new
   def new
     @gallery = Gallery.new
-    @gallery.agencies << current_user.agency
+    @gallery.agencies << current_user.agency if current_user.agency
     @gallery.users << current_user
   end
 

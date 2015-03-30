@@ -1,0 +1,24 @@
+<ol id="gallery-collection" class="list-group gallery-collection">
+  <% gallery_items.map(&:item).each do |app| %>
+    <li class="list-group-item" data-class="<%= app.class %>" data-id="<%= app.id %>">
+      <% if show_move != false %>
+      <i class="fa fa-arrows"></i> 
+      <% end %>
+      <% if app.class == MobileApp %>
+        Mobile App:
+        <%= app.name %> -
+        <%= app.short_description %>
+      <% else %>
+        Social Media:
+        <% if app.organization %>
+          <%= app.organization %> - 
+        <% end %>
+        <%= app.service_url %>
+      <% end %>
+      <% if remove_link %>
+      <%= link_to "<span class=\"pull-right\"><i class=\"fa fa-remove\"></i></span>".html_safe, "javascript:remove_registration('#{app.id}', '#{app.class}');" %>
+      <% end %>
+      <span class="label  <%= app.published? ? "label-success" : "label-danger" %>"> <%= app.status %></span> 
+    </li>
+  <% end %>
+</ol>

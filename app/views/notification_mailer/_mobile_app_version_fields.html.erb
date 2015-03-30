@@ -1,0 +1,64 @@
+<div class="nested-fields">
+    <fieldset>
+      <legend>Version</legend>
+      <div class="field">
+        <%= f.label :store_url, "Store URL / Location" %> </br>
+        <%= f.text_field :store_url, :class => "form-control formwidth" %>
+        <%= link_to "Get Version Details From URL", "#", :class=>"btn btn-default version-details" %>
+        <span class="version-retrieving hidden"><i class="fa fa-refresh fa-spin"></i></span>
+        <span class="version-messages"></span>
+      </div>
+     <div class="field">
+          <%= f.label :platform %> </br>
+          <%= f.select :platform, options_for_select(
+              [["Android","Android"],
+              ["Blackberry","Blackberry"],
+              ["iOS","iOS"],
+              ["Mobile Web","Mobile Web"],
+              ["Windows","Windows"]],f.object.platform),
+              {include_blank: "Select"}, 
+              {:class => "form-control formwidth"} %>
+      </div>
+      <div class="field">
+        <%= f.label :version_number %> </br>
+        <%= f.text_field :version_number, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :publish_date %> </br>
+        <%= f.date_select :publish_date, order: [:day, :month, :year], add_month_numbers: true, prompt: true, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :description %> </br>
+        <%= f.text_area :description, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :whats_new, "What's New" %> </br>
+        <%= f.text_area :whats_new, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :screenshot %> </br>
+        <%= f.text_area :screenshot, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :device %> </br>
+        <%= f.select :device, options_for_select([
+          ["Mobile Phone","Mobile Phone"],
+          ["Mobile Web Browser","Mobile Web Browser"],
+          ["Tablet","Tablet"]
+          ]),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      </div>
+      <div class="field">
+          <%= f.label :language %> </br>
+          <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]]),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      </div>
+      <div class="field">
+        <%= f.label :average_rating %> </br>
+        <%= f.text_field :average_rating, :class => "form-control formwidth" %>
+      </div>
+      <div class="field">
+        <%= f.label :number_of_ratings %> </br>
+        <%= f.text_field :number_of_ratings, :class => "form-control formwidth" %>
+      </div>
+      <div class="buttonRow"><%= link_to_remove_association "Remove", f, {:class => "fa fa-times"}  %></div>
+  </fieldset>
+</div>

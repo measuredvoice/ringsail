@@ -58,7 +58,7 @@ Ringsail::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { :host => ENV['RINGSAIL_HOST'] }
+  config.action_mailer.default_url_options = { :host => ENV['REGISTRY_HOSTNAME'] }
 
   # Set up SendGrid for email
   ActionMailer::Base.delivery_method = :smtp
@@ -69,8 +69,8 @@ Ringsail::Application.configure do
     address:              ENV['REGISTRY_EMAIL_SERVER'],
     port:                 ENV['REGISTRY_EMAIL_PORT'],
     domain:               ENV['REGISTRY_EMAIL_DOMAIN'],
-    user_name:            '<email address>',
-    password:             '<password>',
+    user_name:            ENV['REGISTRY_EMAIL_USER'],
+    password:             ENV['REGISTRY_EMAIL_PASS'],
     authentication:       'plain',
     enable_starttls_auto: true 
   }

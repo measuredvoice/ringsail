@@ -61,7 +61,7 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets/new
   def new
     @outlet = Outlet.new
-    @outlet.agencies << current_user.agency
+    @outlet.agencies << current_user.agency if current_user.agency
     @outlet.users << current_user
   end
 
