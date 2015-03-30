@@ -324,22 +324,26 @@ margin-top: -1px;
 .dataTables_wrapper .dataTables_paginate {
   float: right;
   text-align: right;
-  padding-top: 0;
+/*
 border: solid 1px #bbb;
     border-radius: 4px;
+*/
 }
 .dataTables_wrapper .dataTables_paginate .paginate_button {
-  box-sizing: border-box;
+/*  box-sizing: border-box;*/
   display: inline-block;
+/*
   min-width: 1.5em;
   padding: 0.5em 1em;
   margin-left: 2px;
+*/
   text-align: center;
   text-decoration: none !important;
   cursor: pointer;
   *cursor: hand;
   color: #ff5049!important;
   border: 1px solid transparent;
+    margin-right: -2px!important;
 }
 .paginate_button {border-right: solid 1px #eee;}
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
