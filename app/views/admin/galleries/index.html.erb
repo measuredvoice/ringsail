@@ -3,32 +3,9 @@
     <h1 class="page-header">Galleries</h1>
     <div class="row placeholders">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-          <%= form_tag admin_galleries_path, method: :get, class: 'form-inline' do %>
-          <% if current_user.cross_agency? %>
-          <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
-            <%= select_tag :agency,  content_tag(:option, "Select an Agency", value: "")+options_from_collection_for_select(Agency.all,:id,:name,params[:agency]) %>
-          </div>
-          <% end %>
-          <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
-            <label>Items per page: </label>
-            <%= select_tag :per_page, options_for_select([10, 25, 50, 100], selected: cookies[:per_page_count_galleries] || 25) , class: 'perpage-display' %>
-          </div>
-          <div class="form-group col-xs-12 col-sm-6 col-md-4 col-lg-4">
-<!--            <%= label_tag(:q, "Search for:") %>            -->
-             <%= text_field_tag(:q, params[:q], class: 'search-field', :placeholder => "Search") %>
-            <%= submit_tag "Update", class: 'admin-search-submit form-group-btn' %>
-          </div>
-          <% end %>          
-        </div>
         <div class="paginated-results">           
-          <div>                
-            <%= paginate @galleries %>
-            <%= page_entries_info @galleries %> 
-            <text>
-              <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
-            </text>
-          </div>
-          <table class="table table-striped">
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>
+          <table class="table table-striped" id="data-tables">
           <thead>
           <tr>
             <th>Department</th>
@@ -42,7 +19,7 @@
 
           <tbody>
           <% @galleries.each do |gallery| %>
-          	<tr class = "tablerow">
+          	<tr class = "tablerow" id="<%= gallery.id %>">
               <td class = "outlet_data">
                 <ul class="table_list">
                   <% gallery.agencies.each do |agency| %>
@@ -64,12 +41,7 @@
           <% end %>
           </tbody>
           </table>
-          <div>
-            <text>
-              <%= link_to "Add a Gallery", new_admin_gallery_path, :class => "btn btn-default" %>
-            </text>
-            <%= paginate @galleries %>
-          </div>
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>
         </div>
       </div>
     </div>
@@ -78,4 +50,36 @@
 
 <%= form_tag galleries_export_admin_galleries_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :ids %>
+<% end %>
+
+<% content_for :additional_javascript do %>
+  <script>
+    // var tags = [];
+    // $("#tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
+    //   crossDomain: false,
+    //   prePopulate: tags,
+    //   preventDuplicates: true
+    // });
+    var data_tables = null;
+    $(document).ready(function() {
+       data_tables = $('#data-tables').DataTable({'sDom':'<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>'});
+    } );
+
+
+    all_ids = "";
+    function export_csv(){
+      rows = $("#data-tables").dataTable().$('tr', {"filter":"applied"});
+      all_ids = []
+      for(var i =0; i<rows.length; i++){
+        all_ids.push(rows[i].id);
+      }
+      $('#ids').val(all_ids.join(","));
+      $('#csv_export').submit();
+    }
+
+    function add_tag(id,name){
+      $("#tag_tokens").tokenInput("add", {id: id, name: name});
+    }    
+
+  </script>
 <% end %>

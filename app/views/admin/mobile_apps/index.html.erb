@@ -31,7 +31,7 @@
           </thead>
           <tbody>
           <% @mobile_apps.each do |app| %>
-          	<tr class = "tablerow">
+          	<tr id="<%= app.id%>" class = "tablerow">
               <td class = "table_data">
                 <ul class="table_list">
                   <% app.agencies.each do |agency| %>
@@ -73,7 +73,7 @@
   <script>
     var data_tables = null;
     $(document).ready(function() {
-       data_tables = $('#data-tables').DataTable();
+       data_tables = $('#data-tables').DataTable({'sDom':'<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>'});
     } );
 
 

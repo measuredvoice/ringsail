@@ -7,17 +7,17 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys.json
   def index
     @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
-    if !params[:agency].blank?
-       @galleries = @galleries.where("agencies.id" => params[:agency])
-    end
-    num_items = items_per_page_handler     
-    if params[:q] && !params[:q].blank?
-      @galleries = @galleries.where("galleries.name LIKE ? OR short_description LIKE ? OR long_description LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")      
-    end       
-    @galleries = @galleries.order(sort_column + " " +sort_direction)
 
+    num_items = items_per_page_handler     
     respond_to do |format|
-      format.html { @galleries = @galleries.order(sort_column + " " +sort_direction).page(params[:page]).per(num_items) }
+      format.html { @galleries = @galleries }
+      format.csv { send_data @galleries.to_csv }
+    end
+  end
+
+  def galleries_export
+    @galleries = Gallery.where("id IN (?)",params[:ids].split(",")).includes(:official_tags,:users,:agencies)
+    respond_to do |format|  
       format.csv { send_data @galleries.to_csv }
     end
   end

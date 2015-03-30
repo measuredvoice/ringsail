@@ -63,7 +63,7 @@ class Gallery < ActiveRecord::Base
     CSV.generate(options) do |csv|
       csv << (column_names + ["agencies" ,"contacts" ,"tags"])
 
-      self.all.includes(:agencies,:users,:official_tags).each do |outlet|
+      self.includes(:agencies,:users,:official_tags).each do |outlet|
         csv << (outlet.attributes.values_at(*column_names) + [outlet.agencies.map(&:name).join("|") ,outlet.users.map(&:email).join("|"),outlet.official_tags.map(&:tag_text).join("|")])
       end
     end
