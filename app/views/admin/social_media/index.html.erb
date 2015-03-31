@@ -60,10 +60,18 @@
           { "data" : "tags[, ]"},
           { "data" : "status"},
           { "data" : "updated_at"},
-          { "data" : "links[ ]"}
+          { "data" : "DT_RowId",}
+        ],
+        "columnDefs": [
+          {
+            "render": function(data,type,row){
+              return '<a href="/admin/social_media/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a><a href="/admin/social_media/'+data+'/edit"><i class = \"glyphicon glyphicon-pencil\"></i></a>';
+            }, "targets":[6]
+          }
         ],
         "order": [[ 5, "desc" ]],
-        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'
+      });
     } );
 
     all_ids = "";
