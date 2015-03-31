@@ -43,7 +43,7 @@
               <td class = "table_data">
                 <ul class="table_list">
                 <% app.official_tags.each do |tag| %>
-                  <li><%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %></li>
+                  <li><%= link_to tag.tag_text, "javascript:add_tag(\"#{tag.tag_text}\")" %></li>
                 <% end %>
                 </ul>
               </td>              
@@ -73,7 +73,7 @@
   <script>
     var data_tables = null;
     $(document).ready(function() {
-       data_tables = $('#data-tables').DataTable({'sDom':'<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>'});
+       data_tables = $('#data-tables').dataTable({'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
 
 
@@ -87,6 +87,10 @@
       $('#ids').val(all_ids.join(","));
       $('#csv_export').submit();
     }
+
+    function add_tag(name){
+      data_tables.fnFilter(name);
+    }    
 
   </script>
 <% end %>

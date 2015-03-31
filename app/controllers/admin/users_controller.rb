@@ -10,13 +10,8 @@ class Admin::UsersController < Admin::AdminController
   def index
     num_items = items_per_page_handler        
     @users = User.all
-    if !params[:agency].blank?
-      @users = @users.where(agency: params[:agency])
-    end
-    if params[:q] && !params[:q].blank?
-      @users = @users.where("last_name LIKE ? OR first_name LIKE ? OR email LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%","%#{params[:q]}%")      
-    end      
-    @users = @users.order(sort_column + " " + sort_direction).page(params[:page]).per(num_items)
+   
+    @users = @users
   end
 
   # GET /users/1

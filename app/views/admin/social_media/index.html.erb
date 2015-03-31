@@ -45,7 +45,7 @@
               <td class = "table_data">
                 <ul class="table_list">
                 <% outlet.official_tags.each do |tag| %>
-                  <li><%= link_to tag.tag_text, "javascript:add_tag(#{tag.id},\"#{tag.tag_type.humanize}: #{tag.tag_text}\")" %></li>
+                  <li><%= link_to tag.tag_text, "javascript:add_tag(\"#{tag.tag_text}\")" %></li>
                 <% end %>
                 </ul>
               </td>
@@ -70,17 +70,10 @@
 
 <% content_for :additional_javascript do %>
   <script>
-    // var tags = [];
-    // $("#tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
-    //   crossDomain: false,
-    //   prePopulate: tags,
-    //   preventDuplicates: true
-    // });
     var data_tables = null;
     $(document).ready(function() {
-       data_tables = $('#data-tables').DataTable({'sDom':'<"top"iflp<"clear">>rt<"bottom"iflp<"clear">>'});
+       data_tables = $('#data-tables').dataTable({'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
-
 
     all_ids = "";
     function export_csv(){
@@ -93,8 +86,8 @@
       $('#csv_export').submit();
     }
 
-    function add_tag(id,name){
-      $("#tag_tokens").tokenInput("add", {id: id, name: name});
+    function add_tag(name){
+      data_tables.fnFilter(name);
     }    
 
   </script>
