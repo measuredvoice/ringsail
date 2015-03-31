@@ -19,7 +19,7 @@ Swagger::Docs::Config.register_apis({
       :info => {
         "title" => "DigitalGov Registry",
         "description" => "This registry serves as a central source of Government sponsored social media and mobile applicaitons.
-          This documentation serves as an in-browser testing avenue, making it possible to test using the api in an interactive manner.",
+          This documentation serves as both a way to learn how to use the api, but to also test it directly in your browser.",
         "termsOfServiceUrl" => "http://registry.digitalgov.gov",
         "contact" => "registry@digitalgov.gov",
         "license" => "MIT License",

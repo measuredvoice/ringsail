@@ -108,13 +108,13 @@
       preventDuplicates: true
     });
 
-    $('.version-details').on('click',function(e){
+    $('form').on('click','.version-details',function(e){
       e.preventDefault();
       version_parent = $(this).parent().parent();
       store_url = version_parent.find("input[name$='store_url]']").val();
       version_parent.find(".version-retrieving").removeClass('hidden');
       $.get('/admin/mobile_apps/version_details_for_url',
-        {store_url: store_url},
+        { store_url: store_url },
         function(data){
           populate_version_details(data,version_parent);
           version_parent.find(".version-retrieving").addClass('hidden');
