@@ -49,7 +49,7 @@
                 <% end %>
                 </ul>
               </td>
-              <td class = "table_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+              <td class = "table_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M %Z") %></td>
 
               <td class = "table_data lastlinks">
                 <%= link_to admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
