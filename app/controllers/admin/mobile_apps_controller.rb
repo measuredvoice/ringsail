@@ -8,7 +8,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    @mobile_apps = MobileApp.where("draft_id IS NULL").uniq
+    @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies).references(:official_tags,:agencies).uniq
     
     if params[:platform] && params[:platform] != ""
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})

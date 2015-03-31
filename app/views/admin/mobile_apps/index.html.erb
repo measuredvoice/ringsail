@@ -48,7 +48,7 @@
                 </ul>
               </td>              
               <td class = "table_data"><%= app.status.titleize %></td>
-              <td class = "table_data"><%= app.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+              <td class = "table_data"><%= app.updated_at.strftime("%B %e, %Y %H:%M %Z")%></td>
               <td class = "table_data lastlinks">
                 <ul class = "gly">
                   <li><%= link_to admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>

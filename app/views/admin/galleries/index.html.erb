@@ -30,7 +30,7 @@
         	    <td class = "outlet_data"><%= gallery.name %></td>
               <td class = "outlet_data"><%= gallery.outlets.count %></td>
           	  <td class = "outlet_data"><%= gallery.mobile_apps.count %></td>
-              <td class = "outlet_data"><%= gallery.updated_at.strftime("%B %e, %Y %H:%M") %></td>
+              <td class = "outlet_data"><%= gallery.updated_at.strftime("%B %e, %Y %H:%M %Z") %></td>
               <td class = "outlet_data lastlinks">
                 <ul class = "gly">
                   <li><%= link_to admin_gallery_path(gallery) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
