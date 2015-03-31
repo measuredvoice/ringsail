@@ -62,7 +62,7 @@
     // });
     var data_tables = null;
     $(document).ready(function() {
-       data_tables = $('#data-tables').DataTable({'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+       data_tables = $('#data-tables').DataTable({"order": [[ 4, "desc" ]],'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
 
 
