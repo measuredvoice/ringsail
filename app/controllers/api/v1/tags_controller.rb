@@ -3,7 +3,7 @@ class Api::V1::TagsController < Api::ApiController
 	swagger_controller :tags, "Tags"
 
 	swagger_api :index do
-		summary "Fetches all official tags, with queryable fields"
+    	summary "Fetches all official tags, with queryable fields such as a basic text search and search by tag."
         notes "This lists all active agencies.  It accepts parameters to perform basic search."
         param :query, :q, :string, :optional, "String to compare to the short name of tags."
         param :type, :type, :string, :optional, "Comma Seperated List of Tag Types"
@@ -15,14 +15,14 @@ class Api::V1::TagsController < Api::ApiController
         response :not_found
 	end
 
-  swagger_api :types do
-    summary "Fetches all types for the tags."
-    notes "This returns an agency based on an ID."
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable   
-    response :not_found 
-  end
+    swagger_api :types do
+        summary "Fetches all types for the tags, to help power other queries."
+        notes "This returns an agency based on an ID."
+        response :ok, "Success"
+        response :not_acceptable, "The request you made is not acceptable"
+        response :requested_range_not_satisfiable   
+        response :not_found 
+    end
 
 	swagger_api :show do
 		summary "Fetches tag based on ID"
@@ -51,17 +51,17 @@ class Api::V1::TagsController < Api::ApiController
 		end
 	end
 
-  def types
-    @tag_type_counts = OfficialTag.group(:tag_type).count.to_a
-    respond_to do |format|
-      format.json { render "tag_type" }
+    def types
+        @tag_type_counts = OfficialTag.group(:tag_type).count.to_a
+        respond_to do |format|
+          format.json { render "tag_type" }
+        end
     end
-  end
 
-	def show
-		@official_tag = OfficialTag.find(params[:id])
-		respond_to do |format|
-			format.json { render "show" }
-		end
-	end
+    def show
+    	@official_tag = OfficialTag.find(params[:id])
+    	respond_to do |format|
+    		format.json { render "show" }
+    	end
+    end
 end

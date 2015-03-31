@@ -4,7 +4,7 @@ class Api::V1::AgenciesController < Api::ApiController
 
 	swagger_api :index do
 		summary "Fetches all agencies"
-    notes "This lists all active agencies.  It accepts parameters to perform basic search."
+    notes "This lists all active agencies in the system. These agencies can be used to query for social media accounts, mobile products, and galleries."
     param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
@@ -15,7 +15,7 @@ class Api::V1::AgenciesController < Api::ApiController
 	end
 
 	swagger_api :show do
-		summary "Fetches a single agency item"
+		summary "Fetches a single agency and its metadata."
 		notes "This returns an agency based on an ID."
 		param :path, :id, :integer, :required, "ID of the agency"
 		response :ok, "Success"

@@ -4,7 +4,7 @@ class Api::V1::SocialMediaController < Api::ApiController
 
   swagger_api :index do
     summary "Fetches all accounts"
-    notes "This lists all active accounts. It accepts parameters to perform basic search."
+    notes "This lists all active accounts. It accepts parameters to perform basic search as well as search by service, agency, or tags."
     param :query, :q, :string, :optional, "String to compare to the name of accounts"
     param :query, :services, :service_keys, :optional, "Comma seperated list of service keys (available via services call)"
     param :query, :agencies, :ids, :optional, "Comma seperated list of agency ids"
@@ -42,7 +42,7 @@ class Api::V1::SocialMediaController < Api::ApiController
   end
 
   swagger_api :show do
-    summary "Fetches a single account item"
+    summary "Fetches a single social media account by ID"
     notes "This returns an agency based on an ID."
     param :path, :id, :integer, :required, "ID of the account"
     response :ok, "Success"
@@ -59,7 +59,7 @@ class Api::V1::SocialMediaController < Api::ApiController
   end
 
   swagger_api :verify do
-    summary "Checks against the registry for a given account by URL"
+    summary "Checks against the registry for a given account by URL to verify it is a federal account"
     notes "This returns an agency based on an URL. If not found, it will return a 404"
     param :query, :url, :string, :required, "URL of social media account"
     response :ok, "Success"

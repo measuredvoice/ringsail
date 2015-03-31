@@ -3,7 +3,7 @@ class Api::V1::MobileAppsController < Api::ApiController
 
 	swagger_api :index do
 		summary "Fetches all mobile apps"
-    notes "This lists all active mobile apps.  It accepts parameters to perform basic search."
+    notes "This lists all active mobile apps.  It accepts parameters to perform basic search as well as searching by tag and agency."
     param :query, :q, :string, :optional, "String to compare to the name & short description of the mobile apps."
     param :query, :agencies, :ids, :optional, "Comma seperated list of agency ids"
     param :query, :tags, :ids, :optional, "Comma seperated list of tag ids"
