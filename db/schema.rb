@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331142207) do
+
+ActiveRecord::Schema.define(version: 20150331140426) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -107,15 +108,24 @@ ActiveRecord::Schema.define(version: 20150331142207) do
     t.integer "agency_id",     limit: 4
   end
 
+  add_index "mobile_app_agencies", ["agency_id"], name: "index_mobile_app_agencies_on_agency_id", using: :btree
+  add_index "mobile_app_agencies", ["mobile_app_id"], name: "index_mobile_app_agencies_on_mobile_app_id", using: :btree
+
   create_table "mobile_app_official_tags", force: :cascade do |t|
     t.integer "mobile_app_id",   limit: 4
     t.integer "official_tag_id", limit: 4
   end
 
+  add_index "mobile_app_official_tags", ["mobile_app_id"], name: "index_mobile_app_official_tags_on_mobile_app_id", using: :btree
+  add_index "mobile_app_official_tags", ["official_tag_id"], name: "index_mobile_app_official_tags_on_official_tag_id", using: :btree
+
   create_table "mobile_app_users", force: :cascade do |t|
     t.integer "mobile_app_id", limit: 4
     t.integer "user_id",       limit: 4
   end
+
+  add_index "mobile_app_users", ["mobile_app_id"], name: "index_mobile_app_users_on_mobile_app_id", using: :btree
+  add_index "mobile_app_users", ["user_id"], name: "index_mobile_app_users_on_user_id", using: :btree
 
   create_table "mobile_app_versions", force: :cascade do |t|
     t.integer  "mobile_app_id",     limit: 4
@@ -132,6 +142,8 @@ ActiveRecord::Schema.define(version: 20150331142207) do
     t.integer  "number_of_ratings", limit: 4
     t.string   "mongo_id",          limit: 255
   end
+
+  add_index "mobile_app_versions", ["platform"], name: "index_mobile_app_versions_on_platform", using: :btree
 
   create_table "mobile_apps", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -177,10 +189,16 @@ ActiveRecord::Schema.define(version: 20150331142207) do
     t.integer "official_tag_id", limit: 4
   end
 
+  add_index "outlet_official_tags", ["official_tag_id"], name: "index_outlet_official_tags_on_official_tag_id", using: :btree
+  add_index "outlet_official_tags", ["outlet_id"], name: "index_outlet_official_tags_on_outlet_id", using: :btree
+
   create_table "outlet_users", force: :cascade do |t|
     t.integer "outlet_id", limit: 4
     t.integer "user_id",   limit: 4
   end
+
+  add_index "outlet_users", ["outlet_id"], name: "index_outlet_users_on_outlet_id", using: :btree
+  add_index "outlet_users", ["user_id"], name: "index_outlet_users_on_user_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
     t.string   "service_url",       limit: 255
@@ -197,7 +215,9 @@ ActiveRecord::Schema.define(version: 20150331142207) do
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree
+  add_index "outlets", ["draft_id"], name: "index_outlets_on_draft_id", using: :btree
   add_index "outlets", ["service", "account"], name: "index_outlets_on_service_and_account", using: :btree
+  add_index "outlets", ["service"], name: "index_outlets_on_service", using: :btree
 
   create_table "rails_admin_histories", force: :cascade do |t|
     t.text     "message",    limit: 65535
@@ -242,9 +262,9 @@ ActiveRecord::Schema.define(version: 20150331142207) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                        limit: 255
+    t.string   "email",                        limit: 255,   default: "",    null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                limit: 4
+    t.integer  "sign_in_count",                limit: 4,     default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",           limit: 255
