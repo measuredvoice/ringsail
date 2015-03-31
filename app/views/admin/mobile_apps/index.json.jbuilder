@@ -1,5 +1,6 @@
 json.data @mobile_apps do |mobile_app|
   json.set! :id, mobile_app.id
+  json.set! "DT_RowId", mobile_app.id
   json.set! :agencies, mobile_app.agencies.map(&:name)
   json.set! :name, mobile_app.name
   json.set! :tags, mobile_app.official_tags.map(&:tag_link)
