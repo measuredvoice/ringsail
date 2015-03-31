@@ -15,7 +15,8 @@ class Admin::MobileAppsController < Admin::AdminController
     end
     @platform_counts = @mobile_apps.platform_counts
     respond_to do |format|
-      format.html { @mobile_apps = @mobile_apps }
+      format.html { @mobile_apps = []}
+      format.json { render "index"}
       format.csv { send_data @mobile_apps.to_csv}      
     end
   end

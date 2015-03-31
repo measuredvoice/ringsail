@@ -126,6 +126,7 @@ class Outlet < ActiveRecord::Base
     self.user_ids = ids.split(",")
   end
 
+
   def published!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:published]

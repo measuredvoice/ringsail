@@ -30,33 +30,6 @@
           </tr>
           </thead>
           <tbody>
-          <% @mobile_apps.each do |app| %>
-          	<tr id="<%= app.id%>" class = "tablerow">
-              <td class = "table_data">
-                <ul class="table_list">
-                  <% app.agencies.each do |agency| %>
-                    <li><%= agency.name %></li>
-                  <% end %>
-                </ul>
-              </td>
-          	  <td class = "table_data"><%= app.name %></td>
-              <td class = "table_data">
-                <ul class="table_list">
-                <% app.official_tags.each do |tag| %>
-                  <li><%= link_to tag.tag_text, "javascript:add_tag(\"#{tag.tag_text}\")" %></li>
-                <% end %>
-                </ul>
-              </td>              
-              <td class = "table_data"><%= app.status.titleize %></td>
-              <td class = "table_data"><%= app.updated_at.strftime("%B %e, %Y %H:%M %Z")%></td>
-              <td class = "table_data lastlinks">
-                <ul class = "gly">
-                  <li><%= link_to admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %></li>
-                  <li><%= link_to edit_admin_mobile_app_path(app) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %></li>
-                </ul>
-              </td>   
-          	</tr>
-          <% end %>
           </tbody>
           </table>
           <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>  
@@ -73,9 +46,24 @@
   <script>
     var data_tables = null;
     $(document).ready(function() {
-       data_tables = $('#data-tables').dataTable({"order": [[ 4, "desc" ]],'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+       data_tables = $('#data-tables').dataTable({
+        "ajax" : {
+          "url":"/admin/mobile_apps.json",
+          "data": function(d){
+            d.service = $('#service').val();
+          }
+        },
+        "columns": [
+          { "data" : "agencies[, ]"},
+          { "data" : "name"},
+          { "data" : "tags[, ]"},
+          { "data" : "status"},
+          { "data" : "updated_at"},
+          { "data" : "links[ ]"}
+        ],
+        "order": [[ 5, "desc" ]],
+        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
-
 
     all_ids = "";
     function export_csv(){

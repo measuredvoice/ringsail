@@ -24,39 +24,12 @@
               <th>Service</th>
               <th>Social Media Account</th>
               <th>Tags</th>
+              <th>Status</th>
               <th>Updated At</th>
               <th class = "lastlinks">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <% @outlets.each do |outlet| %>
-
-            <tr id="<%=outlet.id%>" class="tablerow">
-              <td class = "table_data">
-                  
-                  <ul class="table_list">
-                    <% outlet.agencies.each do |agency| %>
-                      <li><%= agency.name %></li>
-                    <% end %>
-                  </ul>
-              </td>
-              <td class = "table_data"><%= outlet.service %></td>
-              <td class = "table_data"><%= outlet.organization %></td>
-              <td class = "table_data">
-                <ul class="table_list">
-                <% outlet.official_tags.each do |tag| %>
-                  <li><%= link_to tag.tag_text, "javascript:add_tag(\"#{tag.tag_text}\")" %></li>
-                <% end %>
-                </ul>
-              </td>
-              <td class = "table_data"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M %Z") %></td>
-
-              <td class = "table_data lastlinks">
-                <%= link_to admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
-                <%= link_to edit_admin_outlet_path(outlet) do %> <i class = "glyphicon glyphicon-pencil"></i> <% end %>
-              </td>   
-            </tr>
-            <% end %>
           </tbody>
         </table>
         <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>
@@ -65,14 +38,32 @@
   </div>
 </div>
 <%= form_tag social_media_export_admin_outlets_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
+  <%= hidden_field_tag :service, params[:service] %>
   <%= hidden_field_tag :ids %>
 <% end %>
 
 <% content_for :additional_javascript do %>
   <script>
     var data_tables = null;
-    $(document).ready(function() {
-       data_tables = $('#data-tables').dataTable({"order": [[ 4, "desc" ]],'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+   $(document).ready(function() {
+       data_tables = $('#data-tables').dataTable({
+        "ajax" : {
+          "url":"/admin/social_media.json",
+          "data": function(d){
+            d.service = $('#service').val();
+          }
+        },
+        "columns": [
+          { "data" : "agencies[, ]"},
+          { "data" : "service"},
+          { "data" : "account_name"},
+          { "data" : "tags[, ]"},
+          { "data" : "status"},
+          { "data" : "updated_at"},
+          { "data" : "links[ ]"}
+        ],
+        "order": [[ 5, "desc" ]],
+        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
 
     all_ids = "";

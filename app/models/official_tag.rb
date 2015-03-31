@@ -35,4 +35,7 @@ class OfficialTag < ActiveRecord::Base
     self[:tag_text] = text.downcase
   end
 
+  def tag_link
+    "<a href='javascript:add_tag(\"#{tag_text}\")'>#{tag_text}</a>"
+  end
 end

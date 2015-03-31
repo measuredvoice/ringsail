@@ -12,12 +12,14 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlets = Outlet.includes(:official_tags,:agencies).references(:official_tags,:agencies).where("draft_id IS NULL")
     num_items = items_per_page_handler
     @total_outlets = @outlets.count
-    if(params[:service])
+    if(params[:service] && !params[:service].blank?)
       @outlets = @outlets.where(service: params[:service])
     end
     @services = @outlets.group(:service).count
+       
     respond_to do |format|
-      format.html { @outlets = @outlets.order(sort_column + " " + sort_direction) }    
+      format.html { @outlets = [] }
+      format.json {  render "index" }
       format.csv { send_data @outlets.to_csv }
     end
   end

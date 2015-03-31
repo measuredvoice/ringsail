@@ -1,7 +1,7 @@
 class Admin::OfficialTagsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_filter :set_tag, only: [:edit, :show, :update]
+  before_filter :set_tag, only: [:edit, :show, :update, :destroy]
 
   before_filter :require_admin, except: [:tokeninput]
   # GET /tags
@@ -70,13 +70,11 @@ class Admin::OfficialTagsController < Admin::AdminController
   # DELETE /tags/1
   # DELETE /tags/1.json
   def destroy
-    @official_tag.archived!
-    @official_tag.save!
+    @official_tag.destroy
     respond_to do |format|
-      format.html { redirect_to tags_url, notice: 'tag was successfully destroyed.' }
+      format.html { redirect_to admin_official_tags_path, notice: 'tag was successfully destroyed.' }
       format.json { head :no_content }
     end
-    redirect_to action: :index
   end
 
   def tokeninput
