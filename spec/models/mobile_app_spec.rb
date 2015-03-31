@@ -17,8 +17,13 @@
 require 'rails_helper'
 
 RSpec.describe MobileApp, type: :model do 
-	it "should pass validations" do
-		mobile_app =  FactoryGirl.create(:mobile_app)
-		expect(mobile_app.valid?).to eq(true)
-	end
+	it { should have_many(:gallery_items) }
+	it { should have_many(:mobile_app_agencies) }
+	it { should have_many(:agencies) }
+	it { should have_many(:mobile_app_users) }
+	it { should have_many(:users) }
+	it { should have_many(:mobile_app_versions) }
+	it { should have_many(:mobile_app_official_tags) }
+	it { should have_many(:official_tags) }
+	it { is_expected.to validate_presence_of :name }
 end
