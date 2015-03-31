@@ -142,7 +142,7 @@ class Gallery < ActiveRecord::Base
   def publish_requested!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:publish_requested]
-    self.save!
+    self.save(validate: false)
     Gallery.public_activity_on
     self.create_activity :publish_requested
   end
@@ -150,7 +150,7 @@ class Gallery < ActiveRecord::Base
   def archive_requested!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archive_requested]
-    self.save!
+    self.save(validate: false)
     Gallery.public_activity_on
     self.create_activity :archive_requested
   end

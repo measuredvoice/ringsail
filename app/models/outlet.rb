@@ -163,7 +163,7 @@ class Outlet < ActiveRecord::Base
   def publish_requested!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:publish_requested]
-    self.save!
+    self.save(validate: false)
     Outlet.public_activity_on
     self.create_activity :publish_requested
   end
@@ -171,7 +171,7 @@ class Outlet < ActiveRecord::Base
   def archive_requested!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:archive_requested]
-    self.save!
+    self.save(validate: false)
     Outlet.public_activity_on
     self.create_activity :archive_requested
   end

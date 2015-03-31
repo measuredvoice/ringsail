@@ -108,7 +108,7 @@
       preventDuplicates: true
     });
 
-    $('form').on('click','.version-details',function(e){
+    $('form ').on('click','.version-details',function(e){
       e.preventDefault();
       version_parent = $(this).parent().parent();
       store_url = version_parent.find("input[name$='store_url]']").val();
