@@ -15,7 +15,7 @@ class Admin::OfficialTagsController < Admin::AdminController
     num_items = items_per_page_handler            
     @total_tags = OfficialTag.all.count
     @types = OfficialTag.group(:tag_type).count
-    @official_tags = @official_tags.order(sort_column + " " + sort_direction).page(params[:page]).per(num_items)
+    @official_tags = @official_tags
   end
 
   # GET /tags/1
