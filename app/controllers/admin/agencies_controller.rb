@@ -9,8 +9,8 @@ class Admin::AgenciesController < Admin::AdminController
   def index 
     @agencies = Agency.all.order(sort_column + " " + sort_direction) 
     respond_to do |format|
-      format.html { @agencies }
-      format.json { render json: @agencies }
+      format.html { @agencies = [] }
+      format.json { render "index" }
       format.xml { render xml: @agencies }
       format.csv { send_data @agencies.to_csv }
       format.xls { send_data @agencies.to_csv(col_sep: "\t")}

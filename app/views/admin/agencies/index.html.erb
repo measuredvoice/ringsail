@@ -7,27 +7,16 @@
         <table id="data-tables" class="table table-striped">
       		<thead>
             <tr class = "agency_row">
-              <th><%= sortable "name", "Agency Name" %></th>
-              <th><%= sortable "draft_outlets_count", "# of Social Accounts (published)" %></th>
-              <th><%= sortable "draft_mobile_apps_count", "# of Apps (published)" %></th>
-              <th><%= sortable "draft_galleries_count", "# of Galleries (published)" %></th>
+              <th>Agency Name</th>
+              <th># of Social Accounts (published)</th>
+              <th># of Apps (published)</th>
+              <th># of Galleries (published)</th>
               <th class = "lastlinks">Actions</th>
         		</tr>
           </thead>
 
           <tbody>
-        		<% @agencies.each do |agency| %>
-        			<tr class = "tablerow">
-        				<td class = "tabledata midWidth"><%= agency.name %></td>
-                <td class="center"><%= agency.draft_outlet_count %> (<%= agency.published_outlet_count %>)</td>
-                <td class="center"><%= agency.draft_mobile_app_count %> (<%= agency.published_mobile_app_count %>)</td>
-                <td class="center"><%= agency.draft_gallery_count %> (<%= agency.published_gallery_count %>)</td>
-                <td class = "table_data lastlinks">
-                  <%= link_to admin_agency_path(agency) do %> <i class = "glyphicon glyphicon-info-sign"></i> <% end %>
-                  <!-- <%#= link_to history_admin_agency_path(agency) do %><i class = "glyphicon glyphicon-book"></i> <#% end %>  -->
-                </td>   
-        			</tr>
-        		<% end %>
+        		
           </tbody>
     	  </table>
       </div>
@@ -39,7 +28,25 @@
   <script>
     var data_tables = null;
     $(document).ready(function() {
-       data_tables = $('#data-tables').dataTable({'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+       data_tables = $('#data-tables').dataTable({
+        "ajax" : {
+          "url":"/admin/agencies.json"
+        },
+        "columns": [
+          { "data" : "name"},
+          { "data" : "outlet_counts"},
+          { "data" : "mobile_counts"},
+          { "data" : "gallery_counts"},
+          { "data" : "DT_RowId"}
+        ],
+        "columnDefs": [
+          {
+            "render": function(data,type,row){
+              return '<a href="/admin/agencies/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a>';
+            }, "targets":[4]
+          }
+        ],
+        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
 
 

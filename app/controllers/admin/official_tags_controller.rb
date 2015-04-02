@@ -16,6 +16,10 @@ class Admin::OfficialTagsController < Admin::AdminController
     @total_tags = OfficialTag.all.count
     @types = OfficialTag.group(:tag_type).count
     @official_tags = @official_tags
+     respond_to do |format|
+      format.html {  @official_tags = [] }
+      format.json { render "index" }
+    end
   end
 
   # GET /tags/1

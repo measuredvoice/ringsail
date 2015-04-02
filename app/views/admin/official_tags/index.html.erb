@@ -21,29 +21,15 @@
         <table id="data-tables" class=" table table-striped">
           <thead>
             <tr = "users_row">
-              <th><%= sortable "tag_text", "Tag" %></th>
-              <th><%= sortable "tag_type", "Type" %></th>
-              <th><%= sortable "outlet_count", "# Social Accounts" %></th>
-              <th><%= sortable "mobile_app_count", "# Mobile Apps" %></th>
-              <th><%= sortable "gallery_count", "# Galleries" %></th>
+              <th>Tag</th>
+              <th>Type</th>
+              <th># Social Accounts</th>
+              <th># Mobile Apps</th>
+              <th># Galleries</th>
               <th class = "lastlinks">Actions</th>
             </tr>
           </thead>
           <tbody>
-            <% @official_tags.each do |official_tag| %>
-              <tr class = "tablerow">
-                <td class = "table_data"><%= official_tag.tag_text %></td>
-                <td class = "table_data"><%= official_tag.tag_type.humanize %></td>
-                <td class = "table_data"><%= official_tag.draft_outlet_count %> (<%= official_tag.published_outlet_count %>)</td>
-                <td class = "table_data"><%= official_tag.draft_mobile_app_count %> (<%= official_tag.published_outlet_count %>)</td>
-                <td class = "table_data"><%= official_tag.draft_gallery_count %> (<%= official_tag.published_outlet_count %>)</td>
-                <td class = "table_data lastlinks">
-                 <%= link_to admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-info-sign"></i> <%end %>
-                 <%= link_to edit_admin_official_tag_path(official_tag) do %> <i class = "glyphicon glyphicon-pencil"> </i> <% end %>
-                 <%= link_to admin_official_tag_path(official_tag), method: :delete, confirm: 'Are you certain you want to delete this?' do %> <i class = "glyphicon glyphicon-remove"> </i> <% end %>
-               </td>
-              </tr>
-            <% end %>
           </tbody>
         </table>
       </dvi>
@@ -56,7 +42,24 @@
     var data_tables = null;
     $(document).ready(function() {
        data_tables = $('#data-tables').dataTable({
-      
+        "ajax" : {
+          "url":"/admin/official_tags.json"
+        },
+        "columns": [
+          { "data" : "tag_text"},
+          { "data" : "tag_type"},
+          { "data" : "outlet_counts"},
+          { "data" : "mobile_counts"},
+          { "data" : "gallery_counts"},
+          { "data" : "DT_RowId"}
+        ],
+        "columnDefs": [
+          {
+            "render": function(data,type,row){
+              return '<a href="/admin/official_tags/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a><a href="/admin/official_tags/'+data+'/edit"><i class = \"glyphicon glyphicon-pencil\"></i></a>';
+            }, "targets":[5]
+          }
+        ],
         'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
 
