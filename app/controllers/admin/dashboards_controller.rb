@@ -32,7 +32,7 @@ class Admin::DashboardsController < Admin::AdminController
     @activites_graph_json = []
     activities_graph.each do |item|
       @activites_graph_json << {
-        period: "#{item['month']}-#{item['year']}",
+        period: "#{item['year']}-#{item['month'].to_s.rjust(2, '0')}",
         activities: item.count
       }
     end

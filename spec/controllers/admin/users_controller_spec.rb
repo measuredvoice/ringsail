@@ -37,7 +37,7 @@ RSpec.describe Admin::UsersController, type: :controller do
     it "load all users" do 
       build_users = build_list(:user,20)
       sign_in FactoryGirl.create(:admin_user)
-      get :index
+      get :index, format: :json
       expect(assigns(:users)).to match_array(User.all)
     end
   end

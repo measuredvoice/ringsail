@@ -12,6 +12,10 @@ class Admin::UsersController < Admin::AdminController
     @users = User.all
    
     @users = @users
+    respond_to do |format|
+      format.html { @users = [] }
+      format.json { render "index" }
+    end
   end
 
   # GET /users/1

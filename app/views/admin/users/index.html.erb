@@ -26,7 +26,7 @@
                 <td class="table_data"><%= user.agency.name if user.agency %> </td>
                 <td class="table_data"><%= user.role.titleize if user.role %> </td>
                 <td class="table_data"><%= user.sign_in_count %> </td>
-                <td class="table_data"><%= user.last_sign_in_at.strftime("%B %e, %Y %H:%M") if user.last_sign_in_at? %> </td>
+                <td class="table_data"><%= user.last_sign_in_at.strftime("%B %e, %Y %H:%M %Z") if user.last_sign_in_at? %> </td>
         				<td class="table_data lastlinks">
                  <%= link_to admin_user_path(user) do %> <i class="glyphicon glyphicon-info-sign"></i> <%end %>
                  <%= link_to edit_admin_user_path(user) do %> <i class="glyphicon glyphicon-pencil"> </i> <% end %>
@@ -43,7 +43,26 @@
   <script>
     var data_tables = null;
     $(document).ready(function() {
-       data_tables = $('#data-tables').dataTable({'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+       data_tables = $('#data-tables').dataTable({
+         "ajax" : {
+          "url":"/admin/users.json"
+        },
+        "columns": [
+          { "data" : "name"},
+          { "data" : "agency"},
+          { "data" : "role"},
+          { "data" : "sign_in_count"},
+          { "data" : "last_sign_in_at"},
+          { "data" : "DT_RowId"}
+        ],
+        "columnDefs": [
+          {
+            "render": function(data,type,row){
+              return '<a href="/admin/users/'+data+'/edit"><i class = \"glyphicon glyphicon-info-sign\"></i></a>';
+            }, "targets":[5]
+          }
+        ],
+        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
 
 
