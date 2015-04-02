@@ -32,7 +32,7 @@ RSpec.describe Admin::AgenciesController, type: :controller do
     it "load all agencies" do 
       build_agencies = build_list(:agency,20)
       sign_in FactoryGirl.create(:admin_user)
-      get :index
+      get :index, format: :json
       expect(assigns(:agencies)).to match_array(Agency.all)
     end
   end
