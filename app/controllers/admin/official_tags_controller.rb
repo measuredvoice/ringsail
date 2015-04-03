@@ -7,7 +7,7 @@ class Admin::OfficialTagsController < Admin::AdminController
   # GET /tags
   # GET /tags.json
   def index
-    if params[:type]
+    if params[:type] && params[:type] != ""
       @official_tags = OfficialTag.where(tag_type: params[:type])
     else
       @official_tags = OfficialTag.all
