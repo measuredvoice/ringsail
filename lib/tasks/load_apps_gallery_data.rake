@@ -7,6 +7,7 @@ namespace :load_apps_gallery_data do
     MobileApp.where("draft_id IS NULL AND status = ?", MobileApp.statuses[:published]).each { |ma| ma.published!}
     Gallery.where("draft_id IS NULL AND status = ?", Gallery.statuses[:published]).each { |ga| ga.published!}
   end
+
 	desc "update all"
 	task :update_all, [:file] => :environment do |t,args|
 		PublicActivity.enabled = false
@@ -20,6 +21,7 @@ namespace :load_apps_gallery_data do
     end
     Gallery.update_all(status: 1)
 	end
+  
   desc "Fill agencies"
   task :agencies, [:file] => :environment do |t, args|
 	filepath= args[:file] || "data/current/agencies.json"
