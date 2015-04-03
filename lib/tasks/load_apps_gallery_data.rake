@@ -1,5 +1,12 @@
 namespace :load_apps_gallery_data do
 
+  desc "actually publish" do 
+  task :publish, [:file] => :environment do |t,args|
+    PublicActivity.enabled = false
+    Outlet.where("draft_id IS NULL AND status = ?", Outlet.statuses[:published]).each { |outlet| outlet.published!}
+    MobileApp.where("draft_id IS NULL AND status = ?", MobileApp.statuses[:published]).each { |ma| ma.published!}
+    Gallery.where("draft_id IS NULL AND status = ?", Gallery.statuses[:published]).each { |ga| ga.published!}
+  end
 	desc "update all"
 	task :update_all, [:file] => :environment do |t,args|
 		PublicActivity.enabled = false
