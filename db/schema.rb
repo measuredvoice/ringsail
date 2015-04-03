@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331142207) do
+ActiveRecord::Schema.define(version: 20150403043320) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20150331142207) do
     t.integer  "draft_id",          limit: 4
     t.text     "short_description", limit: 65535
     t.text     "long_description",  limit: 65535
-    t.integer  "status",            limit: 4
+    t.integer  "status",            limit: 4,     default: 0
   end
 
   create_table "gallery_agencies", force: :cascade do |t|

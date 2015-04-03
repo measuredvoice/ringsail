@@ -69,6 +69,7 @@ class Admin::MobileAppsController < Admin::AdminController
 
     respond_to do |format|
       if @mobile_app.save
+        @mobile_app.build_notifications(:created)
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully created.' }
         format.json { render :show, status: :created, location: @mobile_app }
       else
@@ -86,6 +87,7 @@ class Admin::MobileAppsController < Admin::AdminController
   def update
     respond_to do |format|
       if @mobile_app.update(mobile_app_params)
+        @mobile_app.build_notifications(:updated)
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_mobile_app_path(@mobile_app) }
       else

@@ -76,7 +76,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.save
-        @outlet.build_notifications(:created)
+        @outlet.build_notifications(:created) #may want to remove
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully created.' }
         format.json { render :show, status: :created, location: @outlet }
       else
@@ -92,7 +92,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.update(outlet_params)
-        @outlet.build_notifications(:updated)
+        @outlet.build_notifications(:updated) #may want to remove
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }
       else

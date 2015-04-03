@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">   
-          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>      
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right export" %>      
           <table class="table table-striped" id="data-tables">
           <thead>
           <tr>
@@ -32,7 +32,7 @@
           <tbody>
           </tbody>
           </table>
-          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right" %>  
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right export" %>  
          </div>
       </div>
     </div>
@@ -70,7 +70,9 @@
           }
         ],
         "order": [[ 5, "desc" ]],
-        
+        "initComplete": function(settings, json) {
+          $('.export').show();
+        },
         'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     });
 

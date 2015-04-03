@@ -10,7 +10,8 @@ class Admin::GalleriesController < Admin::AdminController
 
     num_items = items_per_page_handler     
     respond_to do |format|
-      format.html { @galleries = @galleries }
+      format.html { @galleries = [] }
+      format.json { render "index" }
       format.csv { send_data @galleries.to_csv }
     end
   end

@@ -11,6 +11,8 @@
 #  agency_id         :integer
 #  status            :integer          default("0")
 #  mongo_id          :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
 #  draft_id          :integer
 #
 
