@@ -1,11 +1,8 @@
 //= require jquery
-//= require digitalgovtheme/jquery.ui.min
+//= require handlebars-2.0.0
 //= require digitalgovtheme/flexslider
 //= require digitalgovtheme/superfish
 //= require digitalgovtheme/hoverintent
-// WELL MAKE SURE EVERYTHING IN THIS FILE, AND IN THE INDIVIDUAL PAGES IS PORTED OVER. (MINUS JQUERY)
-//= require handlebars-2.0.0
-//= require jquery.tokeninput
 //= require bootstrap/tab
 //= require bootstrap/collapse
 //= require digitalgovtheme/jsmenus

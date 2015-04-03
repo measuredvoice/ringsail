@@ -28,8 +28,10 @@
       </div> <!-- End #page div -->
     </div>
   </div>
-  <%= render partial: "layouts/digital_gov_static_footer" %>
   <%= javascript_include_tag "public" %>
+  <%= javascript_include_tag "handlebars-2.0.0" %>
+  <%= javascript_include_tag "jquery.tokeninput" %>
+  <%= render partial: "layouts/digital_gov_static_footer" %>
   <%= yield :additional_javascript %>
 </body>
 </html>

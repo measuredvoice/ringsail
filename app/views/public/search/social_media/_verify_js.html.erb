@@ -24,6 +24,8 @@
 </script>
 
 <script>
+
+$(document).ready(function() { 
   var source   = $("#verify-social-media-template").html();
   var verify_social_media_template = Handlebars.compile(source); 
   source   = $("#error-template").html();
@@ -42,4 +44,5 @@
       }
     );
   });
+});
 </script>

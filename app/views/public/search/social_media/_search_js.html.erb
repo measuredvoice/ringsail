@@ -32,6 +32,8 @@
 </script>
 
 <script>
+
+$(document).ready(function() { 
   var source_social_media_template   = $("#social-media-template").html();
   var social_media_template = Handlebars.compile(source_social_media_template); 
   var source_social_media_li_template   = $("#token-input-li-template").html();
@@ -86,4 +88,5 @@
       }
     })
   });
+});
 </script>

@@ -31,7 +31,7 @@ Ringsail::Application.configure do
   # config.force_ssl = true
 
   # See everything in the log (default is :info)
-  # config.log_level = :debug
+  config.log_level = :info
 
   # Use a different logger for distributed setups
   # config.logger = SyslogLogger.new
@@ -43,7 +43,7 @@ Ringsail::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( public.css public.js swagger.js swagger.css admin.css admin.js)
+  config.assets.precompile += %w( public.css public.js swagger.js swagger.css admin.css admin.js handlebars-2.0.0.js jquery.tokeninput.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

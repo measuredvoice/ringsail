@@ -16,7 +16,4 @@ test:
 
 production:
   <<: *default
-  database: ENV['REGISTRY_DB_NAME']
-  host: ENV['REGISTRY_DB_HOST']
-  user: ENV['REGISTRY_DB_USER']
-  password: ENV['REGISTRY_DB_PASS']
+  database: ringsail_development
