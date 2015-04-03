@@ -116,7 +116,7 @@
 	<div class="container wrapping">
 		</br>
 		<% if notice %>
-  		<p class="alert alert-success"><%= notice %></p>
+  		<p class="alert alert-success" role="alert"><%= notice %><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
 		<% end %>
 		<% if alert %>
 			<% unless alert.start_with?("Your session") || alert.start_with?("You need to") %>

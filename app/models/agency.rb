@@ -23,14 +23,14 @@ class Agency < ActiveRecord::Base
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   
   # each agency has social media outlets
-  has_many :sponsorships
+  has_many :sponsorships, dependent: :destroy
   has_many :outlets, :through => :sponsorships
   
   # each agency has defined contacts
   has_many :agency_contacts
 
   # each agency has mobile applications
-  has_many :mobile_app_agencies
+  has_many :mobile_app_agencies, dependent: :destroy
   has_many :mobile_apps, :through => :mobile_app_agencies
   
   has_many :gallery_agencies, dependent: :destroy

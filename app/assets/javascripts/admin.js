@@ -10,11 +10,6 @@
 //= require datatables.bootstrap
 //= require cocoon
 
-$(function() {
-  setTimeout(function(){
-    $('.alert').slideUp(500);
-  }, 1500);
-});
 
 function humanize(string)
 {

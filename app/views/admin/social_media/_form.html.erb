@@ -3,7 +3,7 @@
     <div id="error_explanation">
         
       <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-  <span class="sr-only">Error:</span><%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</div>
+      <span class="sr-only">Error:</span><%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</div>
 
       <ul class="inlineErrorMsgs">
       <% @outlet.errors.full_messages.each do |message| %>

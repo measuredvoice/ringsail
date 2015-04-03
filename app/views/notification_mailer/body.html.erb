@@ -1,17 +1,17 @@
 <% if @notification.item_type == "MobileApp" %>
   <%= link_to "See this social media account here.", admin_mobile_app_url(@notification.item) %>
-  <p>If you are having trouble with the link, follow this url <%= admin_mobile_app_url(@notification.item) %></p>
+  <p>If you are having trouble with the link, follow this url <%= admin_mobile_app_url(@notification.item) %></p><br/>
   <p>Mobile Product Details:</p>
   <%= render partial: "mobile_app_details", locals: {mobile_app: @notification.item } %>
 <% elsif @notification.item_type == "Gallery" %>
   <%= link_to "See this social media account here.", admin_gallery_url(@notification.item) %>
-  <p>If you are having trouble with the link, follow this url <%= admin_gallery_url(@notification.item) %></p>
+  <p>If you are having trouble with the link, follow this url <%= admin_gallery_url(@notification.item) %></p><br/>
   <p>Gallery Details:</p>
   <%= render partial: "gallery_details", locals: {gallery: @notification.item } %>
 
 <% elsif @notification.item_type == "Outlet"  %>
   <%= link_to "See this social media account here.", admin_outlet_url(@notification.item) %>
-  <p>If you are having trouble with the link, follow this url <%= admin_outlet_url(@notification.item) %></p>
+  <p>If you are having trouble with the link, follow this url <%= admin_outlet_url(@notification.item) %></p><br/>
   <p>Social Media Account Details:</p>
   <%= render partial: "outlet_details", locals: {outlet: @notification.item } %>
 <% end %>

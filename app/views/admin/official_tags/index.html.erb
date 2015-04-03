@@ -36,14 +36,19 @@
     </div>
   </div>
 </div>
-
+<%= form_tag admin_official_tags_path(format: :json), method: :post, class: 'hidden', id: "json_export" do %>
+  <%= hidden_field_tag :type, params[:type] %>
+<% end %>
 <% content_for :additional_javascript do %>
   <script>
     var data_tables = null;
     $(document).ready(function() {
        data_tables = $('#data-tables').dataTable({
         "ajax" : {
-          "url":"/admin/official_tags.json"
+          "url":"/admin/official_tags.json",
+          "data": function(d){
+            d.type = $('#type').val();
+          }
         },
         "columns": [
           { "data" : "tag_text"},

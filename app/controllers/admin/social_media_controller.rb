@@ -77,7 +77,7 @@ class Admin::SocialMediaController < Admin::AdminController
     respond_to do |format|
       if @outlet.save
         @outlet.build_notifications(:created) #may want to remove
-        format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully created.' }
+        format.html { redirect_to admin_outlet_path(@outlet), notice: 'Social Media Account was successfully created.' }
         format.json { render :show, status: :created, location: @outlet }
       else
         format.html { render :new }
@@ -93,7 +93,7 @@ class Admin::SocialMediaController < Admin::AdminController
     respond_to do |format|
       if @outlet.update(outlet_params)
         @outlet.build_notifications(:updated) #may want to remove
-        format.html { redirect_to admin_outlet_path(@outlet), notice: 'Outlet was successfully updated.' }
+        format.html { redirect_to admin_outlet_path(@outlet), notice: 'Social Media Account was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }
       else
         format.html { render :edit }
@@ -107,7 +107,7 @@ class Admin::SocialMediaController < Admin::AdminController
   def destroy
     @outlet.destroy!
     respond_to do |format|
-      format.html { redirect_to admin_outlets_url, notice: 'Outlet was successfully destroyed.' }
+      format.html { redirect_to admin_outlets_url, notice: 'Social Media Account was successfully destroyed.' }
       format.json { head :no_content }
     end
     redirect_to action: :index
@@ -120,13 +120,13 @@ class Admin::SocialMediaController < Admin::AdminController
   def publish
     @outlet.published!
     @outlet.build_notifications(:published)
-    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now public."
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
   end
 
   def archive
     @outlet.archived!
     @outlet.build_notifications(:archived)
-    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived"
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived. #{view_context.link_to 'Undo', publish_admin_outlet_path(@outlet)}".html_safe
   end
 
   def request_publish
