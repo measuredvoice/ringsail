@@ -56,7 +56,7 @@ class Api::V1::SocialMediaController < Api::ApiController
     params[:page_size] = params[:page_size] || PAGE_SIZE
     @outlets = Outlet.where(draft_id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
-      format.json { render "index" }
+      format.json { render "show" }
     end
   end
 
