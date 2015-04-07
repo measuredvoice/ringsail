@@ -3,9 +3,34 @@ namespace :load_apps_gallery_data do
   desc "actually publish"
   task :publish, [:file] => :environment do |t,args|
     PublicActivity.enabled = false
+    puts "publish items that might not be actually published"
     Outlet.where("draft_id IS NULL AND status = ?", Outlet.statuses[:published]).each { |outlet| outlet.published!}
     MobileApp.where("draft_id IS NULL AND status = ?", MobileApp.statuses[:published]).each { |ma| ma.published!}
     Gallery.where("draft_id IS NULL AND status = ?", Gallery.statuses[:published]).each { |ga| ga.published!}
+    
+    puts "outlets updates"
+    Sponsorship.all.each do |sponsorship|
+      sponsorship.update_counter_cache
+    end
+    OutletOfficialTag.all.each do |oot|
+      oot.update_counter_cache
+    end
+
+    puts "mobile apps updates"
+    MobileAppAgency.all.each do |maa|
+      maa.update_counter_cache
+    end
+    MobileAppOfficialTag.all.each do |maot|
+      maot.update_counter_cache
+    end
+
+    puts "gallery updates"
+    GalleryAgency.all.each do |ga|
+      ga.update_counter_cache
+    end
+    GalleryOfficialTag.all.each do |got|
+      got.update_counter_cache
+    end
   end
 
 	desc "update all"
