@@ -1,4 +1,4 @@
-json.set! :id, gallery.id
+json.set! :id, gallery.draft_id
 json.set! :name, gallery.name
 json.set! :short_description, gallery.short_description
 json.set! :long_description, gallery.long_description

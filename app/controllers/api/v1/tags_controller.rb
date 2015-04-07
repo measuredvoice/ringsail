@@ -38,14 +38,15 @@ class Api::V1::TagsController < Api::ApiController
 	DEFAULT_PAGE=1
 
 	def index
-    	if params[:q]
-    		@official_tags = OfficialTag.where("tag_text LIKE ?","%#{params[:q]}%").page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE )
-    	else
-    		@official_tags = OfficialTag.all.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+        params[:page_size] = params[:page_size] || PAGE_SIZE
+        @official_tags = OfficialTag.all
+    	if params[:q] && !params[:q].blank?
+    		@official_tags = @official_tags.where("tag_text LIKE ?","%#{params[:q]}%")
     	end
         if params[:type] && !params[:type].blank?
           @official_tags = @official_tags.in(tag_type: params[:type].split(","))
         end
+        @official_tags = @official_tags.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE )
 		respond_to do |format|
 			format.json { render "index" }
 		end
@@ -59,7 +60,8 @@ class Api::V1::TagsController < Api::ApiController
     end
 
     def show
-    	@official_tag = OfficialTag.find(params[:id])
+        params[:page_size] = params[:page_size] || PAGE_SIZE
+    	@official_tags = OfficialTag.where(id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE )
     	respond_to do |format|
     		format.json { render "show" }
     	end

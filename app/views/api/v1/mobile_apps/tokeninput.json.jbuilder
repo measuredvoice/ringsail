@@ -15,5 +15,4 @@ json.array! @items do |item|
     json.set! :key, "text|#{item}"
     json.set! :name, "Text: #{item}"
   end
-
 end 

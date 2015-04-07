@@ -28,6 +28,7 @@ class Api::V1::AgenciesController < Api::ApiController
 	DEFAULT_PAGE=1
 
 	def index
+		params[:page_size] = params[:page_size] || PAGE_SIZE
 		if params[:q]
 			@agencies = Agency.where("name LIKE ? or shortname LIKE ?", 
 				"%#{params[:q]}%", "%#{params[:q]}%").page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
@@ -40,15 +41,10 @@ class Api::V1::AgenciesController < Api::ApiController
 	end
 
 	def show
-		@agency = Agency.find(params[:id])
-		if @agency
-			respond_to do |format|
-				format.json { render "show"}
-			end
-		else
-			respond_to do |format|
-				format.json { render json: { error: "not foudn", status: :not_found}}
-			end
+		params[:page_size] = params[:page_size] || PAGE_SIZE
+		@agencies = Agency.where(id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+		respond_to do |format|
+			format.json { render "show"}
 		end
 	end
 end

@@ -29,6 +29,7 @@ class Api::V1::GalleriesController < Api::ApiController
 	DEFAULT_PAGE = 1
 
 	def	index	
+    params[:page_size] = params[:page_size] || PAGE_SIZE
     @galleries = Gallery.api.includes(:agencies, :official_tags)
 		if params[:q] && params[:q] != ""
 			@galleries = @galleries.where("name LIKE ? or short_description LIKE ? or long_description LIKE ?", 
@@ -44,7 +45,10 @@ class Api::V1::GalleriesController < Api::ApiController
 	end
 
 	def show
-		@gallery = Gallery.where(draft_id: params[:id]).includes(:mobile_apps, :outlets).first
+    params[:page_size] = params[:page_size] || PAGE_SIZE
+		@galleries = Gallery.where(draft_id: params[:id]).includes(
+      :mobile_apps, :outlets).references(
+      :mobile_apps,:outlets).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "show" }
 		end
