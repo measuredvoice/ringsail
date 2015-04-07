@@ -107,7 +107,24 @@ class Outlet < ActiveRecord::Base
     else
       return nil
     end
-  end    
+  end   
+
+  def self.resolves(url)
+    return nil if url.nil? || url.empty?
+
+    url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
+    
+    s = Service.find_by_url(url)
+    
+    return nil unless s
+    
+    existing = self.where(account: s.account, service: s.shortname).where("draft_id IS NOT NULL")
+    if existing
+      return existing
+    else
+      return nil
+    end
+  end  
   
   def service_info
     @service_info ||= Service.find_by_url(service_url)

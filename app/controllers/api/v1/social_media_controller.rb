@@ -71,10 +71,10 @@ class Api::V1::SocialMediaController < Api::ApiController
   end
 
   def verify
-    @outlet = Outlet.resolve(params[:q])
+    @outlet = Outlet.resolves(params[:url])
     if @outlet
       respond_to do |format|
-        format.json { render "show" }
+        format.json { render "verify" }
       end
     else
       respond_to do |format|
@@ -94,7 +94,7 @@ class Api::V1::SocialMediaController < Api::ApiController
 
   def services
     ## specific breakdowns
-    @services = Outlet.where("status <> 2").group(:service).count
+    @services = Outlet.where("status = 1").group(:service).count
 
     respond_to do |format|
       format.json { render "services" }
