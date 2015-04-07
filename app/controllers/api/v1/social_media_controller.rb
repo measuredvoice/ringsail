@@ -94,7 +94,7 @@ class Api::V1::SocialMediaController < Api::ApiController
 
   def services
     ## specific breakdowns
-    @services = Outlet.where("status = 1").group(:service).count
+    @services = Outlet.where("status = 1 AND draft_id IS NOT NULL").group(:service).count
 
     respond_to do |format|
       format.json { render "services" }
