@@ -23,5 +23,5 @@ class MobileAppVersion < ActiveRecord::Base
 
   validates :store_url, presence: true
   validates :platform, presence: true
-
+  validates :device, presence: true
 end

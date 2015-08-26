@@ -70,6 +70,9 @@ ol.gallery-collection li{
     cursor: move;
     background-color: #fafafa;
 }
+ol.gallery-collection-no-move li{
+    background-color: #fafafa;
+}
 /*Sub Nav Tab Panel*/
 .subnav-tabpanel{}
 .subnav-tabpanel  li.active > a:hover, .nav-tabs > li.active > a:focus{
@@ -149,7 +152,7 @@ legend {
     width:200px!important;
      color:#555!important;   
     display:inline-block!important;
-    
+    padding-top: 30px;
     padding-left:5px;
 }
 fieldset > div {
@@ -192,7 +195,7 @@ border-radius: 4px;
 @media (max-width: 1060px) {
   .navBrand {
     padding: 5px;
-text-align: center;
+  text-align: center;
   }
 }
 
@@ -201,12 +204,25 @@ text-align: center;
     background: #0c555d !important;
 }
 .navbar-nav{
-    padding-left: 125px;
+    padding-left: 40px;
     transition: left 0.5s;
 }
+
+
 @media (max-width: 1060px) {
   .navbar-nav {
-    padding-left: 15px;
+    padding-left: 5px;
+  }
+  .navbar-nav > li > a{
+    font-size: 12px;
+    padding: 10px 10px 10px 10px;
+  }
+  .username{
+    width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display:inline-block;
   }
 }
 .navbar-nav > li > a{

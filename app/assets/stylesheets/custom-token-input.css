@@ -77,6 +77,13 @@ form ul.token-input-list .token-input-input-token::before {
     color: #ccc;
     font-size: 13px;
 }
+form .agencies ul.token-input-list .token-input-input-token::before {
+    content:"\f002   Search By Agency";
+}
+
+form .contacts ul.token-input-list .token-input-input-token::before {
+    content:"\f002   Search By Contact";
+}
 form ul.token-input-focused .token-input-input-token::before{
     font-family: 'FontAwesome';
     content: "";

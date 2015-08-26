@@ -39,15 +39,15 @@
     <%= f.label :language, "Language*" %> </br>
     <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @outlet.language), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
-  <div class="field">
+  <div class="field agencies">
     <%= f.label :agency_tokens, "Sponsoring Agencies*" %> </br>
-    <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
+    <%= f.text_field :agency_tokens, {:class => "form-control formwidth agencies", :value => ""} %>
   </div>
   <div class="field">
     <%= f.label :tag_tokens, "Tags" %> </br>
     <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>
-  <div class="field">
+  <div class="field contacts">
     <%= f.label :user_tokens, "Contacts*" %> </br>
     <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => "" }%>
   </div>

@@ -28,11 +28,12 @@
         <%= f.date_select :publish_date, {order: [:day, :month, :year], add_month_numbers: true, prompt: true}, {:class => "form-control-inline" } %>
       </div>
       <div class="field">
-        <%= f.label :description %> </br>
+        <%= f.label :description, "Description - This will be set to match the Registration Description by default"
+ %> </br>
         <%= f.text_area :description, :class => "form-control formwidth" %>
       </div>
       <div class="field">
-        <%= f.label :whats_new, "What's New" %> </br>
+        <%= f.label :whats_new, "What's New  - Provide a brief list of what has been updated, if applicable" %> </br>
         <%= f.text_area :whats_new, :class => "form-control formwidth" %>
       </div>
       <div class="field">
@@ -40,7 +41,7 @@
         <%= f.text_area :screenshot, :class => "form-control formwidth" %>
       </div>
       <div class="field">
-        <%= f.label :device %> </br>
+        <%= f.label :device, "Device*" %> </br>
         <%= f.select :device, options_for_select([
           ["Mobile Phone","Mobile Phone"],
           ["Mobile Web Browser","Mobile Web Browser"],

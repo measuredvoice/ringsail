@@ -57,6 +57,8 @@ class MobileApp < ActiveRecord::Base
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :presence => true
+  validates :short_description, :presence => true
+  validates :long_description, :presence => true
   validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
   validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one mobile app version" } 

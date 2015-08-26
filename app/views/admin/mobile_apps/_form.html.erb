@@ -25,30 +25,33 @@
       </div>
     <% end %>
   <% end %>
-
+  <div class="form_intro">
+    <p>Please provide the following information on your mobile product (app or website) for the registry: * denotes a required field</p>
+  </div>
 
   <div class="field">
-    <%= f.label :name , "Name*"%> </br>
+    <%= f.label :name , "Name of App/Website*"%> </br>
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
   <div class="field"> 
-    <%= f.label :short_description %> </br>
+    <%= f.label :short_description, "Short Description*  - Tagline description; not more than one sentence
+" %> </br>
     <%= f.text_field :short_description, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :long_description %> </br>
+    <%= f.label :long_description, "Long Description* - Should be the same or similar to your app store description" %> </br>
     <%= f.text_area :long_description, :class => "form-control formwidth" %>
   </div>
   </br>
   <div class="field">
-    <%= f.label :icon_url %> </br>
+    <%= f.label :icon_url, "Icon URL - Please provide the URL of the app or website’s icon" %> </br>
     <%= f.text_field :icon_url, :class => "form-control formwidth" %>
   </div>
   <div class="field">
     <%= f.label :language %> </br>
     <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
-  <div class="field">
+  <div class="field agencies">
     <%= f.label :agency_tokens, "Sponsoring Agencies*" %> </br>
     <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
   </div>
