@@ -76,7 +76,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.save
-        @outlet.build_notifications(:created) #may want to remove
+        # @outlet.build_notifications(:created) #may want to remove
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Social Media Account was successfully created.' }
         format.json { render :show, status: :created, location: @outlet }
       else
@@ -92,7 +92,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.update(outlet_params)
-        @outlet.build_notifications(:updated) #may want to remove
+        # @outlet.build_notifications(:updated) #may want to remove
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Social Media Account was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }
       else
@@ -130,14 +130,14 @@ class Admin::SocialMediaController < Admin::AdminController
   end
 
   def request_publish
-    @outlet.publish_requested!
-    @outlet.build_notifications(:publish_requested)
+    # @outlet.publish_requested!
+    # @outlet.build_notifications(:publish_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be published."
   end
 
   def request_archive
-    @outlet.archive_requested!
-    @outlet.build_notifications(:archive_requested)
+    # @outlet.archive_requested!
+    # @outlet.build_notifications(:archive_requested)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, has a request in with admins to be archived."
   end
 
