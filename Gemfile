@@ -2,10 +2,10 @@ source 'http://rubygems.org'
 ruby '2.1.5'
 
 # Rails
-gem 'rails', '4.2.4'
+gem 'rails', '4.1.13'
 
 # DB Connector
-gem 'mysql2'
+gem 'mysql'
 
 # Templates for generating JSON and other data output
 gem 'json'
