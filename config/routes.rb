@@ -295,8 +295,8 @@ Ringsail::Application.routes.draw do
     get "widgets" => "widgets#index"
   end
 
-  get 'swagger_docs/:file' => "swagger#doc"
-  
+  get 'swagger_docs/*path' => "swagger#doc"
+
   root :to => "public/swagger#index"
 
 
