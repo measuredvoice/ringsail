@@ -6,6 +6,7 @@ class BlipService < Service
   def self.archived? 
     true
   end
+  
   def self.shortname
     :blip
   end

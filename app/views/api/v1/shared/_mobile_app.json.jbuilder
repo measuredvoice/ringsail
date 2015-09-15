@@ -10,8 +10,6 @@ end
 json.tags do
   json.array! mobile_app.official_tags, partial: "api/v1/shared/official_tag", as: :official_tag, counts: false
 end
-if show_versions
-  json.versions do
-    json.array! mobile_app.mobile_app_versions, partial: "api/v1/shared/mobile_app_version", as: :version
-  end
+json.versions do
+  json.array! mobile_app.mobile_app_versions, partial: "api/v1/shared/mobile_app_version", as: :version
 end
