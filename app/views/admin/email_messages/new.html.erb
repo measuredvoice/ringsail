@@ -1,5 +1,7 @@
 <div class="row">
 	<div class="col-sm-12 col-md-12 main">
+
+    <%= content_for :page_title do %>Email Registered User<% end %>
 		<h1 class="page-header"> Email Registered User </h1>
 
 		<%= form_for ([:admin,@email]) do |f| %>

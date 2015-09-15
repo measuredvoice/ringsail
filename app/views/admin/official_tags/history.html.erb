@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="col-sm-12">
+  	<%= content_for :page_title do %>Tag Versions<% end %>
 		<h1 class="page-header">Versions</h1>
 		<% @versions.each do |version| %>
 			<% official_tag  = version.reify({:has_many => true}) %>

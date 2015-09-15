@@ -1,5 +1,6 @@
 <div class="row">  
   <div class="col-sm-12 col-md-12 main">
+  	<%= content_for :page_title do %>Versions of Gallery<% end %>
     <h1 class="page-header">Versions</h1>
 		<% @versions.each do |version| %>
 		<% gallery = version.reify(:has_one => true, :has_many => true)

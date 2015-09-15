@@ -1,26 +1,26 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://localhost:3000/",
+  "basePath": "http://localhost:3000/",
   "apis": [
     {
-      "path": "https://localhost:3000/swagger_docs/api/v1/agencies.{format}",
+      "path": "http://localhost:3000/swagger_docs/api/v1/agencies.{format}",
       "description": "Government Agencies"
     },
     {
-      "path": "https://localhost:3000/swagger_docs/api/v1/social_media.{format}",
+      "path": "http://localhost:3000/swagger_docs/api/v1/social_media.{format}",
       "description": "Social Media Accounts"
     },
     {
-      "path": "https://localhost:3000/swagger_docs/api/v1/galleries.{format}",
+      "path": "http://localhost:3000/swagger_docs/api/v1/galleries.{format}",
       "description": "Mobile App Galleries"
     },
     {
-      "path": "https://localhost:3000/swagger_docs/api/v1/mobile_apps.{format}",
+      "path": "http://localhost:3000/swagger_docs/api/v1/mobile_apps.{format}",
       "description": "Government Mobile Apps"
     },
     {
-      "path": "https://localhost:3000/swagger_docs/api/v1/tags.{format}",
+      "path": "http://localhost:3000/swagger_docs/api/v1/tags.{format}",
       "description": "Tags"
     }
   ],

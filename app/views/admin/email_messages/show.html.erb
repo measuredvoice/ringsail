@@ -1,5 +1,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 main">
+
+    <%= content_for :page_title do %>Show Email<% end %>
     <h1 class = "page-header"> #Show</h1>
     <div class = "field">
       <p>To: <%= @email.to %></p>

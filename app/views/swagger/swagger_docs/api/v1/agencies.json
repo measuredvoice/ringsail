@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://localhost:3000/",
+  "basePath": "http://localhost:3000/",
   "resourcePath": "agencies",
   "apis": [
     {

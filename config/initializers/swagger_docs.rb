@@ -17,7 +17,7 @@ Swagger::Docs::Config.register_apis({
     # add custom attributes to api-docs
     :attributes => {
       :info => {
-        "title" => "U.S. Digital Services Registry",
+        "title" => "Social Mobile Registry",
         "description" => "This registry serves as a central source of Government sponsored social media and mobile applicaitons.
           This documentation serves as both a way to learn how to use the api, but to also test it directly in your browser.",
         "termsOfServiceUrl" => "http://registry.digitalgov.gov",

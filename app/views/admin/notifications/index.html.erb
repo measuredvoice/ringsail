@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 main">
+    <%= content_for :page_title do %>Notifications for User: <%= @user.email %> <% end %>
     <h1 class="page-header">Notifications for User: <%= @user.email %> </h1>
 
     <%= link_to "Edit Notification Settings", edit_notification_settings_admin_user_path(@user), :class => "btn btn-default" %><br/><br/>
