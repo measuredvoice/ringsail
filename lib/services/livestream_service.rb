@@ -7,6 +7,10 @@ class LivestreamService < Service
     :livestream
   end
 
+  def self.archived? 
+    true
+  end
+  
   def self.longname
   	"Livestream"
   end

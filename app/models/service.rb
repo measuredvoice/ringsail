@@ -6,7 +6,7 @@ class Service
 
   def self.find_by_shortname(shortname)
     found_service = nil
-    self.all.each do |service|
+    self.all(true).each do |service|
       found_service = service if service.shortname.to_s == shortname.to_s
     end
     found_service
@@ -14,7 +14,7 @@ class Service
 
   def self.search_by_name(query)
     services = []
-    self.all.each do |service|
+    self.all(true).each do |service|
       services << service if service.shortname.to_s.downcase.include? query
     end
     services
@@ -42,13 +42,21 @@ class Service
     return nil
   end
   
-  def self.all
-    sorted = @services.sort_by { |shortname, service| shortname }
+  def self.all(include_archived = false)
+    if include_archived == false
+      sorted = @services.select{ |shortname, service| service.archived? == false }.sort_by { |shortname, service| shortname }
+    else  
+      sorted = @services.sort_by { |shortname, service| shortname }
+    end
     sorted.map do |shortname, service|
       service
     end
   end
   
+  def self.archived? 
+    false
+  end
+
   def self.handles?(url)
     # Each service subclass needs to identify which URLs it can handle
     false

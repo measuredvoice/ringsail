@@ -11,6 +11,10 @@ class VimeoService < Service
     "#{account} on Vimeo"
   end
 
+  def self.archived? 
+    true
+  end
+  
   def account
     # This is probably an individual video
     return nil if /^\/\d+$/ =~ @uri.path

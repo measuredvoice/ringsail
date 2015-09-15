@@ -7,6 +7,10 @@ class PosterousService < Service
     :posterous
   end
   
+  def self.archived? 
+    true
+  end
+  
   def display_name
     "#{account} on Posterous"
   end

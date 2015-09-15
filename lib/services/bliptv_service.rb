@@ -3,6 +3,9 @@ class BlipService < Service
     uri.host =~ /blip.tv$/
   end
   
+  def self.archived? 
+    true
+  end
   def self.shortname
     :blip
   end

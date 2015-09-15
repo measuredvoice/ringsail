@@ -7,6 +7,10 @@ class MyspaceService < Service
     :myspace
   end
   
+  def self.archived? 
+    true
+  end
+
   def display_name
     "#{account} on Myspace"
   end

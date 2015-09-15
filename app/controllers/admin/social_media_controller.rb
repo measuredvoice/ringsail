@@ -16,7 +16,7 @@ class Admin::SocialMediaController < Admin::AdminController
       @outlets = @outlets.where(service: params[:service])
     end
     @services = @outlets.group(:service).count
-       
+    
     respond_to do |format|
       format.html { @outlets = [] }
       format.json { render "index" }

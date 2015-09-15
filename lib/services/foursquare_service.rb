@@ -7,6 +7,10 @@ class FoursquareService < Service
     :foursquare
   end
   
+  def self.archived? 
+    true
+  end
+
   def display_name
     "#{account} on Foursquare"
   end
