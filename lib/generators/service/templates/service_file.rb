@@ -13,7 +13,7 @@ class <%= file_name.capitalize  %>Service < Service
   end
 
   def account
-     /^\/(?<account>[\w-]+)\/?/ =~ @url.path
+     /^\/(?<account>[\w-]+)\/?/ =~ @uri.path
     account
   end
 
