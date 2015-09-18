@@ -45,8 +45,8 @@
         <%= f.select :device, options_for_select([
           ["Mobile Phone","Mobile Phone"],
           ["Mobile Web Browser","Mobile Web Browser"],
-          ["Tablet","Tablet"]
-          ]),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+          ["Tablet","Tablet"] ],f.object.device),
+          {include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div>
       <div class="field">
           <%= f.label :language %> </br>
