@@ -45,6 +45,7 @@ class AppStore
       response = JSON.parse(open(full_uri).read)
       if response["resultCount"] == 1
         date = Date.parse(response["results"][0]["releaseDate"])
+        screenshots = response["results"][0]["screenshotUrls"] + response["results"][0]["ipadScreenshotUrls"]
         return {
           platform: "iOS",
           version: response["results"][0]["version"],
@@ -53,7 +54,7 @@ class AppStore
           publish_day: date.day,
           publish_month: date.month,
           publish_year: date.year,
-          screenshot: response["results"][0]["screenshotUrls"].join("\n"),
+          screenshot: screenshots.join("\n") ,
           language: response["results"][0]["language"] == "EN" ? "English" : "Spanish"
         }
       else
