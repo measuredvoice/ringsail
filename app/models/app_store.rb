@@ -29,7 +29,7 @@ class AppStore
         number_of_ratings: response.xpath('//*[@itemprop="aggregateRating"]//meta[@itemprop="ratingCount"]/@content').to_s.strip,
         publish_day: date.day,
         publish_month: date.month,
-        pusbliH_year: date.year,
+        publish_year: date.year,
         screenshot: response.xpath('//img[@itemprop="screenshot"]/@src').map(&:to_s).join("\n")
       }
     rescue Exception => e
