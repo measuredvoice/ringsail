@@ -151,6 +151,13 @@
             },
             {
               "paramType": "query",
+              "name": "language",
+              "type": "string",
+              "description": "Language of the social media accounts to return",
+              "required": false
+            },
+            {
+              "paramType": "query",
               "name": "tags",
               "type": "ids",
               "description": "Comma seperated list of tag ids",

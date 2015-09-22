@@ -8,6 +8,7 @@ class Api::V1::SocialMediaController < Api::ApiController
     param :query, :q, :string, :optional, "String to compare to the name of accounts"
     param :query, :services, :service_keys, :optional, "Comma seperated list of service keys (available via services call)"
     param :query, :agencies, :ids, :optional, "Comma seperated list of agency ids"
+    param :query, :language, :string, :optional, "Language of the social media accounts to return"
     param :query, :tags, :ids, :optional, "Comma seperated list of tag ids"
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
@@ -22,7 +23,7 @@ class Api::V1::SocialMediaController < Api::ApiController
 
   def index
     params[:page_size] = params[:page_size] || PAGE_SIZE
-    @outlets = Outlet.api.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
+    @outlets = Outlet.all
     if params[:q] && params[:q] != ""
       @outlets = @outlets.where("account LIKE ? OR organization LIKE ? OR short_description LIKE ? OR long_description LIKE ?", 
         "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
@@ -32,6 +33,9 @@ class Api::V1::SocialMediaController < Api::ApiController
     end
     if params[:tags] && params[:tags] != ""
       @outlets = @outlets.where("official_tags.id" => params[:tags].split(","))
+    end
+    if params[:language] && params[:language] != ""
+      @outlets = @outlets.where("language LIKE ? ", "%#{params[:language]}%")
     end
     if params[:services] && params[:services] != ""
       @outlets = @outlets.where(service: params[:services].split(","))

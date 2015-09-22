@@ -7,6 +7,7 @@ class Api::V1::MobileAppsController < Api::ApiController
     param :query, :q, :string, :optional, "String to compare to the name & short description of the mobile apps."
     param :query, :agencies, :ids, :optional, "Comma seperated list of agency ids"
     param :query, :tags, :ids, :optional, "Comma seperated list of tag ids"
+    param :query, :language, :string, :optional, "Language of the social media accounts to return"
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
     response :ok, "Success"
@@ -27,6 +28,9 @@ class Api::V1::MobileAppsController < Api::ApiController
     end
     if params[:agencies] && params[:agencies] != ""
       @mobile_apps = @mobile_apps.where("agencies.id" =>params[:agencies].split(","))
+    end
+    if params[:language] && params[:language] != ""
+      @mobile_apps = @mobile_apps.where("language LIKE ? ", "%#{params[:language]}%")
     end
     if params[:tags] && params[:tags] != ""
       @mobile_apps = @mobile_apps.where("official_tags.id" => params[:tags].split(","))
