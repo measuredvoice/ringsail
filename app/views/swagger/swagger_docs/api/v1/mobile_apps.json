@@ -76,6 +76,13 @@
             },
             {
               "paramType": "query",
+              "name": "language",
+              "type": "string",
+              "description": "Language of the social media accounts to return",
+              "required": false
+            },
+            {
+              "paramType": "query",
               "name": "page_size",
               "type": "integer",
               "description": "Number of results per page",
