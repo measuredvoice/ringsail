@@ -111,6 +111,33 @@ namespace :load_apps_gallery_data do
   	end
   end
 
+
+  desc "Fill mobile apps"
+  task :fix_languages, [:file] => :environment do |t, args|
+    filepath= args[:file] || "data/current/registrations.json"
+    PublicActivity.enabled = false
+    Gallery.skip_callback(:save)
+    MobileApp.skip_callback(:save)
+    MobileAppVersion.skip_callback(:save)
+    Gallery.skip_callback(:create)
+    MobileApp.skip_callback(:create)
+    MobileAppVersion.skip_callback(:create)
+    if filepath
+        File.readlines(filepath).each do |f|
+          item = JSON.load( f )
+          app = MobileApp.find_by(mongo_id: item["Id"])
+          if app
+            app.language = item["Language"] == "English" ? "English" : "Spanish"
+          end
+        end
+        app.save(:validate => false)
+        end
+
+    else
+      puts "provide a file path relative to current working directory (or absolute)"
+    end
+  end
+
   desc "Fill mobile apps"
   task :mobile_apps, [:file] => :environment do |t, args|
   	filepath= args[:file] || "data/current/registrations.json"
@@ -131,7 +158,7 @@ namespace :load_apps_gallery_data do
   	    	if item["Icon"]
   		    	app.icon_url = item["Icon"].join(",")
   		    end
-  	    	app.language = item["Language"] == "EN" ? "English" : "Spanish"
+  	    	app.language = item["Language"] == "English" ? "English" : "Spanish"
   	    	if item["Agency"] && item["Agency"] != []
   		    	item["Agency"].each do |agency|
   		    		agency = Agency.find_by(mongo_id: agency["Id"])
