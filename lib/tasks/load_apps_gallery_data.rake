@@ -122,20 +122,15 @@ namespace :load_apps_gallery_data do
     Gallery.skip_callback(:create)
     MobileApp.skip_callback(:create)
     MobileAppVersion.skip_callback(:create)
-    if filepath
-        File.readlines(filepath).each do |f|
-          item = JSON.load( f )
-          app = MobileApp.find_by(mongo_id: item["Id"])
-          if app
-            app.language = item["Language"] == "English" ? "English" : "Spanish"
-          end
-        end
-        app.save(:validate => false)
-        end
-
-    else
-      puts "provide a file path relative to current working directory (or absolute)"
+    File.readlines(filepath).each do |f|
+      item = JSON.load( f )
+      app = MobileApp.find_by(mongo_id: item["Id"])
+      if app
+        app.language = item["Language"] == "English" ? "English" : "Spanish"
+      end
+      app.save(:validate => false)
     end
+
   end
 
   desc "Fill mobile apps"
