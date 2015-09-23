@@ -112,7 +112,7 @@ namespace :load_apps_gallery_data do
   end
 
 
-  desc "Fill mobile apps"
+  desc "Fix languages"
   task :fix_languages, [:file] => :environment do |t, args|
     filepath= args[:file] || "data/current/registrations.json"
     PublicActivity.enabled = false
