@@ -46,7 +46,9 @@ class AppStore
       if response["resultCount"] == 1
         date = Date.parse(response["results"][0]["releaseDate"])
         screenshots = response["results"][0]["screenshotUrls"] + response["results"][0]["ipadScreenshotUrls"]
-        return {
+        language = response["results"][0]["languageCodesISO2A"][0] == "EN" ? "English" : nil
+        language = response["results"][0]["languageCodesISO2A"][0] == "ES" ? "Spanish" : language
+        results = {
           platform: "iOS",
           version: response["results"][0]["version"],
           average_rating: response["results"][0]["averageUserRating"],
@@ -54,9 +56,12 @@ class AppStore
           publish_day: date.day,
           publish_month: date.month,
           publish_year: date.year,
-          screenshot: screenshots.join("\n") ,
-          language: response["results"][0]["language"] == "EN" ? "English" : "Spanish"
+          screenshot: screenshots.join("\n")
         }
+        if language
+          results[:language] = language
+        end
+        return results
       else
         return {}
       end
