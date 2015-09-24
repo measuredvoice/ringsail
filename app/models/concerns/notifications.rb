@@ -30,8 +30,8 @@ module Notifications
   def notifications_users_list
     contact_users = users.where(contact_notifications: true)
     contact_user_ids = contact_users.map(&:id)
-    contact_users << User.where(agency_id: agencies.map(&:id), agency_notifications: true).where("id NOT IN (?)",contact_user_ids)
-    contact_users.flatten
+    contact_users << User.where(agency_id: agencies.map(&:id), agency_notifications: true)
+    contact_users.flatten.uniq
   end
 
 end

@@ -73,9 +73,10 @@ class Admin::SocialMediaController < Admin::AdminController
   # POST /outlets.json
   def create
     @outlet = Outlet.new(outlet_params)
-    @outlet.status = Outlet.statuses[:under_review]
+    @outlet.status = Outlet.statuses[:published]
     respond_to do |format|
       if @outlet.save
+        @outlet.published!
         # @outlet.build_notifications(:created) #may want to remove
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Social Media Account was successfully created.' }
         format.json { render :show, status: :created, location: @outlet }
@@ -89,9 +90,11 @@ class Admin::SocialMediaController < Admin::AdminController
   # PATCH/PUT /outlets/1
   # PATCH/PUT /outlets/1.json
   def update
-    @outlet.status = Outlet.statuses[:under_review]
     respond_to do |format|
       if @outlet.update(outlet_params)
+        if @outlet.published?
+          @outlet.published!
+        end
         # @outlet.build_notifications(:updated) #may want to remove
         format.html { redirect_to admin_outlet_path(@outlet), notice: 'Social Media Account was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }
