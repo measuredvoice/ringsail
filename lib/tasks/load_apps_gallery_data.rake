@@ -231,6 +231,38 @@ namespace :load_apps_gallery_data do
   	end
   end
 
+  desc "Update versions languages"
+  task :mobile_apps, [:file] => :environment do |t, args|
+  	filepath= args[:file] || "data/current/registrations.json"
+  	PublicActivity.enabled = false
+    Gallery.skip_callback(:save)
+    MobileApp.skip_callback(:save)
+    MobileAppVersion.skip_callback(:save)
+    Gallery.skip_callback(:create)
+    MobileApp.skip_callback(:create)
+    MobileAppVersion.skip_callback(:create)
+  	if filepath
+  	    File.readlines(filepath).each do |f|
+  	      item = JSON.load( f )
+  	    	if item["Version_Details"] && ["Version_Details"] != []
+  		    	item["Version_Details"].each do |version_details|
+  		    		mobile_app_version = MobileAppVersion.find_by(mongo_id: version_details["_id"]["$oid"])
+  		    		if mobile_app_version
+  		    		  language = version_details["Language"] == "EN" ? "English" : nil
+  		    		  language =  version_details["Language"] == "ES" ? "Spanish" : language
+  		    		  mobile_app_version.language = language
+  		    		
+  		    		  mobile_app_version.save(:validate => false)
+  		    		end
+  		    	end
+  		    end
+  	    end
+
+  	else
+  		puts "provide a file path relative to current working directory (or absolute)"
+  	end
+  end
+  
   desc "Fill galleries"
   task :galleries, [:file] => :environment do |t, args|
   	filepath= args[:file] || "data/current/galleries.json"
