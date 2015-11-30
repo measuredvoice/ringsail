@@ -246,7 +246,7 @@ Ringsail::Application.routes.draw do
     end
     get 'about' => 'admin#about'
     get 'dashboards' => "dashboards#index"
-    get '/' => 'dashboards#index'
+    get '/' => 'admin#about'
   end
   
   devise_for :users

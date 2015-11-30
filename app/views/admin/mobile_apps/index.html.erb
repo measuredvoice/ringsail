@@ -22,12 +22,10 @@
           <table class="table table-striped" id="data-tables">
           <thead>
           <tr>
-            <th>Department</th>
+            <th>Agency</th>
             <th>Name</th>
-            <th>Tags</th>
+            <th>Last Updated</th>
             <th>Status</th>
-            <th>Updated At</th>
-            <th class = "lastlinks">Actions</th>
           </tr>
           </thead>
           <tbody>
@@ -55,23 +53,21 @@
             d.platform = $('#platform').val();
           }
         },
-        "scrollY":        "400px",
+        "scrollY": "400px",
         "columns": [
           { "data" : "agencies[, ]"},
           { "data" : "name"},
-          { "data" : "tags[, ]"},
-          { "data" : "status"},
           { "data" : "updated_at"},
-          { "data" : "DT_RowId"}
+          { "data" : "status"}
         ],
         "columnDefs": [
           {
             "render": function(data,type,row){
-              return '<a href="/admin/mobile_apps/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a><a href="/admin/mobile_apps/'+data+'/edit"><i class = \"glyphicon glyphicon-pencil\"></i></a>';
-            }, "targets":[5]
+              return '<a href="/admin/mobile_apps/'+row.id+'">'+data+'</a>';
+            }, "targets":[1]
           }
         ],
-        "order": [[ 5, "desc" ]],
+        "order": [[ 2, "desc" ]],
         "initComplete": function(settings, json) {
           $('.export').show();
         },

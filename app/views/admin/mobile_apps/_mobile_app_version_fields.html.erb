@@ -27,15 +27,15 @@
         <%= f.label :publish_date %> </br>
         <%= f.date_select :publish_date, {order: [:day, :month, :year], add_month_numbers: true, prompt: true}, {:class => "form-control-inline" } %>
       </div>
-      <div class="field">
+      <!-- <div class="field">
         <%= f.label :description, "Description - This will be set to match the Registration Description by default"
  %> </br>
         <%= f.text_area :description, :class => "form-control formwidth" %>
-      </div>
-      <div class="field">
+      </div> -->
+     <!--  <div class="field">
         <%= f.label :whats_new, "What's New  - Provide a brief list of what has been updated, if applicable" %> </br>
         <%= f.text_area :whats_new, :class => "form-control formwidth" %>
-      </div>
+      </div> -->
       <div class="field">
         <%= f.label :screenshot %> </br>
         <%= f.text_area :screenshot, :class => "form-control formwidth" %>
@@ -48,10 +48,10 @@
           ["Tablet","Tablet"] ],f.object.device),
           {include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div>
-      <div class="field">
+      <!-- <div class="field">
           <%= f.label :language %> </br>
           <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]],f.object.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
-      </div>
+      </div> -->
       <div class="field">
         <%= f.label :average_rating %> </br>
         <%= f.text_field :average_rating, :class => "form-control formwidth" %>
