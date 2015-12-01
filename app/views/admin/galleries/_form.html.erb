@@ -1,7 +1,7 @@
 <%= form_for([:admin,@gallery]) do |f| %>
   <% if @gallery.errors.any? %>
     <div id="error_explanation">
-        
+
       <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
   <span class="sr-only">Error:</span><%= pluralize(@gallery.errors.count, "error") %> prohibited this social media account from being saved</div>
 
@@ -17,11 +17,11 @@
     <%= f.label :name, "Name*" %> </br>
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
-  <div class="field"> 
+  <div class="field">
     <%= f.label :short_description %> </br>
     <%= f.text_field :short_description, :class => "form-control formwidth" %>
   </div>
-  <div class="field"> 
+  <div class="field">
     <%= f.label :long_description %> </br>
     <%= f.text_area :long_description, :class => "form-control formwidth" %>
   </div>
@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <div class="field hidden"> 
+  <div class="field hidden">
     <%= f.hidden_field :gallery_items_ol, :value => "" %>
   </div>
 
@@ -62,25 +62,25 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="mobile_apps">
         <table id="all_mobile_table" class="table table-striped" cellspacing="0" width="100%">
-          
+
         </table>
       </div>
       <div role="tabpanel" class="tab-pane" id="social_media">
         <table id="all_social_table" class="table table-striped" cellspacing="0" width="100%">
-        
+
         </table>
       </div>
     </div>
 
   </div>
-  </br> 
+  </br>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
-     <%= link_to 'Back', admin_galleries_path, :class => "btn btn-default" %>
+     <%= link_to 'Cancel', admin_galleries_path, :class => "btn btn-default" %>
   </div>
 
 <% end %>
-    
+
 <% content_for :additional_javascript do %>
   <script>
     function add_mobile_app(id,status,text){
@@ -131,7 +131,7 @@
         prePopulate: tags,
       preventDuplicates: true
       });
-      <% user_json = [] 
+      <% user_json = []
       @gallery.users.each do |user|
         user_json << {id: user.id, name: user_list_format(user)}
       end%>
@@ -184,9 +184,9 @@
         ]
       });
 
-      
+
     });
 
-  
+
   </script>
 <% end %>

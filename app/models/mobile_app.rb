@@ -20,13 +20,13 @@ class MobileApp < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model
   include Notifications
-  
+
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
   scope :api, -> { where("draft_id IS NOT NULL") }
 
-  enum status: { under_review: 0, published: 1, archived: 2, 
+  enum status: { under_review: 0, published: 1, archived: 2,
     publish_requested: 3, archive_requested: 4 }
 
   # Outlets have a relationship to themselvs
@@ -44,7 +44,7 @@ class MobileApp < ActiveRecord::Base
 
   has_many :mobile_app_agencies, dependent: :destroy
   has_many :agencies, :through => :mobile_app_agencies
-  
+
   has_many :mobile_app_users, dependent: :destroy
   has_many :users, :through => :mobile_app_users
 
@@ -53,16 +53,16 @@ class MobileApp < ActiveRecord::Base
   has_many :mobile_app_official_tags, dependent: :destroy
   has_many :official_tags, :through => :mobile_app_official_tags
 
-  
+
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :presence => true
   validates :short_description, :presence => true
   validates :long_description, :presence => true
-  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
-  validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one mobile app version" } 
-  
+  validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one version of the product must be given." } 
+
 
   def self.platform_counts
     joins(:mobile_app_versions).where("mobile_apps.draft_id IS NULL").group(:platform).distinct("mobile_app_id, platform").count
@@ -150,5 +150,5 @@ class MobileApp < ActiveRecord::Base
     MobileApp.public_activity_on
     self.create_activity :archive_requested
   end
- 
+
 end

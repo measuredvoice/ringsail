@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>Mobile Product Registrations<% end %>
-    <h1 class="page-header">Mobile Product Registrations</h1>
+    <%= content_for :page_title do %>Mobile Products<% end %>
+    <h1 class="page-header">Mobile Products</h1>
       <div class="row placeholders">
         <div class="col-xs-12 col-sm-3 col-md-2 verticalTabsWrap">
           <div class="list-group verticalTabs">
@@ -17,8 +17,9 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">   
-          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right export" %>      
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
+          <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %>
           <table class="table table-striped" id="data-tables">
           <thead>
           <tr>
@@ -31,7 +32,8 @@
           <tbody>
           </tbody>
           </table>
-          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right export" %>  
+          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default  pull-right export" %>
+          <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %>
          </div>
       </div>
     </div>
@@ -63,7 +65,10 @@
         "columnDefs": [
           {
             "render": function(data,type,row){
-              return '<a href="/admin/mobile_apps/'+row.id+'">'+data+'</a>';
+              console.log(data);
+              console.log(type);
+              console.log(row);
+              return '<a href="/admin/mobile_apps/'+row.DT_RowId+'">'+data+'</a>';
             }, "targets":[1]
           }
         ],
@@ -87,12 +92,7 @@
 
     function add_tag(name){
       data_tables.fnFilter(name);
-    }    
+    }
 
   </script>
 <% end %>
-
-
-
-
-

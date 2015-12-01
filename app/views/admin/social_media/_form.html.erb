@@ -1,7 +1,7 @@
 <%= form_for([:admin,@outlet]) do |f| %>
   <% if @outlet.errors.any? %>
     <div id="error_explanation">
-        
+
       <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
       <span class="sr-only">Error:</span><%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</div>
 
@@ -21,16 +21,16 @@
       <%= f.select :service, options_for_select(Service.all.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
     <% end %>
   </div>
-  <div class="field"> 
-    <%= f.label :service_url, "Service URL*" %> Format Help - <span id="format-help">pick an account type for format help</span></br>
+  <div class="field">
+    <%= f.label :service_url, "Account URL*" %> Format Help - <span id="format-help">pick an account type for format help</span></br>
     <%= f.text_field :service_url, :class => "form-control formwidth" %>
     <%= f.hidden_field :account %>
   </div>
   <div class="field">
-    <%= f.label :organization, "Social Media Account Name (Plain Language Name)" %> </br>
+    <%= f.label :organization, "Account Name" %> </br>
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
-  
+
   <div class="field">
     <%= f.label :short_description %> </br>
     <%= f.text_field :short_description, :class => "form-control formwidth" %>
@@ -58,7 +58,7 @@
   <br/>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
-    <%= link_to 'Back', admin_outlets_path, {:class=>"btn btn-default", role: "button"} %>
+    <%= link_to 'Cancel', admin_outlets_path, {:class=>"btn btn-default", role: "button"} %>
   </div>
 
 <% end %>
@@ -71,7 +71,7 @@
       preventDuplicates: true
     });
 
-    
+
     var tags = [];
     var official_tags = <%= raw @outlet.official_tags.to_json %>;
     for(var i =0; i< official_tags.length; i++){
@@ -82,7 +82,7 @@
       prePopulate: tags,
       preventDuplicates: true
     });
-    <% user_json = [] 
+    <% user_json = []
       @outlet.users.each do |user|
         user_json << {id: user.id, name: user_list_format(user)}
       end

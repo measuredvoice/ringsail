@@ -35,7 +35,7 @@
   <strong>Status:</strong>
   <%= mobile_app.status.humanize %>
 </p>
-<p><strong>Versions</strong></p>
+<p><strong>Platform Details</strong></p>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <% random = rand(10000000) %>
   <% mobile_app.mobile_app_versions.each_with_index do |mav,index| %>
@@ -43,14 +43,14 @@
     <div class="panel-heading" role="tab" id="headingOne">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%= "#{random}#{index}" %>" aria-expanded="false" aria-controls="collapseOne">
-          Version <%= index + 1 %>
+          Platform <%= index + 1 %>
         </a>
       </h4>
     </div>
     <div id="collapse<%= "#{random}#{index}" %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-        <strong>Store url:</strong> <%= mav.store_url %> </br>
-        <strong>Version Platform:</strong> <%= mav.platform %> </br>
+        <strong>Store URL:</strong> <%= mav.store_url %> </br>
+        <strong>Platform:</strong> <%= mav.platform %> </br>
         <strong>Version Number:</strong> <%= mav.version_number %> </br>
         <!-- <strong>Description:</strong> <%= mav.description %></br> -->
         <!-- <strong>What's new:</strong> <%= mav.whats_new %></br> -->
