@@ -9,30 +9,33 @@
 		</div>
 	</div>
 	<div class="col-sm-6 col-md-6">
-    <h3><i class="fa fa-clock-o fa-fw"></i> Published Social Media Account Info</h3>
-		<div class="panel panel-default">
-	  	<div class="panel-body">
-	  		<% if @outlet.published %>
-	  			<p>
-		  			<strong>API Link</strong>
-		  			<%= link_to api_v1_social_medium_url(id:@outlet), 
-		  				api_v1_social_medium_url(id: @outlet) %>
-		  		</p>
-	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published } %>
-	  		<% else %>
-	  			<p>No information is currently published for this social media account</p>
-	  		<% end %>
-	    </div>
-	  </div>
-	</div>
-</div>
-<div class="row">
-	<div class="buttonRow">
-		<%= link_to 'Back to Social Media', admin_outlets_path, {:class => "fa fa-angle-double-left"} %>
-		<%= link_to 'Edit', edit_admin_outlet_path(@outlet), {:class => "fa fa-pencil"} %> 
-<!-- 		<%#= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "fa fa-history"} %> -->
-			<%= link_to 'Publish', publish_admin_outlet_path(@outlet), {:class => "fa fa-bullhorn"} %> 
-			<%= link_to 'Archive', archive_admin_outlet_path(@outlet), {:class=> "fa fa-archive"} %>
+    <div class="row">
+			<div class="col-sm-12">
+				<br/>
+        <%= link_to ' Back to Social Media', admin_outlets_path, {:class => "btn btn-default fa fa-angle-double-left"} %>
+        <%= link_to ' Edit', edit_admin_outlet_path(@outlet), {:class => "btn btn-default fa fa-pencil"} %>
+    <!-- 		<%#= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "fa fa-history"} %> -->
+          <%= link_to ' Publish', publish_admin_outlet_path(@outlet), {:class => "btn btn-default fa fa-bullhorn"} %>
+          <%= link_to ' Archive', archive_admin_outlet_path(@outlet), {:class=> "btn btn-default fa fa-archive"} %>
+      </div>
+      <div class="col-sm-12">
+        <h3><i class="fa fa-clock-o fa-fw"></i> Published Social Media Account Info</h3>
+    		<div class="panel panel-default">
+    	  	<div class="panel-body">
+    	  		<% if @outlet.published %>
+    	  			<p>
+    		  			<strong>API Link</strong>
+    		  			<%= link_to api_v1_social_medium_url(id:@outlet),
+    		  				api_v1_social_medium_url(id: @outlet) %>
+    		  		</p>
+    	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published } %>
+    	  		<% else %>
+    	  			<p>No information is currently published for this social media account</p>
+    	  		<% end %>
+    	    </div>
+    	  </div>
+      </div>
+    </div>
 	</div>
 </div>
 <div class = "row">

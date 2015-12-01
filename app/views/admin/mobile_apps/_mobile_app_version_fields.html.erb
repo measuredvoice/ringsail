@@ -2,6 +2,14 @@
     <fieldset>
       <legend>Platform Details</legend>
       <div class="field">
+        <%= f.label :device, "Product Type*" %> </br>
+        <%= f.select :device, options_for_select([
+          ["Web","Web"],
+          ["App - Phone/Tablet","App - Phone/Tablet"],
+          ["App - Tablet Only","App - Tablet Only"] ],f.object.device),
+          {include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      </div>
+      <div class="field">
         <%= f.label :store_url, "Store URL / Location*" %> </br>
         <%= f.text_field :store_url, :class => "form-control formwidth" %>
         <%= link_to "Get Platform Details From URL", "#", :class=>"btn btn-default version-details" %>
@@ -39,14 +47,6 @@
       <div class="field">
         <%= f.label :screenshot, "Screenshot - Provide app store URLs of the screenshots" %> </br>
         <%= f.text_area :screenshot, :class => "form-control formwidth" %>
-      </div>
-      <div class="field">
-        <%= f.label :device, "Device*" %> </br>
-        <%= f.select :device, options_for_select([
-          ["Mobile Phone","Mobile Phone"],
-          ["Mobile Web Browser","Mobile Web Browser"],
-          ["Tablet","Tablet"] ],f.object.device),
-          {include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div>
       <!-- <div class="field">
           <%= f.label :language %> </br>
