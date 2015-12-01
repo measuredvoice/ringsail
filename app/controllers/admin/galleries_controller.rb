@@ -1,14 +1,14 @@
 class Admin::GalleriesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy, 
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy,
     :publish, :archive, :request_archive, :request_publish]
   # GET /gallerys
   # GET /gallerys.json
   def index
     @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
 
-    num_items = items_per_page_handler     
+    num_items = items_per_page_handler
     respond_to do |format|
       format.html { @galleries = [] }
       format.json { render "index" }
@@ -18,7 +18,7 @@ class Admin::GalleriesController < Admin::AdminController
 
   def galleries_export
     @galleries = Gallery.where("id IN (?)",params[:ids].split(",")).includes(:official_tags,:users,:agencies)
-    respond_to do |format|  
+    respond_to do |format|
       format.csv { send_data @galleries.to_csv }
     end
   end
@@ -26,7 +26,7 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys/1
   # GET /gallerys/1.json
   def show
-    
+
   end
 
   # GET /gallerys/new
@@ -47,7 +47,7 @@ class Admin::GalleriesController < Admin::AdminController
     @gallery = Gallery.new(gallery_params)
     respond_to do |format|
       if @gallery.save
-
+        @gallery.published!
         @gallery.gallery_items_ol = gallery_params[:gallery_items_ol]
         if @gallery.save
           format.html { redirect_to admin_gallery_path(@gallery), notice: 'Gallery was successfully created.' }
@@ -130,13 +130,13 @@ class Admin::GalleriesController < Admin::AdminController
     def sort_column
       Gallery.column_names.include?(params[:sort]) ? params[:sort] : "galleries.name"
     end
-  
+
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     def items_per_page_handler
-      per_page_count = 25    
+      per_page_count = 25
       if cookies[:per_page_count_galleries]
         per_page_count = cookies[:per_page_count_galleries]
       end
@@ -144,6 +144,6 @@ class Admin::GalleriesController < Admin::AdminController
         per_page_count = params[:per_page]
         cookies[:per_page_count_galleries] = per_page_count
       end
-      return per_page_count.to_i        
-    end      
+      return per_page_count.to_i
+    end
 end

@@ -1,7 +1,7 @@
 class Admin::MobileAppsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy, 
+  before_action :set_mobile_app, only: [:show, :edit, :update, :destroy,
     :archive, :publish, :request_archive, :request_publish]
 
   before_filter :require_admin, only: [:publish]
@@ -9,7 +9,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps.json
   def index
     @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies).references(:official_tags,:agencies).uniq
-    
+
     if params[:platform] && params[:platform] != ""
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
     end
@@ -17,13 +17,13 @@ class Admin::MobileAppsController < Admin::AdminController
     respond_to do |format|
       format.html { @mobile_apps = []}
       format.json { render "index"}
-      format.csv { send_data @mobile_apps.to_csv}      
+      format.csv { send_data @mobile_apps.to_csv}
     end
   end
 
   def mobile_apps_export
     @mobile_apps = MobileApp.where("id in (?)", params[:ids].split(",")).includes(:official_tags,:users,:agencies,:mobile_app_versions)
-     respond_to do |format|  
+     respond_to do |format|
       format.csv { send_data @mobile_apps.to_csv }
     end
   end
@@ -59,7 +59,7 @@ class Admin::MobileAppsController < Admin::AdminController
   end
 
   def show
-    
+
   end
 
   # POST /mobile_apps
@@ -70,6 +70,7 @@ class Admin::MobileAppsController < Admin::AdminController
     respond_to do |format|
       if @mobile_app.save
         @mobile_app.build_notifications(:created)
+        @mobile_app.published!
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully created.' }
         format.json { render :show, status: :created, location: @mobile_app }
       else
@@ -151,7 +152,7 @@ class Admin::MobileAppsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_app_params
-      params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url, 
+      params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url,
         :language, :agency_tokens, :user_tokens, :tag_tokens, mobile_app_versions_attributes: [:id, :store_url,:platform,
         :version_number,:publish_date,:description,:whats_new,:screenshot,:device,
         :language,:average_rating,:number_of_ratings, :_destroy])
@@ -160,16 +161,16 @@ class Admin::MobileAppsController < Admin::AdminController
     def sort_column
       MobileApp.column_names.include?(params[:sort]) ? params[:sort] : "name"
     end
-  
+
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-    end    
+    end
 
     def items_per_page_handler
       per_page_count = 25
       if params[:hidden_platform_value]
         params[:platform] = params[:hidden_platform_value]
-      end      
+      end
       if cookies[:per_page_count_mobile_registrations]
         per_page_count = cookies[:per_page_count_mobile_registrations]
       end
@@ -177,14 +178,14 @@ class Admin::MobileAppsController < Admin::AdminController
         per_page_count = params[:per_page]
         cookies[:per_page_count_mobile_registrations] = per_page_count
       end
-      return per_page_count.to_i        
-    end    
+      return per_page_count.to_i
+    end
 
     def get_tag(tag_id)
       !tag_id.nil? ? OfficialTag.find_by(id: tag_id) : nil
     end
 
     def tag_text(tag)
-      !tag.nil? ? tag.tag_text : nil 
-    end    
+      !tag.nil? ? tag.tag_text : nil
+    end
 end

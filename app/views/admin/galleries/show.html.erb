@@ -15,15 +15,8 @@
 				<br/>
 				<%= link_to " Back to Galleries", admin_galleries_path, {:class => "btn btn-default fa fa-angle-double-left"} %>
 				<%= link_to " Edit", edit_admin_gallery_path(@gallery), {:class => "btn btn-default fa fa-pencil"} %>
-				<% if current_user.admin? %>
-					<%= link_to ' Publish', publish_admin_gallery_path(@gallery), {:class => "btn btn-default fa fa-bullhorn"} %>
-					<%= link_to ' Archive', archive_admin_gallery_path(@gallery), {:class=> "btn btn-default fa fa-archive"} %>
-				<% else %>
-					<%= link_to ' Request Publish', request_publish_admin_gallery_path(@gallery), {:class => "btn btn-default fa fa-bullhorn"} %>
-					<% if @gallery.published %>
-					<%= link_to ' Request Archive', request_archive_admin_gallery_path(@gallery), {:class=> "btn btn-default fa fa-archive"} %>
-					<% end %>
-				<% end %>
+				<%= link_to ' Publish', publish_admin_gallery_path(@gallery), {:class => "btn btn-default fa fa-bullhorn"} %>
+				<%= link_to ' Archive', archive_admin_gallery_path(@gallery), {:class=> "btn btn-default fa fa-archive"} %>
 			</div>
 			<div class="col-sm-12">
 				<h3><i class="fa fa-clock-o fa-fw"></i> Published Gallery Info</h3>
