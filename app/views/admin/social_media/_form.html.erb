@@ -41,7 +41,7 @@
   </div>
   <div class="field">
     <%= f.label :language, "Language*" %> </br>
-    <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @outlet.language), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
+    <%= f.select :language, options_for_select(language_select_options, @outlet.language), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field agencies">
     <%= f.label :agency_tokens, "Sponsoring Agencies*" %> </br>

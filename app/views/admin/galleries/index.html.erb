@@ -15,10 +15,8 @@
             <th>Name</th>
             <th># Social Media Accounts</th>
             <th># Mobile Products</th>
-            <th>Tags</th>
             <th>Status</th>
             <th>Updated At</th>
-            <th class = "lastlinks">Actions</th>
           </tr>
           </thead>
 
@@ -58,16 +56,14 @@
           { "data" : "name"},
           { "data" : "outlet_count"},
           { "data" : "mobile_app_count"},
-          { "data" : "tags[, ]"},
           { "data" : "status"},
-          { "data" : "updated_at"},
-          { "data" : "DT_RowId"}
+          { "data" : "updated_at"}
         ],
         "columnDefs": [
           {
             "render": function(data,type,row){
-              return '<a href="/admin/galleries/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a><a href="/admin/galleries/'+data+'/edit"><i class = \"glyphicon glyphicon-pencil\"></i></a>';
-            }, "targets":[7]
+              return '<a href="/admin/galleries/'+row.DT_RowId+'">'+data+'</a>';
+            }, "targets":[1]
           }
         ],
         "order": [[ 4, "desc" ]],
