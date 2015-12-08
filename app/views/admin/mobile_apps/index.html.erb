@@ -45,6 +45,11 @@
   <%= hidden_field_tag :ids %>
 <% end %>
 <% content_for :additional_javascript do %>
+<style>
+.dataTables_filter{
+  display:none;
+}
+</style>
   <script>
     var data_tables = null;
     $(document).ready(function() {
@@ -72,6 +77,7 @@
         "order": [[ 2, "desc" ]],
         "initComplete": function(settings, json) {
           $('.export').show();
+          $('.dataTables_filter').show();
         },
         'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     });
