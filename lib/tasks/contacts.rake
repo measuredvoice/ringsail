@@ -14,7 +14,7 @@ namespace :contacts do
       agency = Agency.find_by_name(contact[1])
       user = User.find_by(email: contact[0])
       if user == nil
-        user = User.create_by(email: contact[0], user: contact[0], agency: agency)
+        user = User.create(email: contact[0], user: contact[0], agency: agency)
       end
       agency.mobile_apps.each do |ma|
         if !ma.users.map(&:id).include? user.id
