@@ -20,13 +20,13 @@ class Outlet < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model
   include Notifications
-  
+
   tracked owner: Proc.new{ |controller, model| controller.current_user }
-  
+
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
   scope :api, -> { where("draft_id IS NOT NULL") }
-  
-  enum status: { under_review: 0, published: 1, archived: 2, 
+
+  enum status: { under_review: 0, published: 1, archived: 2,
     publish_requested: 3, archive_requested: 4 }
   #handles versioning
   #attr_accessor :auth_token
@@ -54,18 +54,18 @@ class Outlet < ActiveRecord::Base
 
   # acts as taggable is being kept until we do a final data migration (needed for backwards compatibility)
   acts_as_taggable
-  
+
   # Published outlets should not.
-  validates :service, 
+  validates :service,
     :presence   => true
-  validates :service_url, 
-    :presence   => true, 
+  validates :service_url,
+    :presence   => true,
     :format     => { :with => URI::regexp(%w(http https)) }
 
   validates :language, :presence => true
-  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
-  
+
   paginates_per 100
 
   # def service_info
@@ -77,7 +77,7 @@ class Outlet < ActiveRecord::Base
   #     end
   #   end
   # end
-  
+
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << (column_names + ["agencies" ,"contacts" ,"tags"])
@@ -91,52 +91,56 @@ class Outlet < ActiveRecord::Base
   def self.to_review
     where('outlets.updated_at < ?', 6.months.ago).order('outlets.updated_at')
   end
-  
+
   def self.resolve(url)
     return nil if url.nil? || url.empty?
 
     url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
-    
+
     s = Service.find_by_url(url)
-    
+
     return nil unless s
-    
+
     existing = self.find_by_account_and_service(s.account, s.shortname)
     if existing
       return existing
     else
       return nil
     end
-  end   
+  end
 
   def self.resolves(url)
     return nil if url.nil? || url.empty?
 
     url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
-    
+
     s = Service.find_by_url(url)
-    
+
     return nil unless s
-    
+
     existing = self.where(account: s.account, service: s.shortname).where("draft_id IS NOT NULL")
     if existing
       return existing
     else
       return nil
     end
-  end  
-  
+  end
+
   def service_info
     @service_info ||= Service.find_by_url(service_url)
   end
-    
+
   def agency_tokens=(ids)
     self.agency_ids = ids.split(",")
   end
 
   # will rely on replacing the tokens system, but CRUDing out the info for now
   def tag_tokens=(ids)
-    self.official_tag_ids = ids.split(',')
+    current_ids = []
+    ids.split(",").each do |id|
+      current_ids << OfficialTag.find_or_create_by(tag_text: id).id
+    end
+    self.official_tag_ids = current_ids
   end
 
   def user_tokens=(ids)
@@ -194,7 +198,7 @@ class Outlet < ActiveRecord::Base
   end
 
   private
-  
+
   def set_updated_by
     current_token = AuthToken.find_valid_token(auth_token)
     if !current_token.nil?
@@ -202,5 +206,5 @@ class Outlet < ActiveRecord::Base
     else
       self.updated_by ||= 'admin'
     end
-  end  
+  end
 end

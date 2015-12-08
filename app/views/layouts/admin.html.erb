@@ -33,14 +33,14 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-        
+
 	    </div>
 	    <div id="navbar" class="navbar-collapse collapse">
 	      <ul class="nav navbar-nav">
 	        <li class="<%= "active" if request.path == "/admin" %>">
-	        	<a href="/admin/">Dashboard </a>
+	        	<a href="/admin/">Home</a>
 	        </li>
-         	
+
 	        <li class="<%= "active" if request.original_url.include? "admin/social_media" %>">
 	        	<a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Social Media <span class = "caret"></span></a>
 	        	<ul class="dropdown-menu" role="menu">
@@ -102,8 +102,8 @@
 	            <li><%= link_to "Logout", destroy_user_session_path %></li>
 	            <% if Rails.env.development?  %>
 	            	<li role="presentation" class="dropdown-header">Impersonate</li>
-	            	<% User.roles.each do |k,v| 
-	            		  user = User.where(role: v).first 
+	            	<% User.roles.each do |k,v|
+	            		  user = User.where(role: v).first
 	            		  if user %>
 			                <li><%= link_to k.humanize, admin_impersonate_path(user_id: user.id) %></li>
 			            <% end %>
@@ -111,7 +111,7 @@
 	            <% end %>
 		        </ul>
 	        </li>
-                
+
         </ul>
 	    </div>
 	  </div>

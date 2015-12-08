@@ -6,7 +6,7 @@
       <div class="col-xs-12 col-sm-12 col-md-2 verticalTabsWrap">
         <div class="list-group verticalTabs">
           <%= link_to admin_outlets_path, {class: "list-group-item verticalTabs-item #{"active" if params[:service].nil? }"} do %>
-            All         
+            All
           <%end%>
           <% @services.each do |key, value|
               if  !Service.find_by_shortname(key).archived? %>
@@ -20,23 +20,24 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
-        <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right export" %>
+        <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
+        <%= link_to "Add a Social Media Account", new_admin_outlet_path, class: "btn btn-default pull-right"  %>
         <table class="table table-striped" id="data-tables">
           <thead>
             <tr>
-              <th>Department</th>
-              <th>Service</th>
-              <th>Social Media Account</th>
-              <th>Tags</th>
+              <th>Agency</th>
+              <th>Account Type</th>
+              <th>Account Name</th>
+              <th>User Name</th>
+              <th>Last Updated</th>
               <th>Status</th>
-              <th>Updated At</th>
-              <th class = "lastlinks">Actions</th>
             </tr>
           </thead>
           <tbody>
           </tbody>
         </table>
-        <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "pull-right export" %>
+        <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
+        <%= link_to "Add a Social Media Account", new_admin_outlet_path, class: "btn btn-default pull-right"  %>
       </div>
     </div>
   </div>
@@ -61,17 +62,16 @@
         "columns": [
           { "data" : "agencies[, ]"},
           { "data" : "service"},
-          { "data" : "account_name"},
-          { "data" : "tags[, ]"},
-          { "data" : "status"},
+          { "data" : "account_name" },
+          { "data" : "account"},
           { "data" : "updated_at"},
-          { "data" : "DT_RowId"}
+          { "data" : "status"}
         ],
         "columnDefs": [
           {
             "render": function(data,type,row){
-              return '<a href="/admin/social_media/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a><a href="/admin/social_media/'+data+'/edit"><i class = \"glyphicon glyphicon-pencil\"></i></a>';
-            }, "targets":[6]
+              return '<a href="/admin/social_media/'+row.DT_RowId+'">'+data+'</a>';
+            }, "targets":[3]
           }
         ],
         "order": [[ 5, "desc" ]],
@@ -95,7 +95,7 @@
 
     function add_tag(name){
       data_tables.fnFilter(name);
-    }    
+    }
 
   </script>
 <% end %>

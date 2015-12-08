@@ -33,7 +33,7 @@
     <%= f.label :name , "Name of App/Website*"%> </br>
     <%= f.text_field :name, :class => "form-control formwidth" %>
   </div>
-  <div class="field"> 
+  <div class="field">
     <%= f.label :short_description, "Short Description*  - Tagline description; not more than one sentence
 " %> </br>
     <%= f.text_field :short_description, :class => "form-control formwidth" %>
@@ -49,7 +49,7 @@
   </div>
   <div class="field">
     <%= f.label :language %> </br>
-    <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]], @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+    <%= f.select :language, options_for_select(language_select_options, @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field agencies">
     <%= f.label :agency_tokens, "Sponsoring Agencies*" %> </br>
@@ -66,18 +66,18 @@
     </div>
   </div>
   <div class="versions">
-    <p>At least one version of the app must be given.</p>
+    <p>At least one version of the product must be given.</p>
     <%= f.fields_for :mobile_app_versions do |mobile_app_version| %>
       <%= render "mobile_app_version_fields",{ f: mobile_app_version, mav: mobile_app_version } %>
     <% end %>
-      
+
     <div class="buttonRow">
-      <%= link_to_add_association "Add Version", f, :mobile_app_versions , {:class => "fa fa-plus"} %>
+      <%= link_to_add_association "Add Platform Details", f, :mobile_app_versions , {:class => "fa fa-plus"} %>
     </div>
   </div>
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
-    <%= link_to 'Back', admin_mobile_apps_path, :class => "btn btn-default" %>
+    <%= link_to 'Cancel', admin_mobile_apps_path, :class => "btn btn-default" %>
   </div>
 
 <% end %>
@@ -90,7 +90,7 @@
       prePopulate: <%= raw @mobile_app.agencies.map(&:attributes).to_json %>,
       preventDuplicates: true
     });
-    <% user_json = [] 
+    <% user_json = []
       @mobile_app.users.each do |user|
         user_json << {id: user.id, name: user_list_format(user)}
       end%>
@@ -103,7 +103,7 @@
     var tags = [];
     var official_tags = <%= raw @mobile_app.official_tags.to_json %>;
     for(var i =0; i< official_tags.length; i++){
-      tags.push({id: official_tags[i]["id"], name: humanize(official_tags[i]["tag_type"])+': '+official_tags[i]["tag_text"]})
+      tags.push({id: official_tags[i]["tag_text"], name: official_tags[i]["tag_text"]})
     }
     $("#mobile_app_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,
@@ -132,9 +132,9 @@
       if(data["version"]){
         el.find("[name$='version_number]']").val(data["version"]);
       }
-      if(data["language"]){
-        el.find("[name$='language]']").val(data["language"]);
-      }
+      // if(data["language"]){
+      //   el.find("[name$='language]']").val(data["language"]);
+      // }
       if(data["average_rating"]){
         el.find("[name$='average_rating]']").val(data["average_rating"]);
       }
@@ -145,13 +145,13 @@
         el.find("[name$='screenshot]']").val(data["screenshot"]);
       }
       if(data["publish_day"]){
-        el.find("[name$='publish_date(3i)]']").val(data["publish_day"]);       
+        el.find("[name$='publish_date(3i)]']").val(data["publish_day"]);
       }
       if(data["publish_month"]){
-        el.find("[name$='publish_date(2i)]']").val(data["publish_month"]); 
+        el.find("[name$='publish_date(2i)]']").val(data["publish_month"]);
       }
       if(data["publish_year"]){
-       el.find("[name$='publish_date(1i)]']").val(data["publish_year"]); 
+       el.find("[name$='publish_date(1i)]']").val(data["publish_year"]);
       }
       if(!data["platform"]){
         version_parent.find(".version-messages").text("No details found for given URL.")

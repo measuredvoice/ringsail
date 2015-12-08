@@ -4,26 +4,13 @@
     <h1 class="page-header">Tags</h1>
 
     <div class="row placeholders">
-      <div class="col-xs-12 col-sm-12 col-md-2 verticalTabsWrap">
-        <div class="list-group verticalTabs">
-          <%= link_to admin_official_tags_path, {class: "list-group-item verticalTabs-item #{"active" if params[:type].nil? }"} do %>
-            All
-            <span class="count pull-right"><%= @total_tags %></span>
-          <%end%>
-          <% @types.each do |key, value| %>
-            <%= link_to admin_official_tags_path(type: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:type]}"} do %>
-              <%= OfficialTag.tag_types.invert[key].humanize %>
-              <span class="count pull-right"><%= value %></span>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 tbldisplay">
+
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 tbldisplay">
         <table id="data-tables" class=" table table-striped">
           <thead>
             <tr = "users_row">
               <th>Tag</th>
-              <th>Type</th>
+              <!-- <th>Type</th> -->
               <th># Social Accounts</th>
               <th># Mobile Apps</th>
               <th># Galleries</th>
@@ -54,7 +41,6 @@
         "scrollY":        "400px",
         "columns": [
           { "data" : "tag_text"},
-          { "data" : "tag_type"},
           { "data" : "outlet_counts"},
           { "data" : "mobile_counts"},
           { "data" : "gallery_counts"},
@@ -64,7 +50,7 @@
           {
             "render": function(data,type,row){
               return '<a href="/admin/official_tags/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a><a href="/admin/official_tags/'+data+'/edit"><i class = \"glyphicon glyphicon-pencil\"></i></a>';
-            }, "targets":[5]
+            }, "targets":[4]
           }
         ],
         'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
