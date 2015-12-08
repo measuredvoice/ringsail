@@ -37,6 +37,11 @@
 <% end %>
 
 <% content_for :additional_javascript do %>
+<style>
+.dataTables_filter{
+  display:none;
+}
+</style>
   <script>
     // var tags = [];
     // $("#tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
@@ -69,6 +74,7 @@
         "order": [[ 4, "desc" ]],
         "initComplete": function(settings, json) {
           $('.export').show();
+          $('.dataTables_filter').show();
         },
         'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
     } );
