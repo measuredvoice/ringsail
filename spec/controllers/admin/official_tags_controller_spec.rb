@@ -1,6 +1,6 @@
 require 'rails_helper'
 RSpec.describe Admin::OfficialTagsController, type: :controller do
-  
+
   describe "GET #index" do
     it "responds successfully with an HTTP 200 status code for admin users" do
       sign_in FactoryGirl.create(:admin_user)
@@ -34,7 +34,7 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
       expect(response).to render_template("index")
     end
 
-    it "load all official tags" do 
+    it "load all official tags" do
       build_official_tags = build_list(:official_tag,20)
       sign_in FactoryGirl.create(:admin_user)
       get :index
@@ -107,7 +107,7 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
   end
 
 
-  describe "POST #create" do 
+  describe "POST #create" do
     it "creates an official_tag" do
       sign_in FactoryGirl.create(:admin_user)
       official_tag = FactoryGirl.attributes_for(:official_tag)
@@ -185,14 +185,14 @@ RSpec.describe Admin::OfficialTagsController, type: :controller do
     end
   end
 
-  describe "GET /official_tags/tokeninput" do
-    it "should allow lookup of tags by text" do
-      sign_in FactoryGirl.create(:admin_user)
-      official_tag = FactoryGirl.create(:official_tag)
-      get :tokeninput, format: :json, q: official_tag.tag_text.first(2)
-      expect(assigns[:official_tags]).to match([official_tag])
-      expect(response).to render_template("tokeninput")
-    end
-  end
+  # describe "GET /official_tags/tokeninput" do
+  #   it "should allow lookup of tags by text" do
+  #     sign_in FactoryGirl.create(:admin_user)
+  #     official_tag = FactoryGirl.create(:official_tag)
+  #     get :tokeninput, format: :json, q: official_tag.tag_text.first(2)
+  #     expect(assigns[:official_tags]).to match([official_tag])
+  #     expect(response).to render_template("tokeninput")
+  #   end
+  # end
 
 end
