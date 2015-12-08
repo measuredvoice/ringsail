@@ -1,5 +1,5 @@
 class AdminMailer < ActionMailer::Base
-  default from: "Social Media Registry <socialmediaregistry@gsa.gov>"
+  default from: "Social Media and Mobile Product Registry <socialmediaregistry@gsa.gov>"
 
   def six_month_review_notice(email, preview_email=nil)
     @outlets_count = Outlet.to_review_for(email).count

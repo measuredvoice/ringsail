@@ -49,7 +49,7 @@
     </div>
     <div id="collapse<%= "#{random}#{index}" %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
       <div class="panel-body">
-        <strong>Store URL:</strong> <%= mav.store_url %> </br>
+        <strong>Store URL:</strong> <%= link_to mav.store_url, mav.store_url, :target => "_blank" %> </br>
         <strong>Platform:</strong> <%= mav.platform %> </br>
         <strong>Version Number:</strong> <%= mav.version_number %> </br>
         <!-- <strong>Description:</strong> <%= mav.description %></br> -->

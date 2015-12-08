@@ -15,10 +15,10 @@
       <%= f.label :tag_text, "Tag" %> </br>
       <%= f.text_field :tag_text, :class => "form-control formwidth" %>
     </div>
-     <div class="field">
+     <!-- <div class="field">
       <%= f.label :tag_type, "Type" %> </br>
       <%= f.select :tag_type, OfficialTag.tag_types.keys.to_a.map{ |w| [w.humanize, w]}, {}, :class => "form-control formwidth" %>
-    </div>
+    </div> -->
     <div class="actions">
       <%= f.submit :class => "btn btn-primary" %>
     </div>

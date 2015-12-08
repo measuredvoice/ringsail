@@ -5,5 +5,5 @@ json.data @outlets do |outlet|
   json.set! :account_name, outlet.organization
   json.set! :account, outlet.account
   json.set! :status, outlet.status.humanize
-  json.set! :updated_at, outlet.updated_at.strftime("%B %e, %Y %H:%M %Z")
+  json.set! :updated_at, outlet.updated_at.strftime("%m/%d/%Y %H:%M %Z")
 end

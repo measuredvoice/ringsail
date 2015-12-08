@@ -16,7 +16,7 @@ class Gallery < ActiveRecord::Base
 	 #handles logging of activity
 	include PublicActivity::Model
   include Notifications
-  
+
 	tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
@@ -30,7 +30,7 @@ class Gallery < ActiveRecord::Base
   # This will allow easy querying on the public / admin portion of the application
   has_one :published, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
   belongs_to :draft, class_name: "Gallery", foreign_key: "draft_id"
-	
+
 	has_many :gallery_users, dependent: :destroy
 	has_many :users, through: :gallery_users
 
@@ -45,9 +45,9 @@ class Gallery < ActiveRecord::Base
   has_many :outlets, :through => :gallery_items, :source => :item, :source_type => "Outlet"
 
   validates :name, :presence => true
-  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" } 
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
-  
+
   def published_gallery_items
     self.gallery_items.where(status: 1)
   end
@@ -60,7 +60,7 @@ class Gallery < ActiveRecord::Base
     Outlet.where("draft_id IN (?)", self.outlet_ids)
   end
 
-  
+
   def self.to_csv(options = {})
     CSV.generate(options) do |csv|
       csv << (column_names + ["agencies" ,"contacts" ,"tags"])
@@ -70,7 +70,7 @@ class Gallery < ActiveRecord::Base
       end
     end
   end
-  
+
   # This handles a json serialized format from the administrative end.
   # It is to allowed ordering of lists in the forms
   # Please be careful if messing with this, its senssitive
@@ -131,7 +131,7 @@ class Gallery < ActiveRecord::Base
     MobileApp.public_activity_on
     self.create_activity :published
   end
-  
+
   def archived!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archived]
@@ -156,9 +156,13 @@ class Gallery < ActiveRecord::Base
     Gallery.public_activity_on
     self.create_activity :archive_requested
   end
-  
-  def tag_tokens=(ids)
-    self.official_tag_ids = ids.split(',')
+
+	def tag_tokens=(ids)
+    current_ids = []
+    ids.split(",").each do |id|
+      current_ids << OfficialTag.find_or_create_by(tag_text: id).id
+    end
+    self.official_tag_ids = current_ids
   end
 
   def agency_tokens=(ids)

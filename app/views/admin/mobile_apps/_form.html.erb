@@ -103,7 +103,7 @@
     var tags = [];
     var official_tags = <%= raw @mobile_app.official_tags.to_json %>;
     for(var i =0; i< official_tags.length; i++){
-      tags.push({id: official_tags[i]["id"], name: humanize(official_tags[i]["tag_type"])+': '+official_tags[i]["tag_text"]})
+      tags.push({id: official_tags[i]["tag_text"], name: official_tags[i]["tag_text"]})
     }
     $("#mobile_app_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,

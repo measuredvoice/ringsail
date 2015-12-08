@@ -1,5 +1,5 @@
 class NotificationMailer < ActionMailer::Base
-  default from: "Social Media Registry <socialmediaregistry@gsa.gov>"
+  default from: "Social Media and Mobile Product Registry <socialmediaregistry@gsa.gov>"
 
   def email(notification)
     @notification = notification

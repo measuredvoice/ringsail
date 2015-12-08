@@ -6,5 +6,5 @@ json.data @galleries do |gallery|
   json.set! :outlet_count, gallery.outlets.count
   json.set! :mobile_app_count, gallery.mobile_apps.count
   json.set! :status, gallery.status.try(:humanize)
-  json.set! :updated_at, gallery.updated_at.strftime("%B %e, %Y %H:%M %Z")
+  json.set! :updated_at, gallery.updated_at.strftime("%m/%d/%Y %H:%M %Z")
 end

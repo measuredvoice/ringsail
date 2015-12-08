@@ -34,7 +34,7 @@
               </td>
               <td class="table_data"><%= notification.message_type %></td>
               <td class="table_data"><%= notification.message %></td>
-              <td class="table_data"><%= notification.created_at.strftime("%B %e, %Y %H:%M") %></td>
+              <td class="table_data"><%= notification.created_at.strftime("%m/%d/%Y %H:%M %Z") %></td>
             </tr>
           <% end %>
         </tbody>

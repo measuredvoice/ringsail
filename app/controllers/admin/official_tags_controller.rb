@@ -12,7 +12,7 @@ class Admin::OfficialTagsController < Admin::AdminController
     else
       @official_tags = OfficialTag.all
     end
-    num_items = items_per_page_handler            
+    num_items = items_per_page_handler
     @total_tags = OfficialTag.all.count
     @types = OfficialTag.group(:tag_type).count
     @official_tags = @official_tags
@@ -39,7 +39,7 @@ class Admin::OfficialTagsController < Admin::AdminController
       @official_tag = OfficialTag.where(:id=> @official_tag.id).includes(:outlets,:mobile_apps,:galleries).first
     end
   end
-  
+
 
   # POST /tags
   # POST /tags.json
@@ -83,6 +83,7 @@ class Admin::OfficialTagsController < Admin::AdminController
 
   def tokeninput
     @official_tags = OfficialTag.where("tag_Text LIKE ?", "%#{params[:q]}%")
+    @official_tags << OfficialTag.new(tag_text: params[:q]) if !@official_tags.any? {|tag| tag.tag_text == params[:q]}
     respond_to do |format|
       format.json { render 'tokeninput'}
     end
@@ -102,13 +103,13 @@ class Admin::OfficialTagsController < Admin::AdminController
     def sort_column
       OfficialTag.column_names.include?(params[:sort]) ? params[:sort] : "tag_text"
     end
-  
+
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     def items_per_page_handler
-      per_page_count = 25    
+      per_page_count = 25
       if cookies[:per_page_count_tags]
         per_page_count = cookies[:per_page_count_tags]
       end
@@ -116,7 +117,7 @@ class Admin::OfficialTagsController < Admin::AdminController
         per_page_count = params[:per_page]
         cookies[:per_page_count_tags] = per_page_count
       end
-      return per_page_count.to_i        
-    end      
+      return per_page_count.to_i
+    end
 
 end

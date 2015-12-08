@@ -3,18 +3,17 @@
     <div class="swagger-ui-wrap">
        <form id='api_selector' class="navbar-form navbar-left" role="search">
         <div class="form-group">
-          <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
+          <!-- <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
           <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
-          <div class='input'><a id="explore" href="#">Explore</a></div>
+          <div class='input'><a id="explore" href="#">Explore</a></div> -->
         </div>
       </form>
     </div>
   </div>
-  <div id="message-bar" class="swagger-ui-wrap">&nbsp;</div>
   <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 </div>
 <%= content_for :page_title do %>Swagger Docs <% end %>
-<% content_for :additional_javascript do %> 
+<% content_for :additional_javascript do %>
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
