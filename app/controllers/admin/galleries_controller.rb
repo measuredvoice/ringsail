@@ -68,6 +68,9 @@ class Admin::GalleriesController < Admin::AdminController
   def update
     respond_to do |format|
       if @gallery.update(gallery_params)
+        if @gallery.published?
+          @gallery.published!
+        end
         format.html { redirect_to admin_gallery_path(@gallery), notice: 'Gallery was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_gallery_path(@gallery) }
       else

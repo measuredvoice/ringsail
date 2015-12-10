@@ -4,7 +4,7 @@ class Admin::MobileAppsController < Admin::AdminController
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy,
     :archive, :publish, :request_archive, :request_publish]
 
-  before_filter :require_admin, only: [:publish]
+  # before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
@@ -88,6 +88,9 @@ class Admin::MobileAppsController < Admin::AdminController
   def update
     respond_to do |format|
       if @mobile_app.update(mobile_app_params)
+        if @mobile_app.published?
+          @mobile_app.published!
+        end
         @mobile_app.build_notifications(:updated)
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully updated.' }
         format.json { render :show, status: :ok, location: admin_mobile_app_path(@mobile_app) }
