@@ -26,7 +26,9 @@ Swagger::Docs::Config.register_apis({
              products.  Accessing the Social Media and Mobile Products Registry requires an OMB Max ID, which is available
              to federal government employees and contractors with a valid .gov, .mil, or .fed.us email address.
              <a href=\"https://max.omb.gov/maxportal/registrationForm.action\">Register for an OMB Max ID</a> if you need one.</p>
-         <p><a class=\"btn btn-default\" href=\"/admin/\">LOG IN</a></p>"
+         <p><a class=\"btn btn-default\" href=\"/admin/\">LOG IN</a></p>
+         <h2>API Documentation</h2>
+        <p>The API documentation below serves as both a way to learn how to use the API, but to also test it directly in your browser.</p>"
       }
     }
   }
