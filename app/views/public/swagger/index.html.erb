@@ -17,7 +17,7 @@
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
-        url: "http://<%= request.host_with_port %>/swagger_docs/api-docs.json",
+        url: "#{ENV['REGISTRY_HOSTNAME']}/swagger_docs/api-docs.json",
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
         onComplete: function(swaggerApi, swaggerUi){
