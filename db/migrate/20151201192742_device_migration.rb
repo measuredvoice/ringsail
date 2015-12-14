@@ -8,5 +8,10 @@ class DeviceMigration < ActiveRecord::Migration
       ma.long_description = ActionView::Base.full_sanitizer.sanitize(ma.long_description)
       ma.save
     end
+
+    Outlet.all.each do |outlet|
+      outlet.published!
+      outlet.save
+    end
   end
 end
