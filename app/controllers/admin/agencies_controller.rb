@@ -1,7 +1,7 @@
 class Admin::AgenciesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore]
+  before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore, :reassign]
   protect_from_forgery except: :tokeninput
  
   before_filter :require_admin, except: [:tokeninput]
@@ -54,6 +54,24 @@ class Admin::AgenciesController < Admin::AdminController
         format.json {render json: @agency.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def reassign
+    @new_agency = Agency.find(params[:new_agency])
+    if @agency && @new_agency
+      GalleryAgency.where(agency_id: @agency.id).update_all(agency_id: @new_agency.id)
+      
+      MobileAppAgency.where(agency_id: @agency.id).update_all(agency_id: @new_agency.id)
+      
+      Sponsorship.where(agency_id: @agency.id).update_all(agency_id: @new_agency.id)
+      
+      @agency.update_counters
+      @agency.save
+
+      @new_agency.update_counters
+      @new_agency.save
+    end
+    redirect_to admin_agency_path(@new_agency)
   end
 
   def destroy

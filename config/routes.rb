@@ -192,6 +192,9 @@ Ringsail::Application.routes.draw do
       collection do
         get 'tokeninput'
       end
+      member do
+        get 'reassign'
+      end
     end
     resources :official_tags, concerns: :activity_and_history do
       collection do
