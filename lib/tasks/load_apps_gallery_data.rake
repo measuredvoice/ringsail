@@ -1,5 +1,24 @@
 namespace :load_apps_gallery_data do
 
+  desc "fixing data for production deploy"
+  task :data_fix, [:file] => :environment do |t,args|
+    PublicActivity.enabled = false 
+    MobileAppVersion.where(device: "Mobile Phone").update_all(device: "App - Phone/Tablet") 
+    MobileAppVersion.where(device: "Tablet").update_all(device: "App - Tablet Only") 
+    MobileAppVersion.where(device: "Mobile Web Browser").update_all(device: "Web") 
+    MobileApp.all.each do |ma| 
+      ma.long_description = ActionView::Base.full_sanitizer.sanitize(ma.long_description) 
+      ma.save 
+    end 
+    Outlet.all.each do |out| 
+      out.published! 
+      out.save 
+    end 
+
+  end
+
+
+
   desc "actually publish"
   task :publish, [:file] => :environment do |t,args|
     PublicActivity.enabled = false
@@ -196,7 +215,7 @@ namespace :load_apps_gallery_data do
   		    		mobile_app_version.publish_date = date
   		    		mobile_app_version.description = version_details["Description"]
   		    		mobile_app_version.whats_new = version_details["Whats_New"]
-  		    		mobile_app_version.screenshot = version_details["Screenshot"].empty? ? "" : version_details["Screenshot"][0]
+  		    		mobile_app_version.screenshot = version_details["Screenshot"].empty? ? "" : version_details["Screenshot"].join("\n")
   		    		mobile_app_version.device = version_details["Device"][0]
   		    		mobile_app_version.language = version_details["Language"] == "EN" ? "English" : "Spanish"
   		    		mobile_app_version.average_rating = version_details["Rating"]
