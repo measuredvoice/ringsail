@@ -133,6 +133,7 @@ namespace :load_apps_gallery_data do
   		    	app.icon_url = item["Icon"].join(",")
   		    end
   	    	app.language = item["Language"] == "English" ? "English" : "Spanish"
+          app.agencies = []
   	    	if item["Agency"] && item["Agency"] != []
   		    	item["Agency"].each do |agency|
   		    		agency = Agency.find_by(mongo_id: agency["Id"])
@@ -159,6 +160,7 @@ namespace :load_apps_gallery_data do
   		    	tags << item["Meta_Details"][0]["Category"]
   		    	tags << item["Meta_Details"][0]["Topic"]
   		    	actual_tags = tags.flatten
+            app.official_tags = []
   		    	actual_tags.each do |tag|
   		    		if !tag.blank?
   			    		app.official_tags << OfficialTag.find_or_create_by(tag_text: tag)
@@ -166,12 +168,14 @@ namespace :load_apps_gallery_data do
   		    	end
   		    end
   	    	contacts = item["Contact"].map{|item| item["Email1"]}
+          app.users = []
   	    	contacts.each do |contact|
   	    		user = User.find_by(email: contact)
   	    		if user
   	    			app.users << user
   	    		end
   	    	end
+          app.mobile_app_versions = []
   	    	if item["Version_Details"] && ["Version_Details"] != []
   		    	item["Version_Details"].each do |version_details|
   		    		mobile_app_version = MobileAppVersion.find_or_create_by(mongo_id: version_details["_id"]["$oid"])
@@ -256,14 +260,14 @@ namespace :load_apps_gallery_data do
       	
       	registrations = item["Registration"].map{|item| item["Id"]}
 
-        
+        gallery.mobile_apps = []
       	registrations.each do |registration|
       		mobile_app = MobileApp.find_by(mongo_id: registration)
       		if mobile_app
   	    		gallery.mobile_apps << mobile_app
   	    	end
       	end
-
+        gallery.users = []
       	contacts = item["Contact"].map{|item| item["Email1"]}
       	contacts.each do |contact|
       		user = User.find_by(email: contact)
