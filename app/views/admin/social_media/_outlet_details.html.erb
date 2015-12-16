@@ -25,6 +25,11 @@
   <strong>Long Description:</strong>
   <%= outlet.long_description %>
 </p>
+
+<p>
+  <strong>Language:</strong>
+  <%= outlet.language %>
+</p>
 <p>
   <strong>Tags:</strong>
   <%= outlet.official_tags.map(&:tag_text).join(', ') %>
