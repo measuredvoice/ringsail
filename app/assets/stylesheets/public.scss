@@ -27,6 +27,12 @@ line-height: 1.6em;
 color: #555;
 font-weight: 400;
 }
+.entry ul.square-style li{
+  list-style: square;
+}
+.entry ul.square-style{
+    margin: 0 0 20px 60px;
+}
 h1, h2, h3, h4, h5, h6{
     font-family: Trebuchet,Tahoma,sans-serif;
 }
@@ -41,9 +47,9 @@ p{
 margin-bottom: 20px;
 }
 
-.entry ul, .entry ol{
-    margin: 0!important;
-}
+// .entry ul, .entry ol{
+//     margin: 0!important;
+// }
 ul.token-input-list{   
 background-color: #ffffff;
 }

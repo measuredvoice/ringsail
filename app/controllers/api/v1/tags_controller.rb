@@ -3,8 +3,8 @@ class Api::V1::TagsController < Api::ApiController
 	swagger_controller :tags, "Tags"
 
 	swagger_api :index do
-    	summary "Fetches all official tags, with queryable fields such as a basic text search and search by tag."
-        notes "This lists all active agencies.  It accepts parameters to perform basic search."
+    	summary "Fetches all official tags, with queryable fields such as a basic text search and."
+        notes "This lists all tags.  It accepts parameters to perform basic search."
         param :query, :q, :string, :optional, "String to compare to the short name of tags."
         param :type, :type, :string, :optional, "Comma Seperated List of Tag Types"
         param :query, :page_size, :integer, :optional, "Number of results per page"
@@ -17,7 +17,7 @@ class Api::V1::TagsController < Api::ApiController
 
     swagger_api :types do
         summary "Fetches all types for the tags, to help power other queries."
-        notes "This returns an agency based on an ID."
+        notes "This returns a tag based on an ID."
         response :ok, "Success"
         response :not_acceptable, "The request you made is not acceptable"
         response :requested_range_not_satisfiable   
@@ -26,7 +26,7 @@ class Api::V1::TagsController < Api::ApiController
 
 	swagger_api :show do
 		summary "Fetches tag based on ID"
-        notes "This returns an agency based on an ID."
+        notes "This returns a tag based on an ID."
         param :path, :id, :integer, :optional, "ID of the tag."
         response :ok, "Success"
         response :not_acceptable, "The request you made is not acceptable"

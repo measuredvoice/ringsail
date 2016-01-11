@@ -1,3 +1,53 @@
+  <h1 class="page-title">U.S. Digital Registry</h1>
+  <p><img class="aligncenter size-full wp-image-168841" src="https://www.digitalgov.gov/files/2014/06/600-x-280-Facebook-Federal-Government-Verification-CIA-Federal-Social-Media-Registry.jpg" alt="Screen capture of search results for &quot;Central Intelligence Agency&quot; on Facebook; Facebook's blue and white Verified check mark identifies the real CIA's federal account above multiple imposter accounts." width="600" height="280" scale="0"></p>
+  <h2>For U.S. Government</h2>
+  <p><a class="button" href="https://socialmobileregistry.digitalgov.gov/admin">Register and Manage Accounts</a></p>
+  <h2>For Developers: Using and Improving the API</h2>
+  <p>Access the <a href="#swagger-api-docs">U.S. Digital Registry API</a> or its <a href="https://github.com/ctacdev/social-media-registry" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://github.com/ctacdev/social-media-registry', 'GitHub repo');">GitHub repo</a> to test, evaluate, improve and use it.</p>
+  <h2>What is the U.S. Digital Registry?</h2>
+  <p>Whether for emergency management and public health, reliable financial services or trusted access to education programs, the need for users to confirm the validity of official U.S. government digital platforms is critical.</p>
+  <p>A challenge in embracing emerging startup and private sector platforms for public service is ensuring that citizens can trust the app used for official engagement is managed by the legitimate agency and not a unofficial source, phishing scam or malicious entity.</p>
+  <p>The U.S. Digital Registry serves as the authoritative resource for agencies, citizens and developers to confirm the official status of social media and public-facing collaboration accounts, mobile apps and mobile websites.</p>
+  <p>Data fields in the registry include the agency, platform, account, language, points of contact and collaborative tags.</p>
+  <p>Developers are encouraged to use the API to verify the thousands of official accounts and mobile apps in order to maintain trust in official public service engagements, and build new user-centered programs to empower citizens. The API currently feeds <a href="https://www.usa.gov/mobile-apps" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://www.usa.gov/mobile-apps', 'USAgov’s Federal Mobile Apps Directory');">USAgov’s Federal Mobile Apps Directory</a> and <a href="https://gobierno.usa.gov/apps-moviles" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://gobierno.usa.gov/apps-moviles', 'Directorio Federal de Aplicaciones (Apps) Móviles');">Directorio Federal de Aplicaciones (Apps) Móviles</a> page(s).</p>
+  <p>The U.S. Digital&nbsp;Registry and API is early in development: please contact us to share your feedback, ideas and experience for future iterations.</p>
+  <h2><b>How to Access the U.S. Digital Registry</b></h2>
+  <p>Accessing the U.S. Digital&nbsp;Registry requires an OMB Max ID, which is available to federal government employees and contractors with a valid .gov, .mil, or .fed.us email address. <a href="https://max.omb.gov/maxportal/registrationForm.action" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://max.omb.gov/maxportal/registrationForm.action', 'Register for an OMB Max ID');">Register for an OMB Max ID</a> if you need one.</p>
+  <p>Any registered social media accounts should be created under federal-compatible <a href="http://www.digitalgov.gov/resources/negotiated-terms-of-service-agreements/">Terms of Service (TOS)</a>. If they weren’t, contact your agency <a href="http://www.digitalgov.gov/resources/agency-points-of-contact-for-federal-compatible-terms-of-service-agreements/">Point of Contact</a>, to bring accounts into compliance with federal law. Mobile native app and mobile web registrations do not need to be created with federal-compatible Terms of Service (TOS).</p>
+  <h2><b>What’s “Official”?</b></h2>
+  <p>The U.S. Digital Registry only includes accounts that represent official U.S. government agencies, organizations, or programs — the collection grows weekly. You can register accounts managed by federal agencies, heads of agencies or members of the President’s Cabinet. <b><i>Do not</i></b> enter personal, employee, or other types of accounts.</p>
+  <h2>Types of accounts we can verify</h2>
+  <hr style="border-style: none;border-width: 1px;margin: 0.5em auto 0.5em auto">
+  <p>More than 80 apps currently have amended Terms of Service for official government use. This list will update and expand in future iterations based on need and capability:</p>
+  <ul class="square-style">
+  <li>Facebook</li>
+  <li>Flickr</li>
+  <li>Github</li>
+  <li>Google+</li>
+  <li>IdeaScale</li>
+  <li>Instagram</li>
+  <li>LinkedIn</li>
+  <li>Pinterest</li>
+  <li>Scribd</li>
+  <li>Slideshare</li>
+  <li>Socrata</li>
+  <li>Storify</li>
+  <li>Tumblr</li>
+  <li>Twitter</li>
+  <li>Uservoice</li>
+  <li>Ustream</li>
+  <li>YouTube</li>
+  </ul>
+  <h2>Feedback</h2>
+  <p>If you have questions, comments or ideas on how to use or improve the U.S. Digital&nbsp;Registry, please contact us <a href="mailto:socialmediaregistry@gsa.gov">via email</a>.</p>
+
+<div style="clear:both;"></div>
+  <h2 id="swagger-api-docs">API Documentation</h2>
+  <p>The API documentation below serves as both a way to learn how to use the API, but to also test it directly in your browser.</p>
+
+
+<div style="clear:both;"></div>
+
 <div class="swagger-section">
   <div id='header'>
     <div class="swagger-ui-wrap">
@@ -12,12 +62,11 @@
   </div>
   <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 </div>
-<%= content_for :page_title do %>Swagger Docs <% end %>
 <% content_for :additional_javascript do %>
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
-        url: "https://<%= request.host_with_port %>/swagger_docs/api-docs.json",
+        url: "http://<%= request.host_with_port %>/swagger_docs/api-docs.json",
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
         onComplete: function(swaggerApi, swaggerUi){
