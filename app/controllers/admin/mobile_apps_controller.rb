@@ -4,7 +4,7 @@ class Admin::MobileAppsController < Admin::AdminController
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy,
     :archive, :publish, :request_archive, :request_publish]
 
-  before_filter :require_admin, only: [:publish]
+  # before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
@@ -70,8 +70,8 @@ class Admin::MobileAppsController < Admin::AdminController
     respond_to do |format|
       if @mobile_app.save
         @mobile_app.build_notifications(:created)
-        @mobile_app.published!
-        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully created.' }
+        # @mobile_app.published!
+        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully created. Please review and click 'Publish' to publish this mobile product to the API." }
         format.json { render :show, status: :created, location: @mobile_app }
       else
         if @mobile_app.mobile_app_versions.empty?
@@ -88,8 +88,11 @@ class Admin::MobileAppsController < Admin::AdminController
   def update
     respond_to do |format|
       if @mobile_app.update(mobile_app_params)
+        # if @mobile_app.published?
+        #   @mobile_app.published!
+        # end
         @mobile_app.build_notifications(:updated)
-        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: 'MobileApp was successfully updated.' }
+        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully updated. Please review and click 'Publish' to publish these updates to the API." }
         format.json { render :show, status: :ok, location: admin_mobile_app_path(@mobile_app) }
       else
         format.html { render :edit }
@@ -103,7 +106,7 @@ class Admin::MobileAppsController < Admin::AdminController
   def destroy
     @mobile_app.destroy!
     respond_to do |format|
-      format.html { redirect_to admin_mobile_apps_url, notice: 'MobileApp was successfully destroyed.' }
+      format.html { redirect_to admin_mobile_apps_url, notice: 'Mobile Product was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

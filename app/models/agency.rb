@@ -56,7 +56,20 @@ class Agency < ActiveRecord::Base
       end
     end
   end
-  
+
+
+  def update_counters
+    self.draft_gallery_count = galleries.where("draft_id IS NULL").count
+    self.published_gallery_count = galleries.where("draft_id IS NOT NULL").count
+
+
+    self.draft_outlet_count = outlets.where("draft_id IS NULL").count
+    self.published_outlet_count = outlets.where("draft_id IS NOT NULL").count
+
+    self.draft_mobile_app_count = mobile_apps.where("draft_id IS NULL").count
+    self.published_mobile_app_count = mobile_apps.where("draft_id IS NOT NULL").count
+  end
+
   def contact_emails(options = {})
     agency_contacts.where("email != ?", options[:excluding]).map do |contact|
       contact.email

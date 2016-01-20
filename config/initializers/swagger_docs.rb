@@ -15,19 +15,5 @@ Swagger::Docs::Config.register_apis({
     :base_api_controller => "Api::ApiController",
     :clean_directory => true,
     # add custom attributes to api-docs
-    :attributes => {
-      :info => {
-        "title" => "Social Media & Mobile Products Registry",
-        "description" => "<p>The Social Media and Mobile Products Registry feeds the Federal Social Media and Mobile Products API.
-          This API populates the USAgov Federal Government Mobile Apps Directory, and is used by social media firms
-          to verify the authenticity of government social media accounts.</p>
-
-          <p>Federal government social media and mobile products managers can register, edit and review their agency’s
-             products.  Accessing the Social Media and Mobile Products Registry requires an OMB Max ID, which is available
-             to federal government employees and contractors with a valid .gov, .mil, or .fed.us email address.
-             <a href=\"https://max.omb.gov/maxportal/registrationForm.action\">Register for an OMB Max ID</a> if you need one.</p>
-         <p><a class=\"btn btn-default\" href=\"/admin/\">LOG IN</a></p>"
-      }
-    }
   }
 })

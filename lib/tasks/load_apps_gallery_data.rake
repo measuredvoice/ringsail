@@ -1,5 +1,24 @@
 namespace :load_apps_gallery_data do
 
+  desc "fixing data for production deploy"
+  task :data_fix, [:file] => :environment do |t,args|
+    PublicActivity.enabled = false 
+    MobileAppVersion.where(device: "Mobile Phone").update_all(device: "App - Phone/Tablet") 
+    MobileAppVersion.where(device: "Tablet").update_all(device: "App - Tablet Only") 
+    MobileAppVersion.where(device: "Mobile Web Browser").update_all(device: "Web") 
+    MobileApp.all.each do |ma| 
+      ma.long_description = ActionView::Base.full_sanitizer.sanitize(ma.long_description) 
+      ma.save 
+    end 
+    Outlet.all.each do |out| 
+      out.published! 
+      out.save 
+    end 
+
+  end
+
+
+
   desc "actually publish"
   task :publish, [:file] => :environment do |t,args|
     PublicActivity.enabled = false
@@ -133,6 +152,7 @@ namespace :load_apps_gallery_data do
   		    	app.icon_url = item["Icon"].join(",")
   		    end
   	    	app.language = item["Language"] == "English" ? "English" : "Spanish"
+          app.agencies = []
   	    	if item["Agency"] && item["Agency"] != []
   		    	item["Agency"].each do |agency|
   		    		agency = Agency.find_by(mongo_id: agency["Id"])
@@ -159,6 +179,7 @@ namespace :load_apps_gallery_data do
   		    	tags << item["Meta_Details"][0]["Category"]
   		    	tags << item["Meta_Details"][0]["Topic"]
   		    	actual_tags = tags.flatten
+            app.official_tags = []
   		    	actual_tags.each do |tag|
   		    		if !tag.blank?
   			    		app.official_tags << OfficialTag.find_or_create_by(tag_text: tag)
@@ -166,12 +187,14 @@ namespace :load_apps_gallery_data do
   		    	end
   		    end
   	    	contacts = item["Contact"].map{|item| item["Email1"]}
+          app.users = []
   	    	contacts.each do |contact|
   	    		user = User.find_by(email: contact)
   	    		if user
   	    			app.users << user
   	    		end
   	    	end
+          app.mobile_app_versions = []
   	    	if item["Version_Details"] && ["Version_Details"] != []
   		    	item["Version_Details"].each do |version_details|
   		    		mobile_app_version = MobileAppVersion.find_or_create_by(mongo_id: version_details["_id"]["$oid"])
@@ -192,7 +215,7 @@ namespace :load_apps_gallery_data do
   		    		mobile_app_version.publish_date = date
   		    		mobile_app_version.description = version_details["Description"]
   		    		mobile_app_version.whats_new = version_details["Whats_New"]
-  		    		mobile_app_version.screenshot = version_details["Screenshot"].empty? ? "" : version_details["Screenshot"][0]
+  		    		mobile_app_version.screenshot = version_details["Screenshot"].empty? ? "" : version_details["Screenshot"].join("\n")
   		    		mobile_app_version.device = version_details["Device"][0]
   		    		mobile_app_version.language = version_details["Language"] == "EN" ? "English" : "Spanish"
   		    		mobile_app_version.average_rating = version_details["Rating"]
@@ -256,14 +279,14 @@ namespace :load_apps_gallery_data do
       	
       	registrations = item["Registration"].map{|item| item["Id"]}
 
-        
+        gallery.mobile_apps = []
       	registrations.each do |registration|
       		mobile_app = MobileApp.find_by(mongo_id: registration)
       		if mobile_app
   	    		gallery.mobile_apps << mobile_app
   	    	end
       	end
-
+        gallery.users = []
       	contacts = item["Contact"].map{|item| item["Email1"]}
       	contacts.each do |contact|
       		user = User.find_by(email: contact)

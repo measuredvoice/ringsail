@@ -2,10 +2,10 @@ class AddMobileApps < ActiveRecord::Migration
   def change
 
   	create_table :mobile_apps do |t|
-      	t.string :name
+      	t.text :name
       	t.text :short_description
       	t.text :long_description
-      	t.string :icon_url
+      	t.text :icon_url
       	t.string :language
 
       	t.integer :agency_id
@@ -22,7 +22,7 @@ class AddMobileApps < ActiveRecord::Migration
 
   	create_table :mobile_app_versions do |t|
   		t.integer :mobile_app_id
-  		t.string :store_url
+  		t.text :store_url
   		t.string :platform
   		t.string :version_number
   		t.datetime :publish_date

@@ -47,10 +47,10 @@ class Admin::GalleriesController < Admin::AdminController
     @gallery = Gallery.new(gallery_params)
     respond_to do |format|
       if @gallery.save
-        @gallery.published!
+        # @gallery.published!
         @gallery.gallery_items_ol = gallery_params[:gallery_items_ol]
         if @gallery.save
-          format.html { redirect_to admin_gallery_path(@gallery), notice: 'Gallery was successfully created.' }
+          format.html { redirect_to admin_gallery_path(@gallery), notice: "Gallery was successfully created. Please review and click 'Publish' to publish this record to the API." }
           format.json { render :show, status: :created, location: @gallery }
         else
           format.html { render :new }
@@ -68,7 +68,10 @@ class Admin::GalleriesController < Admin::AdminController
   def update
     respond_to do |format|
       if @gallery.update(gallery_params)
-        format.html { redirect_to admin_gallery_path(@gallery), notice: 'Gallery was successfully updated.' }
+        # if @gallery.published?
+        #   @gallery.published!
+        # end
+        format.html { redirect_to admin_gallery_path(@gallery), notice: "Gallery was successfully updated. Please review and click 'Publish' to publish this gallery to the API." }
         format.json { render :show, status: :ok, location: admin_gallery_path(@gallery) }
       else
         format.html { render :edit }

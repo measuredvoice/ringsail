@@ -61,12 +61,12 @@
   </div>
   <div class="contacts">
     <div class="field">
-      <%= f.label :user_tokens, "Contacts*" %></br>
+      <%= f.label :user_tokens, "Contacts* - please provide two contact names" %></br>
       <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => ""} %>
     </div>
   </div>
   <div class="versions">
-    <p>At least one version of the product must be given.</p>
+    <p>At least one set of platform details of the product must be given.</p>
     <%= f.fields_for :mobile_app_versions do |mobile_app_version| %>
       <%= render "mobile_app_version_fields",{ f: mobile_app_version, mav: mobile_app_version } %>
     <% end %>
