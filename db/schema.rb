@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201192742) do
+ActiveRecord::Schema.define(version: 20160202170612) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20151201192742) do
     t.string   "name",              limit: 255
     t.text     "short_description", limit: 65535
     t.text     "long_description",  limit: 65535
-    t.string   "icon_url",          limit: 255
+    t.text     "icon_url",          limit: 65535
     t.string   "language",          limit: 255
     t.integer  "agency_id",         limit: 4
     t.integer  "status",            limit: 4,     default: 0
@@ -219,7 +219,7 @@ ActiveRecord::Schema.define(version: 20151201192742) do
   add_index "outlets", ["service"], name: "index_outlets_on_service", using: :btree
 
   create_table "rails_admin_histories", force: :cascade do |t|
-    t.text     "message",    limit: 65535
+    t.text     "message",    limit: 16777215
     t.string   "username",   limit: 255
     t.integer  "item",       limit: 4
     t.string   "table",      limit: 255

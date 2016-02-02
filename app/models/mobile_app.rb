@@ -129,10 +129,14 @@ class MobileApp < ActiveRecord::Base
       draft_id: self.id
     })
     self.mobile_app_versions.each do |mav|
-      ma.mobile_app_versions << MobileAppVersion.new(mav.attributes.except!("id","mobile_app_id"))
+      mobile_app_version = MobileAppVersion.new(mav.attributes.except!("id","mobile_app_id"))
+      ma.mobile_app_versions << mobile_app_version
     end
-    ma.save(validate: false)
     self.save(validate: false)
+    ma.save(validate: false)
+    ma.mobile_app_versions.each do |mav|
+      mav.save(validate: false)
+    end
     MobileApp.public_activity_on
     self.create_activity :published
   end
