@@ -49,6 +49,8 @@ namespace :bulk_upload do
                 :long_description => row[:long_description],
                 :language => row[:language]
               })
+            
+            outlet.save(validate: false)
             outlet.agencies = agencies
             outlet.official_tags = tags
             outlet.users = users;
