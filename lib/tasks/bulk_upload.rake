@@ -14,7 +14,7 @@ namespace :bulk_upload do
         if row[:service_type] #if row actually has data, because CSVs are wonky
           total_valid_rows += 1
           if Service.find_by_shortname(row[:service_type].downcase.strip.gsub(" ","_")) #&&
-            outlet = Outlet.find_or_initialize_by(service_url: row[:account_url])
+            outlet = Outlet.find_or_initialize_by({service_url: row[:account_url], draft_id: nil})
             agencies = []
             if row[:sponsoring_agencies]
               row[:sponsoring_agencies].split(',').each do |agency|
@@ -22,6 +22,7 @@ namespace :bulk_upload do
                 agencies << agency if agency
               end
             end
+            # puts agencies.inspect
             tags = []
             if row[:tags]
               row[:tags].split(',').each do |tag|
@@ -46,11 +47,12 @@ namespace :bulk_upload do
                 :organization => row[:account_name],
                 :short_description => row[:short_description],
                 :long_description => row[:long_description],
-                :language => row[:language],
-                :agency_ids => agencies.map(&:id),
-                :official_tags => tags,
-                :users => users
+                :language => row[:language]
               })
+            outlet.agencies = agencies
+            outlet.official_tags = tags
+            outlet.users = users;
+            # puts outlet.inspect
             outlet.save(validate: false)
             outlet.published!
             valid_accounts += 1
