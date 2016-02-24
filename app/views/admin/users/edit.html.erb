@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 main">
   	<h1 class = "page-header">User Profile: <%= @user.email %></h1>
-
+    <%= content_for :page_title do %>User Profile<% end %>
   	<%= render 'form' %>
   </div>
 </div>

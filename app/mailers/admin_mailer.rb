@@ -1,12 +1,12 @@
 class AdminMailer < ActionMailer::Base
-  default from: "Social Media and Mobile Product Registry <socialmediaregistry@gsa.gov>"
+  default from: "US Digital Registry <socialmediaregistry@gsa.gov>"
 
   def six_month_review_notice(email, preview_email=nil)
     @outlets_count = Outlet.to_review_for(email).count
     
     # Figure out the default email for admin-added accounts
     if email == 'admin'
-      email = 'someone@undetermined.gov'
+      email = 'socialmediaregistry@gsa.gov'
       show_admin = true
     end
     

@@ -48,6 +48,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps/new
   def new
     @mobile_app = MobileApp.new
+    @mobile_app.language = "English"
     @mobile_app.agencies << current_user.agency if current_user.agency
     @mobile_app.users << current_user
     @mobile_app.mobile_app_versions.build

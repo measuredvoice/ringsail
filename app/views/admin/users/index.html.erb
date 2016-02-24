@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main">
     <h1 class="page-header">Users</h1>
+    <%= content_for :page_title do %>Users<% end %>
     <div class="bg-info">
         <p>Notice: Users are managed through OMB Max.  Please contact the administrators of the OMB Max groups <%= "#{ENV['REGISTRY_ADMIN_GROUP']} & #{ENV['REGISTRY_ADMIN_GROUP']}" %>.</p>
 

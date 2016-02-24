@@ -48,7 +48,7 @@
     <%= f.text_field :icon_url, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :language %> </br>
+    <%= f.label :language, "Language*" %> </br>
     <%= f.select :language, options_for_select(language_select_options, @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
   </div>
   <div class="field agencies">
@@ -72,6 +72,7 @@
     <% end %>
 
     <div class="buttonRow">
+      <p>Is this mobile product on an additional platform? If yes, Click 'Add Platform Details'</p>
       <%= link_to_add_association "Add Platform Details", f, :mobile_app_versions , {:class => "fa fa-plus"} %>
     </div>
   </div>

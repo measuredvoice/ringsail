@@ -10,7 +10,7 @@ class Api::V1::SocialMediaController < Api::ApiController
     param :query, :agencies, :ids, :optional, "Comma separated list of agency ids"
     param :query, :language, :string, :optional, "Language of the social media accounts to return"
     param :query, :tags, :ids, :optional, "Comma separated list of tag ids"
-    param :query, :page_size, :integer, :optional, "Number of results per page"
+    param :query, :page_size, :integer, :optional, "Number of results per page, defaults to 25"
     param :query, :page, :integer, :optional, "Page number"
     response :unauthorized
     response :not_acceptable, "The request you made is not acceptable"

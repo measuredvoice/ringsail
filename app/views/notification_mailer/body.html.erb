@@ -1,3 +1,4 @@
+<p>Change made by: <%= @notification.item.activities.order("created_at DESC").first.owner.email %></p>
 <% if @notification.item_type == "MobileApp" %>
   <%= link_to "See this social media account here.", admin_mobile_app_url(@notification.item) %>
   <p>If you are having trouble with the link, follow this url <%= admin_mobile_app_url(@notification.item) %></p><br/>
