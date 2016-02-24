@@ -11,12 +11,12 @@
 #  mongo_id                   :string(255)
 #  parent_mongo_id            :string(255)
 #  parent_id                  :integer
-#  draft_outlet_count         :integer          default("0")
-#  draft_mobile_app_count     :integer          default("0")
-#  published_outlet_count     :integer          default("0")
-#  published_mobile_app_count :integer          default("0")
-#  draft_gallery_count        :integer          default("0")
-#  published_gallery_count    :integer          default("0")
+#  draft_outlet_count         :integer          default(0)
+#  draft_mobile_app_count     :integer          default(0)
+#  published_outlet_count     :integer          default(0)
+#  published_mobile_app_count :integer          default(0)
+#  draft_gallery_count        :integer          default(0)
+#  published_gallery_count    :integer          default(0)
 #
 
 require 'rails_helper'

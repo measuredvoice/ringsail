@@ -6,10 +6,10 @@
 #  name              :string(255)
 #  short_description :text(65535)
 #  long_description  :text(65535)
-#  icon_url          :string(255)
+#  icon_url          :text(65535)
 #  language          :string(255)
 #  agency_id         :integer
-#  status            :integer          default("0")
+#  status            :integer          default(0)
 #  mongo_id          :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime

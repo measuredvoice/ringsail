@@ -6,7 +6,7 @@
 #  gallery_id :integer
 #  item_id    :integer
 #  item_type  :string(255)
-#  item_order :integer          default("0")
+#  item_order :integer          default(0)
 #
 
 class GalleryItem < ActiveRecord::Base

@@ -9,7 +9,7 @@
 #  draft_id          :integer
 #  short_description :text(65535)
 #  long_description  :text(65535)
-#  status            :integer          default("0")
+#  status            :integer          default(0)
 #
 
 require 'rails_helper'

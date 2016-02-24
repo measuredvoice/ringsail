@@ -6,12 +6,14 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys
   # GET /gallerys.json
   def index
-    @galleries = Gallery.includes(:official_tags, :agencies).where("draft_id IS NULL").uniq
+    @galleries = Gallery.includes(:official_tags, :agencies, :outlets, :mobile_apps).where("draft_id IS NULL").uniq
 
     num_items = items_per_page_handler
     respond_to do |format|
       format.html { @galleries = [] }
-      format.json { render "index" }
+      format.json { 
+        @galleries = @galleries.select([:id, :name, :status, :updated_at])
+        render "index" }
       format.csv { send_data @galleries.to_csv }
     end
   end

@@ -9,7 +9,7 @@
 #  message           :string(255)
 #  message_type      :string(255)
 #  notification_type :string(255)
-#  has_read          :boolean          default("0")
+#  has_read          :boolean          default(FALSE)
 #  created_at        :datetime
 #  updated_at        :datetime
 #
