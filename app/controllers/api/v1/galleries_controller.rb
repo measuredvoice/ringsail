@@ -6,7 +6,7 @@ class Api::V1::GalleriesController < Api::ApiController
 		summary "Fetches all galleries"
     notes "This lists all active galleries.  It accepts parameters to perform basic search, as well as parameters to find galleries based on tags."
     param :query, :q, :string, :optional, "String to compare to the name of the galleries."
-    param :query, :tags, :ids, :optional, "Comma seperated list of tag ids"
+    param :query, :tags, :ids, :optional, "Comma separated list of tag ids"
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
     response :ok, "Success"

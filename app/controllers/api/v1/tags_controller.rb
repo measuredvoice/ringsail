@@ -6,7 +6,7 @@ class Api::V1::TagsController < Api::ApiController
     	summary "Fetches all official tags, with queryable fields such as a basic text search and."
         notes "This lists all tags.  It accepts parameters to perform basic search."
         param :query, :q, :string, :optional, "String to compare to the short name of tags."
-        param :type, :type, :string, :optional, "Comma Seperated List of Tag Types"
+        param :type, :type, :string, :optional, "Comma separated list of tag types"
         param :query, :page_size, :integer, :optional, "Number of results per page"
         param :query, :page, :integer, :optional, "Page number"
         response :ok, "Success"

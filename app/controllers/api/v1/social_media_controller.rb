@@ -6,10 +6,10 @@ class Api::V1::SocialMediaController < Api::ApiController
     summary "Fetches all accounts"
     notes "This lists all active accounts. It accepts parameters to perform basic search as well as search by service, agency, or tags."
     param :query, :q, :string, :optional, "String to compare to the name of accounts"
-    param :query, :services, :service_keys, :optional, "Comma seperated list of service keys (available via services call)"
-    param :query, :agencies, :ids, :optional, "Comma seperated list of agency ids"
+    param :query, :services, :service_keys, :optional, "Comma separated list of service keys (available via services call)"
+    param :query, :agencies, :ids, :optional, "Comma separated list of agency ids"
     param :query, :language, :string, :optional, "Language of the social media accounts to return"
-    param :query, :tags, :ids, :optional, "Comma seperated list of tag ids"
+    param :query, :tags, :ids, :optional, "Comma separated list of tag ids"
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
     response :unauthorized
