@@ -68,6 +68,7 @@ class Admin::GalleriesController < Admin::AdminController
   def update
     respond_to do |format|
       if @gallery.update(gallery_params)
+        @gallery.touch
         # if @gallery.published?
         #   @gallery.published!
         # end
@@ -96,12 +97,14 @@ class Admin::GalleriesController < Admin::AdminController
   end
 
   def publish
+    @gallery.touch
     @gallery.published!
     @gallery.build_notifications(:published)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now published. #{view_context.link_to 'Undo', archive_admin_gallery_path(@gallery)}".html_safe
   end
 
   def archive
+    @gallery.touch
     @gallery.archived!
     @gallery.build_notifications(:archived)
     redirect_to admin_gallery_path(@gallery), :notice => "Gallery: #{@gallery.name}, is now archived. #{view_context.link_to 'Undo', publish_admin_gallery_path(@gallery)}".html_safe

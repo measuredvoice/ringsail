@@ -92,6 +92,7 @@ class Admin::SocialMediaController < Admin::AdminController
   def update
     respond_to do |format|
       if @outlet.update(outlet_params)
+        @outlet.touch
         if @outlet.published?
           @outlet.published!
         end
@@ -121,12 +122,14 @@ class Admin::SocialMediaController < Admin::AdminController
   end
   
   def publish
+    @outlet.touch
     @outlet.published!
     @outlet.build_notifications(:published)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
   end
 
   def archive
+    @outlet.touch
     @outlet.archived!
     @outlet.build_notifications(:archived)
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived. #{view_context.link_to 'Undo', publish_admin_outlet_path(@outlet)}".html_safe

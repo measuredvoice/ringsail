@@ -88,6 +88,7 @@ class Admin::MobileAppsController < Admin::AdminController
   def update
     respond_to do |format|
       if @mobile_app.update(mobile_app_params)
+        @mobile_app.touch
         # if @mobile_app.published?
         #   @mobile_app.published!
         # end
@@ -116,6 +117,7 @@ class Admin::MobileAppsController < Admin::AdminController
   end
 
   def publish
+    @mobile_app.touch
     @mobile_app.published!
     @mobile_app.build_notifications(:published)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now published. #{view_context.link_to 'Undo', archive_admin_mobile_app_path(@mobile_app)}".html_safe
@@ -123,6 +125,7 @@ class Admin::MobileAppsController < Admin::AdminController
   end
 
   def archive
+    @mobile_app.touch
     @mobile_app.archived!
     @mobile_app.build_notifications(:archived)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now archived. #{view_context.link_to 'Undo', publish_admin_mobile_app_path(@mobile_app)}".html_safe
