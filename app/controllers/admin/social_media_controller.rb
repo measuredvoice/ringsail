@@ -19,7 +19,9 @@ class Admin::SocialMediaController < Admin::AdminController
     
     respond_to do |format|
       format.html { @outlets = [] }
-      format.json { render "index" }
+      format.json { 
+        @outlets = @outlets.select([:id,:service,:organization,:account,:status,:updated_at])
+        render "index" }
       format.csv { send_data @outlets.to_csv }
     end
   end
