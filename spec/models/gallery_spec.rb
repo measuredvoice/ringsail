@@ -15,7 +15,7 @@
 require 'rails_helper'
 
 RSpec.describe Gallery, type: :model do
-	it { should validate_presence_of(:name) }
+	# it { should validate_presence_of(:name) }
 
 	it { should have_many(:gallery_users) }
 	it { should have_many(:users)}

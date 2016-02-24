@@ -27,5 +27,5 @@ RSpec.describe MobileApp, type: :model do
 	it { should have_many(:mobile_app_versions) }
 	it { should have_many(:mobile_app_official_tags) }
 	it { should have_many(:official_tags) }
-	it { is_expected.to validate_presence_of :name }
+	# it { is_expected.to validate_presence_of :name }
 end

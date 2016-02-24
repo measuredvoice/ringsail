@@ -22,7 +22,7 @@
 require 'rails_helper'
 
 RSpec.describe Agency, type: :model do
-	it { is_expected.to validate_presence_of :name }
+	# it { should validate_presence_of(:name) }
 	it { should have_many(:mobile_app_agencies) }
 	it { should have_many(:mobile_apps) }
 	it { should have_many(:gallery_agencies) }
