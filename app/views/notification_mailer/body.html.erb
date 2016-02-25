@@ -1,6 +1,6 @@
 <p>Change made by: <%= @notification.item.activities.order("created_at DESC").first.try(:owner).try(:email) %></p>
 <% if @notification.item_type == "MobileApp" %>
-  <%= link_to "See this social media account here.", admin_mobile_app_url(@notification.item) %>
+  <%= link_to "See this Mobile Product registration here.", admin_mobile_app_url(@notification.item) %>
   <p>If you are having trouble with the link, follow this url <%= admin_mobile_app_url(@notification.item) %></p><br/>
   <p>Mobile Product Details:</p>
   <%= render partial: "mobile_app_details", locals: {mobile_app: @notification.item } %>
