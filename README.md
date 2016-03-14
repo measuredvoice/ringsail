@@ -7,7 +7,7 @@
 * [Verification and Registration Pages](https://socialmobileregistry.digitalgov.gov/admin) (login required)
 
 
-# Ringsail (the underlying software) 
+# Ringsail (the underlying software)
 
 Ringsail is a registry built in Ruby on Rails to gather, organize, and make available information about social media accounts and mobile applications run by large organizations.
 
@@ -23,15 +23,15 @@ Ringsail is currently being developed.  This document should be considered a liv
 
 ## Requirements
 
-Ringsail is built on Ruby 2.1.5 and Rails 4.1.1, backed by a MySQL 5 database (or greater). 
+Ringsail is built on Ruby 2.1.5 and Rails 4.1.1, backed by a MySQL 5 database (or greater).
 
 ## Setup
 
 Commands:
-rake db:create
-rake db:migrate
-rake db:seed
-rails s
+
+    rake db:create db:migrate db:seed
+    rake services:load
+    rails s
 
 ## Information on specific features
 
@@ -39,34 +39,44 @@ rails s
 
 For the purposes of Single Sign-On (SSO), Ringsail integrates with OMB.MAX.  For this integration to work, the domain name of the service must be configured with OMB MAX as an external dependency.  It also requires configuration of groups in the secrets.yml file (the user and administrator groups to check against). Leaving these blanks will cause every user account to have either user level or administrator level access.
 
-In development mode, users form the db:seeds file will be created with each level of access available in the system.  There should be no need to integrate with a CAS provider for development purposes
+In development mode, users from the db:seeds file will be created with each level of access available in the system.  There should be no need to integrate with a CAS provider for development purposes.
 
-If you are looking to run your own version of the application, either modify the authentication mechanism or integrate with a cas provider.
+If you are looking to run your own version of the application, either modify the authentication mechanism or integrate with a CAS provider.
 
 ### Social Media Accounts
 
 Social media accounts are stored as Outlets internally.  This is for the purposes of naming as having "accounts" as a name is particularly useful, and more closely matches with terminiology of the web communication divisions of various government agencies.
 
 The major goals of social media accounts is to be able to search, sort, and verify their authenticity.
-  
-### Social Media Plugins
 
-Social Media services change rapidly, so Ringsail allows new services to be added as plug-ins in the folder 'lib/services'
+### Social Media Services
 
-See `lib/services/twitter_service.rb` for a good example of the service plug-in style.
+Social media services change rapidly, so Ringsail allows new services to be added to the database through admin interface using a flexible mechanism.
 
-You can generate a new plugin using a generator with the format below:
+Under Admin -> Services List, social media services may be created, edited, and un/archived. Regular expressions and string templating can be used in the definition and updating of social media services. A brief primer in the customizable fields follows.
 
-'rails g service service_name'
+**Service host match regexp:** A regular expression used to determine the social media service being provided by the user when the user pastes a canonical url. Checks against the host portion of the URI.
 
-where service name is the name of the service, and the key that will be used in the database to tie services of the same type together.
+**Display name template:** A string representation of how the Outlet's binding to a social media account should appear, e.g. "John Smith on Facebook". The placeholder `#{account}` is replaced with the account's primary identifier.
 
-To submit a new service for inclusion in this registry, please fork this repository, add your service, and submit a pull request with the proposed change.
+**Service url canonical template**: A string representation of how the Outlet's binding to a social media account should appear, e.g. "http://username.tumblr.com". The placeholder `#{account}` is replaced with the account id.
 
-All services should include the same methods, and return sensible results.
+**Account id regex matchers:** These are evaluated in the following order. The first to match determines the account id, or else has the stated effect. All require the `<id>` capture token to be included in the regular expression.
+
+**1. Reject All regexp:** Ceases trying to determine the social media service if the URI path matches this regular expression.
+
+**2. Host match regexp:** Tries to match on the URI host. Most useful for subdomain-based accounts, e.g. http://username.tumblr.com
+
+**3. Path match regexp:** Tries to match on the URI path. Useful for most social media services, e.g. http://linkedin.com/username
+
+**4. Fragment match regexp:** Tries to match on the URI fragment if it exists; if it does not, tries to match on the URI path. The Twitter service uses this regular expression.
+
+**5. Conditional regexps:** When the "If" expression matches the URI path, try to match against the "Then" expression. Otherwise, try to match against the "Else" expression.
+
+**6. Stop words array:** Specified as a commma-delimited list, this can be used to ensure that a dashboard or aggregate landing page is not registered as a social media Outlet, e.g. `/newsfeed`. If the account id matched by some method above is included in the stop list, it is blocked.
 
 ### Mobile Applications
-Mobile applications are stored as MobileApps internally.  This name much more closely reflects their purpose than social media accounts. 
+Mobile applications are stored as MobileApps internally.  This name much more closely reflects their purpose than social media accounts.
 
 The major goals of mobile applications is to be able to search, sort, and verify their authenticity.
 

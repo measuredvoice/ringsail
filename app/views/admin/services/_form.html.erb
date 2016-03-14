@@ -1,0 +1,80 @@
+<%= form_for(@admin_service) do |f| %>
+  <% if @admin_service.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_service.errors.count, "error") %> prohibited this admin_service from being saved:</h2>
+
+      <ul>
+      <% @admin_service.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :handles_regex_eval, 'Service host match regexp' %><br>
+    <%= f.text_field :handles_regex_eval, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :shortname, 'Short name' %><br>
+    <%= f.text_field :shortname, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :longname, 'Long name' %><br>
+    <%= f.text_field :longname, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :display_name_eval, 'Display name template' %><br>
+    <%= f.text_field :display_name_eval, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :account_matchers_eval, 'Account id regexp matchers' %><br>
+    <%= f.fields_for :account_matchers_eval do |o| %>
+        &nbsp;&nbsp;<%= o.label :nil, 'Reject all regexp' %>
+        <%= o.text_field :nil, :value => @admin_service.account_matchers_eval[:nil],
+                         :class => "form-control formwidth" %>
+
+        &nbsp;&nbsp;<%= o.label :host, 'Host match regexp' %>
+        <%= o.text_field :host, :value => @admin_service.account_matchers_eval[:host],
+                         :class => "form-control formwidth" %>
+
+        &nbsp;&nbsp;<%= o.label :path, 'Path match regexp' %>
+        <%= o.text_field :path, :value => @admin_service.account_matchers_eval[:path],
+                         :class => "form-control formwidth" %>
+
+        &nbsp;&nbsp;<%= o.label :fragment, 'Fragment/path match regexp' %>
+        <%= o.text_field :fragment, :value => @admin_service.account_matchers_eval[:fragment],
+                         :class => "form-control formwidth" %>
+
+        &nbsp;&nbsp;<%= o.label :conditional, 'Conditional regexps' %><br />
+        <%= o.fields_for :conditional do |c| %>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;<%= c.label :if, '"If" regexp' %>
+          <%= c.text_field :if, :value => @admin_service.account_matchers_eval[:conditional].try(:[], :if),
+                           :class => "form-control formwidth" %>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;<%= c.label :then, '"Then" regexp' %>
+          <%= c.text_field :then, :value => @admin_service.account_matchers_eval[:conditional].try(:[], :then),
+                           :class => "form-control formwidth" %>
+
+          &nbsp;&nbsp;&nbsp;&nbsp;<%= c.label :else, '"Else" regexp' %>
+          <%= c.text_field :else, :value => @admin_service.account_matchers_eval[:conditional].try(:[], :else),
+                           :class => "form-control formwidth" %>
+        <% end %>
+        &nbsp;&nbsp;<%= o.label :stop_words, 'Stop words array' %>
+        <%= o.text_field :stop_words, :value => Array(@admin_service.account_matchers_eval[:stop_words]).join(','),
+                         :class => "form-control formwidth" %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :service_url_example %><br>
+    <%= f.text_field :service_url_example, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :service_url_canonical_eval, 'Service url canonical template' %><br>
+    <%= f.text_field :service_url_canonical_eval, :class => "form-control formwidth" %>
+  </div>
+  <div class="actions">
+    <%= f.submit :class => "btn btn-primary" %>
+  </div>
+<% end %>

@@ -242,6 +242,12 @@ Ringsail::Application.routes.draw do
       end
     end
     resources :email_messages
+    resources :services, except: [:destroy] do
+      member do
+        get 'archive'
+        get 'restore'
+      end
+    end
 
     # in a development environment, allow
     # use of impersonation

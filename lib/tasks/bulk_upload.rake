@@ -13,7 +13,7 @@ namespace :bulk_upload do
       CSV.foreach(filepath, :headers=> true, :header_converters => :symbol , :encoding => 'windows-1251:utf-8') do |row, i|
         if row[:service_type] #if row actually has data, because CSVs are wonky
           total_valid_rows += 1
-          if Service.find_by_shortname(row[:service_type].downcase.strip.gsub(" ","_")) #&&
+          if Admin::Service.find_by_shortname(row[:service_type].downcase.strip.gsub(" ","_")) #&&
             outlet = Outlet.find_or_initialize_by({service_url: row[:account_url], draft_id: nil})
             agencies = []
             if row[:sponsoring_agencies]
@@ -43,7 +43,7 @@ namespace :bulk_upload do
             outlet.update({
                 :service => row[:service_type].downcase.strip.gsub(" ","_"),
                 :service_url => row[:account_url],
-                :account => Service.find_by_url(row[:account_url]) ? Service.find_by_url(row[:account_url]).account : nil,
+                :account => Admin::Service.find_by_url(row[:account_url]) ? Admin::Service.find_by_url(row[:account_url]).account : nil,
                 :organization => row[:account_name],
                 :short_description => row[:short_description],
                 :long_description => row[:long_description],

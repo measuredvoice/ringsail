@@ -12,7 +12,7 @@ class Api::V1::MultiController < Api::ApiController
     query = params[:q]
 
     @agencies = Agency.where("name LIKE ?","%#{query}%")
-    @services = Service.search_by_name(query)
+    @services = Admin::Service.search_by_name(query)
     @tags = OfficialTag.where("tag_text LIKE ?", "%#{query}%")
     if query
       render 'autocomplete'
@@ -24,7 +24,7 @@ class Api::V1::MultiController < Api::ApiController
   def tokeninput
     query = params[:q]
     @agencies = Agency.where("name LIKE ?","%#{query}%")
-    @services = Service.search_by_name(query)
+    @services = Admin::Service.search_by_name(query)
     @tags = OfficialTag.where("tag_text LIKE ?", "%#{query}%")
     if query
       render 'autocomplete'

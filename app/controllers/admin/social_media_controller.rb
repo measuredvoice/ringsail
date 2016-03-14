@@ -45,7 +45,7 @@ class Admin::SocialMediaController < Admin::AdminController
   end
 
   def account_for_url
-    service = Service.find_by_url(params[:url])
+    service = Admin::Service.find_by_url(params[:url])
     account = { account: "", service: ""}
     if service
       account = { account: service.account,

@@ -1,0 +1,98 @@
+<div class = "row">
+	<div class="col-sm-12 col-md-12">
+
+    <%= content_for :page_title do %>Service Info<% end %>
+		<h1 class="page-header">Service Info</h1>
+		<div class = "panel panel-default">
+			<div class = "panel-body">
+        <p>
+          <strong>Service host match regexp:</strong>
+          <%= @admin_service.handles_regex_eval %>
+        </p>
+
+        <p>
+          <strong>Short name:</strong>
+          :<%= @admin_service.shortname %>
+        </p>
+
+        <p>
+          <strong>Long name:</strong>
+          <%= @admin_service.longname %>
+        </p>
+
+        <p>
+          <strong>Display name template:</strong>
+          <%= @admin_service.display_name_eval %>
+        </p>
+
+        <p>
+          <strong>Account id regexp matchers:</strong>
+        </p>
+        <p>
+          <em>&nbsp;&nbsp;Reject all regexp:</em>
+					<%= @admin_service.account_matchers_eval[:nil] %>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;Host match regexp:</em>
+					<%= @admin_service.account_matchers_eval[:host] %>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;Path match regexp:</em>
+					<%= @admin_service.account_matchers_eval[:path] %>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;Fragment/path match regexp:</em>
+					<%= @admin_service.account_matchers_eval[:fragment] %>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;Conditional regexps:</em>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;&nbsp;&nbsp;"If" regexp:</em>
+					<%= @admin_service.account_matchers_eval[:conditional].try(:[], :if) %>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;&nbsp;&nbsp;"Then" regexp:</em>
+					<%= @admin_service.account_matchers_eval[:conditional].try(:[], :then) %>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;&nbsp;&nbsp;"Else" regexp:</em>
+					<%= @admin_service.account_matchers_eval[:conditional].try(:[], :else) %>
+        </p>
+				<p>
+          <em>&nbsp;&nbsp;Stop words array:</em>
+					<%= @admin_service.account_matchers_eval[:stop_words] %>
+        </p>
+
+        <p>
+          <strong>Service url example:</strong>
+          <%= @admin_service.service_url_example %>
+        </p>
+
+        <p>
+          <strong>Service url canonical template:</strong>
+          <%= @admin_service.service_url_canonical_eval %>
+        </p>
+
+        <p>
+          <strong>Archived:</strong>
+          <%= @admin_service.archived %>
+        </p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12 col-md-12">
+		<div class="buttonRow">
+			<%= link_to 'Back to Agencies', admin_services_path,{:class => "fa fa-angle-double-left"} %>
+			<%= link_to 'Edit', edit_admin_service_path(@admin_service), {:class => "fa fa-pencil"} %>
+      <% if @admin_service.archived? %>
+        <%= link_to ' Unarchive', restore_admin_service_path(@admin_service),{:class => "fa fa-plus"} %>
+      <% else %>
+        <%= link_to ' Archive', archive_admin_service_path(@admin_service),{:class => "fa fa-remove",
+                                                                            :data => { :confirm => 'Are you sure you want to archive this social media service?' } } %>
+      <% end %>
+		</div>
+	</div>
+</div>

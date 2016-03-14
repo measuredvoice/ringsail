@@ -97,7 +97,7 @@ class Outlet < ActiveRecord::Base
 
     url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
 
-    s = Service.find_by_url(url)
+    s = Admin::Service.find_by_url(url)
 
     return nil unless s
 
@@ -114,7 +114,7 @@ class Outlet < ActiveRecord::Base
 
     url = 'http://' + url unless url =~ %r{(?i)\Ahttps?://}
 
-    s = Service.find_by_url(url)
+    s = Admin::Service.find_by_url(url)
 
     return nil unless s
 
@@ -127,7 +127,7 @@ class Outlet < ActiveRecord::Base
   end
 
   def service_info
-    @service_info ||= Service.find_by_url(service_url)
+    @service_info ||= Admin::Service.find_by_url(service_url)
   end
 
   def agency_tokens=(ids)

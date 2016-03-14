@@ -20,6 +20,7 @@ gem 'cocoon'
 # Support for social media service plugins
 # gem 'twitter'
 # gem 'hyper-graph'
+gem 'to_regexp'
 
 # Devise does user authentication mechanisms for us
 gem "devise"

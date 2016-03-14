@@ -119,7 +119,7 @@ class Api::V1::SocialMediaController < Api::ApiController
     @query = params[:q]
     if @query
       @agencies = Agency.where("name LIKE ?","%#{@query}%")
-      @services = Service.search_by_name(@query)
+      @services = Admin::Service.search_by_name(@query)
       @tags = OfficialTag.where("tag_text LIKE ?", "%#{@query}%")
       @service_breakdown = Outlet.where("draft_id IS NULL").group(:service).count
       @items = [@query,@agencies,@services,@tags].flatten

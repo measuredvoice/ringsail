@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12 main">
+    <%= content_for :page_title do %>Services<% end %>
+    <h1 class="page-header">Services</h1>
+    <div class="row placeholders">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+        <table id="data-tables" class="table table-striped">
+      		<thead>
+            <tr class = "service_row">
+              <th>Service Name</th>
+              <th>Service URL Example</th>
+              <th>Archived</th>
+              <th class = "lastlinks">Actions</th>
+        		</tr>
+          </thead>
+
+          <tbody>
+
+          </tbody>
+    	  </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'New Service', new_admin_service_path %>
+
+<% content_for :additional_javascript do %>
+  <script>
+    var data_tables = null;
+    $(document).ready(function() {
+       data_tables = $('#data-tables').dataTable({
+        "ajax" : {
+          "url":"/admin/services.json"
+        },
+        "scrollY": "400px",
+        "columns": [
+          { "data" : "name"},
+          { "data" : "url_example"},
+          { "data" : "archived"},
+          { "data" : "DT_RowId"}
+        ],
+        "columnDefs": [
+          {
+            "render": function(data,type,row){
+              return '<a href="/admin/services/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a>';
+            }, "targets":[3]
+          }
+        ],
+        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+    } );
+
+
+  </script>
+<% end %>
