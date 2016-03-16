@@ -6,12 +6,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/blip.tv$/',
       shortname: 'blip',
-      display_name_eval: '#{account} on Blip',
+      display_name_eval: '<account> on Blip',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://www.blip.tv/username',
-      service_url_canonical_eval: 'http://blip.tv/#{account}',
+      service_url_canonical_eval: 'http://blip.tv/<account>',
       archived: true
     ).find_or_create_by(
       longname: 'Blip'
@@ -21,12 +21,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/disqus.com$/',
       shortname: 'disqus',
-      display_name_eval: '#{account} on Disqus',
+      display_name_eval: '<account> on Disqus',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://www.disqus.com/username',
-      service_url_canonical_eval: 'http://disqus.com/#{account}'
+      service_url_canonical_eval: 'http://disqus.com/<account>'
     ).find_or_create_by(
       longname: 'Disqus'
     )
@@ -35,7 +35,7 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/eventbrite.com/',
       shortname: 'eventbrite',
-      display_name_eval: '#{account} on Eventbrite',
+      display_name_eval: '<account> on Eventbrite',
       account_matchers_eval: {
         path: '/o\/(?<id>[\w-]+)\/?/'
       },
@@ -49,7 +49,7 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/facebook.com$/',
       shortname: 'facebook',
-      display_name_eval: '#{account} on Facebook',
+      display_name_eval: '<account> on Facebook',
       account_matchers_eval: {
         conditional: {
           if: '/pages/',
@@ -58,7 +58,7 @@ namespace :services do
         }
       },
       service_url_example: 'https://www.facebook.com/username',
-      service_url_canonical_eval: 'http://facebook.com/#{account}'
+      service_url_canonical_eval: 'http://facebook.com/<account>'
     ).find_or_create_by(
       longname: 'Facebook'
     )
@@ -67,12 +67,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/flickr.com$/',
       shortname: 'flickr',
-      display_name_eval: '#{account} on Flickr',
+      display_name_eval: '<account> on Flickr',
       account_matchers_eval: {
         path: '/(photos|people)\/(?<id>[\w@-]+)(\/)?$/'
       },
       service_url_example: 'http://flickr.com/photos/username',
-      service_url_canonical_eval: 'http://flickr.com/photos/#{account}'
+      service_url_canonical_eval: 'http://flickr.com/photos/<account>'
     ).find_or_create_by(
       longname: 'Flickr'
     )
@@ -81,12 +81,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/foursquare.com$/',
       shortname: 'foursquare',
-      display_name_eval: '#{account} on Foursquare',
+      display_name_eval: '<account> on Foursquare',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://www.foursquare.com/username',
-      service_url_canonical_eval: 'http://foursquare.com/#{account}',
+      service_url_canonical_eval: 'http://foursquare.com/<account>',
       archived: true
     ).find_or_create_by(
       longname: 'Foursquare'
@@ -96,12 +96,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/github.com$/',
       shortname: 'github',
-      display_name_eval: '#{account} on GitHub',
+      display_name_eval: '<account> on GitHub',
       account_matchers_eval: {
         path: '/^\/(?<id>[\w-]+)/'
       },
       service_url_example: 'http://www.github.com/username',
-      service_url_canonical_eval: 'http://github.com/#{account}'
+      service_url_canonical_eval: 'http://github.com/<account>'
     ).find_or_create_by(
       longname: 'GitHub'
     )
@@ -110,7 +110,7 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/plus.google.com$/',
       shortname: 'google_plus',
-      display_name_eval: 'Google Plus ID: #{account}',
+      display_name_eval: 'Google Plus ID: <account>',
       account_matchers_eval: {
         conditional: {
           if: '/^(\/u\/0)?\/(?<id>\d+)(\/posts)?/',
@@ -119,7 +119,7 @@ namespace :services do
         }
       },
       service_url_example: 'https://plus.google.com/username/posts',
-      service_url_canonical_eval: 'https://plus.google.com/#{account}'
+      service_url_canonical_eval: 'https://plus.google.com/<account>'
     ).find_or_create_by(
       longname: 'Google+'
     )
@@ -128,12 +128,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/hulu.com/',
       shortname: 'hulu',
-      display_name_eval: '#{account} on Hulu',
+      display_name_eval: '<account> on Hulu',
       account_matchers_eval: {
         path: '/^\/(?<id>[\w-]+)\/?/'
       },
       service_url_example: 'http://www.hulu.com/username',
-      service_url_canonical_eval: 'http://Hulu.com/#{account}'
+      service_url_canonical_eval: 'http://Hulu.com/<account>'
     ).find_or_create_by(
       longname: 'Hulu'
     )
@@ -142,12 +142,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/ideascale.com$/',
       shortname: 'ideascale',
-      display_name_eval: '#{account} on IdeaScale',
+      display_name_eval: '<account> on IdeaScale',
       account_matchers_eval: {
         host: '/^(?<id>[\w-]+)\.ideascale.com/'
       },
       service_url_example: 'http://username.ideascale.com/',
-      service_url_canonical_eval: 'http://#{account}.ideascale.com/'
+      service_url_canonical_eval: 'http://<account>.ideascale.com/'
     ).find_or_create_by(
       longname: 'IdeaScale'
     )
@@ -156,13 +156,13 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/instagram.com$/',
       shortname: 'instagram',
-      display_name_eval: '#{account} on Instagram',
+      display_name_eval: '<account> on Instagram',
       account_matchers_eval: {
         path: '/^\/(?<id>[\w-]+)/',
         stop_words: ['p', 'popular', 'developer', 'press', 'about']
       },
       service_url_example: 'http://instagram.com/username',
-      service_url_canonical_eval: 'http://instagram.com/#{account}'
+      service_url_canonical_eval: 'http://instagram.com/<account>'
     ).find_or_create_by(
       longname: 'Instagram'
     )
@@ -171,12 +171,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/linkedin.com$/',
       shortname: 'linkedin',
-      display_name_eval: '#{account} on LinkedIn',
+      display_name_eval: '<account> on LinkedIn',
       account_matchers_eval: {
         path: '/\/company\/(?<id>[\w.-]+)$/'
       },
       service_url_example: 'http://www.linkedin.com/company/username',
-      service_url_canonical_eval: 'http://linkedin.com/company/#{account}'
+      service_url_canonical_eval: 'http://linkedin.com/company/<account>'
     ).find_or_create_by(
       longname: 'LinkedIn'
     )
@@ -185,12 +185,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/livestream.com/',
       shortname: 'livestream',
-      display_name_eval: '#{account} on Livestream',
+      display_name_eval: '<account> on Livestream',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://new.livestream.com/username',
-      service_url_canonical_eval: 'http://new.livestream.com/#{account}',
+      service_url_canonical_eval: 'http://new.livestream.com/<account>',
       archived: true
     ).find_or_create_by(
       longname: 'Livestream'
@@ -200,7 +200,7 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/medium.com/',
       shortname: 'medium',
-      display_name_eval: '#{account} on Medium',
+      display_name_eval: '<account> on Medium',
       account_matchers_eval: {
         path: '/^\/@(?<id>[\w-]+)\/?/'
       },
@@ -214,12 +214,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/meetup.com$/',
       shortname: 'meetup',
-      display_name_eval: '#{account} on Meetup',
+      display_name_eval: '<account> on Meetup',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://www.meetup.com/username',
-      service_url_canonical_eval: 'http://meetup.com/#{account}'
+      service_url_canonical_eval: 'http://meetup.com/<account>'
     ).find_or_create_by(
       longname: 'Meetup'
     )
@@ -228,12 +228,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/myspace.com$/',
       shortname: 'myspace',
-      display_name_eval: '#{account} on Myspace',
+      display_name_eval: '<account> on Myspace',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://www.myspace.com/username',
-      service_url_canonical_eval: 'http://myspace.com/#{account}',
+      service_url_canonical_eval: 'http://myspace.com/<account>',
       archived: true
     ).find_or_create_by(
       longname: 'Myspace'
@@ -243,12 +243,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/pinterest.com$/',
       shortname: 'pinterest',
-      display_name_eval: '#{account} on Pinterest',
+      display_name_eval: '<account> on Pinterest',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://pinterest.com/username/',
-      service_url_canonical_eval: 'http://pinterest.com/#{account}/'
+      service_url_canonical_eval: 'http://pinterest.com/<account>/'
     ).find_or_create_by(
       longname: 'Pinterest'
     )
@@ -257,12 +257,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/posterous.com$/',
       shortname: 'posterous',
-      display_name_eval: '#{account} on Posterous',
+      display_name_eval: '<account> on Posterous',
       account_matchers_eval: {
         host: '/^(?<id>[\w-]+)\.posterous.com/'
       },
       service_url_example: 'http://username.posterous.com/',
-      service_url_canonical_eval: 'http://#{account}.posterous.com/',
+      service_url_canonical_eval: 'http://<account>.posterous.com/',
       archived: true
     ).find_or_create_by(
       longname: 'Posterous'
@@ -272,12 +272,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/scribd.com$/',
       shortname: 'scribd',
-      display_name_eval: '#{account} on Scribd',
+      display_name_eval: '<account> on Scribd',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://www.scribd.com/username',
-      service_url_canonical_eval: 'http://scribd.com/#{account}'
+      service_url_canonical_eval: 'http://scribd.com/<account>'
     ).find_or_create_by(
       longname: 'Scribd'
     )
@@ -286,13 +286,13 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/slideshare.net$/',
       shortname: 'slideshare',
-      display_name_eval: '#{account} on SlideShare',
+      display_name_eval: '<account> on SlideShare',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/',
         stop_words: ['newsfeed', 'popular', 'most-downloaded', 'most-favorited', 'pro_accounts', 'popular', 'featured', 'features']
       },
       service_url_example: 'http://www.slideshare.net/username',
-      service_url_canonical_eval: 'http://slideshare.net/#{account}'
+      service_url_canonical_eval: 'http://slideshare.net/<account>'
     ).find_or_create_by(
       longname: 'SlideShare'
     )
@@ -301,12 +301,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/socrata.com$/',
       shortname: 'socrata',
-      display_name_eval: '#{account} on Socrata',
+      display_name_eval: '<account> on Socrata',
       account_matchers_eval: {
         host: '/^(?<id>[\w-]+)\.socrata.com/'
       },
       service_url_example: 'http://username.socrata.com/',
-      service_url_canonical_eval: 'http://#{account}.socrata.com/'
+      service_url_canonical_eval: 'http://<account>.socrata.com/'
     ).find_or_create_by(
       longname: 'Socrata'
     )
@@ -315,12 +315,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/storify.com$/',
       shortname: 'storify',
-      display_name_eval: '#{account} on Storify',
+      display_name_eval: '<account> on Storify',
       account_matchers_eval: {
         path: '/^\/(?<id>[\w-]+)/'
       },
       service_url_example: 'http://www.storify.com/username',
-      service_url_canonical_eval: 'http://storify.com/#{account}'
+      service_url_canonical_eval: 'http://storify.com/<account>'
     ).find_or_create_by(
       longname: 'Storify'
     )
@@ -329,12 +329,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/tumblr.com$/',
       shortname: 'tumblr',
-      display_name_eval: '#{account} on Tumblr',
+      display_name_eval: '<account> on Tumblr',
       account_matchers_eval: {
         host: '/^(?<id>[\w-]+)\.tumblr.com/'
       },
       service_url_example: 'http://username.tumblr.com/',
-      service_url_canonical_eval: 'http://#{account}.tumblr.com/'
+      service_url_canonical_eval: 'http://<account>.tumblr.com/'
     ).find_or_create_by(
       longname: 'Tumblr'
     )
@@ -343,12 +343,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/twitter.com$/',
       shortname: 'twitter',
-      display_name_eval: '@#{account} on Twitter',
+      display_name_eval: '@<account> on Twitter',
       account_matchers_eval: {
         fragment: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://twitter.com/username',
-      service_url_canonical_eval: 'http://twitter.com/#{account}'
+      service_url_canonical_eval: 'http://twitter.com/<account>'
     ).find_or_create_by(
       longname: 'Twitter'
     )
@@ -357,12 +357,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/uservoice.com$/',
       shortname: 'uservoice',
-      display_name_eval: '#{account} on UserVoice',
+      display_name_eval: '<account> on UserVoice',
       account_matchers_eval: {
         host: '/^(?<id>[\w-]+)\.uservoice.com/'
       },
       service_url_example: 'http://username.uservoice.com/',
-      service_url_canonical_eval: 'http://#{account}.uservoice.com/'
+      service_url_canonical_eval: 'http://<account>.uservoice.com/'
     ).find_or_create_by(
       longname: 'UserVoice'
     )
@@ -371,12 +371,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/ustream.tv$/',
       shortname: 'ustream',
-      display_name_eval: '#{account} on Ustream',
+      display_name_eval: '<account> on Ustream',
       account_matchers_eval: {
         path: '/\/(?<id>[\w-]+)$/'
       },
       service_url_example: 'http://www.ustream.tv/username',
-      service_url_canonical_eval: 'http://ustream.tv/#{account}'
+      service_url_canonical_eval: 'http://ustream.tv/<account>'
     ).find_or_create_by(
       longname: 'Ustream'
     )
@@ -385,7 +385,7 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/vimeo.com$/',
       shortname: 'vimeo',
-      display_name_eval: '#{account} on Vimeo',
+      display_name_eval: '<account> on Vimeo',
       account_matchers_eval: {
         nil: '/^\/\d+$/',
         conditional: {
@@ -395,7 +395,7 @@ namespace :services do
         }
       },
       service_url_example: 'http://vimeo.com/username',
-      service_url_canonical_eval: 'http://vimeo.com/#{account}'
+      service_url_canonical_eval: 'http://vimeo.com/<account>'
     ).find_or_create_by(
       longname: 'Vimeo'
     )
@@ -404,12 +404,12 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/yelp.com$/',
       shortname: 'yelp',
-      display_name_eval: '#{account} on Yelp',
+      display_name_eval: '<account> on Yelp',
       account_matchers_eval: {
         path: '/biz\/(?<id>[\w-]+)\/?/'
       },
       service_url_example: 'http://www.yelp.com/biz/username',
-      service_url_canonical_eval: 'http://www.yelp.com/biz/#{account}'
+      service_url_canonical_eval: 'http://www.yelp.com/biz/<account>'
     ).find_or_create_by(
       longname: 'Yelp'
     )
@@ -418,13 +418,13 @@ namespace :services do
     Admin::Service.create_with(
       handles_regex_eval: '/youtube.com$/',
       shortname: 'youtube',
-      display_name_eval: '#{account} on YouTube',
+      display_name_eval: '<account> on YouTube',
       account_matchers_eval: {
         path: '/^(\/user)?\/(?<id>[\w-]+)/',
         stop_words: ['watch', 'movies', 'channel', 'music', 'shows', 'live', 'sports', 'education', 'news']
       },
       service_url_example: 'http://www.youtube.com/username',
-      service_url_canonical_eval: 'http://youtube.com/#{account}'
+      service_url_canonical_eval: 'http://youtube.com/<account>'
     ).find_or_create_by(
       longname: 'YouTube'
     )

@@ -15,7 +15,7 @@ class ServiceBinding
   end
 
   def display_name
-    eval('"' + @service.display_name_eval + '"')
+    @service.display_name_eval.gsub('<account>', account)
   end
 
   def service_url_example
@@ -24,7 +24,7 @@ class ServiceBinding
 
   def service_url_canonical
     # By default, return whatever the user specified.
-    eval('"' + @service.service_url_canonical_eval + '"')
+    @service.service_url_canonical_eval.gsub('<account>', account)
   end
 
   def account

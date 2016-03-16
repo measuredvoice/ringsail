@@ -57,9 +57,9 @@ Under Admin -> Services List, social media services may be created, edited, and 
 
 **Service host match regexp:** A regular expression used to determine the social media service being provided by the user when the user pastes a canonical url. Checks against the host portion of the URI.
 
-**Display name template:** A string representation of how the Outlet's binding to a social media account should appear, e.g. "John Smith on Facebook". The placeholder `#{account}` is replaced with the account's primary identifier.
+**Display name template:** A string representation of how the Outlet's binding to a social media account should appear, e.g. "John Smith on Facebook". The placeholder `<account>` is replaced with the account's primary identifier.
 
-**Service url canonical template**: A string representation of how the Outlet's binding to a social media account should appear, e.g. "http://username.tumblr.com". The placeholder `#{account}` is replaced with the account id.
+**Service url canonical template**: A string representation of how the Outlet's binding to a social media account should appear, e.g. "http://username.tumblr.com". The placeholder `<account>` is replaced with the account id.
 
 **Account id regex matchers:** These are evaluated in the following order. The first to match determines the account id, or else has the stated effect. All require the `<id>` capture token to be included in the regular expression.
 
