@@ -301,10 +301,10 @@ table.dataTable td {
   clear: both;
   *zoom: 1;
   zoom: 1;
-    border: solid 1px #ddd;
-padding: 25px;
-margin-top: -1px;
-    overflow-x: scroll;
+  border: solid 1px #ddd;
+  padding: 15px;
+  margin-top: -1px;
+  overflow-x: scroll;
 }
 .dataTables_wrapper .dataTables_length {
   float: left;

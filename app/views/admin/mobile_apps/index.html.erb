@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-right: 0;">
           <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
           <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %>
           <table class="table table-striped" id="data-tables">
@@ -76,7 +76,7 @@
             }, "targets":[2]
           }
         ],
-        "order": [[ 2, "desc" ]],
+        "order": [[ 3, "desc" ]],
         "initComplete": function(settings, json) {
           $('.export').show();
           $('.dataTables_filter').show();
