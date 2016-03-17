@@ -24,6 +24,7 @@
           <thead>
           <tr>
             <th>Agency</th>
+            <th>Contacts</th>
             <th>Name</th>
             <th>Last Updated</th>
             <th>Status</th>
@@ -63,6 +64,7 @@
         "scrollY": "400px",
         "columns": [
           { "data" : "agencies[, ]"},
+          { "data" : "contacts[, ]"},
           { "data" : "name"},
           { "data" : "updated_at"},
           { "data" : "status"}
@@ -71,7 +73,7 @@
           {
             "render": function(data,type,row){
               return '<a href="/admin/mobile_apps/'+row.DT_RowId+'">'+data+'</a>';
-            }, "targets":[1]
+            }, "targets":[2]
           }
         ],
         "order": [[ 2, "desc" ]],

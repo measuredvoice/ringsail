@@ -8,7 +8,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies).references(:official_tags,:agencies).uniq
+    @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).uniq
 
     if params[:platform] && params[:platform] != ""
       @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
@@ -16,7 +16,7 @@ class Admin::MobileAppsController < Admin::AdminController
     @platform_counts = @mobile_apps.platform_counts
     respond_to do |format|
       format.html { @mobile_apps = []}
-      format.json { 
+      format.json {
         @mobile_apps = @mobile_apps.select([:id, :name, :status, :updated_at])
         render "index"}
       format.csv { send_data @mobile_apps.to_csv}

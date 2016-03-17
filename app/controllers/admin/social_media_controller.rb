@@ -2,24 +2,24 @@ class Admin::SocialMediaController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
 
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy, 
+  before_action :set_outlet, only: [:show, :edit, :update, :destroy,
     :publish, :archive, :request_publish, :request_archive]
 
   # before_filter :require_admin, only: [:publish]
   # GET /outlets
   # GET /outlets.json
-  def index    
-    @outlets = Outlet.includes(:official_tags,:agencies).references(:official_tags,:agencies).where("draft_id IS NULL")
+  def index
+    @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
     num_items = items_per_page_handler
     @total_outlets = @outlets.count
     if(params[:service] && !params[:service].blank?)
       @outlets = @outlets.where(service: params[:service])
     end
     @services = @outlets.group(:service).count
-    
+
     respond_to do |format|
       format.html { @outlets = [] }
-      format.json { 
+      format.json {
         @outlets = @outlets.select([:id,:service,:organization,:account,:status,:updated_at])
         render "index" }
       format.csv { send_data @outlets.to_csv }
@@ -28,7 +28,7 @@ class Admin::SocialMediaController < Admin::AdminController
 
   def social_media_export
     @outlets = Outlet.where("id IN (?)",params[:ids].split(",")).includes(:official_tags,:users,:agencies)
-    respond_to do |format|  
+    respond_to do |format|
       format.csv { send_data @outlets.to_csv }
     end
   end
@@ -70,7 +70,7 @@ class Admin::SocialMediaController < Admin::AdminController
 
   def show
   end
-  
+
 
   # POST /outlets
   # POST /outlets.json
@@ -123,7 +123,7 @@ class Admin::SocialMediaController < Admin::AdminController
   def activities
     @activities = PublicActivity::Activity.where(trackable_type: "Outlet").order("created_at desc").page(params[:page]).per(25)
   end
-  
+
   def publish
     @outlet.touch
     @outlet.published!
@@ -158,7 +158,7 @@ class Admin::SocialMediaController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def outlet_params
-      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status, 
+      params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status,
         :account, :service, :language, :agency_tokens, :user_tokens, :tag_tokens,
         :short_description, :long_description)
     end
@@ -166,7 +166,7 @@ class Admin::SocialMediaController < Admin::AdminController
     def sort_column
       params[:sort] ? params[:sort] : "account"
     end
-  
+
     def sort_direction
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
@@ -175,7 +175,7 @@ class Admin::SocialMediaController < Admin::AdminController
       per_page_count = 25
       if params[:hidden_service_value]
         params[:service] = params[:hidden_service_value]
-      end      
+      end
       if cookies[:per_page_count_social_media_accounts]
         per_page_count = cookies[:per_page_count_social_media_accounts]
       end
@@ -183,7 +183,7 @@ class Admin::SocialMediaController < Admin::AdminController
         per_page_count = params[:per_page]
         cookies[:per_page_count_social_media_accounts] = per_page_count
       end
-      return per_page_count.to_i        
+      return per_page_count.to_i
     end
 
     def get_tag(tag_id)
@@ -191,7 +191,7 @@ class Admin::SocialMediaController < Admin::AdminController
     end
 
     def tag_text(tag)
-      !tag.nil? ? tag.tag_text : nil 
+      !tag.nil? ? tag.tag_text : nil
     end
 
 end
