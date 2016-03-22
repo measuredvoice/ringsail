@@ -4,7 +4,7 @@ json.set! :account, outlet.account
 json.set! :service_key, outlet.service
 json.set! :short_description, outlet.short_description
 json.set! :long_description, outlet.long_description
-json.set! :service_display_name, Service.find_by_shortname(outlet.service).longname
+json.set! :service_display_name, Admin::Service.find_by_shortname(outlet.service).longname
 json.set! :service_url, outlet.service_url
 json.set! :language, outlet.language
 json.agencies do

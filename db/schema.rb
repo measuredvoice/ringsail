@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202170612) do
+ActiveRecord::Schema.define(version: 20160314143648) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -29,6 +29,19 @@ ActiveRecord::Schema.define(version: 20160202170612) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+
+  create_table "admin_services", force: :cascade do |t|
+    t.string   "handles_regex_eval",         limit: 255
+    t.string   "shortname",                  limit: 255
+    t.string   "longname",                   limit: 255
+    t.string   "display_name_eval",          limit: 255
+    t.text     "account_matchers_eval",      limit: 65535
+    t.string   "service_url_example",        limit: 255
+    t.string   "service_url_canonical_eval", limit: 255
+    t.boolean  "archived",                                 default: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+  end
 
   create_table "agencies", force: :cascade do |t|
     t.string   "name",                       limit: 255
@@ -51,7 +64,7 @@ ActiveRecord::Schema.define(version: 20160202170612) do
     t.string   "token",        limit: 255
     t.string   "email",        limit: 255
     t.string   "phone",        limit: 255
-    t.boolean  "admin",        limit: 1
+    t.boolean  "admin"
     t.integer  "access_count", limit: 4
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -165,7 +178,7 @@ ActiveRecord::Schema.define(version: 20160202170612) do
     t.string   "message",           limit: 255
     t.string   "message_type",      limit: 255
     t.string   "notification_type", limit: 255
-    t.boolean  "has_read",          limit: 1,   default: false
+    t.boolean  "has_read",                      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -277,10 +290,10 @@ ActiveRecord::Schema.define(version: 20160202170612) do
     t.string   "last_name",                    limit: 255
     t.text     "groups",                       limit: 65535
     t.integer  "role",                         limit: 4,     default: 0
-    t.boolean  "agency_notifications",         limit: 1,     default: false
-    t.boolean  "agency_notifications_emails",  limit: 1,     default: false
-    t.boolean  "contact_notifications",        limit: 1,     default: true
-    t.boolean  "contact_notifications_emails", limit: 1,     default: true
+    t.boolean  "agency_notifications",                       default: false
+    t.boolean  "agency_notifications_emails",                default: false
+    t.boolean  "contact_notifications",                      default: true
+    t.boolean  "contact_notifications_emails",               default: true
     t.integer  "email_notification_type",      limit: 4,     default: 0
   end
 

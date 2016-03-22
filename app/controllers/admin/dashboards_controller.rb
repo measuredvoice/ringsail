@@ -16,7 +16,7 @@ class Admin::DashboardsController < Admin::AdminController
     social_media_breakdowns = Outlet.where("draft_id IS NULL").group(:service).count
     @social_chart = []
     social_media_breakdowns.each do |k,v|
-      @social_chart << {label: Service.find_by_shortname(k).longname, value: v}
+      @social_chart << {label: Admin::Service.find_by_shortname(k).longname, value: v}
     end
     
     mobile_breakdowns = MobileApp.joins(:mobile_app_versions).where("draft_id IS NULL").uniq.group("mobile_app_versions.platform").count

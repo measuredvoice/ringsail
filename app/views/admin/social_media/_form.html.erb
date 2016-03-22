@@ -16,9 +16,9 @@
   <div class="field">
     <%= f.label :service, "Account Type*" %> </br>
     <% if @outlet.try(:service).try(:archived?) %>
-      <%= f.select :service, options_for_select(Service.all(true).map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      <%= f.select :service, options_for_select(Admin::Service.every.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
     <% else %>
-      <%= f.select :service, options_for_select(Service.all.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      <%= f.select :service, options_for_select(Admin::Service.unarchived.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
     <% end %>
   </div>
   <div class="field">

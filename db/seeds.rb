@@ -71,7 +71,7 @@ puts "Finished tags to get to #{TAGS_NUM}"
 
 puts "Adding outlets to get to #{OUTLETS_NUM}"
 (1..OUTLETS_NUM).each do |outlet_number|
-	random_service = Service.all.sample
+	random_service = Admin::Service.all.sample
 	language = ["English","Spanish"].sample
 	status = Outlet.statuses.values.sample
 	out = Outlet.create!({

@@ -9,10 +9,10 @@
             All
           <%end%>
           <% @services.each do |key, value|
-              if  !Service.find_by_shortname(key).archived? %>
+              if  !Admin::Service.find_by_shortname(key).archived? %>
 
             <%= link_to admin_outlets_path(service: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:service]}"} do %>
-              <%= Service.find_by_shortname(key).longname %>
+              <%= Admin::Service.find_by_shortname(key).longname %>
               <span class="count pull-right"><%= value %></span>
             <% end
             end %>

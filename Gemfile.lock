@@ -327,6 +327,7 @@ GEM
     thread_safe (0.3.5)
     tilt (2.0.2)
     tins (1.6.0)
+    to_regexp (0.2.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.2)
@@ -385,5 +386,6 @@ DEPENDENCIES
   sass-rails
   shoulda-matchers
   swagger-docs
+  to_regexp
   uglifier
   unicorn
