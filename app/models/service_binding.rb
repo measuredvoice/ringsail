@@ -59,11 +59,13 @@ class ServiceBinding
       end
     end
 
-    if stop_words = matchers[:stop_words]
-      if stop_words.any? { |stop_word| account_id == stopword }
-        account_id = nil
-      end
-    end
+    # if stop_words = matchers[:stop_words]
+    #   puts stop_words.inspect
+    #   puts account_id
+    #   if stop_words.any? { |stop_word| account_id == stopword }
+    #     account_id = nil
+    #   end
+    # end
 
     account_id
   end
