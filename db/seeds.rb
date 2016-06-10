@@ -1,5 +1,4 @@
 PublicActivity.enabled = false
-DatabaseCleaner.clean_with :truncation
 
 AGENCIES_NUM = 3
 USERS_NUM = 100 #users will always make a minimum of 4 (one for each role)
