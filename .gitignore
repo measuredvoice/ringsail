@@ -11,5 +11,6 @@ tmp/
 data/*
 .env
 public/swagger_docs/
+public/assets/
 .ruby-gemset
 coverage/

@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20160314143648) do
 
   create_table "mobile_app_versions", force: :cascade do |t|
     t.integer  "mobile_app_id",     limit: 4
-    t.string   "store_url",         limit: 255
+    t.text     "store_url",         limit: 65535
     t.string   "platform",          limit: 255
     t.string   "version_number",    limit: 255
     t.datetime "publish_date"
@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 20160314143648) do
   add_index "mobile_app_versions", ["platform"], name: "index_mobile_app_versions_on_platform", using: :btree
 
   create_table "mobile_apps", force: :cascade do |t|
-    t.string   "name",              limit: 255
+    t.text     "name",              limit: 65535
     t.text     "short_description", limit: 65535
     t.text     "long_description",  limit: 65535
     t.text     "icon_url",          limit: 65535
@@ -232,7 +232,7 @@ ActiveRecord::Schema.define(version: 20160314143648) do
   add_index "outlets", ["service"], name: "index_outlets_on_service", using: :btree
 
   create_table "rails_admin_histories", force: :cascade do |t|
-    t.text     "message",    limit: 16777215
+    t.text     "message",    limit: 65535
     t.string   "username",   limit: 255
     t.integer  "item",       limit: 4
     t.string   "table",      limit: 255
@@ -274,9 +274,9 @@ ActiveRecord::Schema.define(version: 20160314143648) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                        limit: 255,   default: "",    null: false
+    t.string   "email",                        limit: 255
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                limit: 4,     default: 0
+    t.integer  "sign_in_count",                limit: 4
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",           limit: 255
