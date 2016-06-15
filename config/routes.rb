@@ -194,7 +194,6 @@ Ringsail::Application.routes.draw do
       end
       member do
         get 'reassign'
-        get 'destroy'
       end
     end
     resources :official_tags, concerns: :activity_and_history do
