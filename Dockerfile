@@ -1,4 +1,4 @@
-FROM ctac/base-ruby:2.1
+FROM ctac/base-ruby:2.1.5
 
 ENV APP_HOME /var/app/social_media
 
@@ -14,4 +14,5 @@ ARG RAILS_ENV
 RUN bundle install
 
 ADD . $APP_HOME
+
 RUN bundle exec rake assets:precompile
