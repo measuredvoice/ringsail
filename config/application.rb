@@ -14,13 +14,13 @@ module Ringsail
   class Application < Rails::Application
 
     # insert rack cors first
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins '*'
-        resource '/api/*', :headers => :any, :methods => [:get, :post, :options]
-        resource '/swagger_docs/*', :headers => :any, :methods => [:get, :post, :options]
-      end
-    end
+    # config.middleware.insert_before 0, "Rack::Cors" do
+    #   allow do
+    #     origins '*'
+    #     resource '/api/*', :headers => :any, :methods => [:get, :post, :options]
+    #     resource '/swagger_docs/*', :headers => :any, :methods => [:get, :post, :options]
+    #   end
+    # end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
