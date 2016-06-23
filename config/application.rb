@@ -59,7 +59,7 @@ module Ringsail
     config.assets.version = '1.0'
 
     config.assets.precompile += %w( admin.css admin.js public.css public.js swagger.css swagger.js )
-        
+
     # Put compiled JS and CSS assets in a proxy-friendly path
     #config.assets.prefix = "/social-media/social-media-registry/accounts/assets"
   end

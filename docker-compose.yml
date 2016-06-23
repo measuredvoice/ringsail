@@ -15,26 +15,13 @@ services:
         RAILS_ENV: development
     depends_on:
       - db
-    command: ./development.sh
+    entrypoint: ./development.sh
     env_file: ./env
     ports:
       - "80:80"
     environment:
-      # runtime ENV parameters4
+      # runtime ENV parameters
       RAILS_ENV: development
       REGISTRY_RAILS_COOKIE_TOKEN: 8db388d70170c0ec9dedf836b5c8060c1a871b1abc2487e50ee5111be20f5740bc1aad2a2f39fb0dff88bd849db14170b96cf6f70f84cee0526920f1bd4bac25
       REGISTRY_HOSTNAME: http://spoofedapp.com
       REGISTRY_API_HOST: http://spoofedapp.com
-    volumes:
-      - .:/var/app/social_media
-    #
-    # - ./etc/nginx/conf.d:/etc/nginx/conf.d:ro
-    # - ./etc/nginx/certs:/etc/nginx/certs:ro
-    # - ./etc/php-fpm.d/zz-www.conf:/usr/local/etc/php-fpm.d/zz-www.conf:ro
-    # - ./etc/php/conf.d/zz-php.ini:/usr/local/etc/php/conf.d/zz-php.ini:ro
-    # - ./apps/gsa-cmp-drupal:/var/www/gsa-cmp-drupal
-    # - ./apps/html:/var/www/html
-    # - ./apps/etl-migration:/var/www/etl-migration
-    #- ./log/php_error.log:/var/log/php_error.log
-    #- ./log/php_access.log:/var/log/php_access.log
-    #- ./log/php_slow.log:/var/log/php_slow.log
