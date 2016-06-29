@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::AdminController
   respond_to :html, :xml, :json
 
   before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_notification_settings, :update_notification_settings, :notifications]
-  before_action :require_admin, only: [:index]
+  before_action :require_admin, only: [:index, :destroy]
   before_action :require_admin_or_owner, except: [:index, :tokeninput]
   # GET /users
   # GET /users.json
