@@ -8,7 +8,7 @@ development:
   database: ringsail_development
   username: root
   password:
-  host: db
+  host: localhost
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

@@ -59,10 +59,6 @@
           <em>&nbsp;&nbsp;&nbsp;&nbsp;"Else" regexp:</em>
 					<%= @admin_service.account_matchers_eval[:conditional].try(:[], :else) %>
         </p>
-				<p>
-          <em>&nbsp;&nbsp;Stop words array:</em>
-					<%= @admin_service.account_matchers_eval[:stop_words] %>
-        </p>
 
         <p>
           <strong>Service url example:</strong>
@@ -85,7 +81,7 @@
 <div class="row">
 	<div class="col-sm-12 col-md-12">
 		<div class="buttonRow">
-			<%= link_to 'Back to Agencies', admin_services_path,{:class => "fa fa-angle-double-left"} %>
+			<%= link_to 'Back to Services', admin_services_path,{:class => "fa fa-angle-double-left"} %>
 			<%= link_to 'Edit', edit_admin_service_path(@admin_service), {:class => "fa fa-pencil"} %>
       <% if @admin_service.archived? %>
         <%= link_to ' Unarchive', restore_admin_service_path(@admin_service),{:class => "fa fa-plus"} %>
