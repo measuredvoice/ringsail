@@ -11,6 +11,10 @@ class AppStore
       params = Rack::Utils.parse_nested_query uri.query
       id = params["id"]
       details =  self.google_store_data(id)
+    elsif uri.host == "www.amazon.com"
+      details = {
+        amazon: true
+      }
     else
       details = {}
     end

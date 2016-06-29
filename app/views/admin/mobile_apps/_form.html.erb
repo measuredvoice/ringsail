@@ -155,8 +155,13 @@
        el.find("[name$='publish_date(1i)]']").val(data["publish_year"]);
       }
       if(!data["platform"]){
-        version_parent.find(".version-messages").text("No details found for given URL.")
-      }else{
+        if(data["amazon"]){
+           version_parent.find(".version-messages").text("Can not pull data from amazon app store, please fill in below.")
+        }else{
+          version_parent.find(".version-messages").text("No details found for given URL.")
+        }
+      }
+      else{
         version_parent.find(".version-messages").text("Updated retrieved attributes.")
       }
     }
