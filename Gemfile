@@ -60,6 +60,7 @@ gem 'raphael-rails'
 gem 'jquery-rails'
 gem 'jquery-tokeninput-rails'
 gem "jqcloud-rails"
+gem "non-stupid-digest-assets"
 
 ######
 # End Assets / Assets related gems
