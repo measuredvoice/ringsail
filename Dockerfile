@@ -17,7 +17,9 @@ RUN bundle install
 
 ADD . $APP_HOME
 
-RUN rm -f tmp/pids/server.pid
+RUN mkdir public/assets && \
+  mkdir tmp && \
+  mkdir tmp/pids
 
 RUN bundle exec rake assets:precompile
 
