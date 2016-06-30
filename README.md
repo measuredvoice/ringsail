@@ -1,4 +1,4 @@
-# Social Media Registry (program information)
+# U.S. Digital Registry (program information)
 
 [![Build Status](https://travis-ci.org/ctacdev/social-media-registry.svg?branch=develop)](https://travis-ci.org/ctacdev/social-media-registry)
 [![Coverage Status](https://coveralls.io/repos/ctacdev/social-media-registry/badge.svg?branch=develop)](https://coveralls.io/r/ctacdev/social-media-registry?branch=develop)
