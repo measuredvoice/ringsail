@@ -13,6 +13,8 @@ services:
       args:
         # build-time ENV parameters
         RAILS_ENV: development
+        REGISTRY_HOSTNAME: http://spoofedapp.com
+        REGISTRY_API_HOST: http://spoofedapp.com
     depends_on:
       - db
     entrypoint: ./development.sh
