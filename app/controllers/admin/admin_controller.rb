@@ -2,7 +2,7 @@ class Admin::AdminController < ApplicationController
   include PublicActivity::StoreController
   layout "admin"
 
-  before_filter :authenticate_user! unless Rails.env.development?
+  before_filter :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
   before_filter :banned_user?, except: [:about, :impersonate, :dashboard]
   helper_method :current_user  
   
@@ -17,7 +17,7 @@ class Admin::AdminController < ApplicationController
   end
 
   def current_user
-    if Rails.env.development?
+    if Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
       if session[:user_id]
         if User.where(id: session[:user_id]).count > 0
           @current_user ||= User.find(session[:user_id])

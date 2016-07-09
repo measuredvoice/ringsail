@@ -1,9 +1,5 @@
 FROM ctac/ruby-base:2.1
 
-ARG RAILS_ENV=production
-ARG REGISTRY_HOSTNAME=https://unprovided.domain
-ARG REGISTRY_API_HOST=https://unprovided.domain
-
 ENV APP_HOME /social_media
 
 RUN mkdir $APP_HOME
@@ -16,6 +12,8 @@ RUN apt-get update && \
 
 ADD Gemfile* $APP_HOME/
 
+ARG RAILS_ENV=production
+
 RUN bundle install
 
 ADD . $APP_HOME
@@ -23,6 +21,9 @@ ADD . $APP_HOME
 RUN mkdir public/assets && \
   mkdir tmp && \
   mkdir tmp/pids
+
+ARG REGISTRY_HOSTNAME=https://unprovided.domain
+ARG REGISTRY_API_HOST=https://unprovided.domain
 
 RUN bundle exec rake assets:precompile swagger:docs
 
