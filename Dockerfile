@@ -22,7 +22,7 @@ RUN mkdir public/assets && \
   mkdir tmp && \
   mkdir tmp/pids
 
-ARG REGISTRY_HOSTNAME=https://unprovided.domain
+ARG REGISTRY_HOSTNAME=unprovided.domain
 ARG REGISTRY_API_HOST=https://unprovided.domain
 
 RUN bundle exec rake assets:precompile swagger:docs
