@@ -4,8 +4,8 @@ class Admin::AdminController < ApplicationController
 
   before_filter :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
   before_filter :banned_user?, except: [:about, :impersonate, :dashboard]
-  helper_method :current_user  
-  
+  helper_method :current_user
+
   def about
     @admins = User.where("role = ?", User.roles[:admin])
   end
@@ -21,7 +21,7 @@ class Admin::AdminController < ApplicationController
       if session[:user_id] && User.where(id: session[:user_id]).count > 0
         @current_user ||= User.find(session[:user_id])
       else
-        @current_user ||= User.where(role: 1).first
+        @current_user ||= User.where(role: 2).first
       end
     else
       @current_user ||= warden.authenticate(scope: :user)
