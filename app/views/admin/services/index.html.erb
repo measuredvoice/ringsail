@@ -2,6 +2,9 @@
   <div class="col-sm-12 col-md-12 main">
     <%= content_for :page_title do %>Services<% end %>
     <h1 class="page-header">Services</h1>
+<%= link_to 'New Service', new_admin_service_path, class: "btn btn-primary" %>
+    <br/>
+    <br/>
     <div class="row placeholders">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -19,12 +22,15 @@
 
           </tbody>
     	  </table>
-      </div>
-    </div>
-  </div>
-</div>
 
-<%= link_to 'New Service', new_admin_service_path %>
+
+      </div>
+
+    </div>
+<%= link_to 'New Service', new_admin_service_path, class: "btn btn-primary" %>
+  </div>
+
+</div>
 
 <% content_for :additional_javascript do %>
   <script>

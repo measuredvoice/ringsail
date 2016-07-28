@@ -113,14 +113,15 @@ class Admin::ServicesController < Admin::AdminController
 
     def admin_service_regex_params
       admin_service_params.to_hash.tap do |p|
+        if p["account_matchers_eval"]
+          if conds = p["account_matchers_eval"]["conditional"]
+            p["account_matchers_eval"]["conditional"] = conds.reject { |k, v| v.blank? }
+          end
+          p["account_matchers_eval"] = p["account_matchers_eval"].reject { |k, v| v.blank? }
 
-        if conds = p["account_matchers_eval"]["conditional"]
-          p["account_matchers_eval"]["conditional"] = conds.reject { |k, v| v.blank? }
-        end
-        p["account_matchers_eval"] = p["account_matchers_eval"].reject { |k, v| v.blank? }
-
-        if stops = p["account_matchers_eval"]["stop_words"]
-          p["account_matchers_eval"]["stop_words"] = stops.split(',')
+          if stops = p["account_matchers_eval"]["stop_words"]
+            p["account_matchers_eval"]["stop_words"] = stops.split(',')
+          end
         end
       end.deep_symbolize_keys
     end

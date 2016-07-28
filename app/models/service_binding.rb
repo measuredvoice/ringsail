@@ -30,35 +30,35 @@ class ServiceBinding
   def account
     account_id = nil
     matchers = @service.account_matchers_eval
+    if matchers
+      if nil_matcher = matchers[:nil]
+        return nil if nil_matcher.to_regexp =~ @uri.path
+      end
 
-    if nil_matcher = matchers[:nil]
-      return nil if nil_matcher.to_regexp =~ @uri.path
-    end
+      if host_matcher = matchers[:host]
+        account_id = host_matcher.to_regexp.match(@uri.host).try(:[], :id)
+      end
 
-    if host_matcher = matchers[:host]
-      account_id = host_matcher.to_regexp.match(@uri.host).try(:[], :id)
-    end
+      if account_id.nil? and path_matcher = matchers[:path]
+        account_id = path_matcher.to_regexp.match(@uri.path).try(:[], :id)
+      end
 
-    if account_id.nil? and path_matcher = matchers[:path]
-      account_id = path_matcher.to_regexp.match(@uri.path).try(:[], :id)
-    end
+      if account_id.nil? and fragment_matcher = matchers[:fragment]
+        account_id = fragment_matcher.to_regexp.match(@uri.fragment || @uri.path).try(:[], :id)
+      end
 
-    if account_id.nil? and fragment_matcher = matchers[:fragment]
-      account_id = fragment_matcher.to_regexp.match(@uri.fragment || @uri.path).try(:[], :id)
-    end
+      if account_id.nil? and cond_matcher = matchers[:conditional]
+        if_regex = cond_matcher[:if].to_regexp
+        then_regex = cond_matcher[:then].to_regexp
+        else_regex = cond_matcher[:else].to_regexp
 
-    if account_id.nil? and cond_matcher = matchers[:conditional]
-      if_regex = cond_matcher[:if].to_regexp
-      then_regex = cond_matcher[:then].to_regexp
-      else_regex = cond_matcher[:else].to_regexp
-
-      if if_regex =~ @uri.path
-        account_id = then_regex.match(@uri.path).try(:[], :id)
-      else
-        account_id = else_regex.match(@uri.path).try(:[], :id)
+        if if_regex =~ @uri.path
+          account_id = then_regex.match(@uri.path).try(:[], :id)
+        else
+          account_id = else_regex.match(@uri.path).try(:[], :id)
+        end
       end
     end
-
     # if stop_words = matchers[:stop_words]
     #   puts stop_words.inspect
     #   puts account_id
@@ -67,7 +67,7 @@ class ServiceBinding
     #   end
     # end
 
-    account_id
+    account_id || nil
   end
 
   #not sure if invoked?

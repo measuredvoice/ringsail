@@ -12,18 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :handles_regex_eval, 'Service host match regexp' %><br>
+    <%= f.label :service_url_example, 'URL Example: (May be http://facebook.com/username for facebook)' %><br>
+    <%= f.text_field :service_url_example, :class => "form-control formwidth" %>
+  </div>
+  <div class="field">
+    <%= f.label :handles_regex_eval, 'Service host match regexp: (Should look like /facebook.com$/ for facebook)' %><br>
     <%= f.text_field :handles_regex_eval, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :shortname, 'Short name' %><br>
+    <%= f.label :shortname, 'Short name: (No spaces, no special characters)' %><br>
     <%= f.text_field :shortname, :class => "form-control formwidth" %>
   </div>
   <div class="field">
-    <%= f.label :longname, 'Long name' %><br>
+    <%= f.label :longname, 'Long name: (Display name)' %><br>
     <%= f.text_field :longname, :class => "form-control formwidth" %>
   </div>
-  <div class="field">
+  <!-- <div class="field">
     <%= f.label :display_name_eval, 'Display name template' %><br>
     <%= f.text_field :display_name_eval, :class => "form-control formwidth" %>
   </div>
@@ -61,16 +65,13 @@
           <%= c.text_field :else, :value => @admin_service.account_matchers_eval[:conditional].try(:[], :else),
                            :class => "form-control formwidth" %>
         <% end %>
-    <% end %>
+    <% end %> -->
   </div>
-  <div class="field">
-    <%= f.label :service_url_example %><br>
-    <%= f.text_field :service_url_example, :class => "form-control formwidth" %>
-  </div>
-  <div class="field">
+ 
+  <!-- <div class="field">
     <%= f.label :service_url_canonical_eval, 'Service url canonical template' %><br>
     <%= f.text_field :service_url_canonical_eval, :class => "form-control formwidth" %>
-  </div>
+  </div> -->
   <div class="actions">
     <%= f.submit :class => "btn btn-primary" %>
   </div>

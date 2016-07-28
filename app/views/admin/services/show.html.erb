@@ -6,6 +6,10 @@
 		<div class = "panel panel-default">
 			<div class = "panel-body">
         <p>
+          <strong>Service url example:</strong>
+          <%= @admin_service.service_url_example %>
+        </p>
+        <p>
           <strong>Service host match regexp:</strong>
           <%= @admin_service.handles_regex_eval %>
         </p>
@@ -19,7 +23,7 @@
           <strong>Long name:</strong>
           <%= @admin_service.longname %>
         </p>
-
+<!-- 
         <p>
           <strong>Display name template:</strong>
           <%= @admin_service.display_name_eval %>
@@ -60,15 +64,12 @@
 					<%= @admin_service.account_matchers_eval[:conditional].try(:[], :else) %>
         </p>
 
-        <p>
-          <strong>Service url example:</strong>
-          <%= @admin_service.service_url_example %>
-        </p>
+
 
         <p>
           <strong>Service url canonical template:</strong>
           <%= @admin_service.service_url_canonical_eval %>
-        </p>
+        </p> -->
 
         <p>
           <strong>Archived:</strong>
