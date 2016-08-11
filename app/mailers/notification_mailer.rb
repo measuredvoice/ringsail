@@ -1,5 +1,5 @@
 class NotificationMailer < ActionMailer::Base
-  default from: "US Digital Registry <socialmediaregistry@gsa.gov>"
+  default from: "US Digital Registry <digitalregistry@usa.gov>"
 
   def email(notification)
     @notification = notification
