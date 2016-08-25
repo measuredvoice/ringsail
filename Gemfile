@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-#ruby ENV['RUBY_VERSION']
+ruby ENV['RUBY_VERSION']
 
 # Rails
 gem 'rails', '4.2.5'
