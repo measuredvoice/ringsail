@@ -36,9 +36,11 @@ class Admin::SocialMediaController < Admin::AdminController
     respond_to do |format|
       format.html { @outlets = [] }
       format.json {
-        
-        @outlets = Outlet.search("a", {}).page(1).records
-
+        if params[:q]
+          @outlets = Outlet.search(params[:q], {}).page(1).records
+        else
+          @outlets = @outlets.page(1)
+        end
       }
       format.csv { send_data @outlets.to_csv }
     end

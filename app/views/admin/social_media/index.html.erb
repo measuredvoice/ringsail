@@ -60,6 +60,8 @@
    $(document).ready(function() {
 
        data_tables = $('#data-tables').dataTable({
+        "processing": true,
+        "serverside" : true,
         "ajax" : {
           "url":"/admin/social_media.json",
           "data": function(d){

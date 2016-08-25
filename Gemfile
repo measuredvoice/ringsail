@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby ENV['RUBY_VERSION']
+#ruby ENV['RUBY_VERSION']
 
 # Rails
 gem 'rails', '4.2.5'
@@ -43,7 +43,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'unicorn'
 
 # generate fake data in tests & seeds files
-gem 'faker'
+#gem 'faker'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
