@@ -188,6 +188,7 @@ Ringsail::Application.routes.draw do
     end
   end
   namespace :admin do
+    resources :related_policies
     resources :agencies, concerns: :activity_and_history do
       collection do
         get 'tokeninput'

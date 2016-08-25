@@ -40,6 +40,8 @@ gem 'swagger-docs'
 gem 'rack-cors', :require => 'rack/cors'
 
 
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 ######
 # Assets / Assets related gems
 ######

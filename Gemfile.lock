@@ -123,6 +123,19 @@ GEM
     dotenv (2.0.0.beta)
     dotenv-rails (2.0.0.beta)
       dotenv (= 2.0.0.beta)
+    elasticsearch (2.0.0)
+      elasticsearch-api (= 2.0.0)
+      elasticsearch-transport (= 2.0.0)
+    elasticsearch-api (2.0.0)
+      multi_json
+    elasticsearch-model (0.1.9)
+      activesupport (> 3)
+      elasticsearch (> 0.4)
+      hashie
+    elasticsearch-rails (0.1.9)
+    elasticsearch-transport (2.0.0)
+      faraday
+      multi_json
     erubis (2.7.0)
     execjs (2.6.0)
     factory_girl (4.5.0)
@@ -132,6 +145,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.6.3)
       i18n (~> 0.5)
+    faraday (0.9.2)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.10)
     font-awesome-rails (4.5.0.1)
       railties (>= 3.2, < 5.1)
@@ -156,6 +171,7 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    hashie (3.4.4)
     hirb (0.7.3)
     i18n (0.7.0)
     jbuilder (2.4.1)
@@ -192,6 +208,7 @@ GEM
     morrisjs-rails (0.5.1)
       railties (> 3.1, < 5)
     multi_json (1.11.2)
+    multipart-post (2.0.0)
     mysql2 (0.4.2)
     nenv (0.3.0)
     nokogiri (1.6.7.2)
@@ -362,6 +379,8 @@ DEPENDENCIES
   devise
   devise_cas_authenticatable
   dotenv-rails (= 2.0.0.beta)
+  elasticsearch-model
+  elasticsearch-rails
   factory_girl_rails
   faker
   font-awesome-rails

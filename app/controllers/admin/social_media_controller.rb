@@ -9,6 +9,22 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
+    # @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
+    # num_items = items_per_page_handler
+    # @total_outlets = @outlets.count
+    # if(params[:service] && !params[:service].blank?)
+    #   @outlets = @outlets.where(service: params[:service])
+    # end
+    # @services = @outlets.group(:service).count
+
+    # respond_to do |format|
+    #   format.html { @outlets = [] }
+    #   format.json {
+    #     @outlets = @outlets.select([:id,:service,:organization,:account,:status,:updated_at])
+    #     render "index" }
+    #   format.csv { send_data @outlets.to_csv }
+    # end
+
     @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
     num_items = items_per_page_handler
     @total_outlets = @outlets.count
@@ -20,8 +36,10 @@ class Admin::SocialMediaController < Admin::AdminController
     respond_to do |format|
       format.html { @outlets = [] }
       format.json {
-        @outlets = @outlets.select([:id,:service,:organization,:account,:status,:updated_at])
-        render "index" }
+        
+        @outlets = Outlet.search("a", {}).page(1).records
+
+      }
       format.csv { send_data @outlets.to_csv }
     end
   end

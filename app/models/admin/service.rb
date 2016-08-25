@@ -46,7 +46,7 @@ end
 #  account_matchers_eval      :text(65535)
 #  service_url_example        :string(255)
 #  service_url_canonical_eval :string(255)
-#  archived                   :boolean
+#  archived                   :boolean          default(FALSE)
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #

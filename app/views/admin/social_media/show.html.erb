@@ -51,6 +51,17 @@
 	  		</ul>
 	  	</div>
 		</div>
+    <h3><i class="fa fa-user"></i> Related Policies</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>These are policies that apply to accounts under this social media account type.</p>
+        <ul class="list-group">
+          <% RelatedPolicy.where(service: @outlet.service).each do |policy| %>
+              <li class="list-group-item"><%= link_to policy.title, policy.url, {:target => "_blank" } %><br/> <%= policy.description%></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
 	</div>
 	<div class="col-lg-8 col-sm-12 col-md-8">
     <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Social Media Account</h3>

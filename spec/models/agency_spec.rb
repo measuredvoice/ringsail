@@ -17,6 +17,7 @@
 #  published_mobile_app_count :integer          default(0)
 #  draft_gallery_count        :integer          default(0)
 #  published_gallery_count    :integer          default(0)
+#  api_id                     :integer
 #
 
 require 'rails_helper'
