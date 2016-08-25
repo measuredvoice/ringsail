@@ -213,6 +213,8 @@ GEM
     nenv (0.3.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    non-stupid-digest-assets (1.0.8)
+      sprockets (>= 2.0)
     notiffany (0.0.8)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -395,6 +397,7 @@ DEPENDENCIES
   letter_opener
   morrisjs-rails
   mysql2
+  non-stupid-digest-assets
   pry
   public_activity
   rack-cors
@@ -408,3 +411,9 @@ DEPENDENCIES
   to_regexp
   uglifier
   unicorn
+
+RUBY VERSION
+   ruby 2.1.5p273
+
+BUNDLED WITH
+   1.12.5

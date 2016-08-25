@@ -1,0 +1,35 @@
+<div class = "row">
+	<div class="col-sm-12 col-md-12">
+
+    <%= content_for :page_title do %>Related Policy Info<% end %>
+		<h1 class="page-header">Related Policy Info</h1>
+		<div class = "panel panel-default">
+			<div class = "panel-body">
+        <p>
+          <strong>Service:</strong>
+          <%= @related_policy.service %>
+        </p>
+				<p>
+				  <strong>Title:</strong>
+				  <%= @related_policy.title %>
+				</p>
+				<p>
+				  <strong>URL:</strong>
+				  <%= @related_policy.url %>
+				</p>
+				<p>
+				  <strong>Description:</strong>
+				  <%= @related_policy.description %>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-sm-12 col-md-12">
+		<div class="buttonRow">
+			<%= link_to 'Back to Related Policies', admin_related_policies_path,{:class => "fa fa-angle-double-left"} %>
+			<%= link_to 'Edit', edit_admin_related_policy_path(@related_policy), {:class => "fa fa-pencil"} %> 
+		</div>
+	</div>
+</div>

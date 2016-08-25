@@ -1,18 +1,31 @@
-FROM ctac/base-ruby:2.1.5
+FROM ctac/ruby-base:2.1
 
-ENV APP_HOME /var/app/social_media
+ENV APP_HOME /social_media
 
-RUN mkdir /var/app && mkdir $APP_HOME
+RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 
-RUN apt-get update && apt-get install git -y --no-install-recommends
+RUN apt-get update && \
+  DEBIAN_FRONTEND=noninteractive apt-get install git nodejs -y --no-install-recommends && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ADD Gemfile* $APP_HOME/
 
-ARG RAILS_ENV
+ARG RAILS_ENV=production
 
 RUN bundle install
 
 ADD . $APP_HOME
 
-RUN bundle exec rake assets:precompile
+RUN mkdir public/assets && \
+  mkdir tmp && \
+  mkdir tmp/pids
+
+ARG REGISTRY_HOSTNAME=unprovided.domain
+ARG REGISTRY_API_HOST=https://unprovided.domain
+
+RUN bundle exec rake assets:precompile swagger:docs
+
+EXPOSE 80
+ENTRYPOINT [ "unicorn", "-c", "config/unicorn.rb" ]

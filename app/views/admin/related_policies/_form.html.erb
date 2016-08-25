@@ -1,0 +1,40 @@
+<%= form_for([:admin,@related_policy]) do |f| %>
+		<% if @related_policy.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@related_policy.errors.count, "error") %> prohibited this chapter from being saved:</h2>
+
+				<ul>
+				<% @related_policy.errors.full_messages.each do |message| %>
+				<li><%= message %></li>
+				<% end %>
+				</ul>
+			</div>
+		<% end %>
+
+		<div class="field">
+	    <%= f.label :service, "Account Type*" %> </br>
+	    <% if @related_policy.try(:service).try(:archived?) %>
+	      <%= f.select :service, options_for_select(Admin::Service.every.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @related_policy..service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+	    <% else %>
+	      <%= f.select :service, options_for_select(Admin::Service.unarchived.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @related_policy.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+	    <% end %>
+  	</div>
+		<div class="field">
+			<%= f.label :title, "Title" %> </br>
+			<%= f.text_field :title, :class => "form-control formwidth" %>
+		</div>
+		</br>
+		<div class="field"> 
+			<%= f.label :url, "URL" %> </br>
+			<%= f.text_field :url, :class => "form-control formwidth" %>
+		</div>
+		</br> 
+		<div class="field">
+			<%= f.label :description %> </br>
+			<%= f.text_area :description, :class => "form-control formwidth" %>
+		</div>
+		</br>
+		<div class="actions">
+			<%= f.submit :class => "btn btn-primary" %>
+		</div>
+<% end %>

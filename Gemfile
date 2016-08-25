@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby '2.1.5'
+ruby ENV['RUBY_VERSION']
 
 # Rails
 gem 'rails', '4.2.5'
@@ -39,6 +39,11 @@ gem 'swagger-docs'
 # Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
 gem 'rack-cors', :require => 'rack/cors'
 
+# Unicorn app server for hosting purposes in dev environment. Will be replaced with phusion passenger in 'real' host
+gem 'unicorn'
+
+# generate fake data in tests & seeds files
+gem 'faker'
 
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
@@ -57,6 +62,7 @@ gem 'raphael-rails'
 gem 'jquery-rails'
 gem 'jquery-tokeninput-rails'
 gem "jqcloud-rails"
+gem "non-stupid-digest-assets"
 
 ######
 # End Assets / Assets related gems
@@ -74,11 +80,11 @@ group :development, :test do
   gem "capybara" #feature specs
   gem 'database_cleaner'
   gem 'guard-rspec', require: false
-  
+
   gem 'shoulda-matchers'
   # generate fake data in tests & seeds files
   gem 'faker'
-  
+
   # nice debug tools
   gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
   gem 'better_errors'
@@ -94,9 +100,6 @@ group :development, :test do
   # Ruby style checking
   gem 'rubocop', require: false
 
-  # Unicorn app server for hosting purposes in dev environment. Will be replaced with phusion passenger in 'real' host
-  gem 'unicorn'
-  
   gem "dotenv-rails", "2.0.0.beta"
 end
 ######

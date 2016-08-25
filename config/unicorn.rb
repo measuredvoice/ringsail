@@ -16,7 +16,7 @@
 # Read about unicorn workers here:
 # http://doc.gitlab.com/ee/install/requirements.html#unicorn-workers
 #
-worker_processes 15
+worker_processes 3
 
 # Since Unicorn is never exposed to outside clients, it does not need to
 # run on the standard HTTP port (80), there is no reason to start Unicorn
@@ -57,8 +57,10 @@ pid "tmp/pids/unicorn.pid"
 # By default, the Unicorn logger will write to stderr.
 # Additionally, some applications/frameworks log to stderr or stdout,
 # so prevent them from going to /dev/null when daemonized here:
-stderr_path "log/unicorn.stderr.log"
-stdout_path "log/unicorn.stdout.log"
+# stderr_path "log/unicorn.stderr.log"
+# stdout_path "log/unicorn.stdout.log"
+
+logger Logger.new($stdout)
 
 # combine Ruby 2.0.0dev or REE with "preload_app true" for memory savings
 # http://rubyenterpriseedition.com/faq.html#adapt_apps_for_cow
