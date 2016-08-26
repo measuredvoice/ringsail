@@ -60,14 +60,11 @@
    $(document).ready(function() {
 
        data_tables = $('#data-tables').dataTable({
-        "processing": true,
-        "serverside" : true,
-        "ajax" : {
-          "url":"/admin/social_media.json",
-          "data": function(d){
-            d.service = $('#service').val();
-          }
-        },
+        "bServerSide" : true,
+        "sAjaxSource" : "/admin/social_media.json",
+        // "fnServerParams": function ( aoData ) {
+        //   aoData.push( { "service": $('#service').val() } ) ;
+        // },
         "scrollY":        "400px",
         "columns": [
           { "data" : "agencies[, ]"},

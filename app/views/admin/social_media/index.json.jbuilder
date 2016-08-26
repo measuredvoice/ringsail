@@ -1,4 +1,7 @@
-json.data @outlets do |outlet|
+json.set! "sEcho", params["sEcho"]
+json.set! "iTotalRecords", @total_outlets
+json.set! "iTotalDisplayRecords", @result_count
+json.aaData @outlets do |outlet|
   json.set! "DT_RowId", outlet.id
   json.set! :agencies, outlet.agencies.map(&:name)
   json.set! :contacts, outlet.users.map(&:email)

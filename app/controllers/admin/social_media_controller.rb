@@ -1,5 +1,5 @@
 class Admin::SocialMediaController < Admin::AdminController
-  helper_method :sort_column, :sort_direction
+  helper_method :sort_column, :sort_direction, :current_page
   respond_to :html, :xml, :json, :csv, :xls
 
   before_action :set_outlet, only: [:show, :edit, :update, :destroy,
@@ -24,22 +24,55 @@ class Admin::SocialMediaController < Admin::AdminController
     #     render "index" }
     #   format.csv { send_data @outlets.to_csv }
     # end
-
-    @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
-    num_items = items_per_page_handler
-    @total_outlets = @outlets.count
-    if(params[:service] && !params[:service].blank?)
-      @outlets = @outlets.where(service: params[:service])
-    end
-    @services = @outlets.group(:service).count
-
     respond_to do |format|
-      format.html { @outlets = [] }
+      format.html { 
+        @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
+        num_items = items_per_page_handler
+        @total_outlets = @outlets.count
+        if(params[:service] && !params[:service].blank?)
+          @outlets = @outlets.where(service: params[:service])
+        end
+        @services = @outlets.group(:service).count
+        @outlets = [] }
       format.json {
-        if params[:q]
-          @outlets = Outlet.search(params[:q], {}).page(1).records
+        @total_outlets = Outlet.where("draft_id IS NULL").count
+
+        if !params["sSearch"].blank?
+          @outlets = Outlet.search(
+            query: {
+              bool: {
+                must: [
+                  {
+                    match: { _all: {
+                    query: "%#{params["sSearch"]}%"
+                    }
+                    }
+                  },
+                  {
+                    constant_score: {
+                      filter: {
+                        missing: {
+                          field: "draft_id",
+                          existence: true,
+                          null_value: true
+                        }
+                      }
+                    }
+                  }
+                ] 
+              }
+            },
+            sort: [
+              { "#{sort_column}" => "#{sort_direction}"}
+            ]
+          )
+          
+          @result_count = @outlets.count
+          @outlets = @outlets.page(current_page).records
         else
-          @outlets = @outlets.page(1)
+          @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
+          @result_count = @outlets.count
+          @outlets = @outlets.order("outlets.#{sort_column} #{sort_direction}").page(current_page)
         end
       }
       format.csv { send_data @outlets.to_csv }
@@ -183,12 +216,25 @@ class Admin::SocialMediaController < Admin::AdminController
         :short_description, :long_description)
     end
 
+    def current_page
+      return 0 if params["iDisplayStart"].to_i == 0
+      params["iDisplayStart"].to_i / params["iDisplayLength"].to_i + 1
+    end
     def sort_column
-      params[:sort] ? params[:sort] : "account"
+      columns = {
+        "0" => "organization",
+        "1" => "contacts",
+        "2" => "service",
+        "3" => "organization",
+        "4" => "account",
+        "5" => "updated_at",
+        "6" => "status"
+      }
+      params["iSortCol_0"] ? columns[params["iSortCol_0"]] : "account"
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params["sSortDir_0"]) ? params["sSortDir_0"] : "asc"
     end
 
     def items_per_page_handler
