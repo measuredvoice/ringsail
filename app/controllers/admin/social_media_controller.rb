@@ -68,11 +68,11 @@ class Admin::SocialMediaController < Admin::AdminController
           )
           
           @result_count = @outlets.count
-          @outlets = @outlets.page(current_page).records
+          @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).records
         else
           @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
           @result_count = @outlets.count
-          @outlets = @outlets.order("outlets.#{sort_column} #{sort_direction}").page(current_page)
+          @outlets = @outlets.order("outlets.#{sort_column} #{sort_direction}").page(current_page).per(params["iDisplayLength"].to_i)
         end
       }
       format.csv { send_data @outlets.to_csv }
@@ -238,7 +238,7 @@ class Admin::SocialMediaController < Admin::AdminController
     end
 
     def items_per_page_handler
-      per_page_count = 25
+      per_page_count = 10 || params["iDisplayLength"].to_i
       if params[:hidden_service_value]
         params[:service] = params[:hidden_service_value]
       end
