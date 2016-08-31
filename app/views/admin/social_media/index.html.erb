@@ -60,20 +60,20 @@
    $(document).ready(function() {
 
        data_tables = $('#data-tables').dataTable({
-        "bServerSide" : true,
+        "serverSide" : true,
         "sAjaxSource" : "/admin/social_media.json",
-        // "fnServerParams": function ( aoData ) {
+        // "fnServerParams": function(aoData) {
         //   aoData.push( { "service": $('#service').val() } ) ;
         // },
         "scrollY":        "400px",
         "columns": [
-          { "data" : "agencies[, ]", "orderable": false},
-          { "data" : "contacts[, ]", "orderable": false},
-          { "data" : "service"},
+          { "data" : "agencies" },
+          { "data" : "contacts" },
+          { "data" : "service" },
           { "data" : "account_name" },
-          { "data" : "account"},
-          { "data" : "updated_at"},
-          { "data" : "status"}
+          { "data" : "account" },
+          { "data" : "updated_at" },
+          { "data" : "status" }
         ],
         "columnDefs": [
           {

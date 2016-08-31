@@ -3,11 +3,11 @@ json.set! "iTotalRecords", @total_outlets
 json.set! "iTotalDisplayRecords", @result_count
 json.aaData @outlets do |outlet|
   json.set! "DT_RowId", outlet.id
-  json.set! :agencies, outlet.agencies.map(&:name)
-  json.set! :contacts, outlet.users.map(&:email)
+  json.set! :agencies, outlet.agencies
+  json.set! :contacts, outlet.contacts
   json.set! :service, outlet.service
-  json.set! :account_name, !outlet.organization.blank? ? outlet.organization : "n/a"
+  json.set! :account_name, outlet.account_name ? outlet.account_name : "n/a"
   json.set! :account, outlet.account
   json.set! :status, outlet.status.humanize
-  json.set! :updated_at, outlet.updated_at.strftime("%m/%d/%Y %H:%M %Z")
+  json.set! :updated_at, Time.parse(outlet.updated_at).strftime("%m/%d/%Y %H:%M %Z")
 end

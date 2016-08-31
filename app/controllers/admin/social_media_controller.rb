@@ -66,13 +66,37 @@ class Admin::SocialMediaController < Admin::AdminController
               { "#{sort_column}" => "#{sort_direction}"}
             ]
           )
-          
-          @result_count = @outlets.count
-          @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).records
+          @result_count = @outlets.total_count
+          @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
         else
-          @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
-          @result_count = @outlets.count
-          @outlets = @outlets.order("outlets.#{sort_column} #{sort_direction}").page(current_page).per(params["iDisplayLength"].to_i)
+          @outlets = Outlet.search(
+            query: {
+              bool: {
+                must: [
+                  {
+                    constant_score: {
+                      filter: {
+                        missing: {
+                          field: "draft_id",
+                          existence: true,
+                          null_value: true
+                        }
+                      }
+                    }
+                  }
+                ] 
+              }
+            },
+            sort: [
+              { "#{sort_column}" => "#{sort_direction}"}
+            ]
+          )
+          
+          @result_count = @outlets.total_count
+          @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
+          # @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
+          # @result_count = @outlets.count
+          # @outlets = @outlets.order("outlets.#{sort_column} #{sort_direction}").page(current_page).per(params["iDisplayLength"].to_i)
         end
       }
       format.csv { send_data @outlets.to_csv }
@@ -222,33 +246,23 @@ class Admin::SocialMediaController < Admin::AdminController
     end
     def sort_column
       columns = {
-        "0" => "organization",
+        "0" => "agencies",
         "1" => "contacts",
         "2" => "service",
-        "3" => "organization",
+        "3" => "account_name",
         "4" => "account",
         "5" => "updated_at",
         "6" => "status"
       }
-      params["iSortCol_0"] ? columns[params["iSortCol_0"]] : "account"
+      params["iSortCol_0"] ? columns[params["iSortCol_0"]] : "updated_at"
     end
 
     def sort_direction
-      %w[asc desc].include?(params["sSortDir_0"]) ? params["sSortDir_0"] : "asc"
+      %w[asc desc].include?(params["sSortDir_0"]) ? params["sSortDir_0"] : "desc"
     end
 
     def items_per_page_handler
       per_page_count = 10 || params["iDisplayLength"].to_i
-      if params[:hidden_service_value]
-        params[:service] = params[:hidden_service_value]
-      end
-      if cookies[:per_page_count_social_media_accounts]
-        per_page_count = cookies[:per_page_count_social_media_accounts]
-      end
-      if params[:per_page]
-        per_page_count = params[:per_page]
-        cookies[:per_page_count_social_media_accounts] = per_page_count
-      end
       return per_page_count.to_i
     end
 

@@ -52,7 +52,6 @@ class User < ActiveRecord::Base
   paginates_per 200
 
   def cas_extra_attributes=(extra_attributes)
-    puts extra_attributes
     extra_attributes.each do |name, value|
       case name
         when "Email-Address"

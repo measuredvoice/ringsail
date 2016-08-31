@@ -22,6 +22,38 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   include Notifications
   include Elasticsearch::Model
+
+
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :id, type: :integer
+      indexes :title, analyzer: 'english'
+      indexes :agencies, analyzer: 'english'
+      indexes :service, analyzer: 'english'
+      indexes :contacts, analyzer: 'english'
+      indexes :account_name, analyzer: 'english'
+      indexes :account, analyzer: 'english'
+      indexes :status, analyzer: 'english'
+      indexes :draft_id, type: :integer
+      indexes :updated_at, type: :date
+    end
+  end
+
+  def as_indexed_json(options={})
+    result = {
+      id: self.id,
+      draft_id: self.draft_id,
+      service: self.service,
+      agencies: self.agencies.map(&:name).join(", "),
+      contacts: self.users.map(&:email).join(", "),
+      account_name: self.organization,
+      account: self.account,
+      status: self.status.humanize,
+      updated_at: self.updated_at
+    }
+    result
+  end
+
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
@@ -29,10 +61,7 @@ class Outlet < ActiveRecord::Base
 
   enum status: { under_review: 0, published: 1, archived: 2,
     publish_requested: 3, archive_requested: 4 }
-  #handles versioning
-  #attr_accessor :auth_token
-  #attr_accessible :service_url, :organization, :info_url, :language, :account, :service, :auth_token, :agency_ids, :tag_list, :location_id, :location_name
-
+  
   # Outlets have a relationship to themselvs
   # The "published" outlet will have a draft_id pointing to its parent
   # The "draft" outlet will not have a draft_id field
