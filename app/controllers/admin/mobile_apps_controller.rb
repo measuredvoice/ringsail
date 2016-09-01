@@ -8,17 +8,76 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
-    @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).uniq
-
-    if params[:platform] && params[:platform] != ""
-      @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
-    end
-    @platform_counts = @mobile_apps.platform_counts
     respond_to do |format|
-      format.html { @mobile_apps = []}
+      format.html { 
+        @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).uniq
+    
+        if params[:platform] && params[:platform] != ""
+          @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
+        end
+        @platform_counts = @mobile_apps.platform_counts
+        @mobile_apps = []}
       format.json {
-        @mobile_apps = @mobile_apps.select([:id, :name, :status, :updated_at])
-        render "index"}
+        if !params["sSearch"].blank?
+          @mobile_apps = MobileApp.search(
+            query: {
+              bool: {
+                must: [
+                  {
+                    match: { _all: {
+                    query: "%#{params["sSearch"]}%"
+                    }
+                    }
+                  },
+                  {
+                    constant_score: {
+                      filter: {
+                        missing: {
+                          field: "draft_id",
+                          existence: true,
+                          null_value: true
+                        }
+                      }
+                    }
+                  }
+                ] 
+              }
+            },
+            sort: [
+              { "#{sort_column}" => "#{sort_direction}"}
+            ]
+          )
+          @result_count = @mobile_apps.total_count
+          @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
+        else
+          @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
+          @mobile_apps = MobileApp.search(
+            query: {
+              bool: {
+                must: [
+                  {
+                    constant_score: {
+                      filter: {
+                        missing: {
+                          field: "draft_id",
+                          existence: true,
+                          null_value: true
+                        }
+                      }
+                    }
+                  }
+                ] 
+              }
+            },
+            sort: [
+              { "#{sort_column}" => "#{sort_direction}"}
+            ]
+          )
+          
+          @result_count = @mobile_apps.total_count
+          @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
+        end
+      }
       format.csv { send_data @mobile_apps.to_csv}
     end
   end
@@ -167,26 +226,28 @@ class Admin::MobileAppsController < Admin::AdminController
         :language,:average_rating,:number_of_ratings, :_destroy])
     end
 
+    def current_page
+      return 0 if params["iDisplayStart"].to_i == 0
+      params["iDisplayStart"].to_i / params["iDisplayLength"].to_i + 1
+    end
+
     def sort_column
-      MobileApp.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      columns = {
+        "0" => "agencies",
+        "1" => "contacts",
+        "2" => "name",
+        "3" => "updated_at",
+        "4" => "status"
+      }
+      params["iSortCol_0"] ? columns[params["iSortCol_0"]] : "updated_at"
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params["sSortDir_0"]) ? params["sSortDir_0"] : "desc"
     end
 
     def items_per_page_handler
-      per_page_count = 25
-      if params[:hidden_platform_value]
-        params[:platform] = params[:hidden_platform_value]
-      end
-      if cookies[:per_page_count_mobile_registrations]
-        per_page_count = cookies[:per_page_count_mobile_registrations]
-      end
-      if params[:per_page]
-        per_page_count = params[:per_page]
-        cookies[:per_page_count_mobile_registrations] = per_page_count
-      end
+      per_page_count = 10 || params["iDisplayLength"].to_i
       return per_page_count.to_i
     end
 

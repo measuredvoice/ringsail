@@ -244,6 +244,7 @@ class Admin::SocialMediaController < Admin::AdminController
       return 0 if params["iDisplayStart"].to_i == 0
       params["iDisplayStart"].to_i / params["iDisplayLength"].to_i + 1
     end
+    
     def sort_column
       columns = {
         "0" => "agencies",

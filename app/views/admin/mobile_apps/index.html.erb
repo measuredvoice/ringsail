@@ -55,17 +55,13 @@
     var data_tables = null;
     $(document).ready(function() {
        data_tables = $('#data-tables').dataTable({
-        "ajax" : {
-          "url":"/admin/mobile_apps.json",
-          "data": function(d){
-            d.platform = $('#platform').val();
-          }
-        },
+        "serverSide" : true,
+        "sAjaxSource" : "/admin/mobile_apps.json",
         "scrollY": "400px",
         "columns": [
-          { "data" : "agencies[, ]"},
-          { "data" : "contacts[, ]"},
-          { "data" : "name"},
+          { "data" : "agencies"},
+          { "data" : "contacts"},
+          { "data" : "name" },
           { "data" : "updated_at"},
           { "data" : "status"}
         ],

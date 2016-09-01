@@ -20,6 +20,33 @@ class MobileApp < ActiveRecord::Base
   #handles logging of activity
   include PublicActivity::Model
   include Notifications
+  include Elasticsearch::Model
+
+
+  settings index: { number_of_shards: 1 } do
+    mappings dynamic: 'false' do
+      indexes :id, type: :integer
+      indexes :draft_id, type: :integer
+      indexes :name, analyzer: 'english'
+      indexes :agencies, analyzer: 'english'
+      indexes :contacts, analyzer: 'english'
+      indexes :status, analyzer: 'english'
+      indexes :updated_at, type: :date
+    end
+  end
+
+  def as_indexed_json(options={})
+    result = {
+      id: self.id,
+      draft_id: self.draft_id,
+      name: name,
+      agencies: self.agencies.map(&:name).join(", "),
+      contacts: self.users.map(&:email).join(", "),
+      status: self.status.humanize,
+      updated_at: self.updated_at
+    }
+    result
+  end
 
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
