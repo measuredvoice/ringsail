@@ -1,6 +1,6 @@
 if ENV['REGISTRY_ES_HOST'] 
   config = {
-    host: "http://#{ENV['REGISTRY_ES_HOST']}:#{ENV['REGISTRY_ES_PORT']}/",
+    host: "#{ENV['REGISTRY_ES_HOST']}:#{ENV['REGISTRY_ES_PORT']}/",
     transport_options: {
       request: { timeout: 5 }
     },
