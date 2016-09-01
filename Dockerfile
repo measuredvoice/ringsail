@@ -14,7 +14,7 @@ ADD Gemfile* $APP_HOME/
 
 ARG RAILS_ENV=production
 
-RUN bundle install
+RUN bundle install --jobs 4
 
 ADD . $APP_HOME
 
