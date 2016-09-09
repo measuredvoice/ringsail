@@ -1,11 +1,11 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "http://localhost:3000/",
+  "basePath": "http://localhost:3000",
   "resourcePath": "social_media",
   "apis": [
     {
-      "path": "api/v1/social_media/verify.json",
+      "path": "/api/v1/social_media/verify.json",
       "operations": [
         {
           "summary": "Checks against the registry for a given account by URL to verify it is a federal account",
@@ -41,13 +41,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::SocialMedia#verify"
+          "nickname": "Api::V1::SocialMedia#verify",
+          "method": "get"
         }
       ]
     },
     {
-      "path": "api/v1/social_media/services.json",
+      "path": "/api/v1/social_media/services.json",
       "operations": [
         {
           "summary": "Get a list of all services represented in the social media account listing",
@@ -74,13 +74,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::SocialMedia#services"
+          "nickname": "Api::V1::SocialMedia#services",
+          "method": "get"
         }
       ]
     },
     {
-      "path": "api/v1/social_media/tokeninput.json",
+      "path": "/api/v1/social_media/tokeninput.json",
       "operations": [
         {
           "summary": "Returns a list of tokens to help with search interfaces",
@@ -116,13 +116,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::SocialMedia#tokeninput"
+          "nickname": "Api::V1::SocialMedia#tokeninput",
+          "method": "get"
         }
       ]
     },
     {
-      "path": "api/v1/social_media.json",
+      "path": "/api/v1/social_media.json",
       "operations": [
         {
           "summary": "Fetches all accounts",
@@ -139,14 +139,14 @@
               "paramType": "query",
               "name": "services",
               "type": "service_keys",
-              "description": "Comma seperated list of service keys (available via services call)",
+              "description": "Comma separated list of service keys (available via services call)",
               "required": false
             },
             {
               "paramType": "query",
               "name": "agencies",
               "type": "ids",
-              "description": "Comma seperated list of agency ids",
+              "description": "Comma separated list of agency ids",
               "required": false
             },
             {
@@ -160,14 +160,14 @@
               "paramType": "query",
               "name": "tags",
               "type": "ids",
-              "description": "Comma seperated list of tag ids",
+              "description": "Comma separated list of tag ids",
               "required": false
             },
             {
               "paramType": "query",
               "name": "page_size",
               "type": "integer",
-              "description": "Number of results per page",
+              "description": "Number of results per page, defaults to 25",
               "required": false
             },
             {
@@ -200,13 +200,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::SocialMedia#index"
+          "nickname": "Api::V1::SocialMedia#index",
+          "method": "get"
         }
       ]
     },
     {
-      "path": "api/v1/social_media/{id}.json",
+      "path": "/api/v1/social_media/{id}.json",
       "operations": [
         {
           "summary": "Fetches a single social media account by ID",
@@ -242,10 +242,11 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::SocialMedia#show"
+          "nickname": "Api::V1::SocialMedia#show",
+          "method": "get"
         }
       ]
     }
-  ]
+  ],
+  "authorizations": null
 }

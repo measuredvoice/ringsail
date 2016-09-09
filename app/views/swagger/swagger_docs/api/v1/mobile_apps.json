@@ -1,11 +1,11 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "http://localhost:3000/",
+  "basePath": "http://localhost:3000",
   "resourcePath": "mobile_apps",
   "apis": [
     {
-      "path": "api/v1/mobile_apps/tokeninput.json",
+      "path": "/api/v1/mobile_apps/tokeninput.json",
       "operations": [
         {
           "summary": "Returns a list of tokens to help with search interfaces",
@@ -41,13 +41,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::MobileApps#tokeninput"
+          "nickname": "Api::V1::MobileApps#tokeninput",
+          "method": "get"
         }
       ]
     },
     {
-      "path": "api/v1/mobile_apps.json",
+      "path": "/api/v1/mobile_apps.json",
       "operations": [
         {
           "summary": "Fetches all mobile apps",
@@ -64,14 +64,14 @@
               "paramType": "query",
               "name": "agencies",
               "type": "ids",
-              "description": "Comma seperated list of agency ids",
+              "description": "Comma separated list of agency ids",
               "required": false
             },
             {
               "paramType": "query",
               "name": "tags",
               "type": "ids",
-              "description": "Comma seperated list of tag ids",
+              "description": "Comma separated list of tag ids",
               "required": false
             },
             {
@@ -85,7 +85,7 @@
               "paramType": "query",
               "name": "page_size",
               "type": "integer",
-              "description": "Number of results per page",
+              "description": "Number of results per page, defaults to 25",
               "required": false
             },
             {
@@ -118,13 +118,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::MobileApps#index"
+          "nickname": "Api::V1::MobileApps#index",
+          "method": "get"
         }
       ]
     },
     {
-      "path": "api/v1/mobile_apps/{id}.json",
+      "path": "/api/v1/mobile_apps/{id}.json",
       "operations": [
         {
           "summary": "Fetches a single mobile app item",
@@ -160,10 +160,11 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::MobileApps#show"
+          "nickname": "Api::V1::MobileApps#show",
+          "method": "get"
         }
       ]
     }
-  ]
+  ],
+  "authorizations": null
 }

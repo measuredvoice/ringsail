@@ -1,7 +1,7 @@
 <script id="mobile-app-template" type="text/x-handlebars-template">
-  <div class="media">
+  <div class="media mobile-result">
     {{#if icon_url}}
-    <a href="#" class="pull-left">
+    <a href="#" class="pull-left"  target="_">
       <img src="{{icon_url}}" class="media-object img-rounded" style="height: 64px; width:64px" alt='' />
     </a>
     {{/if}}
@@ -10,7 +10,7 @@
       {{short_description}}
       <ul>
         {{#each versions}}
-        <a href="{{store_url}}">{{platform}}</a>
+        <a href="{{store_url}}" target="_blank">{{platform}}</a>
         {{/each}}
       </ul>
     </div>
@@ -18,20 +18,42 @@
 </script>
 
 <script id="token-input-mobile-li-template" type="text/x-handlebars-template">
-  <li id="mobile-li-{{id}}" data-id="{{id}}">
+  <div id="mobile-li-{{id}}" data-id="{{id}}">
   {{name}}
-
-  {{count}}
+  <span class="badge">{{count}}</span>
   <a href="javascript:remove_mobile_token('{{id}}');"><i class="fa fa-times"></i></a>
-  </li>
+  </div>
+</script>
+
+<script id="mobile-metadata-template" type="text/x-handlebars-template">
+  <div class="metadata-results">
+  <h2>Metadata</h2>
+    <ul>
+      <li>count: {{ count}}</li>
+      <li>page: {{ page }}</li>
+      <li>page_size: {{ page_size }}</li>
+      <li>pages: {{ pages }}</li>
+    </ul>
+  </div>
 </script>
 
 <script>
+
+
+    function remove_mobile_token(id){
+      key = id.replace("-","|")
+      $("#search-social-box").tokenInput("remove", {"key": key});
+      $("#social-li-"+id).remove();
+      $('#mobile-search').submit();
+    }
+
  $(document).ready(function() { 
     var source_mobile_template   = $("#mobile-app-template").html();
     var mobile_template = Handlebars.compile(source_mobile_template); 
     var source_mobile_li_template   = $("#token-input-mobile-li-template").html();
     var mobile_li_template = Handlebars.compile(source_mobile_li_template); 
+    var source_mobile_metadata_template = $('#mobile-metadata-template').html();
+    var mobile_metadata_template = Handlebars.compile(source_mobile_metadata_template);
 
     $("#search-mobile-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/mobile_apps/tokeninput.json", {
       crossDomain: false,
@@ -42,13 +64,6 @@
         $('#mobile-search').submit();
       }
     });
-
-    function remove_mobile_token(id){
-      key = id.replace("-","|")
-      $("#search-social-box").tokenInput("remove", {"key": key});
-      $("#social-li-"+id).remove();
-      $('#mobile-search').submit();
-    }
 
     $('#mobile-search').submit(function(e){
       e.preventDefault();
@@ -73,10 +88,14 @@
       $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/mobile_apps.json",{
         q: text.join(" "),
         agencies: agencies.join(","),
-        tags: tags.join(",")
+        tags: tags.join(","),
+        page_size: $('#search-mobile-page-size').val(),
+        page: $('#search-mobile-page').val()
       }, function(data){
-        for(var i =0; i<data.length; i++){
-          $('#mobile-collection').append(mobile_template(data[i]));
+        $('#mobile-metadata-results').html(mobile_metadata_template(data.metadata));
+         $('#mobile-collection').html('');
+        for(var i =0; i<data.results.length; i++){
+          $('#mobile-collection').append(mobile_template(data.results[i]));
         }
       })
     });

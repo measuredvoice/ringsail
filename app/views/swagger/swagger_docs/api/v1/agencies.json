@@ -1,11 +1,11 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "http://localhost:3000/",
+  "basePath": "http://localhost:3000",
   "resourcePath": "agencies",
   "apis": [
     {
-      "path": "api/v1/agencies.json",
+      "path": "/api/v1/agencies.json",
       "operations": [
         {
           "summary": "Fetches all agencies",
@@ -55,13 +55,13 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::Agencies#index"
+          "nickname": "Api::V1::Agencies#index",
+          "method": "get"
         }
       ]
     },
     {
-      "path": "api/v1/agencies/{id}.json",
+      "path": "/api/v1/agencies/{id}.json",
       "operations": [
         {
           "summary": "Fetches a single agency and its metadata.",
@@ -97,10 +97,11 @@
               "message": "Requested Range Not Satisfiable"
             }
           ],
-          "method": "get",
-          "nickname": "Api::V1::Agencies#show"
+          "nickname": "Api::V1::Agencies#show",
+          "method": "get"
         }
       ]
     }
-  ]
+  ],
+  "authorizations": null
 }

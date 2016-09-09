@@ -1,9 +1,12 @@
 
 <form class="navbar-form navbar-left" role="search" id="social-media-search">
-  <div class="form-group">
-    <input type="text" class="form-control" id="search-social-box" placeholder="Search">
-  </div>
+
   <button type="submit" class="button">Submit</button>
+  <div class="form-group">
+    <label for="search-social-box">Search by Tag:</label><input type="text" class="form-control" id="search-social-box" placeholder="Search"><br/>
+    <label for="search-social-page-size">Page Size:</label><input type="text" class="form-control" id="search-social-page-size" placeholder="25" value="25"><br/><br/>
+     <label for="search-social-page">Page:</label><input type="text" class="form-control" id="search-social-page" placeholder="1" value="1">
+  </div>
 </form>
  
 <div class="row">
@@ -12,6 +15,12 @@
       <ul id="social-tokens" class="agencyResults">
 
       </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <div id="metadata-results">
     </div>
   </div>
 </div>

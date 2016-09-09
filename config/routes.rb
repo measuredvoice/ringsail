@@ -299,11 +299,14 @@ Ringsail::Application.routes.draw do
   #######
   #### PUBLIC PAGES
   #######
-  # scope module: :public do
-    # get "swagger" => "swagger#index"
-  #   # get "search" => "search#index"
-  #   # get "widgets" => "widgets#index"
-  # end
+  scope module: :public do
+    get "swagger" => "swagger#index"
+    get "search" => "search#index"
+    get "widgets" => "widgets#index"
+
+    get "social_media" => "browser#social_media"
+    get "mobile_apps" => "browser#mobile_apps"
+  end
 
   get 'swagger_docs/*path' => "swagger#doc"
 

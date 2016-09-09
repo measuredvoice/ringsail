@@ -1,5 +1,5 @@
 json.array! @items do |item|
-  if item.class == Service
+  if item.class == Admin::Service
     json.set! :key, "service|#{item.shortname}"
     json.set! :name, "Service: #{item.longname}"
     json.set! :count, @service_breakdown[item.shortname.to_s]
