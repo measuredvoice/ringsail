@@ -9,6 +9,9 @@ class Admin::AdminController < ApplicationController
   def about
     @admins = User.where("role = ?", User.roles[:admin])
   end
+  def faq
+    
+  end
 
   def impersonate
     session[:user_id] = params[:user_id]

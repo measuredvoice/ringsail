@@ -255,6 +255,7 @@ Ringsail::Application.routes.draw do
       get 'impersonate' => 'admin#impersonate'
     end
     get 'about' => 'admin#about'
+    get 'faq' => 'admin#faq'
     get 'dashboards' => "dashboards#index"
     get '/' => 'dashboards#index'
   end
