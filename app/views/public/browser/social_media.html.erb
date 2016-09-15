@@ -16,7 +16,7 @@
                 <button type="submit" class="button">Submit</button>
                 <div class="form-group">
                   <label for="search-social-box">Agency</label>
-                  <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(name: :desc), "id", "name"), class: "test" , id: "social-media-agency" %></br>
+                  <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(name: :asc), "id", "name"), class: "test" , id: "social-media-agency" %></br>
                   <label for="search-social-platform">Service</label>
                   <%= select_tag "service", options_from_collection_for_select(Admin::Service.all, :shortname, :longname), class: "test", id: "social-media-service" %></br>
                   <label for="search-social-page-size">Page Size:</label><input type="text" class="form-control" id="search-social-page-size" placeholder="25" value="25"><br/><br/>
