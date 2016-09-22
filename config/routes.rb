@@ -275,7 +275,7 @@ Ringsail::Application.routes.draw do
           get 'tokeninput'
         end
       end
-      resources :galleries, only: [:index, :show]
+      # resources :galleries, only: [:index, :show]
       resources :mobile_apps, only: [:index, :show] do
         collection do
           get 'tokeninput'

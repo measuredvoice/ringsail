@@ -61,7 +61,7 @@
 		            <li><%= link_to "Add a Mobile Product", new_admin_mobile_app_path %></li>
 		        </ul>
 	        </li>
-	        <li class = "<%= "active" if request.original_url.include? "admin/galleries" %>">
+	        <!-- <li class = "<%= "active" if request.original_url.include? "admin/galleries" %>">
 	        	<a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Galleries<span class = "caret"></span></a>
 	        	<ul class="dropdown-menu" role="menu">
 		            <li><%= link_to "Galleries List", admin_galleries_path %> </li>
@@ -70,7 +70,7 @@
 		            <% end %>
 		            <li><%= link_to "Add a Gallery", new_admin_gallery_path %></li>
 		        </ul>
-	        </li>
+	        </li> -->
 	        <li class="<%= "active" if request.path == "/admin/faq" %>">
 	        	<a href="/admin/faq">FAQ</a>
 	        </li>

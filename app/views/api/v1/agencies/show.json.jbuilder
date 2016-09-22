@@ -5,5 +5,5 @@ json.metadata do
   json.set! :pages, @agencies.total_pages
 end
 json.results do 
-  json.array! @agencies, partial: "api/v1/shared/agency", as: :agency
+  json.array! @agencies, partial: "api/v1/shared/agency", as: :agency, locals: {include_counts: true}
 end
