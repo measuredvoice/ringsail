@@ -7,6 +7,7 @@
 //= require bootstrap/collapse
 //= require digitalgovtheme/jsmenus
 //= require digitalgovtheme/jquery.mobilemenu
+//= require jquery.tipsy.js
 
 $(document).ready(function() { 
       $('#topnav ul.nav').superfish({ 

@@ -307,6 +307,9 @@ Ringsail::Application.routes.draw do
 
     get "social_media" => "browser#social_media"
     get "mobile_apps" => "browser#mobile_apps"
+
+    get "social_media_test_one" => "browser#social_media_test_one"
+    get "social_media_bubbles" => "browser#social_media_bubbles"
   end
 
   get 'swagger_docs/*path' => "swagger#doc"
