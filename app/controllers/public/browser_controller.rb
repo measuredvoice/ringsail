@@ -18,7 +18,7 @@ class Public::BrowserController < Public::PublicController
       @services = Outlet.includes(:agencies).where("agencies.id" =>agency.id).group(:service).count
       @service_data = []
       @services.each do |key, value|
-        @service_data << { name: "#{agency.name}: #{key}", size: value}
+        @service_data << { name: "#{agency.name}, #{key.humanize}", size: value}
       end
       @agency_data = {
         name: agency.name,

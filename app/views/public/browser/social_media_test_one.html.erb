@@ -35,7 +35,7 @@ d3.json("/social_media_bubbles.json", function(error, root) {
       .text(function(d) { return d.className + ": " + format(d.value); });
 
   node.append("circle")
-      .attr("hover", function(d){ return ''+d.packageName+': '+d.value; })
+      .attr("hover", function(d){ return ''+d.className+': '+d.value; })
       .attr("r", function(d) { return d.r; })
       .style("fill", function(d) { return color(d.packageName); });
 
