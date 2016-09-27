@@ -12,10 +12,6 @@
       "description": "Social Media Accounts"
     },
     {
-      "path": "//swagger_docs/api/v1/galleries.{format}",
-      "description": "Mobile App Galleries"
-    },
-    {
       "path": "//swagger_docs/api/v1/mobile_apps.{format}",
       "description": "Government Mobile Apps"
     },

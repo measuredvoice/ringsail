@@ -18,67 +18,18 @@ class Admin::MobileAppsController < Admin::AdminController
         @platform_counts = @mobile_apps.platform_counts
         @mobile_apps = []}
       format.json {
-        if !params["sSearch"].blank?
-          @mobile_apps = MobileApp.search(
-            query: {
-              bool: {
-                must: [
-                  {
-                    match: { _all: {
-                    query: "%#{params["sSearch"]}%"
-                    }
-                    }
-                  },
-                  {
-                    constant_score: {
-                      filter: {
-                        missing: {
-                          field: "draft_id",
-                          existence: true,
-                          null_value: true
-                        }
-                      }
-                    }
-                  }
-                ] 
-              }
-            },
-            sort: [
-              { "#{sort_column}" => "#{sort_direction}"}
-            ]
-          )
-          @result_count = @mobile_apps.total_count
-          @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
-        else
-          @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
-          @mobile_apps = MobileApp.search(
-            query: {
-              bool: {
-                must: [
-                  {
-                    constant_score: {
-                      filter: {
-                        missing: {
-                          field: "draft_id",
-                          existence: true,
-                          null_value: true
-                        }
-                      }
-                    }
-                  }
-                ] 
-              }
-            },
-            sort: [
-              { "#{sort_column}" => "#{sort_direction}"}
-            ]
-          )
-          
-          @result_count = @mobile_apps.total_count
-          @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
-        end
+        @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
+        @mobile_apps = MobileApp.es_search(params, sort_column, sort_direction)
+        @result_count = @mobile_apps.total_count
+        @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
       }
-      format.csv { send_data @mobile_apps.to_csv}
+      format.csv { 
+        @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
+        @mobile_apps = MobileApp.es_search(params, sort_column, sort_direction)
+        @result_count = @mobile_apps.total_count
+        @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
+        send_data @mobile_apps.to_csv
+      }
     end
   end
 

@@ -33,28 +33,6 @@
               "required": false
             }
           ],
-          "responseMessages": [
-            {
-              "code": 200,
-              "responseModel": null,
-              "message": "Success"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "The request you made is not acceptable"
-            },
-            {
-              "code": 500,
-              "responseModel": null,
-              "message": "Requested Range Not Satisfiable"
-            }
-          ],
           "nickname": "Api::V1::Agencies#index",
           "method": "get"
         }
@@ -73,28 +51,6 @@
               "type": "integer",
               "description": "ID of the agency",
               "required": true
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 200,
-              "responseModel": null,
-              "message": "Success"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "The request you made is not acceptable"
-            },
-            {
-              "code": 500,
-              "responseModel": null,
-              "message": "Requested Range Not Satisfiable"
             }
           ],
           "nickname": "Api::V1::Agencies#show",

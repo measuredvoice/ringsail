@@ -118,6 +118,48 @@ class Outlet < ActiveRecord::Base
     end
   end
 
+  def self.es_search(params, sort_column, sort_direction)
+    query = {
+      query: {
+        bool: {
+          must: [
+            {
+              constant_score: {
+                filter: {
+                  missing: {
+                    field: "draft_id",
+                    existence: true,
+                    null_value: true
+                  }
+                }
+              }
+            }
+          ] 
+        }
+      },
+      sort: [
+        { "#{sort_column}" => "#{sort_direction}"}
+      ]
+    }
+    if !params["sSearch"].blank?
+      query[:query][:bool][:must] <<  {
+                                        match: { 
+                                          _all: {
+                                            query: "%#{params["sSearch"]}%"
+                                          }
+                                        }
+                                      }
+    end
+    if !params[:service].blank?
+      query[:query][:bool][:must] << {
+                                        match: {
+                                          "service" => params[:service]
+                                        }
+                                      }
+    end
+    self.search(query)
+  end
+
   def self.to_review
     where('outlets.updated_at < ?', 6.months.ago).order('outlets.updated_at')
   end

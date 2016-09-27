@@ -1,8 +1,21 @@
 <div class="row">
-  <div class="col-sm-12 col-md-8 col-md-offset-2 main wrapper">
-    <%= content_for :page_title do %>F.A.Q. U.S. Digital Registry<% end %>
-    <h1 class="page-header">F.A.Q. U.S. Digital Registry</h1>
-    <div class="section-of-faq">
+  <div class="col-sm-12 col-md-4 main">
+    <div class="list-group">
+      <a href="#log-in" class="list-group-item">Logging In</a>
+      <a href="#add-account" class="list-group-item">Add Social Media</a>
+      <a href="#find-social" class="list-group-item">Find Social Media Accounts</a>
+      <a href="#export-social" class="list-group-item">Export Social Media Accounts</a>
+      <a href="#add-mobile" class="list-group-item">Add Mobile Products</a>
+      <a href="#add-details" class="list-group-item">Add Mobile Platform Details</a>
+      <a href="#find-mobile" class="list-group-item">Find Mobile Products</a>
+      <a href="export-mobile" class="list-group-item">Export Mobile Products</a>
+      <a href="#additional-contacts" class="list-group-item">Additional Contacts</a>
+    </div>     
+  </div>
+  <div class="col-sm-12 col-md-8 main wrapper">
+    <%= content_for :page_title do %>FAQ U.S. Digital Registry<% end %>
+    <h1 class="page-header">FAQ U.S. Digital Registry</h1>
+    <div id="log-in" class="section-of-faq">
       <h2>How to Log Onto the U.S. Digital Registry</h2>
       <ol>
         <li>All users must have an individual OMB MAX account or ID to log onto the U.S. Digital Registry. Accounts are available to federal government employees and contractors with a valid .gov, .mil, or .fed.us email address.</li>
@@ -12,7 +25,7 @@
         <li>You will be taken directly to the home page of the Registry where you can complete tasks.</li>
       </li>
     </div>
-    <div class="section-of-faq">
+    <div id="add-account" class="section-of-faq">
       <h2>Add a Social Media Account</h2>
       <ol>
         <li>Click on the Add a Social Media Account button.</li>
@@ -33,17 +46,8 @@ Note: Users will need to login to the registry via the U.S. Digital Registry lin
         <li>Click on “Create Social Media Account” button - Social Media Account Info page displays, showing that your information has been published.</li>
       </li>
     </div>
-    <div class="section-of-faq">
-      <h2>Adding Additional “Contacts” To Your Agency Accounts</h2>
-      <p>You can add multiple “contacts” from your agency to any account and contacts can make changes to your account. If you would like to add an agency representative to your account, you need to complete these steps. </p>
-      <ol>
-        <li>The registry only recognizes users who have signed into the registry, so anyone you want to add as a “contact” to an account, needs to log into the registry to be recognized.</li>
-        <li>Have any users you want to add to an account? Follow the “How To Log Into the Registry” instructions above.</li>
-        <li>Once the person successfully logs into the registry, the registry will recognize them and you can add them to your account(s).</li>
-        <li>Note that only you or any other existing contact on an account can assign a new contact--new contacts will not be able to add themselves to existing accounts.</li>
-      </li>
-    </div>
-    <div class="section-of-faq">
+    
+    <div id="find-social" class="section-of-faq">
       <h2>How to find your Social Media Accounts</h2>
       <ol>
         <li>To filter by Account type click on one for the links (Facebook, Instagram, etc) on the left hand side of the Social Media Listing page.</li>
@@ -52,14 +56,14 @@ Note: Users will need to login to the registry via the U.S. Digital Registry lin
         <li>The Search box will also search on the Account Name and User Name.</li>
       </li>
     </div>
-    <div class="section-of-faq">
+    <div id="export-social" class="section-of-faq">
       <h2>Exporting a list of Social Media accounts to a .CSV file</h2>
       <ol>
         <li>Once all accounts are loaded, click on the “Export Results to CSV file”.</li>
         <li>This export can be filtered by any search query. For example, you can search for your agency, and once loaded, click on the “Export Results to CSV file” and the export will only contain the accounts for your agency.</li>
       </li>
     </div>
-    <div class="section-of-faq">
+    <div id="add-mobile" class="section-of-faq">
       <h2>Add a Mobile Product (Mobile Website or Native App)</h2>
       <ol>
         <li>Click on the Add a Product Account button</li>
@@ -77,7 +81,7 @@ Note: Users will need to login to the registry via the U.S. Digital Registry lin
         <li>Click on “Create Moblie Product” button - Mobile Product Info page displays, showing that your information has been published.</li>
       </li>
     </div>
-    <div class="section-of-faq">
+    <div id="add-details" class="section-of-faq">
       <h2>Adding Mobile Platform Details</h2>
       <p>You will want to add a ‘Platform Details’ entry for each version of a product that you have. Multiple platform versions will most likely be Android and iOS versions of the same app.  Do not add a separate ‘Platform Details’ entry for an app that is compatible on both smartphone and tablet (if it’s only one entry in the respective app store, it’s only one entry here.)</p>
       <ol>
@@ -93,17 +97,7 @@ For websites and Blackberry and Windows apps continue to complete the fields bel
         <li>If there is only one platform version, click the red “Create Mobile Product” button. If you have an additional platform version of your app, click the “+Add Platform Details” link and repeat Platform Details steps 1-8 for each additional platform version you have.</li>
       </li>
     </div>
-    <div class="section-of-faq">
-      <h2>Adding Additional “Contacts” To Your Agency Accounts</h2>
-      <p>You can add multiple “contacts” from your agency to any account and contacts can make changes to your account. If you would like to add an agency representative to your account, you need to complete these steps.</p>
-      <ol>
-        <li>The registry only recognizes users who have signed into the registry, so anyone you want to add as a “contact” to an account, needs to log into the registry to be recognized.</li>
-        <li>Have any users you want to add to an account follow the “How To Log Into the Registry” instructions above. </li>
-        <li>Once the person successfully logs into the registry, the registry will recognize them and you can add them to your account(s).</li>
-        <li>Note that only you or any other existing contact on an account can assign a new contact--new contacts will not be able to add themselves to existing accounts.</li>
-      </li>
-    </div>
-    <div class="section-of-faq">
+    <div id="find-mobile" class="section-of-faq">
       <h2>How to find your Mobile Product Accounts</h2>
       <ol>
         <li>To filter by Platform type click on one of the links (iOS, Android, etc) on the left hand side of the Mobile App Listings page.</li>
@@ -112,11 +106,21 @@ For websites and Blackberry and Windows apps continue to complete the fields bel
         <li>The Search box will also search on the [app] Name and Status (to view only Archived or Published Accounts)</li>
       </li>
     </div>
-    <div class="section-of-faq">
+    <div id="export-mobile" class="section-of-faq">
       <h2>Exporting a list of Mobile Product accounts to a .CSV file</h2>
       <ol>
         <li>Once all accounts are loaded, click on the “Export Results to CSV file”  </li>
         <li>This export can be filtered by any search query. For example, you can search for your agency, and once loaded, click on the “Export Results to CSV file” and the export will only contain the accounts for your agency. </li>
+      </li>
+    </div>
+    <div id="additional-contacts" class="section-of-faq">
+      <h2>Adding Additional “Contacts” To Your Agency Accounts</h2>
+      <p>You can add multiple “contacts” from your agency to any account and contacts can make changes to your account. If you would like to add an agency representative to your account, you need to complete these steps. </p>
+      <ol>
+        <li>The registry only recognizes users who have signed into the registry, so anyone you want to add as a “contact” to an account, needs to log into the registry to be recognized.</li>
+        <li>Have any users you want to add to an account? Follow the “How To Log Into the Registry” instructions above.</li>
+        <li>Once the person successfully logs into the registry, the registry will recognize them and you can add them to your account(s).</li>
+        <li>Note that only you or any other existing contact on an account can assign a new contact--new contacts will not be able to add themselves to existing accounts.</li>
       </li>
     </div>
   </div>

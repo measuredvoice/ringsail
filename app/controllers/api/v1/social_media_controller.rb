@@ -12,10 +12,6 @@ class Api::V1::SocialMediaController < Api::ApiController
     param :query, :tags, :ids, :optional, "Comma separated list of tag ids"
     param :query, :page_size, :integer, :optional, "Number of results per page, defaults to 25"
     param :query, :page, :integer, :optional, "Page number"
-    response :unauthorized
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable   
-    response :not_found
   end
 
   PAGE_SIZE=25
@@ -40,7 +36,7 @@ class Api::V1::SocialMediaController < Api::ApiController
     if params[:services] && params[:services] != ""
       @outlets = @outlets.where(service: params[:services].split(","))
     end
-    @outlets = @outlets.uniq.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+    @outlets = @outlets.uniq.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
       format.json { render "index" }
     end
@@ -50,10 +46,6 @@ class Api::V1::SocialMediaController < Api::ApiController
     summary "Fetches a single social media account by ID"
     notes "This returns an agency based on an ID."
     param :path, :id, :integer, :required, "ID of the account"
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable   
-    response :not_found
   end
 
   def show
@@ -68,10 +60,6 @@ class Api::V1::SocialMediaController < Api::ApiController
     summary "Checks against the registry for a given account by URL to verify it is a federal account"
     notes "This returns an agency based on an URL. If not found, it will return a 404"
     param :query, :url, :string, :required, "URL of social media account"
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable   
-    response :not_found
   end
 
   def verify
@@ -90,10 +78,6 @@ class Api::V1::SocialMediaController < Api::ApiController
   swagger_api :services do
     summary "Get a list of all services represented in the social media account listing"
     notes "This returns a list of services along with the number of accounts registered with them"
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable   
-    response :not_found
   end
 
   def services
@@ -109,10 +93,6 @@ class Api::V1::SocialMediaController < Api::ApiController
     summary "Returns a list of tokens to help with search interfaces"
     notes "This returns tokens representing services, agencies, tags, and a basic text search token for the purpose of building search dialogs"
     param :query, :q, :string, :optional, "String to compare to the various values"
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable   
-    response :not_found
   end
 
   def tokeninput

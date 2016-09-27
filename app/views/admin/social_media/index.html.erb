@@ -62,9 +62,9 @@
        data_tables = $('#data-tables').dataTable({
         "serverSide" : true,
         "sAjaxSource" : "/admin/social_media.json",
-        // "fnServerParams": function(aoData) {
-        //   aoData.push( { "service": $('#service').val() } ) ;
-        // },
+        "fnServerParams": function(aoData) {
+          aoData.push( { "name":"service", "value" : $('#service').val() } ) ;
+        },
         "scrollY":        "400px",
         "columns": [
           { "data" : "agencies" },

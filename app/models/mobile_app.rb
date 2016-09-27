@@ -28,6 +28,7 @@ class MobileApp < ActiveRecord::Base
       indexes :id, type: :integer
       indexes :draft_id, type: :integer
       indexes :name, analyzer: 'english'
+      indexes :platform, analyzer: 'english'
       indexes :agencies, analyzer: 'english'
       indexes :contacts, analyzer: 'english'
       indexes :status, analyzer: 'english'
@@ -42,6 +43,7 @@ class MobileApp < ActiveRecord::Base
       name: name,
       agencies: self.agencies.map(&:name).join(", "),
       contacts: self.users.map(&:email).join(", "),
+      platform: self.mobile_app_versions.map(&:platform).join(", "),
       status: self.status.humanize,
       updated_at: self.updated_at
     }
@@ -121,6 +123,48 @@ class MobileApp < ActiveRecord::Base
         end
       end
     end
+  end
+
+  def self.es_search(params, sort_column, sort_direction)
+    query = {
+      query: {
+        bool: {
+          must: [ 
+                  {
+                    constant_score: {
+                      filter: {
+                        missing: {
+                          field: "draft_id",
+                          existence: true,
+                          null_value: true
+                        }
+                      }
+                    }
+                  }
+          ]
+        }
+      },
+      sort: [
+        { "#{sort_column}" => "#{sort_direction}"}
+      ]
+    }
+    if !params["sSearch"].blank?
+      query[:query][:bool][:must] <<  {
+                                        match: { 
+                                          _all: {
+                                            query: "%#{params["sSearch"]}%"
+                                          }
+                                        }
+                                      }
+    end
+    if !params[:platform].blank?
+      query[:query][:bool][:must] << {
+                                        match: {
+                                          "platform" => params[:platform]
+                                        }
+                                      }
+    end
+    self.search(query)
   end
 
   def tag_tokens=(ids)

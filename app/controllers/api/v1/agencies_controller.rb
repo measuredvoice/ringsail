@@ -8,20 +8,12 @@ class Api::V1::AgenciesController < Api::ApiController
     param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
     param :query, :page_size, :integer, :optional, "Number of results per page"
     param :query, :page, :integer, :optional, "Page number"
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable		
-		response :not_found
 	end
 
 	swagger_api :show do
 		summary "Fetches a single agency and its metadata."
 		notes "This returns an agency based on an ID."
 		param :path, :id, :integer, :required, "ID of the agency"
-		response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable		
-		response :not_found
 	end
 
 	PAGE_SIZE=25
@@ -31,10 +23,11 @@ class Api::V1::AgenciesController < Api::ApiController
 		params[:page_size] = params[:page_size] || PAGE_SIZE
 		if params[:q]
 			@agencies = Agency.where("name LIKE ? or shortname LIKE ?", 
-				"%#{params[:q]}%", "%#{params[:q]}%").page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+				"%#{params[:q]}%", "%#{params[:q]}%")
 		else
-			@agencies = Agency.all.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+			@agencies = Agency.all
 		end
+    @agencies = @agencies.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "index"}
 		end

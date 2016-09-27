@@ -10,10 +10,6 @@ class Api::V1::MobileAppsController < Api::ApiController
     param :query, :language, :string, :optional, "Language of the social media accounts to return"
     param :query, :page_size, :integer, :optional, "Number of results per page, defaults to 25"
     param :query, :page, :integer, :optional, "Page number"
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable		
-		response :not_found
 	end
 
 	PAGE_SIZE=25
@@ -35,7 +31,7 @@ class Api::V1::MobileAppsController < Api::ApiController
     if params[:tags] && params[:tags] != ""
       @mobile_apps = @mobile_apps.where("official_tags.id" => params[:tags].split(","))
     end
-		@mobile_apps = @mobile_apps.uniq.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+		@mobile_apps = @mobile_apps.uniq.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "index" }
 		end		
@@ -45,10 +41,6 @@ class Api::V1::MobileAppsController < Api::ApiController
 		summary "Fetches a single mobile app item"
 		notes "This returns an mobile app based on an ID."
 		param :path, :id, :integer, :required, "ID of the mobile app"
-		response :ok, "Success" 
-		response :not_acceptable, "The request you made is not available"
-		response :requested_range_not_satisfiable
-		response :not_found
 	end
 	def show
     params[:page_size] = params[:page_size] || PAGE_SIZE
@@ -63,10 +55,6 @@ class Api::V1::MobileAppsController < Api::ApiController
     summary "Returns a list of tokens to help with search interfaces"
     notes "This returns tokens representing agencies, tags, and a basic text search token for the purpose of building search dialogs"
     param :query, :q, :string, :optional, "String to compare to the various values"
-    response :ok, "Success"
-    response :not_acceptable, "The request you made is not acceptable"
-    response :requested_range_not_satisfiable   
-    response :not_found
   end
 
 

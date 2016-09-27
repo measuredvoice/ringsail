@@ -68,7 +68,7 @@
       window.swaggerUi = new SwaggerUi({
         url: "<%= ENV['REGISTRY_API_HOST'] %>/swagger_docs/api-docs.json",
         dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
+        supportedSubmitMethods: ['get'],
         onComplete: function(swaggerApi, swaggerUi){
           log("Loaded SwaggerUI");
 
@@ -88,7 +88,7 @@
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
-        docExpansion: "none",
+        docExpansion: "list",
         sorter : "alpha"
       });
 

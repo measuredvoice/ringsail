@@ -19,28 +19,6 @@
               "required": true
             }
           ],
-          "responseMessages": [
-            {
-              "code": 200,
-              "responseModel": null,
-              "message": "Success"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "The request you made is not acceptable"
-            },
-            {
-              "code": 500,
-              "responseModel": null,
-              "message": "Requested Range Not Satisfiable"
-            }
-          ],
           "nickname": "Api::V1::SocialMedia#verify",
           "method": "get"
         }
@@ -52,28 +30,6 @@
         {
           "summary": "Get a list of all services represented in the social media account listing",
           "notes": "This returns a list of services along with the number of accounts registered with them",
-          "responseMessages": [
-            {
-              "code": 200,
-              "responseModel": null,
-              "message": "Success"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "The request you made is not acceptable"
-            },
-            {
-              "code": 500,
-              "responseModel": null,
-              "message": "Requested Range Not Satisfiable"
-            }
-          ],
           "nickname": "Api::V1::SocialMedia#services",
           "method": "get"
         }
@@ -92,28 +48,6 @@
               "type": "string",
               "description": "String to compare to the various values",
               "required": false
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 200,
-              "responseModel": null,
-              "message": "Success"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "The request you made is not acceptable"
-            },
-            {
-              "code": 500,
-              "responseModel": null,
-              "message": "Requested Range Not Satisfiable"
             }
           ],
           "nickname": "Api::V1::SocialMedia#tokeninput",
@@ -178,28 +112,6 @@
               "required": false
             }
           ],
-          "responseMessages": [
-            {
-              "code": 401,
-              "responseModel": null,
-              "message": "Unauthorized"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "The request you made is not acceptable"
-            },
-            {
-              "code": 500,
-              "responseModel": null,
-              "message": "Requested Range Not Satisfiable"
-            }
-          ],
           "nickname": "Api::V1::SocialMedia#index",
           "method": "get"
         }
@@ -218,28 +130,6 @@
               "type": "integer",
               "description": "ID of the account",
               "required": true
-            }
-          ],
-          "responseMessages": [
-            {
-              "code": 200,
-              "responseModel": null,
-              "message": "Success"
-            },
-            {
-              "code": 404,
-              "responseModel": null,
-              "message": "Not Found"
-            },
-            {
-              "code": 406,
-              "responseModel": null,
-              "message": "The request you made is not acceptable"
-            },
-            {
-              "code": 500,
-              "responseModel": null,
-              "message": "Requested Range Not Satisfiable"
             }
           ],
           "nickname": "Api::V1::SocialMedia#show",

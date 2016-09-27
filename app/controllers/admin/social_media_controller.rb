@@ -35,71 +35,16 @@ class Admin::SocialMediaController < Admin::AdminController
         @services = @outlets.group(:service).count
         @outlets = [] }
       format.json {
-        @total_outlets = Outlet.where("draft_id IS NULL").count
-
-        if !params["sSearch"].blank?
-          @outlets = Outlet.search(
-            query: {
-              bool: {
-                must: [
-                  {
-                    match: { _all: {
-                    query: "%#{params["sSearch"]}%"
-                    }
-                    }
-                  },
-                  {
-                    constant_score: {
-                      filter: {
-                        missing: {
-                          field: "draft_id",
-                          existence: true,
-                          null_value: true
-                        }
-                      }
-                    }
-                  }
-                ] 
-              }
-            },
-            sort: [
-              { "#{sort_column}" => "#{sort_direction}"}
-            ]
-          )
-          @result_count = @outlets.total_count
-          @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
-        else
-          @outlets = Outlet.search(
-            query: {
-              bool: {
-                must: [
-                  {
-                    constant_score: {
-                      filter: {
-                        missing: {
-                          field: "draft_id",
-                          existence: true,
-                          null_value: true
-                        }
-                      }
-                    }
-                  }
-                ] 
-              }
-            },
-            sort: [
-              { "#{sort_column}" => "#{sort_direction}"}
-            ]
-          )
-          
-          @result_count = @outlets.total_count
-          @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
-          # @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
-          # @result_count = @outlets.count
-          # @outlets = @outlets.order("outlets.#{sort_column} #{sort_direction}").page(current_page).per(params["iDisplayLength"].to_i)
-        end
+        @outlets = Outlet.es_search(params, sort_column, sort_direction)
+        @result_count = @outlets.total_count
+        @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
       }
-      format.csv { send_data @outlets.to_csv }
+      format.csv { 
+        @outlets = Outlet.es_search(params, sort_column, sort_direction)
+        @result_count = @outlets.total_count
+        @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
+        send_data @outlets.to_csv 
+      }
     end
   end
 
