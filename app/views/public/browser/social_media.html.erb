@@ -1,46 +1,53 @@
 <div class="row">
   <div class="col-sm-12 entry widget-wrap">
-    <%= content_for :page_title do %>Search Pages<% end %>
-    <h1 class=""> Search pages</h1>
-    <p>These are widgets browsing against the API.  Social Media Search, Social Media Verification, and Mobile Apps Search are included</p>
-    <div class="featured-tabs clearfix" role="tabpanel">
-      <ul class="flextabs-custom-controls clearfix" role="tablist">
-        <li role="presentation" class="tab-pop firstab"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab" class="flex-active">Search Social Media Accounts</a></li>
-      </ul>
-      <div class="tab-content flextabs clearfix">
-        <div role="tabpanel" class="tab-pane fade in active" id="search_social">
-          <div class="row">
-            <div class="col-sm-12">
-              <form class="navbar-form navbar-left" role="search" id="social-media-search">
+    <%= content_for :page_title do %>Search Social Media Accounts<% end %>
+    <h1 class=""> Search Social Media Accounts</h1>
 
-                <button type="submit" class="button">Submit</button>
-                <div class="form-group">
-                  <label for="search-social-box">Agency</label>
-                  <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(name: :asc), "id", "name"), class: "test" , id: "social-media-agency" %></br>
-                  <label for="search-social-platform">Service</label>
-                  <%= select_tag "service", options_from_collection_for_select(Admin::Service.all, :shortname, :longname), class: "test", id: "social-media-service" %></br>
-                  <label for="search-social-page-size">Page Size:</label><input type="text" class="form-control" id="search-social-page-size" placeholder="25" value="25"><br/><br/>
-                   <label for="search-social-page">Page:</label><input type="text" class="form-control" id="search-social-page" placeholder="1" value="1">
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div id="metadata-results">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="social-media-results">
-                <ul class="media-list" id="social-media-collection">
-
-                </ul>
-              </div>
-            </div>
-          </div>
+    <form class="navbar-form navbar-left" role="search" id="social-media-search">
+      <div class="row">
+        <div class="col-sm-12">
+          <label for="search-social-text">Text: </label>
+          <%= text_field_tag "search-social-text" %>
+          <label for="search-social-language">Language: </label>
+          <%= select_tag "language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]], class: "test", id: "social-media-language") %></br>
+          <label for="search-social-box">Agency: </label>
+          <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(published_outlet_count: :desc, name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test" , id: "social-media-agency" %></br>
+          <label for="search-social-platform">Service: </label>
+          <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Service', class: "test", id: "social-media-service" %>
+          <label for="search-social-page-size">Page Size: </label>
+          <input type="text" class="form-control" id="search-social-page-size" placeholder="25" value="25">
+          <label for="search-social-page">Page: </label>
+          <input type="text" class="form-control" id="search-social-page" placeholder="1" value="1">
+         </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <button type="submit" class="button">Submit</button>
+          <button id="previousPage" class="button">Previous Page</button>
+          <button id="nextPage" class="button">Next Page</button>
         </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-sm-12">
+        <div id="metadata-results">
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+          <table class="table table-striped" id="data-tables">
+          <thead>
+            <tr>
+              <th>Agency</th>
+              <th>Account Type</th>
+              <th>Account Name</th>
+              <th>Last Updated</th>
+            </tr>
+          </thead>
+          <tbody id="social-media-collection">
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
@@ -48,40 +55,50 @@
 
 
 <% content_for :additional_javascript do %>
+<script>
+$(document).ready(function(){
+  $('#previousPage').click(function(e){
+    e.preventDefault();
+    page_int = parseInt($('#search-social-page').val(),10);
+    if(page_int > 1){
+      $('#search-social-page').val(page_int - 1);
+    }else{
+      $('#search-social-page').val(1)
+    } 
+    submit_form();
+  });
+  $('#nextPage').click(function(e){
+    e.preventDefault();
+    var page_int = parseInt($('#search-social-page').val(),10);
+    if(page_int){
+      $('#search-social-page').val(page_int + 1);
+    }else{
+      $('#search-social-page').val(1)
+    }
+    submit_form();
+  });
+});
+</script>
 <script id="social-media-template" type="text/x-handlebars-template">
-  <div class="media social-media-result">
-    <div class="media-body text-overflow">
-      <a href="{{service_url}}" target="_"><h4 class="media-heading">
+  <tr>
+    <td>{{#each agencies}}
+        {{name}}
+      {{/each}}</td>
+    <td>{{service_display_name}}</td>
+    <td><a href="{{service_url}}" target="_"><h4 class="media-heading">
       {{#if organization}}
         {{organization}}
       {{else}}
         {{service_display_name}}:{{service_url}}
       {{/if}}
-      </h4></a>
-      <p>
-      {{short_description}}
-      </p>
-      <p>
-      Agencies:{{#each agencies}}
-        {{name}}
-      {{/each}}
-      </p>
-      <p>
-      Tags List: {{#each tags}} {{tag_text}} {{/each}}
-      </p>
-    </div>
-  </div>
+      </h4></a></td>
+    <td>{{updated_at}}</td>
+  </tr>
 </script>
 
 <script id="metadata-template" type="text/x-handlebars-template">
   <div class="metadata-results">
-  <h2>Metadata</h2>
-    <ul>
-      <li>count: {{ count}}</li>
-      <li>page: {{ page }}</li>
-      <li>page_size: {{ page_size }}</li>
-      <li>pages: {{ pages }}</li>
-    </ul>
+    <p>Displaying {{page_size}} results on page {{page}} of {{pages}} total pages. Total results: {{ count}}</p>
   </div>
 </script>
 
@@ -107,12 +124,19 @@
 
     $('#social-media-search').submit(function(e){
       e.preventDefault();
+      submit_form();
+      
+  });
+
+    function submit_form(){
       $('#social-media-collection').empty();
       $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media.json",{
         agencies: $('#social-media-agency').val(),
         services: $('#social-media-service').val(),
+        language: $('#language').val(),
         page_size: $('#search-social-page-size').val(),
-        page: $('#search-social-page').val()
+        page: $('#search-social-page').val(),
+        q: $('#search-social-text').val()
       }, function(data){
         $('#metadata-results').html(metadata_template(data.metadata));
         $('#social-media-collection').html('');
@@ -120,6 +144,6 @@
           $('#social-media-collection').append(social_media_template(data.results[i]));
         }
       });
-  });
+    }
   </script>
 <% end %>

@@ -76,6 +76,10 @@ class Agency < ActiveRecord::Base
       contact.email
     end
   end
+
+  def name_and_social_media_count
+    "#{name} (#{published_outlet_count})"
+  end
   
 
 end

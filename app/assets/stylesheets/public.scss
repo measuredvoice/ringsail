@@ -77,7 +77,7 @@ ul.token-input-list li input{
 div.form-group ul.token-input-focused .token-input-input-token::before{
     font-family: 'FontAwesome';
     content: "";
-   padding:0 5px 0 15px;  
+   // padding:0 5px 0 15px;  
    color: #ccc;
    font-size: 13px;
 }
@@ -90,8 +90,10 @@ div.form-group ul.token-input-focused .token-input-input-token::before{
   background: #fff;
   font-family: inherit;
   font-size: inherit;
-  padding: 3%;
-  width: 700px!important;
+  height: auto;
+  padding: 0px;
+  // padding: 3%;
+  // width: 700px!important;
   box-shadow: none;
 }
 
