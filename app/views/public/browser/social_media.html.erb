@@ -92,7 +92,7 @@ $(document).ready(function(){
         {{service_display_name}}:{{service_url}}
       {{/if}}
       </h4></a></td>
-    <td>{{updated_at}}</td>
+    <td>{{#formatDate}}{{updated_at}}{{/formatDate}}</td>
   </tr>
 </script>
 
@@ -109,8 +109,14 @@ $(document).ready(function(){
   <a href="javascript:remove_token('{{id}}');" class="pull-right"><i class="fa fa-times"></i></a>
   </div>
 </script>
+
   <script>  
-    var source_social_media_template   = $("#social-media-template").html();
+  Handlebars.registerHelper('formatDate', function(date){
+    var d = new Date(date.data.root.updated_at);
+    return d.toDateString();
+  });
+  
+  var source_social_media_template   = $("#social-media-template").html();
   var social_media_template = Handlebars.compile(source_social_media_template); 
   var source_social_media_li_template   = $("#token-input-li-template").html();
   var social_media_li_template = Handlebars.compile(source_social_media_li_template); 
