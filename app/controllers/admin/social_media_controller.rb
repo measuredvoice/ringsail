@@ -35,6 +35,7 @@ class Admin::SocialMediaController < Admin::AdminController
         @services = @outlets.group(:service).count
         @outlets = [] }
       format.json {
+        @total_outlets = Outlet.where("draft_id IS NULL").count
         @outlets = Outlet.es_search(params, sort_column, sort_direction)
         @result_count = @outlets.total_count
         @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
