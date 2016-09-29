@@ -38,4 +38,8 @@ class OfficialTag < ActiveRecord::Base
   def tag_link
     "<a href='javascript:add_tag(\"#{tag_text}\")'>#{tag_text}</a>"
   end
+
+   def text_and_social_count
+    "#{tag_text} (#{published_outlet_count})"
+  end
 end

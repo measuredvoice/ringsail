@@ -12,8 +12,6 @@
 * THESE FILES AND EVERYTHING BELOW ARE REQUIRED TO BE PORTED TO PUBLIC SITE.
 
  *= require font-awesome
-
- *= require custom-token-input.css
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -24,16 +22,16 @@
 body{
     font-family: Trebuchet,Tahoma,sans-serif;
     font-size: 16px;
-line-height: 1.6em;
-color: #555;
-font-weight: 400;
+  line-height: 1.6em;
+  color: #555;
+  font-weight: 400;
 }
-.entry ul.square-style li{
-  list-style: square;
-}
-.entry ul.square-style{
-    margin: 0 0 20px 60px;
-}
+// .entry ul.square-style li{
+//   list-style: square;
+// }
+// .entry ul.square-style{
+//     margin: 0 0 20px 60px;
+// }
 h1, h2, h3, h4, h5, h6{
     font-family: Trebuchet,Tahoma,sans-serif;
 }
@@ -51,10 +49,10 @@ margin-bottom: 20px;
 .social-media-result{
   border: 1px solid black;
 }
-.social-media-result p{
-  margin: 0;
-  padding: 0;
-}
+// .social-media-result p{
+//   margin: 0;
+//   padding: 0;
+// }
 .mobile-result{
   border: 1px solid black;
 }
@@ -62,75 +60,28 @@ margin-bottom: 20px;
   margin: 0;
   padding: 0;
 }
-#search-social-box{
-  width: 60%;
-}
+
 // .entry ul, .entry ol{
 //     margin: 0!important;
 // }
-ul.token-input-list{   
-background-color: #ffffff;
-}
-ul.token-input-list li input{
-    background-color: #fff;
-}
-div.form-group ul.token-input-focused .token-input-input-token::before{
-    font-family: 'FontAwesome';
-    content: "";
-   // padding:0 5px 0 15px;  
-   color: #ccc;
-   font-size: 13px;
-}
-.token-input-token{
-    display: none !important;
-}
+
 .form-control {
-  border-radius: 0;
-  border: 1px solid #ddd;
+  // border-radius: 0;
+  // border: 1px solid #ddd;
   background: #fff;
   font-family: inherit;
   font-size: inherit;
-  height: auto;
-  padding: 0px;
+  // height: auto;
+  // padding: 0px;
   // padding: 3%;
   // width: 700px!important;
-  box-shadow: none;
+  // box-shadow: none;
 }
 
-::-webkit-input-placeholder {
-   color: #ccc;
-    font-size: 13px;
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   color: #ccc; 
-     font-size: 13px;
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color: #ccc;  
-     font-size: 13px;
-}
-
-:-ms-input-placeholder {  
-   color: #ccc;  
-     font-size: 13px;
-}
 .button{
     border-radius: 0;
 }
-.agencyResults{
-    margin: 0;
-    padding: 0;
-}
-.agencyResults div{
-  display: block;
-border-bottom: dotted 1px #ddd;
-margin: 0 15px 0 15px;
-background-color: #f1f1f1;
-padding: 5px;
 
-}
 .media-body{
     padding:15px 0  15px 25px;
 }
@@ -143,4 +94,7 @@ padding: 5px;
     color: #fff;
     
     
+}
+#tags{
+  width: 150px;
 }

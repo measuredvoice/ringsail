@@ -19,4 +19,5 @@ class OutletOfficialTag < ActiveRecord::Base
     self.official_tag.published_outlet_count = self.official_tag.outlets.where("draft_id IS NOT NULL").count
     self.official_tag.save
   end
+
 end

@@ -6,14 +6,17 @@
     <form class="navbar-form navbar-left" role="search" id="social-media-search">
       <div class="row">
         <div class="col-sm-12">
-          <label for="search-social-text">Text: </label>
-          <%= text_field_tag "search-social-text" %>
-          <label for="search-social-language">Language: </label>
-          <%= select_tag "language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]], class: "test", id: "social-media-language") %></br>
           <label for="search-social-box">Agency: </label>
           <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(published_outlet_count: :desc, name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test" , id: "social-media-agency" %></br>
-          <label for="search-social-platform">Service: </label>
+          <label for="search-social-language">Language: </label>
+          <%= select_tag "language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]], class: "test", id: "social-media-language") %>
+          <label for="search-social-platform">Platforms: </label>
           <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Service', class: "test", id: "social-media-service" %>
+          <label for="search-social-tags">Tags: </label>
+          <%= select_tag "tags", options_from_collection_for_select(OfficialTag.all.order(published_outlet_count: :desc), :id, :text_and_social_count), :class => "form-control", :prompt => "Select a Tag" %><br/>
+
+          <label for="search-social-text">Text: </label>
+          <%= text_field_tag "search-social-text" %>
           <label for="search-social-page-size">Page Size: </label>
           <input type="text" class="form-control" id="search-social-page-size" placeholder="25" value="25">
           <label for="search-social-page">Page: </label>
@@ -42,6 +45,7 @@
               <th>Agency</th>
               <th>Account Type</th>
               <th>Account Name</th>
+              <th>Tags</th>
               <th>Last Updated</th>
             </tr>
           </thead>
@@ -92,6 +96,7 @@ $(document).ready(function(){
         {{service_display_name}}:{{service_url}}
       {{/if}}
       </h4></a></td>
+    <td>{{#tags}}{{tags}},{{/tags}}</td>
     <td>{{#formatDate}}{{updated_at}}{{/formatDate}}</td>
   </tr>
 </script>
@@ -114,6 +119,14 @@ $(document).ready(function(){
   Handlebars.registerHelper('formatDate', function(date){
     var d = new Date(date.data.root.updated_at);
     return d.toDateString();
+  });
+
+  Handlebars.registerHelper('tags', function(item){
+    var array_of_text = []
+    for(var i = 0 ; i<item.data.root.tags.length; i++){
+      array_of_text.push(item.data.root.tags[i].tag_text);
+    }
+    return array_of_text.join(", ");
   });
   
   var source_social_media_template   = $("#social-media-template").html();
@@ -142,7 +155,8 @@ $(document).ready(function(){
         language: $('#language').val(),
         page_size: $('#search-social-page-size').val(),
         page: $('#search-social-page').val(),
-        q: $('#search-social-text').val()
+        q: $('#search-social-text').val(),
+        tags: $('#tags').val()
       }, function(data){
         $('#metadata-results').html(metadata_template(data.metadata));
         $('#social-media-collection').html('');
