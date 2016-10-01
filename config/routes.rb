@@ -305,7 +305,7 @@ Ringsail::Application.routes.draw do
     # get "search" => "search#index"
     # get "widgets" => "widgets#index"
 
-    get "social_media" => "browser#social_media"
+    # get "social_media" => "browser#social_media"
     # # get "mobile_apps" => "browser#mobile_apps"
 
 

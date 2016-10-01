@@ -1,5 +1,16 @@
 //= require jquery
-//= require handlebars-2.0.0
+//= require jquery_ujs
+//= require handlebars-4.0.0
+//= require swagger/lodash.min
+//= require swagger/backbone-min
+//= require swagger/marked
+//= require swagger/es5-shim
+//= require swagger/jsoneditor.min
+//= require swagger/highlight.9.1.0.pack
+//= require swagger/jquery.wiggle.min
+//= require swagger/jquery.ba-bbq.min
+//= require swagger/jquery.slideto.min
+//= require swagger-ui.min
 //= require digitalgovtheme/flexslider
 //= require digitalgovtheme/superfish
 //= require digitalgovtheme/hoverintent

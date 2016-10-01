@@ -31,7 +31,10 @@
     </div>
   </div>
   <%= render partial: "layouts/digital_gov_static_footer" %>
-  <%= javascript_include_tag "swagger" %>
+
+  <%= javascript_include_tag "public" %>
+  
+  <%= javascript_include_tag "jquery.tokeninput" %>
   <%= yield :additional_javascript %>
 </body>
 </html>
