@@ -1,4 +1,4 @@
-//= require jquery
+//= require swagger/jquery-1.8.0.min
 //= require jquery_ujs
 //= require handlebars-4.0.0
 //= require swagger/lodash.min
