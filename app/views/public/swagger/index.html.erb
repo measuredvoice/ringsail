@@ -13,71 +13,150 @@
   </ul>
   <p>For customer service on accounts, please contact their programs directly. </p>
   
-  <form class="navbar-form navbar-left row" role="search" id="social-media-search">
-      <div class="col-sm-12">
-        <div class="row form-inner">
+  <div role="tabpanel">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a></li>
+      <li role="presentation"><a href="#search_mobile" aria-controls="messages" role="tab" data-toggle="tab">Search Mobile Products</a></li>
+    </ul>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane fade in active" id="search_social">
+        <form class="navbar-form navbar-left row" role="search" id="social-media-search">
           <div class="col-sm-12">
-          <label for="search-social-box">Agency: </label>
-          <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(published_outlet_count: :desc, name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "social-media-agency" %>
+            <div class="row form-inner">
+              <div class="col-sm-12">
+              <label for="search-social-box">Agency: </label>
+              <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(published_outlet_count: :desc, name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "social-media-agency" %>
+              </div>
+            </div>
+            <div class="row form-inner">
+              <div class="col-sm-4">
+                <label for="search-social-language">Language: </label>
+                <%= select_tag "language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "form-control"  %>
+              </div>
+              <div class="col-sm-4">
+                <label for="search-social-platform">Platforms: </label>
+                <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Platform', class: "form-control test", id: "social-media-service" %>
+                 </div>
+              <div class="col-sm-4">
+                <label for="search-social-tags">Tags: </label>
+                <%= select_tag "tags", options_from_collection_for_select(OfficialTag.all.order(published_outlet_count: :desc), :id, :text_and_social_count), :class => "form-control col-sm-3", :prompt => "Select a Tag" %>
+              </div>
+            </div>
+            <div class="row form-inner">
+              <div class="col-sm-6">
+                <label for="search-social-page-size">Page Size: </label>
+                <input type="text" class="form-control" id="search-social-page-size" placeholder="10" value="10">
+              </div>
+              <div class="col-sm-6">
+                <label for="search-social-page">Page: </label>
+                <input type="text" class="form-control" id="search-social-page" placeholder="1" value="1">
+              </div>
+            </div>
+            <div class="row form-inner">
+              <div class="col-sm-12">
+                <button type="submit" class="button">Submit</button>
+                <button id="previousPage" class="button">Previous Page</button>
+                <button id="nextPage" class="button">Next Page</button>
+                <button id="export" class="button">Export CSV</button>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="row form-inner">
-          <div class="col-sm-4">
-            <label for="search-social-language">Language: </label>
-            <%= select_tag "language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "form-control"  %>
-          </div>
-          <div class="col-sm-4">
-            <label for="search-social-platform">Platforms: </label>
-            <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Service', class: "form-control test", id: "social-media-service" %>
-             </div>
-          <div class="col-sm-4">
-            <label for="search-social-tags">Tags: </label>
-            <%= select_tag "tags", options_from_collection_for_select(OfficialTag.all.order(published_outlet_count: :desc), :id, :text_and_social_count), :class => "form-control col-sm-3", :prompt => "Select a Tag" %>
-          </div>
-        </div>
-        <div class="row form-inner">
-          <div class="col-sm-6">
-            <label for="search-social-page-size">Page Size: </label>
-            <input type="text" class="form-control" id="search-social-page-size" placeholder="10" value="10">
-          </div>
-          <div class="col-sm-6">
-            <label for="search-social-page">Page: </label>
-            <input type="text" class="form-control" id="search-social-page" placeholder="1" value="1">
-          </div>
-        </div>
-        <div class="row form-inner">
+        </form>
+        <div class="row">
           <div class="col-sm-12">
-            <button type="submit" class="button">Submit</button>
-            <button id="previousPage" class="button">Previous Page</button>
-            <button id="nextPage" class="button">Next Page</button>
-            <button id="export" class="button">Export CSV</button>
+            <div id="metadata-results">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+              <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Agency</th>
+                  <th>Account Type</th>
+                  <th>Account Name</th>
+                  <th>Tags</th>
+                  <th>Last Updated</th>
+                </tr>
+              </thead>
+              <tbody id="social-media-collection">
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-    </form>
-    <div class="row">
-      <div class="col-sm-12">
-        <div id="metadata-results">
+      <div role="tabpanel" class="tab-pane fade" id="search_mobile">
+        <div class="row">
+          <div class="col-sm-12">
+            <form class="navbar-form navbar-left row" role="search" id="mobile-search">
+              <div class="col-sm-12">
+                <div class="row form-inner">
+                  <div class="col-sm-12">
+                  <label for="search-mobile-box">Agency: </label>
+                  <%= select_tag "agency", options_from_collection_for_select(Agency.all.order(published_mobile_app_count: :desc, name: :asc), "id", "name_and_mobile_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "mobile-agency" %>
+                  </div>
+                </div>
+                <div class="row form-inner">
+                  <div class="col-sm-6">
+                    <label for="search-mobile-language">Language: </label>
+                    <%= select_tag "mobile-language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "form-control", id: "mobile-language"  %>
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="search-mobile-tags">Tags: </label>
+                    <%= select_tag "mobile-tags", options_from_collection_for_select(OfficialTag.all.order(published_mobile_app_count: :desc), :id, :text_and_mobile_count), :class => "form-control col-sm-3", :prompt => "Select a Tag" %>
+                  </div>
+                </div>
+                <div class="row form-inner">
+                  <div class="col-sm-6">
+                    <label for="search-mobile-page-size">Page Size: </label>
+                    <input type="text" class="form-control" id="mobile-page-size" placeholder="10" value="10">
+                  </div>
+                  <div class="col-sm-6">
+                    <label for="search-mobile-page">Page: </label>
+                    <input type="text" class="form-control" id="mobile-page" placeholder="1" value="1">
+                  </div>
+                </div>
+                <div class="row form-inner">
+                  <div class="col-sm-12">
+                    <button type="submit" class="button">Submit</button>
+                    <button id="mobilePreviousPage" class="button">Previous Page</button>
+                    <button id="mobileNextPage" class="button">Next Page</button>
+                    <button id="mobileExport" class="button">Export CSV</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="row">
+              <div class="col-sm-12">
+                <div id="mobile-metadata-results">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                  <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Agency</th>
+                      <th>Platforms</th>
+                      <th>Name</th>
+                      <th>Tags</th>
+                      <th>Last Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody id="mobile-collection">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm-12">
-          <table class="table table-striped" id="data-tables">
-          <thead>
-            <tr>
-              <th>Agency</th>
-              <th>Account Type</th>
-              <th>Account Name</th>
-              <th>Tags</th>
-              <th>Last Updated</th>
-            </tr>
-          </thead>
-          <tbody id="social-media-collection">
-          </tbody>
-        </table>
-      </div>
-    </div>
+  </div>
+    
   <h2>How to Access the U.S. Digital Registry</h2>
   <p><a class="button" href="https://socialmobileregistry.digitalgov.gov/admin">Register and Manage Accounts</a></p>
   <p>Accessing the U.S. Digital&nbsp;Registry requires an OMB Max ID, which is available to federal government employees and contractors with a valid .gov, .mil, or .fed.us email address. <a href="https://max.omb.gov/maxportal/registrationForm.action" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://max.omb.gov/maxportal/registrationForm.action', 'Register for an OMB Max ID');">Register for an OMB Max ID</a> if you need one.</p>
@@ -117,7 +196,24 @@
   <%= hidden_field_tag :hidden_languages %>
 <% end %>
 
+<%= form_tag export_mobile_app_path(format: :csv), method: :post, class: 'hidden', id: "mobile_csv_export" do %>
+  <%= hidden_field_tag :hidden_mobile_agencies %>
+  <%= hidden_field_tag :hidden_mobile_tags %>
+  <%= hidden_field_tag :hidden_mobile_languages %>
+<% end %>
+
 <% content_for :additional_javascript do %>
+  <style>
+    .tab-pane{
+      border-top: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+      border-left: 1px solid #ddd;
+      border-bottom: 1px solid #ddd;
+    }
+    .metadata-results{
+      margin: 5px;
+    }
+  </style>
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
@@ -175,19 +271,25 @@
   </tr>
 </script>
 
+<script id="mobile-template" type="text/x-handlebars-template">
+  <tr>
+    <td>{{#each agencies}}
+        {{name}}&nbsp;
+      {{/each}}</td>
+    <td>{{#each versions}}
+        <a href="{{store_url}}" target="_">{{platform}}</a>
+      {{/each}}</td>
+    <td>{{name}}</td>
+    <td>{{#tagoutput}}{{tags}},{{/tagoutput}}</td>
+    <td>{{#formatDate}}{{updated_at}}{{/formatDate}}</td>
+  </tr>
+</script>
 <script id="metadata-template" type="text/x-handlebars-template">
   <div class="metadata-results">
     <p>Displaying {{page_size}} results on page {{page}} of {{pages}} total pages. Total results: {{ count}}</p>
   </div>
 </script>
 
-<script id="token-input-li-template" type="text/x-handlebars-template">
-  <div id="social-li-{{id}}" data-id="{{id}}">
-  {{name}}
-  <span class="badge">{{count}}</span>
-  <a href="javascript:remove_token('{{id}}');" class="pull-right"><i class="fa fa-times"></i></a>
-  </div>
-</script>
 
   <script>  
   Handlebars.registerHelper('formatDate', function(date){
@@ -210,23 +312,26 @@
   
   var source_social_media_template   = $("#social-media-template").html();
   var social_media_template = Handlebars.compile(source_social_media_template); 
-  var source_social_media_li_template   = $("#token-input-li-template").html();
-  var social_media_li_template = Handlebars.compile(source_social_media_li_template); 
+
+
+  var source_mobile_template   = $("#mobile-template").html();
+  var mobile_template = Handlebars.compile(source_mobile_template); 
 
   var source_metadata_template = $('#metadata-template').html();
   var metadata_template = Handlebars.compile(source_metadata_template);
+    
+
+  $(document).ready(function(){
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       $('.flex-active').toggleClass('flex-active');
       e.currentTarget.className = "flex-active";
-    })
+    });
 
     $('#social-media-search').submit(function(e){
       e.preventDefault();
-      submit_form();
+      submit_social_media_form();
       
-  });
-
-  $(document).ready(function(){
+    });
     $('#previousPage').click(function(e){
       e.preventDefault();
       page_int = parseInt($('#search-social-page').val(),10);
@@ -235,7 +340,7 @@
       }else{
         $('#search-social-page').val(1)
       } 
-      submit_form();
+      submit_social_media_form();
     });
     $('#nextPage').click(function(e){
       e.preventDefault();
@@ -245,7 +350,7 @@
       }else{
         $('#search-social-page').val(1)
       }
-      submit_form();
+      submit_social_media_form();
     });
 
     $('#export').click(function(e){
@@ -253,9 +358,39 @@
        export_csv();
     });
 
+    $('#mobileNextPage').click(function(e){
+      e.preventDefault();
+      var page_int = parseInt($('#mobile-page').val(),10);
+      if(page_int){
+        $('#mobile-page').val(page_int + 1);
+      }else{
+        $('#mobile-page').val(1)
+      }
+      submit_mobile_form();
+    });
+    $('#mobilePreviousPage').click(function(e){
+       e.preventDefault();
+      var page_int = parseInt($('#mobile-page').val(),10);
+      if(page_int){
+        $('#mobile-page').val(page_int - 1);
+      }else{
+        $('#mobile-page').val(1)
+      }
+      submit_mobile_form();
+    });
+
+    $('#mobileExport').click(function(e){
+       e.preventDefault();
+       export_mobile_csv();
+    });
+
+    $('#mobile-search').submit(function(e){
+      e.preventDefault();
+      submit_mobile_form();
+    });
   });
 
-    function submit_form(){
+    function submit_social_media_form(){
       $('#social-media-collection').empty();
       $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media.json",{
         agencies: $('#social-media-agency').val(),
@@ -266,10 +401,26 @@
         tags: $('#tags').val()
       }, function(data){
         $('#metadata-results').html(metadata_template(data.metadata));
-        $('#total_page_size').val(data.metadata.count)
         $('#social-media-collection').html('');
         for(var i =0; i<data.results.length; i++){
           $('#social-media-collection').append(social_media_template(data.results[i]));
+        }
+      });
+    }
+
+    function submit_mobile_form(){
+      $('#mobile-collection').empty();
+      $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/mobile_apps.json",{
+        agencies: $('#mobile-agency').val(),
+        language: $('#mobile-language').val(),
+        page_size: $('#mobile-page-size').val(),
+        page: $('#mobile-page').val(),
+        tags: $('#mobile-tags').val()
+      }, function(data){
+        $('#mobile-metadata-results').html(metadata_template(data.metadata));
+        $('#mobile-collection').html('');
+        for(var i =0; i<data.results.length; i++){
+          $('#mobile-collection').append(mobile_template(data.results[i]));
         }
       });
     }
@@ -282,6 +433,14 @@
       $('#hidden_languages').val($('#language').val());
       $('#csv_export').submit();
     }
-    submit_form();
+
+    function export_mobile_csv(){
+      $('#hidden_mobile_agencies').val($('#mobile-agency').val());
+      $('#hidden_mobile_tags').val($('#mobile-tags').val());
+      $('#hidden_mobile_languages').val($('#mobile-language').val());
+      $('#mobile_csv_export').submit();
+    }
+    submit_social_media_form();
+    submit_mobile_form();
   </script>
 <% end %>

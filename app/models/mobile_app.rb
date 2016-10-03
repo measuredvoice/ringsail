@@ -125,6 +125,22 @@ class MobileApp < ActiveRecord::Base
     end
   end
 
+  def self.export_csv(options={})
+    CSV.generate(options) do |csv|
+      csv << ["agencies" ,"platforms","platform_urls","name", "tags", "updated"]
+
+      self.all.includes(:agencies,:users,:official_tags, :mobile_app_versions).each do |ma|
+        versions = ma.mobile_app_versions
+        csv << [ ma.agencies.map(&:name).join("|"),
+          versions.map(&:platform).join("|"),
+          versions.map(&:store_url).join("|"),
+          ma.name,
+          ma.official_tags.map(&:tag_text).join("|"),
+          ma.updated_at ]
+      end
+    end
+  end
+
   def self.es_search(params, sort_column, sort_direction)
     query = {
       query: {

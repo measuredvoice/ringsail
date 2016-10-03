@@ -81,5 +81,8 @@ class Agency < ActiveRecord::Base
     "#{name} (#{published_outlet_count})"
   end
   
+  def name_and_mobile_count
+    "#{name} (#{published_mobile_app_count})"
+  end
 
 end
