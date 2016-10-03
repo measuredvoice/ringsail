@@ -307,8 +307,8 @@ Ringsail::Application.routes.draw do
 
     # get "social_media" => "browser#social_media"
     # # get "mobile_apps" => "browser#mobile_apps"
-
-
+    get 'export_social_media' => "browser#export_social_media"
+    post 'export_social_media' => "browser#export_social_media"
     # get "social_media_test_one" => "browser#social_media_test_one"
     # get "social_media_bubbles" => "browser#social_media_bubbles"
   end

@@ -47,6 +47,7 @@
             <button type="submit" class="button">Submit</button>
             <button id="previousPage" class="button">Previous Page</button>
             <button id="nextPage" class="button">Next Page</button>
+            <button id="export" class="button">Export CSV</button>
           </div>
         </div>
       </div>
@@ -105,6 +106,14 @@
   </div>
   <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 </div>
+
+<%= form_tag export_social_media_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
+  <%= hidden_field_tag :hidden_agencies %>
+  <%= hidden_field_tag :hidden_services %>
+  <%= hidden_field_tag :hidden_tags %>
+  <%= hidden_field_tag :hidden_languages %>
+<% end %>
+
 <% content_for :additional_javascript do %>
   <script type="text/javascript">
     $(function () {
@@ -145,31 +154,6 @@
       window.swaggerUi.load();
     });
   </script>
-
-  <script>
-$(document).ready(function(){
-  $('#previousPage').click(function(e){
-    e.preventDefault();
-    page_int = parseInt($('#search-social-page').val(),10);
-    if(page_int > 1){
-      $('#search-social-page').val(page_int - 1);
-    }else{
-      $('#search-social-page').val(1)
-    } 
-    submit_form();
-  });
-  $('#nextPage').click(function(e){
-    e.preventDefault();
-    var page_int = parseInt($('#search-social-page').val(),10);
-    if(page_int){
-      $('#search-social-page').val(page_int + 1);
-    }else{
-      $('#search-social-page').val(1)
-    }
-    submit_form();
-  });
-});
-</script>
 <script id="social-media-template" type="text/x-handlebars-template">
   <tr>
     <td>{{#each agencies}}
@@ -239,6 +223,35 @@ $(document).ready(function(){
       
   });
 
+  $(document).ready(function(){
+    $('#previousPage').click(function(e){
+      e.preventDefault();
+      page_int = parseInt($('#search-social-page').val(),10);
+      if(page_int > 1){
+        $('#search-social-page').val(page_int - 1);
+      }else{
+        $('#search-social-page').val(1)
+      } 
+      submit_form();
+    });
+    $('#nextPage').click(function(e){
+      e.preventDefault();
+      var page_int = parseInt($('#search-social-page').val(),10);
+      if(page_int){
+        $('#search-social-page').val(page_int + 1);
+      }else{
+        $('#search-social-page').val(1)
+      }
+      submit_form();
+    });
+
+    $('#export').click(function(e){
+       e.preventDefault();
+       export_csv();
+    });
+
+  });
+
     function submit_form(){
       $('#social-media-collection').empty();
       $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media.json",{
@@ -247,15 +260,24 @@ $(document).ready(function(){
         language: $('#language').val(),
         page_size: $('#search-social-page-size').val(),
         page: $('#search-social-page').val(),
-        q: $('#search-social-text').val(),
         tags: $('#tags').val()
       }, function(data){
         $('#metadata-results').html(metadata_template(data.metadata));
+        $('#total_page_size').val(data.metadata.count)
         $('#social-media-collection').html('');
         for(var i =0; i<data.results.length; i++){
           $('#social-media-collection').append(social_media_template(data.results[i]));
         }
       });
+    }
+
+
+    function export_csv(){
+      $('#hidden_agencies').val($('#social-media-agency').val());
+      $('#hidden_services').val($('#social-media-service').val());
+      $('#hidden_tags').val($('#tags').val());
+      $('#hidden_languages').val($('#language').val());
+      $('#csv_export').submit();
     }
     submit_form();
   </script>

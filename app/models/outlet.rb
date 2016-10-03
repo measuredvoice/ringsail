@@ -118,6 +118,16 @@ class Outlet < ActiveRecord::Base
     end
   end
 
+  def self.export_csv(options={})
+    CSV.generate(options) do |csv|
+      csv << ["agencies" ,"account_type","account name","account url", "tags", "updated"]
+
+      self.all.includes(:agencies,:users,:official_tags).each do |outlet|
+        csv << [outlet.agencies.map(&:name).join("|") ,outlet.service, outlet.organization, outlet.service_url, outlet.official_tags.map(&:tag_text).join("|"), outlet.updated_at]
+      end
+    end
+  end
+
   def self.es_search(params, sort_column, sort_direction)
     query = {
       query: {
