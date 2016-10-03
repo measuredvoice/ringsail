@@ -13,3 +13,5 @@ end
 json.versions do
   json.array! mobile_app.mobile_app_versions, partial: "api/v1/shared/mobile_app_version", as: :version
 end
+json.set! :created_at, mobile_app.created_at
+json.set! :updated_at, mobile_app.updated_at
