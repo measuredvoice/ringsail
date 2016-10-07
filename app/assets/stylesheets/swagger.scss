@@ -1375,3 +1375,548 @@ padding: 10px;
   text-align: center;
   padding-top: 10px;
 }
+
+
+/////////////////////////
+// FROM ADMIN
+////////////////////////.
+body{
+    font-family: Trebuchet,Tahoma,sans-serif;
+    font-size: 16px;
+  line-height: 1.6em;
+  color: #555;
+  font-weight: 400;
+}
+
+#top-banner{
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: Trebuchet,Tahoma,sans-serif;
+}
+h1{
+    font-size: 30px;
+letter-spacing: 0;
+line-height: 1.3em;
+    font-weight: 700;
+}
+p{
+    margin-top: 0px;
+margin-bottom: 20px;
+}
+
+.social-media-result{
+  border: 1px solid black;
+}
+.mobile-result{
+  border: 1px solid black;
+}
+.mobile-result p{
+  margin: 0;
+  padding: 0;
+}
+
+
+
+.form-control{
+  background: #fff;
+  font-family: inherit;
+  font-size: inherit;
+
+}
+
+.button{
+    border-radius: 0;
+}
+
+.media-body{
+    padding:15px 0  15px 25px;
+}
+
+.media > .pull-left{
+  padding-left: 15px;
+}
+.badge{
+    background-color:#ff5049;
+    color: #fff;
+    
+    
+}
+
+.form-inner{
+  margin: 10px 0px;
+}
+
+.navbar-form .form-control{
+  width: 100%;
+}
+
+
+
+.screenreaders
+{
+  border: 0;
+  clip: rect(0,0,0,0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+#dir-level-search #query
+{
+  border: 1px solid #999;
+  border-radius: 5px;
+  font-size: 1.2em;
+  moz-border-radius: 5px;
+  padding: 10px 14% 10px 2%;
+  webkit-border-radius: 5px;
+  width: 83%;
+}
+.form-chunk
+{
+  margin: 0 auto;
+  position: relative;
+  width: 65%;
+}
+#search-action
+{
+  background: #ff5049;
+  border: 1px solid #999;
+  border-radius: 0 5px 5px 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2em;
+  moz-border-radius: 0 5px 5px 0;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  webkit-border-radius: 0 5px 5px 0;
+}
+.display-posts-listing
+{
+  margin: 0!important;
+  padding: 0;
+}
+.display-posts-listing li
+{
+  list-style: none !important;
+}
+.sub-menu
+{
+  background: #006873;
+}
+.addthis_toolbox
+{
+  margin-bottom: 5px;
+}
+#topnav
+{
+  background: #0c555d !important;
+}
+#topnav ul ul a
+{
+  margin: 0 0 1px;
+}
+.centercatnav #catnav ul ul a:hover
+{
+  background: #333;
+  color: #fff;
+}
+#search_form
+{
+  float: right;
+}
+#search-7
+{
+  margin-right: 15px;
+  position: absolute;
+  right: 0;
+  top: -250px;
+}
+#search-5
+{
+  position: absolute;
+  top: 20px;
+}
+#search_form input[type="text"]
+{
+  background: #fafafa;
+  border: 1px solid #eee;
+  color: #666;
+  display: block;
+  float: left;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 3px 5px 5px 0;
+  padding: 5px 0;
+  text-transform: lowercase;
+  width: 180px;
+}
+.email-form input[type="text"]
+{
+  padding: 10px 5px!important;
+}
+#search_form input[type="submit"]
+{
+  background-color: #ff5049;
+  border-color: #ff5049;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  moz-border-radius: 3px;
+  padding: 5px!important;
+  text-transform: uppercase !important;
+  webkit-border-radius: 3px;
+}
+#catslide-widget-2 .flex-next,#catslide-widget-2 .flex-prev
+{
+  display: none;
+}
+.featured.wide
+{
+  overflow: hidden;
+}
+.featured.yt-temp a.flex-active img.yt-thumb
+{
+  opacity: 1 !important;
+}
+.home .flex-viewport
+{
+  height: 400px;
+  overflow: hidden;
+}
+.flex-next:hover,.flex-prev:hover
+{
+  background-color: #ff6860 !important;
+}
+.home .featured.wide .myflexslider .slide-container
+{
+  height: 400px;
+}
+.home #portfolio-container
+{
+  margin-top: 100px;
+}
+#solofolio-widget-2 .solo-wide
+{
+  background: #fff url(https://digitalgov.sites.usa.gov/files/2014/01/texture2.jpg) repeat-x 50% 0;
+}
+.home .port-intro
+{
+  border-bottom: 0;
+  color: #f5f1e9;
+}
+.home .widget.solofolio h3.widgettitle,.home .catslide-intro h3.widgettitle
+{
+  background: none;
+  color: #f5f1e9;
+  font-size: 40px;
+  margin-bottom: 0;
+}
+.home .tribe-events-list-widget h3.widgettitle,#featposts-widget-4 .widgettitle
+{
+  color: #f5f1e9;
+  font-size: 40px;
+}
+.home #wrap
+{
+  position: relative;
+}
+#catslide-widget-2
+{
+  overflow: visible !important;
+}
+#catslide-widget-2 .flex-viewport
+{
+  height: auto !important;
+}
+#catslide-widget-2 .slides
+{
+  width: 100% !important;
+}
+#catslide-widget-2 .slides li
+{
+  height: 350px;
+  margin: 25px 0;
+  width: 325px !important;
+}
+.home .widget.subscribebox p.intro
+{
+  display: inline;
+}
+#govdelivery input
+{
+  display: inline-block;
+  float: none;
+}
+.home-widget-wide .widgettitle,.home .catslide-intro,.home .tribe-events-list-widget .widgettitle,#featposts-widget-4 .widgettitle
+{
+  background: #fff url(https://digitalgov.sites.usa.gov/files/2014/01/texture2.jpg) repeat-x 50% 50%;
+  color: #f5f1e9;
+  margin-left: -100%;
+  margin-right: -100%;
+  padding: 40px 0;
+  text-align: center;
+}
+.home .cat-posts-widget .entry
+{
+  height: 318px;
+  width: 294px;
+}
+.home .featpage-image
+{
+  box-shadow: 0 1px 10px #006873;
+  float: none;
+  height: 210px;
+  margin-bottom: 10px;
+  moz-box-shadow: 0 1px 10px #006873;
+  overflow: hidden;
+  webkit-box-shadow: 0 1px 10px #006873;
+  width: 100%;
+}
+.home .featpage-image img
+{
+  height: 100%;
+  width: 100%;
+}
+a:focus,a:active,.slides li:focus,.slides li:active
+{
+  outline: 2px dotted #ff5049 !important;
+}
+.featpage-image a
+{
+  display: block !important;
+}
+.sub-icons li a,.twitter,.youtube,.rss
+{
+  background-position: 0 -40px;
+  opacity: 1 !important;
+}
+.widget a.subicon
+{
+  background-color: #0c555d;
+  opacity: 1 !important;
+}
+.more-link,.button
+{
+  background: #ff5049 !important;
+  border: 0;
+  border-radius: 3px;
+  color: #fff !important;
+  display: inline-block;
+  font-size: .9em;
+  font-weight: 700;
+  moz-border-radius: 3px;
+  padding: 5px 25px;
+  webkit-border-radius: 3px;
+}
+.more-link:hover,.button:hover
+{
+  background: #ff6860 !important;
+}
+.home .subscribebox
+{
+  background: #f5f1e9 !important;
+  height: 100px;
+  margin: 0 -100%!important;
+  padding: 0;
+  padding-top: 15px;
+  text-align: center;
+}
+.home .subscribebox .widgettitle
+{
+  background: none !important;
+  font-size: 19px;
+  line-height: 1;
+  margin-bottom: 0;
+  margin-right: 15px;
+}
+.home .subscribebox .intro
+{
+  background: none !important;
+}
+.home .vcalendar
+{
+  border: 0;
+  position: relative;
+}
+.home .tribe-events-widget-link
+{
+  left: 46%;
+  position: absolute;
+}
+.home .tribe-events-list-widget li
+{
+  border: 1px dotted #ccc;
+  float: left;
+  margin: 25px;
+  padding: 10px;
+  width: 42%;
+}
+#topnav
+{
+  padding-top: 20px;
+}
+#tribe-events-list-widget-7 li
+{
+  background: none;
+  display: block;
+  margin: 0;
+  padding: 5px;
+  width: auto;
+}
+#tribe-events-list-widget-7 .widgettitle
+{
+  padding: 0!important;
+}
+#tribe-events-list-widget-7 h3
+{
+  color: #ddd;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+#tribe-events-list-widget-7 .vcalendar
+{
+  margin: 0;
+  min-height: auto;
+  padding: 0;
+  position: relative;
+}
+#tribe-events-list-widget-7 .entry-title
+{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+#tribe-events-list-widget-7 .duration
+{
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+}
+#tribe-events-list-widget-7 .tribe-events-widget-link
+{
+  font-size: 14px;
+  left: auto;
+  position: relative !important;
+  text-align: center;
+}
+.home .featuredpage
+{
+  border: 1px solid #ccc;
+  clear: none;
+  float: left;
+  min-height: 386px;
+  padding: 25px;
+  width: 40%;
+}
+.home .featuredpage:nth-of-type(odd)
+{
+  float: right !important;
+}
+#subscribebox-widget-8
+{
+  background: #0c555d !important;
+  color: #fff;
+}
+#subscribebox-widget-8 .widgettitle
+{
+  color: #fff;
+}
+#footer-widgets
+{
+  background: #0c555d !important;
+  color: #fff !important;
+}
+#footer-widgets .widgettitle
+{
+  color: #fff !important;
+}
+#footer-widgets a
+{
+  color: #ffa49f !important;
+}
+#footer-widgets a:hover
+{
+  color: #ff5049 !important;
+}
+#footer-widgets .widget li
+{
+  border: 0;
+}
+.home #portfolio li.post
+{
+  height: 160px;
+}
+.home ul#filter li a:hover,ul#filter li.current a
+{
+  background: #ff5049;
+}
+.home ul#filter li a:hover,ul#filter li a:hover
+{
+  background: #ff5049;
+}
+#catnav li.current-menu-parent > a,#catnav li.current-menu-item > a,#catnav li.current_page_item > a
+{
+  color: #006873;
+}
+#catnav
+{
+  background: none;
+}
+.wp-caption-text
+{
+  color: #ccc;
+  font-size: 9px !important;
+  padding: 0 0 0 5px !important;
+  text-align: left !important;
+}
+.display-posts-listing .listing-item
+{
+  clear: both;
+}
+.display-posts-listing img
+{
+  float: left;
+  margin: 0 10px 10px 0;
+}
+.wp-caption-text
+{
+  line-height: 1.4 !important;
+  margin-top: 3px !important;
+}
+#single-page-103362 .hdivider
+{
+  margin: 0;
+  padding: 10px 0;
+}
+#single-page-103362 .one-half
+{
+  margin-bottom: 0;
+  padding-top: 60px;
+}
+#single-page-103362 blockquote
+{
+  margin-bottom: 0;
+  margin-top: 0;
+}
+@media only screen and (max-width: 768px)
+{
+  #search-7
+  {
+    position: absolute;
+    right: 30px;
+    top: -200px;
+  }
+  .home #sitetitle
+  {
+    margin-top: 40px;
+  }
+}
