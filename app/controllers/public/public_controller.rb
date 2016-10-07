@@ -1,4 +1,7 @@
 class Public::PublicController < ApplicationController
-  layout "public"
+  layout "swagger"
 
+  def faq
+
+  end
 end

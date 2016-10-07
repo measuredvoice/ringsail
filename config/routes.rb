@@ -302,18 +302,14 @@ Ringsail::Application.routes.draw do
   #######
   scope module: :public do
     get "swagger" => "swagger#index"
-    # get "search" => "search#index"
-    # get "widgets" => "widgets#index"
 
-    # get "social_media" => "browser#social_media"
-    # # get "mobile_apps" => "browser#mobile_apps"
+    get "faq" => "public#faq"
+
     get 'export_social_media' => "browser#export_social_media"
     post 'export_social_media' => "browser#export_social_media"
 
     get 'export_mobile_app' => "browser#export_mobile_app"
     post 'export_mobile_app' => "browser#export_mobile_app"
-    # get "social_media_test_one" => "browser#social_media_test_one"
-    # get "social_media_bubbles" => "browser#social_media_bubbles"
   end
 
   get 'swagger_docs/*path' => "swagger#doc"

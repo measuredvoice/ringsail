@@ -1,10 +1,6 @@
 /*
  * This manifest file includes the CSS files required by default
- *= require digitalgovtheme/style
- *= require digitalgovtheme/style-font
- *= require digitalgovtheme/style-responsive
- *= require digitalgovtheme/custom
- *= require digitalgovtheme/other-custom
+ *= require admin
  *= require jquery.tipsy.css
 
 
@@ -25,6 +21,10 @@ body{
   line-height: 1.6em;
   color: #555;
   font-weight: 400;
+}
+
+#top-banner{
+  width: 100%;
 }
 // .entry ul.square-style li{
 //   list-style: square;

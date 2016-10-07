@@ -1,33 +1,70 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <title><%= yield :page_title %> | DigitalGov</title>
-  <link href='//fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet' type='text/css'/>
-  <%= stylesheet_link_tag    "public" %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
   <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
-  <%= yield :additional_css %>
+    <link rel="shortcut icon" href="https://www.digitalgov.gov/files/2014/02/favicon.ico" type="image/x-icon">
+
+  <title><%= yield :page_title %> | DigitalGov</title>
+
+  <!-- Bootstrap core CSS -->
+  <%= stylesheet_link_tag    'admin', media: 'all' %>
+  <%= csrf_meta_tags %>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
-<body class="home page page-id-472 page-template page-template-page-widgetized-php fwidth unboxed hidetitle centercatnav bodybg1" data-twttr-rendered="true">
-  <%= render partial: "layouts/fixed_nav" %>
-  <div id="outer-wrap">
-    <%= render partial: "layouts/top_nav" %>
-    <%= render partial: "layouts/header" %>
-    <div id="wrap">
-      <div id="page" class="clearfix">
-        <div class="page-border clearfix">
-          <div id="contentleft" class="clearfix">
-            <div id="content" class="clearfix">
-              <div class="" id="single-page-202">
-                <div class="entry">
-                  <%= yield %>
-                </div>
-              </div>
-            </div> <!-- End #content div --> 
-            <div style="clear:both;margin-bottom:20px;"></div>
-          </div> <!-- End #contentleft div -->
-        </div> <!-- End .page-border div -->
-      </div> <!-- End #page div -->
+<body>
+    <nav class="navbar navbar-fixed-top">
+      <div id="navbar-container" class="container">
+        <div class="navBrand">
+        <a class="brandImg" href="/admin"></a>
+      </div>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="<%= "active" if request.path == "/admin" %>">
+            <a href="/">Home</a>
+          </li>
+          <li class="<%= "active" if request.path == "/admin/faq" %>">
+            <a href="/faq">FAQ</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/admin/">Log In</a>
+          </li>
+
+        </ul>
+      </div>
     </div>
+  </nav>
+
+  <div class="container wrapping">
+    </br>
+    <% if notice %>
+      <p class="alert alert-success" role="alert"><%= notice %><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
+    <% end %>
+    <% if alert %>
+      <% unless alert.start_with?("Your session") || alert.start_with?("You need to") %>
+      <p class="alert alert-danger"><%= alert %></p>
+      <% end %>
+    <% end %>
+    <%= yield %>
   </div>
   <%= javascript_include_tag "public" %>
   <%= javascript_include_tag "jquery.tokeninput" %>

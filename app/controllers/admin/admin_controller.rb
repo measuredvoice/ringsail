@@ -9,6 +9,7 @@ class Admin::AdminController < ApplicationController
   def about
     @admins = User.where("role = ?", User.roles[:admin])
   end
+  
   def faq
     
   end
