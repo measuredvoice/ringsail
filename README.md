@@ -3,8 +3,8 @@
 [![Build Status](https://travis-ci.org/ctacdev/social-media-registry.svg?branch=develop)](https://travis-ci.org/ctacdev/social-media-registry)
 [![Coverage Status](https://coveralls.io/repos/ctacdev/social-media-registry/badge.svg?branch=develop)](https://coveralls.io/r/ctacdev/social-media-registry?branch=develop)
 
-* [API Documentation](https://socialmobileregistry.digitalgov.gov/#swagger-api-docs)
-* [Verification and Registration Pages](https://socialmobileregistry.digitalgov.gov/admin) (login required)
+* [API Documentation](https://usdigitalregistry.digitalgov.gov/#swagger-api-docs)
+* [Verification and Registration Pages](https://usdigitalregistry.digitalgov.gov/admin) (login required)
 
 
 # Ringsail (the underlying software)
