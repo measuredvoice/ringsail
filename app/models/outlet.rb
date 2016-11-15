@@ -22,6 +22,7 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   include Notifications
   include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
 
 
   settings index: { number_of_shards: 1 } do
@@ -32,7 +33,7 @@ class Outlet < ActiveRecord::Base
       indexes :service, analyzer: 'english'
       indexes :contacts, analyzer: 'english'
       indexes :account_name, analyzer: 'english'
-      indexes :account, analyzer: 'english'
+      indexes :account, type: :string
       indexes :status, analyzer: 'english'
       indexes :draft_id, type: :integer
       indexes :updated_at, type: :date
@@ -144,7 +145,8 @@ class Outlet < ActiveRecord::Base
                 }
               }
             }
-          ] 
+          ],
+          should: []
         }
       },
       sort: [
