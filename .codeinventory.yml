@@ -1,0 +1,11 @@
+name: 'U.S. Digital Registry'
+description: 'Application that allows for record keeping of US government social media accounts and mobile applications'
+license: null
+openSourceProject: 1
+governmentWideReuseProject: 1
+tags:
+    - gsa
+    - socialmedia
+    - mobileapps
+contact:
+    email: justin.herman@gsa.gov
