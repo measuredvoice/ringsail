@@ -7,6 +7,7 @@ class Api::V1::AgenciesController < Api::ApiController
     notes "This lists all active agencies in the system. These agencies can be used to query for social media accounts, mobile products, and galleries."
     param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
     param :query, :page_size, :integer, :optional, "Number of results per page"
+    param :query, :no_accounts, :string, :optional, "Including this parameter with value 'true' will cause the endpoint to include agencies that have no account in the system"
     param :query, :page, :integer, :optional, "Page number"
 	end
 
@@ -22,10 +23,17 @@ class Api::V1::AgenciesController < Api::ApiController
 	def index
 		params[:page_size] = params[:page_size] || PAGE_SIZE
 		if params[:q]
-			@agencies = Agency.where("name LIKE ? or shortname LIKE ?", 
-				"%#{params[:q]}%", "%#{params[:q]}%")
+			if params[:no_accounts] == 'true'
+				@agencies = Agency.where("name LIKE ? or shortname LIKE ?","%#{params[:q]}%", "%#{params[:q]}%")
+			else
+				@agencies = Agency.where("(name LIKE ? or shortname LIKE ?) AND (published_outlet_count > ? OR published_mobile_app_count > ?)", "%#{params[:q]}%", "%#{params[:q]}%", 0,0)
+			end
 		else
-			@agencies = Agency.all
+			if params[:no_accounts] == 'true'
+				@agencies = Agency.all.order(name: :asc)
+			else
+				@agencies = Agency.where("published_outlet_count > ? OR published_mobile_app_count > ?", 0,0).order(name: :asc)
+			end
 		end
     @agencies = @agencies.page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
