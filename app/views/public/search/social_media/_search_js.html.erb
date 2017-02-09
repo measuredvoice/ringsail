@@ -59,7 +59,7 @@ $(document).ready(function() {
   var source_metadata_template = $('#metadata-template').html();
   var metadata_template = Handlebars.compile(source_metadata_template);
 
-  $("#search-social-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media/tokeninput.json", {
+  $("#search-social-box").tokenInput("https://api.data.gov/gsa/digital-registry/v1/social_media/tokeninput.json", {
     crossDomain: false,
     tokenValue: "key",
     onAdd: function(item){
@@ -92,7 +92,7 @@ $(document).ready(function() {
 
       }
     }
-    $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media.json",{
+    $.get("https://api.data.gov/gsa/digital-registry/v1/social_media.json",{
       q: text.join(" "),
       agencies: agencies.join(","),
       services: services.join(","),

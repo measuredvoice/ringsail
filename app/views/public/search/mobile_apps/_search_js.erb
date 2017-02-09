@@ -55,7 +55,7 @@
     var source_mobile_metadata_template = $('#mobile-metadata-template').html();
     var mobile_metadata_template = Handlebars.compile(source_mobile_metadata_template);
 
-    $("#search-mobile-box").tokenInput("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/mobile_apps/tokeninput.json", {
+    $("#search-mobile-box").tokenInput("https://api.data.gov/gsa/digital-registry/v1/mobile_apps/tokeninput.json", {
       crossDomain: false,
       tokenValue: "key",
       onAdd: function(item){
@@ -85,7 +85,7 @@
 
         }
       }
-      $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/mobile_apps.json",{
+      $.get("https://api.data.gov/gsa/digital-registry/v1/mobile_apps.json",{
         q: text.join(" "),
         agencies: agencies.join(","),
         tags: tags.join(","),

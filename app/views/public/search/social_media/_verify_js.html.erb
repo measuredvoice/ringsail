@@ -33,7 +33,7 @@ $(document).ready(function() {
 
   $('#social-media-verify').submit(function(e){
     e.preventDefault();
-    $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media/verify.json",{
+    $.get("https://api.data.gov/gsa/digital-registry/v1/social_media/verify.json",{
         q: $("#verify-social-box").val()
       }, function(data){
         if(data.error){
