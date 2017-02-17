@@ -396,7 +396,7 @@
 
     function submit_social_media_form(){
       $('#social-media-collection').empty();
-      $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/social_media.json",{
+      $.get("https://api.data.gov/gsa/digital-registry/v1/social_media.json",{
         agencies: $('#social-media-agency').val(),
         services: $('#social-media-service').val(),
         language: $('#language').val(),
@@ -414,7 +414,7 @@
 
     function submit_mobile_form(){
       $('#mobile-collection').empty();
-      $.get("<%= ENV['REGISTRY_API_HOST'] %>/api/v1/mobile_apps.json",{
+      $.get("https://api.data.gov/gsa/digital-registry/v1/mobile_apps.json",{
         agencies: $('#mobile-agency').val(),
         language: $('#mobile-language').val(),
         page_size: $('#mobile-page-size').val(),
