@@ -25,7 +25,7 @@ RUN mkdir public/assets && \
 ARG REGISTRY_HOSTNAME=unprovided.domain
 ARG REGISTRY_API_HOST=https://unprovided.domain
 
-RUN bundle exec rake assets:precompile swagger:docs
+RUN bundle exec rake assets:precompile
 
 EXPOSE 80
 ENTRYPOINT [ "unicorn", "-c", "config/unicorn.rb" ]
