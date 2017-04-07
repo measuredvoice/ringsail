@@ -1,7 +1,7 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://api.data.gov/gsa/digital-registry/",
+  "basePath": "https://api.gsa.gov/systems/digital-registry",
   "resourcePath": "social_media",
   "apis": [
     {
