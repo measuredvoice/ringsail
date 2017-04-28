@@ -1,11 +1,11 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "http://localhost:3000/api",
+  "basePath": "https://api.gsa.gov/systems",
   "resourcePath": "social_media",
   "apis": [
     {
-      "path": "/digital_registry/v1/social_media/verify.json",
+      "path": "/digital-registry/v1/social_media/verify.json",
       "operations": [
         {
           "summary": "Checks against the registry for a given account by URL to verify it is a federal account",
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "path": "/digital_registry/v1/social_media/services.json",
+      "path": "/digital-registry/v1/social_media/services.json",
       "operations": [
         {
           "summary": "Get a list of all services represented in the social media account listing",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "path": "/digital_registry/v1/social_media/tokeninput.json",
+      "path": "/digital-registry/v1/social_media/tokeninput.json",
       "operations": [
         {
           "summary": "Returns a list of tokens to help with search interfaces",
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "path": "/digital_registry/v1/social_media.json",
+      "path": "/digital-registry/v1/social_media.json",
       "operations": [
         {
           "summary": "Fetches all accounts",
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "path": "/digital_registry/v1/social_media/{id}.json",
+      "path": "/digital-registry/v1/social_media/{id}.json",
       "operations": [
         {
           "summary": "Fetches a single social media account by ID",
