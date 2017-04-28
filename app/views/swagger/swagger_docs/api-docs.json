@@ -4,19 +4,19 @@
   "basePath": "https://api.gsa.gov/systems",
   "apis": [
     {
-      "path": "//swagger_docs/digital_registry/v1/agencies.{format}",
+      "path": "/digital-registry/swagger_docs/digital_registry/v1/agencies.{format}",
       "description": "Government Agencies"
     },
     {
-      "path": "//swagger_docs/digital_registry/v1/social_media.{format}",
+      "path": "/digital-registry/swagger_docs/digital_registry/v1/social_media.{format}",
       "description": "Social Media Accounts"
     },
     {
-      "path": "//swagger_docs/digital_registry/v1/mobile_apps.{format}",
+      "path": "/digital-registry/swagger_docs/digital_registry/v1/mobile_apps.{format}",
       "description": "Government Mobile Apps"
     },
     {
-      "path": "//swagger_docs/digital_registry/v1/tags.{format}",
+      "path": "/digital-registry/swagger_docs/digital_registry/v1/tags.{format}",
       "description": "Tags"
     }
   ],
