@@ -221,7 +221,7 @@
   <script type="text/javascript">
     $(function () {
       window.swaggerUi = new SwaggerUi({
-        url: "<%= ENV['REGISTRY_API_HOST'] %>/swagger_docs/api-docs.json",
+        url: "<%= ENV['REGISTRY_API_HOST'] %>/digital-registry/swagger_docs/api-docs.json",
         dom_id: "swagger-ui-container",
         supportedSubmitMethods: ['get'],
         onComplete: function(swaggerApi, swaggerUi){
@@ -248,9 +248,9 @@
 
       $('#input_apiKey').change(function() {
         var key = $('#input_apiKey')[0].value;
-        log("key: " + key);
+        console.loglog("key: " + key);
         if(key && key.trim() != "") {
-          log("added key " + key);
+          console.log("added key " + key);
           window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
         }
       })
