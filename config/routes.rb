@@ -345,6 +345,7 @@ Ringsail::Application.routes.draw do
   get '/swagger_docs/*path' => "swagger#doc"
   get 'api/swagger_docs/*path' => "swagger#doc"
   get 'digital-registry/swagger_docs/*path' => "swagger#doc"
+  get 'api/v1/swagger_docs/*path' => "swagger#doc"
   get 'digital-registry/v1/swagger_docs/*path' => "swagger#doc"
 
   root :to => "public/swagger#index"
