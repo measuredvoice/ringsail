@@ -5,7 +5,7 @@
   "resourcePath": "social_media",
   "apis": [
     {
-      "path": "/api/v1/social_media/verify.json",
+      "path": "/digital_registry/v1/social_media/verify.json",
       "operations": [
         {
           "summary": "Checks against the registry for a given account by URL to verify it is a federal account",
@@ -19,24 +19,24 @@
               "required": true
             }
           ],
-          "nickname": "Api::V1::SocialMedia#verify",
+          "nickname": "DigitalRegistry::V1::SocialMedia#verify",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/social_media/services.json",
+      "path": "/digital_registry/v1/social_media/services.json",
       "operations": [
         {
           "summary": "Get a list of all services represented in the social media account listing",
           "notes": "This returns a list of services along with the number of accounts registered with them",
-          "nickname": "Api::V1::SocialMedia#services",
+          "nickname": "DigitalRegistry::V1::SocialMedia#services",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/social_media/tokeninput.json",
+      "path": "/digital_registry/v1/social_media/tokeninput.json",
       "operations": [
         {
           "summary": "Returns a list of tokens to help with search interfaces",
@@ -50,13 +50,13 @@
               "required": false
             }
           ],
-          "nickname": "Api::V1::SocialMedia#tokeninput",
+          "nickname": "DigitalRegistry::V1::SocialMedia#tokeninput",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/social_media.json",
+      "path": "/digital_registry/v1/social_media.json",
       "operations": [
         {
           "summary": "Fetches all accounts",
@@ -112,13 +112,13 @@
               "required": false
             }
           ],
-          "nickname": "Api::V1::SocialMedia#index",
+          "nickname": "DigitalRegistry::V1::SocialMedia#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/social_media/{id}.json",
+      "path": "/digital_registry/v1/social_media/{id}.json",
       "operations": [
         {
           "summary": "Fetches a single social media account by ID",
@@ -132,7 +132,7 @@
               "required": true
             }
           ],
-          "nickname": "Api::V1::SocialMedia#show",
+          "nickname": "DigitalRegistry::V1::SocialMedia#show",
           "method": "get"
         }
       ]

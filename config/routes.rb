@@ -265,7 +265,7 @@ Ringsail::Application.routes.draw do
   #######
   #### API ENDPOINTS
   #######
-  namespace :api, defaults: {format: :json} do
+  namespace :digital_registry, defaults: {format: :json} do
     namespace :v1 do
       resources :agencies, only: [:index, :show]
       resources :social_media, only: [:index, :show] do
@@ -296,6 +296,36 @@ Ringsail::Application.routes.draw do
     end
   end
 
+   namespace :digital_registry, path:'api', defaults: {format: :json} do
+    namespace :v1 do
+      resources :agencies, only: [:index, :show]
+      resources :social_media, only: [:index, :show] do
+        collection do
+          get 'verify'
+          get 'services'
+          get 'tokeninput'
+        end
+      end
+      # resources :galleries, only: [:index, :show]
+      resources :mobile_apps, only: [:index, :show] do
+        collection do
+          get 'tokeninput'
+        end
+      end
+      resources :tags, only: [:index, :show] do
+        collection do
+          get 'types'
+        end
+      end
+      resources :multi, only: [:index, :show] do
+        collection do
+          get 'autocomplete'
+          get 'tokeninput'
+        end
+      end
+      resources :agencies, only: [:index, :show]
+    end
+  end
 
   #######
   #### PUBLIC PAGES
@@ -312,7 +342,8 @@ Ringsail::Application.routes.draw do
     post 'export_mobile_app' => "browser#export_mobile_app"
   end
 
-  get 'swagger_docs/*path' => "swagger#doc"
+  get 'api/swagger_docs/*path' => "swagger#doc"
+  get 'digital_registry/swagger_docs/*path' => "swagger#doc"
 
   root :to => "public/swagger#index"
 

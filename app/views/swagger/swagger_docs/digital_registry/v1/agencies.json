@@ -5,7 +5,7 @@
   "resourcePath": "agencies",
   "apis": [
     {
-      "path": "/api/v1/agencies.json",
+      "path": "/digital_registry/v1/agencies.json",
       "operations": [
         {
           "summary": "Fetches all agencies",
@@ -40,13 +40,13 @@
               "required": false
             }
           ],
-          "nickname": "Api::V1::Agencies#index",
+          "nickname": "DigitalRegistry::V1::Agencies#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/agencies/{id}.json",
+      "path": "/digital_registry/v1/agencies/{id}.json",
       "operations": [
         {
           "summary": "Fetches a single agency and its metadata.",
@@ -60,7 +60,7 @@
               "required": true
             }
           ],
-          "nickname": "Api::V1::Agencies#show",
+          "nickname": "DigitalRegistry::V1::Agencies#show",
           "method": "get"
         }
       ]

@@ -1,22 +1,22 @@
 {
   "apiVersion": "1.0",
   "swaggerVersion": "1.2",
-  "basePath": "https://usdigitalregistry.digitalgov.gov",
+  "basePath": "http://localhost:3000/api",
   "apis": [
     {
-      "path": "/api/v1/agencies.{format}",
+      "path": "//swagger_docs/digital_registry/v1/agencies.{format}",
       "description": "Government Agencies"
     },
     {
-      "path": "/api/v1/social_media.{format}",
+      "path": "//swagger_docs/digital_registry/v1/social_media.{format}",
       "description": "Social Media Accounts"
     },
     {
-      "path": "/api/v1/mobile_apps.{format}",
+      "path": "//swagger_docs/digital_registry/v1/mobile_apps.{format}",
       "description": "Government Mobile Apps"
     },
     {
-      "path": "/api/v1/tags.{format}",
+      "path": "//swagger_docs/digital_registry/v1/tags.{format}",
       "description": "Tags"
     }
   ],

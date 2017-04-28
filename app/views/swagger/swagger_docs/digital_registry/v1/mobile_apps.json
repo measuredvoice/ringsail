@@ -5,7 +5,7 @@
   "resourcePath": "mobile_apps",
   "apis": [
     {
-      "path": "/api/v1/mobile_apps/tokeninput.json",
+      "path": "/digital_registry/v1/mobile_apps/tokeninput.json",
       "operations": [
         {
           "summary": "Returns a list of tokens to help with search interfaces",
@@ -19,13 +19,13 @@
               "required": false
             }
           ],
-          "nickname": "Api::V1::MobileApps#tokeninput",
+          "nickname": "DigitalRegistry::V1::MobileApps#tokeninput",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/mobile_apps.json",
+      "path": "/digital_registry/v1/mobile_apps.json",
       "operations": [
         {
           "summary": "Fetches all mobile apps",
@@ -74,13 +74,13 @@
               "required": false
             }
           ],
-          "nickname": "Api::V1::MobileApps#index",
+          "nickname": "DigitalRegistry::V1::MobileApps#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/mobile_apps/{id}.json",
+      "path": "/digital_registry/v1/mobile_apps/{id}.json",
       "operations": [
         {
           "summary": "Fetches a single mobile app item",
@@ -94,7 +94,7 @@
               "required": true
             }
           ],
-          "nickname": "Api::V1::MobileApps#show",
+          "nickname": "DigitalRegistry::V1::MobileApps#show",
           "method": "get"
         }
       ]

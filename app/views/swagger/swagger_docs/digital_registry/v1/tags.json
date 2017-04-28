@@ -5,18 +5,18 @@
   "resourcePath": "tags",
   "apis": [
     {
-      "path": "/api/v1/tags/types.json",
+      "path": "/digital_registry/v1/tags/types.json",
       "operations": [
         {
           "summary": "Fetches all types for the tags, to help power other queries.",
           "notes": "This returns a tag based on an ID.",
-          "nickname": "Api::V1::Tags#types",
+          "nickname": "DigitalRegistry::V1::Tags#types",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/tags.json",
+      "path": "/digital_registry/v1/tags.json",
       "operations": [
         {
           "summary": "Fetches all official tags, with queryable fields such as a basic text search and.",
@@ -51,13 +51,13 @@
               "required": false
             }
           ],
-          "nickname": "Api::V1::Tags#index",
+          "nickname": "DigitalRegistry::V1::Tags#index",
           "method": "get"
         }
       ]
     },
     {
-      "path": "/api/v1/tags/{id}.json",
+      "path": "/digital_registry/v1/tags/{id}.json",
       "operations": [
         {
           "summary": "Fetches tag based on ID",
@@ -71,7 +71,7 @@
               "required": false
             }
           ],
-          "nickname": "Api::V1::Tags#show",
+          "nickname": "DigitalRegistry::V1::Tags#show",
           "method": "get"
         }
       ]

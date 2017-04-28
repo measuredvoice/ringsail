@@ -1,6 +1,6 @@
 class Swagger::Docs::Config
   def self.transform_path(path, api_version)
-    "swagger_docs/#{path}"
+    "/swagger_docs/#{path}"
   end
 end
 Swagger::Docs::Config.register_apis({
