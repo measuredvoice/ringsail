@@ -265,7 +265,7 @@ Ringsail::Application.routes.draw do
   #######
   #### API ENDPOINTS
   #######
-  namespace :digital_registry, defaults: {format: :json} do
+  namespace :digital_registry, path: 'digital-registry', defaults: {format: :json} do
     namespace :v1 do
       resources :agencies, only: [:index, :show]
       resources :social_media, only: [:index, :show] do
@@ -344,7 +344,7 @@ Ringsail::Application.routes.draw do
 
   get '/swagger_docs/*path' => "swagger#doc"
   get 'api/swagger_docs/*path' => "swagger#doc"
-  get 'digital_registry/swagger_docs/*path' => "swagger#doc"
+  get 'digital-registry/swagger_docs/*path' => "swagger#doc"
 
   root :to => "public/swagger#index"
 
