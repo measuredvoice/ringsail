@@ -25,8 +25,8 @@
 			  		<% if @gallery.published %>
 			  			<p>
 				  			<strong>API Link</strong>
-				  			<%= link_to api_v1_gallery_url(@gallery),
-				  				api_v1_gallery_url(@gallery) %>
+				  			<%= link_to digital_registry_v1_gallery_url(@gallery),
+				  				digital_registry_v1_gallery_url(@gallery) %>
 				  		</p>
 			  			<%= render partial: "gallery_details", locals: { gallery: @gallery.published } %>
 			  		<% else %>

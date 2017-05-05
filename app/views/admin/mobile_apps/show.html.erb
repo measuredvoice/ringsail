@@ -26,8 +26,8 @@
 			  		<% if @mobile_app.published %>
 			  			<p>
 				  			<strong>API Link</strong>
-				  			<%= link_to api_v1_mobile_app_url(@mobile_app),
-				  				api_v1_mobile_app_url(@mobile_app) %>
+				  			<%= link_to digital_registry_v1_mobile_app_url(@mobile_app),
+				  				digital_registry_v1_mobile_app_url(@mobile_app) %>
 				  		</p>
 			  		<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app.published } %>
 			  		<% else %>

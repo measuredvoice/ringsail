@@ -27,8 +27,8 @@
     	  		<% if @outlet.published %>
     	  			<p>
     		  			<strong>API Link</strong>
-    		  			<%= link_to api_v1_social_medium_url(id:@outlet),
-    		  				api_v1_social_medium_url(id: @outlet) %>
+    		  			<%= link_to digital_registry_v1_social_medium_url(id:@outlet),
+    		  				digital_registry_v1_social_medium_url(id: @outlet) %>
     		  		</p>
     	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published } %>
     	  		<% else %>
