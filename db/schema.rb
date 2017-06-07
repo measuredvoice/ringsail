@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728183420) do
+ActiveRecord::Schema.define(version: 20170607135658) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20160728183420) do
     t.integer  "draft_gallery_count",        limit: 4,   default: 0
     t.integer  "published_gallery_count",    limit: 4,   default: 0
     t.integer  "api_id",                     limit: 4
+    t.string   "omb_name",                   limit: 255
   end
 
   create_table "auth_tokens", force: :cascade do |t|
@@ -142,13 +143,13 @@ ActiveRecord::Schema.define(version: 20160728183420) do
 
   create_table "mobile_app_versions", force: :cascade do |t|
     t.integer  "mobile_app_id",     limit: 4
-    t.string   "store_url",         limit: 255
+    t.text     "store_url",         limit: 16777215
     t.string   "platform",          limit: 255
     t.string   "version_number",    limit: 255
     t.datetime "publish_date"
-    t.text     "description",       limit: 65535
-    t.text     "whats_new",         limit: 65535
-    t.text     "screenshot",        limit: 65535
+    t.text     "description",       limit: 16777215
+    t.text     "whats_new",         limit: 16777215
+    t.text     "screenshot",        limit: 16777215
     t.string   "device",            limit: 255
     t.string   "language",          limit: 255
     t.string   "average_rating",    limit: 255
@@ -159,13 +160,13 @@ ActiveRecord::Schema.define(version: 20160728183420) do
   add_index "mobile_app_versions", ["platform"], name: "index_mobile_app_versions_on_platform", using: :btree
 
   create_table "mobile_apps", force: :cascade do |t|
-    t.string   "name",              limit: 255
-    t.text     "short_description", limit: 65535
-    t.text     "long_description",  limit: 65535
-    t.text     "icon_url",          limit: 65535
+    t.text     "name",              limit: 16777215
+    t.text     "short_description", limit: 16777215
+    t.text     "long_description",  limit: 16777215
+    t.text     "icon_url",          limit: 16777215
     t.string   "language",          limit: 255
     t.integer  "agency_id",         limit: 4
-    t.integer  "status",            limit: 4,     default: 0
+    t.integer  "status",            limit: 4,        default: 0
     t.string   "mongo_id",          limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -205,6 +206,13 @@ ActiveRecord::Schema.define(version: 20160728183420) do
   add_index "outlet_official_tags", ["official_tag_id"], name: "index_outlet_official_tags_on_official_tag_id", using: :btree
   add_index "outlet_official_tags", ["outlet_id"], name: "index_outlet_official_tags_on_outlet_id", using: :btree
 
+  create_table "outlet_related_policies", force: :cascade do |t|
+    t.integer  "outlet_id",         limit: 4
+    t.integer  "related_policy_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
   create_table "outlet_users", force: :cascade do |t|
     t.integer "outlet_id", limit: 4
     t.integer "user_id",   limit: 4
@@ -221,10 +229,10 @@ ActiveRecord::Schema.define(version: 20160728183420) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "service",           limit: 255
-    t.integer  "status",            limit: 4,     default: 0
+    t.integer  "status",            limit: 4,        default: 0
     t.integer  "draft_id",          limit: 4
-    t.text     "short_description", limit: 65535
-    t.text     "long_description",  limit: 65535
+    t.text     "short_description", limit: 16777215
+    t.text     "long_description",  limit: 16777215
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree
@@ -233,7 +241,7 @@ ActiveRecord::Schema.define(version: 20160728183420) do
   add_index "outlets", ["service"], name: "index_outlets_on_service", using: :btree
 
   create_table "rails_admin_histories", force: :cascade do |t|
-    t.text     "message",    limit: 16777215
+    t.text     "message",    limit: 65535
     t.string   "username",   limit: 255
     t.integer  "item",       limit: 4
     t.string   "table",      limit: 255
@@ -244,6 +252,16 @@ ActiveRecord::Schema.define(version: 20160728183420) do
   end
 
   add_index "rails_admin_histories", ["item", "table", "month", "year"], name: "index_rails_admin_histories", using: :btree
+
+  create_table "related_policies", force: :cascade do |t|
+    t.boolean  "service_wide"
+    t.string   "service",      limit: 255
+    t.string   "title",        limit: 255
+    t.string   "url",          limit: 255
+    t.string   "description",  limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
 
   create_table "sponsorships", force: :cascade do |t|
     t.integer  "outlet_id",  limit: 4
@@ -275,27 +293,27 @@ ActiveRecord::Schema.define(version: 20160728183420) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                        limit: 255,   default: "",    null: false
+    t.string   "email",                        limit: 255,      default: "",    null: false
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",                limit: 4,     default: 0
+    t.integer  "sign_in_count",                limit: 4,        default: 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",           limit: 255
     t.string   "last_sign_in_ip",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "user",                         limit: 255,                   null: false
+    t.string   "user",                         limit: 255,                      null: false
     t.integer  "agency_id",                    limit: 4
     t.string   "phone",                        limit: 255
     t.string   "first_name",                   limit: 255
     t.string   "last_name",                    limit: 255
-    t.text     "groups",                       limit: 65535
-    t.integer  "role",                         limit: 4,     default: 0
-    t.boolean  "agency_notifications",                       default: false
-    t.boolean  "agency_notifications_emails",                default: false
-    t.boolean  "contact_notifications",                      default: true
-    t.boolean  "contact_notifications_emails",               default: true
-    t.integer  "email_notification_type",      limit: 4,     default: 0
+    t.text     "groups",                       limit: 16777215
+    t.integer  "role",                         limit: 4,        default: 0
+    t.boolean  "agency_notifications",                          default: false
+    t.boolean  "agency_notifications_emails",                   default: false
+    t.boolean  "contact_notifications",                         default: true
+    t.boolean  "contact_notifications_emails",                  default: true
+    t.integer  "email_notification_type",      limit: 4,        default: 0
   end
 
 end

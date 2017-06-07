@@ -9,9 +9,9 @@
       		<thead>
             <tr class = "agency_row">
               <th>Agency Name</th>
+              <th>Parent Agency</th>
               <th># of Social Accounts (published)</th>
               <th># of Apps (published)</th>
-              <th># of Galleries (published)</th>
               <th class = "lastlinks">Actions</th>
         		</tr>
           </thead>
@@ -36,9 +36,9 @@
         "scrollY":        "400px",
         "columns": [
           { "data" : "name"},
+          { "data" : "parent_name"},
           { "data" : "outlet_counts"},
           { "data" : "mobile_counts"},
-          { "data" : "gallery_counts"},
           { "data" : "DT_RowId"}
         ],
         "columnDefs": [
@@ -48,7 +48,7 @@
             }, "targets":[4]
           }
         ],
-        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+        'sDom':'<"row"<"col-sm-12"lf>> <"row"<"col-sm-12"ip>> rt<"row"<"col-sm-12"ip>> <"row"<"col-sm-12"lf>>'});
     } );
 
 
