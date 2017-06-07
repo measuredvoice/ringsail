@@ -63,7 +63,15 @@ class Admin::AgenciesController < Admin::AdminController
       
       MobileAppAgency.where(agency_id: @agency.id).update_all(agency_id: @new_agency.id)
       
-      Sponsorship.where(agency_id: @agency.id).update_all(agency_id: @new_agency.id)
+      first_agency_mappings = Sponsorship.where(agency_id: @agency.id)
+      second_agency_outlet_ids = Sponsorship.where(agency_id: @new_agency.id).map(&:outlet_id)
+
+      first_agency_mappings.each do |sponsporship|
+        unless second_agency_outlet_ids.include? sponsporship.outlet_id
+          sponsporship.agency_id = @new_agency.id
+          sponsporship.save(validate: false)
+        end
+      end
       
       @agency.update_counters
       @agency.save
