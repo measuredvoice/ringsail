@@ -70,9 +70,12 @@ class Admin::AgenciesController < Admin::AdminController
         unless second_agency_outlet_ids.include? sponsporship.outlet_id
           sponsporship.agency_id = @new_agency.id
           sponsporship.save(validate: false)
+          sponsporship.outlet.save(validate: false)
         end
       end
-      
+      MobileAppAgency.where(agency_id: @new_agency.id).each do |ma|
+        ma.mobile_app.save(validate.false)
+      end
       @agency.update_counters
       @agency.save
 
