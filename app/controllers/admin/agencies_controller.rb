@@ -74,7 +74,7 @@ class Admin::AgenciesController < Admin::AdminController
         end
       end
       MobileAppAgency.where(agency_id: @new_agency.id).each do |ma|
-        ma.mobile_app.save(validate.false)
+        ma.mobile_app.save(validate: false)
       end
       @agency.update_counters
       @agency.save
