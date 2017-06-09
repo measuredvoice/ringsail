@@ -64,11 +64,9 @@
       <div class="panel-body">
         <ul class="list-group">
           <% @agency.outlets.each do |outlet| %>
-            <% if outlet.draft_id == nil %>
             <li class="list-group-item">
               <%= link_to outlet.organization, admin_outlet_path(outlet) %>
             </li>
-          <% end %>
           <% end %>
         </ul>
       </div>
@@ -80,30 +78,13 @@
       <div class="panel-body">
         <ul class="list-group">
           <% @agency.mobile_apps.each do |mobile_app| %>
-            <% if mobile_app.draft_id == nil %>
             <li class="list-group-item">
               <%= link_to mobile_app.name, admin_mobile_app_path(mobile_app) %>
             </li>
-            <% end %>
           <% end %>
         </ul>
       </div>
     </div>
   </div>
-  <div class="col-lg-3 col-sm-12 col-md-3">
-    <h3>Galleries</h3>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <ul class="list-group">
-          <% @agency.galleries.each do |gallery| %>
-          <% if gallery.draft_id == nil %>
-            <li class="list-group-item">
-              <%= link_to gallery.name, admin_gallery_path(gallery) %>
-            </li>
-            <% end %>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-  </div>
+
 </div>
