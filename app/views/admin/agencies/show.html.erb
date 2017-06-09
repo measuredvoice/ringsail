@@ -9,10 +9,7 @@
 				  <strong>Agency Name:</strong>
 				  <%= @agency.name %>
 				</p>
-        <p>
-          <strong>OMB Max Name:</strong>
-          <%= @agency.omb_name %>
-        </p>
+        
 				<p>
 				  <strong>Acronym:</strong>
 				  <%= @agency.shortname %>
@@ -63,7 +60,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <ul class="list-group">
-          <% @agency.outlets.each do |outlet| %>
+          <% @agency.outlets.where(draft_id: nil).each do |outlet| %>
             <li class="list-group-item">
               <%= link_to outlet.organization, admin_outlet_path(outlet) %>
             </li>
@@ -77,7 +74,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <ul class="list-group">
-          <% @agency.mobile_apps.each do |mobile_app| %>
+          <% @agency.mobile_apps.where(draft_id: nil).each do |mobile_app| %>
             <li class="list-group-item">
               <%= link_to mobile_app.name, admin_mobile_app_path(mobile_app) %>
             </li>
@@ -86,5 +83,18 @@
       </div>
     </div>
   </div>
-
+  <div class="col-lg-3 col-sm-12 col-md-3">
+    <h3>Galleries</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <ul class="list-group">
+          <% @agency.galleries.where(draft_id: nil).each do |gallery| %>
+            <li class="list-group-item">
+              <%= link_to gallery.name, admin_gallery_path(gallery) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
