@@ -302,9 +302,12 @@ table.dataTable td {
   *zoom: 1;
   zoom: 1;
   border: solid 1px #ddd;
+  border-top:none;
   padding: 15px;
   margin-top: -1px;
   overflow-x: scroll;
+      margin-left: -15px;
+    margin-right: -15px;
 }
 .dataTables_wrapper .dataTables_length {
   float: left;
