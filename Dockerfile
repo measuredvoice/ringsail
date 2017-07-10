@@ -22,8 +22,6 @@ RUN mkdir public/assets && \
   mkdir tmp && \
   mkdir tmp/pids
 
-RUN df --local -P | awk {'if (NR!=1) print $6'} | xargs -I '{}' find '{}' -xdev -type d -perm -0002 2&gt;/dev/null | xargs chmod a+t
-
 RUN rm -rf /usr/local/bundle/gems/swagger-docs-0.2.8/spec/
 
 ARG REGISTRY_HOSTNAME=unprovided.domain
