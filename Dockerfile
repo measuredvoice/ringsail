@@ -22,8 +22,8 @@ RUN mkdir public/assets && \
   mkdir tmp && \
   mkdir tmp/pids
 
-RUN chmod a+t \usr\local\bundle && \
-  chmod a+t \usr\local\bundle\bin && \
+RUN chmod a+t /usr/local/bundle && \
+  chmod a+t /usr/local/bundle/bin && \
   rm -rf /usr/local/bundle/gems/swagger-docs-0.2.8/spec/
 
 ARG REGISTRY_HOSTNAME=unprovided.domain
