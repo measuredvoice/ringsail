@@ -479,6 +479,13 @@ form{border-top: dotted 1px #bbb; border-bottom: dotted 1px #bbb;padding: 5%}
 .field{
 
 }
+
+#table-controls{
+  padding: 0;
+  background-color: white;
+  border: dotted 1px #bbb;
+  display:block;
+}
 .form-control{
     border-radius: 0;
     border: 1px solid #ddd;

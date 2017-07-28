@@ -169,6 +169,20 @@ class Outlet < ActiveRecord::Base
                                         }
                                       }
     end
+    if !params[:status].blank?
+      query[:query][:bool][:must] << {
+                                        match_phrase: {
+                                          "status" => params[:status]
+                                        }
+                                      }
+    end
+    if !params[:agency].blank?
+      query[:query][:bool][:must] << {
+                                        match_phrase: {
+                                          "agencies" => params[:agency]
+                                        }
+                                      }
+    end
     self.search(query)
   end
 
