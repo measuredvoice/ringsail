@@ -25,7 +25,7 @@
         <%= form_for admin_outlets_path, method: :post, html: { class: 'row', id: 'table-controls'} do %>
           <div class="col-sm-12">
             <%= label :agency_selector, "Agency" %>
-            <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.all.collect{|agency| [agency.name,agency.id]},params[:agency_selector]) %>
+            <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.all.collect{|agency| [agency.name,agency.name]},params[:agency_selector]) %>
           </div>
           <div class="col-sm-6">
             <%= label :service_selector, "Social Media Platform" %>
@@ -34,7 +34,7 @@
           
           <div class="col-sm-6">
             <%= label :status_selector, "Status Selector" %>
-            <%= select_tag :sstatus_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[1]]},params[:status]) %>
+            <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},params[:status]) %>
           </div>
         <% end %>
         <table class="table table-striped" id="data-tables">
@@ -60,7 +60,8 @@
 </div>
 <%= form_tag social_media_export_admin_outlets_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :service, params[:service] %>
-  <%= hidden_field_tag :agencies, params[:agencies] %>
+  <%= hidden_field_tag :agency, params[:agency] %>
+  <%= hidden_field_tag :status, params[:status] %>
   <%= hidden_field_tag :ids %>
 <% end %>
 
@@ -73,13 +74,29 @@
   <script>
     var data_tables = null;
 
+    $('#agency_selector').on('change',function(){
+      $('#agency').val($('#agency_selector').val());
+    });
+    $('#status_selector').on('change',function(){
+      $('#status').val($('#status_selector').val());
+
+    });
+    $('#service_selector').on('change',function(){
+      $('#service').val($('#service_selector').val());
+    });
+
+     $('#service_selector, #status_selector, #agency_selector').on('change',function(){
+        data_tables.fnFilter($('.dataTables_filter input').val());
+     });
    $(document).ready(function() {
 
        data_tables = $('#data-tables').dataTable({
         "serverSide" : true,
         "sAjaxSource" : "/admin/social_media.json",
         "fnServerParams": function(aoData) {
-          aoData.push( { "name":"service", "value" : $('#service').val() } ) ;
+          aoData.push( { "name":"service", "value" : $('#service_selector').val() } ) ;
+          aoData.push( { "name": "agency", "value" : $('#agency_selector').val()});
+          aoData.push( { "name": "status", "value" : $('#status_selector').val()});
         },
         "columns": [
           { "data" : "agencies" },
