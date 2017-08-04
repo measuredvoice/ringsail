@@ -29,7 +29,7 @@
           </div>
           <div class="col-sm-6">
             <%= label :service_selector, "Social Media Platform" %>
-            <%= select_tag :service_selector, options_for_select([["All",""]]+@services.collect{|k,v| ["#{k.humanize} - (#{v})",k]},params[:service]) %>
+            <%= select_tag :service_selector, options_for_select([["All",""]]+@services.collect{|k,v| ["#{k.humanize}",k]},params[:service]) %>
           </div>
           
           <div class="col-sm-6">

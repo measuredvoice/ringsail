@@ -175,8 +175,22 @@ class MobileApp < ActiveRecord::Base
     end
     if !params[:platform].blank?
       query[:query][:bool][:must] << {
-                                        match: {
+                                        match_phrase: {
                                           "platform" => params[:platform]
+                                        }
+                                      }
+    end
+    if !params[:status].blank?
+      query[:query][:bool][:must] << {
+                                        match_phrase: {
+                                          "status" => params[:status]
+                                        }
+                                      }
+    end
+    if !params[:agency].blank?
+      query[:query][:bool][:must] << {
+                                        match_phrase: {
+                                          "agencies" => params[:agency]
                                         }
                                       }
     end

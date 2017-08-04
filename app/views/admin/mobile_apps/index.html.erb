@@ -3,23 +3,28 @@
     <%= content_for :page_title do %>Mobile Products<% end %>
     <h1 class="page-header">Mobile Products</h1>
       <div class="row placeholders">
-        <div class="col-xs-12 col-sm-3 col-md-2 verticalTabsWrap">
-          <div class="list-group verticalTabs">
-            <%= link_to admin_mobile_apps_path, {class: "list-group-item verticalTabs-item #{"active" if params[:platform].nil? }"} do %>
-              All
-            <%end%>
-            <% @platform_counts.each do |key, value| %>
-              <%= link_to admin_mobile_apps_path(platform: key), {class: "list-group-item verticalTabs-item #{"active" if key==params[:platform]}"} do %>
-                <%= key %>
-                <span class="count pull-right"><%= value %></span></br>
-              <% end %>
-            <% end %>
-          </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10" style="padding-right: 0;">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-right: 0;">
           <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
           <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %>
+          <%= form_for admin_mobile_apps_path, method: :post, html: { class: 'row', id: 'table-controls'} do %>
+          <div class="col-sm-12">
+            <%= label :agency_selector, "Agency" %>
+            <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.all.collect{|agency| [agency.name,agency.name]},params[:agency_selector]) %>
+          </div>
+          <div class="col-sm-6">
+            <%= label :platform_selector, "Platform" %>
+            <%= select_tag :platform_selector, options_for_select([["All",""],
+            ["Android","Android"],
+              ["Blackberry","Blackberry"],
+              ["iOS","iOS"],
+              ["Mobile Web","Mobile Web"],
+              ["Windows","Windows"]],params[:platform]) %>
+          </div>
+          <div class="col-sm-6">
+            <%= label :status_selector, "Status Selector" %>
+            <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},params[:status]) %>
+          </div>
+        <% end %>
           <table class="table table-striped" id="data-tables">
           <thead>
           <tr>
@@ -44,15 +49,35 @@
 <%= form_tag admin_mobile_apps_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :platform, params[:platform] %>
   <%= hidden_field_tag :ids %>
+    <%= hidden_field_tag :agency, params[:agency] %>
+  <%= hidden_field_tag :status, params[:status] %>
 <% end %>
 <% content_for :additional_javascript do %>
 <style>
 .dataTables_filter{
   display:none;
 }
+.dataTables_scrollHeadInner{
+  padding-left: 0px !important;
+}
 </style>
   <script>
     var data_tables = null;
+
+     $('#agency_selector').on('change',function(){
+      $('#agency').val($('#agency_selector').val());
+    });
+    $('#status_selector').on('change',function(){
+      $('#status').val($('#status_selector').val());
+
+    });
+    $('#platform_selector').on('change',function(){
+      $('#platform').val($('#platform_selector').val());
+
+    });
+    $('#platform_selector, #status_selector, #agency_selector').on('change',function(){
+        data_tables.fnFilter($('.dataTables_filter input').val());
+     });
     $(document).ready(function() {
        data_tables = $('#data-tables').dataTable({
         "bProcessing": true,
@@ -60,7 +85,9 @@
         "sAjaxSource" : "/admin/mobile_apps.json",
         "scrollY": "400px",
         "fnServerParams": function ( aoData ) {
-         aoData.push( { "name": "platform", "value": $("#platform").val() });
+          aoData.push( { "name": "platform", "value": $("#platform").val() });
+          aoData.push( { "name": "agency", "value" : $('#agency_selector').val()});
+          aoData.push( { "name": "status", "value" : $('#status_selector').val()});
         }, 
         "columns": [
           { "data" : "agencies"},
