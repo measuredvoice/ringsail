@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607135658) do
+ActiveRecord::Schema.define(version: 20170818163110) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -222,17 +222,24 @@ ActiveRecord::Schema.define(version: 20170607135658) do
   add_index "outlet_users", ["user_id"], name: "index_outlet_users_on_user_id", using: :btree
 
   create_table "outlets", force: :cascade do |t|
-    t.string   "service_url",       limit: 255
-    t.string   "organization",      limit: 255
-    t.string   "account",           limit: 255
-    t.string   "language",          limit: 255
+    t.string   "service_url",           limit: 255
+    t.string   "organization",          limit: 255
+    t.string   "account",               limit: 255
+    t.string   "language",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "service",           limit: 255
-    t.integer  "status",            limit: 4,        default: 0
-    t.integer  "draft_id",          limit: 4
-    t.text     "short_description", limit: 16777215
-    t.text     "long_description",  limit: 16777215
+    t.string   "service",               limit: 255
+    t.integer  "status",                limit: 4,        default: 0
+    t.integer  "draft_id",              limit: 4
+    t.text     "short_description",     limit: 16777215
+    t.text     "long_description",      limit: 16777215
+    t.integer  "twitter_followers",     limit: 4
+    t.integer  "twitter_posts",         limit: 4
+    t.integer  "twitter_interactions",  limit: 4
+    t.integer  "facebook_followers",    limit: 4
+    t.integer  "facebook_likes",        limit: 4
+    t.integer  "facebook_posts",        limit: 4
+    t.integer  "facebook_interactions", limit: 4
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree

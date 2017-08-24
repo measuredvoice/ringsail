@@ -14,3 +14,5 @@
 //= require bootstrap/tab
 //= require bootstrap/collapse
 //= require jquery.tipsy.js
+//= require datatables
+//= require datatables.bootstrap

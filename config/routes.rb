@@ -342,6 +342,11 @@ Ringsail::Application.routes.draw do
     post 'export_mobile_app' => "browser#export_mobile_app"
   end
 
+  namespace :stats do
+    get 'twitter' => 'twitter#index'
+    get 'facebook' => 'facebook#index'
+  end
+
   get '/swagger_docs/*path' => "swagger#doc"
   get 'api/swagger_docs/*path' => "swagger#doc"
   get 'digital-registry/swagger_docs/*path' => "swagger#doc"

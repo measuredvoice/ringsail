@@ -1,0 +1,2 @@
+module Stats::FacebookHelper
+end

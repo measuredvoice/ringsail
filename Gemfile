@@ -7,6 +7,10 @@ gem 'rails', '4.2.5'
 # DB Connector
 gem 'mysql2'
 
+#social media platforms
+gem 'twitter'
+gem "koala" #facebook
+
 # Templates for generating JSON and other data output
 gem 'json'
 gem 'jbuilder'

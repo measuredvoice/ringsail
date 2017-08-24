@@ -52,6 +52,15 @@ class Outlet < ActiveRecord::Base
       status: self.status.humanize,
       updated_at: self.updated_at
     }
+    if self.service == "facebook"
+      result['facebook_followers'] = Random.rand(900)
+      result['facebook_likes'] = Random.rand(900)
+      result['facebook_posts'] = Random.rand(100)
+    end
+    if self.service == "twitter"
+      result['twitter_followers'] = Random.rand(900)
+      result['twitter_posts'] = Random.rand(100)
+    end
     result
   end
 
