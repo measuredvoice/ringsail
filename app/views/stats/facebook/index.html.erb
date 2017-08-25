@@ -15,7 +15,7 @@
     <p>Average Followers: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_followers), :delimiter => ',') %> </p>
   </div>
 </div>
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-6">
     <p>Total Likes: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").sum(:facebook_likes), :delimiter => ',') %> </p>
   </div>
@@ -38,7 +38,7 @@
   <div class="col-sm-6">
     <p>Average Interactions: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_interactions), :delimiter => ',') %> </p>
   </div>
-</div>
+</div> -->
 <div class="row">
   <div class="col-sm-6">
     <h2>Most Followers</h2>
@@ -70,18 +70,18 @@
         <tr>
           <th>Name</th>
           <th>Facebook Followers</th>
-          <th>Facebook Likes</th>
-          <th>Facebook Posts</th>
-          <th>Facebook Interactions</th>
+      <!--     <th>Facebook Likes</th> -->
+         <!--  <th>Facebook Posts</th>
+          <th> Facebook Interactions</th>-->
         </tr>
       </thead>
       <tfoot>
         <tr>
           <th>Name</th>
           <th>Facebook Followers</th>
-          <th>Facebook Likes</th>
+          <!-- <th>Facebook Likes</th>
           <th>Facebook Posts</th>
-          <th>Facebook Interactions</th>
+          <th>Facebook Interactions</th> -->
         </tr>
       </tfoot>
       <tbody>
@@ -89,9 +89,9 @@
         <tr>
           <td><%= link_to outlet.organization, outlet.service_url, :target => "_blank" %></td>
           <td><%= outlet.facebook_followers %></td>
-          <td><%= outlet.facebook_likes %></td>
+        <!--   <td><%= outlet.facebook_likes %></td>
           <td><%= outlet.facebook_posts %></td>
-          <td><%= outlet.facebook_interactions %></td>
+          <td><%= outlet.facebook_interactions %></td> -->
         </tr>
         <% end %>
       </tbody>

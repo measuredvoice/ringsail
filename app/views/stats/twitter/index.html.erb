@@ -23,14 +23,14 @@
     <p>Average Posts: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").average(:twitter_posts), :delimiter => ',') %> </p>
   </div>
 </div>
-<div class="row">
+<!-- <div class="row">
   <div class="col-sm-6">
     <p>Total Interactions: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").sum(:twitter_interactions), :delimiter => ',') %> </p>
   </div>
   <div class="col-sm-6">
     <p>Average Interactions: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").average(:twitter_interactions), :delimiter => ',') %> </p>
   </div>
-</div>
+</div> -->
 <div class="row">
   <div class="col-sm-6">
     <h2>Most Followers</h2>
@@ -63,7 +63,7 @@
           <th>Name</th>
           <th>Twitter Followers</th>
           <th>Twitter Posts</th>
-          <th>Twitter Interactions</th>
+          <!-- <th>Twitter Interactions</th> -->
         </tr>
       </thead>
       <tfoot>
@@ -71,7 +71,7 @@
           <th>Name</th>
           <th>Twitter Followers</th>
           <th>Twitter Posts</th>
-          <th>Twitter Interactions</th>
+          <!-- <th>Twitter Interactions</th> -->
         </tr>
       </tfoot>
       <tbody>
@@ -80,7 +80,7 @@
           <td><%= link_to outlet.organization, "https://twitter.com/#{outlet.account}", :target=> "_blank" %></td>
           <td><%= outlet.twitter_followers %></td>
           <td><%= outlet.twitter_posts %></td>
-          <td><%= outlet.twitter_interactions %></td>
+          <!-- <td><%= outlet.twitter_interactions %></td> -->
         </tr>
         <% end %>
       </tbody>

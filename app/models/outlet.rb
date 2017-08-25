@@ -108,6 +108,27 @@ class Outlet < ActiveRecord::Base
 
   paginates_per 100
 
+  before_save :social_media_update
+
+  def social_media_update
+    begin 
+      if self.service.to_s == "facebook"
+        @oauth = Koala::Facebook::OAuth.new("#{ENV['REGISTRY_FACEBOOK_APP_ID']}", "#{ENV['REGISTRY_FACEBOOK_APP_SECRET']}", "https://#{ENV['REGISTRY_HOSTNAME']}/")
+        access_token = @oauth.get_app_access_token
+        koala_client = Koala::Facebook::API.new(access_token)
+
+        results = koala_client.get_object("nationalparkservice",{:fields => "fan_count"})
+        self.facebook_followers = results['fan_count']
+      elsif self.service.to_s == "twitter"
+        account_data = TWITTER_CLIENT.user(self.account)
+        self.twitter_followers = account_data.followers_count
+        self.twitter_posts = account_data.statuses_count
+      end
+    rescue => e
+      puts "Social media connection Error: #{e.inspect}"
+    end
+  end
+
   # def service_info
   #   if self.service_url && self.service
   #     if self.service_info.account
