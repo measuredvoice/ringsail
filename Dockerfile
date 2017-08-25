@@ -10,6 +10,10 @@ RUN apt-get update && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends g++ \
+  && rm -rf /var/lib/apt/lists/*
+
 ADD Gemfile* $APP_HOME/
 
 ARG RAILS_ENV=production
