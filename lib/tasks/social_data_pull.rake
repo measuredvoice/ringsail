@@ -11,4 +11,17 @@ namespace :social_data_pull do
       sleep 70
     end
   end 
+
+
+  desc 'update all on triggers' do
+  task :update_all => :environment do
+    PublicActivity.enabled = false
+    Outlet.where("draft_id IS NOT NULL").find_in_batches(batch_size: 10) do | group|
+      group.each{|out|
+        out.save(validate:false)
+        sleep 1
+      }
+    puts "Finished a Batch"
+    end
+  end
 end
