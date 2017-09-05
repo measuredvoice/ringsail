@@ -345,6 +345,7 @@ Ringsail::Application.routes.draw do
   namespace :stats do
     get 'twitter' => 'twitter#index'
     get 'facebook' => 'facebook#index'
+    get 'youtube' => 'youtube#index'
   end
 
   get '/swagger_docs/*path' => "swagger#doc"

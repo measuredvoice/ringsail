@@ -1,4 +1,4 @@
-class Stats::TwitterController < ApplicationController
+class Stats::YoutubeController < ApplicationController
 
   layout "admin"
 
@@ -40,4 +40,5 @@ class Stats::TwitterController < ApplicationController
       redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
     end
   end
+  
 end

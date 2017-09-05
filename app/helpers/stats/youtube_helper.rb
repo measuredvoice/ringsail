@@ -1,0 +1,2 @@
+module Stats::YoutubeHelper
+end

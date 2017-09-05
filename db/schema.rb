@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170818163110) do
+ActiveRecord::Schema.define(version: 20170831175408) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -240,6 +240,13 @@ ActiveRecord::Schema.define(version: 20170818163110) do
     t.integer  "facebook_likes",        limit: 4
     t.integer  "facebook_posts",        limit: 4
     t.integer  "facebook_interactions", limit: 4
+    t.integer  "youtube_subscribers",   limit: 4
+    t.integer  "youtube_view_count",    limit: 4
+    t.integer  "youtube_comment_count", limit: 4
+    t.integer  "youtube_video_count",   limit: 4
+    t.integer  "instagram_followers",   limit: 4
+    t.integer  "instagram_posts",       limit: 4
+    t.string   "access_token",          limit: 255
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree

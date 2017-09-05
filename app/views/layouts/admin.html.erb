@@ -61,6 +61,8 @@
 		            <li><%= link_to "Add a Mobile Product", new_admin_mobile_app_path %></li>
 		        </ul>
 	        </li>
+
+
 	        <!-- <li class = "<%= "active" if request.original_url.include? "admin/galleries" %>">
 	        	<a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Galleries<span class = "caret"></span></a>
 	        	<ul class="dropdown-menu" role="menu">
@@ -92,6 +94,20 @@
 			        </ul>
 		        </li>
 	        <% end %>
+	         <li class = "<%= "active" if request.original_url.include?("stats") %>">
+		        	<a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Admin<span class = "caret"></span></a>
+		        	<ul class="dropdown-menu" role="menu">
+	        	    <li class="<%= "active" if request.path == "/stats/twitter" %>">
+			            <%= link_to "Twitter Stats", stats_twitter_url %>
+			          </li>
+			          <li class="<%= "active" if request.path == "/stats/facebook" %>">
+			            <%= link_to "Facebook Stats", stats_facebook_url %>
+			          </li>
+			          <li class="<%= "active" if request.path == "/stats/youtube" %>">
+			            <%= link_to "Youtube Stats", stats_youtube_url %>
+			          </li>
+			        </ul>
+			     </li>
 	      </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>

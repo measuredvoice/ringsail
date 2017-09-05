@@ -77,7 +77,7 @@
       <tbody>
         <% Outlet.where(service: "twitter").where("draft_id IS NOT NULL").all.each do |outlet| %>
         <tr>
-          <td><%= link_to outlet.organization, "https://twitter.com/#{outlet.account}", :target=> "_blank" %></td>
+          <td><%= link_to "#{outlet.organization.blank? ? "https://twitter.com/#{outlet.account}" : outlet.organization}" , "https://twitter.com/#{outlet.account}", :target=> "_blank" %></td>
           <td><%= outlet.twitter_followers %></td>
           <td><%= outlet.twitter_posts %></td>
           <!-- <td><%= outlet.twitter_interactions %></td> -->
