@@ -95,7 +95,7 @@
 		        </li>
 	        <% end %>
 	         <li class = "<%= "active" if request.original_url.include?("stats") %>">
-		        	<a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Admin<span class = "caret"></span></a>
+		        	<a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Stats<span class = "caret"></span></a>
 		        	<ul class="dropdown-menu" role="menu">
 	        	    <li class="<%= "active" if request.path == "/stats/twitter" %>">
 			            <%= link_to "Twitter Stats", stats_twitter_url %>
