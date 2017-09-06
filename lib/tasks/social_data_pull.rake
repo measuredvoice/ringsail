@@ -13,7 +13,7 @@ namespace :social_data_pull do
   end 
 
 
-  desc 'update all on triggers' do
+  desc 'update all on triggers' 
   task :update_all => :environment do
     PublicActivity.enabled = false
     Outlet.where("draft_id IS NOT NULL").find_in_batches(batch_size: 10) do | group|
