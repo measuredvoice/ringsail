@@ -65,7 +65,7 @@
 <div class="row">
   <h2>Facebook Accounts</h2>
   <div class="col-sm-12">
-    <table id="twitter-data">
+    <table id="facebook-data">
       <thead>
         <tr>
           <th>Name</th>
@@ -106,7 +106,7 @@
 <% content_for :additional_javascript do %>
   <script type="text/javascript">
   $(document).ready(function() {
-      $('#twitter-data').DataTable( {
+      $('#facebook-data').DataTable( {
         "order": [[ 1, "desc" ]]
     } );
   } );

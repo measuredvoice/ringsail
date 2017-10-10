@@ -16,7 +16,7 @@ namespace :social_data_pull do
   desc 'update all on triggers' 
   task :update_all => :environment do
     PublicActivity.enabled = false
-    Outlet.where("draft_id IS NOT NULL").find_in_batches(batch_size: 10) do | group|
+    Outlet.where("draft_id IS NOT NULL").where("service = ?","youtube").find_in_batches(batch_size: 10) do | group|
       group.each{|out|
         out.save(validate:false)
         sleep 1

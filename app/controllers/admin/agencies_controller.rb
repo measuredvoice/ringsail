@@ -1,7 +1,7 @@
 class Admin::AgenciesController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
-  before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore, :reassign]
+  before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore, :reassign, :stats]
   protect_from_forgery except: :tokeninput
  
   before_filter :require_admin, except: [:tokeninput]
@@ -54,6 +54,10 @@ class Admin::AgenciesController < Admin::AdminController
         format.json {render json: @agency.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def stats
+
   end
 
   def reassign
