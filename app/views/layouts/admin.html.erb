@@ -97,9 +97,11 @@
 	         <li class = "<%= "active" if request.original_url.include?("stats") %>">
 		        	<a href="#" class = "dropdown-toggle" data-toggle = "dropdown" aria-expanded = "false">Stats<span class = "caret"></span></a>
 		        	<ul class="dropdown-menu" role="menu">
+		        		<% if current_user.admin? || [2201,361].include?(current_user.agency.id) %>
 		        		<li class="<%= "active" if request.path == "agency/#{current_user.agency.id}/stats" %>">
-			            <%= link_to "My Agency", stats_admin_agency_path(current_user.agency.id) %>
+			            <%= link_to "Agency Stats", stats_admin_agency_path(current_user.agency.id) %>
 			          </li>
+			          <% end %>
 	        	    <li class="<%= "active" if request.path == "/stats/twitter" %>">
 			            <%= link_to "Twitter Stats", stats_twitter_url %>
 			          </li>
