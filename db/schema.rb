@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170831175408) do
+ActiveRecord::Schema.define(version: 20171012145610) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20170831175408) do
     t.integer  "published_gallery_count",    limit: 4,   default: 0
     t.integer  "api_id",                     limit: 4
     t.string   "omb_name",                   limit: 255
+    t.boolean  "stats_enabled"
   end
 
   create_table "auth_tokens", force: :cascade do |t|

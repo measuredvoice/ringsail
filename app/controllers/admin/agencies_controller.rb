@@ -109,7 +109,7 @@ class Admin::AgenciesController < Admin::AdminController
       @agency = Agency.find(params[:id])
     end
     def agency_params
-      params.require(:agency).permit(:name, :shortname, :info_url, :agency_tokens, :parent_id)
+      params.require(:agency).permit(:name, :shortname, :info_url, :agency_tokens, :parent_id, :stats_enabled)
     end
 
     def sort_column
