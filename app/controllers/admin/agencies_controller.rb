@@ -4,7 +4,7 @@ class Admin::AgenciesController < Admin::AdminController
   before_action :set_agency, only: [:show, :edit, :update, :destroy, :history, :restore, :reassign, :stats]
   protect_from_forgery except: :tokeninput
  
-  before_filter :require_admin, except: [:tokeninput]
+  before_filter :require_admin, except: [:tokeninput, :stats]
 
   def index 
     @agencies = Agency.all.order(sort_column + " " + sort_direction) 
