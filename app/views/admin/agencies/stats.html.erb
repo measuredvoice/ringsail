@@ -5,30 +5,30 @@
     <h1 class="page-header">Agency Stats</h1>
     <div class = "panel panel-default">
       <div class = "panel-body">
-        <p>
-          <strong>Agency Name:</strong>
-          <%= @agency.name %>
-        </p>
-        <p>
-          <strong>Info URL:</strong>
-          <%= @agency.info_url %>
-        </p>
+        <dl class="dl-horizontal">
+          <dt>Agency Name:</dt>
+          <dd><%= @agency.name %></dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Info URL:</dt>
+          <dd><%= @agency.info_url %></dd>
+        </dl>
 
         <dl class="dl-horizontal">
 
-          <dt>Social Media</dt>
+          <dt>Social Media:</dt>
           <dd><%= @agency.draft_outlet_count%> (<%= @agency.published_outlet_count%> published)</dd>
         </dl>
         <dl class="dl-horizontal">
-          <dt>Mobile Products</dt>
+          <dt>Mobile Products:</dt>
           <dd><%= @agency.draft_mobile_app_count%> (<%= @agency.published_mobile_app_count%> published)</dd>
 
           <% @agency.mobile_apps.joins(:mobile_app_versions).where("mobile_apps.draft_id IS NOT NULL").group(:platform).distinct("mobile_app_version_id, platform").count.each do |key, value| %>
-          <dt><%= key %> (published)</dt>
+          <dt><%= key %> (published):</dt>
           <dd><%= value %></dd>
           <% end %>
 
-          <dt>Galleries</dt>
+          <dt>Galleries:</dt>
           <dd><%= @agency.published_gallery_count%> (<%= @agency.published_gallery_count%> published)</dd>
 
 
@@ -44,9 +44,6 @@
     <div class = "panel panel-default">
       <div class = "panel-body">
         <div class="row">
-          <div class="col-sm-6">
-            <p>Total Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").sum(:facebook_followers), :delimiter => ',') %> </p>
-          </div>
           <div class="col-sm-6">
             <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_followers), :delimiter => ',') %> </p>
           </div>
@@ -81,6 +78,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Facebook Followers</th>
+                  <th>Last Updated</th>
               <!--     <th>Facebook Likes</th> -->
                  <!--  <th>Facebook Posts</th>
                   <th> Facebook Interactions</th>-->
@@ -90,6 +88,7 @@
                 <tr>
                   <th>Name</th>
                   <th>Facebook Followers</th>
+                  <th>Last Updated</th>
                   <!-- <th>Facebook Likes</th>
                   <th>Facebook Posts</th>
                   <th>Facebook Interactions</th> -->
@@ -98,8 +97,9 @@
               <tbody>
                 <% @agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").all.each do |outlet| %>
                 <tr>
-                  <td><%= link_to outlet.organization, outlet.service_url, :target => "_blank" %></td>
+                  <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target => "_blank" %></td>
                   <td><%= outlet.facebook_followers %></td>
+                  <td><%= outlet.updated_at %></td>
                 <!--   <td><%= outlet.facebook_likes %></td>
                   <td><%= outlet.facebook_posts %></td>
                   <td><%= outlet.facebook_interactions %></td> -->
@@ -166,6 +166,7 @@
                   <th>Name</th>
                   <th>Twitter Followers</th>
                   <th>Twitter Posts</th>
+                  <th>Last Updated</th>
                   <!-- <th>Twitter Interactions</th> -->
                 </tr>
               </thead>
@@ -174,15 +175,17 @@
                   <th>Name</th>
                   <th>Twitter Followers</th>
                   <th>Twitter Posts</th>
+                  <th>Last Updated</th>
                   <!-- <th>Twitter Interactions</th> -->
                 </tr>
               </tfoot>
               <tbody>
                 <% @agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").all.each do |outlet| %>
                 <tr>
-                  <td><%= link_to "#{outlet.organization.blank? ? "https://twitter.com/#{outlet.account}" : outlet.organization}" , "https://twitter.com/#{outlet.account}", :target=> "_blank" %></td>
+                  <td><%= link_to "#{outlet.organization.blank? ? "https://twitter.com/#{outlet.account}" : outlet.organization}" , admin_outlet_path(outlet), :target=> "_blank" %></td>
                   <td><%= outlet.twitter_followers %></td>
                   <td><%= outlet.twitter_posts %></td>
+                  <td><%= outlet.updated_at %></td>
                   <!-- <td><%= outlet.twitter_interactions %></td> -->
                 </tr>
                 <% end %>
@@ -265,6 +268,7 @@
                   <th>YouTube Videos</th>
                   <th>YouTube Views</th>
                   <th>YouTube Comments</th>
+                  <th>Last Updated</th>
                 </tr>
               </thead>
               <tfoot>
@@ -274,16 +278,18 @@
                   <th>YouTube Videos</th>
                   <th>YouTube Views</th>
                   <th>YouTube Comments</th>
+                  <th>Last Updated</th>
                 </tr>
               </tfoot>
               <tbody>
                 <% @agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").all.each do |outlet| %>
                 <tr>
-                  <td><%= link_to outlet.organization, "https://youtube.com/#{outlet.account}", :target=> "_blank" %></td>
+                  <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target=> "_blank" %></td>
                   <td><%= outlet.youtube_subscribers %></td>
                   <td><%= outlet.youtube_video_count %></td>
                   <td><%= outlet.youtube_view_count %></td>
                   <td><%= outlet.youtube_comment_count %></td>
+                  <td><%= outlet.updated_at %></td>
                 </tr>
                 <% end %>
               </tbody>
@@ -309,6 +315,7 @@
                   <th>Platform</th>
                   <th>Average Rating</th>
                   <th>Total Ratings</th>
+                  <th>Last Updated</th>
                 </tr>
               </thead>
               <tfoot>
@@ -317,16 +324,18 @@
                   <th>Platform</th>
                   <th>Average Rating</th>
                   <th>Total Ratings</th>
+                  <th>Last Updated</th>
                 </tr>
               </tfoot>
               <tbody>
                 <% Agency.find(2021).mobile_apps.includes(:mobile_app_versions).where("mobile_apps.draft_id IS NOT NULL").each do |ma| 
                     ma.mobile_app_versions.each do |mav| %>
                   <tr>
-                    <td><%= ma.name %></td>
+                    <td><%= link_to ma.name, admin_mobile_app_path(ma), :target => "_blank" %></td>
                     <td><%= mav.platform %></td>
                     <td><%= mav.average_rating %></td>
                     <td><%= mav.number_of_ratings %></td>
+                    <td><%= ma.updated_at %></td>
                   </tr>
                 <% end
                 end %>
@@ -343,23 +352,35 @@
   <script type="text/javascript">
   $(document).ready(function() {
       $('#facebook-data').DataTable( {
-        "order": [[ 1, "desc" ]]
+        "order": [[ 2, "desc" ]]
     } );
   } );
   $(document).ready(function() {
       $('#twitter-data').DataTable( {
-        "order": [[ 1, "desc" ]]
+        "order": [[ 3, "desc" ]]
     } );
   } );
   $(document).ready(function() {
       $('#youtube-data').DataTable( {
-        "order": [[ 1, "desc" ]]
+        "order": [[ 5, "desc" ]]
     } );
   } );
   $(document).ready(function() {
       $('#mobile-data').DataTable( {
-        "order": [[ 0, "asc" ]]
+        "order": [[ 4, "desc" ]]
     } );
   } );
 </script>
 <% end %>
+
+<style>
+@media (min-width: 768px) {
+  .dl-horizontal dt {
+    float: left;
+    width: 240px;
+  }
+  .dl-horizontal dd{
+    margin-left: 250px;
+  }
+}
+</style>

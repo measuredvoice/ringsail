@@ -3,6 +3,7 @@ class Admin::AdminController < ApplicationController
   layout "admin"
 
   before_filter :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
+  before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
   before_filter :banned_user?, except: [:about, :impersonate, :dashboard]
   helper_method :current_user
 
@@ -29,6 +30,16 @@ class Admin::AdminController < ApplicationController
       end
     else
       @current_user ||= warden.authenticate(scope: :user)
+    end
+  end
+
+  def admin_two_factor
+    if Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
+      #do nothing because its dev!
+    else
+      if !current_user.user.include?("TwoFactor")
+        redirect_to admin_about_path, status: 302, notice: "You must login with Two Factor Authentication to utilize administrative functionality."
+      end
     end
   end
 

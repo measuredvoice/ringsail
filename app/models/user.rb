@@ -70,7 +70,8 @@ class User < ActiveRecord::Base
         when "Last-Name"
           self.last_name = value
         when "GroupList"
-          self.groups = value
+          self.groups = value 
+
           if self.groups.include? ENV['REGISTRY_ADMIN_GROUP']
             self.role = 2
           elsif self.groups.include? ENV['REGISTRY_USER_GROUP']
@@ -78,6 +79,8 @@ class User < ActiveRecord::Base
           else
             self.role = 0
           end
+        when "samlAuthenticationStatementAuthMethod"
+          self.user = value
       end
     end
   end
