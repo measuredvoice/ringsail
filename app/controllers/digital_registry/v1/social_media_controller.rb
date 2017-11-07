@@ -42,6 +42,43 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
     end
   end
 
+  swagger_api :archived do
+    summary "Fetches Archived accounts that are no longer managed by the federal government."
+    notes "This returns archived accounts in a paginated fashion."
+    param :query, :q, :string, :optional, "String to compare to the name of accounts"
+    param :query, :services, :service_keys, :optional, "Comma separated list of service keys (available via services call)"
+    param :query, :agencies, :ids, :optional, "Comma separated list of agency ids"
+    param :query, :language, :string, :optional, "Language of the social media accounts to return"
+    param :query, :tags, :ids, :optional, "Comma separated list of tag ids"
+    param :query, :page_size, :integer, :optional, "Number of results per page, defaults to 25"
+    param :query, :page, :integer, :optional, "Page number"
+  end
+
+  def archived
+    params[:page_size] = params[:page_size] || PAGE_SIZE
+    @outlets = Outlet.includes(:agencies,:official_tags).where(status: 'archived') 
+    if params[:q] && params[:q] != ""
+      @outlets = @outlets.where("account LIKE ? OR organization LIKE ? OR short_description LIKE ? OR long_description LIKE ?", 
+        "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
+    end
+    if params[:agencies] && params[:agencies] != ""
+      @outlets = @outlets.where("agencies.id" =>params[:agencies].split(","))
+    end
+    if params[:tags] && params[:tags] != ""
+      @outlets = @outlets.where("official_tags.id" => params[:tags].split(","))
+    end
+    if params[:language] && params[:language] != ""
+      @outlets = @outlets.where("language LIKE ? ", "%#{params[:language]}%")
+    end
+    if params[:services] && params[:services] != ""
+      @outlets = @outlets.where(service: params[:services].split(","))
+    end
+    @outlets = @outlets.uniq.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+    respond_to do |format|
+      format.json { render "index" }
+    end
+  end
+
   swagger_api :show do
     summary "Fetches a single social media account by ID"
     notes "This returns an agency based on an ID."

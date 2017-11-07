@@ -118,6 +118,68 @@
       ]
     },
     {
+      "path": "/digital-registry/v1/social_media/archived.json",
+      "operations": [
+        {
+          "summary": "Fetches all accounts",
+          "notes": "This lists all active accounts. It accepts parameters to perform basic search as well as search by service, agency, or tags.",
+          "parameters": [
+            {
+              "paramType": "query",
+              "name": "q",
+              "type": "string",
+              "description": "String to compare to the name of accounts",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "services",
+              "type": "service_keys",
+              "description": "Comma separated list of service keys (available via services call)",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "agencies",
+              "type": "ids",
+              "description": "Comma separated list of agency ids",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "language",
+              "type": "string",
+              "description": "Language of the social media accounts to return",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "tags",
+              "type": "ids",
+              "description": "Comma separated list of tag ids",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "page_size",
+              "type": "integer",
+              "description": "Number of results per page, defaults to 25",
+              "required": false
+            },
+            {
+              "paramType": "query",
+              "name": "page",
+              "type": "integer",
+              "description": "Page number",
+              "required": false
+            }
+          ],
+          "nickname": "DigitalRegistry::V1::SocialMedia#archived",
+          "method": "get"
+        }
+      ]
+    },
+    {
       "path": "/digital-registry/v1/social_media/{id}.json",
       "operations": [
         {
