@@ -3,7 +3,6 @@ class Admin::NotificationsController < Admin::AdminController
   respond_to :html, :xml, :json
   before_action :set_user
   before_action :set_notification, only: [:show, :destroy]
-  before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
   before_action :require_admin_or_owner
 
   # GET /users/1/notifications
