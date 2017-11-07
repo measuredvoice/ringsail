@@ -56,7 +56,7 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
 
   def archived
     params[:page_size] = params[:page_size] || PAGE_SIZE
-    @outlets = Outlet.includes(:agencies,:official_tags).where(status: 'archived') 
+    @outlets = Outlet.where(status: 2).includes(:agencies,:official_tags)
     if params[:q] && params[:q] != ""
       @outlets = @outlets.where("account LIKE ? OR organization LIKE ? OR short_description LIKE ? OR long_description LIKE ?", 
         "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
@@ -75,7 +75,7 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
     end
     @outlets = @outlets.uniq.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
-      format.json { render "index" }
+      format.json { render "archived" }
     end
   end
 

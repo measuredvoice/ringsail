@@ -306,6 +306,7 @@ Ringsail::Application.routes.draw do
           get 'verify'
           get 'services'
           get 'tokeninput'
+          get 'archived'
         end
       end
       # resources :galleries, only: [:index, :show]
