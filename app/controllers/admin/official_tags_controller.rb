@@ -4,6 +4,7 @@ class Admin::OfficialTagsController < Admin::AdminController
   before_filter :set_tag, only: [:edit, :show, :update, :destroy]
 
   before_filter :require_admin, except: [:tokeninput]
+  before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
   # GET /tags
   # GET /tags.json
   def index

@@ -3,7 +3,7 @@ class Admin::MobileAppsController < Admin::AdminController
   respond_to :html, :xml, :json, :csv, :xls
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy,
     :archive, :publish, :request_archive, :request_publish]
-
+    
   # before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
   # GET /mobile_apps.json

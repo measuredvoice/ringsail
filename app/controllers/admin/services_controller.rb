@@ -21,7 +21,7 @@ class Admin::ServicesController < Admin::AdminController
   before_action :set_admin_service, only: [:show, :edit, :update, :archive, :restore]
 
   before_filter :require_admin
-
+  before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
   # GET /admin/services
   # GET /admin/services.json
   def index

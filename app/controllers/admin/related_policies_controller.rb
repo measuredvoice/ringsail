@@ -5,7 +5,8 @@ class Admin::RelatedPoliciesController < Admin::AdminController
   protect_from_forgery except: :tokeninput
  
   before_filter :require_admin
-
+  before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
+  
   def index 
     @related_policies = RelatedPolicy.all.order(sort_column + " " + sort_direction) 
     respond_to do |format|
