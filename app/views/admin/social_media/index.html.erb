@@ -33,8 +33,13 @@
           </div>
           
           <div class="col-sm-6">
+            <% if current_user.admin? %>
             <%= label :status_selector, "Status Selector" %>
             <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},params[:status]) %>
+            <% else %>
+            <%= label :status_selector, "Status Selector", :class => "hidden" %>
+            <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},"Published"), :class=> "hidden" %>
+            <% end %>
           </div>
         <% end %>
         <table class="table table-striped" id="data-tables">

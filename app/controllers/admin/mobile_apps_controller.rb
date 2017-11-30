@@ -8,6 +8,9 @@ class Admin::MobileAppsController < Admin::AdminController
   # GET /mobile_apps
   # GET /mobile_apps.json
   def index
+    if !current_user.admin?
+      params[:status] = "Published"
+    end
     respond_to do |format|
       format.html { 
         @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).uniq

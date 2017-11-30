@@ -9,6 +9,9 @@ class Admin::SocialMediaController < Admin::AdminController
   # GET /outlets
   # GET /outlets.json
   def index
+    if !current_user.admin?
+      params[:status] = "Published"
+    end
     respond_to do |format|
       format.html { 
         @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
