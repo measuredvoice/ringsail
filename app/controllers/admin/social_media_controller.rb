@@ -38,7 +38,7 @@ class Admin::SocialMediaController < Admin::AdminController
     if !params[:agency].blank?
       @outlets = Outlet.es_search(params, sort_column, sort_direction).per(1000).records
     else
-      @outlets = Outlet.es_search(params, sort_column, sort_direction).per(100).records
+      @outlets = Outlet.es_search(params, sort_column, sort_direction).per(1000).records
     end
     respond_to do |format|
       format.csv { send_data @outlets.to_csv }
