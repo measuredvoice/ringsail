@@ -28,14 +28,18 @@ class Admin::SocialMediaController < Admin::AdminController
       format.csv { 
         @outlets = Outlet.es_search(params, sort_column, sort_direction)
         @result_count = @outlets.total_count
-        @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
+        @outlets = @outlets.results
         send_data @outlets.to_csv 
       }
     end
   end
 
   def social_media_export
-    @outlets = Outlet.where("id IN (?)",params[:ids].split(",")).includes(:official_tags,:users,:agencies)
+    if !params[:agency].blank?
+      @outlets = Outlet.es_search(params, sort_column, sort_direction).per(1000).records
+    else
+      @outlets = Outlet.es_search(params, sort_column, sort_direction).per(100).records
+    end
     respond_to do |format|
       format.csv { send_data @outlets.to_csv }
     end
