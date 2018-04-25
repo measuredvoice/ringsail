@@ -23,7 +23,7 @@ class Outlet < ActiveRecord::Base
   include PublicActivity::Model
   include Notifications
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
+  # include Elasticsearch::Model::Callbacks
 
 
   settings index: { number_of_shards: 1 } do
@@ -110,6 +110,18 @@ class Outlet < ActiveRecord::Base
   paginates_per 100
 
   before_save :social_media_update
+
+  after_commit on: [:create] do
+    __elasticsearch__.index_document
+  end
+
+  after_commit on: [:update] do
+    ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: self.id, body: self.as_indexed_json
+  end
+
+  after_commit on: [:destroy] do
+    __elasticsearch__.delete_document
+  end
 
   def social_media_update
     begin 
@@ -309,7 +321,7 @@ class Outlet < ActiveRecord::Base
     new_outlet.save(validate: false)
     self.save(validate: false)
     Outlet.public_activity_on
-    self.create_activity :published
+    # self.create_activity :published
   end
 
   def archived!
@@ -318,7 +330,7 @@ class Outlet < ActiveRecord::Base
     self.published.destroy! if self.published
     self.save(validate: false)
     Outlet.public_activity_on
-    self.create_activity :archived
+    # self.create_activity :archived
   end
 
   def publish_requested!
@@ -326,7 +338,7 @@ class Outlet < ActiveRecord::Base
     self.status = Outlet.statuses[:publish_requested]
     self.save(validate: false)
     Outlet.public_activity_on
-    self.create_activity :publish_requested
+    # self.create_activity :publish_requested
   end
 
   def archive_requested!
@@ -334,7 +346,7 @@ class Outlet < ActiveRecord::Base
     self.status = Outlet.statuses[:archive_requested]
     self.save(validate: false)
     Outlet.public_activity_on
-    self.create_activity :archive_requested
+    # self.create_activity :archive_requested
   end
 
   private

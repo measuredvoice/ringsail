@@ -21,7 +21,6 @@ class MobileApp < ActiveRecord::Base
   include PublicActivity::Model
   include Notifications
   include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
 
   settings index: { number_of_shards: 1 } do
     mappings dynamic: 'false' do
@@ -92,6 +91,18 @@ class MobileApp < ActiveRecord::Base
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
   validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one version of the product must be given." }
 
+
+  after_commit on: [:create] do
+    __elasticsearch__.index_document
+  end
+
+  after_commit on: [:update] do
+    ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: self.id, body: self.as_indexed_json
+  end
+
+  after_commit on: [:destroy] do
+    __elasticsearch__.delete_document
+  end
 
   def self.platform_counts
     joins(:mobile_app_versions).where("mobile_apps.draft_id IS NULL").group(:platform).distinct("mobile_app_id, platform").count

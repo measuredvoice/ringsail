@@ -22,10 +22,13 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
         <%= link_to "Add a Social Media Account", new_admin_outlet_path, class: "btn btn-default pull-right"  %>
+
         <%= form_for admin_outlets_path, method: :post, html: { class: 'row', id: 'table-controls'} do %>
           <div class="col-sm-12">
             <%= label :agency_selector, "Agency" %>
             <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.all.pluck(:name).sort.collect{|agency| [agency,agency]},params[:agency_selector]) %>
+            
+           <p style="font-size: 14px;">Note: Exports are limited to 1000 records at a time, it is recommended to choose an agency to export as CSV.</p>
           </div>
           <div class="col-sm-6">
             <%= label :service_selector, "Social Media Platform" %>
