@@ -43,6 +43,46 @@
         </div>
 			</div>
 		</div>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div class="activity-trackers">
+          <h3>Social Media Activity</h3>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <ul class="table_list">
+                <li>Created last 30 Days: <%=  Outlet.where("draft_id IS NULL").where("created_at > ?", 30.days.ago).count %></li>
+                <li>Created last 90 Days: <%=  Outlet.where("draft_id IS NULL").where("created_at > ?", 90.days.ago).count %></li>
+                <li>Created last 180 Days: <%=  Outlet.where("draft_id IS NULL").where("created_at > ?", 180.days.ago).count %></li>
+              </ul>
+              <ul class="table_list">
+                <li>Updated last 30 days: <%=  Outlet.where("draft_id IS NULL").where("updated_at > ?", 30.days.ago).count %></li>
+                <li>Updated last 90 days: <%=  Outlet.where("draft_id IS NULL").where("updated_at > ?", 90.days.ago).count %></li>
+                <li>Updated last 180 days: <%=  Outlet.where("draft_id IS NULL").where("updated_at > ?", 180.days.ago).count %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div class="activity-trackers">
+          <h3>Mobile Apps Activity</h3>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <ul class="table_list">
+                <li>Created last 30 Days: <%=  MobileApp.where("draft_id IS NULL").where("created_at > ?", 30.days.ago).count %></li>
+                <li>Created last 90 Days: <%=  MobileApp.where("draft_id IS NULL").where("created_at > ?", 90.days.ago).count %></li>
+                <li>Created last 180 Days: <%=  MobileApp.where("draft_id IS NULL").where("created_at > ?", 180.days.ago).count %></li>
+              </ul>
+              <ul class="table_list">
+                <li>Updated last 30 days: <%=  MobileApp.where("draft_id IS NULL").where("updated_at > ?", 30.days.ago).count %></li>
+                <li>Updated last 90 days: <%=  MobileApp.where("draft_id IS NULL").where("updated_at > ?", 90.days.ago).count %></li>
+                <li>Updated last 180 days: <%=  MobileApp.where("draft_id IS NULL").where("updated_at > ?", 180.days.ago).count %></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 	</div>
 </div>
 </div>
