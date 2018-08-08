@@ -9,10 +9,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 	def new
 		@emails = []
 		if params[:include_admins]
-			admins = User.where("role = ?", User.roles[:admin])
-			admins.each do |admin|
-				@emails << admin.email
-			end
+			@emails = ["socialmediaregistry@gsa.gov"]
 		end
 		if params[:param1]
 			if !@emails.include? params[:param1]

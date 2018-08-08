@@ -51,18 +51,7 @@
     </div>
     <div id="about-contact-us">
       <h2>Contact Us</h2>
-      <div>List of Admins 
-        <span class="buttonRow">
-          <% unless current_user.banned? %>
-            <%= link_to "Email Admins", new_admin_email_message_path(include_admins: true), {:class => "fa fa-pencil"} %>
-          <% end %>
-        </span>
-      </div>
-      <ul class="list-unstyled">
-        <% @admins.each do |admin| %>
-          <li><%= "#{admin.first_name} #{admin.last_name} - #{admin.email}" %></li>
-        <% end %>
-      <ul/>
+      <p>Contact us at <a href="mailto:socialmediaregistry@gsa.gov">socialmediaregistry@gsa.gov<a/></p>
     </div>
   </div>
 </div>
