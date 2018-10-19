@@ -25,8 +25,8 @@
             <%= label :status_selector, "Status Selector" %>
             <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},params[:status]) %>
             <% else %>
-            <%= label :status_selector, "Status Selector", :class => "hidden" %>
-            <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},"Published"), :class=> "hidden" %>
+            <%= label :status_selector, "Status Selector" %>
+            <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},"Published") %>
             <% end %>
           </div>
         <% end %>
