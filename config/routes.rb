@@ -338,11 +338,11 @@ Ringsail::Application.routes.draw do
 
     get "faq" => "public#faq"
 
-    get 'export_social_media' => "browser#export_social_media"
-    post 'export_social_media' => "browser#export_social_media"
+    # get 'export_social_media' => "browser#export_social_media"
+    # post 'export_social_media' => "browser#export_social_media"
 
-    get 'export_mobile_app' => "browser#export_mobile_app"
-    post 'export_mobile_app' => "browser#export_mobile_app"
+    # get 'export_mobile_app' => "browser#export_mobile_app"
+    # post 'export_mobile_app' => "browser#export_mobile_app"
   end
 
   namespace :stats do
