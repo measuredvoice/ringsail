@@ -200,7 +200,18 @@
   <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
 </div>
 
+<%= form_tag export_social_media_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
+  <%= hidden_field_tag :hidden_agencies %>
+  <%= hidden_field_tag :hidden_services %>
+  <%= hidden_field_tag :hidden_tags %>
+  <%= hidden_field_tag :hidden_languages %>
+<% end %>
 
+<%= form_tag export_mobile_app_path(format: :csv), method: :post, class: 'hidden', id: "mobile_csv_export" do %>
+  <%= hidden_field_tag :hidden_mobile_agencies %>
+  <%= hidden_field_tag :hidden_mobile_tags %>
+  <%= hidden_field_tag :hidden_mobile_languages %>
+<% end %>
 
 <% content_for :additional_javascript do %>
   <style>
