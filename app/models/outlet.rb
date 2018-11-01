@@ -321,7 +321,7 @@ class Outlet < ActiveRecord::Base
     new_outlet.save(validate: false)
     self.save(validate: false)
     Outlet.public_activity_on
-    # self.create_activity :published
+    self.create_activity :published
   end
 
   def archived!
@@ -330,7 +330,7 @@ class Outlet < ActiveRecord::Base
     self.published.destroy! if self.published
     self.save(validate: false)
     Outlet.public_activity_on
-    # self.create_activity :archived
+    self.create_activity :archived
   end
 
   def publish_requested!
