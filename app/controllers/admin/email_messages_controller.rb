@@ -9,7 +9,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 	def new
 		@emails = []
 		if params[:include_admins]
-			@emails = ["socialmediaregistry@gsa.gov"]
+			@emails = ["usdigitalregistry@gsa.gov"]
 		end
 		if params[:param1]
 			if !@emails.include? params[:param1]

@@ -87,11 +87,11 @@ namespace :generate_data do
     end
     Agency.all.each do |agen|
       services.each do |service|
-        agency_counts[agen.name.to_s][service] = Outlet.where(:agencies => { :id => agen.id }, :service => service).where.not(draft_id: nil).includes(:agencies).references(:agencies).count    
+        agency_counts[agen.name.to_s][service] = Outlet.where(:agencies => { :id => agen.id }, :service => service,created_at:Time.new(2005,1,1)..Time.new(2017,8,31), updated_at: Time.new(2018, 4, 20)..Time.new(2018,9,31)).where(draft_id: nil).includes(:agencies).references(:agencies).count    
       end
     end
     puts agency_counts.inspect
-    CSV.open("reports/agency_counts_by_service_raw.csv", "wb"){ |csv| 
+    CSV.open("reports/agency_counts_raw_updated_since_purge_fiscal_2018.csv", "wb"){ |csv| 
       csv << ['agency'] + services
       agency_counts.each do |(key,val)| 
         row = []
