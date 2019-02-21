@@ -1,0 +1,158 @@
+<div class="row">
+  <div class="col-sm-12 col-md-12 main">
+    <%= content_for :page_title do %>Social Media Accounts<% end %>
+    <h1 class="page-header">Your Social Media Accounts</h1>
+    
+    <p>Please validate accounts are either still active, maintained accounts or if they are ready to be archived and are no longer used by your agency or group</p>
+    <div class="row placeholders">
+        <div class="col-sm-12">
+           <%= link_to  "Needs Review", admin_review_social_media_path, :class => "btn btn-default" %>
+           <%= link_to  "Recently Reviewed", admin_review_social_media_path(status: "recently_published"), :class => "btn btn-success" %>
+           <%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class => "btn btn-warning" %>
+        </div>
+        <div class="col-sm-12">
+           <%= paginate @outlets %>
+           <%= page_entries_info @outlets %>
+        </div>
+    </div>
+
+    <div class="row placeholders">
+        <div class="col-sm-12">
+            <% @outlets.each do |outlet|
+
+              panel_class = "panel-default"
+              if outlet.status == "archived"
+                  panel_class = "panel-warning"
+              else
+                if outlet.updated_at > 90.days.ago
+                  panel_class = "panel-success"
+                end
+              end
+              %>
+            <div class="panel <%= panel_class %>" id="panel-outlet-<%= outlet.id %>">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse">
+                      <i class="icon glyphicon-plus"%></i>
+                      <span style="font-size:14px; line-height:14px;">
+                      <%= outlet.organization  %></span>
+                    </a>
+                  </div>
+                  <div class="col-sm-4" style="font-size:14px; line-height:14px;">
+                      <a href="/admin/social_media/<%= outlet.id %>/edit">Edit Account</a>
+                      <% if outlet.status == "published" %> 
+                      <a class="btn btn-success publish-outlet-button" data-outlet="<%= outlet.id %>">Keep Published</a>
+                      <% else %>
+                       <a class="btn btn-success publish-outlet-button" data-outlet="<%= outlet.id %>">Publish</a>
+                      <% end %>
+
+                      <% if outlet.status == "archived" %> 
+                        <!-- don't need to archive the archived -->
+                      <% else %>
+                       <a class="btn btn-warning archive-outlet-button" data-outlet="<%= outlet.id %>">Archived</a>
+                      <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body collapse" id="body-outlet-<%= outlet.id %>" style="font-size:12px; line-height:13px;">
+                <div class="col-sm-6"  >
+                    <p>
+                      <strong>Account Name:</strong>
+                      <%= outlet.organization %>
+                    </p>
+
+                    <p>
+                      <strong>Agencies:</strong>
+                      <%= outlet.agencies.map(&:name).join(', ') %>
+                    </p>
+
+                    <p>
+                      <strong>Account Type:</strong>
+                      <%= outlet.service %>
+                    </p>
+                    <p>
+                      <strong>Account URL:</strong>
+                      <%= link_to outlet.service_url, outlet.service_url, :target => "_blank" %>
+                    </p>
+                    <p>
+                      <strong>Last Updated/Reviewed:</strong>
+                      <span id="outlet-updated-<%= outlet.id %>"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></span>
+                    </p>
+
+                    
+                </div><div class="col-sm-6">
+                    <p>
+                      <strong>Language:</strong>
+                      <%= outlet.language %>
+                    </p>
+                    <p>
+                      <strong>Tags:</strong>
+                      <%= outlet.official_tags.map(&:tag_text).join(', ') %>
+                    </p>
+                    <p>
+                      <strong>Short Description:</strong>
+                      <%= outlet.short_description %>
+                    </p>
+
+                    <p>
+                      <strong>Long Description:</strong>
+                      <%= outlet.long_description %>
+                    </p>
+                    
+                    <p>
+                      <strong>Status:</strong>
+                      <span id="outlet-status-<%= outlet.id %>"><%= outlet.status.humanize %></span>
+                    </p>
+                </div>
+
+               
+              </div>
+            </div>
+            <% end %>
+                   </div>
+    </div>
+    <div class="row placeholders">
+        <div class="col-sm-12">
+           <%= paginate @outlets %>
+           <%= page_entries_info @outlets %>
+        </div>
+    </div>
+  </div>
+</div>
+<% content_for :additional_javascript do %>
+<script>
+
+  $(document).ready(function(){
+    $('.publish-outlet-button').on('click',function(){
+      var id = $(this).data('outlet');
+      $.ajax({
+        url: "/admin/social_media/"+id+"/publish",
+      }).done(function() {
+        var date = new Date(Date.now())
+        $('#outlet-updated-'+id).html(date.toUTCString());
+        $('#outlet-status-'+id).html("Published");
+        $('#panel-outlet-'+id).removeClass( "panel-default" );
+        $('#panel-outlet-'+id).removeClass( "panel-success" );
+        $('#panel-outlet-'+id).removeClass( "panel-warning" );
+        $('#panel-outlet-'+id).addClass( "panel-success" );
+      });
+    })
+    $('.archive-outlet-button').on('click',function(){
+      var id = $(this).data('outlet');
+      $.ajax({
+        url: "/admin/social_media/"+id+"/archive",
+      }).done(function() {
+        var date = new Date(Date.now())
+        $('#outlet-updated-'+id).html(date.toUTCString());
+        $('#outlet-status-'+id).html("Archived");
+        $('#panel-outlet-'+id).removeClass( "panel-default" );
+        $('#panel-outlet-'+id).removeClass( "panel-success" );
+        $('#panel-outlet-'+id).removeClass( "panel-warning" );
+        $('#panel-outlet-'+id).addClass( "panel-warning" );
+      });
+    })
+  });
+</script>
+
+<% end %>
