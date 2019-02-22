@@ -36,24 +36,15 @@
                     <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse">
                       <i class="icon glyphicon-plus"%></i>
                       <span style="font-size:14px; line-height:14px;">
-                      <%= outlet.organization  %></span>
+                      <%= outlet.organization  %> - <%= outlet.service %></span>
                     </a>
                   </div>
-                  <div class="col-sm-4" style="font-size:14px; line-height:14px;">
-                      <a href="/admin/social_media/<%= outlet.id %>/edit">Edit Account</a>
-                      <% if outlet.status == "published" %> 
-                      <a class="btn btn-success publish-outlet-button" data-outlet="<%= outlet.id %>">Keep Published</a>
-                      <% else %>
-                       <a class="btn btn-success publish-outlet-button" data-outlet="<%= outlet.id %>">Publish</a>
-                      <% end %>
+                  <div class="col-sm-4">
+                    <span id="outlet-alert-<%= outlet.id %>">
 
-                      <% if outlet.status == "archived" %> 
-                        <!-- don't need to archive the archived -->
-                      <% else %>
-                       <a class="btn btn-warning archive-outlet-button" data-outlet="<%= outlet.id %>">Archived</a>
-                      <% end %>
+                    </span>
                   </div>
-                </div>
+                </div>  
               </div>
               <div class="panel-body collapse" id="body-outlet-<%= outlet.id %>" style="font-size:12px; line-height:13px;">
                 <div class="col-sm-6"  >
@@ -105,7 +96,27 @@
                       <span id="outlet-status-<%= outlet.id %>"><%= outlet.status.humanize %></span>
                     </p>
                 </div>
+                <div class="col-sm-12">
+                  <hr />
+                </div>
+                <div class="col-sm-4 col-sm-offset-8" style="font-size:14px; line-height:14px;">
+                      <% if outlet.status == "archived" %> 
+                        <!-- don't need to archive the archived -->
+                      <% else %>
+                       <a class="btn btn-warning archive-outlet-button" data-outlet="<%= outlet.id %>">Archive</a>
+                      <% end %>
 
+                      <a class="btn btn-default" href="/admin/social_media/<%= outlet.id %>/edit">Edit</a>
+                      
+
+                      
+
+                      <% if outlet.status == "published" %> 
+                      <a class="btn btn-success publish-outlet-button" data-outlet="<%= outlet.id %>">Validate</a>
+                      <% else %>
+                       <a class="btn btn-success publish-outlet-button" data-outlet="<%= outlet.id %>">Publish</a>
+                      <% end %>
+                  </div>
                
               </div>
             </div>
@@ -136,6 +147,7 @@
         $('#panel-outlet-'+id).removeClass( "panel-success" );
         $('#panel-outlet-'+id).removeClass( "panel-warning" );
         $('#panel-outlet-'+id).addClass( "panel-success" );
+        $('#outlet-alert-'+id).html("Validated: "+ date.toUTCString());
       });
     })
     $('.archive-outlet-button').on('click',function(){
@@ -150,9 +162,17 @@
         $('#panel-outlet-'+id).removeClass( "panel-success" );
         $('#panel-outlet-'+id).removeClass( "panel-warning" );
         $('#panel-outlet-'+id).addClass( "panel-warning" );
+        $('#outlet-alert-'+id).html("Archived: "+ date.toUTCString());
       });
     })
   });
 </script>
+
+<style>
+hr {
+    margin-top: 5px !important;
+    margin-bottom: 5px  !important;
+}
+</style>
 
 <% end %>

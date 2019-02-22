@@ -97,6 +97,7 @@ class Outlet < ActiveRecord::Base
   acts_as_taggable
 
   # Published outlets should not.
+  validates :organization, :presence => true
   validates :service,
     :presence   => true
   validates :service_url,

@@ -12,6 +12,7 @@ en:
       user: "Contact"
     attributes:
       outlet:
+        organization: "Account Name"
         users:
           one: "Contacts"
           other: "Contacts"

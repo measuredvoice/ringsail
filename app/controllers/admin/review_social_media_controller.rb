@@ -10,11 +10,11 @@ class Admin::ReviewSocialMediaController < Admin::AdminController
   # GET /outlets.json
   def index
     if params[:status] == "archived"
-      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 2).order("updated_at DESC").page(current_page).per(10)
+      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 2).order("updated_at ASC").page(current_page).per(10)
     elsif params[:status] == "recently_published"
-      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 1).where("outlets.updated_at > ?",90.days.ago).order("updated_at DESC").page(current_page).per(10)
+      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 1).where("outlets.updated_at > ?",90.days.ago).order("updated_at ASC").page(current_page).per(10)
     else
-      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 1).where("outlets.updated_at <= ?",90.days.ago).order("updated_at DESC").page(current_page).per(10)
+      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 1).where("outlets.updated_at <= ?",90.days.ago).order("updated_at ASC").page(current_page).per(10)
     end
     
   end

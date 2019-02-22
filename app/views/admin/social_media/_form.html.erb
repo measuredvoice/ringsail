@@ -1,4 +1,6 @@
+
 <%= form_for([:admin,@outlet]) do |f| %>
+   <p><span class="red">*</span> denotes a required field.</p>
   <% if @outlet.errors.any? %>
     <div id="error_explanation">
 
@@ -12,6 +14,7 @@
       </ul>
     </div>
   <% end %>
+
 
   <div class="field">
     <%= f.label :service, "Account Type*" %> </br>
@@ -27,7 +30,7 @@
     <%= f.hidden_field :account %>
   </div>
   <div class="field">
-    <%= f.label :organization, "Account Name" %> </br>
+    <%= f.label :organization, "Account Name*" %> </br>
     <%= f.text_field :organization, :class => "form-control formwidth" %>
   </div>
 
