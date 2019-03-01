@@ -41,7 +41,7 @@ body {
 }
 
 .versions{
-  padding-top: 35px;
+  padding-top: 25px;
 }
 
 .table_list{
@@ -472,7 +472,14 @@ margin: 5px 0 5px 0;
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus{background-color:#ff5049; color:#fff!important; border-color: #bbb; }
 
 /*Form Styles*/
-form{border-top: dotted 1px #bbb; border-bottom: dotted 1px #bbb;padding: 5%}
+.form-inset{
+  border-top: dotted 1px #bbb; 
+  border-bottom: dotted 1px #bbb;
+  padding: 35px 15px 35px;
+}
+form{
+  padding-bottom: 40px;
+}
 .field > label{
     font-weight: 200;
 }
@@ -487,16 +494,17 @@ form{border-top: dotted 1px #bbb; border-bottom: dotted 1px #bbb;padding: 5%}
   display:block;
 }
 .form-control{
-    border-radius: 0;
-    border: 1px solid #ddd;
-background: #fafafa;
-font-family: inherit;
-font-size: inherit;
-margin: 2px 0 20px;
-display: block;
-    box-shadow:none;
-    width:100%;
+  border-radius: 0;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 2px 0 10px;
+  display: block;
+  box-shadow:none;
+  width:100%;
 }
+
 .form-control-inline {
     border-radius: 0;
     border: 1px solid #ddd;

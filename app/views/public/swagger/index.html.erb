@@ -44,7 +44,7 @@
             <div class="row form-inner">
               <div class="col-sm-4">
                 <label for="search-social-language">Language: </label>
-                <%= select_tag "language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "form-control"  %>
+                <%= select_tag "language", options_for_select(language_select_options, nil), include_blank: "Select a Language",  class: "form-control"  %>
               </div>
               <div class="col-sm-4">
                 <label for="search-social-platform">Platforms: </label>

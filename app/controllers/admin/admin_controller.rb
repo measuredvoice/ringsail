@@ -33,6 +33,8 @@ class Admin::AdminController < ApplicationController
         @current_user ||= User.find(session[:user_id])
       else
         @current_user ||= User.find(9661)
+        # @current_user ||= User.where(role: 2).first
+
       end
     else
       @current_user ||= warden.authenticate(scope: :user)

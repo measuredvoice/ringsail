@@ -6,8 +6,7 @@
     <p>Please validate accounts are either still active, maintained accounts or if they are ready to be archived and are no longer used by your agency or group</p>
     <div class="row placeholders">
         <div class="col-sm-12">
-           <%= link_to  "Needs Review", admin_review_social_media_path, :class => "btn btn-default" %>
-           <%= link_to  "Recently Reviewed", admin_review_social_media_path(status: "recently_published"), :class => "btn btn-success" %>
+           <%= link_to  "Review Accounts", admin_review_social_media_path, :class => "btn btn-default" %>
            <%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class => "btn btn-warning" %>
         </div>
         <div class="col-sm-12">

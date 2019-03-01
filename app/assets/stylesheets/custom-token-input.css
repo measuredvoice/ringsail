@@ -6,7 +6,7 @@
 }
 ul.token-input-list {
     overflow: hidden; 
-    min-height:42px;
+    min-height:35px;
     width:100%;
     border: 1px solid #ddd;
     cursor: text;
@@ -14,10 +14,11 @@ ul.token-input-list {
     font-family: Trebuchet,Tahoma,sans-serif;
     z-index: 999;
     margin: 0;
-    padding: 0;
+    padding: 2px;
     background-color: #fafafa;
     list-style-type: none;
-    clear: left;line-height: 52px;
+    clear: left;
+    line-height: 35px;
 }
 ul.token-input-list .token-input-input-token::before{
     font-family: 'FontAwesome';

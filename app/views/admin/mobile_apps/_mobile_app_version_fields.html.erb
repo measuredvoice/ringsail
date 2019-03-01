@@ -1,8 +1,9 @@
 <div class="nested-fields">
     <fieldset>
       <legend>Platform Details</legend>
+      <p>At least one set of platform details of the product must be given.</p>
       <div class="field">
-        <%= f.label :device, "Product Type*" %> </br>
+        <%= f.label :device, "Product Type" %><span class="red">*</span> </br>
         <%= f.select :device, options_for_select([
           ["Web","Web"],
           ["App - Phone/Tablet","App - Phone/Tablet"],
@@ -10,14 +11,14 @@
           {include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div>
       <div class="field">
-        <%= f.label :store_url, "Store URL / Location*" %> </br>
+        <%= f.label :store_url, "Store URL / Location" %><span class="red">*</span> </br>
         <%= f.text_field :store_url, :class => "form-control formwidth" %>
-        <%= link_to "Get Platform Details From URL", "#", :class=>"btn btn-default version-details" %>
+        <!--<%= link_to "Get Platform Details From URL", "#", :class=>"btn btn-default version-details" %>
         <span class="version-retrieving hidden"><i class="fa fa-refresh fa-spin"></i></span>
-        <span class="version-messages"></span>
+        <span class="version-messages"></span> -->
       </div>
      <div class="field">
-          <%= f.label :platform, "Platform*" %> </br>
+          <%= f.label :platform, "Platform" %><span class="red">*</span> </br>
           <%= f.select :platform, options_for_select(
               [["Android","Android"],
               ["Blackberry","Blackberry"],
@@ -33,7 +34,7 @@
       </div>
       <div class="field">
         <%= f.label :publish_date %> </br>
-        <%= f.date_select :publish_date, {order: [:day, :month, :year], add_month_numbers: true, prompt: true}, {:class => "form-control-inline" } %>
+        <%= f.date_select :publish_date, {order: [:month, :day, :year], add_month_numbers: true, prompt: true}, {:class => "form-control-inline" } %>
       </div>
       <!-- <div class="field">
         <%= f.label :description, "Description - This will be set to match the Registration Description by default"
@@ -60,6 +61,6 @@
         <%= f.label :number_of_ratings %> </br>
         <%= f.text_field :number_of_ratings, :class => "form-control formwidth" %>
       </div>
-      <div class="buttonRow"><%= link_to_remove_association "Remove", f, {:class => "fa fa-times"}  %></div>
+      <div class="buttonRow"><%= link_to_remove_association "Remove Platform Details", f, {:class => "fa fa-times"}  %></div>
   </fieldset>
 </div>
