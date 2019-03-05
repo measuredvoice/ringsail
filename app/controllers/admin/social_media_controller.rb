@@ -81,6 +81,9 @@ class Admin::SocialMediaController < Admin::AdminController
 
   # GET /outlets/1/edit
   def edit
+    if @outlet.agencies.count == 0
+      @outlet.agences << current_user.agency
+    end
   end
 
   def show
