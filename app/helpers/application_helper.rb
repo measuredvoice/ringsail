@@ -7,7 +7,7 @@ module ApplicationHelper
   def language_select_options
     language_select_options = []
     LANGUAGE_LIST.each do |lang|
-      language_select_options << [ lang.delete(' '), lang ]
+      language_select_options << [ lang.gsub(/\(/, ' ('),lang.delete(' ')  ]
     end
     language_select_options
   end

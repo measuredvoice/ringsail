@@ -39,10 +39,9 @@
       <%= f.text_field :short_description, :class => "form-control formwidth" %>
     </div>
     <div class="field">
-      <%= f.label :long_description, "Long Description" %> <span class="red">*</span> - Should be the same or similar to your app store description</br>
+      <%= f.label :long_description, "Long Description" %> - Should be the same or similar to your app store description</br>
       <%= f.text_area :long_description, :class => "form-control formwidth" %>
     </div>
-    </br>
     <div class="field">
       <%= f.label :icon_url, "Icon URL - Please provide the URL of the app or website’s icon" %> </br>
       <%= f.text_field :icon_url, :class => "form-control formwidth" %>
@@ -51,14 +50,15 @@
       <%= f.label :language, "Language" %><span class="red">*</span> </br>
       <%= f.select :language, options_for_select(language_select_options, @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
     </div>
-    <div class="field agencies">
-      <%= f.label :agency_tokens, "Sponsoring Agencies" %><span class="red">*</span> </br>
-      <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
-    </div>
     <div class="field">
       <%= f.label :tag_tokens, "Tags" %> </br>
       <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
     </div>
+    <div class="field agencies">
+      <%= f.label :agency_tokens, "Sponsoring Agencies" %><span class="red">*</span> </br>
+      <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
+    </div>
+    
     <div class="contacts">
       <div class="field">
         <%= f.label :user_tokens, "Contacts" %><span class="red">*</span> - please provide two contact names </br>

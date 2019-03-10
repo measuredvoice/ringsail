@@ -21,6 +21,8 @@ gem 'public_activity'
 # Makes nested forms easier
 gem 'cocoon'
 
+gem "selectize-rails"
+
 # Support for social media service plugins
 # gem 'twitter'
 # gem 'hyper-graph'

@@ -29,11 +29,11 @@
               {:class => "form-control formwidth"} %>
       </div>
       <div class="field">
-        <%= f.label :version_number %> </br>
+        <%= f.label :version_number, "Version Number" %> </br>
         <%= f.text_field :version_number, :class => "form-control formwidth" %>
       </div>
       <div class="field">
-        <%= f.label :publish_date %> </br>
+        <%= f.label :publish_date, "Publish Date" %> </br>
         <%= f.date_select :publish_date, {order: [:month, :day, :year], add_month_numbers: true, prompt: true}, {:class => "form-control-inline" } %>
       </div>
       <!-- <div class="field">
@@ -54,11 +54,11 @@
           <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]],f.object.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div> -->
       <div class="field">
-        <%= f.label :average_rating %> </br>
+        <%= f.label :average_rating, "Average Rating" %> </br>
         <%= f.text_field :average_rating, :class => "form-control formwidth" %>
       </div>
       <div class="field">
-        <%= f.label :number_of_ratings %> </br>
+        <%= f.label :number_of_ratings, "Number of Ratings" %> </br>
         <%= f.text_field :number_of_ratings, :class => "form-control formwidth" %>
       </div>
       <div class="buttonRow"><%= link_to_remove_association "Remove Platform Details", f, {:class => "fa fa-times"}  %></div>

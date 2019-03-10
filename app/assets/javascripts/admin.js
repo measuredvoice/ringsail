@@ -9,7 +9,7 @@
 //= require datatables
 //= require datatables.bootstrap
 //= require cocoon
-
+//= require selectize
 
 function humanize(string)
 {

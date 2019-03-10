@@ -7,7 +7,9 @@
  *= require custom-token-input
  *= require font-awesome
  *= require jqcloud
- *= datatables.bootstrap
+ *= datatables.bootstrap 
+ *= require selectize
+ *= require selectize.default
  */
 
 @import "bootstrap-sprockets";

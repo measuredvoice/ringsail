@@ -108,6 +108,7 @@ class Outlet < ActiveRecord::Base
   validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
 
+  validates :short_description, :presence => true
   paginates_per 100
 
   before_save :social_media_update

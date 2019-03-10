@@ -4,7 +4,7 @@
         <%= f.label :name, "Agency" %><span class="red">*</span> </br>
         <%= f.select :name, options_for_select(Agency.all.collect {|p| [ "#{p.name}", p.id ] }),
           {include_blank: "Select"},{:class => "form-control formwidth"} %>
-          <div class="buttonRow"><%= link_to_remove_association "Remove Agency", agency, {:class => "fa fa-times"}  %></div>
+
       </div>
     </fieldset>
 </div>
