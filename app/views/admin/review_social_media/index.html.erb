@@ -32,8 +32,7 @@
               <div class="panel-heading">
                 <div class="row">
                   <div class="col-sm-8">
-                    <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse">
-                      <i class="icon glyphicon-plus"%></i>
+                    <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse" class="collapsed">
                       <span style="font-size:14px; line-height:14px;">
                       <%= outlet.organization  %> - <%= outlet.service %></span>
                     </a>
@@ -108,8 +107,6 @@
                       <a class="btn btn-default" href="/admin/social_media/<%= outlet.id %>/edit">Edit</a>
                       
 
-                      
-
                       <% if outlet.status == "published" %> 
                       <a class="btn btn-success publish-outlet-button" data-outlet="<%= outlet.id %>">Validate</a>
                       <% else %>
@@ -171,6 +168,12 @@
 hr {
     margin-top: 5px !important;
     margin-bottom: 5px  !important;
+}
+.panel-heading .row .col-sm-8 a::before{
+  content: "\2228";
+}
+.panel-heading .row .col-sm-8 .collapsed::before{
+  content: ">" !important;
 }
 </style>
 
