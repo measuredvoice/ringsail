@@ -189,7 +189,13 @@ Ringsail::Application.routes.draw do
   end
   namespace :admin do
     resources :related_policies
-    resources :review_social_media
+    resources :review_social_media do
+        member do
+            get 'publish'
+            get 'validate'
+            get 'archive'
+        end
+    end
     
     resources :agencies, concerns: :activity_and_history do
       collection do

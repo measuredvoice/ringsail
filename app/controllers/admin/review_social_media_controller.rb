@@ -2,8 +2,7 @@ class Admin::ReviewSocialMediaController < Admin::AdminController
   helper_method :sort_column, :sort_direction, :current_page
   respond_to :html, :xml, :json, :csv, :xls
 
-  before_action :set_outlet, only: [:show, :edit, :update, :destroy,
-    :publish, :archive, :request_publish, :request_archive]
+  before_action :set_outlet, only: [:validate, :archive]
 
   # before_filter :require_admin, only: [:publish]
   # GET /outlets
@@ -11,16 +10,40 @@ class Admin::ReviewSocialMediaController < Admin::AdminController
   def index
     if params[:status] == "archived"
       @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 2).order("updated_at ASC").page(current_page).per(10)
+    elsif params[:status] == "needs_review"
+      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 1).where("outlets.validated_at <= ?",180.days.ago).order("updated_at ASC").page(current_page).per(10)
     else
-      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 1).where("outlets.updated_at <= ?",90.days.ago).order("updated_at ASC").page(current_page).per(10)
+      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.draft_id" => nil, "outlets.status" => 1).order("updated_at ASC").page(current_page).per(10)
+    
     end
     
   end
 
+  def publish
+      @outlet.published!
+      @outlet.validated_at = Time.now
+      @outlet.save(validate: false)
+      redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
+  end
   
+  def validate
+    @outlet.validated_at = Time.now
+    @outlet.save(validate: false)
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
+  end
+
+  def archive
+    @outlet.touch
+    @outlet.archived!
+    # @outlet.build_notifications(:archived)
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived. #{view_context.link_to 'Undo', publish_admin_outlet_path(@outlet)}".html_safe
+  end
 
   private
     
+  def set_outlet
+    @outlet = Outlet.find(params[:id])
+  end
 
   def current_page
     if params[:page]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012145610) do
+ActiveRecord::Schema.define(version: 20190314132900) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20171012145610) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "draft_id",          limit: 4
+    t.datetime "validated_at"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -248,6 +249,7 @@ ActiveRecord::Schema.define(version: 20171012145610) do
     t.integer  "instagram_followers",   limit: 4
     t.integer  "instagram_posts",       limit: 4
     t.string   "access_token",          limit: 255
+    t.datetime "validated_at"
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree

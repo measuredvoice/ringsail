@@ -118,7 +118,7 @@ class Outlet < ActiveRecord::Base
   end
 
   after_commit on: [:update] do
-    ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: self.id, body: self.as_indexed_json
+    # ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: self.id, body: self.as_indexed_json
   end
 
   after_commit on: [:destroy] do
@@ -126,33 +126,33 @@ class Outlet < ActiveRecord::Base
   end
 
   def social_media_update
-    begin 
-      if self.service.to_s == "facebook"
-        @oauth = Koala::Facebook::OAuth.new("#{ENV['REGISTRY_FACEBOOK_APP_ID']}", "#{ENV['REGISTRY_FACEBOOK_APP_SECRET']}", "https://#{ENV['REGISTRY_HOSTNAME']}/")
-        access_token = @oauth.get_app_access_token
-        koala_client = Koala::Facebook::API.new(access_token)
-        results = koala_client.get_object(account,{:fields => "fan_count"})
-        self.facebook_followers = results['fan_count']
-      elsif self.service.to_s == "twitter"
-        account_data = TWITTER_CLIENT.user(self.account)
-        self.twitter_followers = account_data.followers_count
-        self.twitter_posts = account_data.statuses_count
-      elsif self.service.to_s == "youtube"
-        channel_name = account 
-        full_uri = "https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=#{channel_name}&key=#{ENV['REGISTRY_YOUTUBE_KEY']}"
-        account_data = JSON.parse(open(full_uri, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read)
-        # puts account_data
-        if account_data["items"][0]
-          stats = account_data["items"][0]["statistics"]
-          self.youtube_subscribers = stats["subscriberCount"]
-          self.youtube_view_count = stats["viewCount"]
-          self.youtube_comment_count = stats["commentCount"]
-          self.youtube_video_count = stats["videoCount"]
-        end
-      end
-    rescue => e
-      puts "Social media connection Error: #{e.inspect}"
-    end
+    # begin 
+    #   if self.service.to_s == "facebook"
+    #     @oauth = Koala::Facebook::OAuth.new("#{ENV['REGISTRY_FACEBOOK_APP_ID']}", "#{ENV['REGISTRY_FACEBOOK_APP_SECRET']}", "https://#{ENV['REGISTRY_HOSTNAME']}/")
+    #     access_token = @oauth.get_app_access_token
+    #     koala_client = Koala::Facebook::API.new(access_token)
+    #     results = koala_client.get_object(account,{:fields => "fan_count"})
+    #     self.facebook_followers = results['fan_count']
+    #   elsif self.service.to_s == "twitter"
+    #     account_data = TWITTER_CLIENT.user(self.account)
+    #     self.twitter_followers = account_data.followers_count
+    #     self.twitter_posts = account_data.statuses_count
+    #   elsif self.service.to_s == "youtube"
+    #     channel_name = account 
+    #     full_uri = "https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=#{channel_name}&key=#{ENV['REGISTRY_YOUTUBE_KEY']}"
+    #     account_data = JSON.parse(open(full_uri, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read)
+    #     # puts account_data
+    #     if account_data["items"][0]
+    #       stats = account_data["items"][0]["statistics"]
+    #       self.youtube_subscribers = stats["subscriberCount"]
+    #       self.youtube_view_count = stats["viewCount"]
+    #       self.youtube_comment_count = stats["commentCount"]
+    #       self.youtube_video_count = stats["videoCount"]
+    #     end
+    #   end
+    # rescue => e
+    #   puts "Social media connection Error: #{e.inspect}"
+    # end
   end
 
   # def service_info
