@@ -1,0 +1,11 @@
+<div class="nested-fields">
+    <fieldset>
+      <div class="field">
+        <%= f.label :email, "Contact" %><span class="red">*</span> </br>
+        <%= f.select :email, options_for_select(User.all.collect {|p| [ "#{p.email}", p.id ] }),
+          {include_blank: "Select"},{:class => "form-control formwidth"} %>
+
+      </div>
+    </fieldset>
+
+</div>

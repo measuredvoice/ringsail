@@ -2,17 +2,64 @@
   <div class="col-sm-12 col-md-12 main">
     <%= content_for :page_title do %>Social Media Accounts<% end %>
     <h1 class="page-header">Your Social Media Accounts</h1>
-    
-    <p>Please validate accounts are either still active, maintained accounts or if they are ready to be archived and are no longer used by your agency or group</p>
     <div class="row placeholders">
         <div class="col-sm-12">
-           <%= link_to  "Review Accounts Validated more than 180 days ago", admin_review_social_media_path(status: "needs_review"), :class => "btn btn-default" %>
-           <%= link_to  "Published Accounts", admin_review_social_media_path, :class => "btn btn-success" %>
-           <%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class => "btn btn-warning" %>
+          
+           <% if params[:status] == "published" %>
+
+              <% if params[:review] == "needs" %>
+                Viewing accounts that need reviewed.
+
+                <%= page_entries_info @outlets %>
+              <% else %>
+                Viewing published accounts.
+
+                <%= page_entries_info @outlets %>
+              <% end %>
+           <% elsif params[:status] == "archived" %>
+            Viewing archived accounts.
+             <%= page_entries_info @outlets %>
+            <% else %>
+              Viewing all social media accounts.
+             <%= page_entries_info @outlets %>
+            <% end %>
+        </div>
+    </div>
+     <div class="row placeholders">
+        <div class="col-sm-12 instructions">
+
+          <p>Instructions:
+            How to Validate Your  Accounts
+          </p>
+          <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+              <ol>
+                <li>Select Published Accounts.</li>
+                <li>Select Need Review.</li>
+                <li>Review each account.</li>
+                <li>Validate all active accounts. Edit the account if necessary and then validate.</li>
+                <li>Archive all accounts that your agency is no longer using.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+     <div class="row placeholders">
+        <div class="col-sm-12">
+          <% 
+              published_class = "btn-success"
+              archived_class = "btn-warning"
+          %>
+           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Accounts <span class="caret"></span></button>
+           <ul class="dropdown-menu dropdown-review">
+            <li> <%= link_to "Needs Reviewed", admin_review_social_media_path(status: "published", review: "needs")%></li>
+            <li>
+              <%= link_to "Recently Reviewed", admin_review_social_media_path(status: "published", review: "recent")  %></li>
+          </ul>
+            <%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class => "btn btn-warning" %>
         </div>
         <div class="col-sm-12">
-           <%= paginate @outlets %>
-           <%= page_entries_info @outlets %>
+          <%= paginate @outlets %>
         </div>
     </div>
 
@@ -28,7 +75,7 @@
                   panel_class = "panel-success"
                 end
               end
-              validated_string = outlet.validated_at ? outlet.validated_at.strftime("%B %e, %Y %H:%M") : "Not yet validated" 
+              validated_string = outlet.validated_at ? outlet.validated_at.strftime("%B %e, %Y %H:%M %Z") : "Not yet validated" 
               %>
             <div class="panel <%= panel_class %>" id="panel-outlet-<%= outlet.id %>">
               <div class="panel-heading">
@@ -36,7 +83,7 @@
                   <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse" class="collapsed">
                     <div class="col-sm-12">
                         <span class="outlet-name" style="font-size:14px; line-height:14px;">
-                        <%= outlet.organization  %> - <%= outlet.service %></span>
+                        <%= outlet.organization  %> - <%= outlet.service.humanize %></span>
                         <span class="outlet-alert" id="outlet-alert-<%= outlet.id %>" style="font-size:14px; line-height:14px;">
                         Last Validated: <%= validated_string %>
                        </span>
@@ -68,7 +115,7 @@
                     </p>
                     <p>
                       <strong>Last Updated:</strong>
-                      <span id="outlet-updated-<%= outlet.id %>"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M") %></span>
+                      <span id="outlet-updated-<%= outlet.id %>"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M %Z") %></span>
                     </p>
                     
                 </div><div class="col-sm-6">
@@ -99,12 +146,15 @@
                   <hr />
                 </div>
                 <div class="col-sm-4 col-sm-offset-8" style="font-size:14px; line-height:14px;">
-                       <a class="btn btn-warning archive-outlet-button" data-outlet="<%= outlet.id %>">Archive</a>
+                      <% if outlet.status == "archived" %>
+                       <a class="btn btn-warning hide archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
+                       <a class="btn btn-default publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
+                      <% else %>
+                       <a class="btn btn-warning archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
+                       <a class="btn btn-default hide  publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
+                      <% end %>
 
-                       <a class="btn btn-default publish-outlet-button" data-outlet="<%= outlet.id %>">Publish</a>
-
-
-                      <a class="btn btn-default" href="/admin/social_media/<%= outlet.id %>/edit">Edit</a>
+                      <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
 
                       <a class="btn btn-success validate-outlet-button" data-outlet="<%= outlet.id %>">Validate</a>
                   </div>
@@ -133,13 +183,18 @@
       }).done(function() {
         var date = new Date(Date.now())
         // $('#outlet-updated-'+id).html(date.toUTCString());
+        date_string = date.toUTCString().replace("GMT","UTC")
         $('#outlet-validated-'+id).html(date.toUTCString());
         $('#outlet-status-'+id).html("Published");
         $('#panel-outlet-'+id).removeClass( "panel-default" );
         $('#panel-outlet-'+id).removeClass( "panel-success" );
         $('#panel-outlet-'+id).removeClass( "panel-warning" );
         $('#panel-outlet-'+id).addClass( "panel-success" );
-        $('#outlet-alert-'+id).html("Last Validated: "+ date.toUTCString());
+        $('#outlet-alert-'+id).html("Last Validated: "+ date_string);
+        $('#archive-'+id).removeClass("hide");
+        $('#publish-'+id).addClass("hide");
+        name = $('#panel-outlet-'+id + ' .outlet-name').text();
+        alert("Published:  " + name);
       });
     })
     $('.validate-outlet-button').on('click',function(){
@@ -149,12 +204,15 @@
       }).done(function() {
         var date = new Date(Date.now())
         // $('#outlet-updated-'+id).html(date.toUTCString());
+        date_string = date.toUTCString().replace("GMT","UTC")
         $('#outlet-validated-'+id).html(date.toUTCString());
         $('#panel-outlet-'+id).removeClass( "panel-default" );
         $('#panel-outlet-'+id).removeClass( "panel-success" );
         $('#panel-outlet-'+id).removeClass( "panel-warning" );
         $('#panel-outlet-'+id).addClass( "panel-success" );
-        $('#outlet-alert-'+id).html("Last Validated: "+ date.toUTCString());
+        $('#outlet-alert-'+id).html("Last Validated: "+ date_string);
+        name = $('#panel-outlet-'+id + ' .outlet-name').text();
+        alert("Validated:  " + name);
       });
     })
     $('.archive-outlet-button').on('click',function(){
@@ -163,6 +221,7 @@
         url: "/admin/review_social_media/"+id+"/archive",
       }).done(function() {
         var date = new Date(Date.now())
+        date_string = date.toUTCString().replace("GMT","UTC")
         $('#outlet-updated-'+id).html(date.toUTCString());
         // $('#outlet-validated-'+id).html(date.toUTCString());
         $('#outlet-status-'+id).html("Archived");
@@ -170,29 +229,60 @@
         $('#panel-outlet-'+id).removeClass( "panel-success" );
         $('#panel-outlet-'+id).removeClass( "panel-warning" );
         $('#panel-outlet-'+id).addClass( "panel-warning" );
-        $('#outlet-alert-'+id).html("Archived: "+ date.toUTCString());
+        $('#outlet-alert-'+id).html("Archived: "+ date_string);
+        $('#archive-'+id).addClass("hide");
+         $('#publish-'+id).removeClass("hide");
+        name = $('#panel-outlet-'+id + ' .outlet-name').text();
+        alert("Archived:  " + name);
       });
     })
+
+
   });
 </script>
 
 <style>
-hr {
+  hr {
     margin-top: 5px !important;
     margin-bottom: 5px  !important;
-}
-.panel-heading .row a div span.outlet-name::before{
-  content: "\2228";
-}
-.panel-heading .row a.collapsed div span.outlet-name::before{
-  content: ">" !important;
-}
-.outlet-alert{
-  float:right;
-}
-.panel{
-  margin-bottom: 15px;
-}
+  }
+  .panel-heading .row a div span.outlet-name::before{
+    content: "\2228";
+  }
+  .panel-heading .row a.collapsed div span.outlet-name::before{
+    content: ">" !important;
+  }
+  .outlet-alert{
+    float:right;
+  }
+  .panel{
+    margin-bottom: 15px;
+  }
+  .dropdown-menu > li > a{
+    color: red !important;
+    font-size: 12pt !important;
+  }
+  .dropdown-menu > li > a:hover{
+    background-color: red !important;
+    color: white !important;
+    font-size: 12pt !important;
+  }
+  .placeholders {
+    margin-bottom: 10px;
+  }
+  .instructions p{
+    margin: 0;
+  }
+  .instructions ol, .instructions ul{
+    margin: 0;
+  }
+  .pagination{
+    margin: 10px 0px;
+  }
+  .page-header {
+    padding-bottom: 0px;
+    margin: 10px 0 10px;
+  }
 </style>
 
 <% end %>
