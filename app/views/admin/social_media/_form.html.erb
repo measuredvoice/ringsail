@@ -54,28 +54,12 @@
     </div>
     
     <div class="field agencies">
-     <%= f.fields_for :agencies do |agency| %>
-        <%= render "agency_fields",{ f: agency, agency: agency} %>
-      <% end %>
-
-      <div class="buttonRow">
-        <%= link_to_add_association "Add Agency", f, :agencies , {:class => "fa fa-plus"} %>
-      </div>
-    </div>
-    <!-- <div class="field agencies">
       <%= f.label :agency_tokens, "Sponsoring Agencies" %><span class="red">*</span> </br>
       <%= f.text_field :agency_tokens, {:class => "form-control formwidth agencies", :value => ""} %>
-    </div> -->
+    </div>
     <div class="field contacts">
-      <%= f.fields_for :users do |contact| %>
-        <%= render "user_fields",{ f: contact, agency: contact} %>
-      <% end %>
-
-      <div class="buttonRow">
-        <%= link_to_add_association "Add Contacts", f, :users , {:class => "fa fa-plus"} %>
-      </div>
-    <!--   <%= f.label :user_tokens, "Contacts" %><span class="red">*</span> - please provide two contact names</br>
-      <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => "" }%> -->
+      <%= f.label :user_tokens, "Contacts" %><span class="red">*</span> - please provide two contact names</br>
+      <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => "" }%>
     </div>
     <br/>
     <div class="actions">
