@@ -118,6 +118,7 @@
                       <span id="outlet-updated-<%= outlet.id %>"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M %Z") %></span>
                     </p>
                     
+                    
                 </div><div class="col-sm-6">
                     <p>
                       <strong>Language:</strong>
@@ -140,6 +141,9 @@
                     <p>
                       <strong>Status:</strong>
                       <span id="outlet-status-<%= outlet.id %>"><%= outlet.status.humanize %></span>
+                    </p>
+                     <p>
+                      <strong>Contacts:</strong> <%= outlet.users.map(&:email).join(", ") %></span>
                     </p>
                 </div>
                 <div class="col-sm-12">
