@@ -32,6 +32,8 @@ class Outlet < ActiveRecord::Base
       indexes :title, analyzer: 'english'
       indexes :agencies, analyzer: 'english'
       indexes :service, analyzer: 'english'
+      indexes :primary_contact, analyzer: 'english'
+      indexes :secondary_contact, analyzer: 'english'
       indexes :contacts, analyzer: 'english'
       indexes :account_name, analyzer: 'english'
       indexes :account, type: :string
@@ -48,20 +50,13 @@ class Outlet < ActiveRecord::Base
       service: self.service,
       agencies: self.agencies.map(&:name).join(", "),
       contacts: self.users.map(&:email).join(", "),
+      primary_contact: self.try(:primary_contact).try(:email),
+      secondary_contact: self.try(:secondary_contact).try(:email),
       account_name: self.organization,
       account: self.account,
       status: self.status.humanize,
       updated_at: self.updated_at
     }
-    if self.service == "facebook"
-      result['facebook_followers'] = Random.rand(900)
-      result['facebook_likes'] = Random.rand(900)
-      result['facebook_posts'] = Random.rand(100)
-    end
-    if self.service == "twitter"
-      result['twitter_followers'] = Random.rand(900)
-      result['twitter_posts'] = Random.rand(100)
-    end
     result
   end
 
@@ -92,6 +87,19 @@ class Outlet < ActiveRecord::Base
 
   has_many :gallery_items, as: :item, dependent: :destroy
   has_many :galleries, through: :gallery_items, source: "Outlet"
+
+  belongs_to :primary_contact, class_name: "User", foreign_key: "primary_contact_id"
+  belongs_to :secondary_contact, class_name: "User", foreign_key: "secondary_contact_id"
+
+  validates :primary_contact, :presence => true
+  validates :secondary_contact, :presence => true
+
+
+  belongs_to :primary_agency, class_name: "Agency", foreign_key: "primary_contact_id"
+  belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_contact_id"
+
+  validates :primary_agency, :presence => true
+  validates :secondary_agency, :presence => true
 
   # acts as taggable is being kept until we do a final data migration (needed for backwards compatibility)
   acts_as_taggable

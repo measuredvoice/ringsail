@@ -86,14 +86,16 @@
               <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Agency</th>
-                  <th>Account Type</th>
-                  <th>Account Name</th>
-                  <th>Tags</th>
-                  <th>Last Updated</th>
+                  <th style="width: 15%;">Agency</th>
+                  <th style="width: 13%;">Account Platform</th>
+                  <th style="width: 12%;"> Account Name</th>
+                  <th style="width: 50%;">Description</th>
+        
+                  <th style="width: 10%;">Last Updated</th>
                 </tr>
               </thead>
               <tbody id="social-media-collection">
+                <td colspan="5"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
               </tbody>
             </table>
           </div>
@@ -154,11 +156,14 @@
                       <th>Agency</th>
                       <th>Platforms</th>
                       <th>Name</th>
-                      <th>Tags</th>
-                      <th>Last Updated</th>
+                      <th>Description</th>
+                      <th style="min-width: 110px">Last Updated</th>
                     </tr>
                   </thead>
                   <tbody id="mobile-collection">
+                    <tr>
+                      <td colspan="5"><p style="text-align: center;">Use the form above to find mobile products.</p></td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
@@ -270,14 +275,14 @@
         {{name}}
       {{/each}}</td>
     <td>{{service_display_name}}</td>
-    <td><a href="{{service_url}}" target="_"><h4 class="media-heading">
+    <td><a href="{{service_url}}" target="_">
       {{#if organization}}
         {{organization}}
       {{else}}
         {{service_display_name}}:{{service_url}}
       {{/if}}
-      </h4></a></td>
-    <td>{{#tagoutput}}{{tags}},{{/tagoutput}}</td>
+      </a></td>
+    <td>{{short_description}}{{#if short_description}}<br/><br/>{{/if}}{{#if tags}}Tags: {{#tagoutput}}{{tags}}{{/tagoutput}}{{/if}}</td>
     <td>{{#formatDate}}{{updated_at}}{{/formatDate}}</td>
   </tr>
 </script>
@@ -291,7 +296,7 @@
         <a href="{{store_url}}" target="_">{{platform}}</a>
       {{/each}}</td>
     <td>{{name}}</td>
-    <td>{{#tagoutput}}{{tags}},{{/tagoutput}}</td>
+    <td>{{short_description}}{{#if short_description}}<br/><br/>{{/if}}{{#if tags}}Tags: {{#tagoutput}}{{tags}}{{/tagoutput}}{{/if}}</td>
     <td>{{#formatDate}}{{updated_at}}{{/formatDate}}</td>
   </tr>
 </script>
@@ -306,7 +311,7 @@
   Handlebars.registerHelper('formatDate', function(date){
     if(date.data.root){
       var d = new Date(date.data.root.updated_at);
-      return d.toDateString();
+      return (d.getUTCMonth()+1)+"/"+ d.getUTCDate() +"/"+ d.getUTCFullYear();
     }
     return '';
   });
@@ -343,6 +348,13 @@
       submit_social_media_form();
       
     });
+
+    $('#social-media-search input, #social-media-search select').on('change', function(){
+      submit_social_media_form();
+
+    });
+
+
     $('#previousPage').click(function(e){
       e.preventDefault();
       page_int = parseInt($('#search-social-page').val(),10);
@@ -399,6 +411,10 @@
       e.preventDefault();
       submit_mobile_form();
     });
+
+    $('#mobile-search input, #mobile-search select').on('change', function(){
+      submit_mobile_form();
+    });
   });
 
     function submit_social_media_form(){
@@ -451,7 +467,13 @@
       $('#hidden_mobile_languages').val($('#mobile-language').val());
       $('#mobile_csv_export').submit();
     }
-    submit_social_media_form();
-    submit_mobile_form();
+    // submit_social_media_form();
+    // submit_mobile_form();
   </script>
+
+  <style>
+    .table{
+      margin: 0 !important;
+    }
+  </style>
 <% end %>

@@ -178,7 +178,7 @@ class Admin::SocialMediaController < Admin::AdminController
     def outlet_params
       params.require(:outlet).permit(:organization, :service_url, :location, :location_id, :status,
         :account, :service, :language, :agency_tokens, :user_tokens, :tag_tokens,
-        :short_description, :long_description)
+        :short_description, :long_description, :primary_contact_id, :secondary_contact_id, :primary_agency_id, :secondary_agency_id, :notes)
     end
 
     def current_page

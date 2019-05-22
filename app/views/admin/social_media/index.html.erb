@@ -31,7 +31,7 @@
            <p style="font-size: 14px;">Note: Exports are limited to 1000 records at a time, it is recommended to choose an agency to export as CSV.</p>
           </div>
           <div class="col-sm-6">
-            <%= label :service_selector, "Social Media Platform" %>
+            <%= label :service_selector, "Account Platform" %>
             <%= select_tag :service_selector, options_for_select([["All",""]]+@services.collect{|k,v| ["#{k.humanize}",k]},params[:service]) %>
           </div>
           
@@ -50,7 +50,7 @@
             <tr>
               <th>Agency</th>
               <th>Contacts</th>
-              <th>Account Type</th>
+              <th>Account Platform</th>
               <th>Account Name</th>
               <th>User Name</th>
               <th>Last Updated</th>

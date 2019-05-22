@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190314132900) do
+ActiveRecord::Schema.define(version: 20190522123527) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -161,18 +161,23 @@ ActiveRecord::Schema.define(version: 20190314132900) do
   add_index "mobile_app_versions", ["platform"], name: "index_mobile_app_versions_on_platform", using: :btree
 
   create_table "mobile_apps", force: :cascade do |t|
-    t.text     "name",              limit: 16777215
-    t.text     "short_description", limit: 16777215
-    t.text     "long_description",  limit: 16777215
-    t.text     "icon_url",          limit: 16777215
-    t.string   "language",          limit: 255
-    t.integer  "agency_id",         limit: 4
-    t.integer  "status",            limit: 4,        default: 0
-    t.string   "mongo_id",          limit: 255
+    t.text     "name",                 limit: 16777215
+    t.text     "short_description",    limit: 16777215
+    t.text     "long_description",     limit: 16777215
+    t.text     "icon_url",             limit: 16777215
+    t.string   "language",             limit: 255
+    t.integer  "agency_id",            limit: 4
+    t.integer  "status",               limit: 4,        default: 0
+    t.string   "mongo_id",             limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "draft_id",          limit: 4
+    t.integer  "draft_id",             limit: 4
     t.datetime "validated_at"
+    t.integer  "primary_contact_id",   limit: 4
+    t.integer  "secondary_contact_id", limit: 4
+    t.integer  "primary_agency_id",    limit: 4
+    t.integer  "secondary_agency_id",  limit: 4
+    t.text     "notes",                limit: 65535
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -250,6 +255,11 @@ ActiveRecord::Schema.define(version: 20190314132900) do
     t.integer  "instagram_posts",       limit: 4
     t.string   "access_token",          limit: 255
     t.datetime "validated_at"
+    t.integer  "primary_contact_id",    limit: 4
+    t.integer  "secondary_contact_id",  limit: 4
+    t.integer  "primary_agency_id",     limit: 4
+    t.integer  "secondary_agency_id",   limit: 4
+    t.text     "notes",                 limit: 65535
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree

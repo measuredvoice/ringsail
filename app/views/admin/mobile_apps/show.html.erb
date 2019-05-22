@@ -1,45 +1,34 @@
 <div class = "row">
-	<div class="col-sm-6">
+	<div class="col-sm-12">
     <%= content_for :page_title do %>Mobile Product Info<% end %>
 		<h1 class="page-header">Mobile Product Info</h1>
 		<div class="panel panel-default">
-	  	<div class="panel-body">
-				<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app } %>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-6">
-		<div class="row">
-			<div class="col-sm-12">
-				<br/>
-				<%= link_to " Back to Mobile Products", admin_mobile_apps_path, {:class => "btn btn-default fa fa-angle-double-left"} %>
-				<%= link_to " Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default fa fa-pencil"} %>
-				<%#= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
-				<%= link_to ' Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default fa fa-bullhorn"} %>
-				<%= link_to ' Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "btn btn-default fa fa-archive"} %>
-        <p>Note: Archiving removes accounts from public visibility</p>
-			</div>
-			<div class="col-sm-12">
-				<h3><i class="fa fa-clock-o fa-fw"></i> Published Mobile Product Info</h3>
-				<div class="panel panel-default">
-			  	<div class="panel-body">
-			  		<% if @mobile_app.published %>
-			  			<p>
-				  			<strong>API Link</strong>
-				  			<%= link_to digital_registry_v1_mobile_app_url(@mobile_app),
-				  				digital_registry_v1_mobile_app_url(@mobile_app) %>
-				  		</p>
-			  		<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app.published } %>
-			  		<% else %>
-			  			<p>No information is currently published for this mobile product.</p>
-			  		<% end %>
-		 			</div>
-				</div>
+		  	<div class="panel-body">
+		  		<div class="row">
+	                <div class="col-sm-6 col-xs-12">
+	                	<%= link_to "< Back to Mobile Products", admin_mobile_apps_path, {:class => "btn btn-default "} %>
+						<%= link_to " Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %>
+						<%#= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
+						<%= link_to ' Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "btn btn-default"} %>
+						<%= link_to ' Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "btn btn-default"} %>
+						 <p>Note: Archiving removes accounts from public visibility</p>
+	                </div>
+	            </div>
+					<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app } %>
+				<% if @mobile_app.published %>
+		  			<p>
+			  			<strong>API Link</strong>
+			  			<%= link_to digital_registry_v1_mobile_app_url(@mobile_app),
+			  				digital_registry_v1_mobile_app_url(@mobile_app) %>
+			  		</p>
+		  		<% else %>
+		  			<p>No information is currently published for this mobile product.</p>
+		  		<% end %>
 			</div>
 		</div>
 	</div>
 </div>
-<div class = "row container">
+<div class="row container">
 	<div class="col-lg-4 col-sm-12 col-md-4">
     <h3><i class="fa fa-user"></i> Contacts</h3>
 		<div class="panel panel-default">

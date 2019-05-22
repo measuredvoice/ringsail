@@ -1,43 +1,28 @@
 <div class="row">
-  <div class="col-sm-6 col-md-6">
+
+  <div class="col-sm-12 col-md-12">
   	<%= content_for :page_title do %>Social Media Account Info<% end %>
     <h1 class="page-header">Social Media Account Info</h1>
-		<div class="panel panel-default">
+	<div class="panel panel-default">
 	  	<div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                   <%= link_to '<< Back to Social Media', admin_outlets_path, {:class => "btn btn-default"} %>
+                    <%= link_to ' Edit', edit_admin_outlet_path(@outlet), {:class => "btn btn-default"} %>
+                    <%= link_to ' Publish', publish_admin_outlet_path(@outlet), {:class => "btn btn-default "} %>
+                    <%= link_to ' Archive', archive_admin_outlet_path(@outlet), {:class=> "btn btn-default"} %>
+                        
+                    <p>Note: Archiving removes accounts from public visibility</p>
+                </div>
+            </div>
 	  		<%= render partial: "outlet_details", locals: {outlet: @outlet} %>
-	  	</div>
+	  	  <p>
+          <strong>API Link</strong>
+          <%= link_to digital_registry_v1_social_medium_url(id:@outlet),
+            digital_registry_v1_social_medium_url(id: @outlet) %>
+        </p>
+      </div>
 		</div>
-	</div>
-	<div class="col-sm-6 col-md-6">
-    <div class="row">
-			<div class="col-sm-12">
-				<br/>
-        <%= link_to ' Back to Social Media', admin_outlets_path, {:class => "btn btn-default fa fa-angle-double-left"} %>
-        <%= link_to ' Edit', edit_admin_outlet_path(@outlet), {:class => "btn btn-default fa fa-pencil"} %>
-    <!-- 		<%#= link_to 'History', history_admin_outlet_path(@outlet), {:class=> "fa fa-history"} %> -->
-          <%= link_to ' Publish', publish_admin_outlet_path(@outlet), {:class => "btn btn-default fa fa-bullhorn"} %>
-          <%= link_to ' Archive', archive_admin_outlet_path(@outlet), {:class=> "btn btn-default fa fa-archive"} %>
-          
-        <p>Note: Archiving removes accounts from public visibility</p>
-      </div>
-      <div class="col-sm-12">
-        <h3><i class="fa fa-clock-o fa-fw"></i> Published Social Media Account Info</h3>
-    		<div class="panel panel-default">
-    	  	<div class="panel-body">
-    	  		<% if @outlet.published %>
-    	  			<p>
-    		  			<strong>API Link</strong>
-    		  			<%= link_to digital_registry_v1_social_medium_url(id:@outlet),
-    		  				digital_registry_v1_social_medium_url(id: @outlet) %>
-    		  		</p>
-    	  		<%= render partial: "outlet_details", locals: {outlet: @outlet.published } %>
-    	  		<% else %>
-    	  			<p>No information is currently published for this social media account</p>
-    	  		<% end %>
-    	    </div>
-    	  </div>
-      </div>
-    </div>
 	</div>
 </div>
 <div class = "row">
@@ -53,17 +38,6 @@
 	  		</ul>
 	  	</div>
 		</div>
-    <h3><i class="fa fa-user"></i> Related Policies</h3>
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <p>These are policies that apply to accounts under this social media account type.</p>
-        <ul class="list-group">
-          <% RelatedPolicy.where(service: @outlet.service).each do |policy| %>
-              <li class="list-group-item"><%= link_to policy.title, policy.url, {:target => "_blank" } %><br/> <%= policy.description%></li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
 	</div>
 	<div class="col-lg-8 col-sm-12 col-md-8">
     <h3><i class="fa fa-clock-o fa-fw"></i> Recent timeline for this Social Media Account</h3>
