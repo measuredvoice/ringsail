@@ -7,7 +7,7 @@
 	  	<div class="panel-body">
             <div class="row">
                 <div class="col-sm-6 col-xs-12">
-                   <%= link_to '<< Back to Social Media', admin_outlets_path, {:class => "btn btn-default"} %>
+                   <%= link_to '< Back to Social Media', admin_outlets_path, {:class => "btn btn-default"} %>
                     <%= link_to ' Edit', edit_admin_outlet_path(@outlet), {:class => "btn btn-default"} %>
                     <%= link_to ' Publish', publish_admin_outlet_path(@outlet), {:class => "btn btn-default "} %>
                     <%= link_to ' Archive', archive_admin_outlet_path(@outlet), {:class=> "btn btn-default"} %>
@@ -32,6 +32,12 @@
 	  	<div class="panel-body">
 	  		<p>This list comprises everyone listed either as a contact on this account, or as a contact for a connected agency</p>
 	  		<ul class="list-group">
+                <% if @outlet.primary_contact %>
+                <li class="list-group-item">Primary Contact: <%= user_list_format( @outlet.primary_contact) %></li>
+                <% end %>
+                <% if @outlet.secondary_contact %>
+                <li class="list-group-item">Secondary Contact: <%= user_list_format(@outlet.secondary_contact) %></li>
+                <% end %>
 	  			<% @outlet.users.each do |contact| %>
 	  					<li class="list-group-item"><%= user_list_format(contact) %></li>
 	  			<% end %>

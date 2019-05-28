@@ -29,7 +29,7 @@
         <div class="col-sm-12 instructions">
 
           <p>Instructions:
-            How to Validate Your  Accounts
+            How to Certify Your  Accounts
           </p>
           <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
@@ -37,8 +37,8 @@
                 <li>Select Published Accounts.</li>
                 <li>Select Needs Review.</li>
                 <li>Review each account.</li>
-                <li>Validate all active accounts. Edit the account if necessary and then validate.</li>
-                <li>Indicate “Archive” for all accounts that are no longer active.</li>
+                <li>Indicate "Certify" for all active accounts. Edit the account if necessary and then "Certify".</li>
+                <li>Indicate "Archive" for all accounts that are no longer active.</li>
               </ol>
             </div>
           </div>
@@ -75,7 +75,7 @@
                   panel_class = "panel-success"
                 end
               end
-              validated_string = outlet.validated_at ? outlet.validated_at.strftime("%B %e, %Y %H:%M %Z") : "Not yet validated" 
+              validated_string = outlet.validated_at ? outlet.validated_at.strftime("%B %e, %Y %H:%M %Z") : "Not yet certified" 
               %>
             <div class="panel <%= panel_class %>" id="panel-outlet-<%= outlet.id %>">
               <div class="panel-heading">
@@ -85,7 +85,7 @@
                         <span class="outlet-name" style="font-size:14px; line-height:14px;">
                         <%= outlet.organization  %> - <%= outlet.service.humanize %></span>
                         <span class="outlet-alert" id="outlet-alert-<%= outlet.id %>" style="font-size:14px; line-height:14px;">
-                        Last Validated: <%= validated_string %>
+                        Last Certified: <%= validated_string %>
                        </span>
                     </div>
                     
@@ -143,7 +143,7 @@
                       <span id="outlet-status-<%= outlet.id %>"><%= outlet.status.humanize %></span>
                     </p>
                      <p>
-                      <strong>Contacts:</strong> <%= outlet.users.map(&:email).join(", ") %></span>
+                      <strong>Contacts:</strong> <%= outlet.try(:primary_contact).try(:email) %> <%= outlet.try(:secondary_contact).try(:email) %> <%= outlet.users.map(&:email).join(", ") %></span>
                     </p>
                 </div>
                 <div class="col-sm-12">
@@ -160,7 +160,7 @@
 
                       <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
 
-                      <a class="btn btn-success validate-outlet-button" data-outlet="<%= outlet.id %>">Validate</a>
+                      <a class="btn btn-success validate-outlet-button" data-outlet="<%= outlet.id %>">Certify</a>
                   </div>
                
               </div>
@@ -185,7 +185,7 @@
         <h4 class="modal-title">Social Media Account Update</h4>
       </div>
       <div class="modal-body">
-        <p>One fine body&hellip;</p>
+        <p>Text.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -211,11 +211,12 @@
         $('#panel-outlet-'+id).removeClass( "panel-success" );
         $('#panel-outlet-'+id).removeClass( "panel-warning" );
         $('#panel-outlet-'+id).addClass( "panel-success" );
-        $('#outlet-alert-'+id).html("Last Validated: "+ date_string);
+        $('#outlet-alert-'+id).html("Last Certified: "+ date_string);
         $('#archive-'+id).removeClass("hide");
         $('#publish-'+id).addClass("hide");
         name = $('#panel-outlet-'+id + ' .outlet-name').text();
         $('.modal-body').html("Published:  " + name);
+        $('.modal-footer button').attr("data-outlet-id", id);
         $('#modal-alert').modal({});
       });
     })
@@ -232,9 +233,10 @@
         $('#panel-outlet-'+id).removeClass( "panel-success" );
         $('#panel-outlet-'+id).removeClass( "panel-warning" );
         $('#panel-outlet-'+id).addClass( "panel-success" );
-        $('#outlet-alert-'+id).html("Last Validated: "+ date_string);
+        $('#outlet-alert-'+id).html("Last Certified: "+ date_string);
         name = $('#panel-outlet-'+id + ' .outlet-name').text();
-        $('.modal-body').html("Validated:   " + name);
+        $('.modal-body').html("Certified:   " + name);
+        $('.modal-footer button').attr("data-outlet-id", id);
         $('#modal-alert').modal({});
       });
     })
@@ -257,11 +259,14 @@
          $('#publish-'+id).removeClass("hide");
         name = $('#panel-outlet-'+id + ' .outlet-name').text();
         $('.modal-body').html("Archived:  " + name);
+        $('.modal-footer button').attr("data-outlet-id", id);
         $('#modal-alert').modal({});
       });
     })
 
-
+     $('.modal-footer button').on('click', function(){
+        $('#panel-outlet-' + $(this).attr('data-outlet-id'))
+     });
   });
 </script>
 
