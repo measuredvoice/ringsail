@@ -3,7 +3,8 @@ if ENV['REGISTRY_ES_HOST']
   config = {
     host: "#{ENV['REGISTRY_ES_HOST']}:#{ENV['REGISTRY_ES_PORT']}/",
     transport_options: {
-      request: { timeout: 5 }
+      request: { timeout: 5 },
+      ssl: { verify: false}
     },
     log: true
   }
