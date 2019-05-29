@@ -3,7 +3,7 @@
 
   <h1 class="page-title">U.S. Digital Registry</h1>
   <h2>What is the U.S. Digital Registry?</h2>
-  <p><%= image_tag "top_banner_public", alt: "image of hand holding a mobile phone", id: "top-banner" %></p>
+
   <div style="margin: 10px; padding: 10px; border: 1px solid black;">
  <p><b>Notice:</b> As of April 19, 2018, all entries that have not been updated by agencies since <b>January 1, 2017</b> have been archived. Archived accounts will not appear in the public facing list and API of official, active accounts. This was done to help ensure that users can trust that accounts listed in the U.S. Digital Registry as official are still active.
 
@@ -25,7 +25,7 @@
     <li>Tags, as self-identified by agencies</li>
   </ul>
   <p>For customer service on accounts, please contact their programs directly. </p>
-  
+
   <div role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a></li>
@@ -174,8 +174,8 @@
       </div>
     </div>
   </div>
-    
-  
+
+
   <h2>What's "Official"?</h2>
   <p>The U.S. Digital Registry only includes accounts that represent official U.S. government agencies, organizations, or programs — the collection grows daily. You can register accounts managed by federal agencies, heads of agencies or members of the President’s Cabinet. <b>Do not enter personal, employee, or other types of accounts.</b></p>
   <h2>For Developers: Using and Improving the API</h2>
@@ -307,7 +307,7 @@
 </script>
 
 
-  <script>  
+  <script>
   Handlebars.registerHelper('formatDate', function(date){
     if(date.data.root){
       var d = new Date(date.data.root.updated_at);
@@ -325,17 +325,17 @@
     }
     return array_of_text.join(", ");
   });
-  
+
   var source_social_media_template   = $("#social-media-template").html();
-  var social_media_template = Handlebars.compile(source_social_media_template); 
+  var social_media_template = Handlebars.compile(source_social_media_template);
 
 
   var source_mobile_template   = $("#mobile-template").html();
-  var mobile_template = Handlebars.compile(source_mobile_template); 
+  var mobile_template = Handlebars.compile(source_mobile_template);
 
   var source_metadata_template = $('#metadata-template').html();
   var metadata_template = Handlebars.compile(source_metadata_template);
-    
+
 
   $(document).ready(function(){
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
@@ -346,7 +346,7 @@
     $('#social-media-search').submit(function(e){
       e.preventDefault();
       submit_social_media_form();
-      
+
     });
 
     $('#social-media-search input, #social-media-search select').on('change', function(){
@@ -362,7 +362,7 @@
         $('#search-social-page').val(page_int - 1);
       }else{
         $('#search-social-page').val(1)
-      } 
+      }
       submit_social_media_form();
     });
     $('#nextPage').click(function(e){
@@ -470,6 +470,7 @@
     // submit_social_media_form();
     // submit_mobile_form();
   </script>
+
 
   <style>
     .table{
