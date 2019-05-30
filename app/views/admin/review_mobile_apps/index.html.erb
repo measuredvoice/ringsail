@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>Mobile Applications<% end %>
-    <h1 class="page-header">Your Mobile Applications</h1>
+    <%= content_for :page_title do %>Mobile Productlications<% end %>
+    <h1 class="page-header">Your Mobile Productlications</h1>
     <div class="row placeholders">
         <div class="col-sm-12">
           
@@ -29,16 +29,16 @@
         <div class="col-sm-12 instructions">
 
           <p>Instructions:
-            How to Certify Your Mobile Applicaitons
+            How to Certify Your Mobile Products
           </p>
           <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
               <ol>
-                <li>Select Published Mobile Applicaitons.</li>
+                <li>Select Published Mobile Products.</li>
                 <li>Select Needs Review.</li>
-                <li>Review each account.</li>
-                <li>Indicate "Certify" for all active mobile applications. Edit the account if necessary and then "Certify".</li>
-                <li>Indicate "Archive" for all accounts that are no longer active.</li>
+                <li>Review each Mobile Product.</li>
+                <li>Indicate "Certify" for all active Mobile Products. Edit the account if necessary and then "Certify".</li>
+                <li>Indicate "Archive" for all Mobile Products that are no longer active.</li>
               </ol>
             </div>
           </div>
@@ -50,7 +50,7 @@
               published_class = "btn-success"
               archived_class = "btn-warning"
           %>
-           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Accounts <span class="caret"></span></button>
+           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Mobile Products <span class="caret"></span></button>
            <ul class="dropdown-menu dropdown-review">
             <li> <%= link_to "Needs Review", admin_review_mobile_apps_path(status: "published", review: "needs")%></li>
             <li>
@@ -169,7 +169,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Mobile App</h4>
+        <h4 class="modal-title">Mobile Product</h4>
       </div>
       <div class="modal-body">
         <p>Text.</p>
