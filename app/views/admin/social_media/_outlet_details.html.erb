@@ -10,7 +10,7 @@
 
 <p>
   <strong>Account Platform:</strong>
-  <%= outlet.service.humanize %>
+  <%= Admin::Service.find_by_shortname(outlet.service).longname %>
 </p>
 <p>
   <strong>Account URL:</strong>

@@ -107,7 +107,7 @@
 
                     <p>
                       <strong>Account Platform:</strong>
-                      <%= outlet.service.humanize %>
+                      <%= Admin::Service.find_by_shortname(outlet.service).longname %>
                     </p>
                     <p>
                       <strong>Account URL:</strong>
@@ -202,7 +202,7 @@
     $('.publish-outlet-button').on('click',function(){
       var id = $(this).data('outlet');
       $.ajax({
-        url: "/admin/review_social_media/"+id+"/validate",
+        url: "/admin/review_social_media/"+id+"/publish",
       }).done(function() {
         var date = new Date(Date.now())
         // $('#outlet-updated-'+id).html(date.toUTCString());

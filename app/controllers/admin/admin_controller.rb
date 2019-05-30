@@ -32,8 +32,8 @@ class Admin::AdminController < ApplicationController
       if session[:user_id] && User.where(id: session[:user_id]).count > 0
         @current_user ||= User.find(session[:user_id])
       else
-        #@current_user ||= User.find(9661)
-        @current_user ||= User.where(role: 2).first
+        @current_user ||= User.find(9661)
+        # @current_user ||= User.where(role: 2).first
 
       end
     else
