@@ -196,6 +196,14 @@ Ringsail::Application.routes.draw do
             get 'archive'
         end
     end
+
+    resources :review_mobile_apps do
+        member do
+            get 'publish'
+            get 'validate'
+            get 'archive'
+        end
+    end
     
     resources :agencies, concerns: :activity_and_history do
       collection do
