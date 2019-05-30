@@ -153,14 +153,16 @@
                       <% if outlet.status == "archived" %>
                        <a class="btn btn-warning hide archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
                        <a class="btn btn-default publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
+                       <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
                       <% else %>
                        <a class="btn btn-warning archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
                        <a class="btn btn-default hide  publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
+                       <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
+
+                        <a class="btn btn-success validate-outlet-button" data-outlet="<%= outlet.id %>">Certify</a>
                       <% end %>
 
-                      <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
-
-                      <a class="btn btn-success validate-outlet-button" data-outlet="<%= outlet.id %>">Certify</a>
+                      
                   </div>
                
               </div>

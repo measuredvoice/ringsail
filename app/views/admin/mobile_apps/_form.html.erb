@@ -59,7 +59,7 @@
       <%= f.select :primary_agency_id, Agency.all.collect {|p| [ "#{p.name} #{p.shortname}", p.id ] }, {:class => "form-control formwidth", :value => "",:prompt => "Select an Agency" }%>
     </div>
     <div class="field contacts">
-      <%= f.label :secondary_agency_id, "Secondary Agency" %><span class="red">*</span> </br>
+      <%= f.label :secondary_agency_id, "Secondary Agency" %></br>
       <%= f.select :secondary_agency_id, Agency.all.collect {|p| [ "#{p.name} #{p.shortname}", p.id ] },{:class => "form-control formwidth", :value => "",:prompt => "Select an Agency" }%>
     </div>
     <div class="field agencies">

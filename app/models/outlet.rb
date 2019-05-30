@@ -99,7 +99,6 @@ class Outlet < ActiveRecord::Base
   belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_contact_id"
 
   validates :primary_agency, :presence => true
-  validates :secondary_agency, :presence => true
 
   # acts as taggable is being kept until we do a final data migration (needed for backwards compatibility)
   acts_as_taggable

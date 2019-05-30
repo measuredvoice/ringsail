@@ -2,7 +2,7 @@ class Admin::ReviewSocialMediaController < Admin::AdminController
   helper_method :sort_column, :sort_direction, :current_page
   respond_to :html, :xml, :json, :csv, :xls
 
-  before_action :set_outlet, only: [:validate, :archive]
+  before_action :set_outlet, only: [:validate, :archive, :publish]
 
   # before_filter :require_admin, only: [:publish]
   # GET /outlets
@@ -24,15 +24,16 @@ class Admin::ReviewSocialMediaController < Admin::AdminController
   end
 
   def publish
-      @outlet.published!
-      @outlet.validated_at = Time.now
-      @outlet.save(validate: false)
-      redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
+    @outlet.published!
+    @outlet.validated_at = Time.now
+    @outlet.save(validate: false)
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
   end
   
   def validate
     @outlet.validated_at = Time.now
     @outlet.save(validate: false)
+    @outlet.create_activity :certified
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
   end
 

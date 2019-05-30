@@ -92,8 +92,7 @@ class MobileApp < ActiveRecord::Base
   belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_contact_id"
 
   validates :primary_agency, :presence => true
-  validates :secondary_agency, :presence => true
-
+  
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :presence => true
