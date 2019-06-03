@@ -75,7 +75,9 @@ class Admin::SocialMediaController < Admin::AdminController
   def new
     @outlet = Outlet.new
     @outlet.language = "English"
-    @outlet.agencies << current_user.agency if current_user.agency
+    if current_user.agency
+      @outlet.primary_agency_id = current_user.agency.id 
+    end
     @outlet.primary_contact_id = current_user.id
   end
 
