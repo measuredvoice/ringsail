@@ -76,7 +76,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet = Outlet.new
     @outlet.language = "English"
     @outlet.agencies << current_user.agency if current_user.agency
-    @outlet.users << current_user
+    @outlet.primary_contact_id = current_user.id
   end
 
   # GET /outlets/1/edit

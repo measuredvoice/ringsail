@@ -52,11 +52,11 @@
           %>
            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Mobile Products <span class="caret"></span></button>
            <ul class="dropdown-menu dropdown-review">
-            <li> <%= link_to "Needs Review", admin_review_mobile_apps_path(status: "published", review: "needs")%></li>
+            <li> <%= link_to "Needs Review", admin_review_mobile_apps_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days."%></li>
             <li>
-              <%= link_to "Recently Reviewed", admin_review_mobile_apps_path(status: "published", review: "recent")  %></li>
+              <%= link_to "Recently Reviewed", admin_review_mobile_apps_path(status: "published", review: "recent"),title: "Accounts that have been certified within the last 180 days."  %></li>
           </ul>
-            <%= link_to  "Archived Accounts", admin_review_mobile_apps_path(status: "archived"), :class => "btn btn-warning" %>
+            <%= link_to  "Archived Accounts", admin_review_mobile_apps_path(status: "archived"), :class => "btn btn-warning",title: "Accounts that are no longer active." %>
         </div>
         <div class="col-sm-12">
           <%= paginate @mobile_apps %>
