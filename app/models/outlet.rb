@@ -112,8 +112,8 @@ class Outlet < ActiveRecord::Base
     :format     => { :with => URI::regexp(%w(http https)) }
 
   validates :language, :presence => true
-  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
-  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  # validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
+  # validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
 
   validates :short_description, :presence => true
   paginates_per 100
