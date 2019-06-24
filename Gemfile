@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 gem 'rails', '4.2.11.1'
 
 # DB Connector
-gem 'mysql2'
+gem 'mysql2', '0.4.10'
 
 #social media platforms
 gem 'twitter'
@@ -51,8 +51,8 @@ gem 'unicorn'
 # generate fake data in tests & seeds files
 #gem 'faker'
 
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'elasticsearch-model', '0.1.9'
+gem 'elasticsearch-rails', '0.1.9'
 ######
 # Assets / Assets related gems
 ######
@@ -81,7 +81,7 @@ group :development, :test do
 
   # testing gems
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails'
+  gem 'factory_bot'
   gem 'coveralls'
   gem "capybara" #feature specs
   gem 'database_cleaner'
@@ -92,10 +92,10 @@ group :development, :test do
   gem 'faker'
 
   # nice debug tools
-  gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'pry'
+  # gem 'jazz_hands', github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
+  # gem 'better_errors'
+  # gem 'binding_of_caller'
+  # gem 'pry'
 
   # adds table data to model files, handy for tracking columns
   gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
