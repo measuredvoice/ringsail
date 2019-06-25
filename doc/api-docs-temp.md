@@ -1,6 +1,6 @@
 ---
-title: Sample API
-banner-heading: Sample API
+title: US Digital Registry API
+banner-heading: US Digital Registry API
 ---
 
 <link rel="stylesheet" type="text/css" href="../../assets/swaggerui-dist/swagger-ui.css" >
@@ -9,13 +9,13 @@ banner-heading: Sample API
 
 ## Overview
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non augue tortor. In sit amet ligula sem. Cras id convallis nisi. Vivamus porta accumsan tempus. Nunc congue gravida quam in tristique. Quisque pharetra massa arcu, eu dictum ante pretium non. Fusce et est elementum, molestie sapien quis, convallis ipsum. Integer rutrum semper lacus et iaculis. Fusce vel dolor posuere, luctus velit ac, tempus mauris. Morbi diam nulla, tristique quis sapien a, egestas semper massa. Etiam accumsan semper nisl non ultrices. Cras nec vehicula nisi. Nunc accumsan urna mauris, vitae bibendum magna ornare eu. Vivamus non sagittis dui, in tincidunt elit. Donec sagittis nulla mauris, eget volutpat quam faucibus sed. Cras lobortis arcu vel odio vehicula congue.
+To help prevent exploitation from unofficial sources, phishing scams, or malicious entities, the U.S. Digital Registry serves as a crowdsource resource for agencies, citizens, and developers to confirm the official status of social media and public-facing collaboration accounts, mobile apps, and mobile websites. The accounts in the registry are independently updated by federal managers across the government who maintain individual agency accounts.
 
 <p><small><a href="#">Back to top</a></small></p>
 
 ## Getting Started
 
-Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam scelerisque, tortor non interdum suscipit, est nulla vehicula dui, blandit facilisis lectus sem vel ante. Duis non congue lectus. Etiam at eros nibh. Nulla facilisi. Morbi tempus quis justo sed imperdiet. Integer id suscipit odio. Morbi eu faucibus ante.
+The API documentation below serves as both a way to learn how to use the API, but to also test it directly in your browser. All API calls should be performed against the base url https://api.gsa.gov/technology/digital-registry/. For example: https://api.gsa.gov/technology/digital-registry/v1/social_media.json
 
 <p><small><a href="#">Back to top</a></small></p>
 
@@ -28,7 +28,7 @@ You can view the full details of this API in the OpenAPI Specification file avai
 
 ## API Calls
 
-In eget nibh consectetur, faucibus sapien et, finibus justo. Duis feugiat elit ex, non aliquet nisl cursus et. Morbi hendrerit est nec leo venenatis tempus. Vestibulum auctor auctor varius. Aenean lorem lacus, rutrum finibus nulla ac, tempor aliquet dolor. Donec egestas lectus ut augue posuere fringilla. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse nec turpis sed ipsum vestibulum aliquam nec eu nunc. Etiam ipsum orci, maximus et lorem nec, interdum dapibus sem. Sed nisl ex, scelerisque nec sodales at, finibus non dolor.
+...
 
 
 {% include swagger-section-header.html %}
@@ -40,14 +40,8 @@ In eget nibh consectetur, faucibus sapien et, finibus justo. Duis feugiat elit e
 
 
 
-## FAQ
-
-Integer velit ex, sollicitudin sed dolor vitae, consectetur cursus urna. Quisque lacus urna, vulputate non efficitur ut, ornare ac leo. Sed varius, lacus vitae mollis semper, magna lorem pretium erat, non maximus elit justo pretium dolor. Phasellus pellentesque bibendum turpis, eu venenatis eros facilisis sit amet. Pellentesque aliquet dolor ac metus luctus interdum. Vivamus est nibh, blandit non finibus id, tincidunt sed justo. Integer ullamcorper sapien neque, ut lobortis risus interdum ac. Aenean finibus, nibh vitae molestie viverra, nibh mi iaculis lacus, interdum dictum ipsum magna sit amet est. Phasellus vitae faucibus felis. Vivamus non molestie felis, at suscipit lectus. Phasellus ac pulvinar purus, luctus porta elit. Morbi a aliquet tellus. Vivamus mollis, ligula sed egestas euismod, elit lacus auctor dolor, sit amet facilisis purus eros ac augue.
-
-<p><small><a href="#">Back to top</a></small></p>
-
 ## Contact Us
 
-Praesent id cursus magna, sodales rutrum mauris. Nulla eget quam at nisl iaculis interdum. In condimentum, mi nec blandit consequat, velit nulla dictum lorem, non scelerisque ex nulla non ex. Sed vitae sem semper, pharetra massa at, vulputate urna. Pellentesque dapibus a ex sit amet pellentesque. Sed eget risus ut felis fringilla ullamcorper vitae a ligula. Aliquam finibus vitae ex sed vehicula.
+If you have questions, comments or ideas on how to use or improve the U.S. Digital Registry, please contact us [via email](usdigitalregistry@gsa.gov).
 
 <p><small><a href="#">Back to top</a></small></p>
