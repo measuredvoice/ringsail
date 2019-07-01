@@ -87,7 +87,7 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
 
   def show
     params[:page_size] = params[:page_size] || PAGE_SIZE
-    @outlets = Outlet.where(draft_id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+    @outlets = Outlet.where(id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
       format.json { render "show" }
     end
@@ -138,7 +138,7 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
       @agencies = Agency.where("name LIKE ?","%#{@query}%")
       @services = Admin::Service.search_by_name(@query)
       @tags = OfficialTag.where("tag_text LIKE ?", "%#{@query}%")
-      @service_breakdown = Outlet.where("draft_id IS NULL").group(:service).count
+      @service_breakdown = Outlet.group(:service).count
       @items = [@query,@agencies,@services,@tags].flatten
       render 'tokeninput'
     else

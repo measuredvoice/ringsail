@@ -46,7 +46,7 @@ class DigitalRegistry::V1::GalleriesController < DigitalRegistry::ApiController
 
 	def show
     params[:page_size] = params[:page_size] || PAGE_SIZE
-		@galleries = Gallery.where(draft_id: params[:id]).includes(
+		@galleries = Gallery.where(id: params[:id]).includes(
       :mobile_apps, :outlets).references(
       :mobile_apps,:outlets).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|

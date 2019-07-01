@@ -63,17 +63,11 @@ class Outlet < ActiveRecord::Base
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
-  scope :api, -> { where("draft_id IS NOT NULL") }
+  scope :api, -> { where(status: 1) }
 
   enum status: { under_review: 0, published: 1, archived: 2,
     publish_requested: 3, archive_requested: 4 }
   
-  # Outlets have a relationship to themselvs
-  # The "published" outlet will have a draft_id pointing to its parent
-  # The "draft" outlet will not have a draft_id field
-  # This will allow easy querying on the public / admin portion of the application
-  has_one :published, class_name: "Outlet", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft, class_name: "Outlet", foreign_key: "draft_id"
 
   # These are has and belongs to many relationships
   has_many :sponsorships, dependent: :destroy
@@ -95,8 +89,8 @@ class Outlet < ActiveRecord::Base
   validates :secondary_contact, :presence => true
 
 
-  belongs_to :primary_agency, class_name: "Agency", foreign_key: "primary_contact_id"
-  belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_contact_id"
+  belongs_to :primary_agency, class_name: "Agency", foreign_key: "primary_agency_id"
+  belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_agency_id"
 
   validates :primary_agency, :presence => true
 
@@ -196,19 +190,7 @@ class Outlet < ActiveRecord::Base
     query = {
       query: {
         bool: {
-          must: [
-            {
-              constant_score: {
-                filter: {
-                  missing: {
-                    field: "draft_id",
-                    existence: true,
-                    null_value: true
-                  }
-                }
-              }
-            }
-          ],
+          must: [],
           should: []
         }
       },
@@ -312,22 +294,6 @@ class Outlet < ActiveRecord::Base
   def published!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:published]
-    self.published.destroy! if self.published
-    new_outlet = Outlet.new({
-      service_url: self.service_url,
-      service: self.service,
-      organization: self.organization,
-      account: self.account,
-      language: self.language,
-      short_description: self.short_description,
-      long_description: self.long_description,
-      agency_ids: self.agency_ids || [],
-      user_ids: self.user_ids || [],
-      official_tag_ids: self.official_tag_ids || [],
-      status: self.status,
-      draft_id: self.id
-    })
-    new_outlet.save(validate: false)
     self.save(validate: false)
     Outlet.public_activity_on
     self.create_activity :published
@@ -336,7 +302,6 @@ class Outlet < ActiveRecord::Base
   def archived!
     Outlet.public_activity_off
     self.status = Outlet.statuses[:archived]
-    self.published.destroy! if self.published
     self.save(validate: false)
     Outlet.public_activity_on
     self.create_activity :archived

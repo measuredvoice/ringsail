@@ -9,15 +9,15 @@ class Admin::ReviewMobileAppsController < Admin::AdminController
   # GET /mobile_apps.json
   def index
     if params[:status] == "archived"
-      @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email, "mobile_apps.draft_id" => nil, "mobile_apps.status" => 2).order("mobile_apps.validated_at ASC").page(current_page).per(10)
+      @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email, "mobile_apps.status" => 2).order("mobile_apps.validated_at ASC").page(current_page).per(10)
     elsif params[:status] == "published"
       if params[:review] == "needs"
-        @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email, "mobile_apps.draft_id" => nil, "mobile_apps.status" => 1).where("mobile_apps.validated_at <= ?",180.days.ago).order("mobile_apps.validated_at ASC").page(current_page).per(10)
+        @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email,  "mobile_apps.status" => 1).where("mobile_apps.validated_at <= ?",180.days.ago).order("mobile_apps.validated_at ASC").page(current_page).per(10)
       else
-        @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email, "mobile_apps.draft_id" => nil, "mobile_apps.status" => 1).order("mobile_apps.validated_at ASC").page(current_page).per(10)
+        @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email, "mobile_apps.status" => 1).order("mobile_apps.validated_at ASC").page(current_page).per(10)
       end
     else
-      @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email, "mobile_apps.draft_id" => nil).order("mobile_apps.validated_at ASC").page(current_page).per(10)
+      @mobile_apps = MobileApp.joins(:users).where("users.email" =>current_user.email).order("mobile_apps.validated_at ASC").page(current_page).per(10)
     
     end
     

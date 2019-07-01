@@ -13,7 +13,7 @@ class Admin::MobileAppsController < Admin::AdminController
     end
     respond_to do |format|
       format.html { 
-        @mobile_apps = MobileApp.where("draft_id IS NULL").includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).uniq
+        @mobile_apps = MobileApp.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).uniq
     
         if params[:platform] && params[:platform] != ""
           @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
@@ -21,13 +21,13 @@ class Admin::MobileAppsController < Admin::AdminController
         @platform_counts = @mobile_apps.platform_counts
         @mobile_apps = []}
       format.json {
-        @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
+        @total_mobile_apps = MobileApp.count
         @mobile_apps = MobileApp.es_search(params, sort_column, sort_direction)
         @result_count = @mobile_apps.total_count
         @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
       }
       format.csv { 
-        @total_mobile_apps = MobileApp.where("draft_id IS NULL").count
+        @total_mobile_apps = MobileApp.count
         @mobile_apps = MobileApp.es_search(params, sort_column, sort_direction)
         @result_count = @mobile_apps.total_count
         @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
@@ -44,7 +44,7 @@ class Admin::MobileAppsController < Admin::AdminController
   end
 
   def datatables
-    @mobile_apps = MobileApp.where("draft_id IS NULL").uniq
+    @mobile_apps = MobileApp.uniq
     respond_to do |format|
       format.json {
         render json: {

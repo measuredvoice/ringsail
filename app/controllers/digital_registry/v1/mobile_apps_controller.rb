@@ -17,7 +17,7 @@ class DigitalRegistry::V1::MobileAppsController < DigitalRegistry::ApiController
 
 	def index
     params[:page_size] = params[:page_size] || PAGE_SIZE
-		@mobile_apps = MobileApp.api.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
+		@mobile_apps = MobileApp.api.includes(:agencies, :official_tags)
     if params[:q] && params[:q] != ""
       @mobile_apps = @mobile_apps.where("mobile_apps.name LIKE ? or mobile_apps.short_description LIKE ? or mobile_apps.long_description LIKE ?", 
       	"%#{params[:q]}%", "%#{params[:q]}%", "%#{params[:q]}%")
@@ -44,7 +44,7 @@ class DigitalRegistry::V1::MobileAppsController < DigitalRegistry::ApiController
 	end
 	def show
     params[:page_size] = params[:page_size] || PAGE_SIZE
-		@mobile_apps =  MobileApp.where(draft_id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+		@mobile_apps =  MobileApp.where(id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "show" }
 		end		
@@ -63,7 +63,7 @@ class DigitalRegistry::V1::MobileAppsController < DigitalRegistry::ApiController
     if @query
       @agencies = Agency.where("name LIKE ?","%#{@query}%")
       @tags = OfficialTag.where("tag_text LIKE ?", "%#{@query}%")
-      @service_breakdown = Outlet.where("draft_id IS NULL").group(:service).count
+      @service_breakdown = Outlet.group(:service).count
       @items = [@query,@agencies,@tags].flatten
       render 'tokeninput'
     else

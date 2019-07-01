@@ -14,7 +14,7 @@ class Admin::SocialMediaController < Admin::AdminController
     end
     respond_to do |format|
       format.html { 
-        @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).where("draft_id IS NULL")
+        @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users)
         num_items = items_per_page_handler
         @total_outlets = @outlets.count
         if(params[:service] && !params[:service].blank?)
@@ -23,7 +23,7 @@ class Admin::SocialMediaController < Admin::AdminController
         @services = @outlets.group(:service).count
         @outlets = [] }
       format.json {
-        @total_outlets = Outlet.where("draft_id IS NULL").count
+        @total_outlets = Outlet.count
         @outlets = Outlet.es_search(params, sort_column, sort_direction)
         @result_count = @outlets.total_count
         @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
@@ -49,7 +49,7 @@ class Admin::SocialMediaController < Admin::AdminController
   end
 
   def datatables
-    @outlets = Outlet.where("draft_id IS NULL").uniq
+    @outlets = Outlet.uniq
     respond_to do |format|
       format.json {
         render json: {

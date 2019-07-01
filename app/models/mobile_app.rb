@@ -52,17 +52,11 @@ class MobileApp < ActiveRecord::Base
   tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
-  scope :api, -> { where("draft_id IS NOT NULL") }
+  scope :api, -> { where(status: 1) }
 
   enum status: { under_review: 0, published: 1, archived: 2,
     publish_requested: 3, archive_requested: 4 }
 
-  # Outlets have a relationship to themselvs
-  # The "published" outlet will have a draft_id pointing to its parent
-  # The "draft" outlet will not have a draft_id field
-  # This will allow easy querying on the public / admin portion of the application
-  has_one :published, class_name: "MobileApp", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft, class_name: "MobileApp", foreign_key: "draft_id"
 
   #attr_accessible :name, :shortname, :info_url, :agency_contact_ids
   acts_as_taggable
@@ -88,8 +82,8 @@ class MobileApp < ActiveRecord::Base
   validates :secondary_contact, :presence => true
 
 
-  belongs_to :primary_agency, class_name: "Agency", foreign_key: "primary_contact_id"
-  belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_contact_id"
+  belongs_to :primary_agency, class_name: "Agency", foreign_key: "primary_agency_id"
+  belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_agency_id"
 
   validates :primary_agency, :presence => true
   
@@ -117,7 +111,7 @@ class MobileApp < ActiveRecord::Base
   end
 
   def self.platform_counts
-    joins(:mobile_app_versions).where("mobile_apps.draft_id IS NULL").group(:platform).distinct("mobile_app_id, platform").count
+    joins(:mobile_app_versions).group(:platform).distinct("mobile_app_id, platform").count
   end
 
   def self.to_csv(options = {})
@@ -168,19 +162,7 @@ class MobileApp < ActiveRecord::Base
     query = {
       query: {
         bool: {
-          must: [ 
-                  {
-                    constant_score: {
-                      filter: {
-                        missing: {
-                          field: "draft_id",
-                          existence: true,
-                          null_value: true
-                        }
-                      }
-                    }
-                  }
-          ]
+          must: [  ]
         }
       },
       sort: [
@@ -239,47 +221,14 @@ class MobileApp < ActiveRecord::Base
   def published!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:published]
-    self.published.destroy! if self.published
-    ma = MobileApp.new({
-      name: self.name,
-      short_description: self.short_description,
-      long_description: self.long_description,
-      icon_url: self.icon_url,
-      language: self.language,
-      agency_ids: self.agency_ids || [],
-      user_ids: self.user_ids || [],
-      official_tag_ids: self.official_tag_ids || [],
-      status: self.status,
-      draft_id: self.id
-    })
-    self.mobile_app_versions.each do |mav|
-      mobile_app_version = MobileAppVersion.new(mav.attributes.except!("id","mobile_app_id"))
-      ma.mobile_app_versions << mobile_app_version
-    end
-    self.save(validate: false)
     ma.save(validate: false)
-    ma.mobile_app_versions.each do |mav|
-      mav.save(validate: false)
-    end
     MobileApp.public_activity_on
     self.create_activity :published
   end
-#
-#  id                :integer          not null, primary key
-#  name              :string(255)
-#  short_description :text(65535)
-#  long_description  :text(65535)
-#  icon_url          :string(255)
-#  language          :string(255)
-#  agency_id         :integer
-#  status            :integer          default("0")
-#  mongo_id          :string(255)
-#  draft_id          :integer
-#
+
   def archived!
     MobileApp.public_activity_off
     self.status = MobileApp.statuses[:archived]
-    self.published.destroy! if self.published
     self.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :archived

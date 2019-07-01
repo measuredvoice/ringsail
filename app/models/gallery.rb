@@ -24,12 +24,6 @@ class Gallery < ActiveRecord::Base
 
   enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
 
-  # Galleries have a relationship to themselvs
-  # The "published" outlet will have a draft_id pointing to its parent
-  # The "draft" outlet will not have a draft_id field
-  # This will allow easy querying on the public / admin portion of the application
-  has_one :published, class_name: "Gallery", foreign_key: "draft_id", dependent: :destroy
-  belongs_to :draft, class_name: "Gallery", foreign_key: "draft_id"
 
 	has_many :gallery_users, dependent: :destroy
 	has_many :users, through: :gallery_users
@@ -53,11 +47,11 @@ class Gallery < ActiveRecord::Base
   end
 
   def published_mobile_apps
-    MobileApp.where("draft_id IN (?)",self.mobile_app_ids)
+    MobileApp.where("id IN (?)", self.mobile_app_ids).where(status: 1)
   end
 
   def published_outlets
-    Outlet.where("draft_id IN (?)", self.outlet_ids)
+    Outlet.where("id IN (?)", self.outlet_ids).where(status: 1)
   end
 
 
@@ -112,21 +106,6 @@ class Gallery < ActiveRecord::Base
   def published!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:published]
-    self.published.destroy! if self.published
-    new_gallery = Gallery.new({
-      name: self.name,
-      short_description: self.short_description,
-      long_description: self.long_description,
-      agency_ids: self.agency_ids || [],
-      user_ids: self.user_ids || [],
-      official_tag_ids: self.official_tag_ids || [],
-      status: self.status,
-      draft_id: self.id
-    })
-    self.gallery_items.each do |mav|
-     new_gallery.gallery_items << GalleryItem.create!(item_id: mav.item_id, item_type: mav.item_type)
-    end
-    new_gallery.save(validate: false)
     self.save(validate: false)
     MobileApp.public_activity_on
     self.create_activity :published
@@ -135,7 +114,6 @@ class Gallery < ActiveRecord::Base
   def archived!
     Gallery.public_activity_off
     self.status = Gallery.statuses[:archived]
-    self.published.destroy! if self.published
     self.save(validate: false)
     Gallery.public_activity_on
     self.create_activity :archived

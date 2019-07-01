@@ -6,7 +6,7 @@ class Admin::GalleriesController < Admin::AdminController
   # GET /gallerys
   # GET /gallerys.json
   def index
-    @galleries = Gallery.includes(:official_tags, :agencies, :outlets, :mobile_apps).where("draft_id IS NULL").uniq
+    @galleries = Gallery.includes(:official_tags, :agencies, :outlets, :mobile_apps).uniq
 
     num_items = items_per_page_handler
     respond_to do |format|
