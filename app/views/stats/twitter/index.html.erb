@@ -9,26 +9,26 @@
 <h1 class="page-title">U.S. Digital Registry - Twitter Stats</h1>
 <div class="row">
   <div class="col-sm-6">
-    <p>Total Followers: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").sum(:twitter_followers), :delimiter => ',') %> </p>
+    <p>Total Followers: <%=  number_with_delimiter(Outlet.where(service: "twitter",status: 1).sum(:twitter_followers), :delimiter => ',') %> </p>
   </div>
   <div class="col-sm-6">
-    <p>Average Followers: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").average(:twitter_followers), :delimiter => ',') %> </p>
+    <p>Average Followers: <%=  number_with_delimiter(Outlet.where(service: "twitter",status: 1).average(:twitter_followers), :delimiter => ',') %> </p>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <p>Total Posts: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").sum(:twitter_posts), :delimiter => ',') %> </p>
+    <p>Total Posts: <%=  number_with_delimiter(Outlet.where(service: "twitter",status: 1).sum(:twitter_posts), :delimiter => ',') %> </p>
   </div>
   <div class="col-sm-6">
-    <p>Average Posts: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").average(:twitter_posts), :delimiter => ',') %> </p>
+    <p>Average Posts: <%=  number_with_delimiter(Outlet.where(service: "twitter",status: 1).average(:twitter_posts), :delimiter => ',') %> </p>
   </div>
 </div>
 <!-- <div class="row">
   <div class="col-sm-6">
-    <p>Total Interactions: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").sum(:twitter_interactions), :delimiter => ',') %> </p>
+    <p>Total Interactions: <%=  number_with_delimiter(Outlet.where(service: "twitter",status: 1).sum(:twitter_interactions), :delimiter => ',') %> </p>
   </div>
   <div class="col-sm-6">
-    <p>Average Interactions: <%=  number_with_delimiter(Outlet.where(service: "twitter").where("draft_id IS NOT NULL").average(:twitter_interactions), :delimiter => ',') %> </p>
+    <p>Average Interactions: <%=  number_with_delimiter(Outlet.where(service: "twitter",status: 1).average(:twitter_interactions), :delimiter => ',') %> </p>
   </div>
 </div> -->
 <div class="row">
@@ -36,7 +36,7 @@
     <h2>Most Followers</h2>
     <ul class="list-group smaller">
       <% index = 1
-       Outlet.where(service: "twitter").where("draft_id IS NOT NULL").order('twitter_followers desc').first(5).each do |outlet| %>
+       Outlet.where(service: "twitter",status: 1).order('twitter_followers desc').first(5).each do |outlet| %>
       <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
       <% index = index + 1
       end %>
@@ -47,7 +47,7 @@
     <h2>Least Followers</h2>
     <ul class="list-group smaller">
       <% index = 1
-       Outlet.where(service: "twitter").where("draft_id IS NOT NULL").order('twitter_followers asc').first(5).each do |outlet| %>
+       Outlet.where(service: "twitter",status: 1).order('twitter_followers asc').first(5).each do |outlet| %>
       <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
       <% index = index + 1
       end %>
@@ -75,7 +75,7 @@
         </tr>
       </tfoot>
       <tbody>
-        <% Outlet.where(service: "twitter").where("draft_id IS NOT NULL").all.each do |outlet| %>
+        <% Outlet.where(service: "twitter",status: 1).all.each do |outlet| %>
         <tr>
           <td><%= link_to "#{outlet.organization.blank? ? "https://twitter.com/#{outlet.account}" : outlet.organization}" , "https://twitter.com/#{outlet.account}", :target=> "_blank" %></td>
           <td><%= outlet.twitter_followers %></td>

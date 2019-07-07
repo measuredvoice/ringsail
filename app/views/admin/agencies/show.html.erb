@@ -60,7 +60,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <ul class="list-group">
-          <% @agency.outlets.where(draft_id: nil).each do |outlet| %>
+          <% @agency.outlets.each do |outlet| %>
             <li class="list-group-item">
               <%= link_to outlet.organization, admin_outlet_path(outlet) %>
             </li>
@@ -74,7 +74,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <ul class="list-group">
-          <% @agency.mobile_apps.where(draft_id: nil).each do |mobile_app| %>
+          <% @agency.mobile_apps.each do |mobile_app| %>
             <li class="list-group-item">
               <%= link_to mobile_app.name, admin_mobile_app_path(mobile_app) %>
             </li>
@@ -88,7 +88,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <ul class="list-group">
-          <% @agency.galleries.where(draft_id: nil).each do |gallery| %>
+          <% @agency.galleries.each do |gallery| %>
             <li class="list-group-item">
               <%= link_to gallery.name, admin_gallery_path(gallery) %>
             </li>

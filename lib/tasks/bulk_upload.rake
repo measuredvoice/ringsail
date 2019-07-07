@@ -15,7 +15,7 @@ namespace :bulk_upload do
           total_valid_rows += 1
           if Admin::Service.find_by_shortname(row[:service_type].downcase.strip.gsub(" ","_")) #&&
             account_url = row[:account_url].end_with?("/") ? row[:account_url][0...-1] : row[:account_url]
-            outlet = Outlet.find_or_initialize_by({service_url: account_url, draft_id: nil})
+            outlet = Outlet.find_or_initialize_by({service_url: account_url})
             agencies = []
             if row[:sponsoring_agencies]
               row[:sponsoring_agencies].split(',').each do |agency|

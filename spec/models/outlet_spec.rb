@@ -11,7 +11,6 @@
 #  updated_at        :datetime
 #  service           :string(255)
 #  status            :integer          default(0)
-#  draft_id          :integer
 #  short_description :text(65535)
 #  long_description  :text(65535)
 #

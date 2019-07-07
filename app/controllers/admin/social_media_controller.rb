@@ -101,6 +101,7 @@ class Admin::SocialMediaController < Admin::AdminController
       if @outlet.save
         @outlet.published!
         # @outlet.build_notifications(:created) #may want to remove
+        ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: @outlet.id, body: @outlet.as_indexed_json
         format.html { redirect_to admin_outlet_path(@outlet), notice: "Social Media Account was successfully created and published." }
         format.json { render :show, status: :created, location: @outlet }
       else
@@ -119,7 +120,7 @@ class Admin::SocialMediaController < Admin::AdminController
         if @outlet.published?
           @outlet.published!
         end
-        # @outlet.build_notifications(:updated) #may want to remove
+        ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: @outlet.id, body: @outlet.as_indexed_json
         format.html { redirect_to admin_outlet_path(@outlet), notice: "Social Media Account was successfully updated." }
         format.json { render :show, status: :ok, location: admin_outlet_path(@outlet) }
       else
@@ -132,8 +133,10 @@ class Admin::SocialMediaController < Admin::AdminController
   # DELETE /outlets/1
   # DELETE /outlets/1.json
   def destroy
+    ELASTIC_SEARCH_CLIENT.destroy  index: 'outlets', type: 'outlet', id: @outlet.id
     @outlet.destroy!
     respond_to do |format|
+
       format.html { redirect_to admin_outlets_url, notice: 'Social Media Account was successfully destroyed.' }
       format.json { head :no_content }
     end

@@ -6,7 +6,6 @@
 #  name              :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
-#  draft_id          :integer
 #  short_description :text(65535)
 #  long_description  :text(65535)
 #  status            :integer          default(0)
@@ -20,7 +19,7 @@ class Gallery < ActiveRecord::Base
 	tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   scope :by_agency, lambda {|id| joins(:agencies).where("agencies.id" => id) }
-  scope :api, -> { where("draft_id IS NOT NULL") }
+  scope :api, -> { where(status: 1) }
 
   enum status: { under_review: 0, published: 1, archived: 2, publish_requested: 3 }
 

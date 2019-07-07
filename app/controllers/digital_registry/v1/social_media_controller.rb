@@ -119,7 +119,7 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
 
   def services
     ## specific breakdowns
-    @services = Outlet.where("status = 1 AND draft_id IS NOT NULL").group(:service).count
+    @services = Outlet.where(status: 1).group(:service).count
 
     respond_to do |format|
       format.json { render "services" }

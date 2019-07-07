@@ -89,6 +89,7 @@ class Admin::MobileAppsController < Admin::AdminController
       if @mobile_app.save
         @mobile_app.build_notifications(:created)
         # @mobile_app.published!
+        ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id, body: @mobile_app.as_indexed_json
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully created. Please review and click 'Publish' to publish this mobile product to the API." }
         format.json { render :show, status: :created, location: @mobile_app }
       else
@@ -111,6 +112,7 @@ class Admin::MobileAppsController < Admin::AdminController
         #   @mobile_app.published!
         # end
         @mobile_app.build_notifications(:updated)
+        ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id, body: @mobile_app.as_indexed_json
         format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully updated. Please review and click 'Publish' to publish these updates to the API." }
         format.json { render :show, status: :ok, location: admin_mobile_app_path(@mobile_app) }
       else
@@ -123,6 +125,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # DELETE /mobile_apps/1
   # DELETE /mobile_apps/1.json
   def destroy
+    ELASTIC_SEARCH_CLIENT.destroy  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id
     @mobile_app.destroy!
     respond_to do |format|
       format.html { redirect_to admin_mobile_apps_url, notice: 'Mobile Product was successfully destroyed.' }

@@ -13,7 +13,5 @@ class GalleryItem < ActiveRecord::Base
   belongs_to :gallery
   belongs_to :item, polymorphic: true
 
-  def published_item
-    self.item_type.constantize.find_by(draft_id: self.item_id)
-  end
+  
 end

@@ -22,7 +22,7 @@ class Public::BrowserController < Public::PublicController
   end
 
   def export_mobile_app
-    @mobile_apps = MobileApp.api.includes(:agencies, :official_tags).where("draft_id IS NOT NULL")
+    @mobile_apps = MobileApp.api.includes(:agencies, :official_tags).where(status: 1)
     if params[:hidden_mobile_agencies] && params[:hidden_mobile_agencies] != ""
       @mobile_apps = @mobile_apps.where("agencies.id" =>params[:hidden_mobile_agencies].split(","))
     end

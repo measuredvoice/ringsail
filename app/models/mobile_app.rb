@@ -13,7 +13,6 @@
 #  mongo_id          :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
-#  draft_id          :integer
 #
 
 class MobileApp < ActiveRecord::Base
@@ -25,7 +24,6 @@ class MobileApp < ActiveRecord::Base
   settings index: { number_of_shards: 1 } do
     mappings dynamic: 'false' do
       indexes :id, type: :integer
-      indexes :draft_id, type: :integer
       indexes :name, analyzer: 'english'
       indexes :platform, analyzer: 'english'
       indexes :agencies, analyzer: 'english'
@@ -36,12 +34,21 @@ class MobileApp < ActiveRecord::Base
   end
 
   def as_indexed_json(options={})
+    contact_list = []
+    if self.try(:primary_contact).try(:email)
+      contact_list << self.try(:primary_contact).try(:email)
+    end
+    if self.try(:secondary_contact).try(:email)
+      contact_list << self.try(:secondary_contact).try(:email)
+    end
+    if self.users.count > 0
+      contact_list << self.users.map(&:email)
+    end
     result = {
       id: self.id,
-      draft_id: self.draft_id,
       name: name,
       agencies: self.agencies.map(&:name).join(", "),
-      contacts: self.users.map(&:email).join(", "),
+      contacts: contact_list.flatten.join(", ")
       platform: self.mobile_app_versions.map(&:platform).join(", "),
       status: self.status.humanize,
       updated_at: self.updated_at
@@ -98,17 +105,6 @@ class MobileApp < ActiveRecord::Base
   validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one version of the product must be given." }
 
 
-  after_commit on: [:create] do
-    __elasticsearch__.index_document
-  end
-
-  after_commit on: [:update] do
-    ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: self.id, body: self.as_indexed_json
-  end
-
-  after_commit on: [:destroy] do
-    __elasticsearch__.delete_document
-  end
 
   def self.platform_counts
     joins(:mobile_app_versions).group(:platform).distinct("mobile_app_id, platform").count

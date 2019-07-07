@@ -23,7 +23,7 @@
           <dt>Mobile Products:</dt>
           <dd><%= @agency.draft_mobile_app_count%> (<%= @agency.published_mobile_app_count%> published)</dd>
 
-          <% @agency.mobile_apps.joins(:mobile_app_versions).where("mobile_apps.draft_id IS NOT NULL").group(:platform).distinct("mobile_app_version_id, platform").count.each do |key, value| %>
+          <% @agency.mobile_apps.joins(:mobile_app_versions).group(:platform).distinct("mobile_app_version_id, platform").count.each do |key, value| %>
           <dt><%= key %> (published):</dt>
           <dd><%= value %></dd>
           <% end %>
@@ -40,12 +40,12 @@
 
 <div class = "row">
   <div class="col-sm-12 col-md-12">
-    <h2>Agency Facebook Accounts (<%= @agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").count %> total)</h2>
+    <h2>Agency Facebook Accounts (<%= @agency.outlets.where(service: "facebook",status: 1).count %> total)</h2>
     <div class = "panel panel-default">
       <div class = "panel-body">
         <div class="row">
           <div class="col-sm-6">
-            <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_followers), :delimiter => ',') %> </p>
+            <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "facebook",status: 1).average(:facebook_followers), :delimiter => ',') %> </p>
           </div>
         </div>
         <div class="row">
@@ -53,7 +53,7 @@
             <h3>Most Followers</h3>
             <ul class="list-group smaller">
               <% index = 1
-               @agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").order('facebook_followers desc').first(5).each do |outlet| %>
+               @agency.outlets.where(service: "facebook",status: 1).order('facebook_followers desc').first(5).each do |outlet| %>
               <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
               <% index = index + 1
               end %>
@@ -64,7 +64,7 @@
             <h3>Least Followers</h3>
             <ul class="list-group smaller">
               <% index = 1
-               @agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").order('facebook_followers asc').first(5).each do |outlet| %>
+               @agency.outlets.where(service: "facebook",status: 1).order('facebook_followers asc').first(5).each do |outlet| %>
               <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
               <% index = index + 1
               end %>
@@ -95,7 +95,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                <% @agency.outlets.where(service: "facebook").where("draft_id IS NOT NULL").all.each do |outlet| %>
+                <% @agency.outlets.where(service: "facebook",status: 1).all.each do |outlet| %>
                 <tr>
                   <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target => "_blank" %></td>
                   <td><%= outlet.facebook_followers %></td>
@@ -116,23 +116,23 @@
 
 <div class = "row">
   <div class="col-sm-12 col-md-12">
-    <h2>Agency Twitter Accounts (<%= @agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").count %> total)</h2>
+    <h2>Agency Twitter Accounts (<%= @agency.outlets.where(service: "twitter",status: 1).count %> total)</h2>
     <div class = "panel panel-default">
       <div class = "panel-body">
         <div class="row">
           <div class="col-sm-6">
-            <p>Total Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").sum(:twitter_followers), :delimiter => ',') %> </p>
+            <p>Total Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).sum(:twitter_followers), :delimiter => ',') %> </p>
           </div>
           <div class="col-sm-6">
-            <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").average(:twitter_followers), :delimiter => ',') %> </p>
+            <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).average(:twitter_followers), :delimiter => ',') %> </p>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <p>Total Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").sum(:twitter_posts), :delimiter => ',') %> </p>
+            <p>Total Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).sum(:twitter_posts), :delimiter => ',') %> </p>
           </div>
           <div class="col-sm-6">
-            <p>Average Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").average(:twitter_posts), :delimiter => ',') %> </p>
+            <p>Average Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).average(:twitter_posts), :delimiter => ',') %> </p>
           </div>
         </div>
         <div class="row">
@@ -140,7 +140,7 @@
             <h3>Most Followers</h3>
             <ul class="list-group smaller">
               <% index = 1
-               @agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").order('twitter_followers desc').first(5).each do |outlet| %>
+               @agency.outlets.where(service: "twitter",status: 1).order('twitter_followers desc').first(5).each do |outlet| %>
               <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
               <% index = index + 1
               end %>
@@ -151,7 +151,7 @@
             <h3>Least Followers</h3>
             <ul class="list-group smaller">
               <% index = 1
-               @agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").order('twitter_followers asc').first(5).each do |outlet| %>
+               @agency.outlets.where(service: "twitter",status: 1).order('twitter_followers asc').first(5).each do |outlet| %>
               <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
               <% index = index + 1
               end %>
@@ -180,7 +180,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                <% @agency.outlets.where(service: "twitter").where("draft_id IS NOT NULL").all.each do |outlet| %>
+                <% @agency.outlets.where(service: "twitter",status: 1).all.each do |outlet| %>
                 <tr>
                   <td><%= link_to "#{outlet.organization.blank? ? "https://twitter.com/#{outlet.account}" : outlet.organization}" , admin_outlet_path(outlet), :target=> "_blank" %></td>
                   <td><%= outlet.twitter_followers %></td>
@@ -200,39 +200,39 @@
 
 <div class = "row">
   <div class="col-sm-12 col-md-12">
-    <h2>Agency YouTube Accounts  (<%= @agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").count %> total)</h2>
+    <h2>Agency YouTube Accounts  (<%= @agency.outlets.where(service: "youtube",status: 1).count %> total)</h2>
     <div class = "panel panel-default">
       <div class = "panel-body">
         <div class="row">
           <div class="col-sm-6">
-            <p>Total Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").sum(:youtube_subscribers), :delimiter => ',') %> </p>
+            <p>Total Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_subscribers), :delimiter => ',') %> </p>
           </div>
           <div class="col-sm-6">
-            <p>Average Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").average(:youtube_subscribers), :delimiter => ',') %> </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Total Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").sum(:youtube_video_count), :delimiter => ',') %> </p>
-          </div>
-          <div class="col-sm-6">
-            <p>Average Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").average(:youtube_video_count), :delimiter => ',') %> </p>
+            <p>Average Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_subscribers), :delimiter => ',') %> </p>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-6">
-            <p>Total Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").sum(:youtube_view_count), :delimiter => ',') %> </p>
+            <p>Total Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_video_count), :delimiter => ',') %> </p>
           </div>
           <div class="col-sm-6">
-            <p>Average Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").average(:youtube_view_count), :delimiter => ',') %> </p>
+            <p>Average Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_video_count), :delimiter => ',') %> </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <p>Total Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_view_count), :delimiter => ',') %> </p>
+          </div>
+          <div class="col-sm-6">
+            <p>Average Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_view_count), :delimiter => ',') %> </p>
           </div>
         </div> 
         <div class="row">
           <div class="col-sm-6">
-            <p>Total Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").sum(:youtube_comment_count), :delimiter => ',') %> </p>
+            <p>Total Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_comment_count), :delimiter => ',') %> </p>
           </div>
           <div class="col-sm-6">
-            <p>Average Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").average(:youtube_comment_count), :delimiter => ',') %> </p>
+            <p>Average Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_comment_count), :delimiter => ',') %> </p>
           </div>
         </div> 
         <div class="row">
@@ -240,7 +240,7 @@
             <h3>Most Followers</h3>
             <ul class="list-group smaller">
               <% index = 1
-               @agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").order('youtube_subscribers desc').first(5).each do |outlet| %>
+               @agency.outlets.where(service: "youtube",status: 1).order('youtube_subscribers desc').first(5).each do |outlet| %>
               <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.youtube_subscribers}" %></li>
               <% index = index + 1
               end %>
@@ -251,7 +251,7 @@
             <h3>Least Followers</h3>
             <ul class="list-group smaller">
               <% index = 1
-               @agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").order('youtube_subscribers asc').first(5).each do |outlet| %>
+               @agency.outlets.where(service: "youtube",status: 1).order('youtube_subscribers asc').first(5).each do |outlet| %>
               <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.youtube_subscribers}" %></li>
               <% index = index + 1
               end %>
@@ -282,7 +282,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                <% @agency.outlets.where(service: "youtube").where("draft_id IS NOT NULL").all.each do |outlet| %>
+                <% @agency.outlets.where(service: "youtube",status: 1).all.each do |outlet| %>
                 <tr>
                   <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target=> "_blank" %></td>
                   <td><%= outlet.youtube_subscribers %></td>
@@ -328,7 +328,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                <% Agency.find(2021).mobile_apps.includes(:mobile_app_versions).where("mobile_apps.draft_id IS NOT NULL").each do |ma| 
+                <% @agency.mobile_apps.includes(:mobile_app_versions).where("mobile_apps.status = ?" 1).each do |ma| 
                     ma.mobile_app_versions.each do |mav| %>
                   <tr>
                     <td><%= link_to ma.name, admin_mobile_app_path(ma), :target => "_blank" %></td>

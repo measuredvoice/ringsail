@@ -9,34 +9,34 @@
 <h1 class="page-title">U.S. Digital Registry - Facebook Stats</h1>
 <div class="row">
   <div class="col-sm-6">
-    <p>Total Followers: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").sum(:facebook_followers), :delimiter => ',') %> </p>
+    <p>Total Followers: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).sum(:facebook_followers), :delimiter => ',') %> </p>
   </div>
   <div class="col-sm-6">
-    <p>Average Followers: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_followers), :delimiter => ',') %> </p>
+    <p>Average Followers: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).average(:facebook_followers), :delimiter => ',') %> </p>
   </div>
 </div>
 <!-- <div class="row">
   <div class="col-sm-6">
-    <p>Total Likes: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").sum(:facebook_likes), :delimiter => ',') %> </p>
+    <p>Total Likes: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).sum(:facebook_likes), :delimiter => ',') %> </p>
   </div>
   <div class="col-sm-6">
-    <p>Average Likes: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_likes), :delimiter => ',') %> </p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-sm-6">
-    <p>Total Posts: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").sum(:facebook_posts), :delimiter => ',') %> </p>
-  </div>
-  <div class="col-sm-6">
-    <p>Average Posts: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_posts), :delimiter => ',') %> </p>
+    <p>Average Likes: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).average(:facebook_likes), :delimiter => ',') %> </p>
   </div>
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <p>Total Interactions: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").sum(:facebook_interactions), :delimiter => ',') %> </p>
+    <p>Total Posts: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).sum(:facebook_posts), :delimiter => ',') %> </p>
   </div>
   <div class="col-sm-6">
-    <p>Average Interactions: <%=  number_with_delimiter(Outlet.where(service: "facebook").where("draft_id IS NOT NULL").average(:facebook_interactions), :delimiter => ',') %> </p>
+    <p>Average Posts: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).average(:facebook_posts), :delimiter => ',') %> </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <p>Total Interactions: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).sum(:facebook_interactions), :delimiter => ',') %> </p>
+  </div>
+  <div class="col-sm-6">
+    <p>Average Interactions: <%=  number_with_delimiter(Outlet.where(service: "facebook",status: 1).average(:facebook_interactions), :delimiter => ',') %> </p>
   </div>
 </div> -->
 <div class="row">
@@ -44,7 +44,7 @@
     <h2>Most Followers</h2>
     <ul class="list-group smaller">
       <% index = 1
-       Outlet.where(service: "facebook").where("draft_id IS NOT NULL").order('facebook_followers desc').first(5).each do |outlet| %>
+       Outlet.where(service: "facebook",status: 1).order('facebook_followers desc').first(5).each do |outlet| %>
       <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
       <% index = index + 1
       end %>
@@ -55,7 +55,7 @@
     <h2>Least Followers</h2>
     <ul class="list-group smaller">
       <% index = 1
-       Outlet.where(service: "facebook").where("draft_id IS NOT NULL").order('facebook_followers asc').first(5).each do |outlet| %>
+       Outlet.where(service: "facebook",status: 1).order('facebook_followers asc').first(5).each do |outlet| %>
       <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
       <% index = index + 1
       end %>
@@ -85,7 +85,7 @@
         </tr>
       </tfoot>
       <tbody>
-        <% Outlet.where(service: "facebook").where("draft_id IS NOT NULL").all.each do |outlet| %>
+        <% Outlet.where(service: "facebook",status: 1).all.each do |outlet| %>
         <tr>
           <td><%= link_to outlet.organization, outlet.service_url, :target => "_blank" %></td>
           <td><%= outlet.facebook_followers %></td>

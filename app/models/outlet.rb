@@ -11,7 +11,6 @@
 #  updated_at        :datetime
 #  service           :string(255)
 #  status            :integer          default(0)
-#  draft_id          :integer
 #  short_description :text(65535)
 #  long_description  :text(65535)
 #
@@ -38,20 +37,37 @@ class Outlet < ActiveRecord::Base
       indexes :account_name, analyzer: 'english'
       indexes :account, type: :string
       indexes :status, analyzer: 'english'
-      indexes :draft_id, type: :integer
       indexes :updated_at, type: :date
     end
   end
 
   def as_indexed_json(options={})
+    contact_list = []
+    if self.try(:primary_contact).try(:email)
+      contact_list << self.try(:primary_contact).try(:email)
+    end
+    if self.try(:secondary_contact).try(:email)
+      contact_list << self.try(:secondary_contact).try(:email)
+    end
+    if self.users.count > 0
+      contact_list << self.users.map(&:email)
+    end
+
+    agency_list = []
+    if self.try(:primary_agency).try(:name)
+      agency_list << self.try(:primary_agency).try(:name)
+    end
+    if self.try(:secondary_agency).try(:name)
+      agency_list << self.try(:secondary_agency).try(:name)
+    end
+    if self.users.count > 0
+      agency_list << self.agencies.map(&:name)
+    end
     result = {
       id: self.id,
-      draft_id: self.draft_id,
       service: self.service,
-      agencies: self.agencies.map(&:name).join(", "),
-      contacts: self.users.map(&:email).join(", "),
-      primary_contact: self.try(:primary_contact).try(:email),
-      secondary_contact: self.try(:secondary_contact).try(:email),
+      agencies: agency_list.flatten.join(", "),
+      contacts: contact_list.flatten.join(", "),
       account_name: self.organization,
       account: self.account,
       status: self.status.humanize,
@@ -113,18 +129,6 @@ class Outlet < ActiveRecord::Base
   paginates_per 100
 
   before_save :social_media_update
-
-  after_commit on: [:create] do
-    __elasticsearch__.index_document
-  end
-
-  after_commit on: [:update] do
-    # ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: self.id, body: self.as_indexed_json
-  end
-
-  after_commit on: [:destroy] do
-    __elasticsearch__.delete_document
-  end
 
   def social_media_update
     # begin 
@@ -261,7 +265,7 @@ class Outlet < ActiveRecord::Base
 
     return nil unless s
 
-    existing = self.where(account: s.account, service: s.shortname).where("draft_id IS NOT NULL")
+    existing = self.where(account: s.account, service: s.shortname).where(status: 1)
     if existing
       return existing
     else

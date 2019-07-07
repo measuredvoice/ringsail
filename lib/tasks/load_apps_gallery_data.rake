@@ -23,9 +23,9 @@ namespace :load_apps_gallery_data do
   task :publish, [:file] => :environment do |t,args|
     PublicActivity.enabled = false
     puts "publish items that might not be actually published"
-    Outlet.where("draft_id IS NULL AND status = ?", Outlet.statuses[:published]).each { |outlet| outlet.published!}
-    MobileApp.where("draft_id IS NULL AND status = ?", MobileApp.statuses[:published]).each { |ma| ma.published!}
-    Gallery.where("draft_id IS NULL AND status = ?", Gallery.statuses[:published]).each { |ga| ga.published!}
+    Outlet.where("status = ?", Outlet.statuses[:published]).each { |outlet| outlet.published!}
+    MobileApp.where("status = ?", MobileApp.statuses[:published]).each { |ma| ma.published!}
+    Gallery.where("status = ?", Gallery.statuses[:published]).each { |ga| ga.published!}
     
     puts "outlets updates"
     Sponsorship.all.each do |sponsorship|

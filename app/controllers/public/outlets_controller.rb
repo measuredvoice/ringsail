@@ -7,9 +7,9 @@ class Public::OutletsController < Public::PublicController
 
   def verify
     if params[:service] and params[:account]
-      @outlet = Outlet.where(service: params[:service], account: params[:account]).where("draft_id IS NOT NULL").first
+      @outlet = Outlet.where(service: params[:service], account: params[:account]).where(status: 1).first
     else
-      @outlet = Outlet.where(service_url: params[:service_url]).where("draft_id IS NOT NULL").first
+      @outlet = Outlet.where(service_url: params[:service_url]).where(status: 1).first
     end
     if @outlet
       respond_to do |format|

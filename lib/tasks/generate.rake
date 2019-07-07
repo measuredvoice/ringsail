@@ -19,7 +19,7 @@ namespace :generate_data do
 
   task :report_agency_counts => :environment do 
     agency_counts = {}
-    Outlet.where.not(draft_id: nil).includes(:agencies).references(:agencies).all.each do |account|
+    Outlet.includes(:agencies).references(:agencies).all.each do |account|
       agency = account.agencies.first
 
       while(agency.parent)
@@ -52,7 +52,7 @@ namespace :generate_data do
         agency_counts[agency.name][service] = 0
       end
     end
-    Outlet.where.not(draft_id: nil).includes(:agencies).references(:agencies).all.each do |account|
+    Outlet.includes(:agencies).references(:agencies).all.each do |account|
       agency = account.agencies.first
 
       while(agency.parent)
@@ -87,7 +87,7 @@ namespace :generate_data do
     end
     Agency.all.each do |agen|
       services.each do |service|
-        agency_counts[agen.name.to_s][service] = Outlet.where(:agencies => { :id => agen.id }, :service => service,created_at:Time.new(2005,1,1)..Time.new(2017,8,31), updated_at: Time.new(2018, 4, 20)..Time.new(2018,9,31)).where(draft_id: nil).includes(:agencies).references(:agencies).count    
+        agency_counts[agen.name.to_s][service] = Outlet.where(:agencies => { :id => agen.id }, :service => service,created_at:Time.new(2005,1,1)..Time.new(2017,8,31), updated_at: Time.new(2018, 4, 20)..Time.new(2018,9,31)).includes(:agencies).references(:agencies).count    
       end
     end
     puts agency_counts.inspect
@@ -109,7 +109,7 @@ namespace :generate_data do
     services = Admin::Service.all.map{|item| item.shortname}
     service_counts = {}
     services.each do |service|
-      service_counts[service] = Outlet.where(:service => service).where.not(draft_id: nil).includes(:agencies).references(:agencies).all.count
+      service_counts[service] = Outlet.where(:service => service).includes(:agencies).references(:agencies).all.count
     end
     puts service_counts.inspect
     CSV.open("reports/service_counts.csv", 'wb') { |csv| 
@@ -122,7 +122,7 @@ namespace :generate_data do
 
   task :report_created_time_month => :environment do 
     # services = Admin::Service.all.map{|item| item.shortname}
-    @outlets = Outlet.where(:draft_id => nil).all
+    @outlets = Outlet.all
     @outlet_months = @outlets.group_by { |t| t.created_at.beginning_of_month }
     
     
@@ -142,7 +142,7 @@ namespace :generate_data do
 
    task :report_created_time_year => :environment do 
     # services = Admin::Service.all.map{|item| item.shortname}
-    @outlets = Outlet.where(:draft_id => nil).all
+    @outlets = Outlet.all
     @outlet_months = @outlets.group_by { |t| t.created_at.beginning_of_year }
     
     

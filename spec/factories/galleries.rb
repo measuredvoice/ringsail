@@ -6,7 +6,6 @@
 #  name              :string(255)
 #  created_at        :datetime
 #  updated_at        :datetime
-#  draft_id          :integer
 #  short_description :text(65535)
 #  long_description  :text(65535)
 #  status            :integer          default(0)

@@ -20,8 +20,8 @@ class Sponsorship < ActiveRecord::Base
   
   def update_counter_cache
     if self.agency
-      self.agency.draft_outlet_count = self.agency.outlets.where("draft_id IS NULL").count
-      self.agency.published_outlet_count = self.agency.outlets.where("draft_id IS NOT NULL").count
+      self.agency.draft_outlet_count = self.agency.outlets.count
+      self.agency.published_outlet_count = self.agency.outlets.count
       self.agency.save
     end
   end
