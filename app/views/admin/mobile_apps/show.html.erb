@@ -15,7 +15,7 @@
 	                </div>
 	            </div>
 					<%= render partial: "mobile_app_details", locals: { mobile_app: @mobile_app } %>
-				<% if @mobile_app.published %>
+				<% if @mobile_app.published? %>
 		  			<p>
 			  			<strong>API Link</strong>
 			  			<%= link_to digital_registry_v1_mobile_app_url(@mobile_app),
