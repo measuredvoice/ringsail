@@ -44,11 +44,23 @@ class MobileApp < ActiveRecord::Base
     if self.users.count > 0
       contact_list << self.users.map(&:email)
     end
+
+    agency_list = []
+    if self.try(:primary_agency).try(:name)
+      agency_list << self.try(:primary_agency).try(:name)
+    end
+    if self.try(:secondary_agency).try(:name)
+      agency_list << self.try(:secondary_agency).try(:name)
+    end
+    if self.users.count > 0
+      agency_list << self.agencies.map(&:name)
+    end
+
     result = {
       id: self.id,
       name: name,
-      agencies: self.agencies.map(&:name).join(", "),
-      contacts: contact_list.flatten.join(", ")
+      agencies: agency_list.flatten.join(", "),
+      contacts: contact_list.flatten.join(", "),
       platform: self.mobile_app_versions.map(&:platform).join(", "),
       status: self.status.humanize,
       updated_at: self.updated_at
