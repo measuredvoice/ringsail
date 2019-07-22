@@ -9,15 +9,15 @@ class Admin::ReviewSocialMediaController < Admin::AdminController
   # GET /outlets.json
   def index
     if params[:status] == "archived"
-      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email,  "outlets.status" => 2).order("outlets.validated_at ASC").page(current_page).per(10)
+      @outlets = Outlet.joins(:users).where("users.email = ? OR outlets.primary_contact_id = ? OR outlets.secondary_contact_id = ? ", current_user.email, current_user.id, current_user.id).where("outlets.status" => 2).order("outlets.validated_at ASC").page(current_page).per(10)
     elsif params[:status] == "published"
       if params[:review] == "needs"
-        @outlets = Outlet.joins(:users).where("users.email" =>current_user.email, "outlets.status" => 1).where("outlets.validated_at <= ?",180.days.ago).order("outlets.validated_at ASC").page(current_page).per(10)
+        @outlets = Outlet.joins(:users).where("users.email = ? OR outlets.primary_contact_id = ? OR outlets.secondary_contact_id = ? ", current_user.email, current_user.id, current_user.id).where( "outlets.status" => 1).where("outlets.validated_at <= ?",180.days.ago).order("outlets.validated_at ASC").page(current_page).per(10)
       else
-        @outlets = Outlet.joins(:users).where("users.email" =>current_user.email,  "outlets.status" => 1).order("outlets.validated_at ASC").page(current_page).per(10)
+        @outlets = Outlet.joins(:users).where("users.email = ? OR outlets.primary_contact_id = ? OR outlets.secondary_contact_id = ? ", current_user.email, current_user.id, current_user.id).where("outlets.status" => 1).order("outlets.validated_at ASC").page(current_page).per(10)
       end
     else
-      @outlets = Outlet.joins(:users).where("users.email" =>current_user.email).order("outlets.validated_at ASC").page(current_page).per(10)
+      @outlets = Outlet.joins(:users).where("users.email = ? OR outlets.primary_contact_id = ? OR outlets.secondary_contact_id = ? ", current_user.email, current_user.id, current_user.id).order("outlets.validated_at ASC").page(current_page).per(10)
     
     end
     
