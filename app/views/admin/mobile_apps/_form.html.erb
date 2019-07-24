@@ -63,7 +63,7 @@
       <%= f.select :secondary_agency_id, Agency.all.collect {|p| [ "#{p.name} #{p.shortname}", p.id ] },{:class => "form-control formwidth", :value => "",:prompt => "Select an Agency" }%>
     </div> -->
     <div class="field agencies">
-      <%= f.label :agency_tokens, "Sponsoring Agencies" %> (Optional)</br>
+      <%= f.label :agency_tokens, "Sponsoring Agencies" %><span class="red">*</span></br>
       <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
     </div>
     <!-- <div class="field contacts">
@@ -76,7 +76,7 @@
     </div> -->
     <div class="contacts">
       <div class="field">
-        <%= f.label :user_tokens, "Contacts" %> (Optional)</br>
+        <%= f.label :user_tokens, "Contacts" %><span class="red">*</span></br>
         <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => ""} %>
       </div>
     </div>
