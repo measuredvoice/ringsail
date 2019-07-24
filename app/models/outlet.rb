@@ -101,14 +101,14 @@ class Outlet < ActiveRecord::Base
   belongs_to :primary_contact, class_name: "User", foreign_key: "primary_contact_id"
   belongs_to :secondary_contact, class_name: "User", foreign_key: "secondary_contact_id"
 
-  validates :primary_contact, :presence => true
-  validates :secondary_contact, :presence => true
+  # validates :primary_contact, :presence => true
+  # validates :secondary_contact, :presence => true
 
 
   belongs_to :primary_agency, class_name: "Agency", foreign_key: "primary_agency_id"
   belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_agency_id"
 
-  validates :primary_agency, :presence => true
+  # validates :primary_agency, :presence => true
 
   # acts as taggable is being kept until we do a final data migration (needed for backwards compatibility)
   acts_as_taggable
@@ -122,8 +122,8 @@ class Outlet < ActiveRecord::Base
     :format     => { :with => URI::regexp(%w(http https)) }
 
   validates :language, :presence => true
-  # validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
-  # validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
 
   validates :short_description, :presence => true
   paginates_per 100

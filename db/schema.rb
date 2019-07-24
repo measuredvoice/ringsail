@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190522123527) do
+ActiveRecord::Schema.define(version: 20190701151411) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20190522123527) do
     t.string   "name",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "draft_id",          limit: 4
     t.text     "short_description", limit: 65535
     t.text     "long_description",  limit: 65535
     t.integer  "status",            limit: 4,     default: 0
@@ -171,7 +170,6 @@ ActiveRecord::Schema.define(version: 20190522123527) do
     t.string   "mongo_id",             limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "draft_id",             limit: 4
     t.datetime "validated_at"
     t.integer  "primary_contact_id",   limit: 4
     t.integer  "secondary_contact_id", limit: 4
@@ -237,7 +235,6 @@ ActiveRecord::Schema.define(version: 20190522123527) do
     t.datetime "updated_at"
     t.string   "service",               limit: 255
     t.integer  "status",                limit: 4,        default: 0
-    t.integer  "draft_id",              limit: 4
     t.text     "short_description",     limit: 16777215
     t.text     "long_description",      limit: 16777215
     t.integer  "twitter_followers",     limit: 4
@@ -263,7 +260,6 @@ ActiveRecord::Schema.define(version: 20190522123527) do
   end
 
   add_index "outlets", ["account"], name: "index_outlets_on_account", using: :btree
-  add_index "outlets", ["draft_id"], name: "index_outlets_on_draft_id", using: :btree
   add_index "outlets", ["service", "account"], name: "index_outlets_on_service_and_account", using: :btree
   add_index "outlets", ["service"], name: "index_outlets_on_service", using: :btree
 

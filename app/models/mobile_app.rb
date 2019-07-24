@@ -97,14 +97,14 @@ class MobileApp < ActiveRecord::Base
   belongs_to :primary_contact, class_name: "User", foreign_key: "primary_contact_id"
   belongs_to :secondary_contact, class_name: "User", foreign_key: "secondary_contact_id"
 
-  validates :primary_contact, :presence => true
-  validates :secondary_contact, :presence => true
+  # validates :primary_contact, :presence => true
+  # validates :secondary_contact, :presence => true
 
 
   belongs_to :primary_agency, class_name: "Agency", foreign_key: "primary_agency_id"
   belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_agency_id"
 
-  validates :primary_agency, :presence => true
+  # validates :primary_agency, :presence => true
   
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
@@ -112,8 +112,8 @@ class MobileApp < ActiveRecord::Base
   validates :short_description, :presence => true
   validates :long_description, :presence => true
  
-  # validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
-  # validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
+  validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
+  validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
   validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one version of the product must be given." }
 
 
