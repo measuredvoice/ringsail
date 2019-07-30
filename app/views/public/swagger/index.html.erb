@@ -85,8 +85,8 @@
                   </tbody>
                 </table>
                 <button type="submit" class="hidden button">Submit</button>
-                <button id="previousPage" class="hidden button">Previous Page</button>
-                <button id="nextPage" class="hidden button">Next Page</button>
+                <button id="previousPage" class="button">Previous Page</button>
+                <button id="nextPage" class="button">Next Page</button>
                 <!-- <button id="export" class="button">Export CSV</button> -->
               </div>
             </div>
@@ -145,8 +145,8 @@
                     </tbody>
                   </table>
                     <button type="submit" class="hidden button">Submit</button>
-                    <button id="mobilePreviousPage" class="hidden button">Previous Page</button>
-                    <button id="mobileNextPage" class="hidden button">Next Page</button>
+                    <button id="mobilePreviousPage" class="button">Previous Page</button>
+                    <button id="mobileNextPage" class="button">Next Page</button>
                     <!-- <button id="mobileExport" class="button">Export CSV</button> -->
                   </div>
                 </div>
@@ -321,6 +321,10 @@
 
 
   $(document).ready(function(){
+    $('#previousPage').hide();
+    $('#nextPage').hide();
+    $('#mobilePreviousPage').hide();
+    $('#mobileNextPage').hide();
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       $('.flex-active').toggleClass('flex-active');
       e.currentTarget.className = "flex-active";
@@ -401,7 +405,6 @@
   });
 
     function submit_social_media_form(){
-      $('#social-media-collection').empty();
       $.get("https://api.gsa.gov/systems/digital-registry/v1/social_media.json",{
         agencies: $('#social-media-agency').val(),
         services: $('#social-media-service').val(),
@@ -410,11 +413,14 @@
         page: $('#search-social-page').val(),
         tags: $('#tags').val()
       }, function(data){
+
+        $('#social-media-collection').empty();
         $('#metadata-results').html(metadata_template(data.metadata));
-        $('#social-media-collection').html('');
+
         if(data.results.length > 0){
           $('#previousPage').show();
           $('#nextPage').show();
+
         }else{
           $('#previousPage').hide();
           $('#nextPage').hide();
@@ -426,7 +432,7 @@
     }
 
     function submit_mobile_form(){
-      $('#mobile-collection').empty();
+      
       $.get("https://api.gsa.gov/systems/digital-registry/v1/mobile_apps.json",{
         agencies: $('#mobile-agency').val(),
         language: $('#mobile-language').val(),
@@ -435,7 +441,8 @@
         tags: $('#mobile-tags').val()
       }, function(data){
         $('#mobile-metadata-results').html(metadata_template(data.metadata));
-        $('#mobile-collection').html('');
+
+        $('#mobile-collection').empty();
         if(data.results.length > 0){
           $('#mobilePreviousPage').show();
           $('#mobileNextPage').show();
