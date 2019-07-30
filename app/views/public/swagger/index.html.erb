@@ -67,6 +67,9 @@
             </div>
             <div class="row form-inner">
               <div class="col-sm-12">
+
+                <button class="previous-page button">Previous Page</button>
+                <button class="next-page button">Next Page</button>
                 <div id="metadata-results">
                 </div>
                 <table class="table table-striped">
@@ -85,8 +88,8 @@
                   </tbody>
                 </table>
                 <button type="submit" class="hidden button">Submit</button>
-                <button id="previousPage" class="button">Previous Page</button>
-                <button id="nextPage" class="button">Next Page</button>
+                <button class="previous-page button">Previous Page</button>
+                <button class="next-page button">Next Page</button>
                 <!-- <button id="export" class="button">Export CSV</button> -->
               </div>
             </div>
@@ -126,6 +129,8 @@
                 </div>
                 <div class="row form-inner">
                   <div class="col-sm-12">
+                    <button class="mobile-previous-page button">Previous Page</button>
+                    <button class="mobile-next-page button">Next Page</button>
                     <div id="mobile-metadata-results">
                     </div>
                     <table class="table table-striped">
@@ -145,8 +150,8 @@
                     </tbody>
                   </table>
                     <button type="submit" class="hidden button">Submit</button>
-                    <button id="mobilePreviousPage" class="button">Previous Page</button>
-                    <button id="mobileNextPage" class="button">Next Page</button>
+                    <button class="mobile-previous-page button">Previous Page</button>
+                    <button class="mobile-next-page  button">Next Page</button>
                     <!-- <button id="mobileExport" class="button">Export CSV</button> -->
                   </div>
                 </div>
@@ -321,10 +326,10 @@
 
 
   $(document).ready(function(){
-    $('#previousPage').hide();
-    $('#nextPage').hide();
-    $('#mobilePreviousPage').hide();
-    $('#mobileNextPage').hide();
+    $('.previous-page').hide();
+    $('.next-page').hide();
+    $('.mobile-previous-page').hide();
+    $('.mobile-next-page').hide();
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       $('.flex-active').toggleClass('flex-active');
       e.currentTarget.className = "flex-active";
@@ -342,7 +347,7 @@
     });
 
 
-    $('#previousPage').click(function(e){
+    $('.previous-page').click(function(e){
       e.preventDefault();
       page_int = parseInt($('#search-social-page').val(),10);
       if(page_int > 1){
@@ -352,7 +357,7 @@
       }
       submit_social_media_form();
     });
-    $('#nextPage').click(function(e){
+    $('.next-page').click(function(e){
       e.preventDefault();
       var page_int = parseInt($('#search-social-page').val(),10);
       if(page_int){
@@ -368,7 +373,7 @@
     //    export_csv();
     // });
 
-    $('#mobileNextPage').click(function(e){
+    $('.mobile-next-page').click(function(e){
       e.preventDefault();
       var page_int = parseInt($('#mobile-page').val(),10);
       if(page_int){
@@ -378,7 +383,7 @@
       }
       submit_mobile_form();
     });
-    $('#mobilePreviousPage').click(function(e){
+    $('.mobile-previous-page').click(function(e){
        e.preventDefault();
       var page_int = parseInt($('#mobile-page').val(),10);
       if(page_int){
@@ -418,12 +423,12 @@
         $('#metadata-results').html(metadata_template(data.metadata));
 
         if(data.results.length > 0){
-          $('#previousPage').show();
-          $('#nextPage').show();
+          $('.previous-page').show();
+          $('.next-page').show();
 
         }else{
-          $('#previousPage').hide();
-          $('#nextPage').hide();
+          $('.previous-page').hide();
+          $('.next-page').hide();
         }
         for(var i =0; i<data.results.length; i++){
           $('#social-media-collection').append(social_media_template(data.results[i]));
@@ -444,11 +449,11 @@
 
         $('#mobile-collection').empty();
         if(data.results.length > 0){
-          $('#mobilePreviousPage').show();
-          $('#mobileNextPage').show();
+          $('.mobile-previous-page').show();
+          $('.mobile-next-page').show();
         }else{
-          $('#mobilePreviousPage').hide();
-          $('#mobileNextPage').hide();
+          $('.mobile-previous-page').hide();
+          $('.mobile-next-page').hide();
         }
         for(var i =0; i<data.results.length; i++){
           $('#mobile-collection').append(mobile_template(data.results[i]));
