@@ -33,7 +33,7 @@
     </ul>
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane fade in active" id="search_social">
-        <form class="navbar-form navbar-left row" role="search" id="social-media-search">
+        <form class="navbar-form row" role="search" id="social-media-search">
           <div class="col-sm-12">
             <div class="row form-inner">
               <div class="col-sm-12">
@@ -67,39 +67,31 @@
             </div>
             <div class="row form-inner">
               <div class="col-sm-12">
-                <button type="submit" class="button">Submit</button>
-                <button id="previousPage" class="button">Previous Page</button>
-                <button id="nextPage" class="button">Next Page</button>
+                <div id="metadata-results">
+                </div>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th style="width: 15%;">Agency</th>
+                      <th style="width: 13%;">Account Platform</th>
+                      <th style="width: 12%;"> Account Name</th>
+                      <th style="width: 50%;">Description</th>
+            
+                      <th style="width: 10%;">Last Updated</th>
+                    </tr>
+                  </thead>
+                  <tbody id="social-media-collection">
+                    <td colspan="5"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
+                  </tbody>
+                </table>
+                <button type="submit" class="hidden button">Submit</button>
+                <button id="previousPage" class="hidden button">Previous Page</button>
+                <button id="nextPage" class="hidden button">Next Page</button>
                 <!-- <button id="export" class="button">Export CSV</button> -->
               </div>
             </div>
           </div>
         </form>
-        <div class="row">
-          <div class="col-sm-12">
-            <div id="metadata-results">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-              <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th style="width: 15%;">Agency</th>
-                  <th style="width: 13%;">Account Platform</th>
-                  <th style="width: 12%;"> Account Name</th>
-                  <th style="width: 50%;">Description</th>
-        
-                  <th style="width: 10%;">Last Updated</th>
-                </tr>
-              </thead>
-              <tbody id="social-media-collection">
-                <td colspan="5"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
       <div role="tabpanel" class="tab-pane fade" id="search_mobile">
         <div class="row">
@@ -134,41 +126,32 @@
                 </div>
                 <div class="row form-inner">
                   <div class="col-sm-12">
-                    <button type="submit" class="button">Submit</button>
-                    <button id="mobilePreviousPage" class="button">Previous Page</button>
-                    <button id="mobileNextPage" class="button">Next Page</button>
+                    <div id="mobile-metadata-results">
+                    </div>
+                    <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>Agency</th>
+                        <th>Platforms</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th style="min-width: 110px">Last Updated</th>
+                      </tr>
+                    </thead>
+                    <tbody id="mobile-collection">
+                      <tr>
+                        <td colspan="5"><p style="text-align: center;">Use the form above to find mobile products.</p></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                    <button type="submit" class="hidden button">Submit</button>
+                    <button id="mobilePreviousPage" class="hidden button">Previous Page</button>
+                    <button id="mobileNextPage" class="hidden button">Next Page</button>
                     <!-- <button id="mobileExport" class="button">Export CSV</button> -->
                   </div>
                 </div>
               </div>
             </form>
-            <div class="row">
-              <div class="col-sm-12">
-                <div id="mobile-metadata-results">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-12">
-                  <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Agency</th>
-                      <th>Platforms</th>
-                      <th>Name</th>
-                      <th>Description</th>
-                      <th style="min-width: 110px">Last Updated</th>
-                    </tr>
-                  </thead>
-                  <tbody id="mobile-collection">
-                    <tr>
-                      <td colspan="5"><p style="text-align: center;">Use the form above to find mobile products.</p></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
@@ -429,6 +412,13 @@
       }, function(data){
         $('#metadata-results').html(metadata_template(data.metadata));
         $('#social-media-collection').html('');
+        if(data.results.length > 0){
+          $('#previousPage').show();
+          $('#nextPage').show();
+        }else{
+          $('#previousPage').hide();
+          $('#nextPage').hide();
+        }
         for(var i =0; i<data.results.length; i++){
           $('#social-media-collection').append(social_media_template(data.results[i]));
         }
@@ -446,6 +436,13 @@
       }, function(data){
         $('#mobile-metadata-results').html(metadata_template(data.metadata));
         $('#mobile-collection').html('');
+        if(data.results.length > 0){
+          $('#mobilePreviousPage').show();
+          $('#mobileNextPage').show();
+        }else{
+          $('#mobilePreviousPage').hide();
+          $('#mobileNextPage').hide();
+        }
         for(var i =0; i<data.results.length; i++){
           $('#mobile-collection').append(mobile_template(data.results[i]));
         }
