@@ -22,6 +22,9 @@
               <ul class="table_list">
                 <li><%= link_to "Add a Social Media Account", new_admin_outlet_path, class: "btn btn-default" %></li>
                 <li>&nbsp;</li>
+                <li><%= link_to "Social Media Accounts Review",  admin_review_social_media_path, class: "btn btn-default" %></li>
+
+                <li>&nbsp;</li>
                 <li><%= link_to "View Social Media Accounts", admin_outlets_path, class: "btn btn-default" %></li>
               </ul>
 				  	</div>
@@ -35,6 +38,8 @@
 				  	<div class="panel-body">
               <ul class="table_list">
                 <li><%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default" %></li>
+                <li>&nbsp;</li>
+                <li><%= link_to "Mobile Products Review",  admin_review_mobile_apps_path , class: "btn btn-default"%></li>
                 <li>&nbsp;</li>
                 <li><%= link_to "View Mobile Products", admin_mobile_apps_path, class: "btn btn-default" %></li>
               </ul>
