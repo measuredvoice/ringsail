@@ -16,5 +16,6 @@ rake load_apps_gallery_data:galleries
 #RAILS_ENV=development bundle exec rake environment elasticsearch:import:model CLASS='MobileApp' FORCE=y
 #RAILS_ENV=development bundle exec rake environment elasticsearch:import:model CLASS='Outlet' FORCE=y
 
+
 #RAILS_ENV=production bundle exec rake environment elasticsearch:import:model CLASS='MobileApp' FORCE=y
 #RAILS_ENV=production bundle exec rake environment elasticsearch:import:model CLASS='Outlet' FORCE=y

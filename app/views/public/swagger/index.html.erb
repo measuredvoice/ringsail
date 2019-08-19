@@ -167,31 +167,14 @@
   <h2>What's "Official"?</h2>
   <p>The U.S. Digital Registry only includes accounts that represent official U.S. government agencies, organizations, or programs — the collection grows daily. You can register accounts managed by federal agencies, heads of agencies or members of the President’s Cabinet. <b>Do not enter personal, employee, or other types of accounts.</b></p>
   <h2>For Developers: Using and Improving the API</h2>
-  <p>Access the <a href="#swagger-api-docs">U.S. Digital Registry API</a> or its <a href="https://github.com/ctacdev/social-media-registry" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://github.com/ctacdev/social-media-registry', 'GitHub repo');">GitHub repo</a> to test, evaluate, improve and use it.</p>
+  <p>Access the <a href="https://open.gsa.gov/api/digital-registry/">U.S. Digital Registry API</a> or its <a href="https://github.com/GSA/us-digital-registry" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://github.com/GSA/us-digital-registry', 'GitHub repo');">GitHub repo</a> to test, evaluate, improve and use it.</p>
   <h2>Feedback</h2>
   <p>If you have questions, comments or ideas on how to use or improve the U.S. Digital&nbsp;Registry, please contact us <a href="mailto:usdigitalregistry@gsa.gov">via email</a>.</p>
 
-<div style="clear:both;"></div>
-  <h2 id="swagger-api-docs" style="padding-top: 50px;">API Documentation</h2>
-  <p>The API documentation below serves as both a way to learn how to use the API, but to also test it directly in your browser. All API calls should be performed against the base url https://api.gsa.gov/systems/digital-registry/.  For example: https://api.gsa.gov/systems/digital-registry/v1/social_media.json </p>
+  <h2 id="swagger-api-docs"> API Documentation</h2>
+  <p style="font-weight: bold; font-size: 1.3em;">The API documentation has moved to <a href="https://open.gsa.gov/api/digital-registry/">https://open.gsa.gov/api/digital-registry/</a>.</p>
+  <div class="spacer" style="padding: 80px;"></div>
 
-
-<div style="clear:both;"></div>
-
-<div class="swagger-section">
-  <div id='header'>
-    <div class="swagger-ui-wrap">
-       <form id='api_selector' class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <!-- <div class='input'><input placeholder="http://example.com/api" id="input_baseUrl" name="baseUrl" type="text"/></div>
-          <div class='input'><input placeholder="api_key" id="input_apiKey" name="apiKey" type="text"/></div>
-          <div class='input'><a id="explore" href="#">Explore</a></div> -->
-        </div>
-      </form>
-    </div>
-  </div>
-  <div id="swagger-ui-container" class="swagger-ui-wrap"></div>
-</div>
 
 <%= form_tag export_social_media_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :hidden_agencies %>
@@ -218,45 +201,7 @@
       margin: 5px;
     }
   </style>
-  <script type="text/javascript">
-    $(function () {
-      window.swaggerUi = new SwaggerUi({
-        url: "<%= ENV['REGISTRY_API_HOST'] %>/digital-registry/v1/swagger_docs/api-docs.json",
-        dom_id: "swagger-ui-container",
-        supportedSubmitMethods: ['get'],
-        onComplete: function(swaggerApi, swaggerUi){
-
-          if(typeof initOAuth == "function") {
-            /*
-            initOAuth({
-              clientId: "your-client-id",
-              realm: "your-realms",
-              appName: "your-app-name"
-            });
-            */
-          }
-          $('pre code').each(function(i, e) {
-            hljs.highlightBlock(e)
-          });
-        },
-        onFailure: function(data) {
-          console.log("Unable to Load SwaggerUI");
-        },
-        docExpansion: "list",
-        sorter : "alpha"
-      });
-
-      $('#input_apiKey').change(function() {
-        var key = $('#input_apiKey')[0].value;
-        console.loglog("key: " + key);
-        if(key && key.trim() != "") {
-          console.log("added key " + key);
-          window.authorizations.add("key", new ApiKeyAuthorization("api_key", key, "query"));
-        }
-      })
-      window.swaggerUi.load();
-    });
-  </script>
+  
 <script id="social-media-template" type="text/x-handlebars-template">
   <tr>
     <td>{{#each agencies}}
