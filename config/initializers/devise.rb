@@ -27,6 +27,7 @@ Devise.setup do |config|
   # CAS, uncomment the following line.
   # config.cas_create_user = false
   config.cas_username_column = :user
+  
   # You can enable Single Sign Out, which by default is disabled.
   # config.cas_enable_single_sign_out = true
 
@@ -43,14 +44,6 @@ Devise.setup do |config|
   # config.cas_client_config_options = {
   #     logger: Rails.logger
   # }
-
-
-
-
-
-
-
-
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
