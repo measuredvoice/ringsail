@@ -328,7 +328,7 @@
                 </tr>
               </tfoot>
               <tbody>
-                <% @agency.mobile_apps.includes(:mobile_app_versions).where("mobile_apps.status = ?" 1).each do |ma| 
+                <% @agency.mobile_apps.includes(:mobile_app_versions).where("mobile_apps.status = ?", 1).each do |ma| 
                     ma.mobile_app_versions.each do |mav| %>
                   <tr>
                     <td><%= link_to ma.name, admin_mobile_app_path(ma), :target => "_blank" %></td>
