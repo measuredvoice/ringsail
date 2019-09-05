@@ -250,5 +250,6 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-   config.secret_key = 'a036b4692a7a63377c45bb05bdad99edf453b7395a38b27ecdb5384aa02f21cfc894d766a4e5c15b9f683d46a7967b4556bcb86f2e03cb26a1992b6c9b6d1456'
+  # line from initializer that overrides this on build
+  config.secret_key = ENV['REGISTRY_RAILS_COOKIE_TOKEN']
 end
