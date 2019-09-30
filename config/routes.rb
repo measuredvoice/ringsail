@@ -165,7 +165,14 @@ Ringsail::Application.routes.draw do
 
   # we are going to replace rails admin, its not very maintainable, but a decent crud
   # keep in the app until we are sure we've replace the functionality
+  # get '/auth/logindotgov/callback' => 'users/omniauth#callback'
 
+  # namespace 'auth' do
+  #   scope 'logindotgov' do
+  #     get 'callback'
+  #     get 'failure'
+  #   end
+  # end
 
   #######
   #### Admin Endpoints
@@ -277,7 +284,7 @@ Ringsail::Application.routes.draw do
     get '/' => 'dashboards#index'
   end
 
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   #######
   #### API ENDPOINTS

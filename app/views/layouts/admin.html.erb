@@ -126,7 +126,7 @@
 	            <li><%= link_to "Notifications <span class=\"count pull-right\">#{current_user.notifications.where(has_read: false).count }</span>".html_safe, admin_user_notifications_path(user_id: current_user) %></li>
 	            <li><%= link_to "Email Admins", new_admin_email_message_path(include_admins: true) %></li>
 	            <li><%= link_to "About Application", admin_about_path %></li>
-	            <li><%= link_to "Logout", destroy_user_session_path %></li>
+	            <li><%= link_to "Logout", "/" %></li>
 	            <% if Rails.env.development?  %>
 	            	<li role="presentation" class="dropdown-header">Impersonate</li>
 	            	<% User.roles.each do |k,v|

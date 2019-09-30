@@ -2,7 +2,7 @@
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
   # CAS SPECIFIC IMPLEMENTATION
-  config.cas_base_url = "https://login.max.gov/cas/"
+  # config.cas_base_url = "https://login.max.gov/cas/"
 
   # you can override these if you need to, but cas_base_url is usually enough
   # config.cas_login_url = "https://cas.myorganization.com/login"
@@ -26,7 +26,7 @@ Devise.setup do |config|
   # require user records to already exist locally before they can authenticate via
   # CAS, uncomment the following line.
   # config.cas_create_user = false
-  config.cas_username_column = :user
+  # config.cas_username_column = :user
   
   # You can enable Single Sign Out, which by default is disabled.
   # config.cas_enable_single_sign_out = true
@@ -44,7 +44,14 @@ Devise.setup do |config|
   # config.cas_client_config_options = {
   #     logger: Rails.logger
   # }
-
+  config.omniauth :login_dot_gov, {
+    name: :login_dot_gov,
+    client_id: 'urn:gov:gsa:openidconnect.profiles:sp:sso:gsa:usdr_dev', # same value as registered in the Partner Dashboard
+    idp_base_url: 'https://idp.int.identitysandbox.gov/', # login.gov sandbox environment IdP
+    ial: 1,
+    private_key: OpenSSL::PKey::RSA.new(File.read('config/private.pem')),
+    redirect_uri: 'http://localhost:3000/users/auth/login_dot_gov/callback',
+  }
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
