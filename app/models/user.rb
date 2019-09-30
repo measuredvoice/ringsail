@@ -30,8 +30,8 @@ class User < ActiveRecord::Base
 
   belongs_to :agency
   
-  devise :omniauthable, omniauth_providers: %i[login_dot_gov]
-  # devise :trackable, :timeoutable
+  devise :omniauthable, omniauth_providers: %i[login_dot_gov] 
+  devise :trackable, :timeoutable
 
   enum role: { user: 0, super_user: 1, admin: 2, banned: 3}
   enum email_notification_type: { full_html_email: 0, plain_text_email: 1 }
