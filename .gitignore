@@ -13,3 +13,5 @@ public/swagger_docs/
 public/assets/
 .ruby-gemset
 coverage/
+config/private.pem
+config/public.crt
