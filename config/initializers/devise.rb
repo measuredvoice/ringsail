@@ -50,7 +50,7 @@ Devise.setup do |config|
     idp_base_url: 'https://idp.int.identitysandbox.gov/', # login.gov sandbox environment IdP
     ial: 1,
     private_key: OpenSSL::PKey::RSA.new(File.read('config/private.pem')),
-    redirect_uri: 'http://localhost:3000/users/auth/login_dot_gov/callback',
+    redirect_uri: ENV['REGISTRY_LOGIN_REDIRECT'],
   }
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
