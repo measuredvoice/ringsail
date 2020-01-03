@@ -2,7 +2,7 @@ class Admin::AdminController < ApplicationController
   include PublicActivity::StoreController
   layout "admin"
 
-  before_filter :authenticate_user! #unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
+  before_filter :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
   # before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
   before_filter :banned_user?, except: [:about, :impersonate, :dashboard]
   before_filter :headers
@@ -28,17 +28,17 @@ class Admin::AdminController < ApplicationController
   end
 
   def current_user
-    # if Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
-    #   if session[:user_id] && User.where(id: session[:user_id]).count > 0
-    #     @current_user ||= User.find(session[:user_id])
-    #   else
-    #     # @current_user ||= User.find(3561)
-    #      @current_user ||= User.where(role: 2).first
+    if Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
+      if session[:user_id] && User.where(id: session[:user_id]).count > 0
+        @current_user ||= User.find(session[:user_id])
+      else
+        # @current_user ||= User.find(3561)
+         @current_user ||= User.where(role: 2).first
 
-    #   end
-    # else
+      end
+    else
       @current_user ||= warden.authenticate(scope: :user)
-    # end
+    end
   end
 
   def admin_two_factor
