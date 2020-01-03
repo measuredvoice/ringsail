@@ -87,7 +87,7 @@ class User < ActiveRecord::Base
   # end
 
   def self.from_omniauth(auth)
-    if auth.info.email.end_with?(".gov") || auth.info.email.end_with?(".mil")
+    if(auth.info.email.end_with?(".gov") || auth.info.email.end_with?(".mil"))
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = auth.info.email
         user.password = Devise.friendly_token[0, 20]
