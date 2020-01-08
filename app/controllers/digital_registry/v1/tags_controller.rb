@@ -1,26 +1,26 @@
 class DigitalRegistry::V1::TagsController < DigitalRegistry::ApiController
 
-	swagger_controller :tags, "Tags"
+	# swagger_controller :tags, "Tags"
 
-	swagger_api :index do
-    	summary "Fetches all official tags, with queryable fields such as a basic text search and."
-        notes "This lists all tags.  It accepts parameters to perform basic search."
-        param :query, :q, :string, :optional, "String to compare to the short name of tags."
-        param :type, :type, :string, :optional, "Comma separated list of tag types"
-        param :query, :page_size, :integer, :optional, "Number of results per page"
-        param :query, :page, :integer, :optional, "Page number"
-	end
+	# swagger_api :index do
+ #    	summary "Fetches all official tags, with queryable fields such as a basic text search and."
+ #        notes "This lists all tags.  It accepts parameters to perform basic search."
+ #        param :query, :q, :string, :optional, "String to compare to the short name of tags."
+ #        param :type, :type, :string, :optional, "Comma separated list of tag types"
+ #        param :query, :page_size, :integer, :optional, "Number of results per page"
+ #        param :query, :page, :integer, :optional, "Page number"
+	# end
 
-    swagger_api :types do
-        summary "Fetches all types for the tags, to help power other queries."
-        notes "This returns a tag based on an ID."
-    end
+ #    swagger_api :types do
+ #        summary "Fetches all types for the tags, to help power other queries."
+ #        notes "This returns a tag based on an ID."
+ #    end
 
-	swagger_api :show do
-		summary "Fetches tag based on ID"
-        notes "This returns a tag based on an ID."
-        param :path, :id, :integer, :optional, "ID of the tag."
-	end
+	# swagger_api :show do
+	# 	summary "Fetches tag based on ID"
+ #        notes "This returns a tag based on an ID."
+ #        param :path, :id, :integer, :optional, "ID of the tag."
+	# end
 
 	PAGE_SIZE=25
 	DEFAULT_PAGE=1

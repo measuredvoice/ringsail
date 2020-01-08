@@ -1,16 +1,16 @@
 class DigitalRegistry::V1::MobileAppsController < DigitalRegistry::ApiController
-	swagger_controller :mobile_apps, "Government Mobile Apps"
+	# swagger_controller :mobile_apps, "Government Mobile Apps"
 
-	swagger_api :index do
-		summary "Fetches all mobile apps"
-    notes "This lists all active mobile apps.  It accepts parameters to perform basic search as well as searching by tag and agency."
-    param :query, :q, :string, :optional, "String to compare to the name & short description of the mobile apps."
-    param :query, :agencies, :ids, :optional, "Comma separated list of agency ids"
-    param :query, :tags, :ids, :optional, "Comma separated list of tag ids"
-    param :query, :language, :string, :optional, "Language of the social media accounts to return"
-    param :query, :page_size, :integer, :optional, "Number of results per page, defaults to 25"
-    param :query, :page, :integer, :optional, "Page number"
-	end
+	# swagger_api :index do
+	# 	summary "Fetches all mobile apps"
+ #    notes "This lists all active mobile apps.  It accepts parameters to perform basic search as well as searching by tag and agency."
+ #    param :query, :q, :string, :optional, "String to compare to the name & short description of the mobile apps."
+ #    param :query, :agencies, :ids, :optional, "Comma separated list of agency ids"
+ #    param :query, :tags, :ids, :optional, "Comma separated list of tag ids"
+ #    param :query, :language, :string, :optional, "Language of the social media accounts to return"
+ #    param :query, :page_size, :integer, :optional, "Number of results per page, defaults to 25"
+ #    param :query, :page, :integer, :optional, "Page number"
+	# end
 
 	PAGE_SIZE=25
 	DEFAULT_PAGE=1
@@ -37,11 +37,11 @@ class DigitalRegistry::V1::MobileAppsController < DigitalRegistry::ApiController
 		end		
 	end
 
-	swagger_api :show do
-		summary "Fetches a single mobile app item"
-		notes "This returns an mobile app based on an ID."
-		param :path, :id, :integer, :required, "ID of the mobile app"
-	end
+	# swagger_api :show do
+	# 	summary "Fetches a single mobile app item"
+	# 	notes "This returns an mobile app based on an ID."
+	# 	param :path, :id, :integer, :required, "ID of the mobile app"
+	# end
 	def show
     params[:page_size] = params[:page_size] || PAGE_SIZE
 		@mobile_apps =  MobileApp.where(id: params[:id]).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
@@ -51,11 +51,11 @@ class DigitalRegistry::V1::MobileAppsController < DigitalRegistry::ApiController
 	end
 
 
-  swagger_api :tokeninput do
-    summary "Returns a list of tokens to help with search interfaces"
-    notes "This returns tokens representing agencies, tags, and a basic text search token for the purpose of building search dialogs"
-    param :query, :q, :string, :optional, "String to compare to the various values"
-  end
+  # swagger_api :tokeninput do
+  #   summary "Returns a list of tokens to help with search interfaces"
+  #   notes "This returns tokens representing agencies, tags, and a basic text search token for the purpose of building search dialogs"
+  #   param :query, :q, :string, :optional, "String to compare to the various values"
+  # end
 
 
   def tokeninput
