@@ -2,8 +2,8 @@ class Stats::YoutubeController < ApplicationController
 
   layout "admin"
 
-  before_filter :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
-  before_filter :banned_user?, except: [:about, :impersonate, :dashboard]
+  before_action :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
+  before_action :banned_user?, except: [:about, :impersonate, :dashboard]
   helper_method :current_user
 
   

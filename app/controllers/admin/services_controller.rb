@@ -20,8 +20,8 @@ class Admin::ServicesController < Admin::AdminController
   respond_to :html, :xml, :json
   before_action :set_admin_service, only: [:show, :edit, :update, :archive, :restore]
 
-  before_filter :require_admin
-  before_filter :admin_two_factor
+  before_action :require_admin
+  before_action :admin_two_factor
   # GET /admin/services
   # GET /admin/services.json
   def index
