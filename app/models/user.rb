@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   has_many :outlets, :through => :outlet_users
 
   has_many :notifications
-  serialize :agency_notifications_settings, :contact_notifications_settings
+  # serialize :agency_notifications_settings, :contact_notifications_settings
 
   paginates_per 200
 

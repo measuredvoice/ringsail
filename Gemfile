@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 #ruby ENV['RUBY_VERSION']
 
 # Rails
-gem 'rails', '4.2.11.1'
+gem 'rails', '5.2'
 
 # DB Connector
 gem 'mysql2', '0.4.10'
@@ -41,7 +41,7 @@ gem 'acts-as-taggable-on'
 gem 'kaminari'
 
 # Swagger generation
-gem 'swagger-docs'
+# gem 'swagger-docs'
 
 # Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
 gem 'rack-cors', :require => 'rack/cors'

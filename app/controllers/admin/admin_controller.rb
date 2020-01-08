@@ -2,10 +2,10 @@ class Admin::AdminController < ApplicationController
   include PublicActivity::StoreController
   layout "admin"
 
-  before_filter :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
+  before_action :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
   # before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
-  before_filter :banned_user?, except: [:about, :impersonate, :dashboard]
-  before_filter :headers
+  before_action :banned_user?, except: [:about, :impersonate, :dashboard]
+  before_action :headers
   helper_method :current_user
 
   def about

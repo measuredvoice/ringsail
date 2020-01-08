@@ -4,11 +4,11 @@ class DigitalRegistry::V1::AgenciesController < DigitalRegistry::ApiController
 
 	swagger_api :index do
 		summary "Fetches all agencies"
-    notes "This lists all active agencies in the system. These agencies can be used to query for social media accounts, mobile products, and galleries."
-    param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
-    param :query, :page_size, :integer, :optional, "Number of results per page"
-    param :query, :no_accounts, :string, :optional, "Including this parameter with value 'true' will cause the endpoint to include agencies that have no account in the system"
-    param :query, :page, :integer, :optional, "Page number"
+	    notes "This lists all active agencies in the system. These agencies can be used to query for social media accounts, mobile products, and galleries."
+	    param :query, :q, :string, :optional, "String to compare to the name & acronym of the agencies."
+	    param :query, :page_size, :integer, :optional, "Number of results per page"
+	    param :query, :no_accounts, :string, :optional, "Including this parameter with value 'true' will cause the endpoint to include agencies that have no account in the system"
+	    param :query, :page, :integer, :optional, "Page number"
 	end
 
 	swagger_api :show do
