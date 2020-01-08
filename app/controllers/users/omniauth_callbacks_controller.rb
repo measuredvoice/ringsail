@@ -11,8 +11,13 @@ module Users
 
       # Can't find an account, tell user to contact login.gov team
       else
-        redirect_to users_none_url
+        redirect_to admin_about_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
       end
+    end
+
+
+    def failure
+      redirect_to admin_about_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
     end
   end
 end
