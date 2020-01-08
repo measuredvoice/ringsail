@@ -31,7 +31,7 @@ class DigitalRegistry::V1::MobileAppsController < DigitalRegistry::ApiController
     if params[:tags] && params[:tags] != ""
       @mobile_apps = @mobile_apps.where("official_tags.id" => params[:tags].split(","))
     end
-		@mobile_apps = @mobile_apps.uniq.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+		@mobile_apps = @mobile_apps.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
 		respond_to do |format|
 			format.json { render "index" }
 		end		

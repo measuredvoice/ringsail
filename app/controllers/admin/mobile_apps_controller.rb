@@ -13,7 +13,7 @@ class Admin::MobileAppsController < Admin::AdminController
     end
     respond_to do |format|
       format.html { 
-        @mobile_apps = MobileApp.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users).uniq
+        @mobile_apps = MobileApp.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users)
     
         if params[:platform] && params[:platform] != ""
           @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})

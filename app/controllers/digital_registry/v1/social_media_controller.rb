@@ -36,7 +36,7 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
     if params[:services] && params[:services] != ""
       @outlets = @outlets.where(service: params[:services].split(","))
     end
-    @outlets = @outlets.uniq.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+    @outlets = @outlets.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
       format.json { render "index" }
     end
@@ -73,7 +73,7 @@ class DigitalRegistry::V1::SocialMediaController < DigitalRegistry::ApiControlle
     if params[:services] && params[:services] != ""
       @outlets = @outlets.where(service: params[:services].split(","))
     end
-    @outlets = @outlets.uniq.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
+    @outlets = @outlets.order(updated_at: :desc).page(params[:page] || DEFAULT_PAGE).per(params[:page_size] || PAGE_SIZE)
     respond_to do |format|
       format.json { render "archived" }
     end
