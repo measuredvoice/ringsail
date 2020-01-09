@@ -2,6 +2,7 @@ class Admin::SocialMediaController < Admin::AdminController
   helper_method :sort_column, :sort_direction, :current_page
   respond_to :html, :xml, :json, :csv, :xls
 
+  before_action :user_has_agency
   before_action :set_outlet, only: [:show, :edit, :update, :destroy,
     :publish, :archive, :request_publish, :request_archive]
 

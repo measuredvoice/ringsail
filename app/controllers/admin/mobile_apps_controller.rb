@@ -1,6 +1,8 @@
 class Admin::MobileAppsController < Admin::AdminController
   helper_method :sort_column, :sort_direction
   respond_to :html, :xml, :json, :csv, :xls
+
+  before_action :user_has_agency
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy,
     :archive, :publish, :request_archive, :request_publish]
     

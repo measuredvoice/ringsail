@@ -4,6 +4,7 @@ class Admin::AdminController < ApplicationController
 
   before_action :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
   # before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
+  
   before_action :banned_user?, except: [:about, :impersonate, :dashboard]
   before_action :headers
   helper_method :current_user
@@ -20,6 +21,14 @@ class Admin::AdminController < ApplicationController
     session[:user_id] = params[:user_id]
     @current_user = User.find(params[:user_id])
     redirect_to admin_dashboards_path, notice: "Now impersonating: #{User.find(params[:user_id]).email} with role: #{User.find(params[:user_id]).role.humanize}"
+  end
+
+  def user_has_agency
+    if current_user.agency
+      return true
+    else
+      redirect_to edit_admin_user_path(current_user.id), notice: "You do not currently have an Agency assigned to user user, please update your user profile to manage accounts"
+    end
   end
 
   def headers

@@ -31,20 +31,7 @@ class Admin::DashboardsController < Admin::AdminController
       "MobileApp" => "Mobile Application",
       "Gallery" => "Gallery"
     }  
-    # activities_pie = PublicActivity::Activity.find_by_sql("
-    #     SELECT COUNT(id) as count, trackable_type as type FROM activities GROUP BY trackable_type;")
-    # @activities_pie_json = []
-
-    # activities_pie.each do |item|
-    #   @activities_pie_json << { label: matches[item.type], value: item.count}
-    # end
-
-    # # TAG CLOUD
-    # @tag_cloud = OfficialTag.find_by_sql("SELECT tag_text as text, 
-    #   (draft_gallery_count + draft_outlet_count + draft_mobile_app_count) as weight 
-    #   FROM official_tags 
-    #   ORDER BY (draft_gallery_count + draft_outlet_count + draft_mobile_app_count) DESC
-    #   LIMIT 50")
+    
   end
 
 end
