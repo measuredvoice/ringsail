@@ -27,7 +27,7 @@ class Admin::AdminController < ApplicationController
     if current_user.agency
       return true
     else
-      redirect_to edit_admin_user_path(current_user.id), notice: "You do not currently have an Agency assigned to user user, please update your user profile to manage accounts"
+      redirect_to admin_user_path(current_user.id), notice: "You do not currently have an Agency assigned to user user, please update your user profile to manage accounts"
     end
   end
 

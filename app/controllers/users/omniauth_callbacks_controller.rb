@@ -18,7 +18,7 @@ module Users
             last_name: omniauth_info['family_name']
           })
         else
-            redirect_to admin_about_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
+          redirect_to admin_about_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
         end
       end
     end
