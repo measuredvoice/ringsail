@@ -12,11 +12,12 @@ module Users
       # Can't find an account, tell user to contact login.gov team
       else
         if(omniauth_info['email'].end_with?(".gov") || omniauth_info['email'].end_with?(".mil"))
-          User.create({
+          new_user = User.create({
             email: omniauth_info['email'],
             first_name: omniauth_info['given_name'],
             last_name: omniauth_info['family_name']
           })
+          redirect_to admin_user_path(new_user.id), notice: "You do not currently have an Agency assigned to user account, please update your user profile to manage accounts"
         else
           redirect_to admin_about_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
         end

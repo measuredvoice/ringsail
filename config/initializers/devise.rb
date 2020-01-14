@@ -1,5 +1,23 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
+
+
+class CustomFailure < Devise::FailureApp
+    def redirect_url
+       "https://#{ENV['REGISTRY_HOSTNAME']}/users/auth/login_dot_gov"
+    end
+
+    # You need to override respond to eliminate recall
+    def respond
+      if http_auth?
+        http_auth
+      else
+        redirect
+      end
+    end
+  end
+
+
 Devise.setup do |config|
   # CAS SPECIFIC IMPLEMENTATION
   # config.cas_base_url = "https://login.max.gov/cas/"
@@ -253,10 +271,9 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    manager.failure_app = CustomFailure
+  end
   # line from initializer that overrides this on build
   config.secret_key = ENV['REGISTRY_RAILS_COOKIE_TOKEN']
 end
