@@ -7,8 +7,8 @@ GIT
       rake (>= 10.4, < 13.0)
 
 GIT
-  remote: https://github.com/18f/omniauth_login_dot_gov.git
-  revision: 2566e7837fd539b43f7da6b567168838fd957067
+  remote: https://github.com/ctacdev/omniauth_login_dot_gov.git
+  revision: 3db2aba2817e484ad7334ca89d8b5be532ed3765
   specs:
     omniauth_login_dot_gov (0.0.1)
       activesupport (~> 5.2)
