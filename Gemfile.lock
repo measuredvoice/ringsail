@@ -8,7 +8,8 @@ GIT
 
 GIT
   remote: https://github.com/ctacdev/omniauth_login_dot_gov.git
-  revision: 3db2aba2817e484ad7334ca89d8b5be532ed3765
+  revision: 456ad8590f3fd5d1207d92914d2571bebcaeb8a6
+  ref: 456ad85
   specs:
     omniauth_login_dot_gov (0.0.1)
       activesupport (~> 5.2)
