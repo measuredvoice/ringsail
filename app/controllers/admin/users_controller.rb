@@ -108,7 +108,7 @@ class Admin::UsersController < Admin::AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :user, :agency_id, :phone, :first_name, :last_name, :groups, :role)
+    params.require(:user).permit(:email, :user, :agency_id, :phone, :first_name, :last_name)
   end
 
   def notification_params

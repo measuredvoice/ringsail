@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col-sm-12 col-md-12 main">
   	<h1 class = "page-header">User Profile: <%= @user.email %></h1>
-    <% if current_user.admin? %>
-    <%= link_to 'Delete (ADMIN ONLY)', admin_user_path(@user), { :method => :delete, :class => "fa fa-cross"} %><br/><br/>
-    <% end %>
+
     <%= content_for :page_title do %>User Profile<% end %>
   	<%= render 'form' %>
 
