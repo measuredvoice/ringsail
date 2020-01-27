@@ -51,13 +51,14 @@ class Admin::AdminController < ApplicationController
   end
 
   def admin_two_factor
-    if Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
-      #do nothing because its dev!
-    else
-      if !current_user.user.include?("TwoFactor")
-        redirect_to admin_about_path, status: 302, notice: "You must login with Two Factor Authentication to utilize administrative functionality."
-      end
-    end
+    # THIS has been disabled due to the move to login.gov.  Will totally remove logic after a test build
+    # if Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
+    #   #do nothing because its dev!
+    # else
+    #   if !current_user.user.include?("TwoFactor")
+    #     redirect_to admin_about_path, status: 302, notice: "You must login with Two Factor Authentication to utilize administrative functionality."
+    #   end
+    # end
   end
 
   def banned_user?
