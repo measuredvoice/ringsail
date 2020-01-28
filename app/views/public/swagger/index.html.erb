@@ -1,31 +1,11 @@
   <%= content_for :page_title do  %> U.S. Digital Registry <% end %>
 
-
+<div class="row">
+  <div class="col-sm-12">
   <h1 class="page-title">U.S. Digital Registry</h1>
-  <h2>What is the U.S. Digital Registry?</h2>
 
-  <div style="margin: 10px; padding: 10px; border: 1px solid black;">
- <p><b>Notice:</b> As of April 19, 2018, all entries that have not been updated by agencies since <b>January 1, 2017</b> have been archived. Archived accounts will not appear in the public facing list and API of official, active accounts. This was done to help ensure that users can trust that accounts listed in the U.S. Digital Registry as official are still active.
-
-<p>Federal agencies are directed to update these account by OMB Memo M-17-06, “Policies for Federal Agency Public Websites and Digital Services,” which states “To help confirm the validity of official U.S. Government digital platforms, within 60 days of the publication date of this Memorandum, agencies must register their public-facing digital services such as social media, collaboration accounts, mobile apps and mobile websites, with the U.S. Digital Registry at: <a href="http://www.digitalgov.gov/services/u-s-digital-registry/">http://www.digitalgov.gov/services/u-s-digital-registry/</a>.”</p>
-
-<p style="margin-bottom: 0px;">If your federal agency account has been archived but is still active, you can easily log-in and update these accounts to make them active again. In the meantime, GSA will continue to help agencies fulfill this need by providing support and guidance.
-</p></div>
-  <p>Whether for access to emergency, financial or education public services, users need to trust they are engaging with official U.S. government digital accounts.</p>
-  <p>To help prevent exploitation from unofficial sources, phishing scams, or malicious entities, the U.S. Digital Registry serves as a crowdsource resource for agencies, citizens, and developers to confirm the official status of social media and public-facing collaboration accounts, mobile apps, and mobile websites. The accounts in the registry are independently updated by federal managers across the government who maintain individual agency accounts. </p>
-  <h2>How to Access the U.S. Digital Registry</h2>
-  <p><a class="button" href="https://usdigitalregistry.digitalgov.gov/admin">Register and Manage Accounts</a></p>
-  <p>Accessing the U.S. Digital&nbsp;Registry requires an OMB Max ID, which is available to federal government employees and contractors with a valid .gov, .mil, or .fed.us email address. <a href="https://max.omb.gov/maxportal/registrationForm.action" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://max.omb.gov/maxportal/registrationForm.action', 'Register for an OMB Max ID');">Register for an OMB Max ID</a> if you need one.</p>
-  <h2>Browse and Export the U.S. Digital Registry</h2>
-  <p>Please browse or export data on accounts currently authenticated by federal agencies using the U.S. Digital Registry by:</p>
-  <ul>
-    <li>Federal Agency</li>
-    <li>English or Spanish language</li>
-    <li>Platform, such a Github, Facebook and Yelp</li>
-    <li>Tags, as self-identified by agencies</li>
-  </ul>
-  <p>For customer service on accounts, please contact their programs directly. </p>
-
+  <p>Confirm the official status of social media and public-facing collaboration accounts, mobile apps, and mobile websites that represent U.S. government agencies, organizations, or programs. </p>
+  <p>Accounts are managed by federal agencies, heads of agencies, or members of the President’s Cabinet.* </p>
   <div role="tabpanel">
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="active"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a></li>
@@ -162,19 +142,23 @@
       </div>
     </div>
   </div>
-
-
-  <h2>What's "Official"?</h2>
-  <p>The U.S. Digital Registry only includes accounts that represent official U.S. government agencies, organizations, or programs — the collection grows daily. You can register accounts managed by federal agencies, heads of agencies or members of the President’s Cabinet. <b>Do not enter personal, employee, or other types of accounts.</b></p>
-  <h2>For Developers: Using and Improving the API</h2>
-  <p>Access the <a href="https://open.gsa.gov/api/digital-registry/">U.S. Digital Registry API</a> or its <a href="https://github.com/GSA/us-digital-registry" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://github.com/GSA/us-digital-registry', 'GitHub repo');">GitHub repo</a> to test, evaluate, improve and use it.</p>
-  <h2>Feedback</h2>
-  <p>If you have questions, comments or ideas on how to use or improve the U.S. Digital&nbsp;Registry, please contact us <a href="mailto:usdigitalregistry@gsa.gov">via email</a>.</p>
-
-  <h2 id="swagger-api-docs"> API Documentation</h2>
-  <p style="font-weight: bold; font-size: 1.3em;">The API documentation has moved to <a href="https://open.gsa.gov/api/digital-registry/">https://open.gsa.gov/api/digital-registry/</a>.</p>
-  <div class="spacer" style="padding: 80px;"></div>
-
+  <div class="row" style="margin-top: 20px;">
+    <div class="col-sm-4 col-sm-offset-2 col-xs-10 col-xs-offset-1 diptech">
+      <h2>AGENCY PARTNERS</h2>
+      <p><a class="button" href="/federal-agencies">Register and Manage Accounts</a></p>
+      <br/>
+      <p>Help prevent exploitation from unofficial sources, phishing scams, or malicious entities.</p>
+    </div>
+    <div class="col-sm-4 col-xs-10 col-xs-offset-1 diptech">
+      <h2>DEVELOPERS</h2>
+      <p><a class="button" href="/developers">Use and Improve the API</a></p><br/>
+      <p>Access the <a href="https://open.gsa.gov/api/digital-registry/">U.S. Digital Registry API</a> or its <a href="https://github.com/GSA/us-digital-registry" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://github.com/GSA/us-digital-registry', 'GitHub repo');">GitHub repo</a> to test, evaluate, improve and use it.  The API documentation has moved to <a href="https://open.gsa.gov/api/digital-registry/">https://open.gsa.gov/api/digital-registry/</a>.
+    </div>
+  </div>
+  <p>*For customer service on accounts, please contact their programs directly. </p>
+  <p>Need help? Email <a href="mailto:usdigitalregistry@gsa.gov">usdigitalregistry@gsa.gov</a></p>
+</div>
+</div>
 
 <%= form_tag export_social_media_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :hidden_agencies %>
@@ -430,5 +414,16 @@
     .table{
       margin: 0 !important;
     }
+
+    .diptech{
+      border: 1px solid rgb(12, 85, 93);
+      border-radius: 4px;
+      padding: 10px;
+    }
+    .diptech h2, .diptech p, .diptech a{
+      margin: 0px !important;
+      text-align: center;
+    }
+
   </style>
 <% end %>

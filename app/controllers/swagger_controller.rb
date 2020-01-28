@@ -5,6 +5,7 @@ class SwaggerController < ApplicationController
 
   end
 
+ 
 
   def doc
     @data = JSON.parse(File.read("app/views/swagger/swagger_docs/#{params[:path]}.json"))

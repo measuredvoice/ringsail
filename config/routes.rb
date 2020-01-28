@@ -383,6 +383,8 @@ Ringsail::Application.routes.draw do
   get 'api/v1/swagger_docs/*path' => "swagger#doc"
   get 'digital-registry/v1/swagger_docs/*path' => "swagger#doc"
 
+  get 'federal-agencies' => "public/swagger#federalagencies"
+  get 'developers' => "public/swagger#developers"
   root :to => "public/swagger#index"
 
 
