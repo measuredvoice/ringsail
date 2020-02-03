@@ -16,3 +16,14 @@
 //= require jquery.tipsy.js
 //= require datatables
 //= require datatables.bootstrap
+
+$(document).ready(function(){
+	$('.usa-banner__header-action').on('click',function(){
+		$('.usa-banner__content').toggle();
+	});
+
+	$('.btn-learn-more ').on('click',function(){
+		$('#org-details').toggle();
+	});
+
+});

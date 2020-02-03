@@ -33,7 +33,6 @@
   display: none;
 }
 body {
-  padding-top: 50px;
     font-family: Trebuchet,Tahoma,sans-serif;
     color:#555;
     font-size: 16px;
@@ -194,9 +193,7 @@ border-radius: 4px;
     list-style: none;
     color: #a94442;
 }
-.wrapping{
-    margin-top: 25px;
-}
+
 .top-buffer { margin-top:5px; }
 /*Navbar Styles*/
 .navBrand{background-color: #fafafa!important;  text-align: left;padding: 5px 0 0 150px;transition: left 0.5s;}
@@ -626,11 +623,13 @@ a.btn-warning{
 }
 
 
+
+
 .usa-banner{
   font-family:Source Sans Pro Web, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif;
   font-size:1.06rem;
   line-height:1.5;
-  background-color:#f0f0f0;
+  background-color: black;
 }
 
 .usa-banner .usa-accordion{
@@ -642,7 +641,6 @@ a.btn-warning{
 .usa-banner__content{
   margin-left:auto;
   margin-right:auto;
-  max-width:64rem;
   padding-left:1rem;
   padding-right:1rem;
   padding-left:1rem;
@@ -654,6 +652,8 @@ a.btn-warning{
   padding-left:0.5rem;
   padding-top:0.25rem;
   width:100%;
+  font-size: 15px;
+  color: white;
 }
 
 .usa-banner__content p:first-child{
@@ -669,7 +669,7 @@ a.btn-warning{
   padding-right:1rem;
   margin-left:auto;
   margin-right:auto;
-  max-width:64rem;
+  max-width: 1170px;
   padding-left:1rem;
   padding-right:1rem;
   display:-webkit-box;
@@ -748,7 +748,7 @@ a.btn-warning{
 .usa-banner__header-flag{
   float:left;
   margin-right:0.5rem;
-  width:1rem;
+  width:24px;
 }
 
 .usa-banner__header--expanded{
@@ -762,6 +762,42 @@ a.btn-warning{
 .usa-banner__header--expanded .usa-banner__header-action{
   display:none;
 }
+
+
+
+.usa-banner__header-action{
+  font-feature-settings: "kern" 1;
+font-kerning: normal;
+list-style-type: none;
+font-family: Public Sans Web,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-size: 12px;
+font-weight: 400;
+box-sizing: inherit;
+max-width: 72ex;
+line-height: 1.2;
+margin-bottom: 0;
+margin-top: 2px;
+text-decoration: underline;
+color: #afaea2;
+    display: inline-block;
+}
+
+.usa-banner__header-text{
+  font-feature-settings: "kern" 1;
+font-kerning: normal;
+list-style-type: none;
+font-family: Public Sans Web,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-weight: 400;
+box-sizing: inherit;
+max-width: 72ex;
+margin-bottom: 0;
+margin-top: 0;
+font-size: 12px;
+line-height: 1.2;
+color: #fff;
+    display: inline-block;
+}
+
 
 .usa-banner__button{
   -moz-osx-font-smoothing:auto;
@@ -843,4 +879,122 @@ a.btn-warning{
 
 .usa-banner__icon{
   width:2.5rem;
+}
+
+.usa-media-block__img{
+  width: 40px;
+}
+
+section.anchor{
+ font-feature-settings: "kern" 1;
+font-kerning: normal;
+font-family: Public Sans Web,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-size: 1.06rem;
+line-height: 1.5;
+color: #white !important;
+box-sizing: inherit;
+font-size: 16px;
+}
+
+.component-anchor{
+  font-feature-settings: "kern" 1;
+font-kerning: normal;
+font-family: Public Sans Web,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-size: 1.06rem;
+line-height: 1.5;
+box-sizing: inherit;
+background-color: #13171f;
+}
+
+.usa-accordion{
+  font-feature-settings: "kern" 1;
+font-kerning: normal;
+box-sizing: inherit;
+list-style-type: none;
+
+margin: 0;
+padding: 0;
+width: 100%;
+font-family: Public Sans Web,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+font-size: 1.06rem;
+line-height: 1.5;
+}
+
+.org-copy{
+  color: white;
+font-size: 16px;
+padding: 10px;
+}
+
+.org-copy a{
+  color: white;
+  text-decoration: underline;
+}
+
+.org-copy p{
+  display:inline-block;
+}
+
+.org-links{
+  color: white;
+font-size: 16px;
+}
+
+.org-links a{
+  color: white;
+  text-decoration: underline;
+}
+
+.btn-learn-more{
+  font-feature-settings: "kern" 1;
+font-kerning: normal;
+list-style-type: none;
+box-sizing: inherit;
+overflow: visible;
+text-transform: none;
+text-align: left;
+cursor: pointer;
+display: inline-block;
+font-weight: 700;
+text-decoration: none;
+color: #fff;
+border: 1px solid #fff;
+border-radius: .25rem;
+background: none;
+box-shadow: none;
+width: auto;
+margin: .5rem 0 0 4.5rem;
+padding: 10px;
+margin-top: 0;
+font-size:16px;
+margin-left: 1rem;
+float: right;
+background-image: url(../lib/uswds/img/angle-arrow-up-white.svg),-webkit-gradient(linear,left top,left bottom,from(transparent),to(transparent));
+background-size: .85rem;
+background-repeat: no-repeat;
+background-position: 6.65em;
+}
+
+.component-anchor-support{
+  background-color: black;
+  color: white;
+}
+
+
+
+.usagov{
+  padding: 10px;
+  margin: 5px;
+   display:inline-block;
+}
+ .usagov p, .usagov a{
+  display:inline-block;
+  color: white;
+  padding: 0; margin: 0;
+}
+
+.usagov a{
+  border: 1px solid white;
+  border-radius: 5px;
+  padding: 8px;
 }
