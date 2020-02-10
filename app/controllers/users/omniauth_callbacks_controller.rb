@@ -14,6 +14,7 @@ module Users
         if(omniauth_info['email'].end_with?(".gov") || omniauth_info['email'].end_with?(".mil"))
           new_user = User.create({
             email: omniauth_info['email'],
+            user: omniauth_info['email'],
             first_name: omniauth_info['given_name'],
             last_name: omniauth_info['family_name']
           })
