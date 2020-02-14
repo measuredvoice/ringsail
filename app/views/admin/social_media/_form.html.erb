@@ -77,8 +77,8 @@
       <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => "" }%>
     </div>
     <div class="field notes">
-      <%= f.label :notes, "Additional Notes:" %> (Viewable only to administrators. <span class="red">Do not include PII content in this field.</span>) <br/>
-      <%= f.text_area :notes, {:class => "form-control formwidth", rows: 5, placeholder: "Suggestion: Include optional contact that doesn’t have an OMB Max account."  }%>
+      <%= f.label :notes, "Additional Notes:" %> <span class="red">Do not include PII content in this field.</span>) <br/>
+      <%= f.text_area :notes, {:class => "form-control formwidth", rows: 5, placeholder: "Suggestion: Include optional contact information."  }%>
     </div>
     <br/>
     <div class="actions">
