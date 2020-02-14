@@ -5,7 +5,7 @@ json.aaData @outlets do |outlet|
   json.set! "DT_RowId", outlet.id
   json.set! :agencies, outlet.agencies
   json.set! :contacts, outlet.contacts
-  json.set! :service, outlet.service
+  json.set! :service, Admin::Service.find_by_shortname(outlet.service).longname
   json.set! :account_name, outlet.account_name ? outlet.account_name : "n/a"
   json.set! :account, outlet.account
   json.set! :status, outlet.status.humanize
