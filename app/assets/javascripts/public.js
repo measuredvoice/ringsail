@@ -1,6 +1,6 @@
-//= require swagger/jquery-3.3.1.min
+//= require jquery-3.4.1.min
 //= require jquery_ujs
-//= require handlebars-4.0.0
+//= require handlebars-v4.7.3
 //= require swagger/lodash.min
 //= require swagger/backbone-min
 //= require swagger/marked

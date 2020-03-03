@@ -144,7 +144,6 @@ class Admin::MobileAppsController < Admin::AdminController
     @mobile_app.published!
     @mobile_app.build_notifications(:published)
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now published. #{view_context.link_to 'Undo', archive_admin_mobile_app_path(@mobile_app)}".html_safe
-
   end
 
   def archive
