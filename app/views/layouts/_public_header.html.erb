@@ -1,0 +1,54 @@
+<header class="usa-header usa-header--extended" role="banner">
+  <div class="usa-navbar">
+    <div class="usa-logo" id="extended-logo">
+      <em class="usa-logo__text">
+        <a href="/" title="US Digital Registry" aria-label="DIGITAL REGISTRY HOME">
+          <img class="logo-black" src="img/digitalgov-logo.svg" alt="US DIGITAL REGISTRY" />
+        </a>
+      </em>
+      <p class="sub-head display-none">This is the description of the registry in short text</p>
+
+    </div>
+
+    <button class="usa-menu-btn"><i class="fas fa-bars"></i> Menu</button>
+  </div>
+  <nav role="navigation" class="usa-nav">
+    <div class="usa-nav__inner">
+      <button class="usa-nav__close">
+        <img src="/uswds/img/close.svg" alt="close">
+      </button>
+      <ul class="usa-nav__primary usa-accordion">
+          <li class="usa-nav__primary-item <%= "active" if request.path == "/" %>">
+            <a class="usa-nav__link" href="/"><span>US Digital Registry</span></a>
+          </li>
+            <li class="usa-nav__primary-item <%= "active" if request.path == "/federal-agencies" %>">
+            <a class="usa-nav__link" href="/federal-agencies"><span>Federal Agencies</span></a>
+          </li>
+            <li class="usa-nav__primary-item <%= "active" if request.path == "/developers" %>">
+            <a class="usa-nav__link" href="/developers"><span>Developers</span></a>
+          </li>
+      </ul><!-- .nav -->
+
+      <div class="usa-nav__secondary">
+        <ul class="usa-nav__secondary-links">
+          <li class="usa-nav__secondary-item">
+            <%= link_to "AGENCY PARTNERS REGISTER/LOG IN", user_login_dot_gov_omniauth_authorize_path %>
+          </li>
+        </ul>
+
+
+        <!-- <form accept-charset="UTF-8" action="https://find.digitalgov.gov/search" id="search_form" method="get" class="usa-search usa-search--small">
+          <input name="utf8" type="hidden" value="&#x2713;" />
+          <input id="affiliate" name="affiliate" type="hidden" value="digitalgov" />
+
+          <div role="search">
+            <label class="usa-sr-only" for="query">Search small</label>
+            <input class="usa-input" id="query" type="search" name="query">
+            <button class="usa-button" name="commit" type="submit"><span class="usa-sr-only">Search</span></button>
+          </div>
+        </form> -->
+
+      </div>
+    </div>
+  </nav>
+</header>

@@ -1,5 +1,4 @@
 class Public::SwaggerController < Public::PublicController
-  layout "swagger"
  
 
   def federalagencies

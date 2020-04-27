@@ -1,168 +1,188 @@
-  <%= content_for :page_title do  %> U.S. Digital Registry <% end %>
+<%= content_for :page_title do  %> U.S. Digital Registry <% end %>
+<section class="usa-section" id="resources_featured">
+  <div class="tablet-lg:grid-container tablet-lg:grid-container-desktop">
+    <div class="grid-row tablet-lg:grid-gap-4">
 
-<div class="row">
-  <div class="col-sm-12">
-  <h1 class="page-title">U.S. Digital Registry</h1>
-
-  <p>Confirm the official status of social media and public-facing collaboration accounts, mobile apps, and mobile websites that represent U.S. government agencies, organizations, or programs. </p>
-  <p>Accounts are managed by federal agencies, heads of agencies, or members of the President’s Cabinet. For customer service on accounts, please contact their programs directly. </p>
-  <div role="tabpanel">
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation" class="active"><a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a></li>
-      <li role="presentation"><a href="#search_mobile" aria-controls="messages" role="tab" data-toggle="tab">Search Mobile Products</a></li>
-    </ul>
-    <div class="tab-content">
-      <div role="tabpanel" class="tab-pane fade in active" id="search_social">
-        <form class="navbar-form row" role="search" id="social-media-search">
-          <div class="col-sm-12">
-            <div class="row form-inner">
-              <div class="col-sm-12">
-              <label for="search-social-box">Agency: </label>
-              <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_outlet_count > 0").order(name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "social-media-agency" %>
-              </div>
-            </div>
-            <div class="row form-inner">
-              <div class="col-sm-4">
-                <label for="search-social-language">Language: </label>
-                <%= select_tag "language", options_for_select(language_select_options, nil), include_blank: "Select a Language",  class: "form-control"  %>
-              </div>
-              <div class="col-sm-4">
-                <label for="search-social-platform">Platforms: </label>
-                <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Platform', class: "form-control test", id: "social-media-service" %>
-                 </div>
-              <div class="col-sm-4">
-                <label for="search-social-tags">Tags: </label>
-                <%= select_tag "tags", options_from_collection_for_select(OfficialTag.all.order(published_outlet_count: :desc), :id, :text_and_social_count), :class => "form-control col-sm-3", :prompt => "Select a Tag" %>
-              </div>
-            </div>
-            <div class="row form-inner">
-              <div class="col-sm-6">
-                <label for="search-social-page-size">Page Size: </label>
-                <input type="number" class="form-control" id="search-social-page-size" placeholder="10" value="10">
-              </div>
-              <div class="col-sm-6">
-                <label for="search-social-page">Page: </label>
-                <input type="number" class="form-control" id="search-social-page" placeholder="1" value="1">
-              </div>
-            </div>
-            <div class="row form-inner">
-              <div class="col-sm-12">
-
-                <button class="previous-page button">Previous Page</button>
-                <button class="next-page button">Next Page</button>
-                <div id="metadata-results">
-                </div>
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th style="width: 15%;">Agency</th>
-                      <th style="width: 13%;">Account Platform</th>
-                      <th style="width: 12%;"> Account Name</th>
-                      <th style="width: 50%;">Description</th>
-            
-                      <th style="width: 10%;">Last Updated</th>
-                    </tr>
-                  </thead>
-                  <tbody id="social-media-collection">
-                    <td colspan="5"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
-                  </tbody>
-                </table>
-                <button type="submit" class="hidden button">Submit</button>
-                <button class="previous-page button">Previous Page</button>
-                <button class="next-page button">Next Page</button>
-                <!-- <button id="export" class="button">Export CSV</button> -->
-              </div>
-            </div>
-          </div>
-        </form>
+      <div class="grid-col-12 tablet-lg:grid-col-4">
+        <div class="box">
+          <h2>U.S. Digital Registry</h2>
+          <p style="border: 0px">Help prevent exploitation from unofficial sources, phishing scams, or malicious entities.
+          <p>
+            <a href="https://www.gsa.gov/" title="U.S. General Services Administration">
+              <img class="org-img" src="/assets/gsa-logo-w100.png" alt="GSA Logo">
+              <span>A product of the U.S. General Services Administration</span>
+            </a>
+          </p>
+        </div>
       </div>
-      <div role="tabpanel" class="tab-pane fade" id="search_mobile">
-        <div class="row">
-          <div class="col-sm-12">
-            <form class="navbar-form navbar-left row" role="search" id="mobile-search">
-              <div class="col-sm-12">
-                <div class="row form-inner">
-                  <div class="col-sm-12">
-                  <label for="search-mobile-box">Agency: </label>
-                  <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_mobile_app_count > 0").order(name: :asc), "id", "name_and_mobile_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "mobile-agency" %>
-                  </div>
-                </div>
-                <div class="row form-inner">
-                  <div class="col-sm-6">
-                    <label for="search-mobile-language">Language: </label>
-                    <%= select_tag "mobile-language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "form-control", id: "mobile-language"  %>
-                  </div>
-                  <div class="col-sm-6">
-                    <label for="search-mobile-tags">Tags: </label>
-                    <%= select_tag "mobile-tags", options_from_collection_for_select(OfficialTag.all.order(published_mobile_app_count: :desc), :id, :text_and_mobile_count), :class => "form-control col-sm-3", :prompt => "Select a Tag" %>
-                  </div>
-                </div>
-                <div class="row form-inner">
-                  <div class="col-sm-6">
-                    <label for="search-mobile-page-size">Page Size: </label>
-                    <input type="text" class="form-control" id="mobile-page-size" placeholder="10" value="10">
-                  </div>
-                  <div class="col-sm-6">
-                    <label for="search-mobile-page">Page: </label>
-                    <input type="text" class="form-control" id="mobile-page" placeholder="1" value="1">
-                  </div>
-                </div>
-                <div class="row form-inner">
-                  <div class="col-sm-12">
-                    <button class="mobile-previous-page button">Previous Page</button>
-                    <button class="mobile-next-page button">Next Page</button>
-                    <div id="mobile-metadata-results">
-                    </div>
-                    <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th>Agency</th>
-                        <th>Platforms</th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th style="min-width: 110px">Last Updated</th>
-                      </tr>
-                    </thead>
-                    <tbody id="mobile-collection">
-                      <tr>
-                        <td colspan="5"><p style="text-align: center;">Use the form above to find mobile products.</p></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                    <button type="submit" class="hidden button">Submit</button>
-                    <button class="mobile-previous-page button">Previous Page</button>
-                    <button class="mobile-next-page  button">Next Page</button>
-                    <!-- <button id="mobileExport" class="button">Export CSV</button> -->
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+
+      <div class="grid-col-12 tablet-lg:grid-col-8">
+        <div class="collection">
+          <p>Confirm the official status of social media and public-facing collaboration accounts, mobile apps, and mobile websites that represent U.S. government agencies, organizations, or programs. </p>
+          <p>Accounts are managed by federal agencies, heads of agencies, or members of the President’s Cabinet. For customer service on accounts, please contact their programs directly. </p>
+           <p>Need help? Email the registry at <a href="mailto:usdigitalregistry@gsa.gov">usdigitalregistry@gsa.gov</a></p>
         </div>
       </div>
     </div>
   </div>
+</section>
+<section id="news_featured" class="stream">
+  <div class="paper">
+    <div class="grid-container grid-container-desktop">
+      <div class="grid-row">
+        <div class="grid-col-12">
+          <header class="page-head page-head-page">
+            <h2>Search The Registry</h2>
+           <!--  <div class="join-buttons">
+              <a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a>
+              <a href="#search_mobile" aria-controls="messages" role="tab" data-toggle="tab">Search Mobile Products</a>
+            </div> -->
+          </header>
+        </div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-col-12">
+          <section class="stream">
+            <div class="card card-article card-linked">
+              <div class="grid-row tablet:grid-gap-4">
+                <div class="grid-col-12">
+                  <form class="navbar-form grid-row" role="search" id="social-media-search">
+                    <div class="grid-col-12">
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-12">
+                          <h3>Social Media Accounts</h3>
+                        <label for="search-social-box">Agency: </label>
+                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_outlet_count > 0").order(name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "social-media-agency" %>
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-4">
+                          <label for="search-social-language">Language: </label>
+                          <%= select_tag "language", options_for_select(language_select_options, nil), include_blank: "Select a Language",  class: "form-control"  %>
+                        </div>
+                        <div class="grid-col-4">
+                          <label for="search-social-platform">Platforms: </label>
+                          <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Platform', class: "form-control test", id: "social-media-service" %>
+                           </div>
+                        <div class="grid-col-4">
+                          <label for="search-social-tags">Tags: </label>
+                          <%= select_tag "tags", options_from_collection_for_select(OfficialTag.where("published_outlet_count > 0").order(published_outlet_count: :desc), :id, :text_and_social_count), :class => "form-control grid-col-9", :prompt => "Select a Tag" %>
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-6">
+                          <label for="search-social-page-size">Page Size: </label>
+                          <input type="number" class="form-control" id="search-social-page-size" placeholder="10" value="10">
+                        </div>
+                        <div class="grid-col-6">
+                          <label for="search-social-page">Page: </label>
+                          <input type="number" class="form-control" id="search-social-page" placeholder="1" value="1">
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-12">
 
-  <div class="row" style="margin-top: 20px;">
-    <div class="col-sm-4 col-sm-offset-2 col-xs-10 col-xs-offset-1 diptech">
-      <h2>AGENCY PARTNERS</h2>
-      <br/>
-      <p><a class="button" href="/federal-agencies">Register and Manage Accounts</a></p>
-      <br/>
-      <p>Help prevent exploitation from unofficial sources, phishing scams, or malicious entities.</p> 
-    </div>
-    <div class="col-sm-4 col-xs-10 col-xs-offset-1 diptech">
-      <h2>DEVELOPERS</h2>
-      <br/>
-      <p><a class="button" href="/developers">Use and Improve the API</a></p><br/>
-      <p>Access the <a href="https://open.gsa.gov/api/digital-registry/">U.S. Digital Registry API</a> or its <a href="https://github.com/GSA/us-digital-registry" onclick="__gaTracker('send', 'event', 'outbound-article', 'https://github.com/GSA/us-digital-registry', 'GitHub repo');">GitHub repo</a> to test, evaluate, improve and use it.
+                          <button class="previous-page button">Previous Page</button>
+                          <button class="next-page button">Next Page</button>
+                          <div id="metadata-results">
+                          </div>
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th style="width: 15%;">Agency</th>
+                                <th style="width: 13%;">Account Platform</th>
+                                <th style="width: 12%;"> Account Name</th>
+                                <th style="width: 50%;">Description</th>
+                      
+                                <th style="width: 10%;">Last Updated</th>
+                              </tr>
+                            </thead>
+                            <tbody id="social-media-collection">
+                              <td colspan="5"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
+                            </tbody>
+                          </table>
+                          <button type="submit" class="hidden button">Submit</button>
+                          <button class="previous-page button">Previous Page</button>
+                          <button class="next-page button">Next Page</button>
+                          <!-- <button id="export" class="button">Export CSV</button> -->
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="card card-article card-linked">
+              <div class="grid-row tablet:grid-gap-4">
+                <div class="grid-col-12">
+                  <form class="navbar-form navbar-left grid-row" role="search" id="mobile-search">
+                    <div class="grid-col-12">
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-12">
+                        <h3>Mobile Applications</h3>
+                        <label for="search-mobile-box">Agency: </label>
+                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_mobile_app_count > 0").order(name: :asc), "id", "name_and_mobile_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "mobile-agency" %>
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-6">
+                          <label for="search-mobile-language">Language: </label>
+                          <%= select_tag "mobile-language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "form-control", id: "mobile-language"  %>
+                        </div>
+                        <div class="grid-col-6">
+                          <label for="search-mobile-tags">Tags: </label>
+                          <%= select_tag "mobile-tags", options_from_collection_for_select(OfficialTag.where("published_mobile_app_count > 0").order(published_mobile_app_count: :desc), :id, :text_and_mobile_count), :class => "form-control grid-col-9", :prompt => "Select a Tag" %>
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-6">
+                          <label for="search-mobile-page-size">Page Size: </label>
+                          <input type="text" class="form-control" id="mobile-page-size" placeholder="10" value="10">
+                        </div>
+                        <div class="grid-col-6">
+                          <label for="search-mobile-page">Page: </label>
+                          <input type="text" class="form-control" id="mobile-page" placeholder="1" value="1">
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-12">
+                          <button class="mobile-previous-page button">Previous Page</button>
+                          <button class="mobile-next-page button">Next Page</button>
+                          <div id="mobile-metadata-results">
+                          </div>
+                          <table class="table table-striped">
+                          <thead>
+                            <tr>
+                              <th>Agency</th>
+                              <th>Platforms</th>
+                              <th>Name</th>
+                              <th>Description</th>
+                              <th style="min-width: 110px">Last Updated</th>
+                            </tr>
+                          </thead>
+                          <tbody id="mobile-collection">
+                            <tr>
+                              <td colspan="5"><p style="text-align: center;">Use the form above to find mobile products.</p></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                          <button type="submit" class="hidden button">Submit</button>
+                          <button class="mobile-previous-page button">Previous Page</button>
+                          <button class="mobile-next-page  button">Next Page</button>
+                          <!-- <button id="mobileExport" class="button">Export CSV</button> -->
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   </div>
-  <br/><br/><br/>
-  <p>Need help? Email the registry at <a href="mailto:usdigitalregistry@gsa.gov">usdigitalregistry@gsa.gov</a></p>
-  <br/><br/><br/><br/><br/><br/><br/>
-</div>
-</div>
+</section>
 
 <%= form_tag export_social_media_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :hidden_agencies %>

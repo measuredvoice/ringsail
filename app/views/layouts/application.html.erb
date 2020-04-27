@@ -1,58 +1,40 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title><%= yield :page_title %> | DigitalGov</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
+<html lang="en-US" itemscope itemtype="http://schema.org/WebSite" prefix="og: http://ogp.me/ns#">
+<head profile="http://gmpg.org/xfn/11">
+  <%= render "layouts/html_head" %>
 </head>
-<body>
-	<div class="site-banner usa-banner">
-      <div class="usa-accordion">
-        <header class="usa-banner__header">
-          <div class="usa-banner__inner">
-            <div class="grid-col-auto">
-              <img class="usa-banner__header-flag" src="/assets/img/us_flag_small.png" alt="U.S. flag">
-            </div>
-            <div class="grid-col-fill tablet:grid-col-auto">
-              <p class="usa-banner__header-text">An official website of the United States government</p>
-              <p class="usa-banner__header-action" aria-hidden="true">Here’s how you know</p>
-            </div>
-            <button class="usa-accordion__button usa-banner__button" aria-expanded="false" aria-controls="gov-banner">
-              <span class="usa-banner__button-text">Here's how you know</span>
-            </button>
-          </div>
-        </header>
-        <div class="usa-banner__content usa-accordion__content" id="gov-banner" hidden="">
-          <div class="grid-row grid-gap-lg">
-            <div class="usa-banner__guidance tablet:grid-col-6">
-              <img class="usa-banner__icon usa-media-block__img" src="/assets/img/icon-dot-gov.svg" alt="Dot gov">
-              <div class="usa-media-block__body">
-                <p>
-                  <strong>The .gov means it’s official.</strong>
-                  <br>
-                  Federal government websites often end in .gov or .mil. Before sharing sensitive information, make sure you’re on a federal government site.
-                </p>
-              </div>
-            </div>
-            <div class="usa-banner__guidance tablet:grid-col-6">
-              <img class="usa-banner__icon usa-media-block__img" src="/assets/img/icon-https.svg" alt="Https">
-              <div class="usa-media-block__body">
-                <p>
-                  <strong>The site is secure.</strong>
-                  <br>
-                  The <strong>https://</strong> ensures that you are connecting to the official website and that any information you provide is encrypted and transmitted securely.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <div>
-    <%= yield %>
-  </div>
-  <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
-<script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA" id="_fed_an_ua_tag"></script>
+<body class="page home">
+  <div class="paper">
+    <%= render "layouts/dg_banner" %>
+    <%= render "layouts/public_header" %>
+    
+    <main aria-label="Content" role="main" id="main-content">
+      <% #should move the notices/alerts to their own "section header" most likely when they do appear %>
+      <% if notice %>
+        <p class="alert alert-success" role="alert"><%= notice %><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
+        <% end %>
+      <% if alert %>
+        <% unless alert.start_with?("Your session") || alert.start_with?("You need to") %>
+        <p class="alert alert-danger"><%= alert %></p>
+        <% end %>
+      <% end %>
+      <% # YIELD ACTUAL CONTENT PAGES %>
+      <%= yield %>
+    </main>
+    
+
+    <%= render "layouts/dg_footer" %>
+    <%= javascript_include_tag "public" %>
+    
+    <%= javascript_include_tag "jquery.tokeninput" %>
+    <%= yield :additional_javascript %>
+
+
+    
+  </div> <!-- End Paper -->
+  <% if !Rails.env.development? %>
+    <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
+  <script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA" id="_fed_an_ua_tag"></script>
+  <% end %>
 </body>
 </html>

@@ -1,0 +1,128 @@
+/*
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+* * * * * ==============================
+========================================
+========================================
+========================================
+*/
+
+// -------------------------------------
+// Import individual theme settings
+
+@import '../uswds/uswds-theme-general';
+@import '../uswds/uswds-theme-typography';
+@import '../uswds/uswds-theme-spacing';
+@import '../uswds/uswds-theme-color';
+@import '../uswds/uswds-theme-utilities';
+@import '../uswds/uswds-theme-components';
+
+// -------------------------------------
+// Import individual USWDS modules...
+
+// @import 'uswds-fonts';
+// @import 'uswds-layout-grid';
+// @import 'uswds-components';
+// @import 'uswds-utilities';
+
+// -------------------------------------
+// ...or import all USWDS modules
+
+@import 'uswds-2.6.0/scss/uswds';
+
+// -------------------------------------
+// Import theme custom styles
+
+@import 'layout';
+@import 'gov-banner';
+@import 'paper';
+
+@import 'header';
+
+@import 'newsletter-signup';
+@import 'footer';
+@import 'usa_anchor';
+
+@import 'promos';
+@import 'stream';
+
+// Cards
+@import 'card';
+@import 'card-article';
+@import 'card-elsewhere';
+@import 'card-event';
+
+@import 'article';
+@import 'page-head';
+
+@import 'news';
+@import 'events';
+@import 'table-of-contents';
+@import 'content';
+@import 'images';
+@import 'resources';
+
+// Lists of related pages
+@import 'collection';
+
+@import 'page-data';
+@import 'share-tools';
+
+@import 'guides/guide-header';
+@import 'guides/guide-nav';
+@import 'guides/guide-page-head';
+@import 'guides/guide-toc';
+@import 'guides/guide-content';
+
+// Authors lists
+@import 'authors-list';
+@import 'authors-list-short';
+
+// Authors profile
+@import 'author-profile';
+
+@import 'notice-bar';
+@import 'search-bar';
+
+@import 'related_promos';
+@import 'video';
+
+// Homepage Styles
+@import 'home/home';
+@import 'home/events';
+@import 'home/topics_featured';
+@import 'resources_featured';
+@import 'home/communities';
+
+
+@import 'community-info';
+
+@import 'related_communities';
+@import 'services';
+@import 'related_services';
+@import 'services-directory';
+@import 'card-service';
+@import 'card-service-contact';
+
+// Topics styles
+@import 'topic-buttons';
+@import 'topics-sidebar';
+@import 'list-topics';
+
+
+@import 'breadcrumbs';
+@import 'clicks';
+@import 'buttons';
+
+// Edit Tools
+@import 'edit-this';
+
+@import 'shortcodes/accordion';
+@import 'shortcodes/box';
+@import 'shortcodes/note';
+@import 'shortcodes/highlight';
+@import 'shortcodes/card-policy';
+@import 'shortcodes/card-quote';
+@import 'shortcodes/card-prompt';
+@import 'shortcodes/termsofservice-compatible';
