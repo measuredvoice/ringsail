@@ -18,6 +18,8 @@
 #  draft_gallery_count        :integer          default(0)
 #  published_gallery_count    :integer          default(0)
 #  api_id                     :integer
+#  omb_name                   :string(255)
+#  stats_enabled              :boolean
 #
 
 class Agency < ActiveRecord::Base

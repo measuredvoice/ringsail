@@ -98,13 +98,12 @@
                               </tr>
                             </thead>
                             <tbody id="social-media-collection">
-                              <td colspan="5"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
+                              <td colspan="12"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
                             </tbody>
                           </table>
                           <button type="submit" class="hidden button">Submit</button>
                           <button class="previous-page button">Previous Page</button>
                           <button class="next-page button">Next Page</button>
-                          <!-- <button id="export" class="button">Export CSV</button> -->
                         </div>
                       </div>
                     </div>
@@ -153,11 +152,11 @@
                           <table class="table table-striped">
                           <thead>
                             <tr>
-                              <th>Agency</th>
-                              <th>Platforms</th>
-                              <th>Name</th>
-                              <th>Description</th>
-                              <th style="min-width: 110px">Last Updated</th>
+                              <th style="width: 15%;">Agency</th>
+                              <th style="width: 15%;">Platforms</th>
+                              <th style="width: 30%;">Name</th>
+                              <th style="width: 45%;">Description</th>
+                              <th style="width: 15%;">Last Updated</th>
                             </tr>
                           </thead>
                           <tbody id="mobile-collection">
@@ -169,7 +168,6 @@
                           <button type="submit" class="hidden button">Submit</button>
                           <button class="mobile-previous-page button">Previous Page</button>
                           <button class="mobile-next-page  button">Next Page</button>
-                          <!-- <button id="mobileExport" class="button">Export CSV</button> -->
                         </div>
                       </div>
                     </div>
@@ -184,18 +182,6 @@
   </div>
 </section>
 
-<%= form_tag export_social_media_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
-  <%= hidden_field_tag :hidden_agencies %>
-  <%= hidden_field_tag :hidden_services %>
-  <%= hidden_field_tag :hidden_tags %>
-  <%= hidden_field_tag :hidden_languages %>
-<% end %>
-
-<%= form_tag export_mobile_app_path(format: :csv), method: :post, class: 'hidden', id: "mobile_csv_export" do %>
-  <%= hidden_field_tag :hidden_mobile_agencies %>
-  <%= hidden_field_tag :hidden_mobile_tags %>
-  <%= hidden_field_tag :hidden_mobile_languages %>
-<% end %>
 
 <% content_for :additional_javascript do %>
   <style>
@@ -321,10 +307,6 @@
       submit_social_media_form();
     });
 
-    // $('#export').click(function(e){
-    //    e.preventDefault();
-    //    export_csv();
-    // });
 
     $('.mobile-next-page').click(function(e){
       e.preventDefault();
@@ -347,15 +329,6 @@
       submit_mobile_form();
     });
 
-    $('#mobileExport').click(function(e){
-       e.preventDefault();
-       export_mobile_csv();
-    });
-
-    $('#mobile-search').submit(function(e){
-      e.preventDefault();
-      submit_mobile_form();
-    });
 
     $('#mobile-search input, #mobile-search select').on('change', function(){
       submit_mobile_form();
@@ -415,20 +388,6 @@
     }
 
 
-    function export_csv(){
-      $('#hidden_agencies').val($('#social-media-agency').val());
-      $('#hidden_services').val($('#social-media-service').val());
-      $('#hidden_tags').val($('#tags').val());
-      $('#hidden_languages').val($('#language').val());
-      $('#csv_export').submit();
-    }
-
-    function export_mobile_csv(){
-      $('#hidden_mobile_agencies').val($('#mobile-agency').val());
-      $('#hidden_mobile_tags').val($('#mobile-tags').val());
-      $('#hidden_mobile_languages').val($('#mobile-language').val());
-      $('#mobile_csv_export').submit();
-    }
     // submit_social_media_form();
     // submit_mobile_form();
   </script>

@@ -4,13 +4,13 @@
 #
 #  id                :integer          not null, primary key
 #  mobile_app_id     :integer
-#  store_url         :string(255)
+#  store_url         :text(16777215)
 #  platform          :string(255)
 #  version_number    :string(255)
 #  publish_date      :datetime
-#  description       :text(65535)
-#  whats_new         :text(65535)
-#  screenshot        :text(65535)
+#  description       :text(16777215)
+#  whats_new         :text(16777215)
+#  screenshot        :text(16777215)
 #  device            :string(255)
 #  language          :string(255)
 #  average_rating    :string(255)

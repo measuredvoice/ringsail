@@ -17,13 +17,13 @@
 #  phone                        :string(255)
 #  first_name                   :string(255)
 #  last_name                    :string(255)
-#  groups                       :text(65535)
-#  role                         :integer          default(0)
+#  groups                       :text(16777215)
+#  role                         :integer          default("user")
 #  agency_notifications         :boolean          default(FALSE)
 #  agency_notifications_emails  :boolean          default(FALSE)
 #  contact_notifications        :boolean          default(TRUE)
 #  contact_notifications_emails :boolean          default(TRUE)
-#  email_notification_type      :integer          default(0)
+#  email_notification_type      :integer          default("full_html_email")
 #
 
 FactoryGirl.define do

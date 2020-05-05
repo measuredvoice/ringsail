@@ -194,6 +194,14 @@ Ringsail::Application.routes.draw do
       get "request_archive"
     end
   end
+
+  # admin stats, may remove
+  namespace :stats do
+    get 'twitter' => 'twitter#index'
+    get 'facebook' => 'facebook#index'
+    get 'youtube' => 'youtube#index'
+  end
+
   namespace :admin do
     resources :related_policies
     resources :review_social_media do
@@ -286,9 +294,14 @@ Ringsail::Application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  	devise_scope :user do
-	   get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
+	devise_scope :user do
+		get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
 	end
+
+
+
+
+
   #######
   #### API ENDPOINTS
   #######
@@ -356,36 +369,25 @@ Ringsail::Application.routes.draw do
     end
   end
 
+
+
+
   #######
   #### PUBLIC PAGES
   #######
-  scope module: :public do
-    get "swagger" => "swagger#index"
+  # scope module: :public do
+  #   get 'export_social_media' => "browser#export_social_media"
+  #   post 'export_social_media' => "browser#export_social_media"
 
-    get "faq" => "public#faq"
+  #   get 'export_mobile_app' => "browser#export_mobile_app"
+  #   post 'export_mobile_app' => "browser#export_mobile_app"
+  # end
 
-    get 'export_social_media' => "browser#export_social_media"
-    post 'export_social_media' => "browser#export_social_media"
+  
 
-    get 'export_mobile_app' => "browser#export_mobile_app"
-    post 'export_mobile_app' => "browser#export_mobile_app"
-  end
-
-  namespace :stats do
-    get 'twitter' => 'twitter#index'
-    get 'facebook' => 'facebook#index'
-    get 'youtube' => 'youtube#index'
-  end
-
-  get '/swagger_docs/*path' => "swagger#doc"
-  get 'api/swagger_docs/*path' => "swagger#doc"
-  get 'digital-registry/swagger_docs/*path' => "swagger#doc"
-  get 'api/v1/swagger_docs/*path' => "swagger#doc"
-  get 'digital-registry/v1/swagger_docs/*path' => "swagger#doc"
-
-  get 'federal-agencies' => "public/swagger#federalagencies"
-  get 'developers' => "public/swagger#developers"
-  root :to => "public/swagger#index"
+  get 'federal-agencies' => "public/home#federalagencies"
+  get 'developers' => "public/home#developers"
+  root :to => "public/home#index"
 
 
 

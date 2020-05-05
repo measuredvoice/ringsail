@@ -8,7 +8,7 @@
 #  updated_at        :datetime
 #  short_description :text(65535)
 #  long_description  :text(65535)
-#  status            :integer          default(0)
+#  status            :integer          default("under_review")
 #
 
 class Gallery < ActiveRecord::Base

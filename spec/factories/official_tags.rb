@@ -12,7 +12,7 @@
 #  published_gallery_count    :integer          default(0)
 #  published_mobile_app_count :integer          default(0)
 #  published_outlet_count     :integer          default(0)
-#  tag_type                   :integer          default(0)
+#  tag_type                   :integer          default("category")
 #
 
 FactoryGirl.define do
