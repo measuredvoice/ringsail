@@ -13,14 +13,14 @@
 	  		<tr>
 	  			<td>
 	  				<% if activity.trackable %>
-		  				<% case activity.trackable %>
-		  				<% when Outlet %>
+		  				<% case activity.trackable_type %>
+		  				<% when "Outlet" %>
 					  	  	<%= link_to activity.trackable.organization, admin_outlet_path(activity.trackable) %>
-					  	<% when User %>
+					  	<% when "User" %>
 					  	  	<%= link_to activity.trackable.email, admin_user_path(activity.trackable) %>
-					  	<% when MobileApp %>
+					  	<% when "MobileApp" %>
 					  	  	<%= link_to activity.trackable.name, admin_mobile_app_path(activity.trackable) %>
-					  	<% when Gallery %>
+					  	<% when "Gallery" %>
 					  	  	<%= link_to activity.trackable.name, admin_gallery_path(activity.trackable) %>
 			  			<% end %>
 			  		<% else %>

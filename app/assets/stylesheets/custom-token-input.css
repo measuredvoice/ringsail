@@ -1,4 +1,4 @@
-/* Example tokeninput style #1: Token vertical list*/
+/*/* Example tokeninput style #1: Token vertical list*/
 /* Example tokeninput style #1: Token vertical list*/
 @font-face{
     font-family:FontAwesome;
@@ -6,7 +6,6 @@
 }
 ul.token-input-list {
     overflow: hidden; 
-    min-height:35px;
     width:100%;
     border: 1px solid #ddd;
     cursor: text;
@@ -18,28 +17,34 @@ ul.token-input-list {
     background-color: #fafafa;
     list-style-type: none;
     clear: left;
-    line-height: 35px;
+    line-height: 14px;
+    border-width: 1px;
+    border-color: #5d5d52;
+    border-style: solid;
+    border-radius: 0;
+    color: #1b1b1b;
+    display: block;
+    min-height: 2.5rem;
+    margin-top: 0.5rem;
+    max-width: 30rem;
+    padding: 0.5rem;
+    width: 100%;
 }
 ul.token-input-list .token-input-input-token::before{
-    font-family: 'FontAwesome';
-    content:"\f002   Type Your Search Terms";
     padding:0 5px 0 15px;  
     color: #ccc;
     font-size: 13px;
 }
 ul.token-input-list .token-input-input-token::before .token-input-input-token.yoman::before{
-    font-family: 'FontAwesome';
-    content:"\f002   Add Tags here";
     padding:0 5px 0 15px;  
     color: #ccc;
     font-size: 13px;
 }
-.form-group label{
+ label{
     font-weight: 300;
 }
 .form-inline select{
-    height: 35px;
-    border: solid 1px #ddd;
+    height: 35px;.
     width:100%;
 }
 .perpage-display{
@@ -48,46 +53,41 @@ ul.token-input-list .token-input-input-token::before .token-input-input-token.yo
 .search-field{
     width:75%!important;
 }
-.form-group ul.token-input-list li input{
-    width:280px!important;
+ ul.token-input-list li input{
+    width:100% !important;
+    font-size: 1.06rem;
 }
-.form-group .token-input-list{
+ .token-input-list{
 width:auto!important;
     position: relative;
     top:0!important;
     left:0!important;
 }
-.form-group ul.token-input-list{
+ ul.token-input-list{
     line-height: 35px!important;
     min-height:35px; 
 }
-.form-group div.field ul.token-input-focused{
-    width:300px!important;
+ div.field ul.token-input-focused{
+    width:100%;
 }
 div.field ul.token-input-focused .token-input-input-token::before{
-    font-family: 'FontAwesome';
-    content: "";
     padding:0 5px 0 15px;  
     color: #ccc;
-    font-size: 13px;
+    font-size: 1.06rem;
 }
 form ul.token-input-list .token-input-input-token::before {
-    font-family: 'FontAwesome';
-    content:"\f002   Search By Tag";
     padding:0 5px 0 15px;  
     color: #ccc;
-    font-size: 13px;
+    font-size: 1.06rem;
 }
 form .agencies ul.token-input-list .token-input-input-token::before {
-    content:"\f002   Search By Agency";
+
 }
 
 form .contacts ul.token-input-list .token-input-input-token::before {
-    content:"\f002   Search By Contact";
+
 }
 form ul.token-input-focused .token-input-input-token::before{
-    font-family: 'FontAwesome';
-    content: "";
     padding:0 5px 0 15px;  
     color: #ccc;
     font-size: 13px;
@@ -95,6 +95,9 @@ form ul.token-input-focused .token-input-input-token::before{
 
 ul.token-input-list li {
     list-style-type: none;
+}
+ul.token-input-list li p{ 
+    font-size: 1.06rem;
 }
 
 ul.token-input-list li input {
@@ -123,26 +126,29 @@ ul.token-input-disabled li.token-input-token span {
 li.token-input-token {
     overflow: hidden; 
     height: auto !important; 
-    height: 1%;
-    margin: 3px;
-    padding: 3px 5px;
+    width: 100%;
+    padding: 5px;
     background-color: #ddd;
     color: #555;
     font-weight: bold;
     cursor: default;
-    display: inline-block;
+    display: block;
 }
 
 li.token-input-token p {
     float: left;
     padding: 0;
+    color: black;
     margin: 0 15px 0 0;
 }
 
 li.token-input-token span {
     float: right;
-    color: #777;
+    color: black;
     cursor: pointer;
+    font-size: 1.06rem;
+    margin-top: .5rem;
+    line-height: 10px;
 }
 
 li.token-input-selected-token {
@@ -200,4 +206,4 @@ div.token-input-dropdown ul li em {
 
 div.token-input-dropdown ul li.token-input-selected-dropdown-item {
     background-color: #ddd;
-}
+}*/

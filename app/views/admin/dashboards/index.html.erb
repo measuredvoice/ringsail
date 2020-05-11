@@ -1,93 +1,127 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>U.S. Digital Registry<% end %>
-    <h1 class="page-header">U.S. Digital Registry</h1>
-    <div class="row">
-      <div class="col-sm-12">
-        <div style="margin: 10px; padding: 10px; border: 1px solid black;">
-  <p><b>Notice:</b> As of April 19, 2018, all entries that have not been updated by agencies since <b>January 1, 2017</b> have been archived. Archived accounts will not appear in the public facing list and API of official, active accounts. This was done to help ensure that users can trust that accounts listed in the U.S. Digital Registry as official are still active.
-
-<p>Federal agencies are directed to update these account by OMB Memo M-17-06, “Policies for Federal Agency Public Websites and Digital Services,” which states “To help confirm the validity of official U.S. Government digital platforms, within 60 days of the publication date of this Memorandum, agencies must register their public-facing digital services such as social media, collaboration accounts, mobile apps and mobile websites, with the U.S. Digital Registry at: <a href="http://www.digitalgov.gov/services/u-s-digital-registry/">http://www.digitalgov.gov/services/u-s-digital-registry/</a>.”</p>
-
-<p style="margin-bottom: 0px;">If your federal agency account has been archived but is still active, you can easily log-in and update these accounts to make them active again. In the meantime, GSA will continue to help agencies fulfill this need by providing support and guidance.
-</p></div>
+<section class="usa-section" id="resources_featured">
+  
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row tablet-lg:grid-gap-4">
+      <div class="grid-col-12">
+        <%= content_for :page_title do %>U.S. Digital Registry<% end %>
+        <h1 class="page-header">U.S. Digital Registry</h1>
       </div>
-    </div> 
-    <div class="row">
-	  	<div class="col-sm-6 col-md-6">
-        <div class="activity-trackers">
-		  		<h2>Social Media</h2>
-		  		<div class="panel panel-default">
-				  	<div class="panel-body">
-              <ul class="table_list">
-                <li><%= link_to "Add a Social Media Account", new_admin_outlet_path, class: "btn btn-default" %></li>
-                <li>&nbsp;</li>
-                <li><%= link_to "Review Social Media Accounts",  admin_review_social_media_path, class: "btn btn-default" %></li>
+    </div>
+  </div>
+<section class="usa-section" id="hotspot_featured" >
+  <div class="paper">
+    <div class="grid-container grid-container-desktop">
+      <div class="grid-row">
+  	  	<div class="grid-col-5 grid-offset-1">
+          <div class="activity-trackers">
+  		  		<h2>Social Media</h2>
+            <ul class="unstyled-list add-list-rese dashboard-list">
+              <li><%= link_to "Add a Social Media Account", new_admin_outlet_path, class: "btn btn-default" %></li>
+              <li><%= link_to "Review Social Media Accounts",  admin_review_social_media_path, class: "btn btn-default" %></li>
+              <li><%= link_to "View Social Media Accounts", admin_outlets_path, class: "btn btn-default" %></li>
+            </ul>
+          </div>
+  			</div>
+  			<div class="grid-col-5 grid-offset-1">
+          <div class="activity-trackers">
+  	        <h2>Mobile Products</h2>
+            <ul class="unstyled-list add-list-reset dashboard-list">
+              <li><%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default" %></li>
+              <li><%= link_to "Review Mobile Products ",  admin_review_mobile_apps_path , class: "btn btn-default"%></li>
+              <li><%= link_to "View Mobile Products", admin_mobile_apps_path, class: "btn btn-default" %></li>
+            </ul>
+          </div>
+  			</div>
+  		</div>
+    </div>
+  </div>
+</section>
 
-                <li>&nbsp;</li>
-                <li><%= link_to "View Social Media Accounts", admin_outlets_path, class: "btn btn-default" %></li>
-              </ul>
-				  	</div>
-				  </div>
-        </div>
-			</div>
-			<div class="col-sm-6 col-md-6">
-        <div class="activity-trackers">
-	        <h2>Mobile Products</h2>
-          <div class="panel panel-default">
-				  	<div class="panel-body">
-              <ul class="table_list">
-                <li><%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default" %></li>
-                <li>&nbsp;</li>
-                <li><%= link_to "Review Mobile Products ",  admin_review_mobile_apps_path , class: "btn btn-default"%></li>
-                <li>&nbsp;</li>
-                <li><%= link_to "View Mobile Products", admin_mobile_apps_path, class: "btn btn-default" %></li>
-              </ul>
-				  	</div>
-				  </div>
-        </div>
-			</div>
-		</div>
-    <div class="row">
-      <div class="col-sm-6 col-md-6">
-        <div class="activity-trackers">
-          <h3>Social Media Activity</h3>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <table class="table table-striped">
-                <tr><td>Created last 30 Days:</td><td><%=  Outlet.where("created_at > ?", 30.days.ago).count %></td></tr>
-                <tr><td>Created last 90 Days:</td><td><%=  Outlet.where("created_at > ?", 90.days.ago).count %></td></tr>
-                <tr><td>Created last 180 Days:</td><td><%=  Outlet.where("created_at > ?", 180.days.ago).count %></td></tr>
-              </table>
-              <table class="table table-striped">
-                <tr><td>Updated last 30 days:</td><td><%=  Outlet.where("updated_at > ?", 30.days.ago).count %></td></tr>
-                <tr><td>Updated last 90 days:</td><td><%=  Outlet.where("updated_at > ?", 90.days.ago).count %></td></tr>
-                <tr><td>Updated last 180 days:</td><td><%=  Outlet.where("updated_at > ?", 180.days.ago).count %></td></tr>
-              </table>
-            </div>
+<section class="usa-section" id="activity_featured" >
+  <div class="paper">
+    <div class="grid-container grid-container-desktop">
+      <div class="grid-row">
+        <div class="grid-col-5 grid-offset-1">
+          <div class="activity-trackers">
+            <h2>Social Media Activity</h2>
+            <table class="usa-table usa-table--borderless dashboard-table">
+              <caption>Social Media Activity</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Activity</th>
+                  <th scope="col">Volume</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Created last 30 Days:</th>
+                  <td><%=  Outlet.where("created_at > ?", 30.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Created last 90 Days:</th>
+                  <td><%=  Outlet.where("created_at > ?", 90.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Created last 180 Days:</th>
+                  <td><%=  Outlet.where("created_at > ?", 180.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Updated last 30 Days:</th>
+                  <td><%=  Outlet.where("updated_at > ?", 30.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Updated last 90 Days:</th>
+                  <td><%=  Outlet.where("updated_at > ?", 90.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Updated last 180 Days:</th>
+                  <td><%=  Outlet.where("updated_at > ?", 180.days.ago).count %></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-      <div class="col-sm-6 col-md-6">
-        <div class="activity-trackers">
-          <h3>Mobile Apps Activity</h3>
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <table class="table table-striped">
-                <tr><td>Created last 30 Days:</td><td><%=  MobileApp.where("created_at > ?", 30.days.ago).count %></td></tr>
-                <tr><td>Created last 90 Days:</td><td><%=  MobileApp.where("created_at > ?", 90.days.ago).count %></td></tr>
-                <tr><td>Created last 180 Days:</td><td><%=  MobileApp.where("created_at > ?", 180.days.ago).count %></td></tr>
-              </table>
-              <table class="table table-striped">
-                <tr><td>Updated last 30 days:</td><td><%=  MobileApp.where("updated_at > ?", 30.days.ago).count %></td></tr>
-                <tr><td>Updated last 90 days:</td><td><%=  MobileApp.where("updated_at > ?", 90.days.ago).count %></td></tr>
-                <tr><td>Updated last 180 days:</td><td><%=  MobileApp.where("updated_at > ?", 180.days.ago).count %></td></tr>
-              </table>
-            </div>
+        <div class="grid-col-5 grid-offset-1">
+          <div class="activity-trackers">
+            <h2>Mobile Apps Activity</h2>
+            <table class="usa-table usa-table--borderless dashboard-table">
+              <caption>Mobile Apps Activity</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Activity</th>
+                  <th scope="col">Volume</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Created last 30 Days:</th>
+                  <td><%=  MobileApp.where("created_at > ?", 30.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Created last 90 Days:</th>
+                  <td><%=  MobileApp.where("created_at > ?", 90.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Created last 180 Days:</th>
+                  <td><%=  MobileApp.where("created_at > ?", 180.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Updated last 30 Days:</th>
+                  <td><%=  MobileApp.where("updated_at > ?", 30.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Updated last 90 Days:</th>
+                  <td><%=  MobileApp.where("updated_at > ?", 90.days.ago).count %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Updated last 180 Days:</th>
+                  <td><%=  MobileApp.where("updated_at > ?", 180.days.ago).count %></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
     </div>
-	</div>
-</div>
-</div>
+  </div>
+</section>

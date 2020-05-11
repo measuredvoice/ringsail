@@ -1,21 +1,17 @@
 <% activities.each do |activity| %>  
-	<li class="<%= cycle("", "timeline-inverted") %>">
+	<li class="<%= cycle("timeline", "timeline-inverted") %>">
 		<div class="timeline-badge">
 			<i class="<%= activity_feed_badge_item(activity) %>"></i>
 		</div>
 		<div class="timeline-panel">
 			<div class="timeline-heading">
 				<h4 class="timeline-title"><%= activity_feed_link(activity) %></h4>
-				<p>
-					<small class="text-muted"><i class="fa fa-clock-o"></i> 
-						<%= time_ago_in_words(activity.created_at) %>
-					</small>
-				</p>
+				<small class="text-muted"><i class="fa fa-clock-o"></i> 
+					<%= time_ago_in_words(activity.created_at) %> ago
+				</small>
 			</div>
 			<div class="timeline-body">
-				<p>
 	  			<%= activity_feed_action_name(activity).html_safe %> by <%= activity_feed_owner(activity).html_safe %>
-				</p>
 			</div>
 		</div>
 	</li>

@@ -1,11 +1,22 @@
-// This is a manifest file that'll be compiled into including all the files listed below.
-// Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
-// be included in the compiled file accessible from http://example.com/assets/application.js
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-//= require jquery
+//= require jquery-3.4.1.min
 //= require jquery_ujs
+//= require handlebars-v4.7.3
+//= require selectize
+//= require uswds
+
+function humanize(string)
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+$(document).ready(function(){
+	$('.usa-banner__header-action').on('click',function(){
+		$('.usa-banner__content').toggle();
+	});
+
+	$('.btn-learn-more ').on('click',function(){
+		$('#org-details').toggle();
+	});
 
 
-
+});

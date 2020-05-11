@@ -6,7 +6,7 @@
 <body class="page home">
   <div class="paper">
     <%= render "layouts/dg_banner" %>
-    <%= render "layouts/public_header" %>
+    <%= render "layouts/public_navigation" %>
     
     <main aria-label="Content" role="main" id="main-content">
       <% #should move the notices/alerts to their own "section header" most likely when they do appear %>
@@ -24,7 +24,7 @@
     
 
     <%= render "layouts/dg_footer" %>
-    <%= javascript_include_tag "public" %>
+    <%= javascript_include_tag "application" %>
     
     <%= javascript_include_tag "jquery.tokeninput" %>
     <%= yield :additional_javascript %>

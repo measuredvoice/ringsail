@@ -1,91 +1,73 @@
 
-<%= form_for([:admin,@outlet]) do |f| %>
-  <p><span class="red">*</span> denotes a required field.</p>
-  <div class="form-inset">
-     
+<%= form_for([:admin,@outlet], :method=> :post, html: {:class => "grid-row usa-form usa-form--large"}) do |f| %>
+  <fieldset class="usa-fieldset">
+    <p><span class="red">*</span> denotes a required field.</p>
     <% if @outlet.errors.any? %>
-      <div id="error_explanation">
-
-        <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span><%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</div>
-
-        <ul class="inlineErrorMsgs">
-        <% @outlet.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
+      <div class="usa-alert usa-alert--error" role="alert">
+        <div class="usa-alert__body">
+          <h3 class="usa-alert__heading">Error:</span> <%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</h3>
+          <ul>
+          <% @outlet.errors.full_messages.each do |message| %>
+          <li class="usa-alert__text"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       </div>
     <% end %>
 
 
     <div class="field">
-      <%= f.label :service, "Account Platform" %><span class="red">*</span> </br>
+      <%= f.label :service, "Account Platform<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
       <% if @outlet.try(:service).try(:archived?) %>
-        <%= f.select :service, options_for_select(Admin::Service.every.map{|item| [item.longname.humanize,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+        <%= f.select :service, options_for_select(Admin::Service.every.map{|item| [item.longname.humanize,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "usa-input"} %>
       <% else %>
-        <%= f.select :service, options_for_select(Admin::Service.unarchived.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+        <%= f.select :service, options_for_select(Admin::Service.unarchived.map{|item| [item.longname,item.shortname,{"data-format-helper" =>item.service_url_example}]}, selected: @outlet.service),{include_blank: "Select"}, {:class => "usa-input"} %>
       <% end %>
     </div>
     <div class="field">
-      <%= f.label :service_url, "Account URL" %><span class="red">*</span> Format Help - <span id="format-help">pick an account type for format help</span></br>
-      <%= f.text_field :service_url, :class => "form-control formwidth" %>
+      <%= f.label :service_url, "Account URL<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %> Format Help - <span id="format-help">pick an account type for format help</span></br>
+      <%= f.text_field :service_url, :class => "usa-input" %>
       <%= f.hidden_field :account %>
     </div>
     <div class="field">
-      <%= f.label :organization, "Account Name" %><span class="red">*</span>  </br>
-      <%= f.text_field :organization, :class => "form-control formwidth" %>
+      <%= f.label :organization, "Account Name<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
+      <%= f.text_field :organization, :class => "usa-input" %>
     </div>
 
     <div class="field">
-      <%= f.label :short_description, "Short Description" %> <span class="red">*</span> 200 Character Limit</br>
-      <%= f.text_field :short_description, :class => "form-control formwidth" %>
+      <%= f.label :short_description, "Short Description<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %> <span class="red">200 Character Limit</span><br/>
+      <%= f.text_field :short_description, :class => "usa-input" %>
     </div>
     <div class="field">
-      <%= f.label :long_description, "Long Description"  %> </br>
-      <%= f.text_area :long_description, :class => "form-control formwidth" %>
+      <%= f.label :long_description, "Long Description", {class: 'usa-label'}  %>
+      <%= f.text_area :long_description, :class => "usa-textarea" %>
     </div>
     <div class="field">
-      <%= f.label :language, "Language" %><span class="red">*</span>  </br>
-      <%= f.select :language, options_for_select(language_select_options, @outlet.language), {include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      <%= f.label :language, "Language<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
+      <%= f.select :language, options_for_select(language_select_options, @outlet.language), {include_blank: "Select"}, {:class => "usa-input"} %>
     </div>
     <div class="field">
-      <%= f.label :tag_tokens, "Tags" %> </br>
-      <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
+      <%= f.label :tag_tokens, "Tags", {class: 'usa-label'} %>
+      <%= f.text_field :tag_tokens, {:class => "usa-input", :value => "" }%>
     </div>
-    <!-- <div class="field contacts">
-      <%= f.label :primary_agency_id, "Primary Agency" %><span class="red">*</span> </br>
-      <%= f.select :primary_agency_id, options_for_select(Agency.all.collect {|p| [ "#{p.name} #{p.shortname}", p.id ] },selected: @outlet.primary_agency_id), {include_blank: "Select"},{:class => "form-control formwidth", :prompt => "Select an Agency" }%>
-    </div>
-    <div class="field contacts">
-      <%= f.label :secondary_agency_id, "Secondary Agency" %></br>
-      <%= f.select :secondary_agency_id, options_for_select(Agency.all.collect {|p| [ "#{p.name} #{p.shortname}", p.id ] },selected: @outlet.secondary_contact_id),{include_blank: "Select"},{:class => "form-control formwidth", :prompt => "Select an Agency" }%>
-    </div> -->
     <div class="field agencies">
-      <%= f.label :agency_tokens, "Sponsoring Agencies" %> <span class="red">*</span></br>
-      <%= f.text_field :agency_tokens, {:class => "form-control formwidth agencies", :value => ""} %>
-    </div>
-    <!-- <div class="field contacts">
-      <%= f.label :primary_contact_id, "Primary Contact" %><span class="red">*</span> </br>
-      <%= f.select :primary_contact_id, options_for_select(User.all.collect {|p| [ "#{p.first_name} #{p.last_name} - #{p.email}", p.id ] }, selected: @outlet.primary_contact_id), {include_blank: "Select"},{:class => "form-control formwidth", :prompt => "Select a Contact" }%>
+      <%= f.label :agency_tokens, "Sponsoring Agencies<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
+      <%= f.text_field :agency_tokens, {:class => "usa-input", :value => ""} %>
     </div>
     <div class="field contacts">
-      <%= f.label :secondary_contact_id, "Secondary Contact" %><span class="red">*</span> </br>
-      <%= f.select :secondary_contact_id, options_for_select(User.all.collect {|p| [ "#{p.first_name} #{p.last_name} - #{p.email}", p.id ] }, selected: @outlet.secondary_contact_id),{include_blank: "Select"},{:class => "form-control formwidth",:prompt => "Select a Contact" }%>
-    </div> -->
-    <div class="field contacts">
-      <%= f.label :user_tokens, "Contacts" %> <span class="red">*</span></br>
-      <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => "" }%>
+      <%= f.label :user_tokens, "Contacts<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
+      <%= f.text_field :user_tokens, {:class => "usa-input", :value => "" }%>
     </div>
     <div class="field notes">
-      <%= f.label :notes, "Additional Notes:" %> <span class="red">Do not include PII content in this field.</span>) <br/>
-      <%= f.text_area :notes, {:class => "form-control formwidth", rows: 5, placeholder: "Suggestion: Include optional contact information."  }%>
+      <%= f.label :notes, "Additional Notes:", {class: 'usa-label'} %> (<span class="red">Do not include PII content in this field.</span>)
+      <%= f.text_area :notes, {:class => "usa-textarea", rows: 5, placeholder: "Suggestion: Include optional contact information."  }%>
     </div>
     <br/>
     <div class="actions">
-      <%= f.submit :class => "btn btn-primary" %>
-      <%= link_to 'Cancel', admin_outlets_path, {:class=>"btn btn-default", role: "button"} %>
+      <%= f.submit :class => "usa-button" %>
+      <%= link_to 'Cancel', admin_outlets_path, {:class=>"usa-button usa-button", role: "button"} %>
     </div>
-  </div>
+  </fieldset>
 
 <% end %>
 
@@ -107,7 +89,8 @@
     $("#outlet_agency_tokens").tokenInput("/admin/agencies/tokeninput.json", {
       crossDomain: false,
       prePopulate: <%= raw @outlet.agencies.map(&:attributes).to_json %>,
-      preventDuplicates: true
+      preventDuplicates: true,
+      hintText: "Search for Agencies"
     });
 
 
@@ -119,7 +102,8 @@
     $("#outlet_tag_tokens").tokenInput("/admin/official_tags/tokeninput.json", {
       crossDomain: false,
       prePopulate: tags,
-      preventDuplicates: true
+      preventDuplicates: true,
+      hintText: "Search for Tags"
     });
     <% user_json = []
       @outlet.users.each do |user|
@@ -129,7 +113,8 @@
     $("#outlet_user_tokens").tokenInput("/admin/users/tokeninput.json", {
       crossDomain: false,
       prePopulate: <%= raw user_json.to_json %>,
-      preventDuplicates: true
+      preventDuplicates: true,
+      hintText: "Search for Contacts"
     });
 
     $('#outlet_service').on("change",function(item){
@@ -155,29 +140,6 @@
       });
     });
 
-    $('#outlet_primary_contact_id').selectize({
-        create: false,
-        sortField: 'text',
-        placeholder: "Select a Contact - must be OMB MAX account holder"
-    });
-
-    $('#outlet_secondary_contact_id').selectize({
-        create: false,
-        sortField: 'text',
-        placeholder: "Select a Contact - must be OMB MAX account holder"
-    });
-
-     $('#outlet_primary_agency_id').selectize({
-        create: false,
-        sortField: 'text',
-        placeholder: "Select an Agency"
-    });
-
-    $('#outlet_secondary_agency_id').selectize({
-        create: false,
-        sortField: 'text',
-        placeholder: "Select an Agency"
-    });
   </script>
   <style>
     .selectize-control{

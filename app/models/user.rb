@@ -52,52 +52,14 @@ class User < ActiveRecord::Base
 
   paginates_per 200
 
-  # def cas_extra_attributes=(extra_attributes)
-  #   extra_attributes.each do |name, value|
-  #     case name
-  #       when "Email-Address"
-  #         self.email = value
-  #       when "Org-Agency-Name"
-  #         new_agency = Agency.where("name LIKE ?","%#{value}%").first
-  #         if new_agency == nil
-  #           self.agency = Agency.create!(name: value)
-  #         else
-  #           self.agency = new_agency
-  #         end
-  #       when "Phone"
-  #         self.phone = value
-  #       when "First-Name"
-  #         self.first_name = value
-  #       when "Last-Name"
-  #         self.last_name = value
-  #       when "GroupList"
-  #         self.groups = value 
-
-  #         if self.groups.include? ENV['REGISTRY_ADMIN_GROUP']
-  #           self.role = 2
-  #         elsif self.groups.include? ENV['REGISTRY_USER_GROUP']
-  #           self.role = 1
-  #         else
-  #           self.role = 0
-  #         end
-  #       when "samlAuthenticationStatementAuthMethod"
-  #         self.user = value
-  #     end
-  #   end
-  # end
 
   def self.from_omniauth(auth)
     if(auth.info.email.end_with?(".gov") || auth.info.email.end_with?(".mil"))
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
         user.email = auth.info.email
         user.password = Devise.friendly_token[0, 20]
-        user.name = auth.info.name   # assuming the user model has a name
-        user.image = auth.info.image # assuming the user model has an image
-        # need to find the user agency based off their email address, somehow
-
-        # If you are using confirmable and the provider(s) you use validate emails, 
-        # uncomment the line below to skip the confirmation emails.
-        # user.skip_confirmation!
+        user.first_name = auth.info.try(:first_name)   # assuming the user model has a name
+        user.last_name = auth.info.try(:last_name)
       end
     else
       return nil

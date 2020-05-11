@@ -45,3 +45,9 @@
   <strong>Status:</strong>
   <%= outlet.status.humanize %>
 </p>
+<% if outlet.published? %>
+<p>
+  <strong>API Link:</strong>
+    <%= link_to digital_registry_v1_social_medium_url(id:@outlet), digital_registry_v1_social_medium_url(id: @outlet) %>
+</p>
+<% end %>

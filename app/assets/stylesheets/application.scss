@@ -1,0 +1,144 @@
+/*
+ * This manifest file includes the CSS files required by default
+ *= require selectize
+ *= require selectize.default
+ *= require font-awesome
+ *= require custom-token-input
+ *= require_self
+*/
+
+
+@import "digitalgov/theme/styles";
+
+
+/*
+ * REFACTOR THESE 
+ */
+
+ul.unstyled-list{
+	list-style:none;
+	padding: 0;
+}
+
+/* look to update variables for this if there is one */
+.usa-nav__submenu{
+	.usa-nav__submenu-item{
+		a{
+			color: white !important;
+		}
+	}
+}
+
+.dashboard-list li a{
+	width: 100%;
+}
+
+.dashboard-table{
+	width: 100%;
+}
+/*
+ * Admin search form styles
+ */
+.dataTables_length{
+	width:100% !important;
+	display:inline-block !important;
+	padding: 14px 14px 14px 0px;
+}
+.dt-filter{
+	float:none !important;
+}
+.dt-length{
+	display:inline-block !important;
+}
+.dataTables_filter{
+	width:100% !important;
+	display:inline-block !important;
+}
+
+select.usa-input-small{
+	max-width:5rem !important;
+}
+
+.hidden{
+	display:none !important;
+}
+[type="search"], .usa-search__input{
+	border-right: 1px solid black !important;
+}
+
+/* 
+ * Editing form styles 
+ */
+.red{
+	color: red;
+}
+
+.actions a.usa-button{
+	color: white;
+	text-decoration: none;
+}
+
+/*
+ * Admin Show Pages
+ */
+
+ul.timeline{
+	margin:0px;
+	padding: 0px;
+}
+ul.timeline li{
+	list-style:none;
+	border:1px grey solid;
+	margin:5px;
+	padding: 10px;
+}
+
+ul.contact-list{
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.contact-list li.contact-list-item{
+	list-style:none;
+	border:1px grey solid;
+	margin:5px;
+	padding: 10px;
+}
+/*
+ * Selectize customization to match the USWDS styles
+ */
+
+.selectize-control{
+	padding: 0 !important;
+}
+.selectize-control.single .selectize-input, .selectize-dropdown.single {
+	height: 100%;
+	position: absolute;
+}
+.selectize-input input{
+	width: 100% !important;
+}
+.selectize-dropdown{
+	margin-top:0;
+	padding: 0;
+}
+.selectize-dropdown-content{
+	background-color:white;
+	border:1px solid black;
+	z-index:100;
+}
+
+input::placeholder { /* Firefox, Chrome, Opera */ 
+    color: black !important; 
+    font-size: 1.06rem;
+} 
+  
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */ 
+    color: black !important;
+    font-size: 1.06rem;
+} 
+  
+input::-ms-input-placeholder { /* Microsoft Edge */ 
+    color: black !important;
+    font-size: 1.06rem;
+} 

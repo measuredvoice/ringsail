@@ -9,14 +9,6 @@ class Admin::AdminController < ApplicationController
   before_action :headers
   helper_method :current_user
 
-  def about
-    @admins = User.where("role = ?", User.roles[:admin])
-  end
-  
-  def faq
-    
-  end
-
   def impersonate
     session[:user_id] = params[:user_id]
     @current_user = User.find(params[:user_id])

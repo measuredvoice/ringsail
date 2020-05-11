@@ -1,202 +1,207 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>Social Media Accounts<% end %>
-    <h1 class="page-header">Your Social Media Accounts</h1>
-    <div class="row placeholders">
-        <div class="col-sm-12">
-          
-           <% if params[:status] == "published" %>
+<section class="usa-section" id="featured_data" >
+  <div class="paper">
+      <div class="grid-container grid-container-desktop">
+          <div class="grid-row">
+            <div class="grid-col-12">
+        <%= content_for :page_title do %>Social Media Accounts<% end %>
+        <h1 class="page-header">Your Social Media Accounts</h1>
+        <div class="row placeholders">
+            <div class="col-sm-12">
+              
+               <% if params[:status] == "published" %>
 
-              <% if params[:review] == "needs" %>
-                Viewing accounts that need reviewed.
+                  <% if params[:review] == "needs" %>
+                    Viewing accounts that need reviewed.
 
-                <%= page_entries_info @outlets %>
-              <% else %>
-                Viewing published accounts.
+                    <%= page_entries_info @outlets %>
+                  <% else %>
+                    Viewing published accounts.
 
-                <%= page_entries_info @outlets %>
-              <% end %>
-           <% elsif params[:status] == "archived" %>
-            Viewing archived accounts.
-             <%= page_entries_info @outlets %>
-            <% else %>
-              Viewing all social media accounts.
-             <%= page_entries_info @outlets %>
-            <% end %>
+                    <%= page_entries_info @outlets %>
+                  <% end %>
+               <% elsif params[:status] == "archived" %>
+                Viewing archived accounts.
+                 <%= page_entries_info @outlets %>
+                <% else %>
+                  Viewing all social media accounts.
+                 <%= page_entries_info @outlets %>
+                <% end %>
+            </div>
         </div>
-    </div>
-     <div class="row placeholders">
-        <div class="col-sm-12 instructions">
+         <div class="row placeholders">
+            <div class="col-sm-12 instructions">
 
-          <h2 style="margin: 0; font-size: 1.2em">
-            How to Certify Your  Accounts
-          </h2>
-          <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-              <ol>
-                <li>Select Published Accounts.</li>
-                <li>Select Needs Review.</li>
-                <li>Review each account.</li>
-                <li>Indicate "Certify" for all active accounts. Edit the account if necessary and then "Certify".</li>
-                <li>Indicate "Archive" for all accounts that are no longer active.</li>
-              </ol>
-             
+              <h2 style="margin: 0; font-size: 1.2em">
+                How to Certify Your  Accounts
+              </h2>
+              <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                  <ol>
+                    <li>Select Published Accounts.</li>
+                    <li>Select Needs Review.</li>
+                    <li>Review each account.</li>
+                    <li>Indicate "Certify" for all active accounts. Edit the account if necessary and then "Certify".</li>
+                    <li>Indicate "Archive" for all accounts that are no longer active.</li>
+                  </ol>
+                 
+                </div>
+              </div>
+               <p><b>Note:</b> Recently Reviewed products have been certified within the past 180 days.</p>
             </div>
           </div>
-           <p><b>Note:</b> Recently Reviewed products have been certified within the past 180 days.</p>
+         <div class="row placeholders">
+            <div class="col-sm-12">
+              <% 
+                  published_class = "btn-success"
+                  archived_class = "btn-warning"
+              %>
+               <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Accounts <span class="caret"></span></button>
+               <ul class="dropdown-menu dropdown-review">
+                <li> <%= link_to "Needs Review", admin_review_social_media_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days."%></li>
+                <li>
+                  <%= link_to "Recently Reviewed", admin_review_social_media_path(status: "published", review: "recent"),title: "Accounts that have been certified within the last 180 days."  %></li>
+              </ul>
+                <%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class => "btn btn-warning", title: "Accounts that are no longer active." %>
+            </div>
+            <div class="col-sm-12">
+              <%= paginate @outlets %>
+            </div>
+        </div>
+
+        <div class="row placeholders">
+            <div class="col-sm-12">
+                <% @outlets.each do |outlet|
+
+                  panel_class = "panel-default"
+                  if outlet.status == "archived"
+                      panel_class = "panel-warning"
+                  else
+                    if outlet.updated_at > 90.days.ago
+                      panel_class = "panel-success"
+                    end
+                  end
+                  validated_string = outlet.validated_at ? outlet.validated_at.strftime("%B %e, %Y %H:%M %Z") : "Not yet certified" 
+                  %>
+                <div class="panel <%= panel_class %>" id="panel-outlet-<%= outlet.id %>">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse" class="collapsed">
+                        <div class="col-sm-12">
+                            <span class="outlet-name" style="font-size:14px; line-height:14px;">
+                            <%= outlet.organization  %> - <%= outlet.service.humanize %></span>
+                            <span class="outlet-alert" id="outlet-alert-<%= outlet.id %>" style="font-size:14px; line-height:14px;">
+                            Last Certified: <%= validated_string %>
+                           </span>
+                        </div>
+                        
+                      </a>
+                    </div>  
+
+                  </div>
+                  <div class="panel-body collapse" id="body-outlet-<%= outlet.id %>" style="font-size:12px; line-height:13px;">
+                    <div class="col-sm-6"  >
+                        <p>
+                          <strong>Account Name:</strong>
+                          <%= outlet.organization %>
+                        </p>
+
+                        <p>
+                          <strong>Agencies:</strong>
+                          <%= outlet.agencies.map(&:name).join(', ') %>
+                        </p>
+
+                        <p>
+                          <strong>Account Platform:</strong>
+                          <%= Admin::Service.find_by_shortname(outlet.service).longname %>
+                        </p>
+                        <p>
+                          <strong>Account URL:</strong>
+                          <%= link_to outlet.service_url, outlet.service_url, :target => "_blank" %>
+                        </p>
+                        <p>
+                          <strong>Last Updated:</strong>
+                          <span id="outlet-updated-<%= outlet.id %>"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M %Z") %></span>
+                        </p>
+                        
+                        
+                    </div><div class="col-sm-6">
+                        <p>
+                          <strong>Language:</strong>
+                          <%= outlet.language %>
+                        </p>
+                        <p>
+                          <strong>Tags:</strong>
+                          <%= outlet.official_tags.map(&:tag_text).join(', ') %>
+                        </p>
+                        <p>
+                          <strong>Short Description:</strong>
+                          <%= outlet.short_description %>
+                        </p>
+
+                        <p>
+                          <strong>Long Description:</strong>
+                          <%= outlet.long_description %>
+                        </p>
+                        
+                        <p>
+                          <strong>Status:</strong>
+                          <span id="outlet-status-<%= outlet.id %>"><%= outlet.status.humanize %></span>
+                        </p>
+                         <p>
+                          <strong>Contacts:</strong> <%= outlet.try(:primary_contact).try(:email) %> <%= outlet.try(:secondary_contact).try(:email) %> <%= outlet.users.map(&:email).join(", ") %></span>
+                        </p>
+                    </div>
+                    <div class="col-sm-12">
+                      <hr />
+                    </div>
+                    <div class="col-sm-4 col-sm-offset-8" style="font-size:14px; line-height:14px;">
+                          <% if outlet.status == "archived" %>
+                           <a class="btn btn-warning hide archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
+                           <a class="btn btn-default publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
+                           <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
+                          <% else %>
+                           <a class="btn btn-warning archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
+                           <a class="btn btn-default hide  publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
+                           <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
+
+                            <a class="btn btn-success validate-outlet-button" data-outlet="<%= outlet.id %>">Certify</a>
+                          <% end %>
+
+                          
+                      </div>
+                   
+                  </div>
+                </div>
+                <% end %>
+         </div>
+        </div>
+        <div class="row placeholders">
+            <div class="col-sm-12">
+               <%= paginate @outlets %>
+               <%= page_entries_info @outlets %>
+            </div>
         </div>
       </div>
-     <div class="row placeholders">
-        <div class="col-sm-12">
-          <% 
-              published_class = "btn-success"
-              archived_class = "btn-warning"
-          %>
-           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Accounts <span class="caret"></span></button>
-           <ul class="dropdown-menu dropdown-review">
-            <li> <%= link_to "Needs Review", admin_review_social_media_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days."%></li>
-            <li>
-              <%= link_to "Recently Reviewed", admin_review_social_media_path(status: "published", review: "recent"),title: "Accounts that have been certified within the last 180 days."  %></li>
-          </ul>
-            <%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class => "btn btn-warning", title: "Accounts that are no longer active." %>
-        </div>
-        <div class="col-sm-12">
-          <%= paginate @outlets %>
-        </div>
-    </div>
-
-    <div class="row placeholders">
-        <div class="col-sm-12">
-            <% @outlets.each do |outlet|
-
-              panel_class = "panel-default"
-              if outlet.status == "archived"
-                  panel_class = "panel-warning"
-              else
-                if outlet.updated_at > 90.days.ago
-                  panel_class = "panel-success"
-                end
-              end
-              validated_string = outlet.validated_at ? outlet.validated_at.strftime("%B %e, %Y %H:%M %Z") : "Not yet certified" 
-              %>
-            <div class="panel <%= panel_class %>" id="panel-outlet-<%= outlet.id %>">
-              <div class="panel-heading">
-                <div class="row">
-                  <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse" class="collapsed">
-                    <div class="col-sm-12">
-                        <span class="outlet-name" style="font-size:14px; line-height:14px;">
-                        <%= outlet.organization  %> - <%= outlet.service.humanize %></span>
-                        <span class="outlet-alert" id="outlet-alert-<%= outlet.id %>" style="font-size:14px; line-height:14px;">
-                        Last Certified: <%= validated_string %>
-                       </span>
-                    </div>
-                    
-                  </a>
-                </div>  
-
-              </div>
-              <div class="panel-body collapse" id="body-outlet-<%= outlet.id %>" style="font-size:12px; line-height:13px;">
-                <div class="col-sm-6"  >
-                    <p>
-                      <strong>Account Name:</strong>
-                      <%= outlet.organization %>
-                    </p>
-
-                    <p>
-                      <strong>Agencies:</strong>
-                      <%= outlet.agencies.map(&:name).join(', ') %>
-                    </p>
-
-                    <p>
-                      <strong>Account Platform:</strong>
-                      <%= Admin::Service.find_by_shortname(outlet.service).longname %>
-                    </p>
-                    <p>
-                      <strong>Account URL:</strong>
-                      <%= link_to outlet.service_url, outlet.service_url, :target => "_blank" %>
-                    </p>
-                    <p>
-                      <strong>Last Updated:</strong>
-                      <span id="outlet-updated-<%= outlet.id %>"><%= outlet.updated_at.strftime("%B %e, %Y %H:%M %Z") %></span>
-                    </p>
-                    
-                    
-                </div><div class="col-sm-6">
-                    <p>
-                      <strong>Language:</strong>
-                      <%= outlet.language %>
-                    </p>
-                    <p>
-                      <strong>Tags:</strong>
-                      <%= outlet.official_tags.map(&:tag_text).join(', ') %>
-                    </p>
-                    <p>
-                      <strong>Short Description:</strong>
-                      <%= outlet.short_description %>
-                    </p>
-
-                    <p>
-                      <strong>Long Description:</strong>
-                      <%= outlet.long_description %>
-                    </p>
-                    
-                    <p>
-                      <strong>Status:</strong>
-                      <span id="outlet-status-<%= outlet.id %>"><%= outlet.status.humanize %></span>
-                    </p>
-                     <p>
-                      <strong>Contacts:</strong> <%= outlet.try(:primary_contact).try(:email) %> <%= outlet.try(:secondary_contact).try(:email) %> <%= outlet.users.map(&:email).join(", ") %></span>
-                    </p>
-                </div>
-                <div class="col-sm-12">
-                  <hr />
-                </div>
-                <div class="col-sm-4 col-sm-offset-8" style="font-size:14px; line-height:14px;">
-                      <% if outlet.status == "archived" %>
-                       <a class="btn btn-warning hide archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
-                       <a class="btn btn-default publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
-                       <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
-                      <% else %>
-                       <a class="btn btn-warning archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
-                       <a class="btn btn-default hide  publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
-                       <a class="btn btn-default edit-outlet-button" href="/admin/social_media/<%= outlet.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
-
-                        <a class="btn btn-success validate-outlet-button" data-outlet="<%= outlet.id %>">Certify</a>
-                      <% end %>
-
-                      
-                  </div>
-               
-              </div>
-            </div>
-            <% end %>
-     </div>
-    </div>
-    <div class="row placeholders">
-        <div class="col-sm-12">
-           <%= paginate @outlets %>
-           <%= page_entries_info @outlets %>
-        </div>
     </div>
   </div>
 </div>
 
-<div id="modal-alert" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Social Media Account Update</h4>
-      </div>
-      <div class="modal-body">
-        <p>Text.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    <div id="modal-alert" class="modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Social Media Account Update</h4>
+          </div>
+          <div class="modal-body">
+            <p>Text.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 <% content_for :additional_javascript do %>
 <script>
 

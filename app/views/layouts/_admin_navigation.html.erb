@@ -1,0 +1,103 @@
+
+<header class="usa-header usa-header--extended">
+	<div class="usa-navbar">
+		<div class="usa-logo" id="extended-logo">
+			<em class="usa-logo__text">
+				<a href="/" title="US Digital Registry" aria-label="DIGITAL REGISTRY HOME">
+			    	<img class="logo-black" src="/assets/usdr-logo.png" alt="US DIGITAL REGISTRY" />
+			    </a>
+			</em>
+		</div>
+  	<button class="usa-menu-btn">Menu</button>
+	</div>
+	<nav aria-label="Primary navigation" class="usa-nav">
+		<div class="usa-nav__inner">
+			<button class="usa-nav__close"><img src="/assets/uswds/img/close.svg" alt="close"></button>
+			<ul class="usa-nav__primary usa-accordion">
+				<li class="usa-nav__primary-item">
+		    		<a class="usa-nav__link" href="/admin/"><span>Dashboard</span></a>
+		    	</li>
+				<li class="usa-nav__primary-item">
+		    		<button class="usa-accordion__button usa-nav__link  <%= "usa-current" if request.original_url.include? "social_media" %>" aria-expanded="false" aria-controls="extended-nav-section-one"><span>Social Media</span></button>
+		    		<ul id="extended-nav-section-one" class="usa-nav__submenu" hidden>
+		    			<li class="usa-nav__submenu-item">
+		              		<%= link_to "Social Media Accounts List", admin_outlets_path %>
+		            	</li>
+		            	<li class="usa-nav__submenu-item">
+		              		<%= link_to "Social Media Accounts Review",  admin_review_social_media_path %>
+		            	</li>
+		            	 <% if current_user.admin? %>
+			            <li class="usa-nav__submenu-item">
+				            <%= link_to "Social Media Accounts Activity", activities_admin_outlets_path %>
+			            </li>
+			            <% end %>
+		            	<li class="usa-nav__submenu-item">
+			              	<%= link_to "Add a Social Media Account", new_admin_outlet_path %>
+			            </li>
+			        </ul>
+			    </li>
+			    <li class="usa-nav__primary-item">
+		    		<button class="usa-accordion__button usa-nav__link <%= "usa-current" if request.original_url.include? "mobile_apps" %>" aria-expanded="false" aria-controls="extended-nav-section-two"><span>Mobile Apps</span></button>
+		    		<ul id="extended-nav-section-two" class="usa-nav__submenu" hidden>
+		    			<li class="usa-nav__submenu-item">
+			              	<%= link_to "Mobile Products List", admin_mobile_apps_path %>
+			            </li>
+			            <li class="usa-nav__submenu-item">
+			              	<%= link_to "Mobile Products Review",  admin_review_mobile_apps_path %>
+			            </li>
+			            <% if current_user.admin? %>
+			            <li class="usa-nav__submenu-item">
+				            <%= link_to "Mobile Products Activity", activities_admin_mobile_apps_path %>
+			            </li>
+			            <% end %>
+			            <li class="usa-nav__submenu-item">
+		              		<%= link_to "Add a Mobile Product", new_admin_mobile_app_path %>
+		            	</li>
+		            </ul>
+		        </li>
+		        <% if current_user.admin? %>
+		        <li class="usa-nav__primary-item">
+		    		<button class="usa-accordion__button usa-nav__link <%= "usa-current" if request.original_url.include?("admin/agencies") ||
+		        		request.original_url.include?("admin/users") ||
+		        		request.original_url.include?("admin/official_tags") ||
+		        		request.original_url.include?("admin/email_messages") %>" aria-expanded="false" aria-controls="extended-nav-section-three"><span>Admin</span></button>
+		    		<ul id="extended-nav-section-three" class="usa-nav__submenu" hidden>
+		    			<li class="usa-nav__submenu-item">
+			              	<%= link_to "Agencies List", admin_agencies_path %>
+			            </li>
+			            <li class="usa-nav__submenu-item">
+			              	<%= link_to "Tags List", admin_official_tags_path %> 
+			            </li>
+			            <li class="usa-nav__submenu-item">
+		              		<%= link_to "Users List", admin_users_path %>
+		            	</li>
+						<li class="usa-nav__submenu-item">
+		              		<%= link_to "Emails Sent", admin_email_messages_path %>
+		            	</li>
+			            <li class="usa-nav__submenu-item">
+				            <%= link_to "Services List", admin_services_path %>
+			            </li>
+		            </ul>
+		        </li>
+		        <% end %>
+
+		    </ul>
+		    <div class="usa-nav__secondary">
+		  		<ul class="usa-nav__secondary-links">
+		  			<li class="usa-nav__secondary-item">
+		      			<%= current_user.email %>
+		    		</li>
+		    		<li class="usa-nav__secondary-item">
+		     			<%= link_to "Email Admins", new_admin_email_message_path(include_admins: true) %>
+		    		</li>
+		    		<li class="usa-nav__secondary-item">
+		      			<%= link_to "Edit Profile", edit_admin_user_path(current_user) %>
+		    		</li>
+		    		<li class="usa-nav__secondary-item">
+		    			<%= link_to "Logout", destroy_user_session_path %>
+		    		</li>
+		    	</ul>
+			</div>
+		</div>
+	</nav>
+</header>

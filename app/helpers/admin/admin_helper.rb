@@ -33,7 +33,7 @@ module Admin::AdminHelper
 
   def activity_feed_owner(activity)
   	if activity.owner
-  		link_to " #{activity.owner.email}".html_safe, admin_user_path(activity.owner)
+      user_list_format(activity.owner)
     else
     	"System"
     end
@@ -41,9 +41,9 @@ module Admin::AdminHelper
 
   def user_list_format(user)
     if user.first_name || user.last_name
-      "#{user.first_name} #{user.last_name} - #{user.email}"
+      "#{user.first_name} #{user.last_name} - <a href=\"mailto:#{user.email}\">#{user.email}</a>".html_safe
     else
-      user.email
+      "<a href=\"mailto:#{user.email}\">#{user.email}</a>".html_safe
     end
   end
 

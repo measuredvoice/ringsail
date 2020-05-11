@@ -19,9 +19,9 @@ var factory = function( $, DataTable ) {
 /* Set the defaults for DataTables initialisation */
 $.extend( true, DataTable.defaults, {
   dom:
-    "<'row'<'col-sm-6'l><'col-sm-6'f>>" +
-    "<'row'<'col-sm-12'tr>>" +
-    "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+    "<'grid-row'<'grid-col-6'l><'grid-col-6'f>>" +
+    "<'grid-row'<'grid-col-12'tr>>" +
+    "<'grud-row'<'grid-col-6'i><'grid-col-6'p>>",
   renderer: 'bootstrap'
 } );
 
@@ -29,8 +29,8 @@ $.extend( true, DataTable.defaults, {
 /* Default class modification */
 $.extend( DataTable.ext.classes, {
   sWrapper:      "dataTables_wrapper form-inline dt-bootstrap",
-  sFilterInput:  "form-control input-sm",
-  sLengthSelect: "form-control input-sm"
+  sFilterInput:  "form-control usa-input dt-filter",
+  sLengthSelect: "form-control usa-input usa-input-small dt-length"
 } );
 
 
@@ -67,25 +67,25 @@ DataTable.ext.renderer.pageButton.bootstrap = function ( settings, host, idx, bu
             break;
 
           case 'first':
-            btnDisplay = lang.sFirst;
+            btnDisplay = "<<";
             btnClass = button + (page > 0 ?
               '' : ' disabled');
             break;
 
           case 'previous':
-            btnDisplay = lang.sPrevious;
+            btnDisplay =  "<";
             btnClass = button + (page > 0 ?
               '' : ' disabled');
             break;
 
           case 'next':
-            btnDisplay = lang.sNext;
+            btnDisplay = ">";
             btnClass = button + (page < pages-1 ?
               '' : ' disabled');
             break;
 
           case 'last':
-            btnDisplay = lang.sLast;
+            btnDisplay = ">>";
             btnClass = button + (page < pages-1 ?
               '' : ' disabled');
             break;

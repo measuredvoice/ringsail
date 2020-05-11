@@ -52,41 +52,42 @@
                         <div class="grid-col-12">
                           <h3>Social Media Accounts</h3>
                         <label for="search-social-box">Agency: </label>
-                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_outlet_count > 0").order(name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "social-media-agency" %>
+                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_outlet_count > 0").order(name: :asc), "id", "name_and_social_media_count"), include_blank: 'Select an Agency', class: "test usa-input" , id: "social-media-agency" %>
                         </div>
                       </div>
                       <div class="grid-row form-inner">
-                        <div class="grid-col-4">
+                        <div class="grid-col-3">
                           <label for="search-social-language">Language: </label>
-                          <%= select_tag "language", options_for_select(language_select_options, nil), include_blank: "Select a Language",  class: "form-control"  %>
+                          <%= select_tag "language", options_for_select(language_select_options, nil), include_blank: "Select a Language",  class: "usa-input"  %>
                         </div>
-                        <div class="grid-col-4">
+                        <div class="grid-col-3 grid-offset-1">
                           <label for="search-social-platform">Platforms: </label>
-                          <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Platform', class: "form-control test", id: "social-media-service" %>
+                          <%= select_tag "service", options_from_collection_for_select(Admin::Service.where(archived: :false).order(longname: :asc), :shortname, :longname), include_blank: 'Select a Platform', class: "usa-input", id: "social-media-service" %>
                            </div>
-                        <div class="grid-col-4">
+                        <div class="grid-col-4 grid-offset-1">
                           <label for="search-social-tags">Tags: </label>
-                          <%= select_tag "tags", options_from_collection_for_select(OfficialTag.where("published_outlet_count > 0").order(published_outlet_count: :desc), :id, :text_and_social_count), :class => "form-control grid-col-9", :prompt => "Select a Tag" %>
+                          <%= select_tag "tags", options_from_collection_for_select(OfficialTag.where("published_outlet_count > 0").order(published_outlet_count: :desc), :id, :text_and_social_count), :class => "usa-input grid-col-9", :prompt => "Select a Tag" %>
                         </div>
                       </div>
                       <div class="grid-row form-inner">
-                        <div class="grid-col-6">
+                        <div class="grid-col-2">
                           <label for="search-social-page-size">Page Size: </label>
-                          <input type="number" class="form-control" id="search-social-page-size" placeholder="10" value="10">
+                          <input type="number" class="usa-input" id="search-social-page-size" placeholder="10" value="10">
                         </div>
-                        <div class="grid-col-6">
+                        <div class="grid-col-2 grid-offset-1">
                           <label for="search-social-page">Page: </label>
-                          <input type="number" class="form-control" id="search-social-page" placeholder="1" value="1">
+                          <input type="number" class="usa-input" id="search-social-page" placeholder="1" value="1">
                         </div>
                       </div>
                       <div class="grid-row form-inner">
-                        <div class="grid-col-12">
-
-                          <button class="previous-page button">Previous Page</button>
-                          <button class="next-page button">Next Page</button>
+                        <div class="grid-col-12 inset-results">
+                          <div class="inset-buttons">
+                            <button class="previous-page usa-button usa-button--outline">Previous Page</button>
+                            <button class="next-page usa-button usa-button--outline">Next Page</button>
+                          </div>
                           <div id="metadata-results">
                           </div>
-                          <table class="table table-striped">
+                          <table class="table table-striped" style="margin-top:15px">
                             <thead>
                               <tr>
                                 <th style="width: 15%;">Agency</th>
@@ -101,9 +102,10 @@
                               <td colspan="12"><p style="text-align:center;">Use the form above to find social media accounts.</p></td>
                             </tbody>
                           </table>
-                          <button type="submit" class="hidden button">Submit</button>
-                          <button class="previous-page button">Previous Page</button>
-                          <button class="next-page button">Next Page</button>
+                          <div class="inset-buttons">
+                            <button class="previous-page usa-button usa-button--outline">Previous Page</button>
+                            <button class="next-page usa-button usa-button--outline">Next Page</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -120,36 +122,38 @@
                         <div class="grid-col-12">
                         <h3>Mobile Applications</h3>
                         <label for="search-mobile-box">Agency: </label>
-                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_mobile_app_count > 0").order(name: :asc), "id", "name_and_mobile_count"), include_blank: 'Select an Agency', class: "test form-control" , id: "mobile-agency" %>
+                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_mobile_app_count > 0").order(name: :asc), "id", "name_and_mobile_count"), include_blank: 'Select an Agency', class: "usa-input" , id: "mobile-agency" %>
                         </div>
                       </div>
                       <div class="grid-row form-inner">
-                        <div class="grid-col-6">
+                        <div class="grid-col-3">
                           <label for="search-mobile-language">Language: </label>
-                          <%= select_tag "mobile-language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "form-control", id: "mobile-language"  %>
+                          <%= select_tag "mobile-language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "usa-input", id: "mobile-language"  %>
                         </div>
-                        <div class="grid-col-6">
+                        <div class="grid-col-4 grid-offset-1">
                           <label for="search-mobile-tags">Tags: </label>
-                          <%= select_tag "mobile-tags", options_from_collection_for_select(OfficialTag.where("published_mobile_app_count > 0").order(published_mobile_app_count: :desc), :id, :text_and_mobile_count), :class => "form-control grid-col-9", :prompt => "Select a Tag" %>
+                          <%= select_tag "mobile-tags", options_from_collection_for_select(OfficialTag.where("published_mobile_app_count > 0").order(published_mobile_app_count: :desc), :id, :text_and_mobile_count), :class => "usa-input grid-col-9", :prompt => "Select a Tag" %>
                         </div>
                       </div>
                       <div class="grid-row form-inner">
-                        <div class="grid-col-6">
+                        <div class="grid-col-2">
                           <label for="search-mobile-page-size">Page Size: </label>
-                          <input type="text" class="form-control" id="mobile-page-size" placeholder="10" value="10">
+                          <input type="text" class="usa-input" id="mobile-page-size" placeholder="10" value="10">
                         </div>
-                        <div class="grid-col-6">
+                        <div class="grid-col-2 grid-offset-1">
                           <label for="search-mobile-page">Page: </label>
-                          <input type="text" class="form-control" id="mobile-page" placeholder="1" value="1">
+                          <input type="text" class="usa-input" id="mobile-page" placeholder="1" value="1">
                         </div>
                       </div>
                       <div class="grid-row form-inner">
-                        <div class="grid-col-12">
-                          <button class="mobile-previous-page button">Previous Page</button>
-                          <button class="mobile-next-page button">Next Page</button>
+                        <div class="grid-col-12 inset-results">
+                          <div class="inset-buttons">
+                            <button class="mobile-previous-page usa-button usa-button--outline">Previous Page</button>
+                            <button class="mobile-next-page usa-button usa-button--outline">Next Page</button>
+                          </div>
                           <div id="mobile-metadata-results">
                           </div>
-                          <table class="table table-striped">
+                          <table class="table table-striped" style="margin-top:15px">
                           <thead>
                             <tr>
                               <th style="width: 15%;">Agency</th>
@@ -165,9 +169,10 @@
                             </tr>
                           </tbody>
                         </table>
-                          <button type="submit" class="hidden button">Submit</button>
-                          <button class="mobile-previous-page button">Previous Page</button>
-                          <button class="mobile-next-page  button">Next Page</button>
+                          <div class="inset-buttons">
+                            <button class="mobile-previous-page usa-button usa-button--outline">Previous Page</button>
+                            <button class="mobile-next-page usa-button usa-button--outline">Next Page</button>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -192,7 +197,10 @@
       border-bottom: 1px solid #ddd;
     }
     .metadata-results{
-      margin: 5px;
+      min-height: 20px;
+    }
+    .inset-buttons{
+      margin: 15px 0px 15px 0px ;
     }
   </style>
   
@@ -272,6 +280,23 @@
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       $('.flex-active').toggleClass('flex-active');
       e.currentTarget.className = "flex-active";
+    });
+
+    $('#social-media-agency').selectize({
+        sortField: 'text'
+    });
+
+    $('#mobile-agency').selectize({
+        sortField: 'text'
+    });
+    
+
+    $('#tags').selectize({
+        sortField: 'text'
+    });
+
+    $('#mobile-tags').selectize({
+        sortField: 'text'
     });
 
     $('#social-media-search').submit(function(e){
@@ -392,21 +417,4 @@
     // submit_mobile_form();
   </script>
 
-
-  <style>
-    .table{
-      margin: 0 !important;
-    }
-
-    .diptech{
-      border: 1px solid rgb(12, 85, 93);
-      border-radius: 4px;
-      padding: 10px;
-    }
-    .diptech h2, .diptech p, .diptech a{
-      margin: 0px !important;
-      text-align: center;
-    }
-
-  </style>
 <% end %>
