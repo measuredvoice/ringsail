@@ -1,88 +1,76 @@
-<%= form_for([:admin,@mobile_app]) do |f| %>
-
+<%= form_for([:admin,@mobile_app], html: {:class => "grid-row usa-form usa-form--large"}) do |f| %>
+  <fieldset class="usa-fieldset">
 <p><span class="red">*</span> denotes a required field.</p>
   <div class="form-inset">
     <% if @mobile_app.errors.any? %>
-      <div id="error_explanation">
-        <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span><%= pluralize(@mobile_app.errors.count, "error") %> prohibited this mobile app from being saved</div>
-
-        <ul class="inlineErrorMsgs">
-        <% @mobile_app.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
+      <div class="usa-alert usa-alert--error" role="alert">
+        <div class="usa-alert__body">
+          <h3 class="usa-alert__heading">Error: <%= pluralize(@mobile_app.errors.count, "error") %> prohibited this mobile app from being saved</h3>
+          <ul>
+          <% @mobile_app.errors.full_messages.each do |message| %>
+          <li class="usa-alert__text"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       </div>
     <% end %>
     <% @mobile_app.mobile_app_versions.each_with_index do |version, index|%>
       <% if version.errors.any? %>
-        <div id="error_explanation">
-          <div class="error"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-              <span class="sr-only">Error:</span><%= pluralize(version.errors.count, "error") %> prohibited mobile app version <%= index + 1 %> from being saved</div>
-
-          <ul class="inlineErrorMsgs">
-          <% version.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-          </ul>
+        <div class="usa-alert usa-alert--error" role="alert">
+          <div class="usa-alert__body">
+            <h3 class="usa-alert__heading">Error: <%= pluralize(version.errors.count, "error") %> obile app version <%= index + 1 %> from being saved</h3>
+            <ul>
+            <% version.errors.full_messages.each do |message| %>
+            <li class="usa-alert__text"><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
         </div>
       <% end %>
     <% end %>
 
 
     <div class="field">
-      <%= f.label :name , "Name of App/Website"%><span class="red">*</span> </br>
-      <%= f.text_field :name, :class => "form-control formwidth" %>
+      <%= f.label :name , "Name of App/Website<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
+      <%= f.text_field :name, :class => "usa-input" %>
     </div>
     <div class="field">
-      <%= f.label :short_description, "Short Description" %><span class="red">*</span> - 200 Character Limit</br>
-      <%= f.text_field :short_description, :class => "form-control formwidth" %>
+      <%= f.label :short_description, "Short Description<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %> 
+      <span class="red">200 Character Limit</span><br/>
+      <%= f.text_field :short_description, :class => "usa-input" %>
     </div>
     <div class="field">
-      <%= f.label :long_description, "Long Description" %> - Should be the same or similar to your app store description</br>
-      <%= f.text_area :long_description, :class => "form-control formwidth" %>
+      <%= f.label :long_description, "Long Description", {class: 'usa-label'} %>
+      <span>Should be the same or similar to your app store description</span><br/>
+      <%= f.text_area :long_description, :class => "usa-input" %>
     </div>
     <div class="field">
-      <%= f.label :icon_url, "Icon URL - Please provide the URL of the app or website’s icon" %> </br>
-      <%= f.text_field :icon_url, :class => "form-control formwidth" %>
+      <%= f.label :icon_url, "Icon URL", {class: 'usa-label'} %>
+       <span>Please provide the URL of the app or website’s icon</span><br/>
+      <%= f.text_field :icon_url, :class => "usa-input" %>
     </div>
     <div class="field">
-      <%= f.label :language, "Language" %><span class="red">*</span> </br>
-      <%= f.select :language, options_for_select(language_select_options, @mobile_app.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
+      <%= f.label :language, "Language<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %> 
+      <%= f.select :language, options_for_select(language_select_options, @mobile_app.language),{include_blank: "Select"}, {:class => "usa-input"} %>
     </div>
     <div class="field">
-      <%= f.label :tag_tokens, "Tags" %> </br>
-      <%= f.text_field :tag_tokens, {:class => "form-control formwidth", :value => "" }%>
+      <%= f.label :tag_tokens, "Tags", {class: 'usa-label'} %> 
+      <%= f.text_field :tag_tokens, {:class => "usa-input", :value => "" }%>
     </div>
-    <!-- <div class="field contacts">
-      <%= f.label :primary_agency_id, "Primary Agency" %><span class="red">*</span> </br>
-      <%= f.select :primary_agency_id, Agency.all.collect {|p| [ "#{p.name} #{p.shortname}", p.id ] }, {:class => "form-control formwidth", :value => "",:prompt => "Select an Agency" }%>
-    </div>
-    <div class="field contacts">
-      <%= f.label :secondary_agency_id, "Secondary Agency" %></br>
-      <%= f.select :secondary_agency_id, Agency.all.collect {|p| [ "#{p.name} #{p.shortname}", p.id ] },{:class => "form-control formwidth", :value => "",:prompt => "Select an Agency" }%>
-    </div> -->
     <div class="field agencies">
-      <%= f.label :agency_tokens, "Sponsoring Agencies" %><span class="red">*</span></br>
-      <%= f.text_field :agency_tokens, {:class => "form-control formwidth", :value => ""} %>
+      <%= f.label :agency_tokens, "Sponsoring Agencies<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %> 
+      <%= f.text_field :agency_tokens, {:class => "usa-input", :value => ""} %>
     </div>
-    <!-- <div class="field contacts">
-      <%= f.label :primary_contact_id, "Primary Contact" %><span class="red">*</span> </br>
-      <%= f.select :primary_contact_id, User.all.collect {|p| [ "#{p.first_name} #{p.last_name} - #{p.email}", p.id ] }, {:class => "form-control formwidth", :value => "",:prompt => "Select a Contact" }%>
-    </div>
-    <div class="field contacts">
-      <%= f.label :secondary_contact_id, "Secondary Contact" %><span class="red">*</span> </br>
-      <%= f.select :secondary_contact_id, User.all.collect {|p| [ "#{p.first_name} #{p.last_name} - #{p.email}", p.id ] },{:class => "form-control formwidth", :value => "",:prompt => "Select a Contact" }%>
-    </div> -->
     <div class="contacts">
       <div class="field">
-        <%= f.label :user_tokens, "Contacts" %><span class="red">*</span></br>
-        <%= f.text_field :user_tokens, {:class => "form-control formwidth", :value => ""} %>
+        <%= f.label :user_tokens, "Contacts<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %> 
+        <%= f.text_field :user_tokens, {:class => "usa-iput", :value => ""} %>
       </div>
     </div>
     <div class="field notes">
-      <%= f.label :notes, "Additional Notes:" %> <span class="red">Do not include PII content in this field.</span> ) <br/>
-      <%= f.text_area :notes, {:class => "form-control formwidth", rows: 5, placeholder: "Suggestion: Include optional contact information." }%>
+      <%= f.label :notes, "Additional Notes:", {class: 'usa-label'} %> 
+      <span class="red">Do not include PII content in this field.</span> <br/>
+      <%= f.text_area :notes, {:class => "usa-textarea", rows: 5, placeholder: "Suggestion: Include optional contact information." }%>
     </div>
     <div class="versions">
       <%= f.fields_for :mobile_app_versions do |mobile_app_version| %>
@@ -95,10 +83,11 @@
       </div>
     </div>
     <div class="actions">
-      <%= f.submit :class => "btn btn-primary" %>
-      <%= link_to 'Cancel', admin_mobile_apps_path, :class => "btn btn-default" %>
+      <%= f.submit :class => "usa-button" %>
+      <%= link_to 'Cancel', admin_mobile_apps_path, :class => "usa-button usa-button--secondary" %>
     </div>
   </div>
+</fieldset>
 <% end %>
 
 

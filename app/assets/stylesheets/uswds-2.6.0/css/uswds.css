@@ -912,8 +912,8 @@ img{
 
 .usa-checkbox__input:checked + .usa-checkbox__label::before,
 .usa-checkbox__input:checked:disabled + .usa-checkbox__label::before{
-  background-image:url("../img/correct8.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/correct8.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/correct8.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/correct8.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-position:center center;
   background-size:0.75rem auto;
@@ -923,7 +923,7 @@ img{
 .usa-checkbox__input:checked:disabled + .usa-checkbox__label::before{
     background-image:none;
     background-color:white;
-    content:url("../img/checkbox-check-print.svg");
+    content:url("/assets/uswd/img/checkbox-check-print.svg");
     text-indent:0;
   }
 }
@@ -986,8 +986,8 @@ img{
 }
 
 .usa-select{
-  background-image:url("../img/arrow-both.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/arrow-both.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/arrow-both.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/arrow-both.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   -webkit-appearance:none;
      -moz-appearance:none;
@@ -2982,7 +2982,7 @@ img{
 }
 
 .usa-link--external::after{
-  background-image:url("../img/external-link.svg");
+  background-image:url("/assets/uswd/img/external-link.svg");
   background-position:0 0;
   background-repeat:no-repeat;
   background-size:100%;
@@ -2994,12 +2994,12 @@ img{
   width:0.65em;
 }
 .usa-link--external:hover::after{
-  background-image:url("../img/external-link-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/external-link-hover.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/external-link-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/external-link-hover.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 .usa-link--external.usa-link--alt::after{
-  background-image:url("../img/external-link-alt.svg");
+  background-image:url("/assets/uswd/img/external-link-alt.svg");
   background-position:0 0;
   background-repeat:no-repeat;
   background-size:100%;
@@ -3011,8 +3011,8 @@ img{
   width:0.65em;
 }
 .usa-link--external.usa-link--alt:hover::after{
-  background-image:url("../img/external-link-alt-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/external-link-alt-hover.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/external-link-alt-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/external-link-alt-hover.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 
@@ -3181,8 +3181,8 @@ img{
   margin:0;
   padding:0;
   text-align:left;
-  background-image:url("../img/minus.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/minus.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/minus.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/minus.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-color:#f0f0f0;
   background-position:right 1.25rem center;
@@ -3224,8 +3224,8 @@ img{
 }
 
 .usa-accordion__button[aria-expanded=false]{
-  background-image:url("../img/plus.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/plus.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/plus.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/plus.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-size:1rem;
 }
@@ -3311,8 +3311,8 @@ img{
 }
 
 .usa-alert--success{
-  background-image:url("../img/alerts/success.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/alerts/success.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/alerts/success.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/alerts/success.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-color:#ecf3ec;
 }
@@ -3324,8 +3324,8 @@ img{
 }
 
 .usa-alert--warning{
-  background-image:url("../img/alerts/warning.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/alerts/warning.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/alerts/warning.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/alerts/warning.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-color:#faf3d1;
 }
@@ -3337,8 +3337,8 @@ img{
 }
 
 .usa-alert--error{
-  background-image:url("../img/alerts/error.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/alerts/error.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/alerts/error.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/alerts/error.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-color:#f4e3db;
 }
@@ -3350,8 +3350,8 @@ img{
 }
 
 .usa-alert--info{
-  background-image:url("../img/alerts/info.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/alerts/info.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/alerts/info.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/alerts/info.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-color:#e7f6f8;
 }
@@ -3545,8 +3545,8 @@ img{
   text-decoration:underline;
 }
 .usa-banner__header-action::after{
-  background-image:url("../img/angle-arrow-down-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/angle-arrow-down-primary.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/usw/assets/uswd/img/angle-arrow-down-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/usw/assets/uswd/img/angle-arrow-down-primary.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-position:center center;
   background-repeat:no-repeat;
@@ -3558,8 +3558,8 @@ img{
   margin-left:0.25rem;
 }
 .usa-banner__header-action:hover::after{
-  background-image:url("../img/angle-arrow-down-primary-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/angle-arrow-down-primary-hover.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/usw/assets/uswd/img/angle-arrow-down-primary-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/usw/assets/uswd/img/angle-arrow-down-primary-hover.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 .usa-banner__header--expanded .usa-banner__header-action{
@@ -3678,8 +3678,8 @@ img{
     position:relative;
   }
   .usa-banner__button::after{
-    background-image:url("../img/angle-arrow-down-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/angle-arrow-down-primary.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/angle-arrow-down-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/angle-arrow-down-primary.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
     background-position:center center;
     background-repeat:no-repeat;
@@ -3691,8 +3691,8 @@ img{
     margin-left:2px;
   }
   .usa-banner__button:hover::after{
-    background-image:url("../img/angle-arrow-down-primary-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/angle-arrow-down-primary-hover.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/angle-arrow-down-primary-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/angle-arrow-down-primary-hover.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
   }
   .usa-banner__button:hover{
@@ -3707,8 +3707,8 @@ img{
 }
 @media all and (max-width: 39.99em){
   .usa-banner__button[aria-expanded=true]::after{
-    background-image:url("../img/close-blue-60v-alt.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/close-blue-60v-alt.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/close-blue-60v-alt.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/close-blue-60v-alt.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
     background-position:center center;
     background-repeat:no-repeat;
@@ -3736,8 +3736,8 @@ img{
     position:relative;
   }
   .usa-banner__button[aria-expanded=true]::after{
-    background-image:url("../img/angle-arrow-up-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/angle-arrow-up-primary.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/angle-arrow-up-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/angle-arrow-up-primary.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
     background-position:center center;
     background-repeat:no-repeat;
@@ -3749,8 +3749,8 @@ img{
     margin-left:2px;
   }
   .usa-banner__button[aria-expanded=true]:hover::after{
-    background-image:url("../img/angle-arrow-up-primary-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/angle-arrow-up-primary-hover.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/angle-arrow-up-primary-hover.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/angle-arrow-up-primary-hover.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
   }
 }
@@ -3797,8 +3797,8 @@ img{
   width:2rem;
 }
 .usa-checklist__item.usa-checklist__item--checked::before{
-  background-image:url("../img/correct9.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/correct9.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/correct9.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/correct9.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-position:center;
   background-size:1.25rem;
@@ -4075,26 +4075,26 @@ img{
 }
 
 .usa-social-link--facebook{
-  background-image:url("../img/social-icons/facebook25.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/social-icons/facebook25.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/social-icons/facebook25.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/social-icons/facebook25.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 
 .usa-social-link--twitter{
-  background-image:url("../img/social-icons/twitter16.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/social-icons/twitter16.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/social-icons/twitter16.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/social-icons/twitter16.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 
 .usa-social-link--youtube{
-  background-image:url("../img/social-icons/youtube15.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/social-icons/youtube15.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/social-icons/youtube15.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/social-icons/youtube15.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 
 .usa-social-link--rss{
-  background-image:url("../img/social-icons/rss25.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/social-icons/rss25.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/social-icons/rss25.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/social-icons/rss25.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 
@@ -4193,8 +4193,8 @@ img{
           justify-content:flex-start;
 }
 .usa-footer--big .usa-footer__primary-content--collapsible .usa-footer__primary-link::before{
-  background-image:url("../img/arrow-down.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/arrow-down.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/arrow-down.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/arrow-down.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   -webkit-box-align:center;
       -ms-flex-align:center;
@@ -4220,8 +4220,8 @@ img{
   display:none;
 }
 .usa-footer--big .usa-footer__primary-content--collapsible.hidden .usa-footer__primary-link::before{
-  background-image:url("../img/arrow-right.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/arrow-right.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/arrow-right.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/arrow-right.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
 }
 @media all and (min-width: 30em){
@@ -4685,7 +4685,7 @@ img{
   line-height:1.5;
   padding-bottom:2rem;
   padding-top:2rem;
-  background-image:url("../img/hero.png");
+  background-image:url("/assets/uswd/img/hero.png");
   background-position:center;
   background-size:cover;
   color:white;
@@ -5088,16 +5088,16 @@ img{
   }
 }
 .usa-nav__primary button[aria-expanded=false]{
-  background-image:url("../img/plus-alt.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/plus-alt.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/plus-alt.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/plus-alt.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-position:right 0 center;
   background-size:0.75rem;
 }
 @media all and (min-width: 64em){
   .usa-nav__primary button[aria-expanded=false]{
-    background-image:url("../img/angle-arrow-down.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/angle-arrow-down.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/angle-arrow-down.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/angle-arrow-down.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
     background-size:0.5rem;
     background-position:right 1rem top 53%;
@@ -5105,22 +5105,22 @@ img{
 }
 @media all and (min-width: 64em){
   .usa-nav__primary button[aria-expanded=false]:hover{
-    background-image:url("../img/angle-arrow-down-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/angle-arrow-down-primary.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/angle-arrow-down-primary.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/angle-arrow-down-primary.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
   }
 }
 .usa-nav__primary button[aria-expanded=true]{
-  background-image:url("../img/minus-alt.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/minus-alt.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/minus-alt.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/minus-alt.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-position:right 0 center;
   background-size:0.75rem;
 }
 @media all and (min-width: 64em){
   .usa-nav__primary button[aria-expanded=true]{
-    background-image:url("../img/angle-arrow-up-white.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/angle-arrow-up-white.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/angle-arrow-up-white.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/angle-arrow-up-white.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
     -moz-osx-font-smoothing:grayscale;
     -webkit-font-smoothing:antialiased;
@@ -5374,8 +5374,8 @@ img{
   display:flex;
 }
 .usa-search [type=submit]{
-  background-image:url("../img/search.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-  background-image:url("../img/search.svg"), linear-gradient(transparent, transparent);
+  background-image:url("/assets/uswd/img/search.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+  background-image:url("/assets/uswd/img/search.svg"), linear-gradient(transparent, transparent);
   background-repeat:no-repeat;
   background-position:center center;
   background-size:1rem;
@@ -5416,8 +5416,8 @@ img{
 @media all and (min-width: 30em){
   .usa-search--small [type=submit],
 .usa-search--small .usa-search__submit{
-    background-image:url("../img/search.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
-    background-image:url("../img/search.svg"), linear-gradient(transparent, transparent);
+    background-image:url("/assets/uswd/img/search.svg"), -webkit-gradient(linear, left top, left bottom, from(transparent), to(transparent));
+    background-image:url("/assets/uswd/img/search.svg"), linear-gradient(transparent, transparent);
     background-repeat:no-repeat;
     background-position:center center;
     background-size:1rem;

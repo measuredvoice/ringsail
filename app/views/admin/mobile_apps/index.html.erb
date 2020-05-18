@@ -1,55 +1,57 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>Mobile Products<% end %>
-    <h1 class="page-header">Mobile Products</h1>
-      <div class="row placeholders">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding-right: 0;">
-          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
-          <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %>
-          <%= form_for admin_mobile_apps_path, method: :post, html: { class: 'row', id: 'table-controls'} do %>
-          <div class="col-sm-12">
-            <%= label :agency_selector, "Agency" %>
-            <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.all.pluck(:name).sort.collect{|agency| [agency,agency]},params[:agency_selector]) %>
-          </div>
-          <div class="col-sm-6">
-            <%= label :platform_selector, "Platform" %>
-            <%= select_tag :platform_selector, options_for_select([["All",""],
-            ["Android","Android"],
-              ["Blackberry","Blackberry"],
-              ["iOS","iOS"],
-              ["Mobile Web","Mobile Web"],
-              ["Windows","Windows"]],params[:platform]) %>
-          </div>
-          <div class="col-sm-6">
-            <% if current_user.admin? %>
-            <%= label :status_selector, "Status Selector" %>
-            <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},params[:status]) %>
-            <% else %>
-            <%= label :status_selector, "Status Selector" %>
-            <%= select_tag :status_selector, options_for_select([["All",""]]+Outlet.statuses.collect{|item| [item[0].humanize,item[0].humanize]},"Published") %>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
+
+      <div class="grid-col-12">
+        <%= content_for :page_title do %>Mobile Products<% end %>
+        <h1 class="page-header">Mobile Products</h1>
+          <div class="grid-row placeholders">
+            <div class="grid-col-12">
+             <!--  <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
+              <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %> -->
+              <%= form_for admin_mobile_apps_path, method: :post, html: { class: 'grid-row', id: 'table-controls'} do %>
+              <div class="grid-col-10 grid-offset-1">
+                <%= label :agency_selector, "Agency", {class: 'usa-label'} %>
+                <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.where("published_mobile_app_count > 0").pluck(:name).sort.collect{|agency| [agency,agency]},params[:agency_selector]), {class: 'usa-input'} %>
+              </div>
+              <div class="grid-col-5 grid-offset-1">
+                <%= label :platform_selector, "Platform", {class: 'usa-label'} %>
+                <%= select_tag :platform_selector, options_for_select([["All",""],
+                ["Android","Android"],
+                  ["Blackberry","Blackberry"],
+                  ["iOS","iOS"],
+                  ["Mobile Web","Mobile Web"],
+                  ["Windows","Windows"]],params[:platform]), {class: 'usa-input'} %>
+              </div>
+              <div class="grid-col-5 grid-offset-1">
+                <% if current_user.admin? || params[:status] %>
+                <%= label :status_selector, "Status Selector", {class: 'usa-label'} %>
+                <%= select_tag :status_selector, options_for_select([["All",""],["Published","Published"],["Archived","Archived"]],params[:status]), {class: 'usa-input'} %>
+                <% else %>
+                <%= label :status_selector, "Status Selector", {class: 'usa-label'} %>
+                <%= select_tag :status_selector, options_for_select([["All",""],["Published","Published"],["Archived","Archived"]],"Published"), {class: 'usa-input'} %>
+                <% end %>
+              </div>
             <% end %>
+              <table class="table table-striped" id="data-tables">
+              <thead>
+              <tr>
+                <th>Agency</th>
+                <th>Contacts</th>
+                <th>Name</th>
+                <th>Last Updated</th>
+                <th>Status</th>
+              </tr>
+              </thead>
+              <tbody>
+              </tbody>
+              </table>
+             </div>
           </div>
-        <% end %>
-          <table class="table table-striped" id="data-tables">
-          <thead>
-          <tr>
-            <th>Agency</th>
-            <th>Contacts</th>
-            <th>Name</th>
-            <th>Last Updated</th>
-            <th>Status</th>
-          </tr>
-          </thead>
-          <tbody>
-          </tbody>
-          </table>
-          <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default  pull-right export" %>
-          <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %>
-         </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
 <%= form_tag admin_mobile_apps_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :platform, params[:platform] %>
@@ -68,8 +70,10 @@
 </style>
   <script>
     var data_tables = null;
-
-     $('#agency_selector').on('change',function(){
+    $('#agency_selector').selectize({
+        sortField: 'text'
+    });
+    $('#agency_selector').on('change',function(){
       $('#agency').val($('#agency_selector').val());
     });
     $('#status_selector').on('change',function(){
@@ -88,7 +92,6 @@
         "bProcessing": true,
         "serverSide" : true,
         "sAjaxSource" : "/admin/mobile_apps.json",
-        "scrollY": "400px",
         "fnServerParams": function ( aoData ) {
           aoData.push( { "name": "platform", "value": $("#platform").val() });
           aoData.push( { "name": "agency", "value" : $('#agency_selector').val()});
@@ -113,7 +116,7 @@
           $('.export').show();
           $('.dataTables_filter').show();
         },
-        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+        'sDom':'<"grid-row"<"grid-col-5 grid-offset-1"f><"grid-col-5 grid-offset-1"l>><"grid-row"<"grid-col-10 grid-offset-1"pi>>rt<"grid-row"<"grid-col-10 grid-offset-1"ip>><"grid-row"<"grid-col-10 grid-offset-1">>'});
     });
 
     all_ids = "";

@@ -3,22 +3,22 @@
       <legend>Platform Details</legend>
       <p>At least one set of platform details of the product must be given.</p>
       <div class="field">
-        <%= f.label :device, "Product Type" %><span class="red">*</span> </br>
+        <%= f.label :device, "Product Type<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
         <%= f.select :device, options_for_select([
           ["Web","Web"],
           ["App - Phone/Tablet","App - Phone/Tablet"],
           ["App - Tablet Only","App - Tablet Only"] ],f.object.device),
-          {include_blank: "Select"}, {:class => "form-control formwidth"} %>
+          {include_blank: "Select"}, {:class => "usa-input"} %>
       </div>
       <div class="field">
-        <%= f.label :store_url, "Store URL / Location" %><span class="red">*</span> </br>
-        <%= f.text_field :store_url, :class => "form-control formwidth" %>
+        <%= f.label :store_url, "Store URL / Location<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
+        <%= f.text_field :store_url, :class => "usa-inpuit" %>
         <!--<%= link_to "Get Platform Details From URL", "#", :class=>"btn btn-default version-details" %>
         <span class="version-retrieving hidden"><i class="fa fa-refresh fa-spin"></i></span>
         <span class="version-messages"></span> -->
       </div>
      <div class="field">
-          <%= f.label :platform, "Platform" %><span class="red">*</span> </br>
+          <%= f.label :platform, "Platform<span class=\"red\">*</span>".html_safe, {class: 'usa-label'} %>
           <%= f.select :platform, options_for_select(
               [["Android","Android"],
               ["Blackberry","Blackberry"],
@@ -26,15 +26,15 @@
               ["Mobile Web","Mobile Web"],
               ["Windows","Windows"]],f.object.platform),
               {include_blank: "Select"},
-              {:class => "form-control formwidth"} %>
+              {:class => "usa-input"} %>
       </div>
       <div class="field">
-        <%= f.label :version_number, "Version Number" %> </br>
-        <%= f.text_field :version_number, :class => "form-control formwidth" %>
+        <%= f.label :version_number, "Version Number", {class: 'usa-label'}  %>
+        <%= f.text_field :version_number, :class => "usa-input" %>
       </div>
       <div class="field">
-        <%= f.label :publish_date, "Publish Date" %> </br>
-        <%= f.date_select :publish_date, {order: [:month, :day, :year], add_month_numbers: true, prompt: true}, {:class => "form-control-inline" } %>
+        <%= f.label :publish_date, "Publish Date", {class: 'usa-label'}  %>
+        <%= f.date_select :publish_date, {order: [:month, :day, :year], add_month_numbers: true, prompt: true}, {:class => " usa-input--inline" } %>
       </div>
       <!-- <div class="field">
         <%= f.label :description, "Description - This will be set to match the Registration Description by default"
@@ -46,20 +46,20 @@
         <%= f.text_area :whats_new, :class => "form-control formwidth" %>
       </div> -->
       <div class="field">
-        <%= f.label :screenshot, "Screenshot - Provide app store URLs of the screenshots" %> </br>
-        <%= f.text_area :screenshot, :class => "form-control formwidth" %>
+        <%= f.label :screenshot, "Screenshot - Provide app store URLs of the screenshots", {class: 'usa-label'} %>
+        <%= f.text_area :screenshot, :class => "usa-textarea" %>
       </div>
       <!-- <div class="field">
           <%= f.label :language %> </br>
           <%= f.select :language, options_for_select([["English","English"],["Spanish","Spanish"]],f.object.language),{include_blank: "Select"}, {:class => "form-control formwidth"} %>
       </div> -->
       <div class="field">
-        <%= f.label :average_rating, "Average Rating" %> </br>
-        <%= f.text_field :average_rating, :class => "form-control formwidth" %>
+        <%= f.label :average_rating, "Average Rating", {class: 'usa-label'} %>
+        <%= f.text_field :average_rating, :class => "usa-input" %>
       </div>
       <div class="field">
-        <%= f.label :number_of_ratings, "Number of Ratings" %> </br>
-        <%= f.text_field :number_of_ratings, :class => "form-control formwidth" %>
+        <%= f.label :number_of_ratings, "Number of Ratings", {class: 'usa-label'} %>
+        <%= f.text_field :number_of_ratings, :class => "usa-input" %>
       </div>
       <div class="buttonRow"><%= link_to_remove_association "Remove Platform Details", f, {:class => "fa fa-times"}  %></div>
   </fieldset>

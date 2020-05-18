@@ -8,6 +8,7 @@ gem 'rails', '5.2'
 gem 'mysql2', '0.4.10'
 
 #social media platforms
+# remove these since we no longer are able to integrate directly smoothly
 gem 'twitter'
 gem "koala" #facebook
 
@@ -63,12 +64,16 @@ group :assets do
   gem 'uglifier'
 end
 gem 'font-awesome-rails'
+
+# can remove all of these if we get rid of the 
 gem 'bootstrap-sass', '~> 3.3.3'
 gem 'morrisjs-rails'
 gem 'raphael-rails'
+gem "jqcloud-rails"
+# end remove old files
+
 gem 'jquery-rails'
 gem 'jquery-tokeninput-rails'
-gem "jqcloud-rails"
 gem "non-stupid-digest-assets"
 
 ######

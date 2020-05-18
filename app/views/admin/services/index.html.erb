@@ -1,37 +1,40 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>Services<% end %>
-    <h1 class="page-header">Services</h1>
-<%= link_to 'New Service', new_admin_service_path, class: "btn btn-primary" %>
-    <br/>
-    <br/>
-    <div class="row placeholders">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-        <table id="data-tables" class="table table-striped">
-      		<thead>
-            <tr class = "service_row">
-              <th>Service Name</th>
-              <th>Service URL Example</th>
-              <th>Archived</th>
-              <th class = "lastlinks">Actions</th>
-        		</tr>
-          </thead>
+      <div class="grid-col-12">
+        <%= content_for :page_title do %>Services<% end %>
+        <h1 class="page-header">Services</h1>
+        <%= link_to 'New Service', new_admin_service_path, class: "usa-button" %>
+        <br/>
+        <br/>
+        <div class="row placeholders">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-          <tbody>
+            <table id="data-tables" class="table table-striped">
+          		<thead>
+                <tr class = "service_row">
+                  <th>Service Name</th>
+                  <th>Service URL Example</th>
+                  <th>Archived</th>
+                  <th class = "lastlinks">Actions</th>
+            		</tr>
+              </thead>
 
-          </tbody>
-    	  </table>
+              <tbody>
+
+              </tbody>
+        	  </table>
 
 
+          </div>
+
+        </div>
       </div>
 
     </div>
-<%= link_to 'New Service', new_admin_service_path, class: "btn btn-primary" %>
   </div>
-
-</div>
-
+</section>
 <% content_for :additional_javascript do %>
   <script>
     var data_tables = null;
@@ -40,7 +43,6 @@
         "ajax" : {
           "url":"/admin/services.json"
         },
-        "scrollY": "400px",
         "columns": [
           { "data" : "name"},
           { "data" : "url_example"},
@@ -50,11 +52,11 @@
         "columnDefs": [
           {
             "render": function(data,type,row){
-              return '<a href="/admin/services/'+data+'"><i class = \"glyphicon glyphicon-info-sign\"></i></a>';
+              return '<a href="/admin/services/'+data+'">Info</a>';
             }, "targets":[3]
           }
         ],
-        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+        'sDom':'<"grid-row"<"grid-col-5 grid-offset-1"f><"grid-col-5 grid-offset-1"l>><"grid-row"<"grid-col-10 grid-offset-1"pi>>rt<"grid-row"<"grid-col-10 grid-offset-1"ip>><"grid-row"<"grid-col-10 grid-offset-1">>'});
     } );
 
 

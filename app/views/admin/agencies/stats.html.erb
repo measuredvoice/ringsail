@@ -1,353 +1,373 @@
-<div class = "row">
-  <div class="col-sm-12 col-md-12">
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-    <%= content_for :page_title do %>Agency Stats<% end %>
-    <h1 class="page-header">Agency Stats</h1>
-    <div class = "panel panel-default">
-      <div class = "panel-body">
-        <dl class="dl-horizontal">
-          <dt>Agency Name:</dt>
-          <dd><%= @agency.name %></dd>
-        </dl>
-        <dl class="dl-horizontal">
-          <dt>Info URL:</dt>
-          <dd><%= @agency.info_url %></dd>
-        </dl>
+      <div class="grid-col-12">
 
-        <dl class="dl-horizontal">
+        <%= content_for :page_title do %>Agency Stats<% end %>
+        <h1 class="page-header">Agency Stats</h1>
+        <div class = "panel panel-default">
+          <div class = "panel-body">
+            <dl class="dl-horizontal">
+              <dt>Agency Name:</dt>
+              <dd><%= @agency.name %></dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt>Info URL:</dt>
+              <dd><%= @agency.info_url %></dd>
+            </dl>
 
-          <dt>Social Media:</dt>
-          <dd><%= @agency.draft_outlet_count%> (<%= @agency.published_outlet_count%> published)</dd>
-        </dl>
-        <dl class="dl-horizontal">
-          <dt>Mobile Products:</dt>
-          <dd><%= @agency.draft_mobile_app_count%> (<%= @agency.published_mobile_app_count%> published)</dd>
+            <dl class="dl-horizontal">
 
-          <% @agency.mobile_apps.joins(:mobile_app_versions).group(:platform).distinct("mobile_app_version_id, platform").count.each do |key, value| %>
-          <dt><%= key %> (published):</dt>
-          <dd><%= value %></dd>
-          <% end %>
+              <dt>Social Media:</dt>
+              <dd><%= @agency.draft_outlet_count%> (<%= @agency.published_outlet_count%> published)</dd>
+            </dl>
+            <dl class="dl-horizontal">
+              <dt>Mobile Products:</dt>
+              <dd><%= @agency.draft_mobile_app_count%> (<%= @agency.published_mobile_app_count%> published)</dd>
 
-          <dt>Galleries:</dt>
-          <dd><%= @agency.published_gallery_count%> (<%= @agency.published_gallery_count%> published)</dd>
+              <% @agency.mobile_apps.joins(:mobile_app_versions).group(:platform).distinct("mobile_app_version_id, platform").count.each do |key, value| %>
+              <dt><%= key %> (published):</dt>
+              <dd><%= value %></dd>
+              <% end %>
+
+              <dt>Galleries:</dt>
+              <dd><%= @agency.published_gallery_count%> (<%= @agency.published_gallery_count%> published)</dd>
 
 
-        </dl>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class = "row">
-  <div class="col-sm-12 col-md-12">
-    <h2>Agency Facebook Accounts (<%= @agency.outlets.where(service: "facebook",status: 1).count %> total)</h2>
-    <div class = "panel panel-default">
-      <div class = "panel-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "facebook",status: 1).average(:facebook_followers), :delimiter => ',') %> </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <h3>Most Followers</h3>
-            <ul class="list-group smaller">
-              <% index = 1
-               @agency.outlets.where(service: "facebook",status: 1).order('facebook_followers desc').first(5).each do |outlet| %>
-              <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
-              <% index = index + 1
-              end %>
-            </ul>
-            
-          </div>
-          <div class="col-sm-6">
-            <h3>Least Followers</h3>
-            <ul class="list-group smaller">
-              <% index = 1
-               @agency.outlets.where(service: "facebook",status: 1).order('facebook_followers asc').first(5).each do |outlet| %>
-              <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
-              <% index = index + 1
-              end %>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <table id="facebook-data">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Facebook Followers</th>
-                  <th>Last Updated</th>
-              <!--     <th>Facebook Likes</th> -->
-                 <!--  <th>Facebook Posts</th>
-                  <th> Facebook Interactions</th>-->
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Facebook Followers</th>
-                  <th>Last Updated</th>
-                  <!-- <th>Facebook Likes</th>
-                  <th>Facebook Posts</th>
-                  <th>Facebook Interactions</th> -->
-                </tr>
-              </tfoot>
-              <tbody>
-                <% @agency.outlets.where(service: "facebook",status: 1).all.each do |outlet| %>
-                <tr>
-                  <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target => "_blank" %></td>
-                  <td><%= outlet.facebook_followers %></td>
-                  <td><%= outlet.updated_at %></td>
-                <!--   <td><%= outlet.facebook_likes %></td>
-                  <td><%= outlet.facebook_posts %></td>
-                  <td><%= outlet.facebook_interactions %></td> -->
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
+            </dl>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-<div class = "row">
-  <div class="col-sm-12 col-md-12">
-    <h2>Agency Twitter Accounts (<%= @agency.outlets.where(service: "twitter",status: 1).count %> total)</h2>
-    <div class = "panel panel-default">
-      <div class = "panel-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Total Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).sum(:twitter_followers), :delimiter => ',') %> </p>
-          </div>
-          <div class="col-sm-6">
-            <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).average(:twitter_followers), :delimiter => ',') %> </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Total Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).sum(:twitter_posts), :delimiter => ',') %> </p>
-          </div>
-          <div class="col-sm-6">
-            <p>Average Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).average(:twitter_posts), :delimiter => ',') %> </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <h3>Most Followers</h3>
-            <ul class="list-group smaller">
-              <% index = 1
-               @agency.outlets.where(service: "twitter",status: 1).order('twitter_followers desc').first(5).each do |outlet| %>
-              <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
-              <% index = index + 1
-              end %>
-            </ul>
-            
-          </div>
-          <div class="col-sm-6">
-            <h3>Least Followers</h3>
-            <ul class="list-group smaller">
-              <% index = 1
-               @agency.outlets.where(service: "twitter",status: 1).order('twitter_followers asc').first(5).each do |outlet| %>
-              <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
-              <% index = index + 1
-              end %>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <table id="twitter-data">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Twitter Followers</th>
-                  <th>Twitter Posts</th>
-                  <th>Last Updated</th>
-                  <!-- <th>Twitter Interactions</th> -->
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Twitter Followers</th>
-                  <th>Twitter Posts</th>
-                  <th>Last Updated</th>
-                  <!-- <th>Twitter Interactions</th> -->
-                </tr>
-              </tfoot>
-              <tbody>
-                <% @agency.outlets.where(service: "twitter",status: 1).all.each do |outlet| %>
-                <tr>
-                  <td><%= link_to "#{outlet.organization.blank? ? "https://twitter.com/#{outlet.account}" : outlet.organization}" , admin_outlet_path(outlet), :target=> "_blank" %></td>
-                  <td><%= outlet.twitter_followers %></td>
-                  <td><%= outlet.twitter_posts %></td>
-                  <td><%= outlet.updated_at %></td>
-                  <!-- <td><%= outlet.twitter_interactions %></td> -->
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
+      <div class="grid-col-12">
+        <h2>Agency Facebook Accounts (<%= @agency.outlets.where(service: "facebook",status: 1).count %> total)</h2>
+        <div class = "panel panel-default">
+          <div class = "panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "facebook",status: 1).average(:facebook_followers), :delimiter => ',') %> </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <h3>Most Followers</h3>
+                <ul class="list-group smaller">
+                  <% index = 1
+                   @agency.outlets.where(service: "facebook",status: 1).order('facebook_followers desc').first(5).each do |outlet| %>
+                  <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
+                  <% index = index + 1
+                  end %>
+                </ul>
+                
+              </div>
+              <div class="col-sm-6">
+                <h3>Least Followers</h3>
+                <ul class="list-group smaller">
+                  <% index = 1
+                   @agency.outlets.where(service: "facebook",status: 1).order('facebook_followers asc').first(5).each do |outlet| %>
+                  <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.facebook_followers}" %></li>
+                  <% index = index + 1
+                  end %>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="facebook-data">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Facebook Followers</th>
+                      <th>Last Updated</th>
+                  <!--     <th>Facebook Likes</th> -->
+                     <!--  <th>Facebook Posts</th>
+                      <th> Facebook Interactions</th>-->
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Facebook Followers</th>
+                      <th>Last Updated</th>
+                      <!-- <th>Facebook Likes</th>
+                      <th>Facebook Posts</th>
+                      <th>Facebook Interactions</th> -->
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <% @agency.outlets.where(service: "facebook",status: 1).all.each do |outlet| %>
+                    <tr>
+                      <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target => "_blank" %></td>
+                      <td><%= outlet.facebook_followers %></td>
+                      <td><%= outlet.updated_at %></td>
+                    <!--   <td><%= outlet.facebook_likes %></td>
+                      <td><%= outlet.facebook_posts %></td>
+                      <td><%= outlet.facebook_interactions %></td> -->
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-<div class = "row">
-  <div class="col-sm-12 col-md-12">
-    <h2>Agency YouTube Accounts  (<%= @agency.outlets.where(service: "youtube",status: 1).count %> total)</h2>
-    <div class = "panel panel-default">
-      <div class = "panel-body">
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Total Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_subscribers), :delimiter => ',') %> </p>
-          </div>
-          <div class="col-sm-6">
-            <p>Average Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_subscribers), :delimiter => ',') %> </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Total Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_video_count), :delimiter => ',') %> </p>
-          </div>
-          <div class="col-sm-6">
-            <p>Average Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_video_count), :delimiter => ',') %> </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Total Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_view_count), :delimiter => ',') %> </p>
-          </div>
-          <div class="col-sm-6">
-            <p>Average Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_view_count), :delimiter => ',') %> </p>
-          </div>
-        </div> 
-        <div class="row">
-          <div class="col-sm-6">
-            <p>Total Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_comment_count), :delimiter => ',') %> </p>
-          </div>
-          <div class="col-sm-6">
-            <p>Average Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_comment_count), :delimiter => ',') %> </p>
-          </div>
-        </div> 
-        <div class="row">
-          <div class="col-sm-6">
-            <h3>Most Followers</h3>
-            <ul class="list-group smaller">
-              <% index = 1
-               @agency.outlets.where(service: "youtube",status: 1).order('youtube_subscribers desc').first(5).each do |outlet| %>
-              <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.youtube_subscribers}" %></li>
-              <% index = index + 1
-              end %>
-            </ul>
-            
-          </div>
-          <div class="col-sm-6">
-            <h3>Least Followers</h3>
-            <ul class="list-group smaller">
-              <% index = 1
-               @agency.outlets.where(service: "youtube",status: 1).order('youtube_subscribers asc').first(5).each do |outlet| %>
-              <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.youtube_subscribers}" %></li>
-              <% index = index + 1
-              end %>
-            </ul>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <table id="youtube-data">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>YouTube Subscribers</th>
-                  <th>YouTube Videos</th>
-                  <th>YouTube Views</th>
-                  <th>YouTube Comments</th>
-                  <th>Last Updated</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>YouTube Subscribers</th>
-                  <th>YouTube Videos</th>
-                  <th>YouTube Views</th>
-                  <th>YouTube Comments</th>
-                  <th>Last Updated</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <% @agency.outlets.where(service: "youtube",status: 1).all.each do |outlet| %>
-                <tr>
-                  <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target=> "_blank" %></td>
-                  <td><%= outlet.youtube_subscribers %></td>
-                  <td><%= outlet.youtube_video_count %></td>
-                  <td><%= outlet.youtube_view_count %></td>
-                  <td><%= outlet.youtube_comment_count %></td>
-                  <td><%= outlet.updated_at %></td>
-                </tr>
-                <% end %>
-              </tbody>
-            </table>
+      <div class="grid-col-12">
+        <h2>Agency Twitter Accounts (<%= @agency.outlets.where(service: "twitter",status: 1).count %> total)</h2>
+        <div class = "panel panel-default">
+          <div class = "panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <p>Total Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).sum(:twitter_followers), :delimiter => ',') %> </p>
+              </div>
+              <div class="col-sm-6">
+                <p>Average Followers: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).average(:twitter_followers), :delimiter => ',') %> </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <p>Total Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).sum(:twitter_posts), :delimiter => ',') %> </p>
+              </div>
+              <div class="col-sm-6">
+                <p>Average Posts: <%=  number_with_delimiter(@agency.outlets.where(service: "twitter",status: 1).average(:twitter_posts), :delimiter => ',') %> </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <h3>Most Followers</h3>
+                <ul class="list-group smaller">
+                  <% index = 1
+                   @agency.outlets.where(service: "twitter",status: 1).order('twitter_followers desc').first(5).each do |outlet| %>
+                  <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
+                  <% index = index + 1
+                  end %>
+                </ul>
+                
+              </div>
+              <div class="col-sm-6">
+                <h3>Least Followers</h3>
+                <ul class="list-group smaller">
+                  <% index = 1
+                   @agency.outlets.where(service: "twitter",status: 1).order('twitter_followers asc').first(5).each do |outlet| %>
+                  <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.twitter_followers}" %></li>
+                  <% index = index + 1
+                  end %>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="twitter-data">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Twitter Followers</th>
+                      <th>Twitter Posts</th>
+                      <th>Last Updated</th>
+                      <!-- <th>Twitter Interactions</th> -->
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Twitter Followers</th>
+                      <th>Twitter Posts</th>
+                      <th>Last Updated</th>
+                      <!-- <th>Twitter Interactions</th> -->
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <% @agency.outlets.where(service: "twitter",status: 1).all.each do |outlet| %>
+                    <tr>
+                      <td><%= link_to "#{outlet.organization.blank? ? "https://twitter.com/#{outlet.account}" : outlet.organization}" , admin_outlet_path(outlet), :target=> "_blank" %></td>
+                      <td><%= outlet.twitter_followers %></td>
+                      <td><%= outlet.twitter_posts %></td>
+                      <td><%= outlet.updated_at %></td>
+                      <!-- <td><%= outlet.twitter_interactions %></td> -->
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-<div class = "row">
-  <div class="col-sm-12 col-md-12">
-    <h2>Agency Mobile Apps  (<%= @agency.published_mobile_app_count %> total)</h2>
-    <div class = "panel panel-default">
-      <div class = "panel-body">
-        <div class="row">
-          <div class="col-sm-12">
-            <table id="mobile-data">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Platform</th>
-                  <th>Average Rating</th>
-                  <th>Total Ratings</th>
-                  <th>Last Updated</th>
-                </tr>
-              </thead>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Platform</th>
-                  <th>Average Rating</th>
-                  <th>Total Ratings</th>
-                  <th>Last Updated</th>
-                </tr>
-              </tfoot>
-              <tbody>
-                <% @agency.mobile_apps.includes(:mobile_app_versions).where("mobile_apps.status = ?", 1).each do |ma| 
-                    ma.mobile_app_versions.each do |mav| %>
-                  <tr>
-                    <td><%= link_to ma.name, admin_mobile_app_path(ma), :target => "_blank" %></td>
-                    <td><%= mav.platform %></td>
-                    <td><%= mav.average_rating %></td>
-                    <td><%= mav.number_of_ratings %></td>
-                    <td><%= ma.updated_at %></td>
-                  </tr>
-                <% end
-                end %>
-              </tbody>
-            </table>
+      <div class="grid-col-12">
+        <h2>Agency YouTube Accounts  (<%= @agency.outlets.where(service: "youtube",status: 1).count %> total)</h2>
+        <div class = "panel panel-default">
+          <div class = "panel-body">
+            <div class="row">
+              <div class="col-sm-6">
+                <p>Total Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_subscribers), :delimiter => ',') %> </p>
+              </div>
+              <div class="col-sm-6">
+                <p>Average Subscribers: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_subscribers), :delimiter => ',') %> </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <p>Total Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_video_count), :delimiter => ',') %> </p>
+              </div>
+              <div class="col-sm-6">
+                <p>Average Videos: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_video_count), :delimiter => ',') %> </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <p>Total Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_view_count), :delimiter => ',') %> </p>
+              </div>
+              <div class="col-sm-6">
+                <p>Average Views: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_view_count), :delimiter => ',') %> </p>
+              </div>
+            </div> 
+            <div class="row">
+              <div class="col-sm-6">
+                <p>Total Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).sum(:youtube_comment_count), :delimiter => ',') %> </p>
+              </div>
+              <div class="col-sm-6">
+                <p>Average Comments: <%=  number_with_delimiter(@agency.outlets.where(service: "youtube",status: 1).average(:youtube_comment_count), :delimiter => ',') %> </p>
+              </div>
+            </div> 
+            <div class="row">
+              <div class="col-sm-6">
+                <h3>Most Followers</h3>
+                <ul class="list-group smaller">
+                  <% index = 1
+                   @agency.outlets.where(service: "youtube",status: 1).order('youtube_subscribers desc').first(5).each do |outlet| %>
+                  <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.youtube_subscribers}" %></li>
+                  <% index = index + 1
+                  end %>
+                </ul>
+                
+              </div>
+              <div class="col-sm-6">
+                <h3>Least Followers</h3>
+                <ul class="list-group smaller">
+                  <% index = 1
+                   @agency.outlets.where(service: "youtube",status: 1).order('youtube_subscribers asc').first(5).each do |outlet| %>
+                  <li class="list-group-item"><%= "#{index}. #{outlet.organization} - #{outlet.youtube_subscribers}" %></li>
+                  <% index = index + 1
+                  end %>
+                </ul>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="youtube-data">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>YouTube Subscribers</th>
+                      <th>YouTube Videos</th>
+                      <th>YouTube Views</th>
+                      <th>YouTube Comments</th>
+                      <th>Last Updated</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>YouTube Subscribers</th>
+                      <th>YouTube Videos</th>
+                      <th>YouTube Views</th>
+                      <th>YouTube Comments</th>
+                      <th>Last Updated</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <% @agency.outlets.where(service: "youtube",status: 1).all.each do |outlet| %>
+                    <tr>
+                      <td><%= link_to outlet.organization, admin_outlet_path(outlet), :target=> "_blank" %></td>
+                      <td><%= outlet.youtube_subscribers %></td>
+                      <td><%= outlet.youtube_video_count %></td>
+                      <td><%= outlet.youtube_view_count %></td>
+                      <td><%= outlet.youtube_comment_count %></td>
+                      <td><%= outlet.updated_at %></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
+      <div class="grid-col-12">
+        <h2>Agency Mobile Apps  (<%= @agency.published_mobile_app_count %> total)</h2>
+        <div class = "panel panel-default">
+          <div class = "panel-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <table id="mobile-data">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Platform</th>
+                      <th>Average Rating</th>
+                      <th>Total Ratings</th>
+                      <th>Last Updated</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Platform</th>
+                      <th>Average Rating</th>
+                      <th>Total Ratings</th>
+                      <th>Last Updated</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <% @agency.mobile_apps.includes(:mobile_app_versions).where("mobile_apps.status = ?", 1).each do |ma| 
+                        ma.mobile_app_versions.each do |mav| %>
+                      <tr>
+                        <td><%= link_to ma.name, admin_mobile_app_path(ma), :target => "_blank" %></td>
+                        <td><%= mav.platform %></td>
+                        <td><%= mav.average_rating %></td>
+                        <td><%= mav.number_of_ratings %></td>
+                        <td><%= ma.updated_at %></td>
+                      </tr>
+                    <% end
+                    end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <% content_for :additional_javascript do %>
   <script type="text/javascript">
   $(document).ready(function() {

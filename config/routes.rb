@@ -240,13 +240,6 @@ Ringsail::Application.routes.draw do
     end
   end
 
-  # admin stats, may remove
-  namespace :stats do
-    get 'twitter' => 'twitter#index'
-    get 'facebook' => 'facebook#index'
-    get 'youtube' => 'youtube#index'
-  end
-
   namespace :admin do
     resources :related_policies
     resources :review_social_media do
@@ -413,7 +406,7 @@ Ringsail::Application.routes.draw do
   end
 
 
-
+  get '/uswds/img/:file_name.:format', to: redirect("/assets/uswds/img/%{file_name}.%{format}")
 
   #######
   #### PUBLIC PAGES

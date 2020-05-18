@@ -1,11 +1,11 @@
 
-<%= form_for([:admin,@outlet], :method=> :post, html: {:class => "grid-row usa-form usa-form--large"}) do |f| %>
+<%= form_for([:admin,@outlet], html: {:class => "grid-row usa-form usa-form--large"}) do |f| %>
   <fieldset class="usa-fieldset">
     <p><span class="red">*</span> denotes a required field.</p>
     <% if @outlet.errors.any? %>
       <div class="usa-alert usa-alert--error" role="alert">
         <div class="usa-alert__body">
-          <h3 class="usa-alert__heading">Error:</span> <%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</h3>
+          <h3 class="usa-alert__heading">Error: <%= pluralize(@outlet.errors.count, "error") %> prohibited this social media account from being saved</h3>
           <ul>
           <% @outlet.errors.full_messages.each do |message| %>
           <li class="usa-alert__text"><%= message %></li>

@@ -3,7 +3,7 @@ class Admin::EmailMessagesController < Admin::AdminController
 	before_action :require_admin, except: [:new, :create, :show]
 	before_action :admin_two_factor, except: [:new, :create, :show]
 	def index
-		@email_messages = EmailMessage.all.page(params[:page]).per(15)
+		@email_messages = EmailMessage.all.order(updated_at: :desc).page(params[:page]).per(15)
 	end
 	
 	def new

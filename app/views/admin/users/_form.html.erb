@@ -1,40 +1,52 @@
-<%= form_for([:admin,@user]) do |f| %>
+<%= form_for([:admin,@user], html: {:class => "grid-row usa-form usa-form--large"}) do |f| %>
+<fieldset class="usa-fieldset">
   <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this social media account from being saved:</h2>
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="usa-alert usa-alert--error" role="alert">
+      <div class="usa-alert__body">
+        <h3 class="usa-alert__heading">Error: <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved</h3>
+        <ul>
+        <% @user.errors.full_messages.each do |message| %>
+        <li class="usa-alert__text"><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
-  <div class="bg-info">
-  <p>Notice: Please ensure all information is up to date in case we need to contact to you in relation to an account</div>
   <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name, :class => 'form-control formwidth'%>
+    <p>Notice: Please ensure all information is up to date in case we need to contact to you in relation to an account</p>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name, :class => 'form-control formwidth'%>
+    <%= f.label :first_name, {class: 'usa-label'} %>
+    <%= f.text_field :first_name, :class => "usa-input" %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email, :class => 'form-control formwidth', :disabled => true%>
+    <%= f.label :last_name, {class: 'usa-label'} %>
+    <%= f.text_field :last_name, :class => "usa-input" %>
+  </div>
+  <div class="field">
+    <%= f.label :email, {class: 'usa-label'} %>
+    <%= f.text_field :email, :class => "usa-input", :disabled => true%>
   </div>
   <div class = "field">
-    <%= f.label :agency_id %>
-    <%= f.select :agency_id, options_from_collection_for_select(Agency.all,:id,:name,@user.try(:agency).try(:id)), {include_blank: "Select"}, {:class => 'form-control formwidth'} %> 
+    <%= f.label :agency_id, {class: 'usa-label'} %>
+    <%= f.select :agency_id, options_from_collection_for_select(Agency.all,:id,:name,@user.try(:agency).try(:id)), {include_blank: "Select"}, {:class => "usa-input"} %> 
   </div>
   
   
   <div class = "field">
-    <%= f.label :phone %>
-    <%= f.text_field :phone, :class => "form-control formwidth"%>
+    <%= f.label :phone, {class: 'usa-label'} %>
+    <%= f.text_field :phone, :class => "usa-input" %>
   </div>
 
   <div class = "field">
-    <%= f.submit "Save Changes", :class => "btn btn-primary" %>
+    <%= f.submit "Save Changes", :class => "usa-button" %>
   </div>
+</fieldset>
+<% end %>
+<% content_for :additional_javascript do %>
+  <script>
+  $('#user_agency_id').selectize({
+        sortField: 'text'
+    });
+  </script>
 <% end %>

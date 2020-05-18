@@ -1,11 +1,16 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>Mobile Product Registrations Activity<% end %>
-  	<h1 class="page-header">Mobile Product Registrations Activity</h1>
-    <div class="row placeholders">
-      <div class="col-sm-12">
-  	    <%= render partial: "admin/shared/activities_table", locals: { activities: @activities} %>
-      </div>
-    </div>
-  </div>
+<section class="usa-section" id="featured_data" >
+	<div class="paper">
+	    <div class="grid-container grid-container-desktop">
+	      	<div class="grid-row">
+		      	<div class="grid-col-12">
+		    <%= content_for :page_title do %>Mobile Product Registrations Activity<% end %>
+		  	<h1 class="page-header">Mobile Product Registrations Activity</h1>
+		    <div class="row placeholders">
+		      <div class="col-sm-12">
+		  	    <%= render partial: "admin/shared/activities_table", locals: { activities: @activities} %>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
 </div>

@@ -1,47 +1,54 @@
-<%= form_for([:admin,@agency]) do |f| %>
-		<% if @agency.errors.any? %>
-			<div id="error_explanation">
-				<h2><%= pluralize(@outlet.errors.count, "error") %> prohibited this chapter from being saved:</h2>
-
-				<ul>
-				<% @outlet.errors.full_messages.each do |message| %>
-				<li><%= message %></li>
-				<% end %>
-				</ul>
-			</div>
-		<% end %>
+<%= form_for([:admin,@agency], html: {:class => "grid-row usa-form usa-form--large"}) do |f| %>
+	<fieldset class="usa-fieldset">
+		<p><span class="red">*</span> denotes a required field.</p>
+	    <% if @agency.errors.any? %>
+	      <div class="usa-alert usa-alert--error" role="alert">
+	        <div class="usa-alert__body">
+	          <h3 class="usa-alert__heading">Error: <%= pluralize(@agency.errors.count, "error") %> prohibited this agency from being saved</h3>
+	          <ul>
+	          <% @agency.errors.full_messages.each do |message| %>
+	          <li class="usa-alert__text"><%= message %></li>
+	          <% end %>
+	          </ul>
+	        </div>
+	      </div>
+	    <% end %>
 
 		<div class="field">
-			<%= f.label :name %> </br>
-			<%= f.text_field :name, :class => "form-control formwidth" %>
+			<%= f.label :name, {class: 'usa-label'} %>
+			<%= f.text_field :name, :class => "usa-input" %>
 			
 		</div>
-		</br>
 		<div class="field"> 
-			<%= f.label :shortname, "Acronym" %> </br>
-			<%= f.text_field :shortname, :class => "form-control formwidth" %>
-		</div>
-		</br> 
-		<div class="field">
-			<%= f.label :info_url %> </br>
-			<%= f.text_field :info_url, :class => "form-control formwidth" %>
+			<%= f.label :shortname, "Acronym", {class: 'usa-label'} %>
+			<%= f.text_field :shortname, :class => "usa-input"  %>
 		</div>
 		<div class="field">
-			<%= f.label :stats_enabled %> </br>
-			<%= f.check_box :stats_enabled, :class => "form-control formwidth" %>
+			<%= f.label :info_url, {class: 'usa-label'} %> 
+			<%= f.text_field :info_url, :class => "usa-input"  %>
 		</div>
-		</br>
-		</br> 
 		<div class="field">
-			<%= f.label :parent_id %> </br>
+			<%= f.label :stats_enabled, {class: 'usa-label'} %> 
+			<%= f.check_box :stats_enabled, :class => "usa-input"  %>
+		</div>
+		<div class="field">
+			<%= f.label :parent_id, {class: 'usa-label'} %>
 			<%= f.select :parent_id, 
 				options_for_select( Agency.all.collect {|item| [item.name, item.id] },  f.object.parent_id), 
 				{include_blank: "Select"},
-				{:class => "form-control formwidth"} 
+				{:class => "usa-input"} 
 			%>
 		</div>
-		</br>
 		<div class="actions">
-			<%= f.submit :class => "btn btn-primary" %>
+			<%= f.submit :class => "usa-button" %>
 		</div>
+	</fieldset>
+<% end %>
+
+<% content_for :additional_javascript do %>
+  <script>
+  $('#agency_parent_id').selectize({
+        sortField: 'text'
+    });
+	</script>
 <% end %>

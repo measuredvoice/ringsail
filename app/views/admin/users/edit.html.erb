@@ -1,9 +1,14 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
-  	<h1 class = "page-header">User Profile: <%= @user.email %></h1>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-    <%= content_for :page_title do %>User Profile<% end %>
-  	<%= render 'form' %>
+      <div class="grid-col-12">
+		  	<h1 class = "page-header">User Profile: <%= @user.email %></h1>
 
-  </div>
-</div>
+		    <%= content_for :page_title do %>User Profile<% end %>
+		  	<%= render 'form' %>
+
+		  </div>
+		</div>
+	</div>
+</section>

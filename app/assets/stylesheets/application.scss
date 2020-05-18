@@ -142,3 +142,52 @@ input::-ms-input-placeholder { /* Microsoft Edge */
     color: black !important;
     font-size: 1.06rem;
 } 
+
+.usa-fieldset{
+	width: 100%;
+}
+
+/* styling for review pages */
+.usa-button-group--segmented{
+	list-style: none;
+}
+
+.panel{
+	border: 1px solid black;
+	border-radius: 3px;
+	margin: 5px;
+}
+.panel-heading{
+	border-bottom: 1px solid black;
+	padding: 10px;
+}
+.panel-heading .grid-row a{
+	text-decoration:none;
+	color: black;
+}
+.panel-body{
+	padding: 10px;
+}
+
+.panel .panel-heading{
+	background-color: #e7f6f8;
+}
+
+.panel-success .panel-heading{
+	background-color: #ecf3ec;
+}
+
+.panel-warning .panel-heading{
+	background-color: #faf3d1;
+}
+
+a.usa-button:visited{
+	color:white !important;
+	text-decoration:none !important;
+	text-decoration-color: white !important;
+}
+a.usa-button--secondary:visited{
+	color:white !important;
+	text-decoration:none !important;
+	text-decoration-color: white !important;
+}

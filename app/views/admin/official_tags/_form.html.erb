@@ -1,25 +1,28 @@
-<%= form_for([:admin,@official_tag]) do |f| %>
+<%= form_for([:admin,@official_tag], html: {:class => "grid-row usa-form usa-form--large"}) do |f| %>
+  <fieldset class="usa-fieldset">
     <% if @official_tag.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@official_tag.errors.count, "error") %> prohibited this tag from being saved:</h2>
-
-        <ul>
-        <% @official_tag.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-        <% end %>
-        </ul>
+      <div class="usa-alert usa-alert--error" role="alert">
+        <div class="usa-alert__body">
+          <h3 class="usa-alert__heading">Error: <%= pluralize(@official_tag.errors.count, "error") %> prohibited this tag from being saved</h3>
+          <ul>
+          <% @official_tag.errors.full_messages.each do |message| %>
+          <li class="usa-alert__text"><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
       </div>
     <% end %>
 
     <div class="field">
-      <%= f.label :tag_text, "Tag" %> </br>
-      <%= f.text_field :tag_text, :class => "form-control formwidth" %>
+      <%= f.label :tag_text, "Tag", {class: 'usa-label'} %>
+      <%= f.text_field :tag_text, :class => "usa-input" %>
     </div>
      <!-- <div class="field">
       <%= f.label :tag_type, "Type" %> </br>
       <%= f.select :tag_type, OfficialTag.tag_types.keys.to_a.map{ |w| [w.humanize, w]}, {}, :class => "form-control formwidth" %>
     </div> -->
     <div class="actions">
-      <%= f.submit :class => "btn btn-primary" %>
+      <%= f.submit :class => "usa-button" %>
     </div>
+  </fieldset>
 <% end %>

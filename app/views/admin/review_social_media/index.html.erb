@@ -1,41 +1,36 @@
 <section class="usa-section" id="featured_data" >
   <div class="paper">
-      <div class="grid-container grid-container-desktop">
-          <div class="grid-row">
-            <div class="grid-col-12">
-        <%= content_for :page_title do %>Social Media Accounts<% end %>
-        <h1 class="page-header">Your Social Media Accounts</h1>
-        <div class="row placeholders">
-            <div class="col-sm-12">
-              
-               <% if params[:status] == "published" %>
-
+    <div class="grid-container grid-container-desktop">
+      <div class="grid-row">
+        <div class="grid-col-12">
+          <%= content_for :page_title do %>Social Media Accounts<% end %>
+          <h1 class="page-header">Your Social Media Accounts</h1>
+          <div class="grid-row placeholders">
+              <div class="grid-col-12">
+                <% if params[:status] == "published" %>
                   <% if params[:review] == "needs" %>
                     Viewing accounts that need reviewed.
-
                     <%= page_entries_info @outlets %>
                   <% else %>
                     Viewing published accounts.
-
                     <%= page_entries_info @outlets %>
                   <% end %>
-               <% elsif params[:status] == "archived" %>
-                Viewing archived accounts.
-                 <%= page_entries_info @outlets %>
+                <% elsif params[:status] == "archived" %>
+                  Viewing archived accounts.
+                  <%= page_entries_info @outlets %>
                 <% else %>
                   Viewing all social media accounts.
-                 <%= page_entries_info @outlets %>
+                  <%= page_entries_info @outlets %>
                 <% end %>
-            </div>
-        </div>
-         <div class="row placeholders">
-            <div class="col-sm-12 instructions">
-
+              </div>
+          </div>
+          <div class="grid-row placeholders">
+            <div class="grid-col-12 instructions">
               <h2 style="margin: 0; font-size: 1.2em">
                 How to Certify Your  Accounts
               </h2>
-              <div class="row">
-                <div class="col-sm-10 col-sm-offset-1">
+              <div class="grid-row">
+                <div class="grid-col-10 grid-offset-1">
                   <ol>
                     <li>Select Published Accounts.</li>
                     <li>Select Needs Review.</li>
@@ -49,27 +44,35 @@
                <p><b>Note:</b> Recently Reviewed products have been certified within the past 180 days.</p>
             </div>
           </div>
-         <div class="row placeholders">
-            <div class="col-sm-12">
+          <div class="grid-row placeholders">
+            <div class="grid-col-6">
               <% 
-                  published_class = "btn-success"
-                  archived_class = "btn-warning"
+                published_class = "btn-success"
+                archived_class = "btn-warning"
               %>
-               <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Accounts <span class="caret"></span></button>
-               <ul class="dropdown-menu dropdown-review">
-                <li> <%= link_to "Needs Review", admin_review_social_media_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days."%></li>
-                <li>
-                  <%= link_to "Recently Reviewed", admin_review_social_media_path(status: "published", review: "recent"),title: "Accounts that have been certified within the last 180 days."  %></li>
+              <h6>Published Accounts</h6>
+              <ul class="usa-button-group usa-button-group--segmented">
+                <li class="usa-button-group__item">
+                  <%= link_to "Needs Review", admin_review_social_media_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days.", :class=>"usa-button usa-button--outline" %>
+                </li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Recently Reviewed", admin_review_social_media_path(status: "published", review: "recent"),title: "Accounts that have been certified within the last 180 days.", :class=>"usa-button usa-button--outline" %>
+                </li>
               </ul>
-                <%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class => "btn btn-warning", title: "Accounts that are no longer active." %>
             </div>
-            <div class="col-sm-12">
+            <div class="grid-col-6">
+              <h6>Archived Accounts</h6>
+              <ul class="usa-button-group usa-button-group--segmented">
+                <li class="usa-button-group__item"><%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class=>"usa-button usa-button--outline", title: "Accounts that are no longer active." %></li>
+              </ul>
+            </div>
+            <div class="grid-col-12">
               <%= paginate @outlets %>
             </div>
-        </div>
+          </div>
 
-        <div class="row placeholders">
-            <div class="col-sm-12">
+          <div class="grid-row placeholders">
+            <div class="grid-col-12">
                 <% @outlets.each do |outlet|
 
                   panel_class = "panel-default"
@@ -84,9 +87,9 @@
                   %>
                 <div class="panel <%= panel_class %>" id="panel-outlet-<%= outlet.id %>">
                   <div class="panel-heading">
-                    <div class="row">
+                    <div class="grid-row">
                       <a  href="#body-outlet-<%= outlet.id %>" data-toggle="collapse" class="collapsed">
-                        <div class="col-sm-12">
+                        <div class="grid-col-12">
                             <span class="outlet-name" style="font-size:14px; line-height:14px;">
                             <%= outlet.organization  %> - <%= outlet.service.humanize %></span>
                             <span class="outlet-alert" id="outlet-alert-<%= outlet.id %>" style="font-size:14px; line-height:14px;">
@@ -98,8 +101,8 @@
                     </div>  
 
                   </div>
-                  <div class="panel-body collapse" id="body-outlet-<%= outlet.id %>" style="font-size:12px; line-height:13px;">
-                    <div class="col-sm-6"  >
+                  <div class="panel-body collapse grid-row" id="body-outlet-<%= outlet.id %>" style="font-size:12px; line-height:13px;">
+                    <div class="grid-col-6"  >
                         <p>
                           <strong>Account Name:</strong>
                           <%= outlet.organization %>
@@ -124,7 +127,7 @@
                         </p>
                         
                         
-                    </div><div class="col-sm-6">
+                    </div><div class="grid-col-6">
                         <p>
                           <strong>Language:</strong>
                           <%= outlet.language %>
@@ -151,10 +154,10 @@
                           <strong>Contacts:</strong> <%= outlet.try(:primary_contact).try(:email) %> <%= outlet.try(:secondary_contact).try(:email) %> <%= outlet.users.map(&:email).join(", ") %></span>
                         </p>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="grid-col-12">
                       <hr />
                     </div>
-                    <div class="col-sm-4 col-sm-offset-8" style="font-size:14px; line-height:14px;">
+                    <div class="grid-col-6 grid-offset-6" style="font-size:14px; line-height:14px;">
                           <% if outlet.status == "archived" %>
                            <a class="btn btn-warning hide archive-outlet-button" id="archive-<%= outlet.id %>"  data-outlet="<%= outlet.id %>">Archive</a>
                            <a class="btn btn-default publish-outlet-button" id="publish-<%= outlet.id %>" data-outlet="<%= outlet.id %>">Publish</a> 
@@ -173,35 +176,19 @@
                   </div>
                 </div>
                 <% end %>
-         </div>
-        </div>
-        <div class="row placeholders">
-            <div class="col-sm-12">
-               <%= paginate @outlets %>
-               <%= page_entries_info @outlets %>
+              </div>
             </div>
+            <div class="grid-row placeholders">
+              <div class="grid-col-12">
+                 <%= paginate @outlets %>
+                 <%= page_entries_info @outlets %>
+              </div>
+            </div> 
         </div>
       </div>
     </div>
   </div>
-</div>
-
-    <div id="modal-alert" class="modal fade" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Social Media Account Update</h4>
-          </div>
-          <div class="modal-body">
-            <p>Text.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+</section>
 <% content_for :additional_javascript do %>
 <script>
 
@@ -224,9 +211,6 @@
         $('#archive-'+id).removeClass("hide");
         $('#publish-'+id).addClass("hide");
         name = $('#panel-outlet-'+id + ' .outlet-name').text();
-        $('.modal-body').html("Published:  " + name);
-        $('.modal-footer button').attr("data-outlet-id", id);
-        $('#modal-alert').modal({});
       });
     })
     $('.validate-outlet-button').on('click',function(){
@@ -244,9 +228,6 @@
         $('#panel-outlet-'+id).addClass( "panel-success" );
         $('#outlet-alert-'+id).html("Last Certified: "+ date_string);
         name = $('#panel-outlet-'+id + ' .outlet-name').text();
-        $('.modal-body').html("Certified:   " + name);
-        $('.modal-footer button').attr("data-outlet-id", id);
-        $('#modal-alert').modal({});
       });
     })
     $('.archive-outlet-button').on('click',function(){
@@ -265,17 +246,10 @@
         $('#panel-outlet-'+id).addClass( "panel-warning" );
         $('#outlet-alert-'+id).html("Archived: "+ date_string);
         $('#archive-'+id).addClass("hide");
-         $('#publish-'+id).removeClass("hide");
+        $('#publish-'+id).removeClass("hide");
         name = $('#panel-outlet-'+id + ' .outlet-name').text();
-        $('.modal-body').html("Archived:  " + name);
-        $('.modal-footer button').attr("data-outlet-id", id);
-        $('#modal-alert').modal({});
       });
     })
-
-     $('.modal-footer button').on('click', function(){
-        $('#panel-outlet-' + $(this).attr('data-outlet-id'))
-     });
   });
 </script>
 

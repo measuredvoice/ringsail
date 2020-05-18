@@ -1,52 +1,57 @@
-<div class="row">
-	<div class="col-sm-12 col-md-12 main">
-    <h1 class="page-header">User Info</h1>
-    <div class="panel panel-default">
-      <div class="panel-body">
-				<p>
-				  <strong>First name</strong>
-				  <%= @user.first_name %>
-				</p>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-				<p>
-				  <strong>Last name:</strong>
-				  <%= @user.last_name %>
-				</p>
+      <div class="grid-col-12">
+		    <h1 class="page-header">User Info</h1>
+		    <div class="panel panel-default">
+		      <div class="panel-body">
+						<p>
+						  <strong>First name</strong>
+						  <%= @user.first_name %>
+						</p>
 
-				<p>
-				  <strong>User name:</strong>
-				  <%= @user.user %>
-				</p>
+						<p>
+						  <strong>Last name:</strong>
+						  <%= @user.last_name %>
+						</p>
 
-				<p>
-				  <strong>Email:</strong>
-				  <%= @user.email %>
-				</p>
+						<p>
+						  <strong>User name:</strong>
+						  <%= @user.user %>
+						</p>
 
-				<p>
-				  <strong>Agency:</strong>
-				  <%= @user.try(:agency).try(:name) %>
-				</p>
-				<p>
-				  <strong>Role</strong>
-				  <%= @user.role.titleize if @user.role %>
-				</p>
-				<p>
-				  <strong>Phone:</strong>
-				  <%= @user.phone %>
-				</p>
-      </div>
-  	</div>
+						<p>
+						  <strong>Email:</strong>
+						  <%= @user.email %>
+						</p>
+
+						<p>
+						  <strong>Agency:</strong>
+						  <%= @user.try(:agency).try(:name) %>
+						</p>
+						<p>
+						  <strong>Role</strong>
+						  <%= @user.role.titleize if @user.role %>
+						</p>
+						<p>
+						  <strong>Phone:</strong>
+						  <%= @user.phone %>
+						</p>
+		      </div>
+		  	</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12 col-md-12 main">
+				<div class="buttonRow">
+					<%= link_to 'Back', admin_users_path, {:class => "usa-button"} %>
+					<% if current_user.admin? %>
+					<%= link_to 'Delete (ADMIN ONLY)', admin_user_path(@user), { :method => :delete, :class => "usa-button"} %>
+					<% end %>
+					<%= link_to 'Edit', edit_admin_user_path(@user), {:class => "usa-button"}  %> 
+			  </div>
+			</div>
+		</div>
 	</div>
-</div>
-<div class="row">
-	<div class="col-sm-12 col-md-12 main">
-		<div class="buttonRow">
-			<%= link_to 'Back', admin_users_path, {:class => "fa fa-angle-double-left"} %>
-			<% if current_user.admin? %>
-			<%= link_to 'Delete (ADMIN ONLY)', admin_user_path(@user), { :method => :delete, :class => "fa fa-cross"} %>
-			<% end %>
-			<%= link_to 'Edit', edit_admin_user_path(@user), {:class => "fa fa-pencil"}  %> 
-	  </div>
-	</div>
-</div>
+</section>

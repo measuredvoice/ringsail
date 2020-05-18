@@ -1,37 +1,41 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-    <%= content_for :page_title do %>Email Messages<% end %>
-    <h1 class="page-header">Email Messages</h1>
-    <div class="row placeholders">
+      <div class="grid-col-12">
+        <%= content_for :page_title do %>Email Messages<% end %>
+        <h1 class="page-header">Email Messages</h1>
+        <div class="row placeholders">
 
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-        <%= paginate @email_messages %>   
-        <%= page_entries_info @email_messages %>  
-        <table class=" table table-striped">
-          <thead>
-            <tr = "users_row">
-              <th>Email To</th>
-              <th>Email From</th>
-              <th>Subject</th>
-              <th>Body</th>
-              <th>Time</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @email_messages.each do |email| %>
-              <tr class = "tablerow">
-                <td class = "table_data"><%= email.to %></td>
-                <td class = "table_data"><%= user_list_format(email.user) %></td>
-                <td class = "table_data"><%= link_to email.subject, admin_email_message_path(email.id) %> </td>
-                <td class = "table_data"><%= link_to email.body.first(75), admin_email_message_path(email.id) %> </td>
-                <td class = "table_data"><%= email.created_at.strftime("%m/%d/%Y %H:%M %Z") %> </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <%= paginate @email_messages %>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+            <%= paginate @email_messages %>   
+            <%= page_entries_info @email_messages %>  
+            <table class=" table table-striped">
+              <thead>
+                <tr class="users_row">
+                  <th>Email To</th>
+                  <th>Email From</th>
+                  <th>Subject</th>
+                  <th>Body</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @email_messages.each do |email| %>
+                  <tr class = "tablerow">
+                    <td class = "table_data"><%= email.to %></td>
+                    <td class = "table_data"><%= user_list_format(email.user) %></td>
+                    <td class = "table_data"><%= link_to email.subject, admin_email_message_path(email.id) %> </td>
+                    <td class = "table_data"><%= link_to email.body.first(75), admin_email_message_path(email.id) %> </td>
+                    <td class = "table_data"><%= email.created_at.strftime("%m/%d/%Y %H:%M %Z") %> </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%= paginate @email_messages %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>

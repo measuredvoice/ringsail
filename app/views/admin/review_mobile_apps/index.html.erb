@@ -1,186 +1,180 @@
-<div class="row">
-  <div class="col-sm-12 col-md-12 main">
-    <%= content_for :page_title do %>Mobile Productlications<% end %>
-    <h1 class="page-header">Your Mobile Productlications</h1>
-    <div class="row placeholders">
-        <div class="col-sm-12">
-          
-           <% if params[:status] == "published" %>
+<section class="usa-section" id="featured_data" >
+  <div class="paper">
+    <div class="grid-container grid-container-desktop">
+      <div class="grid-row">
+        <div class="grid-col-12">
+        <%= content_for :page_title do %>Mobile Products<% end %>
+        <h1 class="page-header">Your Mobile Products</h1>
+        <div class="grid-row placeholders">
+            <div class="grid-col-12">
+              
+               <% if params[:status] == "published" %>
 
-              <% if params[:review] == "needs" %>
-                Viewing mobile apps that need reviewed.
+                  <% if params[:review] == "needs" %>
+                    Viewing mobile apps that need reviewed.
 
-                <%= page_entries_info @mobile_apps %>
-              <% else %>
-                Viewing published mobile apps.
+                    <%= page_entries_info @mobile_apps %>
+                  <% else %>
+                    Viewing published mobile apps.
 
-                <%= page_entries_info @mobile_apps %>
-              <% end %>
-           <% elsif params[:status] == "archived" %>
-            Viewing archived mobile apps.
-             <%= page_entries_info @mobile_apps %>
-            <% else %>
-              Viewing all mobile apps.
-             <%= page_entries_info @mobile_apps %>
-            <% end %>
+                    <%= page_entries_info @mobile_apps %>
+                  <% end %>
+               <% elsif params[:status] == "archived" %>
+                Viewing archived mobile apps.
+                 <%= page_entries_info @mobile_apps %>
+                <% else %>
+                  Viewing all mobile apps.
+                 <%= page_entries_info @mobile_apps %>
+                <% end %>
+            </div>
         </div>
-    </div>
-     <div class="row placeholders">
-        <div class="col-sm-12 instructions">
+         <div class="grid-row placeholders">
+            <div class="grid-col-12 instructions">
 
-          <h2 style="margin: 0; font-size: 1.2em">
-            How to Certify Your Mobile Products
-          </h2>
-          <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-              <ol>
-                <li>Select Published Mobile Products.</li>
-                <li>Select Needs Review.</li>
-                <li>Review each Mobile Product.</li>
-                <li>Indicate "Certify" for all active Mobile Products. Edit the account if necessary and then "Certify".</li>
-                <li>Indicate "Archive" for all Mobile Products that are no longer active.</li>
-              </ol>
+              <h2 style="margin: 0; font-size: 1.2em">
+                How to Certify Your Mobile Products
+              </h2>
+              <div class="grid-row">
+                <div class="grid-col-10 grid-offset-1">
+                  <ol>
+                    <li>Select Published Mobile Products.</li>
+                    <li>Select Needs Review.</li>
+                    <li>Review each Mobile Product.</li>
+                    <li>Indicate "Certify" for all active Mobile Products. Edit the account if necessary and then "Certify".</li>
+                    <li>Indicate "Archive" for all Mobile Products that are no longer active.</li>
+                  </ol>
+                </div>
+              </div>
+              <p><b>Note:</b> Recently Reviewed products have been certified within the past 180 days.</p>
             </div>
           </div>
-          <p><b>Note:</b> Recently Reviewed products have been certified within the past 180 days.</p>
+         <div class="grid-row placeholders">
+            <div class="grid-col-6">
+              <% 
+                  published_class = "btn-success"
+                  archived_class = "btn-warning"
+              %>
+              <h6>Published Accounts</h6>
+              <ul class="usa-button-group usa-button-group--segmented">
+                <li class="usa-button-group__item"><%= link_to "Needs Review", admin_review_mobile_apps_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days.", :class=>"usa-button usa-button--outline"%></li>
+                <li class="usa-button-group__item">
+                  <%= link_to "Recently Reviewed", admin_review_mobile_apps_path(status: "published", review: "recent"),title: "Accounts that have been certified within the last 180 days.", :class=>"usa-button usa-button--outline"  %></li>
+              </ul>
+            </div>
+            <div class="grid-col-6">
+              <h6>Archived Accounts</h6>
+              <ul class="usa-button-group usa-button-group--segmented">
+                <li class="usa-button-group__item">  <%= link_to  "Archived Accounts", admin_review_mobile_apps_path(status: "archived"), :class=>"usa-button usa-button--outline",title: "Accounts that are no longer active." %></li>
+              </ul>
+            </div>
+            <div class="grid-col-12">
+              <%= paginate @mobile_apps %>
+            </div>
+        </div>
+
+        <div class="grid-row placeholders">
+            <div class="grid-col-12">
+                <% @mobile_apps.each do |mobile_app|
+
+                  panel_class = "panel-default"
+                  if mobile_app.status == "archived"
+                      panel_class = "panel-warning"
+                  else
+                    if mobile_app.updated_at > 90.days.ago
+                      panel_class = "panel-success"
+                    end
+                  end
+                  validated_string = mobile_app.validated_at ? mobile_app.validated_at.strftime("%B %e, %Y %H:%M %Z") : "Not yet certified" 
+                  %>
+                <div class="panel <%= panel_class %>" id="panel-mobile_app-<%= mobile_app.id %>">
+                  <div class="panel-heading">
+                    <div class="row">
+                      <a  href="#body-mobile_app-<%= mobile_app.id %>" data-toggle="collapse" class="collapsed">
+                        <div class="col-sm-12">
+                            <span class="mobile_app-name" style="font-size:14px; line-height:14px;">
+                            <%= mobile_app.name %></span>
+                            <span class="mobile_app-alert" id="mobile_app-alert-<%= mobile_app.id %>" style="font-size:14px; line-height:14px;">
+                            Last Certified: <%= validated_string %>
+                           </span>
+                        </div>
+                        
+                      </a>
+                    </div>  
+
+                  </div>
+                  <div class="panel-body collapse" id="body-mobile_app-<%= mobile_app.id %>" style="font-size:12px; line-height:13px;">
+                    <div class="grid-col-12"  >
+                        <p>
+      <strong>Name:</strong>
+      <%= mobile_app.name %>
+    </p>
+
+    <p>
+      <strong>Short Description:</strong>
+      <%= mobile_app.short_description %>
+    </p>
+
+    <p>
+      <strong>Long Description:</strong>
+      <%= mobile_app.long_description %>
+    </p>
+
+    <p>
+      <strong>Icon URL:</strong>
+      <% if mobile_app.icon_url %>
+      <%= link_to mobile_app.icon_url, mobile_app.icon_url %>
+      <% end %>
+    </p>
+    <p>
+      <strong>Language:</strong>
+      <%= mobile_app.language %>
+    </p>
+    <p>
+      <strong>Agencies:</strong>
+      <%= mobile_app.agencies.map(&:name).join(", ") %>
+    </p>
+    <p>
+      <strong>Tags:</strong>
+      <%= mobile_app.official_tags.map(&:tag_text).join(", ") %>
+    </p>
+    <p>
+      <strong>Status:</strong>
+      <%= mobile_app.status.humanize %>
+    </p>
+                    </div>
+                    <div class="grid-col-12">
+                      <hr />
+                    </div>
+                    <div class="grid-col-6 grid-offset-6" style="font-size:14px; line-height:14px;">
+                          <% if mobile_app.status == "archived" %>
+                           <a class="btn btn-warning hide archive-mobile_app-button" id="archive-<%= mobile_app.id %>"  data-mobile_app="<%= mobile_app.id %>">Archive</a>
+                           <a class="btn btn-default publish-mobile_app-button" id="publish-<%= mobile_app.id %>" data-mobile_app="<%= mobile_app.id %>">Publish</a> 
+                          <% else %>
+                           <a class="btn btn-warning archive-mobile_app-button" id="archive-<%= mobile_app.id %>"  data-mobile_app="<%= mobile_app.id %>">Archive</a>
+                           <a class="btn btn-default hide  publish-mobile_app-button" id="publish-<%= mobile_app.id %>" data-mobile_app="<%= mobile_app.id %>">Publish</a> 
+                          <% end %>
+
+                          <a class="btn btn-default edit-mobile_app-button" href="/admin/mobile_apps/<%= mobile_app.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
+
+                          <a class="btn btn-success validate-mobile_app-button" data-mobile_app="<%= mobile_app.id %>">Certify</a>
+                      </div>
+                   
+                  </div>
+                </div>
+                <% end %>
+         </div>
+        </div>
+        <div class="grid-row placeholders">
+            <div class="grid-col-12">
+               <%= paginate @mobile_apps %>
+               <%= page_entries_info @mobile_apps %>
+            </div>
         </div>
       </div>
-     <div class="row placeholders">
-        <div class="col-sm-12">
-          <% 
-              published_class = "btn-success"
-              archived_class = "btn-warning"
-          %>
-           <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Published Mobile Products <span class="caret"></span></button>
-           <ul class="dropdown-menu dropdown-review">
-            <li> <%= link_to "Needs Review", admin_review_mobile_apps_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days."%></li>
-            <li>
-              <%= link_to "Recently Reviewed", admin_review_mobile_apps_path(status: "published", review: "recent"),title: "Accounts that have been certified within the last 180 days."  %></li>
-          </ul>
-            <%= link_to  "Archived Accounts", admin_review_mobile_apps_path(status: "archived"), :class => "btn btn-warning",title: "Accounts that are no longer active." %>
-        </div>
-        <div class="col-sm-12">
-          <%= paginate @mobile_apps %>
-        </div>
-    </div>
-
-    <div class="row placeholders">
-        <div class="col-sm-12">
-            <% @mobile_apps.each do |mobile_app|
-
-              panel_class = "panel-default"
-              if mobile_app.status == "archived"
-                  panel_class = "panel-warning"
-              else
-                if mobile_app.updated_at > 90.days.ago
-                  panel_class = "panel-success"
-                end
-              end
-              validated_string = mobile_app.validated_at ? mobile_app.validated_at.strftime("%B %e, %Y %H:%M %Z") : "Not yet certified" 
-              %>
-            <div class="panel <%= panel_class %>" id="panel-mobile_app-<%= mobile_app.id %>">
-              <div class="panel-heading">
-                <div class="row">
-                  <a  href="#body-mobile_app-<%= mobile_app.id %>" data-toggle="collapse" class="collapsed">
-                    <div class="col-sm-12">
-                        <span class="mobile_app-name" style="font-size:14px; line-height:14px;">
-                        <%= mobile_app.name %></span>
-                        <span class="mobile_app-alert" id="mobile_app-alert-<%= mobile_app.id %>" style="font-size:14px; line-height:14px;">
-                        Last Certified: <%= validated_string %>
-                       </span>
-                    </div>
-                    
-                  </a>
-                </div>  
-
-              </div>
-              <div class="panel-body collapse" id="body-mobile_app-<%= mobile_app.id %>" style="font-size:12px; line-height:13px;">
-                <div class="col-sm-12"  >
-                    <p>
-  <strong>Name:</strong>
-  <%= mobile_app.name %>
-</p>
-
-<p>
-  <strong>Short Description:</strong>
-  <%= mobile_app.short_description %>
-</p>
-
-<p>
-  <strong>Long Description:</strong>
-  <%= mobile_app.long_description %>
-</p>
-
-<p>
-  <strong>Icon URL:</strong>
-  <% if mobile_app.icon_url %>
-  <%= link_to mobile_app.icon_url, mobile_app.icon_url %>
-  <% end %>
-</p>
-<p>
-  <strong>Language:</strong>
-  <%= mobile_app.language %>
-</p>
-<p>
-  <strong>Agencies:</strong>
-  <%= mobile_app.agencies.map(&:name).join(", ") %>
-</p>
-<p>
-  <strong>Tags:</strong>
-  <%= mobile_app.official_tags.map(&:tag_text).join(", ") %>
-</p>
-<p>
-  <strong>Status:</strong>
-  <%= mobile_app.status.humanize %>
-</p>
-                </div>
-                <div class="col-sm-12">
-                  <hr />
-                </div>
-                <div class="col-sm-4 col-sm-offset-8" style="font-size:14px; line-height:14px;">
-                      <% if mobile_app.status == "archived" %>
-                       <a class="btn btn-warning hide archive-mobile_app-button" id="archive-<%= mobile_app.id %>"  data-mobile_app="<%= mobile_app.id %>">Archive</a>
-                       <a class="btn btn-default publish-mobile_app-button" id="publish-<%= mobile_app.id %>" data-mobile_app="<%= mobile_app.id %>">Publish</a> 
-                      <% else %>
-                       <a class="btn btn-warning archive-mobile_app-button" id="archive-<%= mobile_app.id %>"  data-mobile_app="<%= mobile_app.id %>">Archive</a>
-                       <a class="btn btn-default hide  publish-mobile_app-button" id="publish-<%= mobile_app.id %>" data-mobile_app="<%= mobile_app.id %>">Publish</a> 
-                      <% end %>
-
-                      <a class="btn btn-default edit-mobile_app-button" href="/admin/mobile_apps/<%= mobile_app.id %>/edit" target="_blank">Edit <i class="glyphicon glyphicon-new-window"></i></a>
-
-                      <a class="btn btn-success validate-mobile_app-button" data-mobile_app="<%= mobile_app.id %>">Certify</a>
-                  </div>
-               
-              </div>
-            </div>
-            <% end %>
-     </div>
-    </div>
-    <div class="row placeholders">
-        <div class="col-sm-12">
-           <%= paginate @mobile_apps %>
-           <%= page_entries_info @mobile_apps %>
-        </div>
     </div>
   </div>
 </div>
-
-<div id="modal-alert" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Mobile Product</h4>
-      </div>
-      <div class="modal-body">
-        <p>Text.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+</section>
 <% content_for :additional_javascript do %>
 <script>
 
@@ -203,9 +197,6 @@
         $('#archive-'+id).removeClass("hide");
         $('#publish-'+id).addClass("hide");
         name = $('#panel-mobile_app-'+id + ' .mobile_app-name').text();
-        $('.modal-body').html("Published:  " + name);
-        $('.modal-footer button').attr("data-mobile_app-id", id);
-        $('#modal-alert').modal({});
       });
     })
     $('.validate-mobile_app-button').on('click',function(){
@@ -223,9 +214,6 @@
         $('#panel-mobile_app-'+id).addClass( "panel-success" );
         $('#mobile_app-alert-'+id).html("Last Certified: "+ date_string);
         name = $('#panel-mobile_app-'+id + ' .mobile_app-name').text();
-        $('.modal-body').html("Certified:   " + name);
-        $('.modal-footer button').attr("data-mobile_app-id", id);
-        $('#modal-alert').modal({});
       });
     })
     $('.archive-mobile_app-button').on('click',function(){
@@ -246,15 +234,8 @@
         $('#archive-'+id).addClass("hide");
          $('#publish-'+id).removeClass("hide");
         name = $('#panel-mobile_app-'+id + ' .mobile_app-name').text();
-        $('.modal-body').html("Archived:  " + name);
-        $('.modal-footer button').attr("data-mobile_app-id", id);
-        $('#modal-alert').modal({});
       });
     })
-
-     $('.modal-footer button').on('click', function(){
-        $('#panel-mobile_app-' + $(this).attr('data-mobile_app-id'))
-     });
   });
 </script>
 

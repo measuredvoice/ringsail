@@ -1,45 +1,49 @@
-<div class="row">
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 main">
-    <h1 class="page-header">Users</h1>
-    <%= content_for :page_title do %>Users<% end %>
-    <div class="bg-info">
-        <p>Notice: Users are managed through OMB Max.  Please contact the administrators of the OMB Max groups <%= "#{ENV['REGISTRY_ADMIN_GROUP']} & #{ENV['REGISTRY_ADMIN_GROUP']}" %>.</p>
+<section class="usa-section" id="resources_featured">
+  <div class="grid-container grid-container-desktop">
+    <div class="grid-row">
 
-        <p>If a users information has been updated in OMB Max and they are still having issues, tell them to log out and back in, as this triggers the system to pull their data from OMB Max again</p>
-      </div>
-    <div class="row placeholders">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-      	<table id="data-tables" class=" table table-striped">
-          <thead>
-        		<tr class="users_row">
-        			<th>Email</th>
-              <th>Agency</th>
-              <th>Role</th>
-              <th>Sign-in Count</th>
-              <th>Last Sign-in</th>
-        			<th class="lastlinks">Actions</th>
-        		</tr>
-          </thead>
-          <tbody>
-        		<% @users.each do |user| %>
-        			<tr class="tablerow">
-        				<td class="table_data"><%= link_to user.email, new_admin_email_message_path(:param1 => user.email) %></td>
-                <td class="table_data"><%= user.agency.name if user.agency %> </td>
-                <td class="table_data"><%= user.role.titleize if user.role %> </td>
-                <td class="table_data"><%= user.sign_in_count %> </td>
-                <td class="table_data"><%= user.last_sign_in_at.strftime("%B %e, %Y %H:%M %Z") if user.last_sign_in_at? %> </td>
-        				<td class="table_data lastlinks">
-                 <%= link_to admin_user_path(user) do %> <i class="glyphicon glyphicon-info-sign"></i> <%end %>
-                 <%= link_to edit_admin_user_path(user) do %> <i class="glyphicon glyphicon-pencil"> </i> <% end %>
-               </td>
-        			</tr>
-        		<% end %>
-          </tbody>
-      	</table>
+      <div class="grid-col-12">
+        <h1 class="page-header">Users</h1>
+        <%= content_for :page_title do %>Users<% end %>
+        <div class="bg-info">
+            <p>users are currently managed through Login.gov, this interface is for looking up information related to those users as necessary.</p>
+          </div>
+            <div class="grid-row">
+
+              <div class="grid-col-12">
+          	<table id="data-tables" class=" table table-striped">
+              <thead>
+            		<tr class="users_row">
+            			<th>Email</th>
+                  <th>Agency</th>
+                  <th>Role</th>
+                  <th>Sign-in Count</th>
+                  <th>Last Sign-in</th>
+            			<th class="lastlinks">Actions</th>
+            		</tr>
+              </thead>
+              <tbody>
+            		<% @users.each do |user| %>
+            			<tr class="tablerow">
+            				<td class="table_data"><%= link_to user.email, new_admin_email_message_path(:param1 => user.email) %></td>
+                    <td class="table_data"><%= user.agency.name if user.agency %> </td>
+                    <td class="table_data"><%= user.role.titleize if user.role %> </td>
+                    <td class="table_data"><%= user.sign_in_count %> </td>
+                    <td class="table_data"><%= user.last_sign_in_at.strftime("%B %e, %Y %H:%M %Z") if user.last_sign_in_at? %> </td>
+            				<td class="table_data lastlinks">
+                     <%= link_to admin_user_path(user) do %> <i class="glyphicon glyphicon-info-sign"></i> <%end %>
+                     <%= link_to edit_admin_user_path(user) do %> <i class="glyphicon glyphicon-pencil"> </i> <% end %>
+                   </td>
+            			</tr>
+            		<% end %>
+              </tbody>
+          	</table>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 <% content_for :additional_javascript do %>
   <script>
     var data_tables = null;
@@ -48,7 +52,6 @@
          "ajax" : {
           "url":"/admin/users.json"
         },
-        "scrollY":        "400px",
         "columns": [
           { "data" : "name"},
           { "data" : "agency"},
@@ -60,11 +63,11 @@
         "columnDefs": [
           {
             "render": function(data,type,row){
-              return '<a href="/admin/users/'+data+'/edit"><i class = \"glyphicon glyphicon-info-sign\"></i></a>';
+              return '<a href="/admin/users/'+data+'">Info</a> <a href="/admin/users/'+data+'/edit">Edit</a>';
             }, "targets":[5]
           }
         ],
-        'sDom':'<"row"<"col-sm-12"lf>><"row"<"col-sm-12"ip>>rt<"row"<"col-sm-12"ip>><"row"<"col-sm-12"lf>>'});
+        'sDom':'<"grid-row"<"grid-col-5 grid-offset-1"f><"grid-col-5 grid-offset-1"l>><"grid-row"<"grid-col-10 grid-offset-1"pi>>rt<"grid-row"<"grid-col-10 grid-offset-1"ip>><"grid-row"<"grid-col-10 grid-offset-1">>'});
     } );
 
 

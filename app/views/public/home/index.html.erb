@@ -18,7 +18,7 @@
 
       <div class="grid-col-12 tablet-lg:grid-col-8">
         <div class="collection">
-          <p>Confirm the official status of social media and public-facing collaboration accounts, mobile apps, and mobile websites that represent U.S. government agencies, organizations, or programs. </p>
+          <p>Verify the official status of social media and public-facing collaboration accounts, mobile apps, and mobile websites that represent U.S. government agencies, organizations, or programs. </p>
           <p>Accounts are managed by federal agencies, heads of agencies, or members of the President’s Cabinet. For customer service on accounts, please contact their programs directly. </p>
            <p>Need help? Email the registry at <a href="mailto:usdigitalregistry@gsa.gov">usdigitalregistry@gsa.gov</a></p>
         </div>
@@ -32,7 +32,7 @@
       <div class="grid-row">
         <div class="grid-col-12">
           <header class="page-head page-head-page">
-            <h2>Search The Registry</h2>
+            <h2>Search the Registry</h2>
            <!--  <div class="join-buttons">
               <a href="#search_social" aria-controls="home" role="tab" data-toggle="tab">Search Social Media Accounts</a>
               <a href="#search_mobile" aria-controls="messages" role="tab" data-toggle="tab">Search Mobile Products</a>
@@ -122,7 +122,7 @@
                         <div class="grid-col-12">
                         <h3>Mobile Applications</h3>
                         <label for="search-mobile-box">Agency: </label>
-                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_mobile_app_count > 0").order(name: :asc), "id", "name_and_mobile_count"), include_blank: 'Select an Agency', class: "usa-input" , id: "mobile-agency" %>
+                        <%= select_tag "agency", options_from_collection_for_select(Agency.where("published_mobile_app_count > 0").order(name: :asc), "id", "name_and_mobile_count"), include_blank: 'Select an Agency', class: "usa-input" , id: "app-agency", :autocomplete => "off" %>
                         </div>
                       </div>
                       <div class="grid-row form-inner">
@@ -131,8 +131,8 @@
                           <%= select_tag "mobile-language", options_for_select([ ["Select a Language", ""], ["English", "English"], ["Spanish", "Spanish"]] ),  class: "usa-input", id: "mobile-language"  %>
                         </div>
                         <div class="grid-col-4 grid-offset-1">
-                          <label for="search-mobile-tags">Tags: </label>
-                          <%= select_tag "mobile-tags", options_from_collection_for_select(OfficialTag.where("published_mobile_app_count > 0").order(published_mobile_app_count: :desc), :id, :text_and_mobile_count), :class => "usa-input grid-col-9", :prompt => "Select a Tag" %>
+                          <label for="search-app-tags">Tags: </label>
+                          <%= select_tag "app-tags", options_from_collection_for_select(OfficialTag.where("published_mobile_app_count > 0").order(published_mobile_app_count: :desc), :id, :text_and_mobile_count), :class => "usa-input grid-col-9", :prompt => "Select a Tag", :autocomplete => "off" %>
                         </div>
                       </div>
                       <div class="grid-row form-inner">
@@ -286,8 +286,9 @@
         sortField: 'text'
     });
 
-    $('#mobile-agency').selectize({
-        sortField: 'text'
+    $('#app-agency').selectize({
+        sortField: 'text',
+        autocomplete: 'off'
     });
     
 
@@ -295,8 +296,9 @@
         sortField: 'text'
     });
 
-    $('#mobile-tags').selectize({
-        sortField: 'text'
+    $('#app-tags').selectize({
+        sortField: 'text',
+        autocomplete: 'off'
     });
 
     $('#social-media-search').submit(function(e){
@@ -390,11 +392,11 @@
     function submit_mobile_form(){
       
       $.get("https://api.gsa.gov/systems/digital-registry/v1/mobile_apps.json",{
-        agencies: $('#mobile-agency').val(),
+        agencies: $('#app-agency').val(),
         language: $('#mobile-language').val(),
         page_size: $('#mobile-page-size').val(),
         page: $('#mobile-page').val(),
-        tags: $('#mobile-tags').val()
+        tags: $('#app-tags').val()
       }, function(data){
         $('#mobile-metadata-results').html(metadata_template(data.metadata));
 
