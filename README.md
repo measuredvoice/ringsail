@@ -37,11 +37,11 @@ Commands:
 
 ### Single Sign On
 
-For the purposes of Single Sign-On (SSO), Ringsail integrates with OMB.MAX.  For this integration to work, the domain name of the service must be configured with OMB MAX as an external dependency.  It also requires configuration of groups in the secrets.yml file (the user and administrator groups to check against). Leaving these blanks will cause every user account to have either user level or administrator level access.
+For the purposes of Single Sign-On (SSO), Ringsail integrates with Login.gov.  For this integration to work, the domain name of the service must be configured with Login.gov as an external dependency.  It also requires configuration of groups in the Environment Variables and a PEM file for integration with login.gov.
 
 In development mode, users from the db:seeds file will be created with each level of access available in the system.  There should be no need to integrate with a CAS provider for development purposes.
 
-If you are looking to run your own version of the application, either modify the authentication mechanism or integrate with a CAS provider.
+If you are looking to run your own version of the application, either modify the authentication mechanism or integrate it with another mechanism using Omniauth.
 
 ### Social Media Accounts
 
