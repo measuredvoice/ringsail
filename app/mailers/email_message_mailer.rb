@@ -1,6 +1,6 @@
 class EmailMessageMailer < ActionMailer::Base
   default from: "US Digital Registry <digitalregistry@usa.gov>",
-    reply_to: "Jacob Parcell <jacob.parcell@gsa.gov>"
+    reply_to: "US Digital Registry Team <usdigitalregistry@gsa.gov>"
   
   def email(record)
   	@email = record

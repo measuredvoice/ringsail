@@ -1,6 +1,6 @@
 class AdminMailer < ActionMailer::Base
   default from: "US Digital Registry <digitalregistry@usa.gov>",
-    reply_to: "Jacob Parcell <jacob.parcell@gsa.gov>"
+    reply_to: "US Digital Registry Team <usdigitalregistry@gsa.gov>"
 
   def six_month_review_notice(email, preview_email=nil)
     @outlets_count = Outlet.to_review_for(email).count

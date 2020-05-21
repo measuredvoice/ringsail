@@ -41,9 +41,6 @@ gem 'acts-as-taggable-on'
 # Pagination
 gem 'kaminari'
 
-# Swagger generation
-# gem 'swagger-docs'
-
 # Rack CORS. Prevents need to do this in application controller, lets us do it for public directory
 gem 'rack-cors', :require => 'rack/cors'
 

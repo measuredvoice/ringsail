@@ -71,8 +71,7 @@ Ringsail::Application.configure do
     domain:               ENV['REGISTRY_EMAIL_DOMAIN'],
     user_name:            ENV['REGISTRY_EMAIL_USER'],
     password:             ENV['REGISTRY_EMAIL_PASS'],
-    authentication:       'plain',
-    enable_starttls_auto: true
+    authentication:       'login'
   }
   config.eager_load = true
 end
