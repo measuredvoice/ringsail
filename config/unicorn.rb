@@ -4,7 +4,7 @@ timeout 15
 preload_app true
 
 APP_PATH = File.expand_path '../../', __FILE__
-APP_NAME='socmedreg'
+APP_NAME='smr'
 working_directory APP_PATH
 
 listen "/tmp/.#{APP_NAME}sock", :backlog => 64
