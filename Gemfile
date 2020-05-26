@@ -101,7 +101,7 @@ group :development, :test do
   gem 'pry'
 
   # adds table data to model files, handy for tracking columns
-  gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
+  gem 'annotate', :git => 'https://github.com/ctran/annotate_models.git'
 
   # open emails in browser on send
   gem 'letter_opener'

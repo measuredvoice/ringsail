@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/ctran/annotate_models.git
-  revision: 111640d077836ced23cfffb882c93e40968ab9d9
-  specs:
-    annotate (2.7.5)
-      activerecord (>= 3.2, < 7.0)
-      rake (>= 10.4, < 13.0)
-
-GIT
   remote: https://github.com/ctacdev/omniauth_login_dot_gov.git
   revision: 456ad8590f3fd5d1207d92914d2571bebcaeb8a6
   ref: 456ad85
@@ -18,6 +10,14 @@ GIT
       jwt (~> 2.2)
       multi_json (~> 1.14)
       omniauth (~> 1.8.1)
+
+GIT
+  remote: https://github.com/ctran/annotate_models.git
+  revision: 111640d077836ced23cfffb882c93e40968ab9d9
+  specs:
+    annotate (2.7.5)
+      activerecord (>= 3.2, < 7.0)
+      rake (>= 10.4, < 13.0)
 
 GEM
   remote: http://rubygems.org/
