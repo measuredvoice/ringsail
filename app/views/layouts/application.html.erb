@@ -9,16 +9,30 @@
     <%= render "layouts/public_navigation" %>
     
     <main aria-label="Content" role="main" id="main-content">
-      <% #should move the notices/alerts to their own "section header" most likely when they do appear %>
-      <% if notice %>
-        <p class="alert alert-success" role="alert"><%= notice %><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></p>
-        <% end %>
-      <% if alert %>
-        <% unless alert.start_with?("Your session") || alert.start_with?("You need to") %>
-        <p class="alert alert-danger"><%= alert %></p>
-        <% end %>
+     <% if notice || alert %> 
+      <div class="grid-container grid-container-desktop">
+        <div class="grid-row">
+          <div class="grid-col-12">
+            <% if notice %>
+            <div class="usa-alert usa-alert--info" >
+              <div class="usa-alert__body">
+                <h3 class="usa-alert__heading">Notification</h3>
+                <p class="usa-alert__text"><%= notice %></p>
+              </div>
+            </div>
+            <% end %>
+            <% if alert %>
+            <div class="usa-alert usa-alert--warning" >
+              <div class="usa-alert__body">
+                <h3 class="usa-alert__heading">Warning</h3>
+                <p class="usa-alert__text"><%= alert %></p>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
       <% end %>
-      <% # YIELD ACTUAL CONTENT PAGES %>
       <%= yield %>
     </main>
     
