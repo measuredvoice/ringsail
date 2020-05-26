@@ -10,7 +10,7 @@ working_directory APP_PATH
 listen "/tmp/.#{APP_NAME}sock", :backlog => 64
 listen 3000, :tcp_nopush => true
 
-pid "#{APP_PATH}/tmp/pids/unicorn_#{APP_NAME}.pid"
+pid "#{APP_PATH}/unicorn_#{APP_NAME}.pid"
 stderr_path "/#{APP_PATH}/log/smr.stderr.log"
 stdout_path "/#{APP_PATH}/log/smr.stdout.log"
 
