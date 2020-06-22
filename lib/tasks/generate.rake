@@ -160,5 +160,30 @@ namespace :generate_data do
     # }
   end
 
+   task :report_users => :environment do 
+    
+    @users = User.all.group_by(&:email)
+   
+    current_time = DateTime.now.strftime("%Y%m%d%H%M%S")
+    CSV.open("reports/users_#{current_time}.csv", 'wb') { |csv| 
+      csv << ["email","agency","role","sigh_in_count","last_sign_in"]
+      @users.each do |user|  
+        last_sign_in = user[1][0].last_sign_in_at ? user[1][0].last_sign_in_at.strftime("%B %e, %Y %H:%M %Z") : ""
+        csv << [
+          user[1][0].email,
+          user[1][0].try(:agency).try(:name),
+          user[1][0].role.try(:humanize),
+          user[1][0].sign_in_count,
+          last_sign_in
+        ]
+      end
+    }
+    # CSV.open("reports/service_counts.csv", 'wb') { |csv| 
+    #   csv << ["service","counts"]
+    #   service_counts.each do |(key,val)| 
+    #     csv << [key.to_s, val.to_s]
+    #   end
+    # }
+  end
 
 end

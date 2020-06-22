@@ -15,3 +15,4 @@ public/assets/
 coverage/
 config/private.pem
 config/public.crt
+reports/
