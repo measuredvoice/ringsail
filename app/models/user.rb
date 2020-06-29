@@ -29,8 +29,8 @@
 class User < ActiveRecord::Base
 
   belongs_to :agency
-  
-  devise :omniauthable, omniauth_providers: %i[login_dot_gov] 
+
+  devise :omniauthable, omniauth_providers: %i[login_dot_gov]
   devise :trackable, :timeoutable
 
   enum role: { user: 0, super_user: 1, admin: 2, banned: 3}
@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   has_many :mobile_app_users
   has_many :mobile_apps, through: :mobile_app_users
-  
+
   has_many :gallery_users
   has_many :gallerys, through: :gallery_users
 

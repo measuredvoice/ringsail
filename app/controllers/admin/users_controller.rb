@@ -9,9 +9,9 @@ class Admin::UsersController < Admin::AdminController
   # GET /users
   # GET /users.json
   def index
-    num_items = items_per_page_handler        
+    num_items = items_per_page_handler
     @users = User.all
-   
+
     @users = @users
     respond_to do |format|
       format.html { @users = [] }
@@ -108,7 +108,11 @@ class Admin::UsersController < Admin::AdminController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:email, :user, :agency_id, :phone, :first_name, :last_name)
+    if current_user.admin?
+      params.require(:user).permit(:email, :role, :user, :agency_id, :phone, :first_name, :last_name)
+    else
+      params.require(:user).permit(:user, :agency_id, :phone, :first_name, :last_name)
+    end
   end
 
   def notification_params
@@ -118,13 +122,13 @@ class Admin::UsersController < Admin::AdminController
   def sort_column
     User.column_names.include?(params[:sort]) ? params[:sort] : "email"
   end
-  
+
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
   def items_per_page_handler
-    per_page_count = 25    
+    per_page_count = 25
     if cookies[:per_page_count_users]
       per_page_count = cookies[:per_page_count_users]
     end
@@ -132,7 +136,7 @@ class Admin::UsersController < Admin::AdminController
       per_page_count = params[:per_page]
       cookies[:per_page_count_users] = per_page_count
     end
-    return per_page_count.to_i        
-  end   
+    return per_page_count.to_i
+  end
 
 end

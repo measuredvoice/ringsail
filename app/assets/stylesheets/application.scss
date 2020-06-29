@@ -12,7 +12,7 @@
 
 
 /*
- * REFACTOR THESE 
+ * REFACTOR THESE
  */
 
 ul.unstyled-list{
@@ -66,8 +66,8 @@ select.usa-input-small{
 	border-right: 1px solid black !important;
 }
 
-/* 
- * Editing form styles 
+/*
+ * Editing form styles
  */
 .red{
 	color: red;
@@ -128,20 +128,20 @@ ul.contact-list li.contact-list-item{
 	z-index:100;
 }
 
-input::placeholder { /* Firefox, Chrome, Opera */ 
-    color: black !important; 
-    font-size: 1.06rem;
-} 
-  
-input:-ms-input-placeholder { /* Internet Explorer 10-11 */ 
+input::placeholder { /* Firefox, Chrome, Opera */
     color: black !important;
     font-size: 1.06rem;
-} 
-  
-input::-ms-input-placeholder { /* Microsoft Edge */ 
+}
+
+input:-ms-input-placeholder { /* Internet Explorer 10-11 */
     color: black !important;
     font-size: 1.06rem;
-} 
+}
+
+input::-ms-input-placeholder { /* Microsoft Edge */
+    color: black !important;
+    font-size: 1.06rem;
+}
 
 .usa-fieldset{
 	width: 100%;
@@ -179,4 +179,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 
 .panel-warning .panel-heading{
 	background-color: #faf3d1;
+}
+
+.buttonRow{
+	padding: 5px;
 }

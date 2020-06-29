@@ -5,7 +5,7 @@
     font-weight:400;font-style:normal;
 }
 ul.token-input-list {
-    overflow: hidden; 
+    overflow: hidden;
     width:100%;
     border: 1px solid #ddd;
     cursor: text;
@@ -31,12 +31,12 @@ ul.token-input-list {
     width: 100%;
 }
 ul.token-input-list .token-input-input-token::before{
-    padding:0 5px 0 15px;  
+    padding:0 5px 0 15px;
     color: #ccc;
     font-size: 13px;
 }
 ul.token-input-list .token-input-input-token::before .token-input-input-token.yoman::before{
-    padding:0 5px 0 15px;  
+    padding:0 5px 0 15px;
     color: #ccc;
     font-size: 13px;
 }
@@ -65,18 +65,18 @@ width:auto!important;
 }
  ul.token-input-list{
     line-height: 35px!important;
-    min-height:35px; 
+    min-height:35px;
 }
  div.field ul.token-input-focused{
     width:100%;
 }
 div.field ul.token-input-focused .token-input-input-token::before{
-    padding:0 5px 0 15px;  
+    padding:0 5px 0 15px;
     color: #ccc;
     font-size: 1.06rem;
 }
 form ul.token-input-list .token-input-input-token::before {
-    padding:0 5px 0 15px;  
+    padding:0 5px 0 15px;
     color: #ccc;
     font-size: 1.06rem;
 }
@@ -88,7 +88,7 @@ form .contacts ul.token-input-list .token-input-input-token::before {
 
 }
 form ul.token-input-focused .token-input-input-token::before{
-    padding:0 5px 0 15px;  
+    padding:0 5px 0 15px;
     color: #ccc;
     font-size: 13px;
 }
@@ -96,7 +96,7 @@ form ul.token-input-focused .token-input-input-token::before{
 ul.token-input-list li {
     list-style-type: none;
 }
-ul.token-input-list li p{ 
+ul.token-input-list li p{
     font-size: 1.06rem;
 }
 
@@ -124,8 +124,8 @@ ul.token-input-disabled li.token-input-token span {
 }
 
 li.token-input-token {
-    overflow: hidden; 
-    height: auto !important; 
+    overflow: hidden;
+    height: auto !important;
     width: 100%;
     padding: 5px;
     background-color: #ddd;

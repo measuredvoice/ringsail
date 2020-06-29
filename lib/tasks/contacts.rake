@@ -39,4 +39,30 @@ namespace :contacts do
     end
   end
 
+  task :cleanup => :environment do
+    PublicActivity.enabled = false
+    user_emails = User.select(:email).map(&:email).uniq
+    user_emails.each do |email|
+      puts "Cleaning User Email: #{email}"
+      user_accounts_by_email = User.where(email: email)
+      if user_accounts_by_email.count > 1
+        puts "User: #{email} has #{user_accounts_by_email.count} accounts currently, reducing to 1"
+        primary_account = user_accounts_by_email[0]
+         puts "User: #{email} primary account has id #{primary_account.id}"
+        user_accounts_by_email[1..user_accounts_by_email.count-1].each do |other_account|
+          puts "User: #{email} account_id: #{other_account.id} is being redirected to #{primary_account.id}"
+          GalleryUser.where(user_id: other_account.id).update(user_id: primary_account.id)
+          OutletUser.where(user_id: other_account.id).update(user_id: primary_account.id)
+          MobileAppUser.where(user_id: other_account.id).update(user_id: primary_account.id)
+          other_account.destroy!
+        end
+
+       
+      else
+        puts "User: #{email} only has 1 account."
+      end
+
+    end
+
+  end
 end

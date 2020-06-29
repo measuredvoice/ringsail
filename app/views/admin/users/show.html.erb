@@ -42,15 +42,45 @@
 		  	</div>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-sm-12 col-md-12 main">
+		<div class="grid-row">
+			<div class="grid-col-12 main">
 				<div class="buttonRow">
 					<%= link_to 'Back', admin_users_path, {:class => "usa-button"} %>
 					<% if current_user.admin? %>
 					<%= link_to 'Delete (ADMIN ONLY)', admin_user_path(@user), { :method => :delete, :class => "usa-button"} %>
 					<% end %>
-					<%= link_to 'Edit', edit_admin_user_path(@user), {:class => "usa-button"}  %> 
+					<%= link_to 'Edit', edit_admin_user_path(@user), {:class => "usa-button"}  %>
 			  </div>
+			</div>
+		</div>
+    <div class="grid-row">
+			<div class="grid-col-6">
+				<h3>Social Media Accounts</h3>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="list-group">
+              <% @user.outlets.each do |outlet| %>
+                <li class="list-group-item">
+                  <%= link_to "#{outlet.organization} - #{Admin::Service.find_by_shortname(outlet.service).longname}", admin_outlet_path(outlet) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+			</div>
+			<div class="grid-col-6">
+        <h3>Mobile Apps</h3>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <ul class="list-group">
+              <% @user.mobile_apps.each do |mobile_app| %>
+                <li class="list-group-item">
+                  <%= link_to "#{mobile_app.name}", admin_mobile_app_path(mobile_app) %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
 			</div>
 		</div>
 	</div>

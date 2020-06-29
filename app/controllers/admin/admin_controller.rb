@@ -4,7 +4,7 @@ class Admin::AdminController < ApplicationController
 
   before_action :authenticate_user! unless Rails.env.development? || ENV['IMPERSONATE_ADMIN'].present?
   # before_filter :admin_two_factor, except: [:about, :impersonate, :dashboard]
-  
+
   before_action :banned_user?, except: [:about, :impersonate, :dashboard]
   before_action :headers
   helper_method :current_user
@@ -33,9 +33,7 @@ class Admin::AdminController < ApplicationController
       if session[:user_id] && User.where(id: session[:user_id]).count > 0
         @current_user ||= User.find(session[:user_id])
       else
-         #@current_user ||= User.find(3561)
          @current_user ||= User.where(role: 2).first
-
       end
     else
       @current_user ||= warden.authenticate(scope: :user)
@@ -61,13 +59,13 @@ class Admin::AdminController < ApplicationController
 
   def require_admin
     if !current_user.admin?
-      redirect_to admin_dashboards_path, notice: "You shouldn't be going there... here is the dashboard instead."
+      redirect_to admin_dashboards_path, notice: "This page requires administrative privileges.  You have been redirected."
     end
   end
 
   def require_admin_or_owner
     if !current_user.admin? && current_user.id != @user.id
-      redirect_to admin_dashboards_path, notice: "Hey, thats not your account, check out the dashboard!"
+      redirect_to admin_dashboards_path, notice: "You do not have the appopriate permissions to this item, you have been redirected."
     end
   end
 
