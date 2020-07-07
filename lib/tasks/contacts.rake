@@ -56,8 +56,6 @@ namespace :contacts do
           MobileAppUser.where(user_id: other_account.id).update(user_id: primary_account.id)
           other_account.destroy!
         end
-
-       
       else
         puts "User: #{email} only has 1 account."
       end
