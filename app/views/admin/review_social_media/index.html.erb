@@ -41,7 +41,7 @@
                  
                 </div>
               </div>
-               <p><b>Note:</b> Recently Reviewed products have been certified within the past 180 days.</p>
+               <p><b>Note:</b> "Recently Reviewed" are products that have been certified within the past 180 days.</p>
             </div>
           </div>
           <div class="grid-row placeholders">
@@ -50,7 +50,7 @@
                 published_class = "btn-success"
                 archived_class = "btn-warning"
               %>
-              <h6>Published Accounts</h6>
+              <h3>Published Accounts</h3>
               <ul class="usa-button-group usa-button-group--segmented">
                 <li class="usa-button-group__item">
                   <%= link_to "Needs Review", admin_review_social_media_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days.", :class=>"usa-button usa-button--outline" %>
@@ -61,7 +61,7 @@
               </ul>
             </div>
             <div class="grid-col-6">
-              <h6>Archived Accounts</h6>
+              <h3>Archived Accounts</h3>
               <ul class="usa-button-group usa-button-group--segmented">
                 <li class="usa-button-group__item"><%= link_to  "Archived Accounts", admin_review_social_media_path(status: "archived"), :class=>"usa-button usa-button--outline", title: "Accounts that are no longer active." %></li>
               </ul>

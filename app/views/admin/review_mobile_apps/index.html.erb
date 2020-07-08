@@ -45,7 +45,7 @@
                   </ol>
                 </div>
               </div>
-              <p><b>Note:</b> Recently Reviewed products have been certified within the past 180 days.</p>
+              <p><b>Note:</b> "Recently Reviewed" are products that have been certified within the past 180 days.</p>
             </div>
           </div>
          <div class="grid-row placeholders">
@@ -54,7 +54,7 @@
                   published_class = "btn-success"
                   archived_class = "btn-warning"
               %>
-              <h6>Published Accounts</h6>
+              <h3>Published Accounts</h3>
               <ul class="usa-button-group usa-button-group--segmented">
                 <li class="usa-button-group__item"><%= link_to "Needs Review", admin_review_mobile_apps_path(status: "published", review: "needs"), title: "Accounts that have not been certified in over 180 days.", :class=>"usa-button usa-button--outline"%></li>
                 <li class="usa-button-group__item">
