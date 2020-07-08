@@ -116,7 +116,7 @@ class MobileApp < ActiveRecord::Base
 
   validates :name, :presence => true
   validates :short_description, :presence => true
-  validates :long_description, :presence => true
+  #validates :long_description, :presence => true
  
   validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }

@@ -9,8 +9,7 @@
     <%= render "layouts/admin_navigation" %>
 
     <main aria-label="Content" role="main" id="main-content">
-      <% if notice || alert %> 
-      
+      <% if notice || alert %>
       <div class="grid-container grid-container-desktop">
         <div class="grid-row">
           <div class="grid-col-12">
@@ -39,10 +38,8 @@
     
 
     <%= render "layouts/dg_footer" %>
-    <%= javascript_include_tag "application" %>
-    
+    <%= javascript_include_tag "application" %> 
     <%= javascript_include_tag "admin" %>
-    <%= javascript_include_tag "jquery.tokeninput" %>
     <%= yield :additional_javascript %>
 
 
