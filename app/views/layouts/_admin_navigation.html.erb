@@ -24,7 +24,7 @@
 		              		<%= link_to "Social Media Accounts List", admin_outlets_path %>
 		            	</li>
 		            	<li class="usa-nav__submenu-item">
-		              		<%= link_to "Social Media Accounts Review",  admin_review_social_media_path %>
+		              		<%= link_to "Update Social Media Accounts",  admin_review_social_media_path %>
 		            	</li>
 		            	 <% if current_user.admin? %>
 			            <li class="usa-nav__submenu-item">
@@ -43,7 +43,7 @@
 			              	<%= link_to "Mobile Products List", admin_mobile_apps_path %>
 			            </li>
 			            <li class="usa-nav__submenu-item">
-			              	<%= link_to "Mobile Products Review",  admin_review_mobile_apps_path %>
+			              	<%= link_to "Update Mobile Products",  admin_review_mobile_apps_path %>
 			            </li>
 			            <% if current_user.admin? %>
 			            <li class="usa-nav__submenu-item">
