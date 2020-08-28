@@ -46,14 +46,14 @@ class Admin::AdminController < ApplicationController
     #   #do nothing because its dev!
     # else
     #   if !current_user.user.include?("TwoFactor")
-    #     redirect_to admin_about_path, status: 302, notice: "You must login with Two Factor Authentication to utilize administrative functionality."
+    #     redirect_to root_path, status: 302, notice: "You must login with Two Factor Authentication to utilize administrative functionality."
     #   end
     # end
   end
 
   def banned_user?
     if current_user.banned?
-      redirect_to admin_about_path, status: 302, notice: "You have been banned from the system you may want to email an admin directly if you believe this to be in error."
+      redirect_to root_path, status: 302, notice: "You have been banned from the system you may want to email an admin directly if you believe this to be in error."
     end
   end
 

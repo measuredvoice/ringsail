@@ -20,14 +20,14 @@ module Users
           })
           redirect_to admin_user_path(new_user.id), notice: "You do not currently have an Agency assigned to user account, please update your user profile to manage accounts"
         else
-          redirect_to admin_about_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
+          redirect_to root_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
         end
       end
     end
 
 
     def failure
-      redirect_to admin_about_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
+      redirect_to root_path, status: 302, notice: "Your account could not be found.  Please contact the administrators."
     end
   end
 end
