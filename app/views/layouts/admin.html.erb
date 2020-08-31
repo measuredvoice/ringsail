@@ -21,7 +21,7 @@
               </div>
             </div>
             <% end %>
-            <% if alert %>
+            <% if alert && !alert.include?("session") #try to ignore the annoying session message we can't seem to squash %>
             <div class="usa-alert usa-alert--warning" >
               <div class="usa-alert__body">
                 <h3 class="usa-alert__heading">Warning</h3>
