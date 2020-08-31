@@ -61,7 +61,7 @@
             <ul class="list-group">
               <% @user.outlets.each do |outlet| %>
                 <li class="list-group-item">
-                  <%= link_to "#{outlet.organization} - #{Admin::Service.find_by_shortname(outlet.service).longname}", admin_outlet_path(outlet) %>
+                  <%= link_to "#{outlet.organization} - #{Admin::Service.find_by_shortname(outlet.service).longname}", admin_outlet_path(outlet), target: "_blank" %>
                 </li>
               <% end %>
             </ul>
@@ -75,7 +75,7 @@
             <ul class="list-group">
               <% @user.mobile_apps.each do |mobile_app| %>
                 <li class="list-group-item">
-                  <%= link_to "#{mobile_app.name}", admin_mobile_app_path(mobile_app) %>
+                  <%= link_to "#{mobile_app.name}", admin_mobile_app_path(mobile_app), target: "_blank" %>
                 </li>
               <% end %>
             </ul>
