@@ -134,14 +134,12 @@ class Admin::SocialMediaController < Admin::AdminController
   # DELETE /outlets/1
   # DELETE /outlets/1.json
   def destroy
-    ELASTIC_SEARCH_CLIENT.destroy  index: 'outlets', type: 'outlet', id: @outlet.id
+    ELASTIC_SEARCH_CLIENT.delete  index: 'outlets', type: 'outlet', id: @outlet.id
     @outlet.destroy!
     respond_to do |format|
-
       format.html { redirect_to admin_outlets_url, notice: 'Social Media Account was successfully destroyed.' }
       format.json { head :no_content }
     end
-    redirect_to action: :index
   end
 
   def activities

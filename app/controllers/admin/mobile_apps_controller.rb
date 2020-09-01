@@ -127,7 +127,7 @@ class Admin::MobileAppsController < Admin::AdminController
   # DELETE /mobile_apps/1
   # DELETE /mobile_apps/1.json
   def destroy
-    ELASTIC_SEARCH_CLIENT.destroy  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id
+    ELASTIC_SEARCH_CLIENT.delete index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id
     @mobile_app.destroy!
     respond_to do |format|
       format.html { redirect_to admin_mobile_apps_url, notice: 'Mobile Product was successfully destroyed.' }
