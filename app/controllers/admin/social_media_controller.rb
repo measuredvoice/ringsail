@@ -150,6 +150,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.touch
     @outlet.published!
     @outlet.build_notifications(:published)
+    ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: @outlet.id, body: @outlet.as_indexed_json
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
   end
 
@@ -157,6 +158,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.touch
     @outlet.archived!
     @outlet.build_notifications(:archived)
+    ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: @outlet.id, body: @outlet.as_indexed_json  
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived. #{view_context.link_to 'Undo', publish_admin_outlet_path(@outlet)}".html_safe
   end
 

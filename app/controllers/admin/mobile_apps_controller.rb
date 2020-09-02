@@ -90,9 +90,9 @@ class Admin::MobileAppsController < Admin::AdminController
     respond_to do |format|
       if @mobile_app.save
         @mobile_app.build_notifications(:created)
-        # @mobile_app.published!
+        @mobile_app.published!
         ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id, body: @mobile_app.as_indexed_json
-        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully created. Please review and click 'Publish' to publish this mobile product to the API." }
+        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully created." }
         format.json { render :show, status: :created, location: @mobile_app }
       else
         if @mobile_app.mobile_app_versions.empty?
@@ -110,12 +110,12 @@ class Admin::MobileAppsController < Admin::AdminController
     respond_to do |format|
       if @mobile_app.update(mobile_app_params)
         @mobile_app.touch
-        # if @mobile_app.published?
-        #   @mobile_app.published!
-        # end
+        if @mobile_app.published?
+          @mobile_app.published!
+        end
         @mobile_app.build_notifications(:updated)
         ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id, body: @mobile_app.as_indexed_json
-        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully updated. Please review and click 'Publish' to publish these updates to the API." }
+        format.html { redirect_to admin_mobile_app_path(@mobile_app), notice: "Mobile Product was successfully updated." }
         format.json { render :show, status: :ok, location: admin_mobile_app_path(@mobile_app) }
       else
         format.html { render :edit }
@@ -143,6 +143,7 @@ class Admin::MobileAppsController < Admin::AdminController
     @mobile_app.touch
     @mobile_app.published!
     @mobile_app.build_notifications(:published)
+    ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id, body: @mobile_app.as_indexed_json
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now published. #{view_context.link_to 'Undo', archive_admin_mobile_app_path(@mobile_app)}".html_safe
   end
 
@@ -150,6 +151,7 @@ class Admin::MobileAppsController < Admin::AdminController
     @mobile_app.touch
     @mobile_app.archived!
     @mobile_app.build_notifications(:archived)
+    ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id, body: @mobile_app.as_indexed_json
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now archived. #{view_context.link_to 'Undo', publish_admin_mobile_app_path(@mobile_app)}".html_safe
   end
 
