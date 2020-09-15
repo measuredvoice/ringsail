@@ -22,9 +22,9 @@ module Admin::AdminHelper
     when "Outlet"
       "fa fa-share-alt"
     when "MobileApp"
-      "fa fa-mobile"  
+      "fa fa-mobile"
     when "Gallery"
-      "fa fa-mobile"  
+      "fa fa-mobile"
     end
   end
   def activity_feed_action_name(activity)
@@ -40,10 +40,14 @@ module Admin::AdminHelper
   end
 
   def user_list_format(user)
-    if user.first_name || user.last_name
-      "#{user.first_name} #{user.last_name} - <a href=\"mailto:#{user.email}\">#{user.email}</a>".html_safe
+    if user
+      if user.first_name && user.last_name
+        "#{user.try(:first_name)} #{user.try(:last_name)} - <a href=\"mailto:#{user.email}\">#{user.email}</a>".html_safe
+      else
+        "<a href=\"mailto:#{user.email}\">#{user.email}</a>".html_safe
+      end
     else
-      "<a href=\"mailto:#{user.email}\">#{user.email}</a>".html_safe
+      "Deleted User".html_safe
     end
   end
 
@@ -65,5 +69,5 @@ module Admin::AdminHelper
       outlet.service_url
     end
   end
-  
+
 end
