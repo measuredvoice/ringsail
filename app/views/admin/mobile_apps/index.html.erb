@@ -27,10 +27,10 @@
               <div class="grid-col-5 grid-offset-1">
                 <% if current_user.admin? || params[:status] %>
                 <%= label :status_selector, "Status Selector", {class: 'usa-label'} %>
-                <%= select_tag :status_selector, options_for_select([["All",""],["Published","Published"],["Archived","Archived"]],params[:status]), {class: 'usa-input'} %>
+                <%= select_tag :status_selector, options_for_select([["All",""],["Published","Published"],["Archived","Archived"]],params[:status]), {class: 'usa-input usa-select'} %>
                 <% else %>
                 <%= label :status_selector, "Status Selector", {class: 'usa-label'} %>
-                <%= select_tag :status_selector, options_for_select([["All",""],["Published","Published"],["Archived","Archived"]],"Published"), {class: 'usa-input'} %>
+                <%= select_tag :status_selector, options_for_select([["All",""],["Published","Published"],["Archived","Archived"]],"Published"), {class: 'usa-input usa-select'} %>
                 <% end %>
               </div>
             <% end %>

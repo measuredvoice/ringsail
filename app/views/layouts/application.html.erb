@@ -7,9 +7,9 @@
   <div class="paper">
     <%= render "layouts/dg_banner" %>
     <%= render "layouts/public_navigation" %>
-    
+
     <main aria-label="Content" role="main" id="main-content">
-     <% if notice || alert %> 
+     <% if notice || alert %>
       <div class="grid-container grid-container-desktop">
         <div class="grid-row">
           <div class="grid-col-12">
@@ -35,18 +35,18 @@
       <% end %>
       <%= yield %>
     </main>
-    
+
 
     <%= render "layouts/dg_footer" %>
     <%= javascript_include_tag "application" %>
     <%= yield :additional_javascript %>
 
 
-    
+
   </div> <!-- End Paper -->
   <% if !Rails.env.development? %>
     <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
-  <script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA" id="_fed_an_ua_tag"></script>
+  <script async type="text/javascript" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=GSA&subagency=TTS" id="_fed_an_ua_tag"></script>
   <% end %>
 </body>
 </html>
