@@ -14,7 +14,7 @@ class Admin::SocialMediaController < Admin::AdminController
       params[:status] = "Published"
     end
     respond_to do |format|
-      format.html { 
+      format.html {
         @outlets = Outlet.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users)
         num_items = items_per_page_handler
         @total_outlets = @outlets.count
@@ -29,11 +29,11 @@ class Admin::SocialMediaController < Admin::AdminController
         @result_count = @outlets.total_count
         @outlets = @outlets.page(current_page).per(params["iDisplayLength"].to_i).results
       }
-      format.csv { 
+      format.csv {
         @outlets = Outlet.es_search(params, sort_column, sort_direction)
         @result_count = @outlets.total_count
         @outlets = @outlets.results
-        send_data @outlets.to_csv 
+        render plain: @outlets.to_csv
       }
     end
   end
@@ -45,7 +45,7 @@ class Admin::SocialMediaController < Admin::AdminController
       @outlets = Outlet.es_search(params, sort_column, sort_direction).per(1000).records
     end
     respond_to do |format|
-      format.csv { send_data @outlets.to_csv }
+      format.csv { render plain: @outlets.to_csv }
     end
   end
 
@@ -77,7 +77,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet = Outlet.new
     @outlet.language = "English"
     if current_user.agency
-      @outlet.primary_agency_id = current_user.agency.id 
+      @outlet.primary_agency_id = current_user.agency.id
     end
     @outlet.primary_contact_id = current_user.id
   end
@@ -158,7 +158,7 @@ class Admin::SocialMediaController < Admin::AdminController
     @outlet.touch
     @outlet.archived!
     @outlet.build_notifications(:archived)
-    ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: @outlet.id, body: @outlet.as_indexed_json  
+    ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: @outlet.id, body: @outlet.as_indexed_json
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now archived. #{view_context.link_to 'Undo', publish_admin_outlet_path(@outlet)}".html_safe
   end
 
@@ -191,7 +191,7 @@ class Admin::SocialMediaController < Admin::AdminController
       return 0 if params["iDisplayStart"].to_i == 0
       params["iDisplayStart"].to_i / params["iDisplayLength"].to_i + 1
     end
-    
+
     def sort_column
       columns = {
         "0" => "agencies",

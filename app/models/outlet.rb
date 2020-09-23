@@ -103,7 +103,7 @@ class Outlet < ActiveRecord::Base
 
   enum status: { under_review: 0, published: 1, archived: 2,
     publish_requested: 3, archive_requested: 4 }
-  
+
 
   # These are has and belongs to many relationships
   has_many :sponsorships, dependent: :destroy
@@ -151,7 +151,7 @@ class Outlet < ActiveRecord::Base
   before_save :social_media_update
 
   def social_media_update
-    # begin 
+    # begin
     #   if self.service.to_s == "facebook"
     #     @oauth = Koala::Facebook::OAuth.new("#{ENV['REGISTRY_FACEBOOK_APP_ID']}", "#{ENV['REGISTRY_FACEBOOK_APP_SECRET']}", "https://#{ENV['REGISTRY_HOSTNAME']}/")
     #     access_token = @oauth.get_app_access_token
@@ -163,7 +163,7 @@ class Outlet < ActiveRecord::Base
     #     self.twitter_followers = account_data.followers_count
     #     self.twitter_posts = account_data.statuses_count
     #   elsif self.service.to_s == "youtube"
-    #     channel_name = account 
+    #     channel_name = account
     #     full_uri = "https://www.googleapis.com/youtube/v3/channels?part=statistics&forUsername=#{channel_name}&key=#{ENV['REGISTRY_YOUTUBE_KEY']}"
     #     account_data = JSON.parse(open(full_uri, {ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read)
     #     # puts account_data
@@ -191,13 +191,15 @@ class Outlet < ActiveRecord::Base
   # end
 
   def self.to_csv(options = {})
-    CSV.generate(options) do |csv|
-      csv << (column_names + ["agencies" ,"contacts" ,"tags"])
+    csv_file = CSV.generate(options) do |csv|
+      columns_for_csv = ["id","created_at","updated_at","service_url","organization","account","language","service","status","short_description","long_description"]
+      csv << (columns_for_csv + ["agencies" ,"contacts" ,"tags",])
 
       self.all.includes(:agencies,:users,:official_tags).each do |outlet|
-        csv << (outlet.attributes.values_at(*column_names) + [outlet.agencies.map(&:name).join("|") ,outlet.users.map(&:email).join("|"),outlet.official_tags.map(&:tag_text).join("|")])
+        csv << (outlet.attributes.values_at(*columns_for_csv) + [outlet.agencies.map(&:name).join("|") ,outlet.users.map(&:email).join("|"),outlet.official_tags.map(&:tag_text).join("|")])
       end
     end
+    return csv_file
   end
 
   def self.export_csv(options={})
@@ -224,29 +226,29 @@ class Outlet < ActiveRecord::Base
     }
     if !params["sSearch"].blank?
       query[:query][:bool][:must] <<  {
-        match: { 
+        match: {
           _all: {
             query: "%#{params["sSearch"]}%"
           }
         }
       }
       query[:query][:bool][:should] <<  {
-        match: { 
+        match: {
           "contacts" => "%#{params["sSearch"]}%"
         }
       }
       query[:query][:bool][:should] <<  {
-        match: { 
+        match: {
           "agencies" => "%#{params["sSearch"]}%"
         }
       }
       query[:query][:bool][:should] <<  {
-        match: { 
+        match: {
           "account" => "%#{params["sSearch"]}%"
         }
       }
       query[:query][:bool][:should] <<  {
-        match: { 
+        match: {
           "account_name" => "%#{params["sSearch"]}%"
         }
       }

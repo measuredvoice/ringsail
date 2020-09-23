@@ -7,11 +7,11 @@
         <h1 class="page-header">Mobile Products</h1>
           <div class="grid-row placeholders">
             <div class="grid-col-12">
-             <!--  <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default pull-right export" %>
-              <%= link_to "Add a Mobile Product", new_admin_mobile_app_path, class: "btn btn-default pull-right" %> -->
-              <%= form_for admin_mobile_apps_path, method: :post, html: { class: 'grid-row', id: 'table-controls'} do %>
+            <%= form_for admin_mobile_apps_path, method: :post, html: { class: 'grid-row', id: 'table-controls'} do %>
               <div class="grid-col-10 grid-offset-1">
                 <p style="margin:0; font-size: .9em; width: 100%; max-width: 100%;">Search for mobile apps using the filters below.  Agency names are based found using keywords from their title, for example "Census" for "Bureau of the Census" to find their exact name in the system. Agencies only appear once they have an account published in the system. The search box below is best used for short terms from the entry in the table, for example "GSA" or an email address. </p>
+                <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default export" %>
+                <p style="margin:0; font-size: .9em; width: 100%; max-width: 100%;">A maximum of 1000 records can be exported at a time. </p>
                 <%= label :agency_selector, "Agency", {class: 'usa-label'} %>
                 <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.where("published_mobile_app_count > 0").pluck(:name).sort.collect{|agency| [agency,agency]},params[:agency_selector]), {class: 'usa-input'} %>
               </div>
@@ -53,11 +53,10 @@
       </div>
     </div>
   </section>
-
-<%= form_tag admin_mobile_apps_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
+<%= form_tag mobile_apps_export_admin_mobile_apps_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :platform, params[:platform] %>
   <%= hidden_field_tag :ids %>
-    <%= hidden_field_tag :agency, params[:agency] %>
+  <%= hidden_field_tag :agency, params[:agency] %>
   <%= hidden_field_tag :status, params[:status] %>
 <% end %>
 <% content_for :additional_javascript do %>
@@ -97,7 +96,7 @@
           aoData.push( { "name": "platform", "value": $("#platform").val() });
           aoData.push( { "name": "agency", "value" : $('#agency_selector').val()});
           aoData.push( { "name": "status", "value" : $('#status_selector').val()});
-        }, 
+        },
         "columns": [
           { "data" : "agencies"},
           { "data" : "contacts"},

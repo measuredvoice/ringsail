@@ -111,13 +111,13 @@ class MobileApp < ActiveRecord::Base
   belongs_to :secondary_agency, class_name: "Agency", foreign_key: "secondary_agency_id"
 
   # validates :primary_agency, :presence => true
-  
+
   accepts_nested_attributes_for :mobile_app_versions, reject_if: :all_blank, allow_destroy: true
 
   validates :name, :presence => true
   validates :short_description, :presence => true
   #validates :long_description, :presence => true
- 
+
   validates :agencies, :length => { :minimum => 1, :message => "have at least one sponsoring agency" }
   validates :users, :length => { :minimum => 1, :message => "have at least one contact" }
   validates :mobile_app_versions, :length => { :minimum => 1, :message => "have at least one version of the product must be given." }
@@ -185,24 +185,24 @@ class MobileApp < ActiveRecord::Base
     }
     if !params["sSearch"].blank?
       query[:query][:bool][:must] <<  {
-                                        match: { 
+                                        match: {
                                           _all: {
                                             query: "%#{params["sSearch"]}%"
                                           }
                                         }
                                       }
       query[:query][:bool][:should] <<  {
-        match: { 
+        match: {
           "contacts" => "%#{params["sSearch"]}%"
         }
       }
       query[:query][:bool][:should] <<  {
-        match: { 
+        match: {
           "agencies" => "%#{params["sSearch"]}%"
         }
       }
       query[:query][:bool][:should] <<  {
-        match: { 
+        match: {
           "name" => "%#{params["sSearch"]}%"
         }
       }

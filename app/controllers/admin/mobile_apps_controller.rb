@@ -5,7 +5,7 @@ class Admin::MobileAppsController < Admin::AdminController
   before_action :user_has_agency
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy,
     :archive, :publish, :request_archive, :request_publish]
-    
+
   # before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
   # GET /mobile_apps.json
@@ -14,9 +14,9 @@ class Admin::MobileAppsController < Admin::AdminController
       params[:status] = "Published"
     end
     respond_to do |format|
-      format.html { 
+      format.html {
         @mobile_apps = MobileApp.includes(:official_tags,:agencies,:users).references(:official_tags,:agencies,:users)
-    
+
         if params[:platform] && params[:platform] != ""
           @mobile_apps= @mobile_apps.joins(:mobile_app_versions).where(mobile_app_versions: {platform: params[:platform]})
         end
@@ -28,20 +28,20 @@ class Admin::MobileAppsController < Admin::AdminController
         @result_count = @mobile_apps.total_count
         @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
       }
-      format.csv { 
+      format.csv {
         @total_mobile_apps = MobileApp.count
         @mobile_apps = MobileApp.es_search(params, sort_column, sort_direction)
         @result_count = @mobile_apps.total_count
         @mobile_apps = @mobile_apps.page(current_page).per(params["iDisplayLength"].to_i).results
-        send_data @mobile_apps.to_csv
+        render plain: @mobile_apps.to_csv
       }
     end
   end
 
   def mobile_apps_export
-    @mobile_apps = MobileApp.where("id in (?)", params[:ids].split(",")).includes(:official_tags,:users,:agencies,:mobile_app_versions)
-     respond_to do |format|
-      format.csv { send_data @mobile_apps.to_csv }
+    @mobile_apps = MobileApp.es_search(params, sort_column, sort_direction).per(1000).records
+    respond_to do |format|
+      format.csv { render plain: @mobile_apps.to_csv }
     end
   end
 
@@ -65,7 +65,7 @@ class Admin::MobileAppsController < Admin::AdminController
     @mobile_app = MobileApp.new
     @mobile_app.language = "English"
     if current_user.agency
-      @mobile_app.primary_agency_id = current_user.agency.id 
+      @mobile_app.primary_agency_id = current_user.agency.id
     end
     @mobile_app.primary_contact_id = current_user.id
     @mobile_app.mobile_app_versions.build
@@ -182,7 +182,7 @@ class Admin::MobileAppsController < Admin::AdminController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def mobile_app_params
-      params.require(:mobile_app).permit(:name, :short_description, :long_description, :icon_url,
+      params.permit(:mobile_app, :name, :short_description, :long_description, :icon_url,
         :language, :agency_tokens, :user_tokens, :tag_tokens, :primary_contact_id, :secondary_contact_id, :primary_agency_id, :secondary_agency_id, :notes, mobile_app_versions_attributes: [:id, :store_url,:platform,
         :version_number,:publish_date,:description,:whats_new,:screenshot,:device,
         :language,:average_rating,:number_of_ratings, :_destroy])
