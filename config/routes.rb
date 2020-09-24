@@ -257,7 +257,7 @@ Ringsail::Application.routes.draw do
             get 'archive'
         end
     end
-    
+
     resources :agencies, concerns: :activity_and_history do
       collection do
         get 'tokeninput'
@@ -358,6 +358,8 @@ Ringsail::Application.routes.draw do
           get 'tokeninput'
         end
       end
+      resources :government_urls, only: [:index, :show]
+      
       resources :tags, only: [:index, :show] do
         collection do
           get 'types'

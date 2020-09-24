@@ -1,0 +1,11 @@
+json.set! :id, government_url.id
+json.set! :url, government_url.url
+json.set! :federal_agency, government_url.federal_agency
+json.set! :level_of_government, government_url.level_of_government
+json.set! :location, government_url.location
+json.set! :status, government_url.status
+json.set! :note, government_url.note
+json.set! :link, government_url.link
+json.set! :date_added, government_url.date_added
+json.set! :created_at, government_url.created_at
+json.set! :updated_at, government_url.updated_at

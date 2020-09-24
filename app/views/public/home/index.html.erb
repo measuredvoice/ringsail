@@ -94,7 +94,7 @@
                                 <th style="width: 13%;">Account Platform</th>
                                 <th style="width: 12%;"> Account Name</th>
                                 <th style="width: 50%;">Description</th>
-                      
+
                                 <th style="width: 10%;">Last Updated</th>
                               </tr>
                             </thead>
@@ -182,10 +182,67 @@
             </div>
             <div class="card card-article card-linked">
               <div class="grid-row tablet:grid-gap-4">
+                <div class="grid-col-12">
+                  <form class="navbar-form navbar-left grid-row" role="search" id="government-urls-search">
+                    <div class="grid-col-12">
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-12">
+                          <h3>Government Domains:</h3>
+                          <p>Government Domains that do not end in .gov or .mil</p>
+                          <label for="government-urls-text">Search: </label>
+                          <input type="text" class="usa-input" id="government-urls-text" placeholder="Search" value="">
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-2">
+                          <label for="search-government-urls-page-size">Page Size: </label>
+                          <input type="text" class="usa-input" id="government-urls-page-size" placeholder="10" value="10">
+                        </div>
+                        <div class="grid-col-2 grid-offset-1">
+                          <label for="search-government-urls-page">Page: </label>
+                          <input type="text" class="usa-input" id="government-urls-page" placeholder="1" value="1">
+                        </div>
+                      </div>
+                      <div class="grid-row form-inner">
+                        <div class="grid-col-12 inset-results">
+                          <div class="inset-buttons">
+                            <button class="government-urls-previous-page usa-button usa-button--outline">Previous Page</button>
+                            <button class="government-urls-next-page usa-button usa-button--outline">Next Page</button>
+                          </div>
+                          <div id="government-urls-metadata-results">
+                          </div>
+                          <table class="table table-striped" style="margin-top:15px;table-layout:fixed; width:100%">
+                          <thead>
+                            <tr>
+                              <th style="max-width: 20%;width: 20%;">URL</th>
+                              <th style="max-width: 20%;width: 20%;">Government Org.</th>
+                              <th style="max-width: 40%;width: 40%;">Location / Notes</th>
+                              <th style="max-width: 20%;width: 20%;">Last Updated</th>
+                            </tr>
+                          </thead>
+                          <tbody id="government-urls-collection">
+                            <tr>
+                              <td colspan="5"><p style="text-align: center;">Use the form above to find government urls.</p></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                          <div class="inset-buttons">
+                            <button class="government-urls-previous-page usa-button usa-button--outline">Previous Page</button>
+                            <button class="government-urls-next-page usa-button usa-button--outline">Next Page</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="card card-article card-linked">
+              <div class="grid-row tablet:grid-gap-4">
                 <div class="grid-col-3 grid-offset-3">
                   <h3>Federal Agencies</h3>
                  <a href="/federal-agencies" class="usa-button">Register and Manage Accounts</a>
-                  <p>Help prevent exploitation from unofficial sources, phishing scams, or malicious entities.</p> 
+                  <p>Help prevent exploitation from unofficial sources, phishing scams, or malicious entities.</p>
                 </div>
                 <div class="grid-col-3">
                   <h3>Developers</h3>
@@ -217,7 +274,7 @@
       margin: 15px 0px 15px 0px ;
     }
   </style>
-  
+
 <script id="social-media-template" type="text/x-handlebars-template">
   <tr>
     <td>{{#each agencies}}
@@ -247,6 +304,21 @@
     <td>{{name}}</td>
     <td>{{short_description}}{{#if short_description}}<br/><br/>{{/if}}{{#if tags}}Tags: {{#tagoutput}}{{tags}}{{/tagoutput}}{{/if}}</td>
     <td>{{#formatDate}}{{updated_at}}{{/formatDate}}</td>
+  </tr>
+</script>
+
+<script id="government-urls-template" type="text/x-handlebars-template">
+  <tr>
+    <td>URL: {{url}}{{#if link}}<br/>Link: {{link}}{{/if}} </td>
+    <td>{{level_of_government}}{{#if federal_agency}}<br/>Federal Agency: {{federal_agency}}{{/if}}</td>
+    <td>
+      Notes: {{note}}
+      {{#if location}}
+        Location: {{location}}
+      {{/if}}
+    </td>
+    <td>Date Added: {{date_added}}
+    <br/>Updated At: {{#formatDate}}{{updated_at}}{{/formatDate}}</td>
   </tr>
 </script>
 <script id="metadata-template" type="text/x-handlebars-template">
@@ -282,6 +354,9 @@
   var source_mobile_template   = $("#mobile-template").html();
   var mobile_template = Handlebars.compile(source_mobile_template);
 
+  var source_government_urls_template   = $("#government-urls-template").html();
+  var government_urls_template = Handlebars.compile(source_government_urls_template);
+
   var source_metadata_template = $('#metadata-template').html();
   var metadata_template = Handlebars.compile(source_metadata_template);
 
@@ -291,6 +366,8 @@
     $('.next-page').hide();
     $('.mobile-previous-page').hide();
     $('.mobile-next-page').hide();
+    $('.government-urls-previous-page').hide();
+    $('.government-urls-next-page').hide();
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
       $('.flex-active').toggleClass('flex-active');
       e.currentTarget.className = "flex-active";
@@ -304,7 +381,7 @@
         sortField: 'text',
         autocomplete: 'off'
     });
-    
+
 
     $('#tags').selectize({
         sortField: 'text'
@@ -374,6 +451,32 @@
     $('#mobile-search input, #mobile-search select').on('change', function(){
       submit_mobile_form();
     });
+
+    $('.government-urls-next-page').click(function(e){
+      e.preventDefault();
+      var page_int = parseInt($('#government-urls-page').val(),10);
+      if(page_int){
+        $('#government-urls-page').val(page_int + 1);
+      }else{
+        $('#government-urls-page').val(1)
+      }
+      submit_government_url_form();
+    });
+    $('.government-urls-previous-page').click(function(e){
+       e.preventDefault();
+      var page_int = parseInt($('#government-urls-page').val(),10);
+      if(page_int){
+        $('#government-urls-page').val(page_int - 1);
+      }else{
+        $('#government-urls-page').val(1)
+      }
+      submit_government_url_form();
+    });
+
+
+    $('#government-urls-search input, #government-urls-search select').on('change', function(){
+      submit_government_url_form();
+    });
   });
 
     function submit_social_media_form(){
@@ -403,8 +506,32 @@
       });
     }
 
+    function submit_government_url_form(){
+      $.get("https://api.gsa.gov/systems/digital-registry/v1/government_urls.json",{
+        q: $('#government-urls-text').val(),
+        page_size: $('#government-urls-page-size').val(),
+        page: $('#government-urls-page').val()
+      }, function(data){
+
+        $('#government-urls-collection').empty();
+        $('#government-urls-metadata-results').html(metadata_template(data.metadata));
+
+        if(data.results.length > 0){
+          $('.government-urls-previous-page').show();
+          $('.government-urls-next-page').show();
+
+        }else{
+          $('.government-urls-previous-page').hide();
+          $('.government-urls-next-page').hide();
+        }
+        for(var i =0; i<data.results.length; i++){
+          $('#government-urls-collection').append(government_urls_template(data.results[i]));
+        }
+      });
+    }
+
     function submit_mobile_form(){
-      
+
       $.get("https://api.gsa.gov/systems/digital-registry/v1/mobile_apps.json",{
         agencies: $('#app-agency').val(),
         language: $('#mobile-language').val(),
