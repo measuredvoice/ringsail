@@ -507,7 +507,7 @@
     }
 
     function submit_government_url_form(){
-      $.get("https://api.gsa.gov/systems/digital-registry/v1/government_urls.json",{
+      $.get("https://usdigitalregistry.digitalgov.gov/digital-registry/v1/government_urls.json",{
         q: $('#government-urls-text').val(),
         page_size: $('#government-urls-page-size').val(),
         page: $('#government-urls-page').val()
