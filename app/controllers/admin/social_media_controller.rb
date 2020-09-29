@@ -4,7 +4,7 @@ class Admin::SocialMediaController < Admin::AdminController
 
   before_action :user_has_agency
   before_action :set_outlet, only: [:show, :edit, :update, :destroy,
-    :publish, :archive, :request_publish, :request_archive]
+    :publish, :archive, :request_publish, :request_archive, :validate]
 
   # before_filter :require_admin, only: [:publish]
   # GET /outlets
@@ -153,6 +153,14 @@ class Admin::SocialMediaController < Admin::AdminController
     ELASTIC_SEARCH_CLIENT.index  index: 'outlets', type: 'outlet', id: @outlet.id, body: @outlet.as_indexed_json
     redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
   end
+
+  def validate
+    @outlet.validated_at = Time.now
+    @outlet.save(validate: false)
+    @outlet.create_activity :certified
+    redirect_to admin_outlet_path(@outlet), :notice => "Social Media Account: #{@outlet.organization}, is now published. #{view_context.link_to 'Undo', archive_admin_outlet_path(@outlet)}".html_safe
+  end
+
 
   def archive
     @outlet.touch

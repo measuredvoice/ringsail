@@ -45,6 +45,10 @@
   <strong>Status:</strong>
   <%= outlet.status.humanize %>
 </p>
+<p>
+  <strong>Certified:</strong>
+  <%= outlet.validated_at.strftime("%B %e, %Y %H:%M") if outlet.validated_at %>
+</p>
 <% if outlet.published? %>
 <p>
   <strong>API Link:</strong>

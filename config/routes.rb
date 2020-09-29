@@ -237,6 +237,7 @@ Ringsail::Application.routes.draw do
       get "request_publish"
       get "archive"
       get "request_archive"
+      get 'validate'
     end
   end
 

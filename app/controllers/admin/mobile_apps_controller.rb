@@ -4,7 +4,7 @@ class Admin::MobileAppsController < Admin::AdminController
 
   before_action :user_has_agency
   before_action :set_mobile_app, only: [:show, :edit, :update, :destroy,
-    :archive, :publish, :request_archive, :request_publish]
+    :archive, :publish, :request_archive, :request_publish, :validate]
 
   # before_filter :require_admin, only: [:publish]
   # GET /mobile_apps
@@ -144,6 +144,13 @@ class Admin::MobileAppsController < Admin::AdminController
     @mobile_app.published!
     @mobile_app.build_notifications(:published)
     ELASTIC_SEARCH_CLIENT.index  index: 'mobile_apps', type: 'mobile_app', id: @mobile_app.id, body: @mobile_app.as_indexed_json
+    redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now published. #{view_context.link_to 'Undo', archive_admin_mobile_app_path(@mobile_app)}".html_safe
+  end
+
+  def validate
+    @mobile_app.validated_at = Time.now
+    @mobile_app.save(validate: false)
+    @mobile_app.create_activity :certified
     redirect_to admin_mobile_app_path(@mobile_app), :notice => "Mobile App: #{@mobile_app.name}, is now published. #{view_context.link_to 'Undo', archive_admin_mobile_app_path(@mobile_app)}".html_safe
   end
 

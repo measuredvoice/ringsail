@@ -12,7 +12,12 @@
 		                	<%= link_to "< Back to Mobile Products", admin_mobile_apps_path, {:class => "usa-button"} %>
 							<%= link_to " Edit", edit_admin_mobile_app_path(@mobile_app), {:class => "usa-button"} %>
 							<%#= link_to "History", history_admin_mobile_app_path(@mobile_app), {:class => "fa fa-history "} %>
+							<% if @mobile_app.published? %>
+							<%= link_to ' Certify', validate_admin_mobile_app_path(@mobile_app),
+								{:class => "usa-button"} %>
+							<% else %>
 							<%= link_to ' Publish', publish_admin_mobile_app_path(@mobile_app), {:class => "usa-button"} %>
+							<% end %>
 							<%= link_to ' Archive', archive_admin_mobile_app_path(@mobile_app), {:class=> "usa-button usa-button--secondary"} %>
 							<% if current_user.admin? %>
 							<%= link_to 'Delete (ADMIN)', admin_mobile_app_path(@mobile_app), { :method => :delete, :class => "usa-button usa-button--secondary"} %>

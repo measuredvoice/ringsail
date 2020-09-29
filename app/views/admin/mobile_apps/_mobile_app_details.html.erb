@@ -35,6 +35,10 @@
   <strong>Status:</strong>
   <%= mobile_app.status.humanize %>
 </p>
+<p>
+  <strong>Certified:</strong>
+  <%= mobile_app.validated_at.strftime("%B %e, %Y %H:%M") if mobile_app.validated_at %>
+</p>
 <p><strong>Platform Details</strong></p>
 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
   <% random = rand(10000000) %>
