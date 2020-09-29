@@ -35,8 +35,9 @@
     var data_tables = null;
     $(document).ready(function() {
        data_tables = $('#data-tables').dataTable({
-        "serverSide" : true,
-        "sAjaxSource" : "/admin/agencies.json",
+        "ajax" : {
+          "url":"/admin/agencies.json"
+        },
         "columns": [
           { "data" : "name"},
           { "data" : "parent_name"},
