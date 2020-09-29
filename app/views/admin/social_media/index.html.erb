@@ -37,9 +37,9 @@
                 <%= select_tag :status_selector, options_for_select([["All",""],["Published","Published"],["Archived","Archived"]],"Published"), {class: 'usa-input usa-select'} %>
                 <% end %>
               </div>
-              <div class="grid-col-5 grid-offset-1"><br/>
-                <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "usa-button export" %>
-                 <p style="margin:0; font-size: .9em; width: 100%; max-width: 100%;">A maximum of 1000 records can be exported at a time. </p>
+              <div class="grid-col-10 grid-offset-1"><br/>
+                <%= link_to "Export Results to Spreadsheet", "javascript:export_csv()", class: "usa-button export" %>
+                 <p style="margin:0; font-size: .9em; width: 100%; max-width: 100%;">A maximum of 1000 records at a time. File will be exported as a CSV (Comma Seperated Values) file.</p>
                </div>
             <% end %>
             <div class="grid-row">
