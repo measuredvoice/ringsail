@@ -95,9 +95,12 @@
       $('#platform').val($('#platform_selector').val());
 
     });
-    $('#platform_selector, #status_selector, #agency_selector, #sSearch_selector').on('change',function(){
+    $('#platform_selector, #status_selector, #agency_selector,').on('change',function(){
         data_tables.fnFilter($('.dataTables_filter input').val());
      });
+    $('#sSearch_selector').on('keyup',function(){
+       data_tables.fnFilter($('.dataTables_filter input').val());
+    });
     $(document).ready(function() {
        data_tables = $('#data-tables').dataTable({
         "bProcessing": true,

@@ -479,6 +479,9 @@
     $('#government-urls-search input, #government-urls-search select').on('change', function(){
       submit_government_url_form();
     });
+    $('#government-urls-text').on('keyup',function(){
+      submit_government_url_form();
+    });
   });
 
     function submit_social_media_form(){
