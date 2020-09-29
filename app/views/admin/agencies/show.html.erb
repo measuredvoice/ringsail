@@ -38,8 +38,9 @@
     <div class="row">
     	<div class="col-sm-12 col-md-12">
     		<div class="buttonRow">
-    			<%= link_to 'Back to Agencies', admin_agencies_path,{:class => "fa fa-angle-double-left"} %>
-    			<%= link_to 'Edit', edit_admin_agency_path(@agency), {:class => "fa fa-pencil"} %> 
+    			<%= link_to 'Back to Agencies', admin_agencies_path,{:class => "usa-button"} %>
+    			<%= link_to 'Edit', edit_admin_agency_path(@agency), {:class => "usa-button"} %> 
+          <%= link_to 'Delete (CAUTION, can cause data loss)', admin_agency_path(@agency), { :method => :delete, :class => "usa-button"} %>
     		</div>
     	</div>
     </div>
