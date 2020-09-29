@@ -188,3 +188,8 @@ input::-ms-input-placeholder { /* Microsoft Edge */
 #government-urls-collection td{
 	overflow-wrap: break-word;
 }
+
+.selectize-input input{
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+}

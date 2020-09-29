@@ -14,10 +14,17 @@
 
                  <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "usa-button export" %>
                  <p style="margin:0; font-size: .9em; width: 100%; max-width: 100%;">A maximum of 1000 records can be exported at a time. </p>
+              </div>
 
-                <%= label :agency_selector, "Agency", {class: 'usa-label'} %>
+              <div class="grid-col-5 grid-offset-1">
+                <%= label :agency_selector, "Search Agency", {class: 'usa-label'} %>
                 <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.where("published_outlet_count > 0").order("name ASC").collect{|agency| [agency.name+" (#{agency.published_outlet_count})",agency.name]},params[:agency_selector]), {class: 'usa-input'} %>
 
+              </div>
+
+              <div class="grid-col-5 grid-offset-1">
+                <%= label :sSearch_selector, "Search by Keywords", {class: 'usa-label'} %>
+                <%= text_field_tag :sSearch_selector, params[:sSearch],{class: 'usa-input'} %>
               </div>
               <div class="grid-col-5 grid-offset-1">
                 <%= label :service_selector, "Account Platform", {class: 'usa-label'} %>
@@ -62,6 +69,7 @@
 <%= form_tag social_media_export_admin_outlets_path(format: :csv), method: :post, class: 'hidden', id: "csv_export" do %>
   <%= hidden_field_tag :service, params[:service] %>
   <%= hidden_field_tag :agency, params[:agency] %>
+  <%= hidden_field_tag :sSearch, params[:sSearch] %>
   <%= hidden_field_tag :status, params[:status] %>
   <%= hidden_field_tag :ids %>
 <% end %>
@@ -79,11 +87,14 @@
       $('#status').val($('#status_selector').val());
 
     });
+    $('#sSearch_selector').on('change',function(){
+      $('#sSearch').val($('#sSearch_selector').val());
+    });
     $('#service_selector').on('change',function(){
       $('#service').val($('#service_selector').val());
     });
 
-     $('#service_selector, #status_selector, #agency_selector').on('change',function(){
+     $('#service_selector, #status_selector, #agency_selector, #sSearch_selector').on('change',function(){
         data_tables.fnFilter($('.dataTables_filter input').val());
      });
    $(document).ready(function() {
@@ -95,6 +106,7 @@
           aoData.push( { "name":"service", "value" : $('#service_selector').val() } ) ;
           aoData.push( { "name": "agency", "value" : $('#agency_selector').val()});
           aoData.push( { "name": "status", "value" : $('#status_selector').val()});
+          aoData.push( { "name": "sSearch", "value" : $('#sSearch_selector').val()});
         },
         "columns": [
           { "data" : "agencies" },
@@ -119,7 +131,7 @@
           $('.export').show();
           $('.dataTables_filter').show();
         },
-        'sDom':'<"grid-row"<"grid-col-5 grid-offset-1"f><"grid-col-5 grid-offset-1"l>><"grid-row"<"grid-col-10 grid-offset-1"pi>>rt<"grid-row"<"grid-col-10 grid-offset-1"ip>><"grid-row"<"grid-col-10 grid-offset-1">>'
+        'sDom':'<"grid-row"<"grid-col-5 grid-offset-1"l>><"grid-row"<"grid-col-10 grid-offset-1"pi>>rt<"grid-row"<"grid-col-10 grid-offset-1"ip>><"grid-row"<"grid-col-10 grid-offset-1">>'
       });
     } );
 

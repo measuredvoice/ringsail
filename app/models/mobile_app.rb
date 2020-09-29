@@ -176,7 +176,8 @@ class MobileApp < ActiveRecord::Base
     query = {
       query: {
         bool: {
-          must: [  ]
+          must: [  ],
+          should: []
         }
       },
       sort: [

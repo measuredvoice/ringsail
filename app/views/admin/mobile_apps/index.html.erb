@@ -12,8 +12,14 @@
                 <p style="margin:0; font-size: .9em; width: 100%; max-width: 100%;">Search for mobile apps using the filters below.  Agency names are based found using keywords from their title, for example "Census" for "Bureau of the Census" to find their exact name in the system. Agencies only appear once they have an account published in the system. The search box below is best used for short terms from the entry in the table, for example "GSA" or an email address. </p>
                 <%= link_to "Export Results to CSV", "javascript:export_csv()", class: "btn btn-default export" %>
                 <p style="margin:0; font-size: .9em; width: 100%; max-width: 100%;">A maximum of 1000 records can be exported at a time. </p>
+              </div>
+              <div class="grid-col-5 grid-offset-1">
                 <%= label :agency_selector, "Agency", {class: 'usa-label'} %>
                 <%= select_tag :agency_selector, options_for_select([["All",""]]+Agency.where("published_mobile_app_count > 0").pluck(:name).sort.collect{|agency| [agency,agency]},params[:agency_selector]), {class: 'usa-input'} %>
+              </div>
+               <div class="grid-col-5 grid-offset-1">
+                <%= label :sSearch_selector, "Search by Keywords", {class: 'usa-label'} %>
+                <%= text_field_tag :sSearch_selector, params[:sSearch],{class: 'usa-input'} %>
               </div>
               <div class="grid-col-5 grid-offset-1">
                 <%= label :platform_selector, "Platform", {class: 'usa-label'} %>
@@ -57,6 +63,7 @@
   <%= hidden_field_tag :platform, params[:platform] %>
   <%= hidden_field_tag :ids %>
   <%= hidden_field_tag :agency, params[:agency] %>
+  <%= hidden_field_tag :sSearch, params[:sSearch] %>
   <%= hidden_field_tag :status, params[:status] %>
 <% end %>
 <% content_for :additional_javascript do %>
@@ -80,11 +87,15 @@
       $('#status').val($('#status_selector').val());
 
     });
+    $('#sSearch_selector').on('change',function(){
+      $('#sSearch').val($('#sSearch_selector').val());
+
+    });
     $('#platform_selector').on('change',function(){
       $('#platform').val($('#platform_selector').val());
 
     });
-    $('#platform_selector, #status_selector, #agency_selector').on('change',function(){
+    $('#platform_selector, #status_selector, #agency_selector, #sSearch_selector').on('change',function(){
         data_tables.fnFilter($('.dataTables_filter input').val());
      });
     $(document).ready(function() {
@@ -93,9 +104,10 @@
         "serverSide" : true,
         "sAjaxSource" : "/admin/mobile_apps.json",
         "fnServerParams": function ( aoData ) {
-          aoData.push( { "name": "platform", "value": $("#platform").val() });
+          aoData.push( { "name": "platform", "value": $("#platform_selector").val() });
           aoData.push( { "name": "agency", "value" : $('#agency_selector').val()});
           aoData.push( { "name": "status", "value" : $('#status_selector').val()});
+           aoData.push( { "name": "sSearch", "value" : $('#sSearch_selector').val()});
         },
         "columns": [
           { "data" : "agencies"},
@@ -116,7 +128,7 @@
           $('.export').show();
           $('.dataTables_filter').show();
         },
-        'sDom':'<"grid-row"<"grid-col-5 grid-offset-1"f><"grid-col-5 grid-offset-1"l>><"grid-row"<"grid-col-10 grid-offset-1"pi>>rt<"grid-row"<"grid-col-10 grid-offset-1"ip>><"grid-row"<"grid-col-10 grid-offset-1">>'});
+        'sDom':'<"grid-row"<"grid-col-5 grid-offset-1"l>><"grid-row"<"grid-col-10 grid-offset-1"pi>>rt<"grid-row"<"grid-col-10 grid-offset-1"ip>><"grid-row"<"grid-col-10 grid-offset-1">>'});
     });
 
     all_ids = "";
